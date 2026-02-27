@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — NAMMO Salgsrapport</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --dark-charcoal: #1A1A1A; --navy-card: #253B52; --steel-blue: #8EAEC5;
+    --green: #1B7A3D; --amber: #D4870E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  /* Cover */
+  .cover { background: var(--pure-black); padding: 4rem 3.5rem 3rem; position: relative; overflow: hidden; min-height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 1.8rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 1.8rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 2.5rem; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  /* Content */
+  section { padding: 2.5rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.2rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.6rem; margin-bottom: 0.5rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.8rem; }
+  p.secondary { color: var(--gray-medium); font-size: 0.84rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: 0.84rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.6rem 0.8rem; font-size: 0.8rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+  tbody tr.total-row { border-top: 2px solid var(--black); background: transparent; }
+  tbody tr.total-row td { font-weight: 700; padding-top: 0.7rem; }
+
+  /* Badges */
+  .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; }
+  .badge-active { background: var(--red); color: var(--white); }
+  .badge-pending { background: var(--gray-divider); color: var(--black); }
+  .badge-planned { background: var(--black); color: var(--white); }
+  .badge-won { background: var(--green); color: var(--white); }
+  .badge-risk { background: var(--amber); color: var(--white); }
+
+  /* KPI strip */
+  .kpi-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.2rem 0.6rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-item.dark { background: var(--black); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.2rem; }
+  .kpi-item.highlight .kpi-value, .kpi-item.dark .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.64rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label, .kpi-item.dark .kpi-label { color: rgba(255,255,255,0.8); }
+
+  /* Callout */
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.1rem 1.3rem; margin: 1.2rem 0; }
+  .callout p { font-size: 0.84rem; margin-bottom: 0; line-height: 1.5; }
+
+  /* Progress bar */
+  .progress-container { margin: 1.2rem 0; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .progress-bar { height: 8px; background: var(--gray-panel); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--red); border-radius: 4px; transition: width 0.3s; }
+
+  /* Pipeline funnel */
+  .funnel { margin: 1.5rem auto; max-width: 500px; }
+  .funnel-step { display: flex; align-items: center; margin-bottom: 0.4rem; }
+  .funnel-bar { height: 36px; background: var(--red); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 0.78rem; font-weight: 700; }
+  .funnel-bar.gray { background: var(--gray-divider); color: var(--black); }
+  .funnel-bar.dark { background: var(--black); color: var(--white); }
+  .funnel-label { font-size: 0.76rem; color: var(--gray-medium); margin-left: 0.8rem; white-space: nowrap; }
+
+  /* Bullet list */
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.5rem; font-size: 0.86rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  /* Dark panel */
+  .dark-panel { background: var(--dark-charcoal); padding: 2.5rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  /* Footer */
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">★ ★ ★ ★ ★</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">NAMMO Salgsrapport</div>
+    <div class="cover-subtitle">Ukentlig rapport — NAMMO AS</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Rapportdato: 26. februar 2026</span>
+      <span>|</span>
+      <span>Uke 9</span>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE DASHBOARD -->
+  <section>
+    <div class="section-label">Dashboard</div>
+    <h2>NAMMO-konto — nøkkeltall</h2>
+
+    <div class="kpi-strip">
+      <div class="kpi-item highlight">
+        <div class="kpi-value">8</div>
+        <div class="kpi-label">Kontakter<br>identifisert</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">1</div>
+        <div class="kpi-label">Kontakter<br>initiert</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">0</div>
+        <div class="kpi-label">Aksepterte<br>kontakter</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">0</div>
+        <div class="kpi-label">Møter<br>booket</div>
+      </div>
+      <div class="kpi-item dark">
+        <div class="kpi-value">PRE</div>
+        <div class="kpi-label">Salgs-<br>fase</div>
+      </div>
+    </div>
+
+    <!-- Pipeline funnel -->
+    <h3>Salgstrakt — NAMMO</h3>
+    <div class="funnel">
+      <div class="funnel-step">
+        <div class="funnel-bar" style="width: 100%;">8 identifisert</div>
+        <div class="funnel-label">Identifiserte kontakter</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar" style="width: 78%;">1 kontaktet</div>
+        <div class="funnel-label">Første henvendelse sendt</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar gray" style="width: 55%;">0 akseptert</div>
+        <div class="funnel-label">Akseptert kontakt / svar</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar gray" style="width: 33%;">0 møter</div>
+        <div class="funnel-label">Møter gjennomført</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar dark" style="width: 15%;">0</div>
+        <div class="funnel-label">NDA / formell prosess</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT STATUS PER SEGMENT -->
+  <section>
+    <div class="section-label">Segmentstatus</div>
+    <h2>Kontaktstatus per NAMMO-segment</h2>
+
+    <table>
+      <thead><tr><th>Segment</th><th>Kontakter identifisert</th><th>Kontaktet</th><th>Akseptert</th><th>Møte</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>NAMMO Group (Innkjøp)</strong></td>
+          <td>Peter Lerche Raadal, Jostein Moe, Jens-Petter Dieseth</td>
+          <td>1 av 3</td>
+          <td>0</td>
+          <td>0</td>
+          <td><span class="badge badge-active">AKTIV — 1 SENDT</span></td>
+        </tr>
+        <tr>
+          <td><strong>NAMMO Raufoss</strong></td>
+          <td>Per Olav Moen, Aksel Schjerpen, QA Director (ukjent)</td>
+          <td>0 av 3</td>
+          <td>0</td>
+          <td>0</td>
+          <td><span class="badge badge-planned">KLAR FOR KONTAKT</span></td>
+        </tr>
+        <tr>
+          <td><strong>Large Caliber Systems</strong></td>
+          <td>Quoc Bao Diep</td>
+          <td>0 av 1</td>
+          <td>0</td>
+          <td>0</td>
+          <td><span class="badge badge-pending">VENTER PÅ TIER 1</span></td>
+        </tr>
+        <tr>
+          <td><strong>Aerospace Propulsion</strong></td>
+          <td>(Kontakter delt med Group)</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td><span class="badge badge-pending">VENTER PÅ TIER 1</span></td>
+        </tr>
+        <tr>
+          <td><strong>Missile Products</strong></td>
+          <td>Frank Moller</td>
+          <td>0 av 1</td>
+          <td>0</td>
+          <td>0</td>
+          <td><span class="badge badge-pending">VENTER PÅ TIER 1</span></td>
+        </tr>
+        <tr>
+          <td><strong>Small & Medium Caliber</strong></td>
+          <td>(Kontakter delt med Raufoss)</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td><span class="badge badge-pending">VENTER PÅ TIER 1</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ACTIVITIES THIS WEEK -->
+  <section class="dark-panel">
+    <div class="section-label">Ukeaktiviteter</div>
+    <h2>Gjennomførte aktiviteter — uke 9 (24.–28. feb 2026)</h2>
+
+    <table>
+      <thead><tr><th>Dato</th><th>Aktivitet</th><th>Beskrivelse</th><th>Resultat</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>26. feb</td>
+          <td><strong>Peter Lerche Raadal</strong></td>
+          <td>LinkedIn-invitasjon med notat — VP Procurement & Supply Chain, NAMMO Group</td>
+          <td><span class="badge badge-active">SENDT — VENTER AKSEPT</span></td>
+        </tr>
+        <tr>
+          <td>26. feb</td>
+          <td><strong>Research fullført</strong></td>
+          <td>Kartlegging av NAMMO-organisasjon, 4 segmenter, 8 kontakter identifisert</td>
+          <td>Strategidokumenter opprettet</td>
+        </tr>
+        <tr>
+          <td>26. feb</td>
+          <td><strong>Kontaktliste komplett</strong></td>
+          <td>Tier 1-3 kontakter identifisert med LinkedIn-profiler</td>
+          <td>Klart for outreach</td>
+        </tr>
+        <tr>
+          <td>26. feb</td>
+          <td><strong>LinkedIn-meldinger forberedt</strong></td>
+          <td>200-tegns introduksjonsnotater for Peter, Per Olav, Quoc Bao, Frank</td>
+          <td>Klart til sending</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="color: rgba(255,255,255,0.6); font-size: 0.82rem; margin-top: 1rem;">Parallelt: KDA-kontaktene (Petter Berg Spone, Jon-André Olaussen, Ragnar Løkka) ble kontaktet samme dag. NAMMO-outreach er neste prioritet.</p>
+  </section>
+
+  <!-- OPPORTUNITY ASSESSMENT -->
+  <section>
+    <div class="section-label">Muligheter</div>
+    <h2>NAMMO — estimert potensial per segment</h2>
+
+    <table>
+      <thead><tr><th>Segment</th><th>Est. årlig CNC-timer</th><th>Est. årlig omsetning</th><th>Tidligste ordrer</th><th>Sannsynlighet</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Large Caliber Systems</strong></td>
+          <td>4 000 – 12 000</td>
+          <td>12 – 36 MNOK</td>
+          <td>Q3 2027</td>
+          <td><span class="badge badge-active">HØY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Aerospace Propulsion</strong></td>
+          <td>2 000 – 6 000</td>
+          <td>6 – 18 MNOK</td>
+          <td>2028</td>
+          <td><span class="badge badge-active">MEDIUM-HØY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Small & Medium Caliber</strong></td>
+          <td>1 100 – 4 000</td>
+          <td>3.3 – 12 MNOK</td>
+          <td>Q3 2027</td>
+          <td><span class="badge badge-pending">MEDIUM</span></td>
+        </tr>
+        <tr>
+          <td><strong>Missile Products</strong></td>
+          <td>1 200 – 4 500</td>
+          <td>3.6 – 13.5 MNOK</td>
+          <td>2028</td>
+          <td><span class="badge badge-planned">LANGSIKTIG</span></td>
+        </tr>
+        <tr class="total-row">
+          <td><strong>TOTALT NAMMO-POTENSIAL</strong></td>
+          <td><strong>8 300 – 26 500</strong></td>
+          <td><strong>24.9 – 79.5 MNOK</strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Kontekst:</strong> Aurelians 2028-mål er 37.5% utnyttelse på 5 CNC = ca. 16 425 timer. Kombinert KDA + NAMMO-potensial (konservativt): 10 500 + 8 300 = 18 800 timer — nok til å nå 2028-målet og utløse Phase 2 maskinekspansjon.</p>
+    </div>
+
+    <h3>Andel av Aurelians 2028-kapasitet (kun NAMMO)</h3>
+    <div class="progress-container">
+      <div class="progress-label"><span>NAMMO konservativt estimat (8 300 t)</span><span>51% av 2028-mål</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 51%;"></div></div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-label"><span>NAMMO optimistisk estimat (26 500 t)</span><span>161% av 2028-mål</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+    </div>
+
+    <h3>Kombinert KDA + NAMMO</h3>
+    <div class="progress-container">
+      <div class="progress-label"><span>KDA + NAMMO konservativt (18 800 t)</span><span>114% av 2028-mål</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-label"><span>KDA + NAMMO optimistisk (66 500 t)</span><span>405% — utløser Phase 2</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+    </div>
+  </section>
+
+  <!-- RISK ASSESSMENT -->
+  <section>
+    <div class="section-label">Risikovurdering</div>
+    <h2>NAMMO-konto — risikofaktorer</h2>
+
+    <table>
+      <thead><tr><th>Risiko</th><th>Sannsynlighet</th><th>Konsekvens</th><th>Mitigering</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>NAMMO bygger ut egen CNC-kapasitet</strong></td>
+          <td>Medium</td>
+          <td>Høy</td>
+          <td>Fokusér på overflow/tilleggskapasitet — ikke erstatning. NAMMOs investering i 11 000 m² ny fabrikk dekker ikke alt.</td>
+        </tr>
+        <tr>
+          <td><strong>Lang kvalifiseringstid (forsvarsindustri)</strong></td>
+          <td>Høy</td>
+          <td>Medium</td>
+          <td>Start med verktøy/fixturer (lavere kvalifiseringskrav). Gradvis opptrapping til produksjonskomponenter.</td>
+        </tr>
+        <tr>
+          <td><strong>Konkurranse fra etablerte norske verksteder</strong></td>
+          <td>Medium</td>
+          <td>Medium</td>
+          <td>Differensiér på kapasitet (25 maskiner), automatisering (24/7), og digital sporbarhet. Eksisterende verksteder er typisk fulle.</td>
+        </tr>
+        <tr>
+          <td><strong>Geografisk avstand Raufoss → Våler</strong></td>
+          <td>Lav</td>
+          <td>Lav</td>
+          <td>Ca. 2 timer med bil. Ikke ideelt, men akseptabelt for ikke-tidskritiske komponenter. Mange NAMMO-underleverandører er lenger unna.</td>
+        </tr>
+        <tr>
+          <td><strong>NAMMO-NAMMO: Statlig eierskap = tregere beslutninger</strong></td>
+          <td>Medium</td>
+          <td>Lav</td>
+          <td>Start dialog tidlig. Bruk kapasitetskrisen som pressmiddel. Innkjøpsavdelingen har operativt mandat.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- NEXT WEEK PLAN -->
+  <section>
+    <div class="section-label">Handlingsplan</div>
+    <h2>Prioriterte handlinger — uke 10 (3.–7. mars 2026)</h2>
+
+    <table>
+      <thead><tr><th>#</th><th>Handling</th><th>Eier</th><th>Frist</th><th>Prioritet</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td><strong>Peter Lerche Raadal — LinkedIn sendt ✓</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">VP Procurement & Supply Chain, NAMMO Group — invitasjon med notat sendt 26. feb</span></td>
+          <td>Tore</td>
+          <td>26. feb ✓</td>
+          <td><span class="badge badge-active">SENDT</span></td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td><strong>Send LinkedIn-invitasjon til Per Olav Moen</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">Procurement Director, NAMMO Raufoss — 200-tegns notat forberedt i kontaktloggen</span></td>
+          <td>Tore</td>
+          <td>Denne uken</td>
+          <td><span class="badge badge-active">KRITISK — NESTE</span></td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td><strong>Identifiser QA Director NAMMO Raufoss</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">LinkedIn-søk med innlogget profil. Kvalitetskontakt er kritisk for leverandørkvalifisering.</span></td>
+          <td>Tore</td>
+          <td>5. mars</td>
+          <td><span class="badge badge-active">HØY</span></td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td><strong>Undersøk NAMMOs leverandørregistrering</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">Sjekk nammo.com for leverandørportal eller registreringsskjema</span></td>
+          <td>Tore</td>
+          <td>4. mars</td>
+          <td><span class="badge badge-active">HØY</span></td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td><strong>Forbered NAMMO Capability Brief</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">1–2 sider tilpasset artilleri/rakettmotor-vinkel for oppfølgingsmeldinger</span></td>
+          <td>Tore/André</td>
+          <td>7. mars</td>
+          <td><span class="badge badge-planned">MEDIUM</span></td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td><strong>Send LinkedIn til Quoc Bao Diep og Frank Moller</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">Tier 2-3 — sendes etter Tier 1. Meldinger er forberedt i kontaktloggen.</span></td>
+          <td>Tore</td>
+          <td>Uke 11</td>
+          <td><span class="badge badge-planned">MEDIUM</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- MILESTONE TRACKER -->
+  <section>
+    <div class="section-label">Milepæler</div>
+    <h2>NAMMO-kvalifisering — fremdrift</h2>
+
+    <div class="progress-container">
+      <div class="progress-label"><span>Research og kartlegging</span><span>100%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-label"><span>Kontaktfase (identifisere + kontakte nøkkelpersoner)</span><span>30%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 30%;"></div></div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-label"><span>Leverandørregistrering</span><span>0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-label"><span>Tekniske møter (kapabilitetspresentasjon)</span><span>0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-label"><span>NDA og eksempeltegninger</span><span>0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-label"><span>Pre-kvalifisering (formell søknad)</span><span>0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+    </div>
+
+    <p class="secondary" style="margin-top: 1rem;">Mål: Innledende samtaler med innkjøp innen april 2026. Formell leverandørdialog innen Q3 2026. FAI ved produksjonsstart Q3–Q4 2027.</p>
+  </section>
+
+  <!-- APPENDIX: FILE INDEX -->
+  <section>
+    <div class="section-label">Referanser</div>
+    <h2>NAMMO-strategi dokumenter</h2>
+
+    <table>
+      <thead><tr><th>Fil</th><th>Innhold</th><th>Sist oppdatert</th></tr></thead>
+      <tbody>
+        <tr><td>00_NAMMO_Strategy_Overview.html</td><td>Samlet strategi, kontaktliste, kvalifiseringstidslinje</td><td>26. feb 2026</td></tr>
+        <tr><td>01_NAMMO_Large_Caliber.html</td><td>Large Caliber: 155mm artilleri, 5× produksjon, dreiing/fresing</td><td>26. feb 2026</td></tr>
+        <tr><td>02_NAMMO_Aerospace_Propulsion.html</td><td>Aerospace Propulsion: rakettmotorer, Inconel/titanium</td><td>26. feb 2026</td></tr>
+        <tr><td>03_NAMMO_Small_Medium_Caliber.html</td><td>Small & Medium Caliber: Mk 211, verktøy, spesialkomponenter</td><td>26. feb 2026</td></tr>
+        <tr><td>04_NAMMO_Missile_Products.html</td><td>Missile Products: ny divisjon, loitering munitions</td><td>26. feb 2026</td></tr>
+        <tr><td>05_NAMMO_Contact_Log.html</td><td>Kontaktlogg med aktivitetshistorikk</td><td>26. feb 2026</td></tr>
+        <tr><td><strong>06_NAMMO_Sales_Report.html</strong></td><td><strong>Denne rapporten</strong></td><td><strong>26. feb 2026</strong></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | NAMMO Salgsrapport Uke 9 | 26. februar 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

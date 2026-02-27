@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Material Traceability List — AM-MTL-2026-0042-001</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+  .page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+  .page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #F50537; }
+
+  /* Aurelian Branding */
+  .accent { color: #F50537; }
+  .header-bar { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #F50537; padding-bottom: 14px; margin-bottom: 20px; }
+  .am-logo { display: flex; align-items: center; gap: 10px; }
+  .am-logo-stars { font-size: 14pt; color: #F50537; letter-spacing: 2px; }
+  .am-logo-text { font-size: 18pt; font-weight: bold; color: #2B2B2B; letter-spacing: -0.3px; }
+  .am-logo-text span { display: block; font-size: 9pt; font-weight: normal; color: #6B6B6B; letter-spacing: 0; }
+  .doc-badge { background: #2B2B2B; color: #fff; padding: 8px 16px; text-align: center; }
+  .doc-badge .label { font-size: 8pt; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+  .doc-badge .number { font-size: 12pt; font-weight: bold; letter-spacing: 0.3px; }
+
+  h1 { font-size: 18pt; color: #2B2B2B; font-weight: bold; margin: 24pt 0 6pt 0; border-bottom: 1px solid #D3D3D3; padding-bottom: 4px; }
+  h2 { font-size: 13pt; color: #F50537; font-weight: bold; margin: 18pt 0 6pt 0; }
+  h3 { font-size: 11pt; color: #2B2B2B; font-weight: bold; margin: 12pt 0 4pt 0; }
+  p { margin-bottom: 6pt; font-size: 10pt; }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .meta-box { background: #F5F5F5; padding: 12px; }
+  .meta-box h3 { margin-top: 0; color: #F50537; font-size: 10pt; }
+  .meta-box .row { display: flex; margin-bottom: 3px; }
+  .meta-box .label { width: 130px; font-weight: bold; font-size: 9pt; color: #6B6B6B; text-transform: uppercase; }
+  .meta-box .value { flex: 1; font-size: 10pt; }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px 0; font-size: 9pt; }
+  table thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 6pt 6pt; text-align: left; font-size: 8pt; text-transform: uppercase; letter-spacing: 0.3px; }
+  table tbody td { padding: 5pt 6pt; border-bottom: 0.5pt solid #D3D3D3; vertical-align: top; }
+  table tbody tr:nth-child(even) { background: #F5F5F5; }
+  table .right { text-align: right; }
+  table .center { text-align: center; }
+
+  .callout { background: #F5F5F5; border-left: 3px solid #F50537; padding: 10px 14px; margin: 12px 0; font-size: 10pt; }
+  .callout strong { color: #2B2B2B; }
+
+  .stamp-area { border: 2px solid #D3D3D3; padding: 16px; margin: 16px 0; text-align: center; color: #6B6B6B; font-size: 10pt; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+
+  .signature-block { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 24px; padding-top: 16px; border-top: 1px solid #D3D3D3; }
+  .sig-line { border-bottom: 1px solid #2B2B2B; height: 36px; margin-bottom: 4px; }
+  .sig-label { font-size: 8pt; color: #6B6B6B; }
+  .sig-name { font-size: 10pt; font-weight: bold; }
+  .sig-title { font-size: 9pt; color: #6B6B6B; }
+
+  .footer { margin-top: 30px; border-top: 1px solid #D3D3D3; padding-top: 8px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+  .confidential { color: #F50537; font-weight: bold; font-size: 8pt; text-transform: uppercase; }
+
+  .status-badge { display: inline-block; padding: 2px 8px; font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+  .status-yes { background: #2B2B2B; color: #fff; }
+  .status-na { background: #F5F5F5; color: #6B6B6B; border: 1px solid #D3D3D3; }
+
+  .pmi-yes { color: #2B2B2B; font-weight: bold; }
+
+  .page-break { page-break-before: always; }
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; padding: 2.5cm; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="header-bar">
+    <div class="am-logo">
+      <div>
+        <div class="am-logo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="am-logo-text">
+          Aurelian Manufacturing
+          <span>Production as a Service &mdash; Autonomous, Data-Driven, and Scalable</span>
+        </div>
+      </div>
+    </div>
+    <div class="doc-badge">
+      <div class="label">MRB Section 4</div>
+      <div class="number">AM-MTL-2026-0042-001</div>
+    </div>
+  </div>
+
+  <h1 style="margin-top: 0;">Material Traceability List</h1>
+  <p style="font-size: 11pt; color: #6B6B6B; margin-bottom: 16pt;">Manufacturing Record Book &mdash; Section 4: Material Identification and Traceability Record</p>
+
+  <div class="meta-grid">
+    <div class="meta-box">
+      <h3>Document Information</h3>
+      <div class="row"><span class="label">Document No.</span><span class="value" style="font-weight:bold;">AM-MTL-2026-0042-001</span></div>
+      <div class="row"><span class="label">Revision</span><span class="value">0 (Original Issue)</span></div>
+      <div class="row"><span class="label">Date</span><span class="value">18 March 2026</span></div>
+      <div class="row"><span class="label">Status</span><span class="value"><span class="status-badge status-yes">Issued for Use</span></span></div>
+      <div class="row"><span class="label">Classification</span><span class="value">Confidential</span></div>
+    </div>
+    <div class="meta-box">
+      <h3>Project Reference</h3>
+      <div class="row"><span class="label">Client</span><span class="value">Nordic Subsea Solutions AS</span></div>
+      <div class="row"><span class="label">Project</span><span class="value" style="font-weight:bold;">Barents Sea Development Phase 2</span></div>
+      <div class="row"><span class="label">Project No.</span><span class="value">NSS-PRJ-BS2024</span></div>
+      <div class="row"><span class="label">PO Number</span><span class="value">NSS-PO-2026-0042</span></div>
+    </div>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-box">
+      <h3>Product Identification</h3>
+      <div class="row"><span class="label">Description</span><span class="value">Subsea Connector Assembly, Size 300 (Upfacing)</span></div>
+      <div class="row"><span class="label">Material</span><span class="value">Super Duplex UNS S32750 (SAF 2507)</span></div>
+      <div class="row"><span class="label">Tag Number</span><span class="value" style="font-weight:bold;">NSS-BSP2-SCA-001</span></div>
+      <div class="row"><span class="label">Serial Number</span><span class="value" style="font-weight:bold;">AM-BSP2-300-001</span></div>
+    </div>
+    <div class="meta-box">
+      <h3>Applicable Standards</h3>
+      <div class="row"><span class="label">Material Spec</span><span class="value">ASTM A182 F53</span></div>
+      <div class="row"><span class="label">Certificates</span><span class="value">EN 10204 Type 3.2</span></div>
+      <div class="row"><span class="label">Material Sel.</span><span class="value">NORSOK M-001</span></div>
+      <div class="row"><span class="label">PMI</span><span class="value">100% per NORSOK M-650</span></div>
+    </div>
+  </div>
+
+  <h2>1. Material Register</h2>
+
+  <p>The following table provides full traceability for all materials incorporated into the finished assembly. Each material is traceable to its originating mill heat number, certificate of inspection, and has been verified by Positive Material Identification (PMI) at goods receipt.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:5%;">Item</th>
+        <th style="width:14%;">Part Description</th>
+        <th style="width:11%;">Drawing / Part&nbsp;No</th>
+        <th style="width:11%;">Material Grade</th>
+        <th style="width:10%;">Heat&nbsp;No / Lot&nbsp;No</th>
+        <th style="width:10%;">Cert. No (EN&nbsp;10204)</th>
+        <th style="width:12%;">Supplier / Mill</th>
+        <th style="width:12%;">Dimensions / Form</th>
+        <th style="width:5%;">Qty</th>
+        <th style="width:5%;">PMI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="center">1</td>
+        <td><strong>Main Body Forging</strong></td>
+        <td>AM-SCA-300-001<br>Rev A</td>
+        <td>UNS S32750<br>(ASTM A182 F53)</td>
+        <td style="font-weight:bold;">H24-5587</td>
+        <td>SMT-24-5587-01<br><span style="color:#6B6B6B; font-size:8pt;">Type 3.2</span></td>
+        <td>Sandvik Materials Technology<br><span style="color:#6B6B6B; font-size:8pt;">Sandviken, Sweden</span></td>
+        <td>Forged bar<br>&Oslash;350 &times; 500 mm</td>
+        <td class="center">1</td>
+        <td class="center"><span class="pmi-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td class="center">2</td>
+        <td><strong>Hub Forging</strong></td>
+        <td>AM-SCA-300-002<br>Rev A</td>
+        <td>UNS S32750<br>(ASTM A182 F53)</td>
+        <td style="font-weight:bold;">H24-5612</td>
+        <td>SMT-24-5612-01<br><span style="color:#6B6B6B; font-size:8pt;">Type 3.2</span></td>
+        <td>Sandvik Materials Technology<br><span style="color:#6B6B6B; font-size:8pt;">Sandviken, Sweden</span></td>
+        <td>Forged ring<br>&Oslash;280 &times; 150 mm</td>
+        <td class="center">1</td>
+        <td class="center"><span class="pmi-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td class="center">3</td>
+        <td><strong>Seal Ring</strong></td>
+        <td>AM-SCA-300-010<br>Rev A</td>
+        <td>Inconel 625<br>(UNS N06625)</td>
+        <td style="font-weight:bold;">N24-2201</td>
+        <td>SM-INC-24-2201<br><span style="color:#6B6B6B; font-size:8pt;">Type 3.2</span></td>
+        <td>Special Metals Corporation<br><span style="color:#6B6B6B; font-size:8pt;">Huntington, WV, USA</span></td>
+        <td>Round bar<br>&Oslash;65 &times; 200 mm</td>
+        <td class="center">1</td>
+        <td class="center"><span class="pmi-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td class="center">4</td>
+        <td><strong>Hex Bolts M24&times;80</strong></td>
+        <td>AM-SCA-300-020<br>Rev A</td>
+        <td>ASTM A193<br>B8M Class 2</td>
+        <td style="font-weight:bold;">B24-3344</td>
+        <td>BX-24-3344-A193<br><span style="color:#6B6B6B; font-size:8pt;">Type 3.1</span></td>
+        <td>Bumax AB<br><span style="color:#6B6B6B; font-size:8pt;">Aker, Sweden</span></td>
+        <td>Hex bolt<br>M24 &times; 80 mm</td>
+        <td class="center">12</td>
+        <td class="center"><span class="pmi-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td class="center">5</td>
+        <td><strong>Hex Nuts M24</strong></td>
+        <td>AM-SCA-300-021<br>Rev A</td>
+        <td>ASTM A194<br>Grade 8M</td>
+        <td style="font-weight:bold;">N24-1122</td>
+        <td>BX-24-1122-A194<br><span style="color:#6B6B6B; font-size:8pt;">Type 3.1</span></td>
+        <td>Bumax AB<br><span style="color:#6B6B6B; font-size:8pt;">Aker, Sweden</span></td>
+        <td>Heavy hex nut<br>M24</td>
+        <td class="center">12</td>
+        <td class="center"><span class="pmi-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td class="center">6</td>
+        <td><strong>Test Port Plug</strong></td>
+        <td>AM-SCA-300-030<br>Rev A</td>
+        <td>UNS S32750<br>(ASTM A182 F53)</td>
+        <td style="font-weight:bold;">H24-5587</td>
+        <td>SMT-24-5587-01<br><span style="color:#6B6B6B; font-size:8pt;">Type 3.2 (same cert.)</span></td>
+        <td>Sandvik Materials Technology<br><span style="color:#6B6B6B; font-size:8pt;">Machined from body offcut</span></td>
+        <td>Machined plug<br>1/2&quot; NPT</td>
+        <td class="center">2</td>
+        <td class="center"><span class="pmi-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td class="center">7</td>
+        <td><strong>Gasket</strong></td>
+        <td>AM-SCA-300-040<br>Rev A</td>
+        <td>Spiral wound<br>316L / Graphite</td>
+        <td style="font-weight:bold;">G24-0088</td>
+        <td>FLX-24-0088-SW<br><span style="color:#6B6B6B; font-size:8pt;">Type 3.1</span></td>
+        <td>Flexitallic Group<br><span style="color:#6B6B6B; font-size:8pt;">Cleckheaton, UK</span></td>
+        <td>Spiral wound gasket<br>12&quot; / 300# RF</td>
+        <td class="center">1</td>
+        <td class="center"><span style="color:#6B6B6B;">N/A</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Note &mdash; Item 6:</strong> The test port plugs were machined from an offcut of the main body forging (Item 1). Full traceability is maintained as both items share the same heat number H24-5587 and material certificate SMT-24-5587-01.
+  </div>
+
+  <div class="callout">
+    <strong>Note &mdash; Item 7:</strong> PMI is not applicable to the spiral wound gasket. Material conformance is verified by the manufacturer&rsquo;s certificate of compliance and visual inspection of marking.
+  </div>
+
+  <div class="footer">
+    <span class="confidential">Confidential</span>
+    <span>Page 1 of 2</span>
+    <span>AM-MTL-2026-0042-001 Rev 0</span>
+  </div>
+</div>
+
+<!-- PAGE 2: Traceability Statement & Signatures -->
+<div class="page page-break">
+  <div class="header-bar">
+    <div class="am-logo">
+      <div>
+        <div class="am-logo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="am-logo-text" style="font-size:14pt;">
+          Aurelian Manufacturing
+          <span>Material Traceability List &mdash; AM-MTL-2026-0042-001</span>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:9pt; color:#6B6B6B;">Page 2 of 2</div>
+  </div>
+
+  <h2>2. Certificate Summary</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Certificate No</th>
+        <th>Type</th>
+        <th>Issuing Mill / Supplier</th>
+        <th>Heat / Lot</th>
+        <th>Material</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-weight:bold;">SMT-24-5587-01</td>
+        <td>EN 10204 Type 3.2</td>
+        <td>Sandvik Materials Technology</td>
+        <td>H24-5587</td>
+        <td>UNS S32750</td>
+        <td><span class="status-badge status-yes">Verified</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:bold;">SMT-24-5612-01</td>
+        <td>EN 10204 Type 3.2</td>
+        <td>Sandvik Materials Technology</td>
+        <td>H24-5612</td>
+        <td>UNS S32750</td>
+        <td><span class="status-badge status-yes">Verified</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:bold;">SM-INC-24-2201</td>
+        <td>EN 10204 Type 3.2</td>
+        <td>Special Metals Corporation</td>
+        <td>N24-2201</td>
+        <td>UNS N06625</td>
+        <td><span class="status-badge status-yes">Verified</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:bold;">BX-24-3344-A193</td>
+        <td>EN 10204 Type 3.1</td>
+        <td>Bumax AB</td>
+        <td>B24-3344</td>
+        <td>ASTM A193 B8M Cl.2</td>
+        <td><span class="status-badge status-yes">Verified</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:bold;">BX-24-1122-A194</td>
+        <td>EN 10204 Type 3.1</td>
+        <td>Bumax AB</td>
+        <td>N24-1122</td>
+        <td>ASTM A194 8M</td>
+        <td><span class="status-badge status-yes">Verified</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:bold;">FLX-24-0088-SW</td>
+        <td>EN 10204 Type 3.1</td>
+        <td>Flexitallic Group</td>
+        <td>G24-0088</td>
+        <td>316L / Graphite</td>
+        <td><span class="status-badge status-yes">Verified</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3. PMI Verification Summary</h2>
+
+  <p>Positive Material Identification (PMI) was performed on all CRA (Corrosion Resistant Alloy) materials upon receipt at Aurelian Manufacturing, Moss, Norway. PMI was conducted using an Olympus Vanta M Series handheld XRF analyser (Serial: VXM-24-0871, calibration valid to 15 September 2026).</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Part</th>
+        <th>Heat No</th>
+        <th>PMI Date</th>
+        <th>PMI Report No</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Main Body Forging</td>
+        <td>H24-5587</td>
+        <td>05 March 2026</td>
+        <td>AM-PMI-2026-0112</td>
+        <td><span class="status-badge status-yes">Pass</span></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Hub Forging</td>
+        <td>H24-5612</td>
+        <td>05 March 2026</td>
+        <td>AM-PMI-2026-0113</td>
+        <td><span class="status-badge status-yes">Pass</span></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Seal Ring</td>
+        <td>N24-2201</td>
+        <td>07 March 2026</td>
+        <td>AM-PMI-2026-0114</td>
+        <td><span class="status-badge status-yes">Pass</span></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Hex Bolts M24&times;80</td>
+        <td>B24-3344</td>
+        <td>07 March 2026</td>
+        <td>AM-PMI-2026-0115</td>
+        <td><span class="status-badge status-yes">Pass</span></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Hex Nuts M24</td>
+        <td>N24-1122</td>
+        <td>07 March 2026</td>
+        <td>AM-PMI-2026-0116</td>
+        <td><span class="status-badge status-yes">Pass</span></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Test Port Plug</td>
+        <td>H24-5587</td>
+        <td>12 March 2026</td>
+        <td>AM-PMI-2026-0117</td>
+        <td><span class="status-badge status-yes">Pass</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. Traceability Statement</h2>
+
+  <div class="callout" style="background: #fff; border-left: 4px solid #F50537; padding: 14px 18px;">
+    <p style="font-size: 10pt; margin-bottom: 8pt;">We hereby certify that all materials listed in this Material Traceability List have been:</p>
+    <ul style="margin-left: 16px; margin-bottom: 8pt; font-size: 10pt;">
+      <li>Procured from approved and qualified suppliers</li>
+      <li>Received with valid material certificates as specified (EN 10204 Type 3.1 or 3.2 as applicable)</li>
+      <li>Verified by Positive Material Identification (PMI) using calibrated XRF equipment where required</li>
+      <li>Marked and stored in accordance with Aurelian Manufacturing quality procedure AM-QP-MAT-001 Rev 4</li>
+      <li>Fully traceable from the original mill heat to the finished product</li>
+    </ul>
+    <p style="font-size: 10pt; margin-bottom: 0;">All material certificates referenced herein are included in MRB Section 5 (Material Certificates / PMI Reports).</p>
+  </div>
+
+  <h2>5. Approval Signatures</h2>
+
+  <div class="signature-block">
+    <div>
+      <h3 style="color: #F50537; margin-bottom: 8px;">Prepared By &mdash; QC Inspector</h3>
+      <div class="sig-line"></div>
+      <div class="sig-name">Lars Henriksen</div>
+      <div class="sig-title">QC Inspector &mdash; Materials &amp; Receiving</div>
+      <div class="sig-label">Cert. No.: AM-QCI-2024-018 &bull; ASNT Level II</div>
+      <br>
+      <div class="sig-line" style="width: 60%;"></div>
+      <div class="sig-label">Date</div>
+    </div>
+    <div>
+      <h3 style="color: #F50537; margin-bottom: 8px;">Approved By &mdash; QA Manager</h3>
+      <div class="sig-line"></div>
+      <div class="sig-name">Anna Nordstr&ouml;m</div>
+      <div class="sig-title">Quality Assurance Manager</div>
+      <div class="sig-label">Aurelian Manufacturing AS</div>
+      <br>
+      <div class="sig-line" style="width: 60%;"></div>
+      <div class="sig-label">Date</div>
+    </div>
+  </div>
+
+  <h2>6. Revision History</h2>
+  <table>
+    <thead>
+      <tr><th>Rev</th><th>Date</th><th>Description</th><th>Prepared</th><th>Approved</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0</td><td>18 March 2026</td><td>Original issue</td><td>L. Henriksen</td><td>A. Nordstr&ouml;m</td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 40px; padding: 12px; background: #F5F5F5; font-size: 8pt; color: #6B6B6B;">
+    <strong>Aurelian Manufacturing AS</strong><br>
+    Industriveien 12, 1531 Moss, Norway<br>
+    Org. No.: NO 912 345 678 MVA &bull; Tel: +47 69 00 45 67 &bull; www.aurelian.no<br><br>
+    This document and its contents are the property of Aurelian Manufacturing AS and are confidential. Distribution is limited to the project team and client (Nordic Subsea Solutions AS) as defined in the project document distribution matrix.
+  </div>
+
+  <div class="footer">
+    <span class="confidential">Confidential</span>
+    <span>Page 2 of 2</span>
+    <span>AM-MTL-2026-0042-001 Rev 0 &bull; 18 March 2026</span>
+  </div>
+</div>
+
+</body>
+</html>

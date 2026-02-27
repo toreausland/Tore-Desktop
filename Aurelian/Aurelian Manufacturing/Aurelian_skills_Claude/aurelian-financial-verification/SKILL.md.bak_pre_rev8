@@ -1,0 +1,345 @@
+---
+name: aurelian-financial-verification
+description: Auditor-level financial verification and consistency skill for Aurelian Manufacturing. Use this skill whenever verifying numbers across documents, checking that a financial model matches the DD package, auditing spreadsheets for correctness, cross-referencing pitch deck claims against source data, or ensuring red thread (rod trad) consistency across investor materials. Triggers on "verify numbers", "check consistency", "cross-reference", "audit", "rod trad", "red thread", "do the numbers match", "reconcile", "validate model", "check against pitch", "discrepancy", "which number is correct", "source of truth", "trace back to source", or any request to verify financial accuracy and document consistency. Also use when preparing for investor meetings to ensure no conflicting information exists.
+---
+
+# Aurelian Manufacturing — Financial Verification Skill (Auditor)
+
+This skill acts as an internal auditor for Aurelian's DD package. It maps every key number to its source document, flags known discrepancies, provides verification procedures, and ensures consistency ("rod trad") across all investor-facing materials.
+
+## Purpose
+
+Investors will cross-check numbers between your pitch deck, financial model, VDR documents, and verbal claims. ONE inconsistency destroys credibility. This skill prevents that.
+
+---
+
+## SECTION 1: DOCUMENT AUTHORITY MAP
+
+### 1.1 Source Document Hierarchy
+
+When documents conflict, use this hierarchy (highest authority first):
+
+| Priority | Document | Authoritative For |
+|----------|----------|-------------------|
+| **1** | ***02 Economic Tables & Projections* (VDR 02.04)** | ABSOLUTE master for ALL financial numbers: cap table, fundraising rounds, revenue projections, cost structure, machine deployment, staffing |
+| 2 | Aksjonaeavtale (01_Shareholders_Agreement) | Governance terms, shareholder structure, vesting, non-compete |
+| 3 | VDR Guide v5.1 | Document structure, status tracking |
+| 4 | Autonomous CNC Validation (04_Technical) | Technical feasibility, utilization benchmarks |
+| 5 | Market research docs (Defence, Energy, etc.) | TAM/SAM/SOM, competitive landscape |
+| 6 | Claude Skills | Synthesized analysis — MUST match master document |
+
+### 1.2 READ-BEFORE-VERIFY RULE (ABSOLUTE — NO EXCEPTIONS)
+
+> **Claude does NOT have persistent memory between sessions.** The values in this skills file are a COPY of master document, not a replacement. You MUST read the original.
+
+**Mandatory procedure for ANY verification:**
+
+1. **READ** the master document PDF physically BEFORE starting verification:
+   `Aurelian_VDR/02_Financial/2.4_Economic_Tables_Projections/02_Economic_Tables_Projections_REV6.pdf`
+2. **READ** the design manual: `Design MAnual/aurelian-design-manual.md` (for formatting and styling rules)
+3. **COMPARE** the document's values against what you actually read in master document — not against what you "remember" or what this skills file says.
+4. **CONFIRM** the 17 checkpoint values from the master document.
+5. **USE** the full reference format at all times (see §1.3 below).
+
+**If you cannot read the master document file:** STOP. Inform the user. Do not verify based on memory.
+
+**This check applies for EACH document request within a conversation — not just the first one.**
+
+### 1.3 REFERENCE FORMAT FOR GENERATED DOCUMENTS (COPY — DO NOT RECONSTRUCT)
+
+**Full reference:** `*02 Economic Tables & Projections* (VDR 02.04)`
+**Inline with section:** `Ref: 02 Economic Tables & Projections, §[number] (VDR 02.04)`
+
+❌ Never in generated docs: any revision number, or "VDR 02.04" alone without document name
+✅ Always use: "*02 Economic Tables & Projections* (VDR 02.04)"
+
+**Examples with current values:**
+- Revenue 20 CNC @ 60% = ~315 MNOK → `Ref: 02 Economic Tables & Projections, §5.1 (VDR 02.04)`
+- Seed: 51.3 MNOK equity + 29.3 MNOK debt = 80.6 MNOK total → `Ref: 02 Economic Tables & Projections, §4.1 (VDR 02.04)`
+- Staffing 20 CNC: 16 ops + 4 admin = 20 total → `Ref: 02 Economic Tables & Projections, §1.3b (VDR 02.04)`
+- EBIT 20 CNC @ 60% = ~222.3 MNOK → `Ref: 02 Economic Tables & Projections, §3.6 (VDR 02.04)`
+
+### 1.4 Rule: When Numbers Conflict
+
+```
+IF master document says X and ANY other document says Y:
+    -> USE X (master document is absolute authority)
+    -> FLAG the discrepancy in any deliverable
+    -> NOTE: "Source: 02 Economic Tables & Projections, §[number]. Note: [other doc] references [Y], superseded by current master document revision."
+```
+
+---
+
+## SECTION 2: MASTER DOCUMENT CANONICAL VALUES
+
+### 2.1 The 17 Checkpoint Values
+
+Every financial document must match these exactly:
+
+| # | Parameter | Master Value | Unit |
+|---|-----------|-----------|------|
+| 1 | Revenue at 20 CNC, 60% utilization | ~315 | MNOK |
+| 2 | Total cost at 20 CNC steady state (8% var) | ~92.75 | MNOK |
+| 3 | Break-even at 5 CNC (Seed config) | ~24% | utilization |
+| 4 | Staff ratio | 0.8 | FTE per CNC |
+| 5 | Variable cost (steady state 2032+) | 8% | of revenue |
+| 6 | Variable cost (startup 2027-2028) | 13% | of revenue |
+| 7 | Exit valuation (base case) | 2.3B NOK | at 10x EBITDA |
+| 8 | Founders post-Serie A | 50.60% | ownership |
+| 9 | Accumulated profit 2027-2035 | ~1,254 | MNOK |
+| 10 | Seed pre-money | 130 | MNOK |
+| 11 | CAPEX per CNC (incl. automation) | 10 | MNOK |
+| 12 | First revenue | August 2027 | date |
+| 13 | Seed machines | 5 | CNC |
+| 14 | Serie A machines | 15 (3x5 tranches) | CNC |
+| 15 | Total equity raised (all rounds) | 101.3 | MNOK |
+| 16 | Shop base setup (per site) | 8.6 | MNOK |
+| 17 | Hourly rate (conservative floor) | 3,000 | NOK |
+
+### 2.2 Fundraising Rounds
+
+| Parameter | Pre-Seed | Seed | Serie A |
+|-----------|----------|------|---------|
+| Capital raised (equity) | 5 MNOK | 51.3 MNOK | 45 MNOK |
+| Pre-money valuation | 25 MNOK | 130 MNOK | 250 MNOK |
+| Post-money valuation | 30 MNOK | 181.3 MNOK | 295 MNOK |
+| Dilution | 16.67% | 28.30% | 15.25% |
+| Bank debt | — | 29.3 MNOK | 105 MNOK |
+
+### 2.3 Cap Table
+
+| Shareholder | Founding | Post PreSeed | Post Seed | Post Serie A |
+|-------------|----------|-------------|-----------|-------------|
+| Eier A (Holen Industrier) | 56.25% | 46.88% | 33.60% | 28.46% |
+| Eier B (Quality Group Invest) | 33.75% | 28.13% | 20.16% | 17.08% |
+| Eier C (STAH Invest) | 10.00% | 8.33% | 5.97% | 5.06% |
+| PreSeed investors | — | 16.67% | 11.95% | 10.12% |
+| Seed investors | — | — | 28.30% | 23.98% |
+| Serie A investors | — | — | — | 15.25% |
+| **Founders total** | **100%** | **83.33%** | **59.74%** | **50.60%** |
+
+### 2.4 Revenue Trajectory
+
+| Year | CNC (avg) | Util. | Revenue (MNOK) | Cost (MNOK) | Aurelian Profit (MNOK) |
+|------|-----------|-------|----------------|-------------|----------------------|
+| 2027 H2 | 5 | 20% | 10.9 | 13.4 | -2.5 |
+| 2028 | 5 | 37.5% | 49.3 | 34.1 | 15.2 |
+| 2029 | 12 | 42.5% | 134 | 61.1 | 72.9 |
+| 2030 | 17 | 47.5% | 212 | 80.2 | 131.8 |
+| 2031 | 20 | 52.5% | 276 | 92.8 | 166.8 |
+| 2032 | 20 | 57.5% | 302 | 92.4 | 182.3 |
+| 2033 | 22 | 60% | 347 | 98.0 | 207.0 |
+| 2034 | 24 | 62.5% | 394 | 103.8 | 232.6 |
+| 2035 | 25 | 65% | 427 | 107.2 | 247.8 |
+
+---
+
+## SECTION 3: CROSS-REFERENCE VERIFICATION MATRIX
+
+### 3.1 Core Numbers That Must Match Everywhere
+
+| Parameter | Canonical Value | Must Match In |
+|-----------|----------------|---------------|
+| Hourly rate | 3,000 NOK | Pitch, master doc, all Excel models, skills |
+| Target utilization | 60-65% | Pitch, master doc, CNC Validation doc, skills |
+| Staff per CNC | 0.8 | Pitch, master doc, CNC Validation doc |
+| Variable cost (mature) | 8% | master doc, all financial models |
+| Variable cost (startup) | 13% | master doc, all financial models |
+| Pre-Seed capital | 5 MNOK | master doc, pitch, all DD materials |
+| Pre-Seed pre-money | 25 MNOK | master doc, pitch, all DD materials |
+| Seed capital | 51.3 MNOK | master doc, pitch, all DD materials |
+| Seed pre-money | 130 MNOK | master doc, pitch, all DD materials |
+| Serie A capital | 45 MNOK | master doc, pitch, all DD materials |
+| Serie A pre-money | 250 MNOK | master doc, pitch, all DD materials |
+| Exit valuation | 2.3B NOK | master doc, pitch, cap table models |
+| Founders post-A | 50.60% | master doc, cap table, pitch |
+| CNC cost | 10 MNOK | master doc, CAPEX models |
+| Seed CNC count | 5 | master doc, pitch, deployment plans |
+| Revenue 2028 | 49.3 MNOK | master doc, all models |
+| Revenue 20 CNC @ 60% | ~315 MNOK | master doc, all models |
+| Total cost steady state | ~92.75 MNOK | master doc, all models |
+| Accumulated profit 2027-2035 | ~1,254 MNOK | master doc |
+
+### 3.2 Verification Procedure — Quick Check
+
+Run this checklist before sharing ANY investor-facing material:
+
+```
+STEP 1: Open the document/spreadsheet
+STEP 2: Find every instance of these numbers:
+    - Pre-money valuations (25 / 130 / 250 MNOK)
+    - Capital raised (5 / 51.3 / 45 MNOK)
+    - Revenue at scale (~315 MNOK)
+    - Revenue 2028 (49.3 MNOK, NOT 73 MNOK)
+    - Exit valuation (2.3B)
+    - Utilization target (60-65%)
+    - Hourly rate (3,000 NOK)
+    - Staff ratio (0.8)
+    - Variable cost (8% mature, 13% startup)
+    - CNC count Seed (5, NOT 8)
+    - Break-even (~24% at 5 CNC)
+STEP 3: Verify each matches canonical master document values above
+STEP 4: Check cap table percentages sum to 100% at each stage
+STEP 5: Verify revenue formula uses 8,760 base (NEVER 6,000)
+STEP 6: Check that steady state costs = ~92.75 MNOK (NOT 102.5)
+STEP 7: Verify 50/50 sharing only applies above 45% utilization
+STEP 8: Confirm year labels match (Aug 2027 = production start, 2028 = first full year)
+STEP 9: Cross-check EBIT against P&L (Revenue - Variable - Fixed)
+STEP 10: Verify dilution math: new_investor% = capital / post-money
+```
+
+---
+
+## SECTION 4: COMMON ERRORS TO DETECT
+
+### 4.1 Old-Document Contamination
+
+These are the most frequent errors caused by referencing superseded documents:
+
+| Error | Old Value | Master Value | How to Detect |
+|-------|-----------|-----------|---------------|
+| Wrong Seed amount | 47 MNOK | **51.3 MNOK** | Check fundraising tables |
+| Wrong Seed pre-money | 140 MNOK | **130 MNOK** | Check valuation defense |
+| Wrong Seed CNC | 8 machines | **5 machines** | Check deployment timeline |
+| Wrong Serie A amount | 42 MNOK | **45 MNOK** | Check fundraising tables |
+| Wrong founders post-A | 53.42% | **50.60%** | Check cap table |
+| Wrong Seed dilution | 25.13% | **28.30%** | Check cap table |
+| Wrong admin FTEs | 3 | **4** | Check cost structure |
+| Wrong facility lease | 4.0 MNOK | **5.2 MNOK** | Check fixed costs |
+| Wrong variable cost | 13% flat | **13% > 8% curve** | Check variable cost line |
+| Wrong steady state cost | 102.5 MNOK | **92.75 MNOK** | Check total cost |
+| Wrong revenue 2028 | 73 MNOK | **49.3 MNOK** | Check revenue table |
+| Wrong CNC cost | 8 MNOK | **10 MNOK** | Check CAPEX |
+| Wrong hour base | 6,000 hours | **8,760 hours** | Check revenue formula |
+| Wrong PreSeed ROI | 49x | **46.6x** | Check ROI table |
+| Wrong accumulated profit | 1,094 MNOK | **1,254 MNOK** | Check cumulative P&L |
+
+### 4.2 Excel-Specific Errors
+
+| Error Type | Example | How to Detect | Fix |
+|-----------|---------|--------------|-----|
+| Wrong hour base | Revenue = CNC x 6,000 x util% x 3,000 | Revenue at 20 CNC, 60% = 216 not 315 | Use 8,760 as base |
+| Missing sharing logic | EBIT shown without 50/50 deduction | EBIT too high for util >45% | Add sharing formula |
+| Wrong CNC cost | CAPEX uses 8 MNOK per CNC | Total CAPEX too low | Use 10 MNOK per CNC |
+| Dilution not compounding | Seed investor shows same % post-A | Should decrease by Serie A dilution | Apply (1 - Serie A %) |
+| Staff scaling linearly | FTE = CNC x 0.8 for all years | Year 1 shows 4.0 FTE for 5 CNC | Use staffing table |
+| Flat variable cost | Same 13% for all years | Overstates mature-year costs | Use maturity curve |
+| Missing shop base | No shop base depreciation line | Understates depreciation | Add 1.075 MNOK/year |
+| Rounding drift | Cap table sums to 99.8% or 100.2% | Check SUM() cells | Adjust last shareholder |
+
+---
+
+## SECTION 5: CAP TABLE VERIFICATION
+
+```
+Verification formula for each stage:
+
+Post Pre-Seed:
+  Eier A: 56.25% x (1 - 16.67%) = 46.88%
+  Eier B: 33.75% x (1 - 16.67%) = 28.13%
+  Eier C: 10.00% x (1 - 16.67%) = 8.33%
+  Pre-Seed: 5/30 = 16.67%
+
+Post Seed:
+  Eier A: 46.88% x (1 - 28.30%) = 33.60%
+  Eier B: 28.13% x (1 - 28.30%) = 20.16%
+  Eier C: 8.33% x (1 - 28.30%) = 5.97%
+  Pre-Seed: 16.67% x (1 - 28.30%) = 11.95%
+  Seed: 51.3/181.3 = 28.30%
+
+Post Serie A:
+  Eier A: 33.60% x (1 - 15.25%) = 28.48% ~ 28.46%
+  Eier B: 20.16% x (1 - 15.25%) = 17.09% ~ 17.08%
+  Eier C: 5.97% x (1 - 15.25%) = 5.06%
+  Pre-Seed: 11.95% x (1 - 15.25%) = 10.13% ~ 10.12%
+  Seed: 28.30% x (1 - 15.25%) = 23.99% ~ 23.98%
+  Serie A: 45/295 = 15.25%
+```
+
+---
+
+## SECTION 6: PRE-MEETING VERIFICATION PROTOCOL
+
+Before ANY investor meeting, run this 15-minute check:
+
+```
+PHASE 1 — Numbers Match (5 min):
+  Revenue projections in pitch = financial model = master document
+  Cap table in pitch = master document cap table
+  Pre-money valuations consistent (25 / 130 / 250)
+  Use of funds adds up to capital raised (51.3 MNOK equity Seed)
+  EBITDA multiple cited = 10-11x (not higher)
+  Seed CNC = 5 (NOT 8)
+  Revenue 2028 = 49.3 MNOK (NOT 73)
+
+PHASE 2 — Logic Holds (5 min):
+  Revenue formula reproducible (CNC x 8,760 x util% x 3,000)
+  Break-even claim provable (5 CNC x 24% x 8,760 x 3,000 ~ 31.5 MNOK)
+  Cost structure at scale checks out (~92.75 MNOK at 20 CNC)
+  Sub-linear staffing: 20 staff for 20 CNC (not 50 at industry ratio)
+  50/50 sharing only kicks in above 45% — confirm in all materials
+  Variable cost maturity curve: 13% declining to 8%
+
+PHASE 3 — No Traps (5 min):
+  No reference to 60 MNOK pre-seed pre-money (old, WRONG)
+  No reference to 47 MNOK Seed (old, WRONG — use 51.3)
+  No reference to 140 MNOK Seed pre-money (old, WRONG — use 130)
+  No reference to 8 MNOK per CNC (old, WRONG — use 10)
+  No reference to 8 CNC at Seed (old, WRONG — use 5)
+  No revenue figures using 6,000-hour base (should be 8,760)
+  No reference to 53.42% founders post-A (old, WRONG — use 50.60%)
+  No reference to 3 admin FTEs (old, WRONG — use 4)
+  No cap table showing old dilution math
+  No exit multiple above 11x cited anywhere
+  Year labels correct (production starts Aug 2027, 2028 = first full year)
+```
+
+---
+
+## SECTION 7: ONGOING MAINTENANCE
+
+### 7.1 When New Documents Are Created
+
+Every time a new financial document is produced:
+
+1. Check all numbers against Section 3 Cross-Reference Matrix
+2. Verify no old-document contamination from Section 4
+3. Run Excel audit procedure if spreadsheet
+4. Verify cap table with Section 5 formulas
+
+### 7.2 When the Master Document Is Updated
+
+If the master document is updated to a new revision:
+
+1. Re-derive all 17 checkpoint values
+2. Update this verification skill immediately
+3. Update all downstream skills (financial-model, investor, legal-dd, vdr-index, market-dd)
+4. Update master-reference.md
+5. Flag all VDR documents that need updating
+
+### 7.3 Version Control Principle
+
+```
+All investor-facing numbers must trace to:
+  Master document -> Assumptions Sheet -> Formula Cell -> Output Cell
+
+If any number cannot be traced back to master document,
+it must be flagged with [ESTIMATED] and documented.
+```
+
+---
+
+## SECTION 8: RED FLAGS FOR INVESTOR PERCEPTION
+
+These patterns trigger investor skepticism. Avoid them:
+
+| Red Flag | What Investor Sees | How to Prevent |
+|----------|-------------------|----------------|
+| Different revenue numbers in different docs | "They don't know their own model" | Use this verification skill before sharing |
+| Cap table doesn't sum to 100% | "Basic math error" | Verify with Section 5 formulas |
+| Exit multiple above industry norm | "Unrealistic expectations" | Keep at 10-11x, cite IoT/Industry 4.0 range |
+| Break-even not provable | "Haven't stress-tested" | Show formula: 5 CNC x 24% x 8,760 x 3,000 ~ 31.5 MNOK |
+| Utilization target not benchmarked | "Aspirational, not validated" | Reference CNC Validation doc (DMG MORI, MAZAK, Siemens data) |
+| Cost structure missing items | "Hidden costs will appear" | Ensure all master document cost lines included |
+| Conflicting year labels | "Sloppy" | Confirm: Aug 2027 start, 2028 = first full year |
+| Old numbers in some docs | "Haven't updated their model" | Check ALL docs against master document before sharing |

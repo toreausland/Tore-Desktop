@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MRB Section 6 — Weld &amp; NDT Log</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+  .page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+  .page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #F50537; }
+  .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #D3D3D3; padding-bottom: 12px; margin-bottom: 16px; }
+  .logo { font-size: 16pt; font-weight: bold; color: #2B2B2B; }
+  .logo span { display: block; font-size: 9pt; font-weight: normal; color: #6B6B6B; }
+  .doc-info { text-align: right; font-size: 9pt; color: #6B6B6B; }
+  .doc-info strong { color: #2B2B2B; font-size: 10pt; }
+  h1 { font-size: 18pt; color: #2B2B2B; font-weight: bold; margin: 16px 0 6px 0; }
+  h2 { font-size: 13pt; color: #F50537; font-weight: bold; margin: 14px 0 6px 0; }
+  h3 { font-size: 11pt; color: #2B2B2B; font-weight: bold; margin: 10px 0 4px 0; }
+  p { margin-bottom: 6pt; font-size: 10pt; }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .meta-box { background: #F5F5F5; padding: 10px; font-size: 9pt; }
+  .meta-box .lbl { font-weight: bold; color: #6B6B6B; text-transform: uppercase; font-size: 8pt; }
+  .meta-box .val { color: #2B2B2B; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 14px 0; font-size: 9pt; }
+  thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 5pt 6pt; text-align: left; font-size: 8.5pt; }
+  tbody td { padding: 4pt 6pt; border-bottom: 0.5pt solid #D3D3D3; }
+  tbody tr:nth-child(even) { background: #F5F5F5; }
+  .center { text-align: center; }
+  .right { text-align: right; }
+  .sig-block { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; margin-top: 24px; }
+  .sig-line { border-bottom: 1px solid #2B2B2B; height: 30px; margin-bottom: 3px; }
+  .sig-label { font-size: 8pt; color: #6B6B6B; }
+  .sig-name { font-size: 9pt; font-weight: bold; }
+  .footer { margin-top: 24px; border-top: 1px solid #D3D3D3; padding-top: 8px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+  .stamp { border: 2px solid #F50537; padding: 8px 16px; display: inline-block; font-size: 10pt; font-weight: bold; color: #F50537; margin: 10px 0; }
+  .status-accepted { color: #2B2B2B; font-weight: bold; }
+  .note-box { background: #F5F5F5; border-left: 3px solid #F50537; padding: 10px 12px; margin: 12px 0; font-size: 9pt; }
+  .weld-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0; }
+  .weld-stat { background: #F5F5F5; padding: 10px; text-align: center; }
+  .weld-stat .num { font-size: 18pt; font-weight: bold; color: #2B2B2B; }
+  .weld-stat .desc { font-size: 8pt; color: #6B6B6B; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      Aurelian Manufacturing
+      <span>Production as a Service</span>
+    </div>
+    <div class="doc-info">
+      <strong>AM-WDL-2026-0042-001</strong><br>
+      Rev 0 &nbsp;|&nbsp; 15 May 2026<br>
+      MRB Section 6
+    </div>
+  </div>
+
+  <!-- Title -->
+  <h1>Weld &amp; NDT Log</h1>
+  <p style="font-size: 10pt; color: #6B6B6B; margin-bottom: 14px;">
+    Complete record of all production welds and associated non-destructive testing for the connector assembly.
+  </p>
+
+  <!-- Project Metadata -->
+  <h2>Project Information</h2>
+  <div class="meta-grid">
+    <div class="meta-box">
+      <div class="lbl">Client</div>
+      <div class="val">Nordic Subsea Solutions AS<br>Forusbeen 35, 4033 Stavanger, Norway</div>
+    </div>
+    <div class="meta-box">
+      <div class="lbl">Supplier</div>
+      <div class="val">Aurelian Manufacturing AS<br>Industriveien 12, 1531 Moss, Norway</div>
+    </div>
+    <div class="meta-box">
+      <div class="lbl">Purchase Order</div>
+      <div class="val">NSS-PO-2026-0042</div>
+    </div>
+    <div class="meta-box">
+      <div class="lbl">Project</div>
+      <div class="val">Barents Sea Development Phase 2 (NSS-PRJ-BS2024)</div>
+    </div>
+    <div class="meta-box">
+      <div class="lbl">Product Description</div>
+      <div class="val">Subsea Connector Assembly, Size 300 (Upfacing)<br>Super Duplex UNS S32750</div>
+    </div>
+    <div class="meta-box">
+      <div class="lbl">Tag / Serial</div>
+      <div class="val">Tag: NSS-BSP2-SCA-001<br>Serial: AM-BSP2-300-001</div>
+    </div>
+  </div>
+
+  <!-- Weld Summary -->
+  <h2>Weld Summary</h2>
+  <div class="weld-summary">
+    <div class="weld-stat">
+      <div class="num">6</div>
+      <div class="desc">Total Welds</div>
+    </div>
+    <div class="weld-stat">
+      <div class="num">6</div>
+      <div class="desc">Accepted</div>
+    </div>
+    <div class="weld-stat">
+      <div class="num">0</div>
+      <div class="desc">Rejected / Repaired</div>
+    </div>
+  </div>
+
+  <!-- Weld Log Table -->
+  <h2>Weld Log — Production Welds</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Weld No</th>
+        <th>Joint Description</th>
+        <th>WPS No</th>
+        <th>Welder ID</th>
+        <th>Process</th>
+        <th>Date Welded</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>W-001</td>
+        <td>Body to Hub butt weld</td>
+        <td>AM-WPS-SD-001</td>
+        <td>WE-112</td>
+        <td>GTAW</td>
+        <td>28 Apr 2026</td>
+      </tr>
+      <tr>
+        <td>W-002</td>
+        <td>Seal groove overlay weld (Inconel 625)</td>
+        <td>AM-WPS-IN-001</td>
+        <td>WE-118</td>
+        <td>GTAW</td>
+        <td>29 Apr 2026</td>
+      </tr>
+      <tr>
+        <td>W-003</td>
+        <td>Test port socket weld</td>
+        <td>AM-WPS-SD-002</td>
+        <td>WE-118</td>
+        <td>GTAW</td>
+        <td>30 Apr 2026</td>
+      </tr>
+      <tr>
+        <td>W-004</td>
+        <td>Lifting lug fillet weld</td>
+        <td>AM-WPS-SD-002</td>
+        <td>WE-112</td>
+        <td>GTAW</td>
+        <td>01 May 2026</td>
+      </tr>
+      <tr>
+        <td>W-005</td>
+        <td>Nameplate attachment weld</td>
+        <td>AM-WPS-SD-002</td>
+        <td>WE-112</td>
+        <td>GTAW</td>
+        <td>01 May 2026</td>
+      </tr>
+      <tr>
+        <td>W-006</td>
+        <td>Body circumferential seam weld</td>
+        <td>AM-WPS-SD-001</td>
+        <td>WE-118</td>
+        <td>GTAW</td>
+        <td>02 May 2026</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- NDT Results Table -->
+  <h2>NDT Results</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Weld No</th>
+        <th>VT Result</th>
+        <th>VT Date</th>
+        <th>RT Result</th>
+        <th>RT Report No</th>
+        <th>PT Result</th>
+        <th>PT Report No</th>
+        <th>PMI</th>
+        <th>Ferrite %</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>W-001</td>
+        <td>Accepted</td>
+        <td>28 Apr 2026</td>
+        <td>Accepted</td>
+        <td>AM-RT-0042-001</td>
+        <td>Accepted</td>
+        <td>AM-PT-0042-001</td>
+        <td>Confirmed</td>
+        <td class="center">45%</td>
+        <td class="status-accepted">Accepted</td>
+      </tr>
+      <tr>
+        <td>W-002</td>
+        <td>Accepted</td>
+        <td>29 Apr 2026</td>
+        <td>N/A</td>
+        <td>—</td>
+        <td>Accepted</td>
+        <td>AM-PT-0042-002</td>
+        <td>Confirmed</td>
+        <td class="center">N/A</td>
+        <td class="status-accepted">Accepted</td>
+      </tr>
+      <tr>
+        <td>W-003</td>
+        <td>Accepted</td>
+        <td>30 Apr 2026</td>
+        <td>N/A</td>
+        <td>—</td>
+        <td>Accepted</td>
+        <td>AM-PT-0042-003</td>
+        <td>Confirmed</td>
+        <td class="center">42%</td>
+        <td class="status-accepted">Accepted</td>
+      </tr>
+      <tr>
+        <td>W-004</td>
+        <td>Accepted</td>
+        <td>01 May 2026</td>
+        <td>N/A</td>
+        <td>—</td>
+        <td>Accepted</td>
+        <td>AM-PT-0042-004</td>
+        <td>Confirmed</td>
+        <td class="center">46%</td>
+        <td class="status-accepted">Accepted</td>
+      </tr>
+      <tr>
+        <td>W-005</td>
+        <td>Accepted</td>
+        <td>01 May 2026</td>
+        <td>N/A</td>
+        <td>—</td>
+        <td>Accepted</td>
+        <td>AM-PT-0042-005</td>
+        <td>Confirmed</td>
+        <td class="center">44%</td>
+        <td class="status-accepted">Accepted</td>
+      </tr>
+      <tr>
+        <td>W-006</td>
+        <td>Accepted</td>
+        <td>02 May 2026</td>
+        <td>Accepted</td>
+        <td>AM-RT-0042-002</td>
+        <td>Accepted</td>
+        <td>AM-PT-0042-006</td>
+        <td>Confirmed</td>
+        <td class="center">48%</td>
+        <td class="status-accepted">Accepted</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Notes -->
+  <div class="note-box">
+    <strong>Notes:</strong><br>
+    1. Radiographic testing (RT) performed on all butt welds (W-001, W-006) per ASME V, Article 2.<br>
+    2. Penetrant testing (PT) performed on all welds per ASME V, Article 6 / EN ISO 3452-1.<br>
+    3. Visual testing (VT) performed on all welds per EN ISO 17637.<br>
+    4. PMI verified using XRF analyser (Olympus Vanta M series), Cert No: CAL-2026-0034.<br>
+    5. Ferrite measured per ASTM E562 / NORSOK M-601 (acceptance range: 35&ndash;55%).<br>
+    6. All NDT performed by Level II certified operators (see MRB Section 9 for NDT personnel qualifications).
+  </div>
+
+  <!-- WPS Reference -->
+  <h2>WPS Cross-Reference</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>WPS No</th>
+        <th>Description</th>
+        <th>Applicable Welds</th>
+        <th>WPQR Reference</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AM-WPS-SD-001</td>
+        <td>Super Duplex butt weld, GTAW, all positions</td>
+        <td>W-001, W-006</td>
+        <td>AM-WPQR-SD-001</td>
+      </tr>
+      <tr>
+        <td>AM-WPS-SD-002</td>
+        <td>Super Duplex fillet/socket weld, GTAW</td>
+        <td>W-003, W-004, W-005</td>
+        <td>AM-WPQR-SD-002</td>
+      </tr>
+      <tr>
+        <td>AM-WPS-IN-001</td>
+        <td>Inconel 625 overlay on Super Duplex, GTAW</td>
+        <td>W-002</td>
+        <td>AM-WPQR-IN-001</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Acceptance Statement -->
+  <h2>Acceptance Statement</h2>
+  <p>
+    All six (6) production welds on Tag NSS-BSP2-SCA-001 / Serial AM-BSP2-300-001 have been completed in
+    accordance with the applicable Welding Procedure Specifications and have passed all required non-destructive
+    testing examinations. Ferrite content is within the acceptance range of 35&ndash;55% per NORSOK M-601.
+    All welds are accepted for service.
+  </p>
+  <div class="stamp">ALL WELDS ACCEPTED</div>
+
+  <!-- Signatures -->
+  <h2>Approvals</h2>
+  <div class="sig-block">
+    <div>
+      <div class="sig-line"></div>
+      <div class="sig-name">Erik Solheim</div>
+      <div class="sig-label">Welding Engineer / IWE<br>Date: 15 May 2026</div>
+    </div>
+    <div>
+      <div class="sig-line"></div>
+      <div class="sig-name">Ingrid Dahl</div>
+      <div class="sig-label">QC Inspector Level II<br>Date: 15 May 2026</div>
+    </div>
+    <div>
+      <div class="sig-line"></div>
+      <div class="sig-name">Knut Andersen</div>
+      <div class="sig-label">QA Manager<br>Date: 15 May 2026</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>CONFIDENTIAL</span>
+    <span>Page 1 of 1</span>
+    <span>AM-WDL-2026-0042-001 Rev 0</span>
+  </div>
+</div>
+
+</body>
+</html>

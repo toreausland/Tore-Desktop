@@ -1,0 +1,331 @@
+---
+name: aurelian-investor
+description: Investor materials and pitch skill for Aurelian Manufacturing — an autonomous CNC manufacturing startup. Use this skill for ANY investor-facing question including pitch deck content, financial model explanation, valuation defense, ROI calculations, fundraising strategy, investor Q&A, team bios, cap table, exit scenario, European VC benchmarks, or any question about Aurelian's investment opportunity. Triggers on "investor pitch", "valuation", "ROI", "fundraising", "cap table", "exit", "investment thesis", "seed round", "pre-seed", "series A", "dilution", "EBITDA multiple", or any investor-related query about Aurelian Manufacturing.
+---
+
+# Aurelian Manufacturing — Investor Materials Skill
+
+**All financial numbers sourced from *02 Economic Tables & Projections* (VDR 02.04) — ABSOLUTE master.**
+
+### READ-BEFORE-USE RULE (ABSOLUTE — NO EXCEPTIONS)
+
+> **Claude does NOT have persistent memory.** The values in this skills file are a COPY of master document, not a replacement. You MUST read the original before producing investor materials.
+
+**BEFORE producing any investor-facing content with financial figures:**
+
+1. **READ** the master document PDF: `Aurelian_VDR/02_Financial/2.4_Economic_Tables_Projections/02_Economic_Tables_Projections_REV6.pdf`
+2. **READ** the design manual: `Design MAnual/aurelian-design-manual.md` (for formatting and styling rules)
+3. **VERIFY** that values match what you actually read — not what you "remember".
+4. **CONFIRM** the 17 checkpoint values from the master document.
+5. **If you cannot read master document:** STOP and inform the user.
+
+**This check applies for EACH document request within a conversation — not just the first one.**
+
+### REFERENCE FORMAT FOR GENERATED DOCUMENTS (COPY — DO NOT RECONSTRUCT)
+
+> **Rule: Never hardcode a revision number in generated documents (Word, PPT, PDF).** The master document is always the current revision. When a new revision is issued, all documents remain correct without needing updates. File paths retain the revision in the filename because that is the actual file on disk.
+
+**Full reference:** `*02 Economic Tables & Projections* (VDR 02.04)`
+**Inline with section:** `Ref: 02 Economic Tables & Projections, §[number] (VDR 02.04)`
+
+❌ Never in generated docs: any revision number (e.g. "REV6", "REV7"), or "VDR 02.04" alone without document name
+✅ In generated docs: "*02 Economic Tables & Projections* (VDR 02.04)" — NO revision number
+
+**Examples with current values:**
+- Revenue 20 CNC @ 60% = ~315 MNOK → `Ref: 02 Economic Tables & Projections, §5.1 (VDR 02.04)`
+- Seed: 51.3 MNOK equity + 29.3 MNOK debt = 80.6 MNOK total → `Ref: 02 Economic Tables & Projections, §4.1 (VDR 02.04)`
+- Staffing 20 CNC: 16 ops + 4 admin = 20 total → `Ref: 02 Economic Tables & Projections, §1.3b (VDR 02.04)`
+- EBIT 20 CNC @ 60% = ~222.3 MNOK → `Ref: 02 Economic Tables & Projections, §3.6 (VDR 02.04)`
+
+## COMPANY OVERVIEW
+
+Aurelian Manufacturing is a pre-revenue Norwegian startup building Europe's first fully autonomous CNC manufacturing facility. Production as a Service — Autonomous, Data-Driven, and Scalable.
+
+**Stage:** Pre-revenue (Aug 2027 production start)
+**Location:** Valer, Ostfold, Norway (Norbygg facility partnership)
+**Sector:** Industry 4.0 / Deep Tech / Advanced Manufacturing
+**Org.nr:** 835 679 632
+**Contact:** Andre Tandberg, CEO — andre@aurelian.no
+
+## INVESTMENT THESIS
+
+Three converging mega-trends create a once-in-a-generation opportunity:
+
+1. **Defense Ramp-Up:** NATO nations committed to 5% GDP defense spending. Norway alone: 1,624 Billion NOK allocated 2025-2036. Bipartisan political support, multi-decade demand horizon.
+2. **Energy Transition:** Offshore wind, O&G modernization, hydrogen/CCS, grid infrastructure — all require precision-machined components at scale.
+3. **Structural CNC Capacity Gap:** Norwegian CNC shops average 20-45% utilization with ~2.5 staff per machine (CNC Benchmark, VDR 03.02). No domestic capacity exists to meet coming demand wave.
+
+**Aurelian's approach:** Greenfield autonomous facility with design targets of 60-65% utilization at maturity and 0.8 FTE/CNC at scale — enabled by 24/7 autonomous scheduling, greenfield layout, and sub-linear staffing model. These are design targets for a pre-revenue company, structurally difficult for existing operations to replicate due to brownfield constraints.
+
+## FINANCING STRUCTURE
+
+**CRITICAL: All numbers from *02 Economic Tables & Projections* (VDR 02.04) — master source**
+
+### Capital Rounds
+
+| Round | Ask (MNOK) | Pre-Money (MNOK) | Dilution | Purpose | Investor ROI |
+|-------|-----------|-----------------|----------|---------|-------------|
+| Pre-Seed | 5 | 25 | 16.7% | Runway, agreements, IP | ~46.6x |
+| Seed | **51.3** | **130** | **28.3%** | Workshop + 5 CNC + shop base + buffer | ~10.8x |
+| Serie A | **45** | 250 | **15.25%** | Scale to 20 CNC (3x5 tranches) | ~7.8x |
+
+**Total capital need:** 101.3 MNOK equity + ~134.3 MNOK debt = ~235.6 MNOK total CAPEX
+
+### Investor ROI vs. Market Expectations
+
+| Round | European Market Expected | Aurelian Projected | Status |
+|-------|------------------------|-------------------|--------|
+| Pre-Seed | 20-40x | ~46.6x | Above market |
+| Seed | 10-25x | ~10.8x | Within range |
+| Serie A | 5-10x | ~7.8x | Strong |
+
+### Exit Scenario
+- **Exit valuation:** 2.3 Billion NOK
+- **Multiple:** 10-11x EBITDA (conservative end of Industrial IoT range 6.9-11.1x)
+- **EBIT at exit:** ~222-248 MNOK (after 50/50 customer profit-sharing)
+- **Timeline:** 2033-2035
+- **Founders retain 50.6% at exit** — strong alignment
+
+## CAP TABLE EVOLUTION (
+
+| Shareholder | Pre-Seed | Post-Seed | Post-Serie A | Exit Value (MNOK) |
+|-------------|---------|-----------|-------------|------------------|
+| Eier A (Holen Industrier AS) | 56.25% > 46.88% | **33.60%** | **28.46%** | ~655 |
+| Eier B (Quality Group Invest AS) | 33.75% > 28.13% | **20.16%** | **17.08%** | ~393 |
+| Eier C (STAH Invest AS) | 10.00% > 8.33% | **5.97%** | **5.06%** | ~116 |
+| Pre-Seed investors | 16.67% | **11.95%** | **10.12%** | ~233 |
+| Seed investors | — | **28.30%** | **23.98%** | ~552 |
+| Serie A investors | — | — | **15.25%** | ~351 |
+
+**Key message:** Founders retain majority (50.6%) through exit — unusual discipline for capital-intensive startup.
+
+## REVENUE MODEL & UNIT ECONOMICS
+
+### Per-CNC Economics
+- Theoretical hours: 8,760/year (24/7/365)
+- Normalized hourly rate: NOK 3,000
+- Revenue per CNC at 60% utilization: ~15.8 MNOK/year
+- Revenue per CNC at 65% utilization: ~17.1 MNOK/year
+
+### Revenue Projections (
+
+| Year | Avg CNC | Avg Utilization | Revenue (MNOK) | Aurelian Profit (MNOK) | Staff |
+|------|---------|----------------|----------------|----------------------|-------|
+| 2027 H2 | 5 | 20% | 10.9 | -2.5 | 8 |
+| 2028 | 5 | 37.5% | 49.3 | 15.2 | 10 |
+| 2029 | 12 | 42.5% | 134 | 72.9 | 14 |
+| 2030 | 17 | 47.5% | 212 | 131.8 | 18 |
+| 2031 | 20 | 52.5% | 276 | 166.8 | 20 |
+| 2032 | 20 | 57.5% | 302 | 182.3 | 20 |
+| 2033 | 22 | 60% | 347 | 207.0 | 22 |
+| 2034 | 24 | 62.5% | 394 | 232.6 | 23 |
+| 2035 | 25 | 65% | 427 | 247.8 | 24 |
+
+**Sub-linear headcount growth:** 8 > 24 staff while CNC count grows 5 > 25
+
+### Break-Even
+- **Machine level:** ~24% utilization
+- **Company level:** 5 CNC @ ~24% utilization (~31.5 MNOK revenue)
+- Seed round funds exactly 5 CNC = matched to break-even configuration
+
+### Cost Structure (Steady State, 20 CNC, 8% Variable Cost)
+- Total cost: ~92.75 MNOK/year
+- Variable costs: 8% of revenue (maturity curve from 13% in 2027)
+- Personnel: 23.2 MNOK (17.6 operations + 5.6 admin)
+- CNC depreciation: 25.0 MNOK
+- Finance cost: 10.07 MNOK
+- Facility lease: 5.2 MNOK
+
+## 50/50 PROFIT-SHARING MODEL
+
+**Mechanism:** Above 45% utilization threshold, marginal profit shared 50/50 with qualifying partnership customers.
+
+**Why this is smart (not value-destroying):**
+- Only applies to marginal upside above proven 45% threshold
+- Customers below threshold pay standard market rates (100% to Aurelian)
+- Creates customer lock-in and demand predictability
+- Accumulated customer share (2031-2035): ~215 MNOK
+- Accumulated Aurelian profit (2027-2035): ~1,254 MNOK
+- Aurelian keeps the vast majority; customers get aligned incentives
+
+## VALUATION DEFENSE
+
+### Pre-Seed: 25 MNOK Pre-Money
+- European Pre-Seed median: ~5-55 MNOK
+- Justified by: Significant prep work, clear execution window, experienced founders, Industry 4.0 premium
+- ROI: 46.6x (market expects 20-40x)
+
+### Seed: 130 MNOK Pre-Money
+- European Seed median: ~55 MNOK
+- Aurelian at ~2.4x median, justified by:
+  - Capital intensity (51.3 MNOK vs typical 2-5 MNOK software Seed)
+  - Industry 4.0/Deep Tech premium (+170% YoY investment growth)
+  - VC Method validation: 2.3B exit / required ROI / post-A dilution = Seed pre-money
+- ROI: 10.8x (market expects 10-25x)
+
+### Serie A: 250 MNOK Pre-Money
+- European Series A median: ~390 MNOK
+- Aurelian at 0.64x median = CONSERVATIVE
+- At Serie A: 5 operational CNC, documented revenue (~49 MNOK), proven utilization, established customers
+- ROI: 7.8x (market expects 5-10x)
+
+## SENSITIVITY ANALYSIS
+
+### Utilization Sensitivity (20 CNC, Steady State, 8% Variable)
+
+| Utilization | Revenue (MNOK) | EBIT (MNOK) | EBIT Margin |
+|-------------|---------------|-------------|-------------|
+| 20% | 105 | ~38 | ~36% |
+| 30% | 158 | ~85 | ~54% |
+| 40% | 210 | ~126 | ~60% |
+| 50% | 263 | ~175 | ~67% |
+| 60% | 315 | ~222 | ~71% |
+
+**Key insight:** Extreme operating leverage. Every 10pp utilization increase = ~45-50 MNOK EBIT impact.
+
+### Scenario Analysis
+
+| Scenario | Assumptions | Exit Value |
+|----------|------------|------------|
+| Bear Case | 45% util, 15 CNC by 2032 | 1.5B NOK (-35%) |
+| Base Case | 60% util, 20 CNC by 2031 | 2.3B NOK |
+| Bull Case | 65% util, 25 CNC by 2030 | 3.0B NOK (+30%) |
+
+## STRUCTURAL POSITIONING
+
+### Norwegian CNC Benchmark (Observed — VDR 03.02)
+
+| Company | CNC | Utilization | Staff/CNC |
+|---------|-----|------------|-----------|
+| Rogaland Maskinering | 7 | 10% | 2.6 |
+| Lilaas | 15 | 19% | 2.5 |
+| Tamek | 8 | 20% | 2.5 |
+| Aarbakke | 55 | 38% | 2.5 |
+| Uvdal Maskinfabrikk | 11 | 37% | 2.5 |
+| Ardal Maskinering | 18 | 47% | 2.5 |
+| TP-Products | 14 | 40-45% | 2.5 |
+
+**Aurelian design targets (pre-revenue):** 20 CNC, 60-65% utilization at maturity, 0.8 FTE/CNC at scale — enabled by greenfield autonomous design.
+
+The design target of sub-linear staffing (0.8 FTE/CNC) requires layout, culture, IT/OT, and automation designed from scratch — structurally difficult for existing operations to retrofit.
+
+### Why Brownfield Retrofit is Structurally Difficult
+- Layout optimized for manned operation (not convertible to lights-out without rebuild)
+- "One operator per machine" culture vs "one operator per cell of 3-5 machines"
+- Legacy IT/OT systems with poor integration
+- Cost to retrofit estimated as comparable to building new greenfield
+- Innovator's dilemma: requires disrupting profitable current operations
+
+### Hadrian Comparison (US)
+- Hadrian: ~$1.6B valuation, US defense-focused autonomous CNC
+- Validates global market appetite for this model
+- Aurelian: European capital-disciplined answer — 101.3 MNOK total raise vs Hadrian's $200M+
+
+## TEAM
+
+### Founders
+- **Andre Tandberg (CEO):** MD Ostfold Follo Nyskapingsfond, SpareBank 1 board experience, finance/investment background
+- **Tore Ausland (VP Business Development):** 30+ years oil & gas (GE, FMC, Aker), direct relationships with Equinor, Hydro, Shell, BP — critical for customer acquisition
+- **Henrik Syverstad Strom (Board Member / CFO candidate):** Banking/finance background, Troestad Sparebank / Eika
+
+### Advisory Board
+- **Bjornar Torsnes:** Chairman CodeIT, board experience VW/TINE/Mowi — governance & scaling
+- **Fredrik Vangsal:** CEO Disruptive Engineering — technical validation & CNC expertise
+- **Andreas Mollatt:** CBDO Physical Robotics — automation & robotics integration
+
+## FACILITY & TIMELINE
+
+- **Location:** Valer, Ostfold — multi-modal logistics (rail + sea + road)
+- **Partner:** Norbygg (lease, not own — OPEX character, ~5.2 MNOK/year)
+- **First phase:** 2,635 m2, scalable to 30,000 m2 site
+- **Timeline:** ~12 months from Seed close to first production (Aug 2027)
+- **CNC equipment:** MAZAK + DMG MORI (tier-1 global, strong resale value 50-70% of CAPEX)
+
+## EUROPEAN VC BENCHMARKS
+
+- EBITDA multiples: 6.9-11.1x (private market), 10-11x (Industrial IoT)
+- Industry 4.0 investment growth: +170% YoY
+- Deep Tech attracting increasing share of European VC
+- Seed dilution norm: 20-30% (Aurelian: 28.3% — within range)
+- Serie A dilution norm: 15-30% (Aurelian: 15.25% — conservative)
+
+## INVESTOR Q&A — TOP 15
+
+**Q1: How do you justify valuations without revenue?**
+A: VC Method derivation from 2.3B exit. Pre-Seed 46.6x ROI (above 20-40x market), Seed 10.8x (within 10-25x range), Serie A 7.8x (within 5-10x range). All rounds deliver market-competitive returns.
+
+**Q2: What if you only achieve 40% utilization?**
+A: Still profitable. Break-even is 5 CNC @ ~24%. At 5 CNC @ 40%, we generate ~52 MNOK revenue and ~15 MNOK EBIT. 60-65% is target based on validated benchmarks, but business case holds at materially lower utilization.
+
+**Q3: Why won't incumbents copy you?**
+A: Brownfield constraints. To match our economics, they'd need to rebuild facility, retrain workforce, replace legacy IT/OT, and change customer model. Combined cost = building new greenfield. By then we have 3-5 year head start + customer lock-in.
+
+**Q4: How do you know 60-65% is achievable?**
+A: Three sources: (1) DMG MORI + MAZAK reference installations, (2) Siemens digital twin case studies showing 80% process time reduction, (3) Industry OEE data — 60% is average for all manufacturing, 55-65% is competitive for HMLV, not exceptional.
+
+**Q5: Doesn't 50/50 sharing hurt margins?**
+A: No. Only applies to marginal upside above 45% threshold. Customers below threshold pay standard rates (100% to Aurelian). Accumulated Aurelian profit 2027-2035: 1,254 MNOK. The ~215 MNOK given to customers buys permanent demand lock-in.
+
+**Q6: Why greenfield vs. acquiring an existing shop?**
+A: The design target of sub-linear staffing (0.8 FTE/CNC at scale, vs observed industry ~2.5 per CNC Benchmark VDR 03.02) requires layout, culture, IT/OT architecture, and automation designed from scratch. Brownfield constraints make this structurally difficult to retrofit.
+
+**Q7: What's your use of funds for the Seed round?**
+A: 5 CNC machines (50 MNOK at 50% equity/50% debt) + 8.6 MNOK shop base setup + 10 MNOK operational buffer + 3 MNOK digital systems. Total deployment: 80.6 MNOK (51.3 equity + 29.3 debt).
+
+**Q8: How do founders retain 50.6% through three rounds?**
+A: Capital discipline. Total planned raise 101.3 MNOK equity vs comparable companies raising $200M+. Each round structured for minimum dilution while targeting competitive investor returns.
+
+**Q9: What's the CNC resale value if things go wrong?**
+A: MAZAK and DMG MORI are premium assets with strong secondary markets. 50-70% of CAPEX recoverable, providing significant downside protection for equity and debt investors.
+
+**Q10: Who are your first customers?**
+A: Target segments: Tier 1 Defense (Kongsberg, Nammo), Tier 2 Energy (Equinor, Aker Solutions), Tier 3 Maritime/Infrastructure. Leveraging Tore Ausland's 30+ year network for executive introductions. Physical Robotics LOI in progress. Customer LOIs are a priority gap being addressed.
+
+**Q11: How does this compare to Hadrian?**
+A: Hadrian (~$1.6B valuation) validates market appetite globally. Aurelian is the European capital-disciplined version — same autonomous CNC thesis, but 101.3 MNOK total equity raise vs $200M+, focused on European defense/energy markets.
+
+**Q12: What are the key risks?**
+A: (1) Equipment delivery delays (mitigated: order immediately post-Seed), (2) Customer acquisition timing (mitigated: Tore's network + anchor customer model), (3) Autonomous ramp-up speed (mitigated: gradual ramp with manned fallback), (4) Single facility concentration (mitigated: replicable platform model).
+
+**Q13: What's the board structure?**
+A: Pre-Seed: 3 seats (2 founders + 1 independent). Seed: 4-5 seats (add investor representatives). Serie A: 5 seats with proper governance framework.
+
+**Q14: What quality certifications are planned?**
+A: ISO 9001 (2027), AS9100 aerospace (2028), AQAP 2110 NATO (2028). Sequential approach — each certification unlocks new customer segments.
+
+**Q15: What's the scaling model beyond Site Zero?**
+A: Replicable platform. Same CNC, automation, and digital backbone for each new site. Expansion to DACH region, UK, France, Sweden — aligned with defense and industrial value chains. Each new site demand-anchored by strategic customers. ESOP at 10% per daughter company (site-level) — no dilution on parent.
+
+## PITCH DECK STRUCTURE (V3 — 12 slides)
+
+1. **Title:** Production as a Service — Autonomous, Data-Driven, and Scalable
+2. **Investment Thesis:** Defense growth, energy transition, capacity gap
+3. **Problem We Solve:** Fragmented, inefficient CNC landscape
+4. **Market Timing:** Why now — defense CAPEX, autonomy viable, greenfield window
+5. **Solution:** Autonomous CNC facility, lights-out operation
+6. **Structural Positioning:** Sub-linear staffing model, greenfield design advantage
+7. **Economic Engine:** Revenue projections, sub-linear scaling
+8. **Steady State Potential:** 315M revenue, ~222M EBIT at 20 CNC
+9. **Benchmark Companies:** 7 Norwegian CNC operators (observed data) + Aurelian design targets
+10. **Sub-linear Scaling:** Staff growth vs machine growth
+11. **Break-Even & Risk Profile:** Low downside, high upside
+12. **The Ask:** Seed 51.3 MNOK, 28.3% dilution, 10.8x ROI
+
+## KEY MESSAGES (Always Consistent)
+
+1. **55-65% utilization is the design target** — supported by vendor feasibility data from DMG MORI, MAZAK, Siemens. master document models gradual ramp from 20% to 65%.
+2. **Sub-linear staffing model** (design target 0.8 FTE/CNC at scale, vs observed ~2.5 industry avg VDR 03.02) — enabled by greenfield autonomous design, structurally difficult to retrofit
+3. **Pre-revenue by design** — Aug 2027 production start, focus on assumption validation
+4. **Capital discipline** — 101.3 MNOK total equity raise, founders retain 50.6% at exit
+5. **Exit: 2.3B NOK** @ 10-11x EBITDA (conservative end of Industrial IoT range)
+
+## DOCUMENT REFERENCES
+
+| Document | VDR ref | Folder |
+|----------|---------|--------|
+| *02 Economic Tables & Projections* | VDR 02.04 | 02_Financial/2.4_Economic_Tables_Projections/ |
+| Aksjonaeavtale (01_Shareholders_Agreement) | VDR 01.02 | 01_Corporate_Governance/1.2_Shareholder_Agreements/ |
+| Analyse av Europeisk VC-Praksis | VDR 02.07 | 02_Financial/2.7_VC_Benchmarks_Comparables/ |
+| Investor Pitch V3 | VDR 07.01 | 07_Presentations/7.1_Investor_Pitch_Deck/ |
+| Comparable Investment Cases | VDR 02.07 | 02_Financial/2.7_VC_Benchmarks_Comparables/ |
+| CNC Resale Value Analysis | VDR 04.02 | 04_Technical_Operations/4.2_CNC_Equipment/Resale_Value/ |

@@ -1,0 +1,399 @@
+---
+name: aurelian-financial-model
+description: CFO-level financial modeling skill for Aurelian Manufacturing. Use this skill whenever building, updating, or extending Excel-based financial models, spreadsheets, P&L projections, cash flow statements, balance sheets, sensitivity tables, scenario analyses, cap table calculators, CAPEX schedules, or any quantitative financial deliverable. Triggers on "build financial model", "create spreadsheet", "Excel financial", "P&L projection", "cash flow model", "sensitivity table", "scenario analysis", "cap table Excel", "CAPEX schedule", "monthly cash flow", "build budget", "financial template", "revenue model Excel", or any request to produce quantitative financial outputs in spreadsheet format. This skill provides the EXACT numbers, formulas, and structure — use together with the xlsx system skill for formatting and technical execution.
+---
+
+# Aurelian Manufacturing — Financial Model Skill (CFO)
+
+This skill contains the complete financial model specification for Aurelian Manufacturing. It provides every number, assumption, formula, and structure needed to build professional Excel deliverables. **Always use this skill together with the `xlsx` system skill** which handles formatting, color coding, and technical Excel best practices.
+
+## Master Source Hierarchy
+
+All financial numbers must trace to master document as the absolute master:
+
+| Priority | Document | Authoritative For |
+|----------|----------|-------------------|
+| **1** | ***02 Economic Tables & Projections* (VDR 02.04)** | ABSOLUTE master for ALL financial numbers |
+| 2 | Aksjonaeravtale (01_Shareholders_Agreement) | Governance terms, shareholder structure |
+| 3 | VDR Guide v5.1 | Document structure and status |
+
+**CRITICAL:** master document is the sole financial master. No other financial document overrides the master document.
+
+### READ-BEFORE-BUILD RULE (ABSOLUTE — NO EXCEPTIONS)
+
+> **Claude does NOT have persistent memory.** This skills file is a COPY of master document values — not the source. You MUST read the original.
+
+**BEFORE building, updating, or verifying any financial model:**
+
+1. **READ** the master document PDF: `Aurelian_VDR/02_Financial/2.4_Economic_Tables_Projections/02_Economic_Tables_Projections_REV6.pdf`
+2. **READ** the design manual: `Design MAnual/aurelian-design-manual.md` (for formatting and styling rules)
+3. **VERIFY** that the values you use match what you actually read in master document — not what you "remember".
+4. **CONFIRM** the 17 checkpoint values from the master document.
+5. **If you cannot read master document:** STOP and inform the user.
+
+**This check applies for EACH document request within a conversation — not just the first one.**
+
+### REFERENCE FORMAT FOR GENERATED DOCUMENTS (COPY — DO NOT RECONSTRUCT)
+
+> **Rule: Never hardcode a revision number in generated documents (Word, PPT, PDF).** The master document is always the current revision. When a new revision is issued, all documents remain correct without needing updates. File paths retain the revision in the filename because that is the actual file on disk.
+
+**Full reference:** `*02 Economic Tables & Projections* (VDR 02.04)`
+**Inline with section:** `Ref: 02 Economic Tables & Projections, §[number] (VDR 02.04)`
+
+❌ Never in generated docs: any revision number (e.g. "REV6", "REV7"), or "VDR 02.04" alone without document name
+✅ In generated docs: "*02 Economic Tables & Projections* (VDR 02.04)" — NO revision number
+
+**Examples with current values:**
+- Revenue 20 CNC @ 60% = ~315 MNOK → `Ref: 02 Economic Tables & Projections, §5.1 (VDR 02.04)`
+- Seed: 51.3 MNOK equity + 29.3 MNOK debt = 80.6 MNOK total → `Ref: 02 Economic Tables & Projections, §4.1 (VDR 02.04)`
+- Staffing 20 CNC: 16 ops + 4 admin = 20 total → `Ref: 02 Economic Tables & Projections, §1.3b (VDR 02.04)`
+- EBIT 20 CNC @ 60% = ~222.3 MNOK → `Ref: 02 Economic Tables & Projections, §3.6 (VDR 02.04)`
+
+## Currency & Units
+
+- All amounts in NOK unless explicitly stated otherwise
+- Use MNOK (millioner NOK) for amounts > 1 million
+- Use NOK for unit economics and hourly rates
+- Conversion reference: 1 EUR ~ 11 NOK (approximate, for European comparisons only)
+
+---
+
+## SECTION 1: ASSUMPTIONS SHEET (Always Required)
+
+Every financial model MUST have a dedicated Assumptions sheet. All hardcoded values go here. All other sheets reference this sheet. Mark all assumption cells with **blue font** per xlsx skill standard.
+
+### 1.1 Core Operating Assumptions
+
+| Parameter | Cell Label | Value | Unit | Source |
+|-----------|-----------|-------|------|--------|
+| Theoretical hours per CNC per year | theo_hours | 8,760 | hours | 24h x 365d |
+| Normalized hourly rate | hourly_rate | 3,000 | NOK/hour | Master doc §1 |
+| Variable cost % (startup 2027-2028) | var_cost_startup | 13% | % | Master doc §3 |
+| Variable cost % (mature 2032+) | var_cost_mature | 8% | % | Master doc §3 |
+| Variable cost maturity curve | var_cost_curve | Linear decline 13% to 8% over 2027-2032 | % | Master doc §3 |
+| 50/50 sharing threshold | sharing_threshold | 45% | utilization % | Master doc §1 |
+| Sharing split above threshold | sharing_split | 50% | % | Master doc §1 |
+
+**IMPORTANT:** The revenue formula uses 8,760 hours (full theoretical) x utilization%. There is NO intermediate "6,000 productive hours" step. Utilization is applied directly to 8,760.
+
+### 1.2 CNC Machine Economics
+
+| Parameter | Cell Label | Value | Unit | Source |
+|-----------|-----------|-------|------|--------|
+| Cost per CNC (incl. automation) | cnc_cost | 10,000,000 | NOK | Master doc §2 |
+| Shop base setup (per site) | shop_base | 8,600,000 | NOK | Master doc §7 |
+| Depreciation life (CNC) | depr_life | 8 | years | Master doc §3 |
+| Depreciation life (shop base) | shop_depr_life | 8 | years | Master doc §3 |
+| Annual depreciation per CNC | depr_per_cnc | 1,250,000 | NOK | cnc_cost / depr_life |
+| Annual shop base depreciation | shop_depr | 1,075,000 | NOK | shop_base / shop_depr_life |
+| Debt interest rate | interest_rate | 7.5% | % | Master doc §3 |
+| Debt per CNC (Seed, 50% EQ) | debt_per_cnc_seed | 5,000,000 | NOK | 50% of cnc_cost |
+| Debt per CNC (Serie A, 30% EQ) | debt_per_cnc_a | 7,000,000 | NOK | 70% of cnc_cost |
+| Resale value retention (estimate) | resale_pct | 60% | % | CNC Resale Value Analysis — 50-70% range |
+
+### 1.3 Staffing Model (Sub-Linear)
+
+| Parameter | Cell Label | Value | Unit | Source |
+|-----------|-----------|-------|------|--------|
+| Aurelian staff per CNC | staff_ratio | 0.8 | FTE/CNC | Master doc §1 |
+| Industry avg staff per CNC | industry_ratio | 2.5 | FTE/CNC | Benchmark data |
+| Avg operational salary (incl. social) | ops_salary | 1,100,000 | NOK/year | Master doc §3 |
+| Avg admin salary (incl. social) | admin_salary | 1,400,000 | NOK/year | Master doc §3 |
+| Admin FTEs (constant) | admin_fte | 4 | FTE | Master doc §3 (incl. BD/strategic sales) |
+
+### 1.4 Fixed Costs (Non-Personnel)
+
+| Parameter | Cell Label | Value | Unit | Source |
+|-----------|-----------|-------|------|--------|
+| Facility lease (annual) | facility_lease | 5,200,000 | NOK/year | Master doc §3 (Norbygg) |
+| Other operating costs | other_opex | 3,000,000 | NOK/year | Master doc §7 at 20 CNC |
+| Other opex scaling factor | opex_scale | 150,000 | NOK/CNC/year | other_opex / 20 CNC |
+
+### 1.5 Revenue Formula
+
+The core revenue formula for ANY financial model:
+
+```
+Revenue per CNC = theo_hours x utilization% x hourly_rate
+                = 8,760 x utilization% x 3,000
+
+Annual Revenue = SUM(Revenue per CNC for all machines)
+```
+
+**Reconciliation:** 8,760 x 60% x 3,000 = 15.768 MNOK per CNC. 20 CNC x 15.768 = ~315 MNOK.
+
+**NEVER use 6,000 hours as a basis.** The 6,000 figure from older documents represented theoretical availability. The master document uses 8,760 x utilization% directly.
+
+---
+
+## SECTION 2: SCALING TRAJECTORY (Year-by-Year)
+
+### 2.1 Revenue & Profit Trajectory (MASTER)
+
+| Year | Avg CNC | Util. | Revenue (MNOK) | Cost (MNOK) | Gross Profit (MNOK) | Customer Program (MNOK) | Aurelian Profit (MNOK) |
+|------|---------|-------|----------------|-------------|---------------------|------------------------|----------------------|
+| 2027 H2 | 5 | 20% | 10.9 | 13.4 | -2.5 | — | -2.5 |
+| 2028 | 5 | 37.5% | 49.3 | 34.1 | 15.2 | — | 15.2 |
+| 2029 | 12 | 42.5% | 134 | 61.1 | 72.9 | — | 72.9 |
+| 2030 | 17 | 47.5% | 212 | 80.2 | 131.8 | — | 131.8 |
+| 2031 | 20 | 52.5% | 276 | 92.8 | 183.2 | 16.4 | 166.8 |
+| 2032 | 20 | 57.5% | 302 | 92.4 | 209.6 | 27.3 | 182.3 |
+| 2033 | 22 | 60% | 347 | 98.0 | 249.0 | 42.0 | 207.0 |
+| 2034 | 24 | 62.5% | 394 | 103.8 | 290.2 | 57.6 | 232.6 |
+| 2035 | 25 | 65% | 427 | 107.2 | 319.8 | 72.0 | 247.8 |
+
+**Accumulated Aurelian Profit (2027-2035): ~1,254 MNOK**
+
+### 2.2 Machine Deployment & CAPEX
+
+| Period | Event | CNC (EOY) | Funding Source |
+|--------|-------|-----------|----------------|
+| Jun 2027 | 5 CNC delivered, commissioning | 5 | Seed |
+| Aug 2027 | Production starts | 5 | Seed |
+| Q4 2028 | Serie A Tranche 1 arrives | 5 (+5) | Serie A |
+| Q1 2029 | Tranche 1 operational | 10 | Serie A |
+| Q3 2029 | Tranche 2 operational | 15 | Serie A |
+| Q3 2030 | Tranche 3 operational | 20 | Serie A |
+
+### 2.3 Staffing Trajectory
+
+| Year | CNC Machines | Operational FTEs | Admin FTEs | Total Staff |
+|------|-------------|-----------------|------------|-------------|
+| 2027 H2 | 5 | 4 | 4 | 8 |
+| 2028 | 5 | 6 | 4 | 10 |
+| 2029 | 10-15 | 10 | 4 | 14 |
+| 2030 | 17-20 | 14 | 4 | 18 |
+| 2031+ | 20 | 16 | 4 | 20 |
+| 2032+ | 20-25 | 20 | 4 | 24 |
+
+---
+
+## SECTION 3: COST STRUCTURE FORMULAS
+
+### 3.1 Personnel Cost
+```
+Operational_FTE = from staffing table (sub-linear, NOT simply CNC x 0.8 for early years)
+Personnel_Ops = Operational_FTE x ops_salary
+Personnel_Admin = admin_fte x admin_salary
+Total_Personnel = Personnel_Ops + Personnel_Admin
+```
+
+### 3.2 Fixed Costs
+```
+CNC_Depreciation = total_CNC x depr_per_cnc (1.25M each)
+Shop_Depreciation = shop_depr (1.075M)
+Finance_Cost = total_debt x interest_rate (7.5%)
+Facility = facility_lease (5.2M)
+Other_Opex = total_CNC x opex_scale (150K each)
+Total_Fixed = Total_Personnel + CNC_Depreciation + Shop_Depreciation + Finance_Cost + Facility + Other_Opex
+```
+
+### 3.3 Variable Costs (Maturity Curve)
+```
+Variable cost % by year:
+  2027: 13%
+  2028: 13%
+  2029: 12%
+  2030: 11%
+  2031: 10%
+  2032+: 8%
+
+Variable_Costs = Revenue x var_cost_pct (per year)
+```
+
+### 3.4 Profit with 50/50 Sharing
+```
+Gross_Profit = Revenue - Total_Fixed - Variable_Costs
+IF utilization > 45%:
+    Revenue_At_Threshold = total_CNC x theo_hours x 0.45 x hourly_rate
+    Revenue_Above_Threshold = Revenue - Revenue_At_Threshold
+    Profit_Above_Threshold = Revenue_Above_Threshold x (1 - var_cost_pct)
+    Customer_Share = Profit_Above_Threshold x 0.50
+    Aurelian_Profit = Gross_Profit - Customer_Share
+ELSE:
+    Aurelian_Profit = Gross_Profit
+```
+
+### 3.5 Steady State Cost Validation (20 CNC @ 60% — per master document)
+
+| Component | Annual (MNOK) |
+|-----------|--------------|
+| Operational payroll (16 FTE x 1.1M) | 17.6 |
+| Administration (4 FTE x 1.4M) | 5.6 |
+| **Personnel subtotal** | **23.2** |
+| CNC depreciation (20 x 1.25M) | 25.0 |
+| Shop base depreciation (8.6M / 8yr) | 1.08 |
+| Finance cost (134.3M x 7.5%) | 10.07 |
+| Facility lease | 5.2 |
+| Variable costs (8% of ~315M) | 25.2 |
+| Other operating costs (20 x 150K) | 3.0 |
+| **TOTAL COST** | **~92.75** |
+| **Revenue @ 60%** | **~315** |
+| **Result before tax** | **~222.3** |
+
+---
+
+## SECTION 4: CAPITAL STRUCTURE & CAP TABLE
+
+### 4.1 Fundraising Rounds (
+
+| Parameter | Pre-Seed | Seed | Serie A |
+|-----------|----------|------|---------|
+| Capital Raised (equity) | 5 MNOK | **51.3 MNOK** | **45 MNOK** |
+| Pre-Money | 25 MNOK | **130 MNOK** | 250 MNOK |
+| Post-Money | 30 MNOK | **181.3 MNOK** | **295 MNOK** |
+| Dilution | 16.67% | **28.30%** | **15.25%** |
+| Machines funded | 0 | **5 CNC + shop base** | **15 CNC (3x5 tranches)** |
+| Bank debt raised | — | **29.3 MNOK** | **105 MNOK** |
+| Total capital deployed | 5 MNOK | **80.6 MNOK** | **150 MNOK** |
+
+### 4.2 Cap Table Reference Values (
+
+| Shareholder | Pre-Founding | Post Pre-Seed | Post Seed | Post Serie A |
+|-------------|-------------|---------------|-----------|--------------|
+| Eier A (Holen Industrier AS) | 56.25% | 46.88% | **33.60%** | **28.46%** |
+| Eier B (Quality Group Invest AS) | 33.75% | 28.13% | **20.16%** | **17.08%** |
+| Eier C (STAH Invest AS) | 10.00% | 8.33% | **5.97%** | **5.06%** |
+| Pre-Seed Investors | — | 16.67% | **11.95%** | **10.12%** |
+| Seed Investors | — | — | **28.30%** | **23.98%** |
+| Serie A Investors | — | — | — | **15.25%** |
+| **Founders Total** | **100%** | **83.33%** | **59.74%** | **50.60%** |
+
+### 4.3 Dilution Formula
+```
+New_Investor_% = Capital_Raised / Post_Money_Valuation
+Existing_Holder_New_% = Previous_% x (1 - New_Investor_%)
+```
+
+### 4.4 Exit Distribution (2.3B NOK Base Case)
+
+| Shareholder | Post-A % | Exit Value (MNOK) | ROI |
+|-------------|----------|-------------------|-----|
+| Eier A | 28.46% | ~655 | — |
+| Eier B | 17.08% | ~393 | — |
+| Eier C | 5.06% | ~116 | — |
+| Pre-Seed | 10.12% | ~233 | **~46.6x** |
+| Seed | 23.98% | ~552 | **~10.8x** |
+| Serie A | 15.25% | ~351 | **~7.8x** |
+
+---
+
+## SECTION 5: SENSITIVITY ANALYSIS SPECIFICATIONS
+
+### 5.1 Utilization Sensitivity (20 CNC, Steady State 8% Variable Cost, Before 50/50 Sharing)
+
+| Utilization | Revenue (MNOK) | EBIT (MNOK) | EBIT Margin |
+|-------------|----------------|-------------|-------------|
+| 15% | 79 | ~11 | ~14% |
+| 20% | 105 | ~38 | ~36% |
+| 30% | 158 | ~85 | ~54% |
+| 40% | 210 | ~126 | ~60% |
+| 50% | 263 | ~175 | ~67% |
+| 60% | 315 | ~222 | ~71% |
+| 65% | 342 | ~247 | ~72% |
+
+### 5.2 Scenario Analysis for Exit
+
+| Scenario | CNC | Utilization | EBITDA (MNOK) | Multiple | Exit (MNOK) |
+|----------|-----|-------------|---------------|----------|-------------|
+| Bear | 15 | 45% | 150 | 8x | 1,200 |
+| Base | 20 | 60% | 222 | 10x | 2,220 |
+| Bull | 25 | 65% | 270 | 11x | 2,970 |
+
+### 5.3 Break-Even ( 5 CNC Seed Configuration)
+
+At 5 CNC with Seed cost structure:
+- **Break-even utilization: ~24%**
+- Revenue at 24%: 5 x 8,760 x 0.24 x 3,000 = ~31.5 MNOK
+- This covers fixed costs for 5-CNC setup
+
+---
+
+## SECTION 6: EXCEL WORKBOOK TEMPLATES
+
+### 6.1 Full Financial Model (Investor-Grade)
+
+| Sheet # | Name | Content |
+|---------|------|---------|
+| 1 | Dashboard | KPIs, charts, scenario toggle |
+| 2 | Assumptions | ALL hardcoded inputs (blue font), source refs to master document |
+| 3 | Revenue | CNC x utilization x rate, year-by-year |
+| 4 | P&L | Revenue > COGS > Gross Profit > OpEx > EBIT |
+| 5 | Cash Flow | Operating, Investing, Financing |
+| 6 | Balance Sheet | Assets, Liabilities, Equity |
+| 7 | Cap Table | All rounds, dilution, exit distribution (master document values) |
+| 8 | Sensitivity | Utilization, machine count, scenarios |
+| 9 | Break-Even | Machine-level and company-level |
+
+### 6.2 Quick Model (Pitch Support)
+
+| Sheet | Content |
+|-------|---------|
+| Summary | Revenue ramp-up, EBIT, key metrics |
+| Assumptions | Core assumptions only |
+| Projections | 2027-2035 P&L with sharing |
+
+### 6.3 Formatting Standards (Aurelian Brand)
+
+- Header: #2B2B2B (dark), white text, Calibri bold
+- Accent color: #F50537 (Pantone 032 C red) — for highlights only, NEVER for number text
+- Body: Calibri 11pt
+- NOK: #,##0 | MNOK: #,##0.0 | %: 0.0%
+- Years: Text "2028" (not 2,028)
+- Negatives: Parentheses (123)
+- Assumptions: Blue font | Formulas: Black | Cross-sheet: Green
+- KPI badges: White text on #F50537 background
+
+---
+
+## SECTION 7: USE OF FUNDS
+
+### Pre-Seed (5 MNOK)
+| Category | MNOK | % |
+|----------|------|---|
+| Concept validation & customer discovery | 1.5 | 30% |
+| Supplier LOIs & regulatory | 1.0 | 20% |
+| Team & advisory | 1.0 | 20% |
+| Planning & engineering | 1.0 | 20% |
+| Buffer | 0.5 | 10% |
+
+### Seed (51.3 MNOK Equity + 29.3 MNOK Debt = 80.6 MNOK Total)
+| Category | MNOK | Source |
+|----------|------|--------|
+| CNC machines equity portion (5 x 5M) | 25 | Equity |
+| CNC machines debt portion (5 x 5M) | 25 | Bank |
+| Shop base setup | 8.6 | Equity |
+| Shop base debt | 4.3 | Bank |
+| Digital systems (MES/ERP/CAM) | 3 | Equity |
+| Operational buffer | 10 | Equity |
+| Working capital | 4.7 | Equity |
+
+### Serie A (45 MNOK Equity + 105 MNOK Debt = 150 MNOK Total)
+| Category | MNOK | Source |
+|----------|------|--------|
+| CNC equity portion (15 x 3M) | 45 | Equity |
+| CNC debt portion (15 x 7M) | 105 | Bank |
+
+---
+
+## SECTION 8: VALIDATION CHECKPOINTS
+
+When building any financial model, verify these master document checkpoints:
+
+1. **Revenue at 20 CNC, 60% utilization = ~315 MNOK** (8,760 x 60% x 3,000 x 20)
+2. **Total cost at 20 CNC steady state (8% variable) = ~92.75 MNOK** (NOT 102.5)
+3. **Break-even at 5 CNC (Seed) = ~24% utilization**
+4. **Staff ratio = 0.8 FTE per CNC**
+5. **Variable costs = maturity curve: 13% (2027-28) declining to 8% (2032+)**
+6. **Exit valuation = 2.3B NOK at 10x EBITDA**
+7. **Founders retain 50.60% post-Serie A** (NOT 53.42%)
+8. **Accumulated profit 2027-2035 = ~1,254 MNOK** (NOT ~1,094)
+9. **Seed pre-money = 130 MNOK** (NOT 140)
+10. **CAPEX per CNC = 10 MNOK** (NOT 8 MNOK)
+11. **Seed equity = 51.3 MNOK** (NOT 47)
+12. **Seed CNC = 5 machines** (NOT 8)
+13. **Serie A equity = 45 MNOK** (NOT 42)
+14. **Admin FTEs = 4** (NOT 3)
+15. **Facility lease = 5.2 MNOK** (NOT 4.0)
+16. **Revenue 2028 = 49.3 MNOK** (5 CNC, NOT 73 MNOK from old 8-CNC plan)
+17. **Revenue formula uses 8,760 base** (NEVER 6,000 hours)

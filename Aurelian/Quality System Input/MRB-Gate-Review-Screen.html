@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Material Gate Review GR-2026-0047</title>
+<style>
+  /* ══════════════════════════════════════════════════════════
+     AURELIAN MANUFACTURING — DESIGN SYSTEM TOKENS
+     Pantone 032 C / Scandinavian Industrial Precision
+     ══════════════════════════════════════════════════════════ */
+
+  :root {
+    --red: #F50537;
+    --red-hover: #D0042E;
+    --black: #2B2B2B;
+    --pure-black: #000000;
+    --white: #FFFFFF;
+    --gray-med: #6B6B6B;
+    --gray-panel: #F5F5F5;
+    --gray-divider: #D3D3D3;
+    --gray-chart: #888888;
+
+    --green: #1C6E3D;
+    --green-bg: #E8F5EE;
+    --amber: #C47F17;
+    --amber-bg: #FFF8E7;
+    --red-bg: #FEE8EC;
+
+    --sidebar-w: 240px;
+    --topbar-h: 56px;
+    --font: 'Calibri', 'Segoe UI', Arial, sans-serif;
+    --mono: 'Consolas', 'SF Mono', 'Menlo', monospace;
+    --radius: 6px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
+    --transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ── Reset ─────────────────────────────────────────────── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 14px; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: var(--font);
+    color: var(--black);
+    background: var(--gray-panel);
+    overflow: hidden;
+    height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  /* ══════════════════════════════════════════════════════════
+     LAYOUT — Sidebar / Topbar / Main
+     ══════════════════════════════════════════════════════════ */
+
+  .app {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    grid-template-rows: var(--topbar-h) 1fr;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── Sidebar ───────────────────────────────────────────── */
+  .sidebar {
+    grid-row: 1 / -1;
+    background: var(--pure-black);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+  }
+  .sidebar::-webkit-scrollbar { display: none; }
+
+  .sidebar-logo {
+    padding: 24px 20px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    flex-shrink: 0;
+  }
+  .logo-stars {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .logo-star {
+    width: 10px;
+    height: 10px;
+    position: relative;
+  }
+  .logo-star::before {
+    content: '★';
+    color: var(--white);
+    font-size: 14px;
+    line-height: 1;
+  }
+  .logo-stars .logo-star:nth-child(1) { transform: translateY(6px); }
+  .logo-stars .logo-star:nth-child(2) { transform: translateY(2px); }
+  .logo-stars .logo-star:nth-child(3) { transform: translateY(0px); }
+  .logo-stars .logo-star:nth-child(4) { transform: translateY(2px); }
+  .logo-stars .logo-star:nth-child(5) { transform: translateY(6px); }
+
+  .logo-text {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1;
+  }
+  .logo-sub {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray-chart);
+    margin-top: 6px;
+    line-height: 1.2;
+  }
+
+  .nav-section { padding: 16px 0 4px; }
+  .nav-section-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    padding: 0 20px;
+    margin-bottom: 4px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 20px;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.55);
+    cursor: pointer;
+    transition: all var(--transition);
+    border-left: 3px solid transparent;
+    position: relative;
+  }
+  .nav-item:hover {
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.04);
+  }
+  .nav-item.active {
+    color: var(--white);
+    background: rgba(245,5,55,0.08);
+    border-left-color: var(--red);
+    font-weight: 600;
+  }
+  .nav-item .nav-icon {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+  .nav-item.active .nav-icon { opacity: 1; }
+  .nav-item .nav-badge {
+    margin-left: auto;
+    background: var(--red);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+  }
+
+  .sidebar-user {
+    margin-top: auto;
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .user-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+  }
+  .user-info { flex: 1; min-width: 0; }
+  .user-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .user-role {
+    font-size: 10px;
+    color: var(--gray-chart);
+    margin-top: 1px;
+  }
+  .user-logout {
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    transition: color var(--transition);
+    padding: 4px;
+  }
+  .user-logout:hover { color: var(--red); }
+
+  /* ── Topbar ────────────────────────────────────────────── */
+  .topbar {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-divider);
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+    gap: 16px;
+    z-index: 10;
+  }
+  .topbar-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
+    white-space: nowrap;
+  }
+  .topbar-breadcrumb {
+    font-size: 12px;
+    color: var(--gray-med);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .topbar-breadcrumb span { opacity: 0.5; }
+  .topbar-breadcrumb .bc-id {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--black);
+    opacity: 1;
+  }
+  .topbar-spacer { flex: 1; }
+
+  .topbar-search {
+    position: relative;
+    width: 220px;
+  }
+  .topbar-search input {
+    width: 100%;
+    height: 34px;
+    border: 1px solid var(--gray-divider);
+    border-radius: var(--radius);
+    padding: 0 12px 0 34px;
+    font-size: 12px;
+    font-family: var(--font);
+    color: var(--black);
+    background: var(--gray-panel);
+    transition: all var(--transition);
+    outline: none;
+  }
+  .topbar-search input::placeholder { color: var(--gray-chart); }
+  .topbar-search input:focus {
+    border-color: var(--red);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(245,5,55,0.06);
+  }
+  .topbar-search .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray-chart);
+    pointer-events: none;
+  }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topbar-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-med);
+    transition: all var(--transition);
+    position: relative;
+  }
+  .topbar-btn:hover {
+    background: var(--gray-panel);
+    color: var(--black);
+  }
+  .topbar-btn .notif-dot {
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    width: 16px;
+    height: 16px;
+    background: var(--red);
+    border-radius: 50%;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--white);
+  }
+  .env-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius);
+    background: var(--amber-bg);
+    color: var(--amber);
+    border: 1px solid rgba(196,127,23,0.2);
+  }
+
+  /* ── Main Content ──────────────────────────────────────── */
+  .main {
+    overflow-y: auto;
+    padding: 24px 28px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray-divider) transparent;
+  }
+  .main::-webkit-scrollbar { width: 6px; }
+  .main::-webkit-scrollbar-track { background: transparent; }
+  .main::-webkit-scrollbar-thumb { background: var(--gray-divider); border-radius: 3px; }
+
+  /* ══════════════════════════════════════════════════════════
+     GATE REVIEW — Layout Grid
+     ══════════════════════════════════════════════════════════ */
+
+  .review-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+    align-items: start;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     GATE REVIEW — Header Card
+     ══════════════════════════════════════════════════════════ */
+
+  .review-header {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(211,211,211,0.5);
+    margin-bottom: 16px;
+  }
+
+  .review-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--gray-divider);
+  }
+
+  .review-id-block {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .review-id {
+    font-family: var(--mono);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--black);
+    letter-spacing: 0.5px;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .status-badge.in-progress {
+    background: var(--amber-bg);
+    color: var(--amber);
+    border: 1px solid rgba(196,127,23,0.2);
+  }
+  .status-badge.in-progress::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .review-form-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-chart);
+  }
+
+  .review-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 40px;
+  }
+
+  .meta-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .meta-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--gray-med);
+  }
+  .meta-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .meta-value.mono {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.3px;
+  }
+  .meta-value.grade {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .industry-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .industry-tag.oilgas {
+    background: rgba(28,110,61,0.08);
+    color: var(--green);
+  }
+  .industry-tag.defence {
+    background: rgba(245,5,55,0.06);
+    color: var(--red);
+  }
+
+  .profile-link {
+    color: var(--red);
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: color var(--transition);
+    text-decoration: underline;
+    text-decoration-color: rgba(245,5,55,0.3);
+    text-underline-offset: 2px;
+  }
+  .profile-link:hover {
+    color: var(--red-hover);
+    text-decoration-color: var(--red);
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     CERTIFICATE BAR
+     ══════════════════════════════════════════════════════════ */
+
+  .cert-bar {
+    background: var(--gray-panel);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border: 1px solid rgba(211,211,211,0.5);
+  }
+
+  .cert-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cert-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--red);
+    border: 1px solid rgba(211,211,211,0.5);
+  }
+
+  .cert-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--gray-med);
+    margin-bottom: 2px;
+  }
+  .cert-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .cert-name span {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--gray-med);
+    font-weight: 400;
+    margin-left: 6px;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--red);
+    border: 1.5px solid var(--red);
+    border-radius: var(--radius);
+    transition: all var(--transition);
+    background: transparent;
+  }
+  .btn-outline:hover {
+    background: var(--red);
+    color: var(--white);
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     GATE CHECKS — Expandable Cards
+     ══════════════════════════════════════════════════════════ */
+
+  .checks-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--red);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .checks-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-divider);
+  }
+
+  .check-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(211,211,211,0.5);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: box-shadow var(--transition);
+  }
+  .check-card:hover { box-shadow: var(--shadow-md); }
+
+  .check-header {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background var(--transition);
+  }
+  .check-header:hover { background: rgba(245,245,245,0.5); }
+
+  .check-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gray-panel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--black);
+    flex-shrink: 0;
+    margin-right: 14px;
+    border: 1.5px solid var(--gray-divider);
+  }
+  .check-card.pass .check-number {
+    background: var(--green-bg);
+    border-color: var(--green);
+    color: var(--green);
+  }
+  .check-card.borderline .check-number {
+    background: var(--amber-bg);
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+  .check-card.fail .check-number {
+    background: var(--red-bg);
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  .check-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+    flex: 1;
+  }
+
+  .check-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 12px;
+  }
+  .check-badge.pass {
+    background: var(--green-bg);
+    color: var(--green);
+  }
+  .check-badge.borderline {
+    background: var(--amber-bg);
+    color: var(--amber);
+  }
+  .check-badge.fail {
+    background: var(--red);
+    color: var(--white);
+  }
+
+  .check-chevron {
+    color: var(--gray-chart);
+    transition: transform 300ms ease;
+    flex-shrink: 0;
+  }
+  .check-card.expanded .check-chevron {
+    transform: rotate(180deg);
+  }
+
+  .check-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .check-card.expanded .check-body {
+    max-height: 800px;
+  }
+
+  .check-content {
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--gray-divider);
+  }
+
+  /* Check 1 — Certificate Type Comparison */
+  .cert-compare {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+    padding-top: 16px;
+  }
+
+  .cert-box {
+    background: var(--gray-panel);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+  }
+  .cert-box-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--gray-med);
+    margin-bottom: 8px;
+  }
+  .cert-box-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+  }
+
+  .cert-match-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--green-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+  }
+
+  /* Data Tables (Chemical / Mechanical) */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 16px;
+  }
+  .data-table thead th {
+    background: var(--black);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 10px 14px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  .data-table thead th:nth-child(n+2) { text-align: right; }
+  .data-table thead th:last-child { text-align: center; }
+
+  .data-table tbody tr {
+    border-bottom: 1px solid rgba(211,211,211,0.5);
+    transition: background var(--transition);
+  }
+  .data-table tbody tr:nth-child(even) { background: var(--gray-panel); }
+  .data-table tbody tr:hover { background: rgba(245,5,55,0.02); }
+
+  .data-table tbody td {
+    padding: 10px 14px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .data-table tbody td:first-child {
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .data-table tbody td:nth-child(n+2) {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.3px;
+  }
+  .data-table tbody td:last-child { text-align: center; }
+
+  .data-table .dash {
+    color: var(--gray-chart);
+    font-family: var(--font);
+  }
+
+  /* Result indicators */
+  .result-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-family: var(--font);
+    letter-spacing: 0.3px;
+  }
+  .result-tag.pass { color: var(--green); background: var(--green-bg); }
+  .result-tag.borderline { color: var(--amber); background: var(--amber-bg); }
+  .result-tag.fail { color: var(--white); background: var(--red); }
+
+  .result-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .result-tag.pass .result-dot { background: var(--green); }
+  .result-tag.borderline .result-dot { background: var(--amber); }
+
+  /* Highlighted rows */
+  .data-table tbody tr.row-borderline {
+    background: rgba(196,127,23,0.04);
+    border-left: 3px solid var(--amber);
+  }
+  .data-table tbody tr.row-fail {
+    background: rgba(245,5,55,0.03);
+    border-left: 3px solid var(--red);
+  }
+
+  /* Alert callouts */
+  .alert-callout {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .alert-callout.amber {
+    background: var(--amber-bg);
+    border-left: 3px solid var(--amber);
+    color: var(--amber);
+  }
+  .alert-callout.red {
+    background: var(--red-bg);
+    border-left: 3px solid var(--red);
+    color: var(--red);
+  }
+  .alert-callout .alert-icon {
+    font-size: 14px;
+    flex-shrink: 0;
+    line-height: 1.3;
+  }
+  .alert-callout strong {
+    font-weight: 700;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     BORDERLINE FLAGS PANEL
+     ══════════════════════════════════════════════════════════ */
+
+  .borderline-panel {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    border: 1px solid rgba(196,127,23,0.2);
+    border-left: 3px solid var(--amber);
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .borderline-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--amber);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .borderline-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 12px;
+    padding: 6px 0;
+  }
+  .borderline-element {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--black);
+    min-width: 24px;
+  }
+  .borderline-detail {
+    color: var(--gray-med);
+  }
+  .borderline-detail strong {
+    color: var(--black);
+    font-weight: 600;
+  }
+  .borderline-margin {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--amber);
+    background: var(--amber-bg);
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-left: auto;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     GATE DECISION PANEL
+     ══════════════════════════════════════════════════════════ */
+
+  .decision-panel {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(211,211,211,0.5);
+    margin-bottom: 20px;
+  }
+
+  .decision-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--red);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .decision-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--red), transparent);
+  }
+
+  .decision-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .decision-option {
+    position: relative;
+    border: 2px solid var(--gray-divider);
+    border-radius: var(--radius);
+    padding: 20px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    background: var(--white);
+  }
+  .decision-option:hover {
+    border-color: var(--gray-chart);
+    box-shadow: var(--shadow-md);
+  }
+  .decision-option.selected-approved {
+    border-color: var(--green);
+    background: var(--green-bg);
+  }
+  .decision-option.selected-rejected {
+    border-color: var(--red);
+    background: var(--red-bg);
+  }
+  .decision-option.selected-conditional {
+    border-color: var(--amber);
+    background: var(--amber-bg);
+  }
+
+  .decision-radio {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--gray-divider);
+    border-radius: 50%;
+    transition: all var(--transition);
+  }
+
+  .decision-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+  }
+  .decision-option:nth-child(1) .decision-icon {
+    background: var(--green-bg);
+    color: var(--green);
+  }
+  .decision-option:nth-child(2) .decision-icon {
+    background: var(--red-bg);
+    color: var(--red);
+  }
+  .decision-option:nth-child(3) .decision-icon {
+    background: var(--amber-bg);
+    color: var(--amber);
+  }
+
+  .decision-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .decision-desc {
+    font-size: 11px;
+    color: var(--gray-med);
+    line-height: 1.4;
+  }
+
+  /* Textarea and controls */
+  .decision-textarea {
+    margin-bottom: 16px;
+  }
+  .decision-textarea label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--gray-med);
+    margin-bottom: 6px;
+  }
+  .decision-textarea textarea {
+    width: 100%;
+    height: 80px;
+    border: 1px solid var(--gray-divider);
+    border-radius: var(--radius);
+    padding: 12px;
+    font-size: 13px;
+    font-family: var(--font);
+    color: var(--black);
+    resize: vertical;
+    outline: none;
+    transition: all var(--transition);
+  }
+  .decision-textarea textarea::placeholder { color: var(--gray-chart); }
+  .decision-textarea textarea:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(245,5,55,0.06);
+  }
+
+  .qm-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    background: var(--gray-panel);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+  .qm-checkbox:hover { background: rgba(245,245,245,0.8); }
+
+  .qm-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--red);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .qm-checkbox-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .qm-checkbox-sub {
+    font-size: 11px;
+    color: var(--gray-med);
+    font-weight: 400;
+  }
+
+  .decision-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-divider);
+  }
+
+  .btn-draft {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-med);
+    border: 1.5px solid var(--gray-divider);
+    border-radius: var(--radius);
+    transition: all var(--transition);
+    background: transparent;
+  }
+  .btn-draft:hover {
+    border-color: var(--gray-chart);
+    color: var(--black);
+    background: var(--gray-panel);
+  }
+
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 24px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--red);
+    border-radius: var(--radius);
+    transition: all var(--transition);
+    border: none;
+  }
+  .btn-submit:hover {
+    background: var(--red-hover);
+    box-shadow: 0 2px 8px rgba(245,5,55,0.25);
+  }
+  .btn-submit:disabled {
+    background: var(--gray-divider);
+    color: var(--gray-chart);
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     CONTEXT SIDEBAR (right panel)
+     ══════════════════════════════════════════════════════════ */
+
+  .context-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+  }
+
+  .context-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(211,211,211,0.5);
+    overflow: hidden;
+  }
+
+  .context-card-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--gray-divider);
+  }
+  .context-card-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--black);
+  }
+
+  /* Timeline */
+  .timeline {
+    padding: 16px;
+  }
+  .timeline-item {
+    display: flex;
+    gap: 12px;
+    position: relative;
+    padding-bottom: 16px;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .timeline-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .timeline-dot.completed { background: var(--green); }
+  .timeline-dot.active {
+    background: var(--amber);
+    box-shadow: 0 0 0 3px rgba(196,127,23,0.15);
+  }
+  .timeline-dot.pending {
+    background: var(--gray-divider);
+  }
+  .timeline-line {
+    width: 1.5px;
+    flex: 1;
+    background: var(--gray-divider);
+    margin-top: 4px;
+  }
+
+  .timeline-content {
+    min-width: 0;
+  }
+  .timeline-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--black);
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+  .timeline-time {
+    font-size: 10px;
+    color: var(--gray-chart);
+    font-family: var(--mono);
+  }
+
+  /* Related Documents */
+  .doc-list {
+    padding: 8px 16px 16px;
+  }
+  .doc-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(211,211,211,0.3);
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .doc-item:last-child { border-bottom: none; }
+  .doc-item:hover { opacity: 0.75; }
+
+  .doc-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background: var(--gray-panel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-med);
+    flex-shrink: 0;
+  }
+  .doc-icon.cert { color: var(--red); background: var(--red-bg); }
+
+  .doc-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--black);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .doc-type {
+    font-size: 10px;
+    color: var(--gray-chart);
+  }
+
+  /* Physical Inspection */
+  .inspection-panel {
+    padding: 16px;
+  }
+  .inspection-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .inspection-label-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--black);
+  }
+
+  /* Toggle switch */
+  .toggle {
+    position: relative;
+    width: 40px;
+    height: 22px;
+  }
+  .toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gray-divider);
+    border-radius: 11px;
+    transition: all var(--transition);
+  }
+  .toggle-slider::before {
+    content: '';
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background: var(--white);
+    border-radius: 50%;
+    transition: all var(--transition);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+  .toggle input:checked + .toggle-slider {
+    background: var(--red);
+  }
+  .toggle input:checked + .toggle-slider::before {
+    transform: translateX(18px);
+  }
+
+  .inspection-status {
+    font-size: 11px;
+    color: var(--gray-chart);
+    margin-bottom: 8px;
+  }
+  .inspection-status .status-text {
+    font-weight: 600;
+    color: var(--gray-med);
+  }
+  .inspection-note {
+    font-size: 10px;
+    color: var(--gray-chart);
+    line-height: 1.5;
+    padding: 8px;
+    background: var(--gray-panel);
+    border-radius: 4px;
+  }
+
+  /* Check Summary Mini */
+  .check-summary {
+    padding: 16px;
+  }
+  .summary-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 12px;
+  }
+  .summary-row:not(:last-child) {
+    border-bottom: 1px solid rgba(211,211,211,0.3);
+  }
+  .summary-label {
+    color: var(--gray-med);
+  }
+  .summary-mini-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .summary-mini-badge.pass { background: var(--green-bg); color: var(--green); }
+  .summary-mini-badge.borderline { background: var(--amber-bg); color: var(--amber); }
+  .summary-mini-badge.fail { background: var(--red); color: var(--white); }
+
+  /* ══════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════ */
+
+  .app-footer {
+    padding: 16px 0 4px;
+    text-align: center;
+    font-size: 10px;
+    color: var(--gray-chart);
+    letter-spacing: 0.3px;
+  }
+  .app-footer .confidential {
+    color: var(--red);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 9px;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     ANIMATIONS — Staggered Reveal
+     ══════════════════════════════════════════════════════════ */
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-8px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .review-header { animation: fadeInUp 400ms ease-out 80ms both; }
+  .cert-bar { animation: fadeInUp 400ms ease-out 140ms both; }
+  .checks-section-title { animation: fadeInUp 400ms ease-out 180ms both; }
+
+  .check-card:nth-child(1) { animation: fadeInUp 400ms ease-out 220ms both; }
+  .check-card:nth-child(2) { animation: fadeInUp 400ms ease-out 280ms both; }
+  .check-card:nth-child(3) { animation: fadeInUp 400ms ease-out 340ms both; }
+  .check-card:nth-child(4) { animation: fadeInUp 400ms ease-out 400ms both; }
+  .check-card:nth-child(5) { animation: fadeInUp 400ms ease-out 460ms both; }
+
+  .borderline-panel { animation: fadeInUp 400ms ease-out 500ms both; }
+  .decision-panel { animation: fadeInUp 400ms ease-out 560ms both; }
+
+  .context-card:nth-child(1) { animation: slideInRight 400ms ease-out 200ms both; }
+  .context-card:nth-child(2) { animation: slideInRight 400ms ease-out 300ms both; }
+  .context-card:nth-child(3) { animation: slideInRight 400ms ease-out 400ms both; }
+  .context-card:nth-child(4) { animation: slideInRight 400ms ease-out 500ms both; }
+
+  .nav-item { animation: slideInLeft 300ms ease-out both; }
+  .nav-section:nth-child(2) .nav-item:nth-child(2) { animation-delay: 40ms; }
+  .nav-section:nth-child(2) .nav-item:nth-child(3) { animation-delay: 80ms; }
+  .nav-section:nth-child(2) .nav-item:nth-child(4) { animation-delay: 120ms; }
+  .nav-section:nth-child(3) .nav-item { animation-delay: 160ms; }
+  .nav-section:nth-child(4) .nav-item { animation-delay: 240ms; }
+  .nav-section:nth-child(5) .nav-item { animation-delay: 320ms; }
+
+  /* ══════════════════════════════════════════════════════════
+     RESPONSIVE
+     ══════════════════════════════════════════════════════════ */
+
+  @media (max-width: 1280px) {
+    .review-layout {
+      grid-template-columns: 1fr 280px;
+    }
+  }
+  @media (max-width: 1024px) {
+    .review-layout {
+      grid-template-columns: 1fr;
+    }
+    .context-panel {
+      position: static;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ═══════════════════════════════════════════════════════
+       SIDEBAR — Identical to App Shell
+       ═══════════════════════════════════════════════════════ -->
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+      <div class="logo-stars">
+        <span class="logo-star"></span>
+        <span class="logo-star"></span>
+        <span class="logo-star"></span>
+        <span class="logo-star"></span>
+        <span class="logo-star"></span>
+      </div>
+      <div class="logo-text">Aurelian</div>
+      <div class="logo-sub">Manufacturing</div>
+    </div>
+
+    <!-- Operations -->
+    <nav class="nav-section">
+      <div class="nav-section-label">Operations</div>
+      <div class="nav-item" onclick="navigate('MRB-Builder-App-Shell.html')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>
+        </span>
+        Dashboard
+      </div>
+      <div class="nav-item" onclick="navigate('MRB-Orders-List-Screen.html')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h2"/></svg>
+        </span>
+        Orders
+        <span class="nav-badge">12</span>
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 1.5L14 5v6l-6 3.5L2 11V5L8 1.5z"/><path d="M8 8v6.5M2 5l6 3 6-3"/></svg>
+        </span>
+        Material Queue
+        <span class="nav-badge">5</span>
+      </div>
+    </nav>
+
+    <!-- MRB Management -->
+    <nav class="nav-section">
+      <div class="nav-section-label">MRB Management</div>
+      <div class="nav-item" onclick="navigate('MRB-Index-Screen.html')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 4h10M3 8h10M3 12h6"/></svg>
+        </span>
+        MRB Index
+      </div>
+      <div class="nav-item active" onclick="navigate('MRB-Gate-Review-Screen.html')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 8l3 3 5-6"/><circle cx="8" cy="8" r="6.5"/></svg>
+        </span>
+        Gate Reviews
+        <span class="nav-badge">5</span>
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4h3v10H2z"/><path d="M5 2h9v2H5z"/><path d="M7 4h7v10H7z"/><path d="M9 7h3M9 10h3"/></svg>
+        </span>
+        ITP Management
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h4"/></svg>
+        </span>
+        Documents
+        <span class="nav-badge">23</span>
+      </div>
+    </nav>
+
+    <!-- Administration -->
+    <nav class="nav-section">
+      <div class="nav-section-label">Administration</div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="12" height="10" rx="1.5"/><path d="M5 4V2.5A1.5 1.5 0 0 1 6.5 1h3A1.5 1.5 0 0 1 11 2.5V4"/><path d="M2 8h12"/></svg>
+        </span>
+        Customers
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="7" width="8" height="6" rx="1"/><path d="M3 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/><circle cx="12" cy="10" r="2.5"/><path d="M9 13h6"/></svg>
+        </span>
+        Suppliers
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 14V8l-3 2V6l5-4 5 4v4l-3-2v6"/></svg>
+        </span>
+        Profiles
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+        </span>
+        Users
+      </div>
+    </nav>
+
+    <!-- System -->
+    <nav class="nav-section">
+      <div class="nav-section-label">System</div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h4"/></svg>
+        </span>
+        Audit Log
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="2"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.4 1.4M11.55 11.55l1.4 1.4M3.05 12.95l1.4-1.4M11.55 4.45l1.4-1.4"/></svg>
+        </span>
+        Settings
+      </div>
+    </nav>
+
+    <!-- User -->
+    <div class="sidebar-user">
+      <div class="user-avatar">TA</div>
+      <div class="user-info">
+        <div class="user-name">Tore Ausland</div>
+        <div class="user-role">QA Engineer</div>
+      </div>
+      <button class="user-logout" title="Log out">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2H3.5A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14H6"/><path d="M10 11l3-3-3-3M5.5 8H13"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPBAR
+       ═══════════════════════════════════════════════════════ -->
+  <header class="topbar">
+    <div class="topbar-title">Material Gate Review</div>
+    <div class="topbar-breadcrumb">
+      <span>›</span> <a href="MRB-Index-Screen.html" style="cursor:pointer;">MRB Management</a> <span>›</span> <a href="MRB-Gate-Review-Screen.html" style="cursor:pointer;">Gate Reviews</a> <span>›</span> <span class="bc-id">GR-2026-0047</span>
+    </div>
+    <div class="topbar-spacer"></div>
+
+    <div class="topbar-search">
+      <span class="search-icon">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg>
+      </span>
+      <input type="text" placeholder="Search orders, materials, documents...">
+    </div>
+
+    <div class="topbar-actions">
+      <button class="topbar-btn" title="Notifications">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6a4 4 0 0 1 8 0c0 3 1.5 4.5 2 5H2c.5-.5 2-2 2-5z"/><path d="M6.5 13a1.5 1.5 0 0 0 3 0"/></svg>
+        <span class="notif-dot">7</span>
+      </button>
+      <span class="env-badge">Staging</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MAIN CONTENT — Material Gate Review FM-008-01
+       ═══════════════════════════════════════════════════════ -->
+  <main class="main">
+
+    <div class="review-layout">
+
+      <!-- ── Left Column: Form Content ────────────────────── -->
+      <div class="review-main">
+
+        <!-- Review Header -->
+        <div class="review-header">
+          <div class="review-header-top">
+            <div class="review-id-block">
+              <div class="review-id">GR-2026-0047</div>
+              <span class="status-badge in-progress">In Progress</span>
+            </div>
+            <div class="review-form-label">FM-008-01 Rev 1.1</div>
+          </div>
+
+          <div class="review-meta-grid">
+            <div class="meta-field">
+              <div class="meta-label">Receipt Reference</div>
+              <div class="meta-value mono">REC-2026-0189</div>
+            </div>
+            <div class="meta-field">
+              <div class="meta-label">Order Reference</div>
+              <div class="meta-value mono"><a href="MRB-Order-Detail-Screen.html" class="profile-link" style="font-family:var(--mono);font-size:12px;">ORD-2026-0034</a></div>
+            </div>
+            <div class="meta-field">
+              <div class="meta-label">Material Grade</div>
+              <div class="meta-value grade">ASTM A182 F316</div>
+            </div>
+            <div class="meta-field">
+              <div class="meta-label">Heat Number</div>
+              <div class="meta-value mono">H-84729-A</div>
+            </div>
+            <div class="meta-field">
+              <div class="meta-label">Supplier</div>
+              <div class="meta-value">Sandvik Materials Technology</div>
+            </div>
+            <div class="meta-field">
+              <div class="meta-label">Customer</div>
+              <div class="meta-value">Equinor ASA</div>
+            </div>
+            <div class="meta-field">
+              <div class="meta-label">Industry</div>
+              <div class="meta-value"><span class="industry-tag oilgas">Oil &amp; Gas</span></div>
+            </div>
+            <div class="meta-field">
+              <div class="meta-label">Profile Used</div>
+              <div class="meta-value"><span class="profile-link">EQ-F316-NORSOK</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificate Bar -->
+        <div class="cert-bar">
+          <div class="cert-info">
+            <div class="cert-icon">
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h4"/></svg>
+            </div>
+            <div>
+              <div class="cert-label">Certificate</div>
+              <div class="cert-name">EN 10204 3.1 <span>Sandvik_H84729A_MTC.pdf</span></div>
+            </div>
+          </div>
+          <button class="btn-outline">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 12v2h12v-2"/><path d="M8 2v8M5 7l3 3 3-3"/></svg>
+            View Certificate
+          </button>
+        </div>
+
+        <!-- Gate Checks Section -->
+        <div class="checks-section-title">Gate Checks (5 of 5 completed)</div>
+
+        <!-- Check 1: Certificate Type — PASS -->
+        <div class="check-card pass expanded" onclick="toggleCheck(this)">
+          <div class="check-header">
+            <div class="check-number">1</div>
+            <div class="check-title">Certificate Type</div>
+            <span class="check-badge pass">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3.5 3.5L13 5"/></svg>
+              Pass
+            </span>
+            <div class="check-chevron">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+            </div>
+          </div>
+          <div class="check-body">
+            <div class="check-content">
+              <div class="cert-compare">
+                <div class="cert-box">
+                  <div class="cert-box-label">Required</div>
+                  <div class="cert-box-value">EN 10204 3.1</div>
+                </div>
+                <div class="cert-match-icon">
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3.5 3.5L13 5"/></svg>
+                </div>
+                <div class="cert-box">
+                  <div class="cert-box-label">Actual</div>
+                  <div class="cert-box-value">EN 10204 3.1</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Check 2: Chemical Composition — BORDERLINE -->
+        <div class="check-card borderline expanded" onclick="toggleCheck(this)">
+          <div class="check-header">
+            <div class="check-number">2</div>
+            <div class="check-title">Chemical Composition</div>
+            <span class="check-badge borderline">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 4v5M8 11v1"/></svg>
+              Borderline
+            </span>
+            <div class="check-chevron">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+            </div>
+          </div>
+          <div class="check-body">
+            <div class="check-content">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Element</th>
+                    <th>Required Min</th>
+                    <th>Required Max</th>
+                    <th>Actual</th>
+                    <th>Result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>C</td>
+                    <td class="dash">—</td>
+                    <td>0.045%</td>
+                    <td>0.042%</td>
+                    <td><span class="result-tag pass"><span class="result-dot"></span>PASS</span></td>
+                  </tr>
+                  <tr>
+                    <td>Cr</td>
+                    <td>16.00%</td>
+                    <td>18.00%</td>
+                    <td>17.20%</td>
+                    <td><span class="result-tag pass"><span class="result-dot"></span>PASS</span></td>
+                  </tr>
+                  <tr>
+                    <td>Ni</td>
+                    <td>10.00%</td>
+                    <td>14.00%</td>
+                    <td>10.50%</td>
+                    <td><span class="result-tag pass"><span class="result-dot"></span>PASS</span></td>
+                  </tr>
+                  <tr class="row-borderline">
+                    <td>Mo</td>
+                    <td>2.00%</td>
+                    <td>3.00%</td>
+                    <td>2.10%</td>
+                    <td><span class="result-tag borderline"><span class="result-dot"></span>⚠ BORDERLINE</span></td>
+                  </tr>
+                  <tr>
+                    <td>Mn</td>
+                    <td class="dash">—</td>
+                    <td>2.00%</td>
+                    <td>1.85%</td>
+                    <td><span class="result-tag pass"><span class="result-dot"></span>PASS</span></td>
+                  </tr>
+                  <tr>
+                    <td>Si</td>
+                    <td class="dash">—</td>
+                    <td>1.00%</td>
+                    <td>0.62%</td>
+                    <td><span class="result-tag pass"><span class="result-dot"></span>PASS</span></td>
+                  </tr>
+                  <tr>
+                    <td>P</td>
+                    <td class="dash">—</td>
+                    <td>0.045%</td>
+                    <td>0.031%</td>
+                    <td><span class="result-tag pass"><span class="result-dot"></span>PASS</span></td>
+                  </tr>
+                  <tr>
+                    <td>S</td>
+                    <td class="dash">—</td>
+                    <td>0.030%</td>
+                    <td>0.018%</td>
+                    <td><span class="result-tag pass"><span class="result-dot"></span>PASS</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="alert-callout amber">
+                <div class="alert-icon">⚠</div>
+                <div><strong>Borderline Alert:</strong> Mo actual 2.10% is within 5.0% of minimum limit 2.00%. Consider PMI verification on arrival to confirm composition.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Check 3: Mechanical Properties — FAIL -->
+        <div class="check-card fail expanded" onclick="toggleCheck(this)">
+          <div class="check-header">
+            <div class="check-number">3</div>
+            <div class="check-title">Mechanical Properties</div>
+            <span class="check-badge fail">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+              Fail
+            </span>
+            <div class="check-chevron">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+            </div>
+          </div>
+          <div class="check-body">
+            <div class="check-content">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Property</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                    <th>Actual</th>
+                    <th>Unit</th>
+                    <th>Result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Tensile Strength</td>
+                    <td>485</td>
+                    <td>620</td>
+                    <td>520</td>
+                    <td style="font-family: var(--font); text-align: center; color: var(--gray-med);">MPa</td>
+                    <td><span class="result-tag pass"><span class="result-dot"></span>PASS</span></td>
+                  </tr>
+                  <tr>
+                    <td>Yield Strength</td>
+                    <td>205</td>
+                    <td class="dash">—</td>
+                    <td>210</td>
+                    <td style="font-family: var(--font); text-align: center; color: var(--gray-med);">MPa</td>
+                    <td><span class="result-tag pass"><span class="result-dot"></span>PASS</span></td>
+                  </tr>
+                  <tr class="row-fail">
+                    <td>Elongation</td>
+                    <td>30.0</td>
+                    <td class="dash">—</td>
+                    <td>28.5</td>
+                    <td style="font-family: var(--font); text-align: center; color: var(--gray-med);">%</td>
+                    <td><span class="result-tag fail">✗ FAIL</span></td>
+                  </tr>
+                  <tr>
+                    <td>Hardness (HBW)</td>
+                    <td class="dash">—</td>
+                    <td>217</td>
+                    <td>198</td>
+                    <td style="font-family: var(--font); text-align: center; color: var(--gray-med);">HBW</td>
+                    <td><span class="result-tag pass"><span class="result-dot"></span>PASS</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="alert-callout red">
+                <div class="alert-icon">✗</div>
+                <div><strong>Failure:</strong> Elongation 28.5% below minimum requirement 30.0%. Material does not meet ASTM A182 specification. Gate decision cannot be APPROVED per VR-008-01-002.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Check 4: Supplementary Tests — PASS (collapsed) -->
+        <div class="check-card pass" onclick="toggleCheck(this)">
+          <div class="check-header">
+            <div class="check-number">4</div>
+            <div class="check-title">Supplementary Tests</div>
+            <span class="check-badge pass">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3.5 3.5L13 5"/></svg>
+              Pass
+            </span>
+            <div class="check-chevron">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+            </div>
+          </div>
+          <div class="check-body">
+            <div class="check-content">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Test</th>
+                    <th style="text-align:left">Standard</th>
+                    <th>Required</th>
+                    <th>Actual</th>
+                    <th>Result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Impact −46°C</td>
+                    <td style="text-align:left; font-family: var(--font);">ASTM A370</td>
+                    <td>27J min</td>
+                    <td>45J avg</td>
+                    <td><span class="result-tag pass"><span class="result-dot"></span>PASS</span></td>
+                  </tr>
+                  <tr>
+                    <td>IGC Test</td>
+                    <td style="text-align:left; font-family: var(--font);">ASTM A262 E</td>
+                    <td>No attack</td>
+                    <td>No attack</td>
+                    <td><span class="result-tag pass"><span class="result-dot"></span>PASS</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Check 5: Traceability & Integrity — PASS (collapsed) -->
+        <div class="check-card pass" onclick="toggleCheck(this)">
+          <div class="check-header">
+            <div class="check-number">5</div>
+            <div class="check-title">Traceability &amp; Integrity</div>
+            <span class="check-badge pass">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3.5 3.5L13 5"/></svg>
+              Pass
+            </span>
+            <div class="check-chevron">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+            </div>
+          </div>
+          <div class="check-body">
+            <div class="check-content" style="padding-top: 16px;">
+              <div style="font-size: 12px; color: var(--gray-med); line-height: 1.6;">
+                Heat number traceable from certificate to material marking. Certificate date consistent with production timeline. No anomalous patterns detected in chemical/mechanical data. Supplier (Sandvik) has verified supply chain history.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Borderline Flags Panel -->
+        <div class="borderline-panel">
+          <div class="borderline-title">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2L1 14h14L8 2zM8 6v4M8 12v1"/></svg>
+            Borderline Flags (Auto-calculated)
+          </div>
+          <div class="borderline-item">
+            <div class="borderline-element">Mo</div>
+            <div class="borderline-detail">Actual: <strong>2.10%</strong> — Limit: 2.00% min</div>
+            <div class="borderline-margin">5.0%</div>
+          </div>
+        </div>
+
+        <!-- Gate Decision Panel -->
+        <div class="decision-panel">
+          <div class="decision-title">Gate Decision</div>
+
+          <div class="decision-options">
+            <!-- APPROVED -->
+            <div class="decision-option" onclick="selectDecision(this, 'approved')" data-disabled="true" style="opacity: 0.5; cursor: not-allowed;" title="Cannot approve — Check 3 has FAIL result (VR-008-01-002)">
+              <div class="decision-radio"></div>
+              <div class="decision-icon">
+                <svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8l3.5 3.5L13 5"/><circle cx="8" cy="8" r="7"/></svg>
+              </div>
+              <div class="decision-label">Approved</div>
+              <div class="decision-desc">Material accepted for production use</div>
+              <div style="margin-top: 8px; font-size: 9px; color: var(--red); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Blocked — Check 3 FAIL</div>
+            </div>
+
+            <!-- REJECTED -->
+            <div class="decision-option" onclick="selectDecision(this, 'rejected')">
+              <div class="decision-radio"></div>
+              <div class="decision-icon">
+                <svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 5l6 6M11 5l-6 6"/><circle cx="8" cy="8" r="7"/></svg>
+              </div>
+              <div class="decision-label">Rejected</div>
+              <div class="decision-desc">Material quarantined; cannot be used</div>
+            </div>
+
+            <!-- CONDITIONAL APPROVAL -->
+            <div class="decision-option" onclick="selectDecision(this, 'conditional')">
+              <div class="decision-radio"></div>
+              <div class="decision-icon">
+                <svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 4v5M8 11v1"/><circle cx="8" cy="8" r="7"/></svg>
+              </div>
+              <div class="decision-label">Conditional</div>
+              <div class="decision-desc">Material may proceed with documented conditions</div>
+            </div>
+          </div>
+
+          <div class="decision-textarea">
+            <label>Decision Reason <span style="color: var(--red);">*</span></label>
+            <textarea placeholder="Provide justification for the gate decision..."></textarea>
+          </div>
+
+          <label class="qm-checkbox">
+            <input type="checkbox">
+            <div>
+              <div class="qm-checkbox-text">Escalate to Quality Manager (QM Override)</div>
+              <div class="qm-checkbox-sub">Gate review will appear in QM queue for final decision</div>
+            </div>
+          </label>
+
+          <div class="decision-actions">
+            <button class="btn-draft">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 14h10M3 10l7-7 2 2-7 7H3v-2z"/></svg>
+              Save Draft
+            </button>
+            <button class="btn-submit" disabled id="submitBtn">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3.5 3.5L13 5"/></svg>
+              Submit Gate Review
+            </button>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="app-footer">
+          <span class="confidential">Confidential</span>
+          <div style="margin-top: 4px;">
+            Aurelian Manufacturing AS — Digital MRB Builder — Phase 0 Staging — 22 February 2026
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── Right Column: Context Panel ──────────────────── -->
+      <div class="context-panel">
+
+        <!-- Check Summary -->
+        <div class="context-card">
+          <div class="context-card-header">
+            <div class="context-card-title">Check Summary</div>
+          </div>
+          <div class="check-summary">
+            <div class="summary-row">
+              <span class="summary-label">1. Certificate Type</span>
+              <span class="summary-mini-badge pass">Pass</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">2. Chemical Composition</span>
+              <span class="summary-mini-badge borderline">Borderline</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">3. Mechanical Properties</span>
+              <span class="summary-mini-badge fail">Fail</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">4. Supplementary Tests</span>
+              <span class="summary-mini-badge pass">Pass</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">5. Traceability</span>
+              <span class="summary-mini-badge pass">Pass</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review Timeline -->
+        <div class="context-card">
+          <div class="context-card-header">
+            <div class="context-card-title">Review Timeline</div>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-dot completed"></div>
+                <div class="timeline-line"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-label">Review Created</div>
+                <div class="timeline-time">22 Feb 2026, 09:15</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-dot completed"></div>
+                <div class="timeline-line"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-label">Certificate Uploaded</div>
+                <div class="timeline-time">22 Feb 2026, 09:18</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-dot completed"></div>
+                <div class="timeline-line"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-label">Check 1 Completed — PASS</div>
+                <div class="timeline-time">22 Feb 2026, 09:22</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-dot completed"></div>
+                <div class="timeline-line"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-label">Check 2 Completed — BORDERLINE</div>
+                <div class="timeline-time">22 Feb 2026, 09:34</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-dot completed"></div>
+                <div class="timeline-line"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-label">Check 3 Completed — FAIL</div>
+                <div class="timeline-time">22 Feb 2026, 09:41</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-dot active"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-label">Awaiting Gate Decision</div>
+                <div class="timeline-time">Now</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Related Documents -->
+        <div class="context-card">
+          <div class="context-card-header">
+            <div class="context-card-title">Related Documents</div>
+          </div>
+          <div class="doc-list">
+            <div class="doc-item">
+              <div class="doc-icon cert">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h4"/></svg>
+              </div>
+              <div>
+                <div class="doc-name">Sandvik_H84729A_MTC.pdf</div>
+                <div class="doc-type">Material Test Certificate</div>
+              </div>
+            </div>
+            <div class="doc-item">
+              <div class="doc-icon">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 14V8l-3 2V6l5-4 5 4v4l-3-2v6"/></svg>
+              </div>
+              <div>
+                <div class="doc-name">EQ-F316-NORSOK.json</div>
+                <div class="doc-type">Requirement Profile</div>
+              </div>
+            </div>
+            <div class="doc-item" onclick="navigate('MRB-Order-Detail-Screen.html')">
+              <div class="doc-icon">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h2"/></svg>
+              </div>
+              <div>
+                <div class="doc-name">ORD-2026-0034</div>
+                <div class="doc-type">Order Requirement Matrix</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Physical Inspection -->
+        <div class="context-card">
+          <div class="context-card-header">
+            <div class="context-card-title">Physical Inspection</div>
+          </div>
+          <div class="inspection-panel">
+            <div class="inspection-toggle">
+              <div class="inspection-label-text">Physical inspection required</div>
+              <label class="toggle">
+                <input type="checkbox">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="inspection-status">Status: <span class="status-text">Not triggered</span></div>
+            <div class="inspection-note">
+              Auto-triggered for CRITICAL materials or when Check 5 = FLAG. Triggers creation of FM-008-02 (Physical Inspection Report).
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     INTERACTION — Check expand/collapse + Decision selection
+     ═══════════════════════════════════════════════════════ -->
+<script>
+  function navigate(url) {
+    if (url && url !== '#') window.location.href = url;
+  }
+
+  function toggleCheck(card) {
+    // Don't toggle if click was on a link or button inside
+    if (event.target.closest('a, button, input, textarea')) return;
+    card.classList.toggle('expanded');
+  }
+
+  let selectedDecision = null;
+
+  function selectDecision(el, type) {
+    // Prevent selecting APPROVED when Check 3 has FAIL
+    if (type === 'approved' && el.dataset.disabled === 'true') return;
+
+    // Clear previous selection
+    document.querySelectorAll('.decision-option').forEach(opt => {
+      opt.classList.remove('selected-approved', 'selected-rejected', 'selected-conditional');
+      const radio = opt.querySelector('.decision-radio');
+      radio.style.borderColor = '';
+      radio.style.background = '';
+      radio.innerHTML = '';
+    });
+
+    // Apply new selection
+    selectedDecision = type;
+    el.classList.add('selected-' + type);
+
+    const radio = el.querySelector('.decision-radio');
+    const colors = {
+      approved: 'var(--green)',
+      rejected: 'var(--red)',
+      conditional: 'var(--amber)'
+    };
+    radio.style.borderColor = colors[type];
+    radio.style.background = colors[type];
+    radio.innerHTML = '<svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" style="display:block;margin:2px;"><path d="M3 8l3.5 3.5L13 5"/></svg>';
+
+    // Enable submit button
+    document.getElementById('submitBtn').disabled = false;
+  }
+</script>
+
+</body>
+</html>

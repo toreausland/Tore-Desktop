@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — NAMMO Small & Medium Caliber Strategi</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">AURELIAN MANUFACTURING</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">NAMMO Small & Medium Caliber</div>
+    <div class="cover-subtitle">Segmentstrategi &mdash; liten og mellomstor kaliber ammunisjon</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>&middot;</span>
+      <span>Februar 2026</span>
+      <span>&middot;</span>
+      <span>V1.0</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: SEGMENTOVERSIKT -->
+  <section>
+    <div class="section-label">01 &mdash; Segmentoversikt</div>
+    <h2>Small & Medium Caliber &mdash; NAMMOs modne kjernevirksomhet</h2>
+
+    <p>
+      NAMMO Small & Medium Caliber (SMC) er selskapets mest modne og volummessig st&oslash;rste forretningsomr&aring;de. Segmentet dekker ammunisjon fra <strong>12.7mm</strong> til <strong>30mm</strong> for h&aring;ndv&aring;pen, maskinkanoner og autokanonsystemer. Produksjonen er prim&aelig;rt basert p&aring; stamping, forming og pressing &mdash; ikke CNC-maskinering.
+    </p>
+
+    <p>
+      Flaggskipproduktet er <span class="red-accent">Raufoss Mk 211</span> (12.7mm multipurpose) &mdash; verdenskjent for sin unike kombinasjon av panserbryting, brann og fragmentering i &eacute;n enkelt patron. Mk 211 er NATO-standard og eksporteres til over 20 land. Medium kaliber inkluderer 20mm, 25mm og 30mm ammunisjon for autokanonsystemer som Bushmaster og Mk 44.
+    </p>
+
+    <p>
+      <strong>CNC-relevans:</strong> Segmentet er <span class="red-accent">h&oslash;yt volum, men medium CNC-relevans</span>. Hovedproduksjonen er ikke CNC-basert, men CNC er kritisk for <strong>verkt&oslash;y</strong>, <strong>fusekomponenter</strong>, <strong>spesialinnsatser</strong>, <strong>prototyper</strong> og <strong>testutstyr</strong>. N&aring;r produksjonen skalerer, &oslash;ker ogs&aring; verkt&oslash;ybehovet betydelig.
+    </p>
+
+    <div class="kpi-strip">
+      <div class="kpi-item highlight">
+        <div class="kpi-value">Mk 211</div>
+        <div class="kpi-label">Flaggskip</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">12.7&ndash;30mm</div>
+        <div class="kpi-label">Kaliberspenn</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Verkt&oslash;y</div>
+        <div class="kpi-label">CNC-fokus</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">1&ndash;4k</div>
+        <div class="kpi-label">Est. CNC-timer/&aring;r</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: CNC-KOMPONENTBEHOV -->
+  <section>
+    <div class="section-label">02 &mdash; CNC-komponentbehov</div>
+    <h2>Komponenttyper og maskineringskrav</h2>
+
+    <p>
+      Selv om hovedproduksjonen er forming- og pressebasert, krever SMC-segmentet en rekke presisjonsmaskineringsoppgaver. Tabellen nedenfor viser de viktigste CNC-relevante komponenttypene.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Komponent</th>
+          <th>Materiale</th>
+          <th>Operasjon</th>
+          <th>Volum</th>
+          <th>Kompleksitet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tennere / fuse components</strong></td>
+          <td>St&aring;l, messing</td>
+          <td>CNC-dreiing</td>
+          <td>H&oslash;yt</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Spesialkjerner / cores</strong></td>
+          <td>Wolframkarbid, st&aring;l</td>
+          <td>Presisjonsdreiing</td>
+          <td>Medium</td>
+          <td>H&oslash;y</td>
+        </tr>
+        <tr>
+          <td><strong>Produksjonsverkt&oslash;y</strong></td>
+          <td>Verkt&oslash;ysst&aring;l, HSS</td>
+          <td>3&ndash;5 akse fresing</td>
+          <td>L&oslash;pende</td>
+          <td>H&oslash;y</td>
+        </tr>
+        <tr>
+          <td><strong>Testfixturer</strong></td>
+          <td>Aluminium, st&aring;l</td>
+          <td>Fresing</td>
+          <td>L&oslash;pende</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Prototypekomponenter</strong></td>
+          <td>Diverse</td>
+          <td>Alle operasjoner</td>
+          <td>Lav</td>
+          <td>H&oslash;y</td>
+        </tr>
+        <tr>
+          <td><strong>Dyser og innsatser</strong></td>
+          <td>Hardmetall</td>
+          <td>Presisjonsfresing</td>
+          <td>Medium</td>
+          <td>Sv&aelig;rt h&oslash;y</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary">
+      Verkt&oslash;yst&aring;l- og hardmetallkomponenter krever avansert maskinering med tette toleranser. Mazak multi-tasking-maskiner med b&aring;de dreie- og fresekapabilitet er ideelle for denne typen arbeid.
+    </p>
+  </section>
+
+  <!-- SECTION 3: CALLOUT -->
+  <section>
+    <div class="section-label">03 &mdash; Strategisk vurdering</div>
+    <h2>Segmentets karakter og Aurelians rolle</h2>
+
+    <div class="callout">
+      <p>
+        Small & Medium Caliber er NAMMOs mest modne segment med etablerte produksjonslinjer. CNC-behovet er prim&aelig;rt verkt&oslash;y, fixturer og spesialkomponenter &mdash; ikke hovedproduktene. Men volumet av verkt&oslash;y er betydelig n&aring;r produksjonen skalerer, og Aurelian kan bli en fast leverand&oslash;r av produksjonsverkt&oslash;y.
+      </p>
+    </div>
+
+    <p>
+      Segmentet har en annen dynamikk enn Large Caliber og Aerospace. Produksjonsvolumene er langt h&oslash;yere &mdash; NAMMO produserer millioner av patroner &aring;rlig &mdash; men selve patronproduksjonen er ikke CNC-basert. Det er <em>st&oslash;ttefunksjonene</em> rundt produksjonen som krever presisjonsmaskinering: verkt&oslash;y som slites og m&aring; erstattes, fixturer for nye produktvarianter, og spesialkomponenter i selve ammunisjonen som tennere og kjerner.
+    </p>
+
+    <p>
+      Dette gj&oslash;r SMC til et segment med <strong>stabil, forutsigbar ettersp&oslash;rsel</strong> &mdash; ikke de store enkeltordrene, men en jevn str&oslash;m av verkt&oslash;y- og komponentbehov som &oslash;ker proporsjonalt med produksjonsvolum.
+    </p>
+  </section>
+
+  <!-- SECTION 4: AURELIANS VINKEL (DARK PANEL) -->
+  <section class="dark-panel">
+    <div class="section-label">04 &mdash; Aurelians vinkel</div>
+    <h2>&AElig;rlig vurdering &mdash; muligheter og begrensninger</h2>
+
+    <p>
+      SMC er ikke det segmentet som gir h&oslash;yest CNC-volum, men det har egenskaper som gj&oslash;r det strategisk verdifullt som inngangspunkt.
+    </p>
+
+    <ul class="clean-list">
+      <li>
+        <strong>Lavere CNC-volum enn Large Caliber og Aerospace</strong>, men stabil og forutsigbar ettersp&oslash;rsel. Verkt&oslash;y slites og m&aring; erstattes l&oslash;pende &mdash; dette gir jevn ordreinntgang.
+      </li>
+      <li>
+        <strong>Verkt&oslash;yproduksjon er en god inngangsport</strong> &mdash; lav risiko for NAMMO, demonstrerer Aurelians kapabilitet p&aring; kvalitet og leveranse uten at feil f&aring;r kritiske konsekvenser for sluttprodukt.
+      </li>
+      <li>
+        <strong>Prototyping av nye kalibere gir tidlig tilgang.</strong> NAMMO utvikler kontinuerlig nye ammunisjonstyper og varianter. &Aring; v&aelig;re prototypeleverand&oslash;r gir Aurelian innsikt og posisjon f&oslash;r serieproduksjon starter.
+      </li>
+      <li>
+        <strong>Mazak multi-tasking er ideelt</strong> for verkt&oslash;y og fixturer med korte serier og mange varianter. Kombinasjonen av dreiing og fresing i &eacute;n oppspenning reduserer ledetid og &oslash;ker presisjon.
+      </li>
+      <li>
+        <strong>Fungerer som &laquo;foot in the door&raquo;</strong> &mdash; bevise kvalitet, leveringspresisjon og sikkerhetskompetanse p&aring; lavrisiko-oppdrag f&oslash;r Aurelian s&oslash;ker st&oslash;rre kontrakter i Large Caliber og Aerospace.
+      </li>
+    </ul>
+  </section>
+
+  <!-- SECTION 5: ESTIMERT POTENSIAL -->
+  <section>
+    <div class="section-label">05 &mdash; Estimert potensial</div>
+    <h2>Omsetnings- og volumestimat for CNC-arbeid</h2>
+
+    <p>
+      Estimatene nedenfor er basert p&aring; analyse av NAMMOs produksjonsvolum, kjente verkt&oslash;ybehov og erfaringstall fra sammenlignbare leverand&oslash;rer. Tallene representerer Aurelians realistiske andel av det totale CNC-behovet i segmentet.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Type arbeid</th>
+          <th style="text-align:right;">Volum (timer/&aring;r)</th>
+          <th style="text-align:right;">Omsetning (MNOK)</th>
+          <th>Tidslinje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Produksjonsverkt&oslash;y og fixturer</strong></td>
+          <td style="text-align:right;">500 &ndash; 2 000</td>
+          <td style="text-align:right;">1.5 &ndash; 6</td>
+          <td>Q3 2027</td>
+        </tr>
+        <tr>
+          <td><strong>Tennere og fusekomponenter</strong></td>
+          <td style="text-align:right;">300 &ndash; 1 000</td>
+          <td style="text-align:right;">0.9 &ndash; 3</td>
+          <td>Q4 2027</td>
+        </tr>
+        <tr>
+          <td><strong>Prototyper og testutstyr</strong></td>
+          <td style="text-align:right;">200 &ndash; 500</td>
+          <td style="text-align:right;">0.6 &ndash; 1.5</td>
+          <td>Q3 2027</td>
+        </tr>
+        <tr>
+          <td><strong>Spesialkjerner og innsatser</strong></td>
+          <td style="text-align:right;">100 &ndash; 500</td>
+          <td style="text-align:right;">0.3 &ndash; 1.5</td>
+          <td>2028</td>
+        </tr>
+        <tr style="font-weight:700; border-top: 2px solid var(--black);">
+          <td><strong>TOTAL</strong></td>
+          <td style="text-align:right; border-top: 2px solid var(--black);"><strong>1 100 &ndash; 4 000</strong></td>
+          <td style="text-align:right; border-top: 2px solid var(--black);"><strong>3.3 &ndash; 12 MNOK</strong></td>
+          <td style="border-top: 2px solid var(--black);"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary">
+      Verkt&oslash;y og fixturer utgj&oslash;r den st&oslash;rste andelen og er ogs&aring; den enkleste kategorien &aring; starte med. Tennere og fusekomponenter krever kvalifisering og sertifisering, som gir lengre oppstartstid men h&oslash;yere inngangsbarriere for konkurrenter.
+    </p>
+  </section>
+
+  <!-- SECTION 6: N&Oslash;KKELKONTAKTER -->
+  <section>
+    <div class="section-label">06 &mdash; N&oslash;kkelkontakter</div>
+    <h2>Kontaktpersoner i NAMMO for dette segmentet</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Rolle</th>
+          <th>Relevans</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Per Olav Moen</strong></td>
+          <td>Procurement Director, Raufoss</td>
+          <td>Alle anskaffelser &mdash; prim&aelig;r beslutningstaker for innkj&oslash;p</td>
+        </tr>
+        <tr>
+          <td><strong>Peter Lerche Raadal</strong></td>
+          <td>VP Procurement & Supply Chain, Group</td>
+          <td>Konsernstrategi for leverand&oslash;rkjeden &mdash; strategisk forankring</td>
+        </tr>
+        <tr>
+          <td><strong>Aksel Schjerpen</strong></td>
+          <td>Director BD, Raufoss</td>
+          <td>Lokal kontakt &mdash; forretningsutvikling og relasjonsbygging</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary">
+      Per Olav Moen er den viktigste kontakten for konkrete leveranser. Peter Lerche Raadal b&oslash;r involveres for strategisk posisjonering som fast leverand&oslash;r p&aring; tvers av segmenter. Aksel Schjerpen er verdifull for l&oslash;pende dialog og tidlig varsling om nye behov.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS</span>
+    <span>NAMMO Small & Medium Caliber Strategi V1.0</span>
+    <span>Februar 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

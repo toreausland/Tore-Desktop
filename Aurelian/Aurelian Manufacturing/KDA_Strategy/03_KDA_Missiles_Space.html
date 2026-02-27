@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — KDA Missiles & Space Divisjonsstrategi</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  /* Cover */
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; max-width: 640px; line-height: 1.5; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  /* Content */
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  /* KPI strip */
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  /* Callout */
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+  .callout + .callout { margin-top: 1rem; }
+
+  /* Bullet list */
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  /* Ordered steps */
+  ol.steps-list { list-style: none; padding: 0; margin: 1rem 0; counter-reset: step-counter; }
+  ol.steps-list li { position: relative; padding-left: 2.4rem; margin-bottom: 1rem; font-size: 0.88rem; line-height: 1.55; counter-increment: step-counter; }
+  ol.steps-list li::before { content: counter(step-counter); position: absolute; left: 0; top: 0; width: 24px; height: 24px; background: var(--red); color: var(--white); font-size: 0.78rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  /* Timeline */
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 120px; }
+
+  /* Product list */
+  .product-group { margin-bottom: 1.2rem; }
+  .product-group h4 { font-size: 0.9rem; font-weight: 700; color: var(--black); margin-bottom: 0.2rem; }
+  .product-group p { font-size: 0.84rem; color: var(--gray-medium); margin-bottom: 0; }
+
+  /* Dark panel */
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel ul.clean-list li { color: rgba(255,255,255,0.85); }
+  .dark-panel ul.clean-list li::before { background: var(--red); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+  .dark-panel .callout { background: rgba(255,255,255,0.06); border-left-color: var(--red); }
+  .dark-panel .callout p { color: rgba(255,255,255,0.85); }
+
+  /* Note box (warning style) */
+  .note-box { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .note-box .note-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 0.3rem; }
+  .note-box p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  /* Footer */
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">★ ★ ★ ★ ★</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">KDA Missiles & Space</div>
+    <div class="cover-subtitle">Divisjonsstrategi — NSM, JSM, romkomponenter og høyverdi presisjonsdeler</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Februar 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: DIVISJONSPROFIL -->
+  <section>
+    <div class="section-label">Seksjon 1 — Divisjonsprofil</div>
+    <h2>Missiles & Space — KDAs høyverdi-divisjon</h2>
+
+    <p class="lead"><strong>EVP:</strong> Oyvind Kolset (Missiles & Space combined)</p>
+
+    <h3>Produktportefølje</h3>
+
+    <div class="product-group">
+      <h4>Naval Strike Missile (NSM)</h4>
+      <p>Anti-skip og landangrep. Operasjonell i 14+ nasjoner. Langtrekkende presisjonsmissil.</p>
+    </div>
+
+    <div class="product-group">
+      <h4>Joint Strike Missile (JSM)</h4>
+      <p>F-35-integrert, luftlansert. Verdens eneste 5. generasjons presisjonsmissil med interne våpenrom-kompatibilitet.</p>
+    </div>
+
+    <div class="product-group">
+      <h4>Zone 5 Technologies-missiler (oppkjøpt desember 2025)</h4>
+      <p>Rusty Dagger, White Spike og Paladin — nye missillinjer fra det amerikanske oppkjøpet.</p>
+    </div>
+
+    <div class="product-group">
+      <h4>Romkomponenter</h4>
+      <p>Ariane rakettfeste- og utløsermekanismer, satellittkomponenter (NanoAvionics), bakkestasjonssystemer.</p>
+    </div>
+
+    <h3>Nøkkeltall</h3>
+    <ul class="clean-list">
+      <li><strong>Revenue 2024:</strong> NOK 6 496 millioner (Missiles & Space combined)</li>
+      <li><strong>Ordrebok missilsegmentet:</strong> ~NOK 98 milliarder</li>
+      <li><strong>Nylig kontrakt:</strong> USAF JSM 2nd production lot — $240.9M (desember 2025)</li>
+      <li><strong>Zone 5 Technologies-oppkjøp:</strong> Desember 2025 — ny missilfabrikk i Virginia, USA</li>
+      <li><strong>Kapasitetsinvestering:</strong> NOK 640M+ i utvidet missilproduksjonskapasitet (med EU ASAP-støtte)</li>
+    </ul>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">6.5</div>
+        <div class="kpi-label">MRD NOK<br>Revenue</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">98</div>
+        <div class="kpi-label">MRD NOK<br>Ordrebok</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">NSM + JSM</div>
+        <div class="kpi-label">Primær-<br>missiler</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">$240.9M</div>
+        <div class="kpi-label">USAF JSM<br>kontrakt</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: CNC-KOMPONENTBEHOV -->
+  <section>
+    <div class="section-label">Seksjon 2 — CNC-komponentbehov</div>
+    <h2>Komponenttyper og maskineringskrav</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Komponenttype</th>
+          <th>Materialer</th>
+          <th>Kompleksitet</th>
+          <th>Volum</th>
+          <th>Krav</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Missilkropp-seksjoner</strong></td>
+          <td>Titan, aluminium, høylegert</td>
+          <td>5-akse simultan</td>
+          <td>Medium</td>
+          <td>Ekstremt strenge toleranser</td>
+        </tr>
+        <tr>
+          <td><strong>Seeker-hus (målsøker)</strong></td>
+          <td>Aluminium, spesiallegeringer</td>
+          <td>5-akse presisjon</td>
+          <td>Lav-medium</td>
+          <td>Optisk presisjon</td>
+        </tr>
+        <tr>
+          <td><strong>Styrefinner-assemblyer</strong></td>
+          <td>Titan, kompositt-tilpasset</td>
+          <td>5-akse</td>
+          <td>Medium</td>
+          <td>Aerodynamisk presisjon</td>
+        </tr>
+        <tr>
+          <td><strong>Launcher rail-komponenter</strong></td>
+          <td>Høylegert stål</td>
+          <td>3-4 akse</td>
+          <td>Medium-høy</td>
+          <td>Strukturell integritet</td>
+        </tr>
+        <tr>
+          <td><strong>Missilkontainer strukturdeler</strong></td>
+          <td>Aluminium, stål</td>
+          <td>3-4 akse</td>
+          <td>Medium</td>
+          <td>Miljøbeskyttelse</td>
+        </tr>
+        <tr>
+          <td><strong>Rakettfeste/utløsermekanismer (Space)</strong></td>
+          <td>Titan, spesiallegeringer</td>
+          <td>5-akse ultrapresisjon</td>
+          <td>Lav</td>
+          <td>Romkvalitet</td>
+        </tr>
+        <tr>
+          <td><strong>Satellittstrukturdeler</strong></td>
+          <td>Aluminium, titan</td>
+          <td>5-akse</td>
+          <td>Lav</td>
+          <td>Romkvalitet, lav vekt</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 3: HVORFOR AURELIAN ER RELEVANT -->
+  <section>
+    <div class="section-label">Seksjon 3 — Relevans</div>
+    <h2>Hvorfor Aurelian er relevant for Missiles & Space</h2>
+
+    <div class="callout">
+      <p><strong>Missildivisjonen har den største ordreboken i KDA — NOK 98 mrd.</strong> Hver NSM og JSM krever presisjonsmaskinererte komponenter i krevende materialer. Med ny fabrikk i Virginia og NOK 640M+ i kapasitetsutvidelse, er behovet for underleverandører åpenbart.</p>
+    </div>
+
+    <h3>Nøkkelargumenter</h3>
+    <ul class="clean-list">
+      <li><strong>Missiler er ultimate HMLV:</strong> Komplekse geometrier, krevende materialer, moderate volumer, null feilmargin — dette er kjernen i Aurelians forretningsmodell.</li>
+      <li><strong>Digital sporbarhet er kritisk:</strong> Hver missildel må kunne spores 100%. Aurelians digitale tråd er bygget inn fra dag 1, ikke lagt til i etterkant.</li>
+      <li><strong>Titan og høylegeringer er Aurelians designmaterialer:</strong> Fabrikken er konfigurert for å håndtere vanskelige legeringer effektivt og repeterbart.</li>
+      <li><strong>5-akse simultanbearbeiding:</strong> Seeker-hus og finneprofiler krever avansert simultanmaskinering — en kjernekompetanse for Aurelian.</li>
+      <li><strong>Romkomponenter demonstrerer ambisjoner:</strong> Ariane-mekanismer og satellittdeler krever de strengeste toleransene i industrien. Å kvalifisere seg her beviser kapabilitet for alt annet.</li>
+      <li><strong>Zone 5-oppkjøpet skaper nye behov:</strong> Rusty Dagger, White Spike og Paladin er nye produktlinjer som trenger nye leverandører — eksisterende supply chain dekker ikke alt.</li>
+      <li><strong>AQAP 2110 er et must:</strong> Missildivisjonen krever dette. Aurelian planlegger sertifisering for 2028 — viser langsiktig forpliktelse.</li>
+    </ul>
+
+    <div class="note-box">
+      <div class="note-label">Merk</div>
+      <p><strong>Missildivisjonen har strengere kvalifiseringskrav enn Defence Systems.</strong> Lengre innkjøringsfase, men høyere verdi per komponent og sterkere lock-in når kvalifisert. Denne divisjonen belønner tålmodighet og presisjon i tilnærmingen.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 4: NØKKELKONTAKTER -->
+  <section>
+    <div class="section-label">Seksjon 4 — Nøkkelkontakter</div>
+    <h2>Kontaktpersoner — Missiles & Space</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Tittel</th>
+          <th>Relevans</th>
+          <th>Prioritet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Audun Frøysland</strong></td>
+          <td>Team Manager, Supply Chain QA</td>
+          <td>Kvalitetssiden av supply chain, leverandørkvalifisering</td>
+          <td style="color: var(--red); font-weight: 700;">★★★</td>
+        </tr>
+        <tr>
+          <td><strong>Oyvind Kolset</strong></td>
+          <td>EVP Missiles & Space</td>
+          <td>Divisjonsleder — strategisk</td>
+          <td style="color: var(--red); font-weight: 700;">★★☆ (via intro)</td>
+        </tr>
+        <tr>
+          <td><strong>Petter Berg Spone</strong></td>
+          <td>VP Supply Chain (acting)</td>
+          <td>Overordnet leverandørstrategi</td>
+          <td style="color: var(--red); font-weight: 700;">★★★</td>
+        </tr>
+        <tr>
+          <td><strong>[Ny Strategic Sourcing Manager]</strong></td>
+          <td>Stilling utlyst 2025</td>
+          <td>Divisjonen bygger opp innkjøpsteam</td>
+          <td style="color: var(--red); font-weight: 700;">★★★ (finn via LinkedIn)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 5: TILNÆRMINGSSTRATEGI -->
+  <section>
+    <div class="section-label">Seksjon 5 — Tilnærmingsstrategi</div>
+    <h2>Seks steg inn i Missiles & Space</h2>
+
+    <ol class="steps-list">
+      <li><strong>Kontakt Audun Frøysland</strong> — han eier supply chain QA og forstår kvalifiseringskravene. Dette er den naturlige inngangsporten for nye leverandører til missildivisjonen.</li>
+      <li><strong>Identifiser den nye Strategic Sourcing Manager</strong> (stilling utlyst 2025) — denne personen bygger ny leverandørbase og vil aktivt lete etter kapable leverandører.</li>
+      <li><strong>Start med launcher- og kontainerkomponenter</strong> (lavere kompleksitet enn missilkropp) for å bygge track record. Bevis kvalitet og leveranseevne på mindre kritiske deler først.</li>
+      <li><strong>Eskalér til missilkropp-seksjoner og seeker-hus</strong> etter bevist kvalitet. Disse er høyere verdi, strengere krav — men bygger på demonstrert kompetanse fra steg 3.</li>
+      <li><strong>Posisjonér for romkomponenter som differensiator:</strong> «Vi kan levere space-grade presisjon.» Romkvalitet viser at Aurelian opererer i toppsjiktet av presisjonsproduksjon.</li>
+      <li><strong>Bruk cellekonfigurasjon som inngangsargument:</strong> «Vi kan sette opp CNC-celler optimalisert for missil-komponentprofilen.» Ingen eksisterende leverandør kan tilby dette.</li>
+    </ol>
+  </section>
+
+  <!-- SECTION 6: MISSILPRODUKSJONSEKSPANSJONEN (DARK PANEL) -->
+  <section class="dark-panel">
+    <div class="section-label">Seksjon 6 — Kapasitetsekspansjon</div>
+    <h2>Missilproduksjonsekspansjonen — hvorfor nå</h2>
+
+    <ul class="clean-list">
+      <li><strong>KDA investerer NOK 640M+</strong> i utvidet missilproduksjonskapasitet — den største enkeltsatsingen i divisjonens historie.</li>
+      <li><strong>Støttet av norske myndigheter og EU ASAP-programmet</strong> — dette er geopolitisk prioritert og finansiert utover KDAs eget budsjett.</li>
+      <li><strong>Ny fabrikk i Kongsberg</strong> (åpnet 2024) + ny fabrikk i Virginia, USA (grunnstein januar 2026) — produksjonskapasiteten dobles.</li>
+      <li><strong>Pengene flyter gjennom hele supply chain,</strong> ikke bare internt hos KDA. Underleverandører vil se direkte effekt av denne investeringen.</li>
+      <li><strong>Zone 5 Technologies (USA) oppkjøpt desember 2025</strong> — tre nye missillinjer (Rusty Dagger, White Spike, Paladin) som trenger helt ny leverandørkjede.</li>
+      <li><strong>Nye produktlinjer trenger nye leverandører</strong> — eksisterende supply chain dekker ikke alt. Vinduet for å komme inn er åpent.</li>
+      <li><strong>Aurelians timing matcher perfekt:</strong> Produksjonsstart august 2027 treffer midt i KDAs kapasitetsopptrapping.</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Strategisk innsikt:</strong> KDAs kapasitetsekspansjon er ikke bare en internprosjekt — det er en nasjonal forsvarsprioritet. Leverandører som er kvalifisert og klare når ramp-up starter vil ha et varig fortrinn.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: KVALIFISERINGSSTI -->
+  <section>
+    <div class="section-label">Seksjon 7 — Kvalifiseringssti</div>
+    <h2>Kvalifiseringsløp for missildivisjonen</h2>
+
+    <div class="note-box">
+      <div class="note-label">Viktig</div>
+      <p>Missildivisjonen har en lengre kvalifiseringstidslinje enn Defence Systems grunnet strengere krav til materialsporing, toleranser og kvalitetssystemer. Planlegg for en 3–4 års horisont fra første kontakt til full kvalifisering for kjernekomponenter.</p>
+    </div>
+
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>Tidspunkt</th>
+          <th>Aktivitet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mar 2026</strong></td>
+          <td>Kontakt Audun Frøysland (Supply Chain QA) — etabler dialog om leverandørkvalifisering</td>
+        </tr>
+        <tr>
+          <td><strong>Apr 2026</strong></td>
+          <td>Leverandørregistrering med Missiles & Space-fokus — capability brief tilpasset missildivisjonen</td>
+        </tr>
+        <tr>
+          <td><strong>Mai–Jun 2026</strong></td>
+          <td>Teknisk vurdering — materialkompetanse og toleransekapabilitet demonstreres</td>
+        </tr>
+        <tr>
+          <td><strong>Q3 2026</strong></td>
+          <td>NDA, eksempeltegninger for launcher/kontainer-komponenter</td>
+        </tr>
+        <tr>
+          <td><strong>Q4 2026</strong></td>
+          <td>Maskinvalg med missil-komponentprofil som input — CNC-cellekonfigurasjon låses</td>
+        </tr>
+        <tr>
+          <td><strong>Q1 2027</strong></td>
+          <td>Pre-kvalifiseringssøknad (paper-based) — formell leverandørvurdering</td>
+        </tr>
+        <tr>
+          <td><strong>Q3 2027</strong></td>
+          <td>FAI på launcher/kontainer-deler (lavere kompleksitet først) — bevis leveranseevne</td>
+        </tr>
+        <tr>
+          <td><strong>Q4 2027</strong></td>
+          <td>Betinget godkjenning for Tier 2-komponenter</td>
+        </tr>
+        <tr>
+          <td><strong>2028</strong></td>
+          <td>AS9100 + AQAP 2110 sertifisering — kvalifisering for Tier 1-komponenter (missilkropp, seeker)</td>
+        </tr>
+        <tr>
+          <td><strong>2029+</strong></td>
+          <td>Full kvalifisering for missil-kjernekomponenter — etablert Tier 1-leverandør</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | KDA Missiles & Space V1.0 | Februar 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

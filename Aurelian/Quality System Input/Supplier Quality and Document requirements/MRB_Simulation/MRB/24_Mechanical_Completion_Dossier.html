@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanical Completion Dossier — AM-MCD-2026-0042-001</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+        .page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+        .page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #F50537; }
+        .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #D3D3D3; padding-bottom: 12px; margin-bottom: 16px; }
+        .logo { font-size: 16pt; font-weight: bold; color: #2B2B2B; }
+        .logo span { display: block; font-size: 9pt; font-weight: normal; color: #6B6B6B; }
+        .doc-info { text-align: right; font-size: 9pt; color: #6B6B6B; }
+        .doc-info strong { color: #2B2B2B; font-size: 10pt; }
+        h1 { font-size: 18pt; color: #2B2B2B; font-weight: bold; margin: 16px 0 6px 0; }
+        h2 { font-size: 13pt; color: #F50537; font-weight: bold; margin: 14px 0 6px 0; }
+        h3 { font-size: 11pt; color: #2B2B2B; font-weight: bold; margin: 10px 0 4px 0; }
+        p { margin-bottom: 6pt; font-size: 10pt; }
+        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+        .meta-box { background: #F5F5F5; padding: 10px; font-size: 9pt; }
+        .meta-box .lbl { font-weight: bold; color: #6B6B6B; text-transform: uppercase; font-size: 8pt; }
+        table { width: 100%; border-collapse: collapse; margin: 8px 0 14px 0; font-size: 9pt; }
+        thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 5pt 6pt; text-align: left; font-size: 8.5pt; }
+        tbody td { padding: 4pt 6pt; border-bottom: 0.5pt solid #D3D3D3; }
+        tbody tr:nth-child(even) { background: #F5F5F5; }
+        .center { text-align: center; }
+        .right { text-align: right; }
+        .sig-block { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 18px; }
+        .sig-line { border-bottom: 1px solid #2B2B2B; height: 30px; margin-bottom: 3px; }
+        .sig-label { font-size: 8pt; color: #6B6B6B; }
+        .sig-name { font-size: 9pt; font-weight: bold; }
+        .sig-date { font-size: 8pt; color: #6B6B6B; margin-top: 2px; }
+        .footer { margin-top: 24px; border-top: 1px solid #D3D3D3; padding-top: 8px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+        .stamp { border: 3px solid #F50537; padding: 12px 24px; display: inline-block; font-size: 13pt; font-weight: bold; color: #F50537; margin: 14px 0; letter-spacing: 1px; }
+        .callout { background: #F5F5F5; border-left: 3px solid #F50537; padding: 10px 14px; margin: 10px 0; font-size: 10pt; }
+
+        .check-ok { color: #2B8C2B; font-weight: bold; }
+        .status-complete { display: inline-block; padding: 1px 6px; background: #D4EDDA; color: #155724; font-size: 8pt; font-weight: bold; border-radius: 2px; border: 1px solid #C3E6CB; }
+        .status-closed { display: inline-block; padding: 1px 6px; background: #FFF3CD; color: #856404; font-size: 8pt; font-weight: bold; border-radius: 2px; border: 1px solid #FFE69C; }
+
+        .equip-table td:first-child { font-weight: bold; color: #6B6B6B; width: 180px; font-size: 8.5pt; text-transform: uppercase; }
+        .equip-table td:last-child { color: #2B2B2B; font-size: 9.5pt; }
+
+        .mfg-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 10px 0 14px 0; }
+        .mfg-stat-card { background: #F5F5F5; padding: 12px; text-align: center; }
+        .mfg-stat-card .stat-value { font-size: 16pt; font-weight: bold; color: #2B2B2B; }
+        .mfg-stat-card .stat-label { font-size: 8pt; color: #6B6B6B; text-transform: uppercase; font-weight: bold; margin-top: 2px; }
+
+        .declaration-box { background: #F5F5F5; border: 1px solid #D3D3D3; padding: 16px; margin: 14px 0; }
+        .declaration-box p { font-size: 10pt; line-height: 1.4; }
+
+        .punch-clear { background: #D4EDDA; border: 1px solid #C3E6CB; padding: 10px 14px; font-size: 10pt; font-weight: bold; color: #155724; margin: 10px 0; text-align: center; }
+
+        @media print {
+            body { background: #fff; }
+            .page { box-shadow: none; margin: 0; padding: 2cm; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="header">
+        <div class="logo">
+            Aurelian Manufacturing
+            <span>Industriveien 12, 1531 Moss, Norway</span>
+        </div>
+        <div class="doc-info">
+            <strong>Mechanical Completion Dossier</strong><br>
+            MRB Section 24<br>
+            Doc No: AM-MCD-2026-0042-001<br>
+            Rev: 0 &nbsp;|&nbsp; Date: 25 June 2026
+        </div>
+    </div>
+
+    <h1>Mechanical Completion Dossier</h1>
+    <p style="font-size: 9pt; color: #6B6B6B; margin-bottom: 14px;">
+        Summary and checklist confirming completion of all manufacturing, inspection, testing, and documentation activities.
+    </p>
+
+    <div class="meta-grid">
+        <div class="meta-box">
+            <div class="lbl">Purchase Order</div>
+            NSS-PO-2026-0042
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Client</div>
+            Nordic Subsea Solutions AS
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Project</div>
+            Barents Sea Development Phase 2 (NSS-PRJ-BS2024)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">MRB Reference</div>
+            AM-MRB-2026-0042-001
+        </div>
+    </div>
+
+    <!-- SECTION 1: EQUIPMENT DATA -->
+    <h2>Section 1 — Equipment Data Summary</h2>
+    <table class="equip-table">
+        <tbody>
+            <tr>
+                <td>Tag Number</td>
+                <td>NSS-BSP2-SCA-001</td>
+            </tr>
+            <tr>
+                <td>Serial Number</td>
+                <td>AM-BSP2-300-001</td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>Subsea Connector Assembly, Size 300 (Upfacing Configuration)</td>
+            </tr>
+            <tr>
+                <td>Material</td>
+                <td>Super Duplex UNS S32750 (ASTM A182 F53)</td>
+            </tr>
+            <tr>
+                <td>Weight</td>
+                <td>391.2 kg (coated, with fasteners)</td>
+            </tr>
+            <tr>
+                <td>Design Pressure</td>
+                <td>345 barg</td>
+            </tr>
+            <tr>
+                <td>Test Pressure</td>
+                <td>517 barg (Hydrostatic)</td>
+            </tr>
+            <tr>
+                <td>Design Code</td>
+                <td>ASME B16.5 / NORSOK M-001</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- SECTION 2: MANUFACTURING SUMMARY -->
+    <h2>Section 2 — Manufacturing Summary</h2>
+    <div class="mfg-stats">
+        <div class="mfg-stat-card">
+            <div class="stat-value">12 Mar 2026</div>
+            <div class="stat-label">Manufacturing Start</div>
+        </div>
+        <div class="mfg-stat-card">
+            <div class="stat-value">10 Jun 2026</div>
+            <div class="stat-label">Manufacturing Complete</div>
+        </div>
+        <div class="mfg-stat-card">
+            <div class="stat-value">486 hrs</div>
+            <div class="stat-label">Total Manufacturing Hours</div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: COMPLETION CHECKLIST -->
+    <h2>Section 3 — Completion Checklist</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="center" style="width: 30px;">Item</th>
+                <th>Description</th>
+                <th>Document Ref</th>
+                <th class="center">Status</th>
+                <th class="center" style="width: 40px;">Signed</th>
+                <th class="center">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="center">1</td>
+                <td>ITP approved and followed</td>
+                <td>AM-ITP-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">2</td>
+                <td>QMS certificates valid</td>
+                <td>AM-QMS-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">3</td>
+                <td>Material traceability</td>
+                <td>AM-MTL-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">4</td>
+                <td>Material certificates (EN 10204 Type 3.2)</td>
+                <td>AM-MTC-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">5</td>
+                <td>Weld &amp; NDT log complete</td>
+                <td>AM-WDL-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">6</td>
+                <td>WPS/WPQR documented</td>
+                <td>AM-WPS-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">7</td>
+                <td>Welder certificates valid</td>
+                <td>AM-WCR-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">8</td>
+                <td>Visual inspection</td>
+                <td>AM-VIR-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">9</td>
+                <td>NDE reports (RT + PT)</td>
+                <td>AM-NDE-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">10</td>
+                <td>NDE operator certificates</td>
+                <td>AM-NDC-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">11</td>
+                <td>Surface treatment</td>
+                <td>AM-STR-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">12</td>
+                <td>Dimensional inspection</td>
+                <td>AM-DIR-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">13</td>
+                <td>Weighing certificate</td>
+                <td>AM-WGT-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">14</td>
+                <td>Pressure test procedure</td>
+                <td>AM-PTP-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">15</td>
+                <td>Pressure test certificate</td>
+                <td>AM-PTC-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">16</td>
+                <td>NCR records</td>
+                <td>AM-NCR-2026-0042-001, -002</td>
+                <td class="center"><span class="status-closed">Complete (closed)</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">17</td>
+                <td>Certificate of Conformance</td>
+                <td>AM-COC-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+            <tr>
+                <td class="center">18</td>
+                <td>As-built drawings</td>
+                <td>AM-ABD-2026-0042-001</td>
+                <td class="center"><span class="status-complete">Complete</span></td>
+                <td class="center check-ok">&#10003;</td>
+                <td class="center">25 Jun</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- SECTION 4: PUNCH LIST -->
+    <h2>Section 4 — Outstanding Items / Punch List</h2>
+    <div class="punch-clear">
+        No outstanding items. All punch list items cleared.
+    </div>
+
+    <!-- SECTION 5: DECLARATION -->
+    <h2>Section 5 — Declaration</h2>
+    <div class="declaration-box">
+        <p>Aurelian Manufacturing AS hereby declares that the mechanical completion of the above equipment is achieved. All manufacturing, inspection, testing, and documentation activities have been completed in accordance with the applicable Purchase Order, specifications, and quality requirements.</p>
+    </div>
+
+    <!-- MECHANICAL COMPLETION STAMP -->
+    <div style="text-align: center; margin: 20px 0;">
+        <div class="stamp">MECHANICAL COMPLETION ACHIEVED</div>
+    </div>
+
+    <!-- SECTION 6: ACCEPTANCE -->
+    <h2>Section 6 — Acceptance</h2>
+    <p style="font-size: 9pt; color: #6B6B6B; margin-bottom: 12px;">
+        Authorised signatures confirming mechanical completion and acceptance.
+    </p>
+
+    <div class="sig-block">
+        <div>
+            <div class="sig-name">Anna Nordstr&ouml;m</div>
+            <div class="sig-label">QA Manager — Aurelian Manufacturing AS</div>
+            <div class="sig-line"></div>
+            <div class="sig-date">Date: 25 June 2026</div>
+        </div>
+        <div>
+            <div class="sig-name">Thomas Eriksen</div>
+            <div class="sig-label">Project Manager — Aurelian Manufacturing AS</div>
+            <div class="sig-line"></div>
+            <div class="sig-date">Date: 25 June 2026</div>
+        </div>
+        <div>
+            <div class="sig-name">Marte Lindgren</div>
+            <div class="sig-label">QA Manager — Nordic Subsea Solutions AS</div>
+            <div class="sig-line"></div>
+            <div class="sig-date">Date: 26 June 2026</div>
+        </div>
+        <div>
+            <div class="sig-name">Erik Johansen</div>
+            <div class="sig-label">Project Manager — Nordic Subsea Solutions AS</div>
+            <div class="sig-line"></div>
+            <div class="sig-date">Date: 26 June 2026</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>CONFIDENTIAL</span>
+        <span>Aurelian Manufacturing AS — MRB Section 24</span>
+        <span>25 June 2026</span>
+    </div>
+</div>
+
+</body>
+</html>

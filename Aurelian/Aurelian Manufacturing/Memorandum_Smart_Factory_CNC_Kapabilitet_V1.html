@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Smart Factory CNC Kapabilitetsmemorandum</title>
+<style>
+  @page {
+    size: A4;
+    margin: 2.5cm;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root {
+    --red: #F50537;
+    --black: #2B2B2B;
+    --pure-black: #000000;
+    --white: #FFFFFF;
+    --gray-medium: #6B6B6B;
+    --gray-panel: #F5F5F5;
+    --gray-divider: #D3D3D3;
+    --gray-chart: #888888;
+    --dark-charcoal: #1A1A1A;
+    --dark-navy: #1C2D3F;
+    --navy-card: #253B52;
+    --slate-line: #3D5A7A;
+    --steel-blue: #8EAEC5;
+    --dark-red: #D0042E;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: Calibri, 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--black);
+    background: #E8E8E8;
+    line-height: 1.55;
+  }
+
+  /* ── Document container ── */
+  .document {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 1px 40px rgba(0,0,0,0.12);
+  }
+
+  @media screen and (min-width: 900px) {
+    .document { margin: 2rem auto; }
+  }
+
+  /* ── Cover section ── */
+  .cover {
+    background: var(--pure-black);
+    padding: 5rem 3.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--red);
+  }
+
+  .cover-stars {
+    font-size: 1.6rem;
+    color: var(--white);
+    letter-spacing: 0.5rem;
+    margin-bottom: 1.2rem;
+    opacity: 0.85;
+  }
+
+  .cover-company {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.06em;
+    margin-bottom: 2.4rem;
+  }
+
+  .cover-bar {
+    width: 80px;
+    height: 3px;
+    background: var(--red);
+    margin: 0 auto 2.4rem;
+  }
+
+  .cover-title {
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 0.6rem;
+    max-width: 600px;
+  }
+
+  .cover-subtitle {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--red);
+    font-style: italic;
+    margin-bottom: 3.5rem;
+  }
+
+  .cover-meta {
+    font-size: 0.78rem;
+    color: var(--gray-medium);
+    letter-spacing: 0.04em;
+  }
+
+  .cover-meta span {
+    margin: 0 0.8rem;
+  }
+
+  /* ── Content sections ── */
+  .content {
+    padding: 0;
+  }
+
+  section {
+    padding: 3rem 3.5rem;
+    position: relative;
+  }
+
+  section + section {
+    border-top: 1px solid var(--gray-divider);
+  }
+
+  /* ── Section headers ── */
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+  }
+
+  h2 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.25;
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-top: 2rem;
+    margin-bottom: 0.7rem;
+  }
+
+  /* ── Body text ── */
+  p {
+    font-size: 0.94rem;
+    line-height: 1.65;
+    color: var(--black);
+    margin-bottom: 1rem;
+  }
+
+  p.lead {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--black);
+  }
+
+  p.secondary {
+    color: var(--gray-medium);
+    font-size: 0.88rem;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  .red-accent {
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  /* ── Highlight intro block ── */
+  .intro-block {
+    position: relative;
+    padding-left: 1.4rem;
+    border-left: 3px solid var(--red);
+    margin-bottom: 1.5rem;
+  }
+
+  .intro-block p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* ── Feature cards (4-column for vertikal integrering) ── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.8rem;
+  }
+
+  .feature-card {
+    background: var(--gray-panel);
+    padding: 1.6rem 1.5rem;
+    position: relative;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--red);
+  }
+
+  .feature-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 0.82rem;
+    font-weight: 700;
+    border-radius: 50%;
+    margin-bottom: 0.8rem;
+  }
+
+  .feature-card h4 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-card p {
+    font-size: 0.84rem;
+    line-height: 1.55;
+    color: var(--gray-medium);
+    margin-bottom: 0;
+  }
+
+  /* ── Data table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.88rem;
+  }
+
+  thead th {
+    background: var(--black);
+    color: var(--white);
+    font-weight: 700;
+    text-align: left;
+    padding: 0.7rem 1rem;
+    font-size: 0.84rem;
+    letter-spacing: 0.02em;
+  }
+
+  thead th:last-child {
+    text-align: right;
+  }
+
+  tbody td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--gray-divider);
+    vertical-align: top;
+  }
+
+  tbody td:last-child {
+    text-align: right;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) {
+    background: var(--gray-panel);
+  }
+
+  tbody tr.total-row {
+    border-top: 2px solid var(--black);
+    background: transparent;
+  }
+
+  tbody tr.total-row td {
+    font-weight: 700;
+    padding-top: 0.8rem;
+  }
+
+  /* ── KPI strip ── */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin: 1.8rem 0;
+    border: 1px solid var(--gray-divider);
+  }
+
+  .kpi-item {
+    padding: 1.4rem 1rem;
+    text-align: center;
+    border-right: 1px solid var(--gray-divider);
+    background: var(--white);
+  }
+
+  .kpi-item:last-child {
+    border-right: none;
+  }
+
+  .kpi-item.highlight {
+    background: var(--red);
+  }
+
+  .kpi-value {
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+
+  .kpi-item.highlight .kpi-value {
+    color: var(--white);
+  }
+
+  .kpi-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--gray-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+  }
+
+  .kpi-item.highlight .kpi-label {
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* ── Bullet list ── */
+  ul.clean-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  ul.clean-list li {
+    position: relative;
+    padding-left: 1.4rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  ul.clean-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+  }
+
+  ul.clean-list li strong {
+    color: var(--black);
+  }
+
+  /* ── Dark panel section ── */
+  .dark-panel {
+    background: var(--dark-charcoal);
+    padding: 3rem 3.5rem;
+    border-top: none;
+  }
+
+  .dark-panel .section-label {
+    color: var(--red);
+  }
+
+  .dark-panel h2 {
+    color: var(--white);
+  }
+
+  .dark-panel p {
+    color: rgba(255,255,255,0.82);
+  }
+
+  .dark-panel .feature-card {
+    background: var(--navy-card);
+  }
+
+  .dark-panel .feature-card h4 {
+    color: var(--white);
+  }
+
+  .dark-panel .feature-card p {
+    color: var(--steel-blue);
+  }
+
+  /* ── Machine list ── */
+  .machine-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.2rem 0;
+  }
+
+  .machine-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .machine-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.1em;
+  }
+
+  .machine-icon svg {
+    width: 12px;
+    height: 12px;
+    fill: var(--white);
+  }
+
+  /* ── Callout box ── */
+  .callout {
+    background: var(--gray-panel);
+    border-left: 3px solid var(--red);
+    padding: 1.3rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .callout p {
+    font-size: 0.88rem;
+    margin-bottom: 0;
+    line-height: 1.55;
+  }
+
+  .callout strong {
+    color: var(--black);
+  }
+
+  /* ── Infrastructure icons grid ── */
+  .infra-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .infra-item {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background: var(--gray-panel);
+  }
+
+  .infra-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  .infra-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 0.3rem;
+  }
+
+  .infra-desc {
+    font-size: 0.76rem;
+    color: var(--gray-medium);
+    line-height: 1.4;
+  }
+
+  /* ── Logistics strip ── */
+  .logistics-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin: 1.5rem 0;
+    background: var(--gray-panel);
+    border: 1px solid var(--gray-divider);
+  }
+
+  .logistics-item {
+    padding: 1.2rem 0.8rem;
+    text-align: center;
+    border-right: 1px solid var(--gray-divider);
+  }
+
+  .logistics-item:last-child {
+    border-right: none;
+  }
+
+  .logistics-icon-wrap {
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 0.5rem;
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .logistics-icon-wrap svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--white);
+  }
+
+  .logistics-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--black);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+
+  .logistics-detail {
+    font-size: 0.68rem;
+    color: var(--gray-medium);
+    margin-top: 0.15rem;
+    line-height: 1.3;
+  }
+
+  /* ── OEE Definition Note ── */
+  .oee-definition-note {
+    margin-top: 2rem;
+    padding: 1.2rem 1.5rem;
+    border-top: 1px solid var(--gray-divider);
+  }
+
+  .oee-definition-note p {
+    font-size: 0.72rem;
+    line-height: 1.6;
+    color: var(--gray-medium);
+    margin: 0;
+  }
+
+  .oee-definition-note strong {
+    color: var(--black);
+    font-size: 0.74rem;
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 3rem 0 1.5rem;
+    padding-top: 0;
+  }
+
+  /* The horizontal line connecting all nodes */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 28px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gray-divider) 0%, var(--red) 100%);
+  }
+
+  .timeline-item {
+    position: relative;
+    flex: 1;
+    text-align: center;
+    padding-top: 56px;
+  }
+
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+
+  /* The dot on the line */
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2.5px solid var(--gray-divider);
+    transform: translateX(-50%);
+    z-index: 2;
+    transition: all 0.3s ease;
+  }
+
+  .timeline-item.active::before {
+    width: 20px;
+    height: 20px;
+    top: 18px;
+    background: var(--red);
+    border: 2.5px solid var(--red);
+    box-shadow: 0 0 0 4px rgba(245, 5, 55, 0.15), 0 2px 8px rgba(245, 5, 55, 0.3);
+  }
+
+  /* Small connector line from dot down to card */
+  .timeline-item::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 36px;
+    width: 1px;
+    height: 16px;
+    background: var(--gray-divider);
+    transform: translateX(-50%);
+  }
+
+  .timeline-item.active::after {
+    background: var(--red);
+    width: 2px;
+  }
+
+  .timeline-card {
+    background: var(--gray-panel);
+    border-radius: 6px;
+    padding: 1rem 0.6rem;
+    margin: 0 0.3rem;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .timeline-item.active .timeline-card {
+    background: var(--black);
+  }
+
+  .timeline-date {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-item.active .timeline-date {
+    color: var(--red);
+  }
+
+  .timeline-event {
+    font-size: 0.78rem;
+    color: var(--black);
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  .timeline-item.active .timeline-event {
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  /* Responsive: stack vertically on narrow screens */
+  @media (max-width: 700px) {
+    .timeline {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding-top: 0;
+    }
+    .timeline::before {
+      left: 20px;
+      right: auto;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      height: auto;
+      background: linear-gradient(180deg, var(--gray-divider) 0%, var(--red) 100%);
+    }
+    .timeline-item {
+      text-align: left;
+      padding-top: 0;
+      padding-left: 52px;
+      padding-bottom: 1.5rem;
+    }
+    .timeline-item::before {
+      left: 13px;
+      top: 4px;
+      transform: none;
+    }
+    .timeline-item.active::before {
+      left: 11px;
+      top: 2px;
+    }
+    .timeline-item::after {
+      display: none;
+    }
+    .timeline-card {
+      margin: 0;
+      align-items: flex-start;
+    }
+  }
+
+  /* ── Partner invitation section ── */
+  .partner-section {
+    background: var(--pure-black);
+    padding: 3.5rem 3.5rem;
+    border-top: none;
+  }
+
+  .partner-section .section-label {
+    color: var(--red);
+  }
+
+  .partner-section h2 {
+    color: var(--white);
+    margin-bottom: 1.2rem;
+  }
+
+  .partner-section p {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.94rem;
+    line-height: 1.65;
+  }
+
+  .partner-section .emphasis-line {
+    color: var(--white);
+    font-size: 1.05rem;
+    font-weight: 400;
+    font-style: italic;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+
+  /* ── Contact section ── */
+  .contact-section {
+    padding: 2.5rem 3.5rem;
+    border-top: 3px solid var(--red);
+  }
+
+  .contact-layout {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .contact-person {
+    font-size: 0.88rem;
+    flex-shrink: 0;
+  }
+
+  .contact-name {
+    font-weight: 700;
+    color: var(--black);
+    font-size: 0.94rem;
+  }
+
+  .contact-role {
+    color: var(--gray-medium);
+    font-size: 0.82rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-email {
+    color: var(--red);
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .contact-image {
+    flex: 1;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  }
+
+  .contact-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+  }
+
+  .contact-image-caption {
+    font-size: 0.65rem;
+    color: var(--gray-medium);
+    font-style: italic;
+    margin-top: 0.4rem;
+    text-align: right;
+  }
+
+  /* ── Footer ── */
+  .doc-footer {
+    padding: 1.5rem 3.5rem;
+    border-top: 1px solid var(--gray-divider);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--gray-medium);
+  }
+
+  /* ── Facility specs ── */
+  .specs-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .spec-block {
+    padding: 1.4rem 1.3rem;
+    background: var(--gray-panel);
+    position: relative;
+  }
+
+  .spec-block::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--red);
+  }
+
+  .spec-value {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+
+  .spec-label {
+    font-size: 0.72rem;
+    color: var(--gray-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+
+  /* ── OEE explanation blocks ── */
+  .oee-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+  }
+
+  .oee-item {
+    padding: 1rem;
+    background: var(--gray-panel);
+    border-top: 2px solid var(--red);
+  }
+
+  .oee-item h5 {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--black);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.4rem;
+  }
+
+  .oee-item p {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--gray-medium);
+    margin-bottom: 0;
+  }
+
+  /* ── Print styles ── */
+  @media print {
+    body { background: white; }
+    .document { box-shadow: none; margin: 0; max-width: none; }
+    section { break-inside: avoid; }
+    .cover { break-after: page; min-height: 100vh; }
+    .dark-panel, .partner-section { break-inside: avoid; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    section { padding: 2rem 1.5rem; }
+    .cover { padding: 3rem 1.5rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .kpi-strip { grid-template-columns: 1fr 1fr; }
+    .logistics-strip { grid-template-columns: 1fr; }
+    .specs-row { grid-template-columns: 1fr; }
+    .oee-grid { grid-template-columns: 1fr 1fr; }
+    .infra-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .machine-grid { grid-template-columns: 1fr; }
+    .dark-panel { padding: 2rem 1.5rem; }
+    .partner-section { padding: 2.5rem 1.5rem; }
+    .contact-section { padding: 2rem 1.5rem; }
+    .doc-footer { padding: 1rem 1.5rem; flex-direction: column; gap: 0.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="document">
+
+  <!-- ══════════════════ COVER ══════════════════ -->
+  <header class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">AURELIAN MANUFACTURING</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">Industri 4.0 &mdash; Smart Factory CNC<br>Strategisk produksjonskapasitet for norsk forsvarsindustri</div>
+    <div class="cover-subtitle">Kapabilitetsmemorandum</div>
+    <div class="cover-meta">
+      <span>Februar 2026</span>
+      <span>&middot;</span>
+      <span>Konfidensielt</span>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ══════════════════ HVA VI BYGGER ══════════════════ -->
+    <section>
+      <div class="section-label">Introduksjon</div>
+      <h2>Hva vi bygger</h2>
+
+      <div class="intro-block">
+        <p>Aurelian Manufacturing etablerer en greenfield Smart Factory for autonom CNC-produksjon i V&aring;ler, &Oslash;stfold. Fabrikken bygges fra grunnen for presisjonsmaskinering i High-Mix Low-Volume &mdash; segmentet som kjennetegner forsvarsindustriens produksjonsbehov: komplekse geometrier, krevende legeringer, strenge krav til sporbarhet og dokumentasjon, og varierende ordrevolumer.</p>
+      </div>
+
+      <p>Aurelian er et DeepTech-Industri selskap. Vi utvikler og eier programvarestacken som binder CNC-maskinene sammen med produksjonsplanlegging, kvalitetsstyring og kapasitetsoptimalisering. Denne vertikale integreringen er ikke et tillegg til driften &mdash; den er selve designgrunnlaget for fabrikken.</p>
+
+      <p>Ved full utbygging vil anlegget romme 25 CNC-maskiner med full automasjon og systemintegrering. Det gir en &aring;rlig reell produksjonskapasitet p&aring; inntil 140&nbsp;000 spindeltimer.</p>
+    </section>
+
+    <!-- ══════════════════ VERTIKAL INTEGRERING ══════════════════ -->
+    <section class="dark-panel">
+      <div class="section-label">DeepTech</div>
+      <h2>Vertikal integrering av programvarestacken</h2>
+
+      <p>Aurelian bygger en gjennomg&aring;ende dataarkitektur fra CNC-kontrollerniv&aring; til virksomhetsstyring. Arkitekturen f&oslash;lger ISA-95-rammeverket og bruker standardiserte industriprotokoller (OPC&nbsp;UA, MTConnect) for maskin-til-system-kommunikasjon. Hele stacken utvikles og eies internt.</p>
+
+      <p>I praksis betyr dette fire ting:</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-number">1</div>
+          <h4>Sanntidsdata fra maskin til styringssystem</h4>
+          <p>Hver CNC-maskin rapporterer tilstand, syklustider, verkt&oslash;yslitasje, alarmer og prosessparametere gjennom standardiserte grensesnitt. Dataene normaliseres og er tilgjengelige i sanntid &mdash; ikke som manuelle rapporter etter skiftslutt, men som kontinuerlig datastr&oslash;m.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-number">2</div>
+          <h4>Lukket optimaliseringssl&oslash;yfe</h4>
+          <p>Planlagt produksjonstid sammenlignes kontinuerlig med faktisk m&aring;lt tid per maskin, materiale og operasjonstype. Avvik identifiseres automatisk og brukes til &aring; korrigere fremtidige produksjonsplaner. Systemet kalibrerer seg selv &mdash; det blir mer presist med hver produserte del.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-number">3</div>
+          <h4>Subline&aelig;r bemanning</h4>
+          <p>Fordi overv&aring;kning, datainnsamling, hendelsesh&aring;ndtering og produksjonsrapportering er automatisert, vokser bemanningsbehovet vesentlig saktere enn maskinparken. &Aring; doble antall maskiner krever ikke dobbelt mannskap. Dette er en direkte konsekvens av den vertikale integreringen.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-number">4</div>
+          <h4>Digital tr&aring;d fra ordre til leveranse</h4>
+          <p>Hvert produsert emne kan spores gjennom hele verdikjeden: ordremottak, NC-programmering, oppspenning, maskinering, kvalitetskontroll, m&aring;ledata, materialinformasjon og leveranse. Sporbarhet er bygget inn i systemets grunnarkitektur.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ PRODUKSJONSKAPASITET ══════════════════ -->
+    <section>
+      <div class="section-label">Kapasitet</div>
+      <h2>Produksjonskapasitet</h2>
+
+      <div class="kpi-strip">
+        <div class="kpi-item">
+          <div class="kpi-value">25</div>
+          <div class="kpi-label">CNC-maskiner<br>ved full utbygging</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">65 %</div>
+          <div class="kpi-label">Oppn&aring;elig<br>kapasitetsutnyttelse</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">80&ndash;85 %</div>
+          <div class="kpi-label">OEE-A tilgjengelighet<br>i HMLV</div>
+        </div>
+        <div class="kpi-item highlight">
+          <div class="kpi-value">140 000</div>
+          <div class="kpi-label">&Aring;rlige spindeltimer<br>reell kapasitet</div>
+        </div>
+      </div>
+
+      <p>En OEE-A p&aring; 80&ndash;85&nbsp;% i et HMLV-segment er vesentlig over det som er vanlig. I konvensjonelle verksteder taper man tilgjengelighet til manuelle omstillinger, informasjonsflaskehalser mellom skift, uplanlagt verkt&oslash;ysvikt og venting p&aring; programmer, tegninger eller materialer.</p>
+
+      <p>Aurelians Smart Factory-arkitektur adresserer hver av disse tapskildene systematisk:</p>
+
+      <div class="oee-grid">
+        <div class="oee-item">
+          <h5>Omstillingstid</h5>
+          <p>Reduseres gjennom standardiserte oppspenningsl&oslash;sninger og automatisert verkt&oslash;yh&aring;ndtering</p>
+        </div>
+        <div class="oee-item">
+          <h5>Informasjonsflyt</h5>
+          <p>Numerical Control-programmer, arbeidsinstrukser og kvalitetsplaner f&oslash;lger ordren automatisk &mdash; digitalisert hele veien</p>
+        </div>
+        <div class="oee-item">
+          <h5>Verkt&oslash;yslitasje</h5>
+          <p>Overv&aring;kes i sanntid og utl&oslash;ser planlagt bytte f&oslash;r svikt inntreffer</p>
+        </div>
+        <div class="oee-item">
+          <h5>Materialh&aring;ndtering</h5>
+          <p>Integrert i cellelogistikken fra arkitektfasen &mdash; ikke p&aring;bygd etterpå</p>
+        </div>
+      </div>
+
+      <p class="secondary">65&nbsp;% kapasitetsutnyttelse er et designm&aring;l som tar h&oslash;yde for planlagt vedlikehold, omstilling mellom ordrer, og den iboende variasjonen i HMLV-produksjon. Faktisk spindelkj&oslash;retid per tilgjengelig time er h&oslash;yere, nettopp fordi OEE-A er designet til 80&ndash;85&nbsp;%. Likevel krever slike m&aring;l gode samarbeid med v&aring;re st&oslash;rste kunder, vi tror p&aring; &aring; bygge verdier sammen.</p>
+
+      <div class="oee-definition-note">
+        <p><em><strong>OEE-A definisjon i Smart Factory:</strong>
+        Maskinen vet selv hvorfor den stopper. Systemet foresl&aring;r optimal sekvensering. Verkt&oslash;yslitasje predikeres. Nedetid analyseres automatisk. Kapasitetsutnyttelse simuleres f&oslash;r produksjon. OEE kobles direkte til l&oslash;nnsomhet per ordre. Ikke bare en m&aring;ling, men en kapitalproduktivitets-indikator.</em></p>
+      </div>
+    </section>
+
+    <!-- ══════════════════ MASKINPLATTFORM ══════════════════ -->
+    <section>
+      <div class="section-label">Plattform</div>
+      <h2>Maskinplattform</h2>
+
+      <p><strong>Mazak</strong> er valgt som CNC-leverand&oslash;r, levert gjennom Ravema AS &mdash; autorisert nordisk distribut&oslash;r med full service, oppl&aelig;ring- og applikasjonskapasitet.</p>
+
+      <div class="machine-grid">
+        <div class="machine-item">
+          <div class="machine-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="white" stroke-width="2.5"/><line x1="3" y1="12" x2="21" y2="12" stroke="white" stroke-width="2"/></svg>
+          </div>
+          <div><strong>Multi-tasking turn/mill</strong><br><span style="color:var(--gray-medium);font-size:0.82rem;">Kombinert dreiing og fresing i samme oppspenning</span></div>
+        </div>
+        <div class="machine-item">
+          <div class="machine-icon">
+            <svg viewBox="0 0 24 24"><polygon points="12,2 22,22 2,22" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div><strong>5-akse simultanbearbeiding</strong><br><span style="color:var(--gray-medium);font-size:0.82rem;">Komplekse geometrier i krevende materialer</span></div>
+        </div>
+        <div class="machine-item">
+          <div class="machine-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="white" stroke-width="2.5"/><line x1="12" y1="3" x2="12" y2="12" stroke="white" stroke-width="2"/></svg>
+          </div>
+          <div><strong>Dreisentre med drevet verkt&oslash;y</strong><br><span style="color:var(--gray-medium);font-size:0.82rem;">Rotasjonssymmetriske komponenter</span></div>
+        </div>
+        <div class="machine-item">
+          <div class="machine-icon">
+            <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="8" rx="1" fill="none" stroke="white" stroke-width="2.5"/><line x1="8" y1="8" x2="8" y2="16" stroke="white" stroke-width="1.5"/><line x1="16" y1="8" x2="16" y2="16" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+          <div><strong>Automasjonsforberedt</strong><br><span style="color:var(--gray-medium);font-size:0.82rem;">Robotisert materialinnmating og palettl&oslash;sninger</span></div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p><strong>Kundeinnflytelse p&aring; cellekonfigurasjon:</strong> Kunder som inng&aring;r samarbeid innen <strong style="color:var(--red);">august 2026</strong> kan p&aring;virke CNC-cellenes maskinsammensetning og konfigurasjon &mdash; maskintyper, verkt&oslash;ymagasin, oppspenningsl&oslash;sninger og automasjonsgrad. Denne muligheten eksisterer fordi maskinbestillinger er i sluttfasen og anlegget enn&aring; ikke er bygget. Det er et viktig tidsvindu &mdash; en invitasjon og oppfordring til v&aring;re kunder om &aring; delta aktivt.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════ ANLEGGET ══════════════════ -->
+    <section>
+      <div class="section-label">Fasiliteter</div>
+      <h2>Anlegget</h2>
+
+      <p>Aurelian bygger et nytt verksted p&aring; en byggeklar tomt p&aring; 30&nbsp;000&nbsp;m&sup2; i V&aring;ler, &Oslash;stfold. Verkstedbygningen er p&aring; 2&nbsp;635&nbsp;m&sup2; (verkstedet har utvidelsespotensiale p&aring; 1&nbsp;000&nbsp;m&sup2;) og er tegnet spesifikt for Smart Factory-drift. Det er ytterligere 21&nbsp;000&nbsp;m&sup2; byggeklar industritomt med ledetid 12 m&aring;neder.</p>
+
+      <div class="specs-row">
+        <div class="spec-block">
+          <div class="spec-value">30 000 m&sup2;</div>
+          <div class="spec-label">Byggeklar tomt</div>
+        </div>
+        <div class="spec-block">
+          <div class="spec-value">2 635 m&sup2;</div>
+          <div class="spec-label">Verksted + 1 000 m&sup2; utvidelse</div>
+        </div>
+        <div class="spec-block">
+          <div class="spec-value">21 000 m&sup2;</div>
+          <div class="spec-label">Ytterligere industritomt</div>
+        </div>
+      </div>
+
+      <h3>Form&aring;lsdesignet, ikke ombygd</h3>
+      <p>Infrastruktur, maskinplasseringer, kraner, gulvb&aelig;ring, krafttilf&oslash;rsel, datakabelf&oslash;ring og ventilasjonslogistikk er integrert fra Smart Factory arkitektfasen. Det betyr at automasjon, materialflyt og systemintegrering ikke er noe som legges til etterp&aring; &mdash; det er premisser for byggets utforming. Det legges stor vekt p&aring; tilgangskontroll til produksjonsarealer og begrenset innsyn til berettigede.</p>
+
+      <h3>Skalert for full utbygging</h3>
+      <p>Anleggsarealet er dimensjonert for 25 CNC-maskiner med tilh&oslash;rende automasjon, materiallagring, metrologilab, teknisk verksted og kontorfasiliteter.</p>
+    </section>
+
+    <!-- ══════════════════ INDUSTRIKLYNGE ══════════════════ -->
+    <section>
+      <div class="section-label">Ekspansjon</div>
+      <h2>Industriklynge V&aring;ler</h2>
+
+      <p>Utover Aurelians eget anlegg er ytterligere <strong>180 m&aring;l (180&nbsp;000&nbsp;m&sup2;) regulert til industriform&aring;l</strong> i umiddelbar n&aelig;rhet. Store deler av arealet forventes byggeklart innen ett &aring;r. Ytterligere arealer i n&aelig;romr&aring;det kan reguleres til industriform&aring;l ved behov.</p>
+
+      <h3>Logistikk og infrastruktur</h3>
+
+      <div class="logistics-strip">
+        <div class="logistics-item">
+          <div class="logistics-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M3 17h1.5L6 9h12l1.5 8H21M6 17a2 2 0 104 0m4 0a2 2 0 104 0" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="logistics-label">Vei</div>
+          <div class="logistics-detail">N&aelig;rhet til E6 og rv. 19</div>
+        </div>
+        <div class="logistics-item">
+          <div class="logistics-icon-wrap">
+            <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="7" rx="1" fill="none" stroke="white" stroke-width="2"/><line x1="2" y1="17" x2="22" y2="17" stroke="white" stroke-width="2"/><line x1="8" y1="10" x2="8" y2="7" stroke="white" stroke-width="2"/><line x1="16" y1="10" x2="16" y2="7" stroke="white" stroke-width="2"/></svg>
+          </div>
+          <div class="logistics-label">Tog</div>
+          <div class="logistics-detail">Jernbaneforbindelse</div>
+        </div>
+        <div class="logistics-item">
+          <div class="logistics-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M3 17 C3 12, 6 6, 12 6 C18 6, 21 12, 21 17" fill="none" stroke="white" stroke-width="2"/><line x1="3" y1="17" x2="21" y2="17" stroke="white" stroke-width="2"/><line x1="7" y1="17" x2="7" y2="19" stroke="white" stroke-width="1.5"/><line x1="17" y1="17" x2="17" y2="19" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+          <div class="logistics-label">Sj&oslash;</div>
+          <div class="logistics-detail">Innenlandshavn Moss og&nbsp;Vestby</div>
+        </div>
+        <div class="logistics-item">
+          <div class="logistics-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M12 3 L20 19 H4 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/><line x1="12" y1="12" x2="12" y2="19" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+          <div class="logistics-label">Flyplass</div>
+          <div class="logistics-detail">Rygge milit&aelig;r flyplass</div>
+        </div>
+        <div class="logistics-item">
+          <div class="logistics-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M13 3 L4 14h7l-1 7 9-11h-7z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="logistics-label">Kraft</div>
+          <div class="logistics-detail">Gode kraftforhold for industri</div>
+        </div>
+      </div>
+
+      <h3>Rekruttering</h3>
+      <p>Regionen har en industriell tradisjon og ligger i rimelig avstand til teknologimilj&oslash;er i Oslo-regionen. Det gir et solid rekrutteringsgrunnlag for b&aring;de CNC-operat&oslash;rer, automasjonsingeni&oslash;rer og programvareutviklere.</p>
+    </section>
+
+    <!-- ══════════════════ PARTNERSKAP ══════════════════ -->
+    <section class="partner-section">
+      <div class="section-label">Partnerskap</div>
+      <h2>Invitasjon til industrielle samarbeidspartnere</h2>
+
+      <p>Aurelian s&oslash;ker industrielle partnere som &oslash;nsker &aring; etablere virksomhet i V&aring;ler-omr&aring;det og investere i utviklingen av en ny norsk industri-hub for forsvarsrelatert produksjon.</p>
+
+      <p>Visjonen er et klyngemilj&oslash; der komplement&aelig;r produksjonskapasitet, spesialistkompetanse og felles infrastruktur samles p&aring; &eacute;tt sted. For forsvarsindustrien betyr samlokalisering kortere interne forsyningslinjer, enklere sikkerhetsh&aring;ndtering og et sterkere grunnlag for nasjonal forsyningssikkerhet.</p>
+
+      <p class="emphasis-line">Vi er i en tidlig fase &mdash; og det er nettopp derfor partnere som kommer inn n&aring; har reell mulighet til &aring; forme milj&oslash;et.</p>
+    </section>
+
+    <!-- ══════════════════ TIDSLINJE ══════════════════ -->
+    <section>
+      <div class="section-label">Tidslinje</div>
+      <h2>N&oslash;kkelmilepæler</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="timeline-date">Q2 2026</div>
+            <div class="timeline-event">Byggeprosjekt start</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="timeline-date">Q3 2026</div>
+            <div class="timeline-event">CNC maskin bestilling</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="timeline-date">Q2 2027</div>
+            <div class="timeline-event">Bygg ferdigstilt</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="timeline-date">Q2 2027</div>
+            <div class="timeline-event">CNC-maskiner levert og installasjon startes</div>
+          </div>
+        </div>
+        <div class="timeline-item active">
+          <div class="timeline-card">
+            <div class="timeline-date">August 2027</div>
+            <div class="timeline-event">Produksjonsstart</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ KONTAKT ══════════════════ -->
+    <section class="contact-section">
+      <div class="section-label">Kontakt</div>
+
+      <div class="contact-layout">
+        <div class="contact-person">
+            <div class="contact-name">Tore Ausland</div>
+            <div class="contact-role">VP Business Development</div>
+            <a class="contact-email" href="mailto:tore@aurelian.no">tore@aurelian.no</a>
+        </div>
+
+        <div class="contact-image">
+          <img src="aurelian_factory.jpg" alt="Aurelian Manufacturing &mdash; V&aring;ler, &Oslash;stfold">
+          <div class="contact-image-caption">Konseptillustrasjon &mdash; Aurelian Manufacturing, V&aring;ler</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer class="doc-footer">
+    <span>Aurelian Manufacturing AS &nbsp;|&nbsp; V&aring;ler, &Oslash;stfold</span>
+    <span>Konfidensielt</span>
+    <span>Februar 2026</span>
+  </footer>
+
+</div>
+
+</body>
+</html>

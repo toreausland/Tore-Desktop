@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handover-rapport — VDR-arbeid 14. februar 2026</title>
+    <style>
+        :root {
+            --red: #F50537;
+            --dark: #2B2B2B;
+            --gray: #6B6B6B;
+            --light: #F5F5F5;
+            --white: #FFFFFF;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Calibri, 'Segoe UI', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--white);
+        }
+
+        /* Cover */
+        .cover {
+            background: var(--dark);
+            color: var(--white);
+            padding: 80px 60px;
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .cover h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .cover .subtitle {
+            font-size: 18px;
+            color: var(--red);
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+        .cover .meta {
+            font-size: 14px;
+            color: #999;
+            line-height: 1.8;
+        }
+        .cover .meta strong { color: var(--white); }
+
+        /* Content area */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 60px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: var(--dark);
+            border-bottom: 3px solid var(--red);
+            padding-bottom: 8px;
+            margin: 48px 0 20px 0;
+        }
+        h3 {
+            font-size: 18px;
+            color: var(--dark);
+            margin: 28px 0 12px 0;
+        }
+        h4 {
+            font-size: 15px;
+            color: var(--gray);
+            margin: 20px 0 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 24px 0;
+            font-size: 14px;
+        }
+        thead th {
+            background: var(--dark);
+            color: var(--white);
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+        tbody td {
+            padding: 8px 14px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+        tbody tr:nth-child(even) { background: var(--light); }
+        tbody tr:hover { background: #EEE; }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-red { background: var(--red); color: white; }
+        .badge-green { background: #2E7D32; color: white; }
+        .badge-yellow { background: #F9A825; color: var(--dark); }
+        .badge-gray { background: #9E9E9E; color: white; }
+
+        /* Stat cards */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .stat-card {
+            background: var(--light);
+            border-left: 4px solid var(--red);
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+        }
+        .stat-card .number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--red);
+        }
+        .stat-card .label {
+            font-size: 13px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        /* Alert boxes */
+        .alert {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+        .alert-red {
+            background: #FFEBEE;
+            border-left: 4px solid var(--red);
+        }
+        .alert-green {
+            background: #E8F5E9;
+            border-left: 4px solid #2E7D32;
+        }
+        .alert-yellow {
+            background: #FFF8E1;
+            border-left: 4px solid #F9A825;
+        }
+
+        /* Lists */
+        ul, ol { margin: 8px 0 16px 24px; }
+        li { margin-bottom: 6px; font-size: 14px; }
+
+        /* Section divider */
+        .divider {
+            height: 1px;
+            background: #E0E0E0;
+            margin: 40px 0;
+        }
+
+        /* Code / file references */
+        code {
+            background: var(--light);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: #999;
+            padding: 30px 60px;
+            font-size: 12px;
+            margin-top: 60px;
+        }
+        .footer strong { color: var(--white); }
+
+        @media print {
+            .cover { min-height: auto; padding: 40px; }
+            .content { padding: 20px 40px; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+    <h1>Handover-rapport</h1>
+    <div class="subtitle">VDR-arbeid med Claude Code &mdash; 14. februar 2026</div>
+    <div class="meta">
+        <strong>Til:</strong> Andr&eacute; Tandberg, CEO<br>
+        <strong>Fra:</strong> Tore Ausland, VP Business Development<br>
+        <strong>Verkt&oslash;y:</strong> Claude Code (Anthropic) &mdash; lokal agent med tilgang til Aurelian-filsystemet<br>
+        <strong>Dato:</strong> 14. februar 2026<br>
+        <strong>Klassifisering:</strong> Internt arbeidsdokument
+    </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<h2>1. Sammendrag</h2>
+
+<p>Over to sesjoner med Claude Code har vi gjennomf&oslash;rt en systematisk opprydding og utvidelse av Aurelians Virtual Data Room (VDR). Arbeidet inkluderer gap-analyse, generering av 8 nye VDR-dokumenter, implementering av kommunikasjonsdisiplin (&sect;2.2), kvalitetsrevisjon av eldre dokumenter, og korrigering av alvorlige tallfeil.</p>
+
+<div class="stats">
+    <div class="stat-card">
+        <div class="number">8</div>
+        <div class="label">Nye VDR-dokumenter generert</div>
+    </div>
+    <div class="stat-card">
+        <div class="number">12</div>
+        <div class="label">Tallfeil korrigert mot REV6</div>
+    </div>
+    <div class="stat-card">
+        <div class="number">11</div>
+        <div class="label">Eldre dokumenter revidert (&sect;2.2)</div>
+    </div>
+    <div class="stat-card">
+        <div class="number">36&rarr;28</div>
+        <div class="label">Tomme VDR-mapper redusert</div>
+    </div>
+</div>
+
+<h2>2. Hva er Claude Code?</h2>
+
+<p>Claude Code er en lokal AI-agent fra Anthropic som kj&oslash;rer direkte p&aring; Tores maskin. Den har <strong>lesetilgang til hele filsystemet</strong> (inkludert OneDrive/VDR), kan opprette og redigere Markdown-filer (.md), og kan analysere bin&aelig;re filer (.docx/.pdf) via PowerShell-ekstraksjon.</p>
+
+<p><strong>Begrensninger:</strong> Claude Code kan <em>ikke</em> generere bin&aelig;re Word-filer (.docx). Alle nye dokumenter er skrevet som .md (Markdown), som kan konverteres til Word via Claude.ai chat, Pandoc, eller manuell kopi.</p>
+
+<h2>3. Hva vi har bygget &mdash; Systemet</h2>
+
+<h3>3.1 Design Manual</h3>
+<p>En komplett designmanual (<code>aurelian-design-manual.md</code>) som definerer Aurelians visuelle identitet for alle dokumenter:</p>
+<ul>
+    <li><strong>Prim&aelig;rfarge:</strong> <span style="color:#F50537; font-weight:700;">#F50537</span> (Pantone 032 C r&oslash;d)</li>
+    <li><strong>Font:</strong> Calibri overalt, Arial kun i diagrammer</li>
+    <li><strong>Tabeller:</strong> M&oslash;rk header (#2B2B2B), alternerende rader, kun horisontale linjer</li>
+    <li><strong>Presentasjoner:</strong> 16:9, svarte cover/closing-slides, hvite content-slides</li>
+</ul>
+
+<h3>3.2 Skills-system</h3>
+<p>6 spesialiserte Claude-skills som sikrer konsistent dokumentproduksjon:</p>
+
+<table>
+    <thead>
+        <tr><th>Skill</th><th>Form&aring;l</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><code>vdr-document-generator</code></td><td>Genererer VDR-dokumenter i riktig format</td></tr>
+        <tr><td><code>financial-model-skill</code></td><td>Finansiell analyse tro mot REV6</td></tr>
+        <tr><td><code>financial-verification-skill</code></td><td>Kryssverifiserer tall mot REV6</td></tr>
+        <tr><td><code>market-analysis-skill</code></td><td>Markedsanalyse med kildehenvisninger</td></tr>
+        <tr><td><code>investor-qa-skill</code></td><td>Forbereder investorsp&oslash;rsm&aring;l/svar</td></tr>
+        <tr><td><code>competitive-benchmark-skill</code></td><td>Konkurranseanalyse med &sect;2.2-disiplin</td></tr>
+    </tbody>
+</table>
+
+<h3>3.3 &sect;2.2 Claims Discipline</h3>
+<p>Et kommunikasjonsrammeverk implementert i alle skills og nye dokumenter:</p>
+<div class="alert alert-yellow">
+    <strong>&sect;2.2-reglene i kortform:</strong><br>
+    1. Skill forsiktig projeksjonsspr&aring;k &mdash; kvalifiser alle fremtidsrettede utsagn<br>
+    2. Atskill observert data fra projeksjoner &mdash; aldri blend fakta og m&aring;l<br>
+    3. Oppgi kilder &mdash; REV6, bransjedata, offentlige kilder<br>
+    4. Unng&aring; absolutte p&aring;stander &mdash; &laquo;vil&raquo;, &laquo;garanterer&raquo;, &laquo;sikrer&raquo;<br>
+    5. Anticip&eacute;r motsp&oslash;rsm&aring;l &mdash; inkluder begrensninger og forutsetninger
+</div>
+
+<h3>3.4 Andr&eacute;s markedsdokument &mdash; CNC Benchmark</h3>
+<p>Andr&eacute; leverte et utkast til konkurranseanalyse/CNC-benchmark. Dette ble implementert som <code>03_Competitive_CNC_Benchmark.md</code> i VDR 03.02, oppdatert for &sect;2.2-disiplin, og integrert som referansedokument p&aring; tvers av VDR-en. Dokumentet:</p>
+<ul>
+    <li>Benchmarker 7 norske HMLV-verksteder (Rogaland Maskinering, Lilaas, Tamek, Uvdal, Aarbakke, TP-Products, &Aring;rdal Maskinering)</li>
+    <li>Dokumenterer observert utnyttelse: 20&ndash;47 % (gjennomsnitt ~30 %)</li>
+    <li>Forklarer strukturelle &aring;rsaker til lav utnyttelse i brownfield-anlegg</li>
+    <li>Brukes n&aring; som kildedokument i Sensitivitetsanalyse, Prisingsmodell, Risikoregister og GTM-strategi</li>
+</ul>
+
+<h2>4. VDR Gap-analyse</h2>
+
+<p>Vi kartla hele VDR-mappestrukturen mot forventet innhold for Seed DD. Resultatet:</p>
+
+<table>
+    <thead>
+        <tr><th>Prioritet</th><th>Antall</th><th>Beskrivelse</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="badge badge-red">KRITISK</span></td>
+            <td>8</td>
+            <td>Dokumenter vi kunne generere umiddelbart &mdash; n&aring; opprettet</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-yellow">VIKTIG</span></td>
+            <td>7</td>
+            <td>Krever reelle signaturer/input (LOI-er, leieavtaler, styreprotokoller)</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-gray">SENERE</span></td>
+            <td>21</td>
+            <td>Ikke kritisk for Seed (f.eks. dataroms-tilgangslogg, ESOP-plan)</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>5. De 8 nye VDR-dokumentene</h2>
+
+<p>Alle er skrevet som .md-filer, f&oslash;lger &sect;2.2, og siterer REV6 som kilde:</p>
+
+<table>
+    <thead>
+        <tr><th>#</th><th>Dokument</th><th>VDR-plassering</th><th>Innhold (kortversjon)</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><strong>Finansieringsplan</strong></td>
+            <td><code>02.02</code></td>
+            <td>3-runde oversikt (Pre-Seed/Seed/Serie&nbsp;A), cap table, bankgjeld 134,3&nbsp;MNOK, exit-scenarier</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><strong>Sensitivitetsanalyse</strong></td>
+            <td><code>02.05</code></td>
+            <td>Utnyttelse/pris/skaleringsmatriser for 5 og 20 CNC, break-even, nedsideanalyse</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><strong>GTM-strategi</strong></td>
+            <td><code>03.04</code></td>
+            <td>3-tier kundesegmentering (Forsvar &gt; Energi &gt; Maritim), GTM-faser, 50/50-modell som salgsverkt&oslash;y</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><strong>Prisings- og inntektsmodell</strong></td>
+            <td><code>03.05</code></td>
+            <td>Inntektsformel, timepris-grunnlag, kostnadsstruktur (~93 MNOK ved 20 CNC), marginprofil</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td><strong>Kvalitetssertifiserings-veikart</strong></td>
+            <td><code>04.05</code></td>
+            <td>ISO 9001 (2027) &rarr; AS9100 (2028) &rarr; AQAP 2110 (2028), implementeringsplaner</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td><strong>Produksjonstidslinje</strong></td>
+            <td><code>04.06</code></td>
+            <td>Seed close &rarr; Produksjonsstart (15&ndash;18 mnd), kritisk sti, buffer/risikomargin</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td><strong>Risikoregister</strong></td>
+            <td><code>04.07</code></td>
+            <td>20 risikoer i 5 kategorier, Top 5 prioritering, CNC resale som sikkerhetsventil</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td><strong>Ansettelsesplan</strong></td>
+            <td><code>06.04</code></td>
+            <td>Sub-line&aelig;r bemanningsmodell, fasevis ansettelsesplan, kompetanseprofiler, rekruttering</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>6. Kritisk feiloppdagelse og korrigering</h2>
+
+<div class="alert alert-red">
+    <strong>Tore oppdaget at Finansieringsplanen avvek fra REV6.</strong> Serie A-bankgjeld sto som 29,5 MNOK &mdash; korrekt verdi er <strong>105 MNOK</strong> (15 CNC &times; 7,0 MNOK). Feilen skyldtes at Claude Code ikke hadde direkte lesetilgang til REV6 .docx-filen da dokumentene ble generert, og baserte seg p&aring; fragmentert kontekst fra andre dokumenter.
+</div>
+
+<h3>6.1 Rot&aring;rsak</h3>
+<p>REV6 er en .docx-fil (bin&aelig;r). Claude Code kunne ikke lese den direkte ved f&oslash;rste generering. Tallene ble hentet fra sammendrag i andre dokumenter, og Seed-logikken (5 MNOK gjeld/CNC) ble feilaktig kopiert til Serie A (korrekt: 7 MNOK gjeld/CNC).</p>
+
+<h3>6.2 Alle korrigerte feil</h3>
+<table>
+    <thead>
+        <tr><th>Dokument</th><th>Felt</th><th>Feil verdi</th><th>REV6-verdi</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Finansieringsplan</td><td>Serie A bankgjeld</td><td>29,5 MNOK</td><td><strong>105 MNOK</strong></td><td><span class="badge badge-green">Rettet</span></td></tr>
+        <tr><td>Finansieringsplan</td><td>Total bankgjeld</td><td>58,8 MNOK</td><td><strong>134,3 MNOK</strong></td><td><span class="badge badge-green">Rettet</span></td></tr>
+        <tr><td>Finansieringsplan</td><td>Serie A totalt</td><td>74,5 MNOK</td><td><strong>150 MNOK</strong></td><td><span class="badge badge-green">Rettet</span></td></tr>
+        <tr><td>Finansieringsplan</td><td>Total kapital</td><td>160,1 MNOK</td><td><strong>235,6 MNOK</strong></td><td><span class="badge badge-green">Rettet</span></td></tr>
+        <tr><td>Finansieringsplan</td><td>Gjeldsandel</td><td>~37 %</td><td><strong>~57 %</strong></td><td><span class="badge badge-green">Rettet</span></td></tr>
+        <tr><td>Produksjonstidslinje</td><td>Serie A i tidslinje</td><td>29,5 MNOK</td><td><strong>105 MNOK</strong></td><td><span class="badge badge-green">Rettet</span></td></tr>
+        <tr><td>Prisingsmodell</td><td>2027 H2 omsetning</td><td>~26 MNOK</td><td><strong>~10,9 MNOK</strong></td><td><span class="badge badge-green">Rettet</span></td></tr>
+        <tr><td>Prisingsmodell</td><td>Faste kostn. 20 CNC</td><td>~36 MNOK</td><td><strong>~67,6 MNOK</strong></td><td><span class="badge badge-green">Rettet</span></td></tr>
+        <tr><td>Prisingsmodell</td><td>Marginprofil-tabell</td><td>Feil split</td><td><strong>Totalkostn. ~93 MNOK</strong></td><td><span class="badge badge-green">Rettet</span></td></tr>
+        <tr><td>GTM-strategi</td><td>Omsetning 2027/2029/2030</td><td>Avrundingsfeil</td><td><strong>REV6 &sect;2.2-verdier</strong></td><td><span class="badge badge-green">Rettet</span></td></tr>
+        <tr><td>Ansettelsesplan</td><td>Admin-antall ved skala</td><td>5 FTE</td><td><strong>4 FTE (fast)</strong></td><td><span class="badge badge-green">Rettet</span></td></tr>
+        <tr><td>Ansettelsesplan</td><td>Operativt per fase</td><td>Lavere enn REV6</td><td><strong>REV6 &sect;1.3b-verdier</strong></td><td><span class="badge badge-green">Rettet</span></td></tr>
+    </tbody>
+</table>
+
+<h3>6.3 L&aelig;rdom</h3>
+<div class="alert alert-green">
+    <strong>Tiltak:</strong> REV6 ble deretter ekstrahert via PowerShell og fullverifisert. Alle 8 dokumenter er n&aring; kryss-sjekket mot REV6 Section 8 &laquo;Validation Checkpoints&raquo; (17 kontrollpunkter). Fremtidig dokumentgenerering m&aring; alltid starte med direkte REV6-ekstraksjon.
+</div>
+
+<h2>7. &sect;2.2-revisjon av eldre Word/PDF-dokumenter</h2>
+
+<p>Vi leste og analyserte 11 eldre .docx-filer i VDR-en for brudd p&aring; &sect;2.2 Claims Discipline. Full rapport ligger i <code>VDR Status/Section_2.2_Revision_Report.md</code>.</p>
+
+<table>
+    <thead>
+        <tr><th>Prioritet</th><th>Antall</th><th>Eksempler</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="badge badge-red">KRITISK</span></td>
+            <td>8 endringer</td>
+            <td>&laquo;Europe's first&raquo;, &laquo;structurally impossible&raquo;, finanstabeller uten projeksjon-markering, REV5-referanser</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-yellow">VIKTIG</span></td>
+            <td>~27 endringer</td>
+            <td>Utnyttelsesintervall kuttet (30-40 % vs korrekt 20-45 %), &laquo;Validated model&raquo;, break-even/exit uten kvalifisering</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-gray">KOSMETISK</span></td>
+            <td>~15 endringer</td>
+            <td>Manglende &laquo;projected&raquo;, &laquo;sikre&raquo; &rarr; &laquo;underst&oslash;tte&raquo;</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>Estimert arbeidstid for manuell Word-redigering: ~2 timer.</strong> Priorit&eacute;r Executive Summary + Investment Teaser f&oslash;rst &mdash; det er dokumentene investorer ser f&oslash;rst.</p>
+
+<h2>8. Gjentakende m&oslash;nstre (fix &eacute;n gang, gj&oslash;r konsistent)</h2>
+
+<table>
+    <thead>
+        <tr><th>M&oslash;nster</th><th>Feil (n&aring;v&aelig;rende)</th><th>Korrekt (&sect;2.2)</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Utnyttelsesintervall</td><td>&laquo;30-40 %&raquo;</td><td>&laquo;20-45 % (CNC Benchmark, VDR 03.02)&raquo;</td></tr>
+        <tr><td>Absolutte p&aring;stander</td><td>&laquo;structurally impossible&raquo;</td><td>&laquo;difficult and capital-intensive&raquo;</td></tr>
+        <tr><td>Hadrian-referanse</td><td>&laquo;Validated model&raquo;</td><td>&laquo;Category signal&raquo;</td></tr>
+        <tr><td>Finanstabeller</td><td>Uten markering</td><td>Overskrift: &laquo;(REV6 projections)&raquo;</td></tr>
+        <tr><td>Break-even</td><td>&laquo;24 % utilization&raquo;</td><td>&laquo;~24 % (REV6 model projection)&raquo;</td></tr>
+        <tr><td>Exit-verdsettelse</td><td>&laquo;2.3 Billion NOK&raquo;</td><td>&laquo;Illustrative: ~2.3B NOK (10&times; EBITDA; REV6)&raquo;</td></tr>
+        <tr><td>Self-funding</td><td>&laquo;Self-funded from 2030&raquo;</td><td>&laquo;Projected self-funding capability from ~2030&raquo;</td></tr>
+        <tr><td>0.8 FTE/CNC</td><td>Presentert som fakta</td><td>&laquo;Design target: 0.8 FTE/CNC at scale&raquo;</td></tr>
+    </tbody>
+</table>
+
+<h2>9. Gjenv&aelig;rende oppgaver</h2>
+
+<table>
+    <thead>
+        <tr><th>#</th><th>Oppgave</th><th>Hvem</th><th>Estimat</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><strong>&sect;2.2-korrigeringer i Word-dokumenter</strong><br>Executive Summary, Investment Teaser, DD Checklist (REV5&rarr;REV6), Founder Valuation, TAM/SAM/SOM</td>
+            <td>Andr&eacute; / Tore</td>
+            <td>~2 timer</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><strong>Konvertere .md-dokumenter til Word</strong><br>8 nye dokumenter m&aring; foreligge som .docx for investorpresentasjon</td>
+            <td>Tore (via Claude.ai)</td>
+            <td>~1 time</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><strong>Signerte dokumenter</strong><br>Mazak LOI, Norbygg leiekontrakt, Advisory agreements, Styreprotokoller</td>
+            <td>Andr&eacute;</td>
+            <td>Pågående</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><strong>Design-revisjoner</strong><br>Alignere alle Word/PPT-dokumenter med designmanualen (Pantone 032 C, Calibri, tabellformat)</td>
+            <td>Tore / Andr&eacute;</td>
+            <td>~3-4 timer</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td><strong>README.md oppdatering</strong><br>VDR README har utdatert statusinfo (viste 41 % readiness)</td>
+            <td>Tore (Claude Code)</td>
+            <td>~15 min</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>10. Filkart &mdash; Hva som finnes hvor</h2>
+
+<h4>Nye .md-dokumenter (VDR)</h4>
+<table>
+    <thead>
+        <tr><th>Fil</th><th>Mappe</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><code>02_Financing_Plan_V1.md</code></td><td><code>02_Financial/2.2_Financing_Plan/</code></td></tr>
+        <tr><td><code>02_Sensitivity_Analysis_V1.md</code></td><td><code>02_Financial/2.5_Sensitivity_Analysis/</code></td></tr>
+        <tr><td><code>03_Go_To_Market_Strategy_V1.md</code></td><td><code>03_Commercial_Market/3.4_Go_To_Market_Strategy/</code></td></tr>
+        <tr><td><code>03_Pricing_Revenue_Model_V1.md</code></td><td><code>03_Commercial_Market/3.5_Pricing_Revenue_Model/</code></td></tr>
+        <tr><td><code>04_Quality_Certification_Roadmap_V1.md</code></td><td><code>04_Technical_Operations/4.5_.../ISO_Roadmap/</code></td></tr>
+        <tr><td><code>04_Production_Timeline_V1.md</code></td><td><code>04_Technical_Operations/4.6_Production_Timeline/</code></td></tr>
+        <tr><td><code>04_Risk_Register_V1.md</code></td><td><code>04_Technical_Operations/4.7_Risk_Register/</code></td></tr>
+        <tr><td><code>06_Key_Hires_Plan_V1.md</code></td><td><code>06_Team/6.4_Key_Hires_Plan/</code></td></tr>
+    </tbody>
+</table>
+
+<h4>Systemfiler (utenfor VDR)</h4>
+<table>
+    <thead>
+        <tr><th>Fil</th><th>Form&aring;l</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><code>VDR Status/Section_2.2_Revision_Report.md</code></td><td>Revisjonsrapport for eldre .docx-filer</td></tr>
+        <tr><td><code>VDR Status/Handover_Report_2026-02-14.html</code></td><td>Denne rapporten</td></tr>
+        <tr><td><code>Aurelian_skills_Claude/*.md</code></td><td>6 Claude-skills med &sect;2.2-oppdatering</td></tr>
+        <tr><td><code>claude-project-instructions.md</code></td><td>Prosjektinstruksjoner for Claude (v18:09)</td></tr>
+        <tr><td><code>Design MAnual/aurelian-design-manual.md</code></td><td>Designmanual v2.0</td></tr>
+    </tbody>
+</table>
+
+<h2>11. Anbefalinger</h2>
+
+<ol>
+    <li><strong>Priorit&eacute;r &sect;2.2-korrigeringer i Executive Summary og Investment Teaser</strong> &mdash; dette er det investorer ser f&oslash;rst. 8 kritiske endringer tar ~30 minutter.</li>
+    <li><strong>Konverter de 8 nye .md-dokumentene til Word</strong> &mdash; Tore har startet dette via Claude.ai chat.</li>
+    <li><strong>Verifiser alltid mot REV6 Section 8</strong> &mdash; 17 checkpoint-verdier som er den endelige sannheten.</li>
+    <li><strong>Bruk Claude Code for fremtidig dokumentgenerering</strong> &mdash; men les REV6 direkte f&oslash;rst (via PowerShell-ekstraksjon).</li>
+</ol>
+
+<div class="divider"></div>
+
+<p style="font-size: 13px; color: var(--gray);">
+    <em>Denne rapporten ble generert av Claude Code p&aring; foresp&oslash;rsel fra Tore Ausland, 14. februar 2026.
+    Alle finansielle tall er hentet fra REV6 (VDR 02.04). Fremtidige anslag er projeksjoner.</em>
+</p>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <strong>Aurelian Manufacturing AS</strong> | Konfidensielt<br>
+    Andr&eacute; Tandberg, CEO &mdash; andre@aurelian.no<br>
+    Tore Ausland, VP Business Development &mdash; tore@aurelian.no
+</div>
+
+</body>
+</html>

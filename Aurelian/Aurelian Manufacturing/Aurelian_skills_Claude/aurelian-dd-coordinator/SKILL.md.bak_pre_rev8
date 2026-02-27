@@ -1,0 +1,253 @@
+---
+name: aurelian-dd-coordinator
+description: Master orchestrator for Aurelian Manufacturing's Due Diligence process across Pre-Seed, Seed, and Series A rounds. Use this skill whenever someone mentions DD preparation, investor due diligence, DD checklist, DD readiness review, data room setup, investor Q&A preparation, or anything related to coordinating the DD process. This is the entry point — if unsure which DD skill to use, start here. Also triggers for "what's missing for DD", "prepare for investor meetings", "DD status", "VDR structure", or any general DD coordination question.
+---
+
+# Aurelian Manufacturing — DD Coordinator
+
+Master orchestration skill for investor Due Diligence. This skill routes DD queries to the right specialist skill and maintains overall DD readiness.
+
+## Critical Context
+
+Aurelian Manufacturing is a **pre-revenue** autonomous CNC manufacturing company targeting Q3 2027 production start. All DD materials must reflect pre-revenue status — focus on assumption validation, not historical performance.
+
+**Master financial source:** *02 Economic Tables & Projections* (VDR 02.04) — use this for ALL numbers. No other financial document has authority when it conflicts with master document.
+
+### READ-BEFORE-USE RULE (ABSOLUTE — NO EXCEPTIONS)
+
+> **Claude does NOT have persistent memory.** The values in this skills file are a COPY of master document, not a replacement. You MUST read the original.
+
+**BEFORE producing any DD material with financial figures:**
+
+1. **READ** the master document PDF: `Aurelian_VDR/02_Financial/2.4_Economic_Tables_Projections/02_Economic_Tables_Projections_REV6.pdf`
+2. **READ** the design manual: `Design MAnual/aurelian-design-manual.md` (for formatting and styling rules)
+3. **VERIFY** values match what you actually read — not what you "remember".
+4. **CONFIRM** the 17 checkpoint values from the master document.
+5. **If you cannot read master document:** STOP and inform the user.
+
+**This check applies for EACH document request within a conversation — not just the first one.**
+
+### REFERENCE FORMAT FOR GENERATED DOCUMENTS (COPY — DO NOT RECONSTRUCT)
+
+> **Rule: Never hardcode a revision number in generated documents (Word, PPT, PDF).** The master document is always the current revision. When a new revision is issued, all documents remain correct without needing updates. File paths retain the revision in the filename because that is the actual file on disk.
+
+**Full reference:** `*02 Economic Tables & Projections* (VDR 02.04)`
+**Inline with section:** `Ref: 02 Economic Tables & Projections, §[number] (VDR 02.04)`
+
+❌ Never in generated docs: any revision number (e.g. "REV6", "REV7"), or "VDR 02.04" alone without document name
+✅ In generated docs: "*02 Economic Tables & Projections* (VDR 02.04)" — NO revision number
+
+**Examples with current values:**
+- Revenue 20 CNC @ 60% = ~315 MNOK → `Ref: 02 Economic Tables & Projections, §5.1 (VDR 02.04)`
+- Seed: 51.3 MNOK equity + 29.3 MNOK debt = 80.6 MNOK total → `Ref: 02 Economic Tables & Projections, §4.1 (VDR 02.04)`
+- Staffing 20 CNC: 16 ops + 4 admin = 20 total → `Ref: 02 Economic Tables & Projections, §1.3b (VDR 02.04)`
+- EBIT 20 CNC @ 60% = ~222.3 MNOK → `Ref: 02 Economic Tables & Projections, §3.6 (VDR 02.04)`
+
+## Fundraising Rounds (
+
+| Round | Amount | Pre-Money | Post-Money | Dilution | Target ROI | Status |
+|-------|--------|-----------|------------|----------|------------|--------|
+| Pre-Seed | 5 MNOK | 25 MNOK | 30 MNOK | 16.7% | ~46.6x | Active |
+| Seed | 51.3 MNOK | 130 MNOK | 181.3 MNOK | 28.30% | ~10.8x | Planning |
+| Series A | 45 MNOK | 250 MNOK | 295 MNOK | 15.25% | ~7.8x | Future |
+
+**Total equity raised (all rounds):** 101.3 MNOK
+**Exit scenario:** 2.3B NOK @ 10x EBITDA
+**Founders retain 50.60% at exit** — strong alignment, control maintained throughout.
+
+## Cap Table (
+
+| Shareholder | Founding | Post PreSeed | Post Seed | Post Serie A |
+|-------------|----------|-------------|-----------|-------------|
+| Eier A (56.25%) | 56.25% | 46.88% | 33.60% | 28.46% |
+| Eier B (33.75%) | 33.75% | 28.13% | 20.16% | 17.08% |
+| Eier C (10.00%) | 10.00% | 8.33% | 5.97% | 5.06% |
+| PreSeed investors | — | 16.67% | 11.95% | 10.12% |
+| Seed investors | — | — | 28.30% | 23.98% |
+| Serie A investors | — | — | — | 15.25% |
+| **Founders total** | **100%** | **83.33%** | **59.74%** | **50.60%** |
+
+## Routing Logic
+
+When a DD question arrives, determine the domain and route:
+
+- **Financial questions** (valuation, revenue model, break-even, CAPEX, sensitivities, ROI) → Use `aurelian-financial-model` skill
+- **Technical questions** (CNC utilization, autonomous ops, suppliers, facility, technology risk) → Use `aurelian-technical-dd` skill
+- **Market questions** (TAM/SAM/SOM, competition, customer pipeline, go-to-market) → Use `aurelian-market-dd` skill
+- **Legal/Corporate questions** (cap table, IP, contracts, governance, compliance) → Use `aurelian-legal-dd` skill
+- **Customer-facing materials** (pricing, RFQ, capabilities, partnership model) → Use `aurelian-customer` skill
+- **Go-to-market execution** (LOIs, pipeline, sales strategy, certifications) → Use `aurelian-gtm` skill
+- **General DD coordination** (checklists, readiness, VDR, timeline) → Continue in this skill
+
+## DD Checklists by Round
+
+### Pre-Seed DD (Light — Founder-Friendly, 2-4 weeks)
+
+Investors at this stage focus on team, concept, and market size.
+
+**Required:**
+- [ ] Corporate structure documentation (shareholders, board composition)
+- [ ] Founder backgrounds (CVs, industry experience, references)
+- [ ] Market research and competitive analysis (Markedsanalyse Master V3)
+- [ ] High-level financial projections (3-year view from master document)
+- [ ] Technology concept validation (Autonomous CNC Validation report)
+- [ ] Key team member commitments (Team & Governance documentation)
+- [ ] Investor pitch deck (V3 — 12 slides)
+
+**Available now:** Pitch Deck V3, Markedsanalyse Master V3, master doc, Comparable Investment Cases, CNC Resale Value Analysis, Team & Governance, Real Estate Strategy
+
+### Seed DD (Institutional VC Standard, 4-8 weeks)
+
+**All Pre-Seed items plus:**
+- [ ] Cap table with pre/post-money per round (from master document)
+- [ ] Detailed financial model (5-7 year, with sensitivities)
+- [ ] Customer discovery evidence (interviews, LOIs) — Physical Robotics LOI exists
+- [ ] Supplier commitments — **GAP: Need Mazak LOI, Norbygg executed lease**
+- [ ] Technology validation report (Autonomous CNC Validation)
+- [ ] Comparable investment cases (Hadrian comparison)
+- [ ] CNC resale value analysis (bank collateral documentation)
+- [ ] Facility plans and timeline (Real Estate Strategy — Norbygg partnership)
+- [ ] Risk register with mitigation strategies
+- [ ] Legal entity documents (articles, shareholder agreement — EXISTS, signed)
+- [ ] Material contracts (employment, advisory, leases)
+- [ ] IP strategy and protection plan
+- [ ] Regulatory compliance roadmap (ISO 9001 → AS9100 → AQAP)
+- [ ] Defence/Energy market research (dedicated research reports)
+
+### Series A DD (Full Diligence, 8-12 weeks)
+
+**All Seed items plus:**
+- [ ] 12+ months operational data (actual utilization, revenue, quality metrics)
+- [ ] Customer contracts and active pipeline
+- [ ] Actual vs projected financials (variance analysis)
+- [ ] Quality certifications achieved (ISO 9001 minimum)
+- [ ] Employee roster and organizational development
+- [ ] Banking relationships and credit facilities
+- [ ] Insurance coverage (liability, property, key person)
+- [ ] Environmental compliance documentation
+
+## Documentation Status
+
+### Available Documents
+| Document | Location | DD Domain |
+|----------|----------|-----------|
+| Investor Pitch V3 | 07_Presentations | All |
+| *02 Economic Tables & Projections* (VDR 02.04) | 02_Financial | All financial |
+| Markedsanalyse Master V3 | 03_Commercial | Market, Financial, Technical |
+| Defence Market Research | 03_Commercial | Market |
+| Energy Market Research | 03_Commercial | Market |
+| Critical Markets Research | 03_Commercial | Market |
+| Market Trends & Projections | 03_Commercial | Market |
+| Comparable Investment Cases (Hadrian) | 03_Commercial | Financial, Market |
+| CNC Resale Value Analysis | 02_Financial | Financial, Technical |
+| Team & Governance Documentation | 06_Team | Legal, Team |
+| Real Estate Strategy (Norbygg) | 04_Technical | Technical, Legal |
+| Autonomous CNC Validation | 04_Technical | Technical |
+| Shareholder Agreement (signed) | 01_Corporate | Legal |
+| Physical Robotics LOI | 03_Commercial | Commercial |
+
+### Critical Gaps (Must fill before Seed DD)
+1. **Additional customer LOIs / MOUs** — Physical Robotics exists, need 2-3 more
+2. **Mazak purchase LOI** — Referenced but not documented
+3. **Norbygg lease agreement** — Referenced but not executed
+4. **IP assignment agreements** — Critical for technical/legal DD
+5. **Detailed financial model (Excel)** — With formulas, not just PDF
+6. **Advisory agreements** — Fredrik, Bjørnar, Andreas
+7. **Monthly cash flow projections** — 2027-2028
+
+### Items Previously Flagged as Gaps but Now Resolved
+- ✅ **Shareholder agreement** — EXISTS (signed, in VDR 01_Corporate)
+- ✅ **Founder vesting schedules** — EXISTS (4-year vesting, 12-month cliff, per Aksjonæravtale §4)
+- ✅ **Physical Robotics LOI** — EXISTS (signed, in VDR)
+
+## Virtual Data Room Structure
+
+The VDR follows this 9-section structure:
+
+```
+/VDR/
+├── 00_Executive_Summary/
+│   ├── Executive Summary (2-page)
+│   ├── Investment Teaser (1-page)
+│   └── Concept Note
+├── 01_Corporate/
+│   ├── 1.1_Registration/ (articles, registration certificate)
+│   ├── 1.2_Ownership/ (shareholder agreement, cap table)
+│   └── 1.3_Board_Governance/ (board minutes, org chart)
+├── 02_Financial/
+│   ├── 2.1_Core_Model/ (MASTER)
+│   ├── 2.2_Financing_Plan/
+│   ├── 2.3_Valuation/
+│   ├── 2.4_Cap_Table/ (pro forma all rounds)
+│   ├── 2.5_Sensitivity_Analysis/
+│   ├── 2.6_Use_of_Funds/
+│   └── 2.7_Bank_Debt/
+├── 03_Commercial/
+│   ├── 3.1_Market_Research/ (Markedsanalyse, sector reports)
+│   ├── 3.2_Competitive_Landscape/
+│   ├── 3.3_Customer_Pipeline/ (LOIs, discovery notes)
+│   ├── 3.4_Go_To_Market_Strategy/
+│   └── 3.5_Pricing_Revenue_Model/
+├── 04_Technical/
+│   ├── 4.1_Technology_Overview/
+│   ├── 4.2_CNC_Equipment/ (specifications, resale analysis)
+│   ├── 4.3_Automation_Architecture/
+│   ├── 4.4_Facility/ (Norbygg strategy, lease)
+│   ├── 4.5_Quality_Certifications/ (ISO roadmap)
+│   ├── 4.6_Production_Timeline/
+│   └── 4.7_Risk_Register/
+├── 05_Legal/
+│   ├── 5.1_IP/
+│   ├── 5.2_Contracts/ (employment, advisory, supplier)
+│   ├── 5.3_Regulatory_Compliance/
+│   └── 5.4_Insurance/
+├── 06_Team/
+│   ├── 6.1_Founders/ (CVs, references)
+│   ├── 6.2_Board_of_Directors/
+│   ├── 6.3_Advisory_Board/
+│   └── 6.4_Key_Hires_Plan/
+├── 07_Presentations/
+│   ├── 7.1_Pitch_Deck/ (V3)
+│   └── 7.2_One_Pagers/
+├── 08_Appendices/
+│   └── Comparable Investment Cases (Hadrian)
+└── 09_NDA/
+    └── NDA template
+```
+
+## Investor Types & Their DD Focus
+
+| Investor Type | Primary Focus | Depth | Timeline |
+|---------------|--------------|-------|----------|
+| Pre-Seed Angels | Team, market, concept | Light | 2-4 weeks |
+| Seed VC | Market, business model, financials | Medium | 4-8 weeks |
+| Series A VC | Financials, operations, scalability | Deep | 8-12 weeks |
+| Strategic Corporate | Technology fit, synergy | Very deep | 12-16 weeks |
+| Family Office | Team integrity, long-term vision | Medium-deep | 6-10 weeks |
+
+## DD Best Practices
+
+**Before DD starts:** Organize VDR, run internal pre-DD with advisors, fill documentation gaps, prepare top-50 Q&A document, set up secure data room.
+
+**During DD:** Respond within 24 hours, track all questions in a log (question, answer, source doc, responder, date), over-communicate, flag issues proactively, maintain single source of truth.
+
+**After DD:** Debrief on questions asked, update documentation, improve VDR for next round, archive all Q&A.
+
+## Red Flags to Avoid
+
+**Financial:** Overly aggressive projections without justification, unrealistic assumptions, missing sensitivity analyses, unclear use of funds, cap table complexity.
+
+**Technical:** Unproven technology without validation, single supplier dependency without backup, unrealistic timeline, no risk mitigation.
+
+**Team:** Founder conflicts or unclear roles, lack of relevant experience, weak advisory board, high turnover.
+
+**Legal:** Unclear IP ownership, no founder vesting, undocumented material agreements, regulatory gaps.
+
+## Key Messages (Consistent across all DD)
+
+1. **55-65% CNC utilization is the design target** — supported by DMG MORI, MAZAK, and Siemens vendor feasibility data for greenfield autonomous operations. master document models gradual ramp from 20% to 65%.
+2. **Sub-linear staffing model** — design target 0.8 FTE/CNC at scale (vs observed industry ~2.5, CNC Benchmark VDR 03.02). Enabled by greenfield design, structurally difficult to retrofit in brownfield.
+3. **Pre-revenue by design** — Q3 2027 production target. All projections are forward-looking based on master document model assumptions.
+4. **Capital discipline** — Phased investment (5 CNC Seed + 15 CNC Serie A in 3×5 tranches), leased facility, strong CNC resale values (50-70% range).
+5. **European positioning** — Addresses same structural need as Hadrian (~$1.6B valuation), with different capital philosophy (101.3 MNOK total planned equity vs $200M+).
+6. **Founders retain control** — 50.60% ownership post-Serie A, active board participation.

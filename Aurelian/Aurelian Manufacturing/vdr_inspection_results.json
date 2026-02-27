@@ -1,0 +1,1113 @@
+{
+  "total": 29,
+  "green": 12,
+  "amber": 15,
+  "red": 2,
+  "results": [
+    {
+      "file": "DRAFT_00_Executive_Summary.docx",
+      "rel_path": "00_Executive_Summary\\DRAFT_00_Executive_Summary.docx",
+      "score": 4,
+      "max": 9,
+      "fonts": [
+        "Calibri",
+        "Times New Roman"
+      ],
+      "colors": [
+        "0563C1",
+        "1A1A1A",
+        "1F4D78",
+        "2E74B5",
+        "D5E8F0",
+        "FF3E00"
+      ],
+      "header": "Aurelian Manufacturing  |  VDR 00 — Executive Summary  |  Konfidensielt",
+      "footer": "Aurelian Manufacturing — Executive Summary  |  Side  1",
+      "title": "AURELIAN MANUFACTURING",
+      "tables": 2,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": false,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": false,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "DRAFT_00_Investment_Teaser_OnePager.docx",
+      "rel_path": "00_Executive_Summary\\DRAFT_00_Investment_Teaser_OnePager.docx",
+      "score": 4,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1A1A1A",
+        "1F4D78",
+        "2E74B5",
+        "666666",
+        "D5E8F0",
+        "FF3E00"
+      ],
+      "header": "Aurelian Manufacturing  |  Investment Teaser  |  Konfidensielt",
+      "footer": "Aurelian Manufacturing AS  |  andre@aurelian.no  |  tore@aurelian.no",
+      "title": "AURELIAN MANUFACTURING",
+      "tables": 4,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": false,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": false,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "01_Shareholders_Agreement.docx",
+      "rel_path": "01_Corporate_Governance\\1.2_Shareholder_Agreements\\01_Shareholders_Agreement.docx",
+      "score": 4,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1A1A1A",
+        "1F4D78",
+        "2E74B5",
+        "666666",
+        "D5E8F0",
+        "F5F5F5",
+        "FF3E00"
+      ],
+      "header": "Aurelian Manufacturing  |  VDR 01 — Corporate  |  Konfidensielt",
+      "footer": "Aksjonæravtale — Aurelian Manufacturing AS  |  Side",
+      "title": "AKSJONÆRAVTALE",
+      "tables": 3,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": false,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": false,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "01_Org_Chart_Current.docx",
+      "rel_path": "01_Corporate_Governance\\1.5_Organizational_Structure\\01_Org_Chart_Current.docx",
+      "score": 5,
+      "max": 9,
+      "fonts": [
+        "Calibri",
+        "Courier New"
+      ],
+      "colors": [
+        "0563C1",
+        "1A1A1A",
+        "1F4D78",
+        "2E74B5",
+        "666666",
+        "CCCCCC",
+        "F5F5F5",
+        "FF3E00",
+        "FFFFFF"
+      ],
+      "header": "Aurelian Manufacturing  |  VDR 01 — Corporate  |  Confidential",
+      "footer": "Organizational Chart — Current  |  Page",
+      "title": "ORGANIZATIONAL CHART",
+      "tables": 5,
+      "dark_headers": false,
+      "alt_rows": true,
+      "confidential": false,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": false,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": true,
+        "References section": false
+      }
+    },
+    {
+      "file": "01_Acceleration_Terms_Double_Trigger.docx",
+      "rel_path": "01_Corporate_Governance\\1.6_Founder_Vesting\\01_Acceleration_Terms_Double_Trigger.docx",
+      "score": 5,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1A1A1A",
+        "1F4D78",
+        "2E74B5",
+        "666666",
+        "D5E8F0",
+        "F5F5F5",
+        "FF3E00"
+      ],
+      "header": "DRAFT —  Aurelian Manufacturing  |  VDR 01 — Corporate  |  Konfidensielt",
+      "footer": "Acceleration Terms — Aurelian Manufacturing AS  |  Side",
+      "title": "AKSELERASJONS-",
+      "tables": 3,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": false,
+      "references": true,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": false,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": true
+      }
+    },
+    {
+      "file": "02_Model_Assumptions_Valuation.docx",
+      "rel_path": "02_Financial\\2.1_Financial_Model\\02_Model_Assumptions_Valuation.docx",
+      "score": 5,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1A1A1A",
+        "1F4D78",
+        "2E74B5",
+        "333333",
+        "FF3E00",
+        "FFFFFF"
+      ],
+      "header": "Aurelian Manufacturing  |  VDR 02 — Financial  |  Konfidensielt",
+      "footer": "Confidential — Page",
+      "title": "Aurelian Manufacturing",
+      "tables": 2,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": true,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "02_Financing_Plan_V3.docx",
+      "rel_path": "02_Financial\\2.2_Financing_Plan\\02_Financing_Plan_V3.docx",
+      "score": 8,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2B2B2B",
+        "2E74B5",
+        "6B6B6B",
+        "F50537",
+        "F5F5F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian  Manufacturing",
+      "footer": "KONFIDENSIELT 1 Februar 2026",
+      "title": "Finansieringsplan",
+      "tables": 9,
+      "dark_headers": true,
+      "alt_rows": true,
+      "confidential": true,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": true,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": true,
+        "Alternating row shading": true,
+        "References section": false
+      }
+    },
+    {
+      "file": "02_Founder_Contribution_PreSeed_Valuation_1.docx",
+      "rel_path": "02_Financial\\2.3_Valuation_Basis\\02_Founder_Contribution_PreSeed_Valuation_1.docx",
+      "score": 5,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2E74B5",
+        "333333",
+        "555555",
+        "999999",
+        "CCCCCC",
+        "F5F5F5",
+        "FF3E00",
+        "FFFFFF"
+      ],
+      "header": "Aurelian Manufacturing — Founder Contribution &  PreSeed  Valuation Basis",
+      "footer": "Confidential  — Page  1",
+      "title": "Aurelian Manufacturing",
+      "tables": 13,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": true,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "02_Valuation_Methodology_V2.docx",
+      "rel_path": "02_Financial\\2.3_Valuation_Basis\\02_Valuation_Methodology_V2.docx",
+      "score": 9,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2B2B2B",
+        "2E74B5",
+        "6B6B6B",
+        "F50537",
+        "F5F5F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian  Manufacturing",
+      "footer": "CONFIDENTIAL Side  2 February 2026 — REV6",
+      "title": "Aurelian Manufacturing",
+      "tables": 5,
+      "dark_headers": true,
+      "alt_rows": true,
+      "confidential": true,
+      "references": true,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": true,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": true,
+        "Alternating row shading": true,
+        "References section": true
+      }
+    },
+    {
+      "file": "02_CAPEX_Breakdown_By_Phase.docx",
+      "rel_path": "02_Financial\\2.4_Economic_Tables_Projections\\02_CAPEX_Breakdown_By_Phase.docx",
+      "score": 1,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "000000",
+        "0563C1",
+        "1F4D78",
+        "2E74B5",
+        "333333",
+        "666666",
+        "999999",
+        "FF3E00",
+        "FFFFFF"
+      ],
+      "header": "",
+      "footer": "",
+      "title": "Aurelian Manufacturing",
+      "tables": 8,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": false,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": false,
+        "Header says Aurelian": false,
+        "Footer present": false,
+        "CONFIDENTIAL label": false,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "02_Economic_Tables_Projections_REV6.docx",
+      "rel_path": "02_Financial\\2.4_Economic_Tables_Projections\\02_Economic_Tables_Projections_REV6.docx",
+      "score": 5,
+      "max": 9,
+      "fonts": [
+        "Calibri",
+        "Consolas"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2E74B5",
+        "333333",
+        "666666",
+        "999999",
+        "FF3E00",
+        "FFFFFF"
+      ],
+      "header": "Aurelian Manufacturing — Economic Tables & Projections",
+      "footer": "Confidential  — Page  1",
+      "title": "Aurelian Manufacturing",
+      "tables": 30,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": true,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "02_Sensitivity_Analysis_V4.docx",
+      "rel_path": "02_Financial\\2.5_Sensitivity_Analysis\\02_Sensitivity_Analysis_V4.docx",
+      "score": 9,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2B2B2B",
+        "2E74B5",
+        "6B6B6B",
+        "F50537",
+        "F5F5F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian  Manufacturing",
+      "footer": "CONFIDENTIAL Side  2 February  2026",
+      "title": "Aurelian Manufacturing",
+      "tables": 9,
+      "dark_headers": true,
+      "alt_rows": true,
+      "confidential": true,
+      "references": true,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": true,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": true,
+        "Alternating row shading": true,
+        "References section": true
+      }
+    },
+    {
+      "file": "03_Market_Trends_Projections.docx",
+      "rel_path": "03_Commercial_Market\\3.1_Market_Analysis\\03_Market_Trends_Projections.docx",
+      "score": 8,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2B2B2B",
+        "2E74B5",
+        "6B6B6B",
+        "F50537",
+        "F5F5F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian Manufacturing Macro Market Analysis — VDR 03.05",
+      "footer": "CONFIDENTIAL Page  2 February  2026",
+      "title": "V D R   D O C U M E N T   0 3 . 0 5",
+      "tables": 19,
+      "dark_headers": true,
+      "alt_rows": true,
+      "confidential": true,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": true,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": true,
+        "Alternating row shading": true,
+        "References section": false
+      }
+    },
+    {
+      "file": "03_TAM_SAM_SOM_Norwegian_Nordic.docx",
+      "rel_path": "03_Commercial_Market\\3.1_Market_Analysis\\03_TAM_SAM_SOM_Norwegian_Nordic.docx",
+      "score": 4,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1A1A1A",
+        "1A4A7A",
+        "1F4D78",
+        "2E74B5",
+        "666666",
+        "856404",
+        "F0F7FF",
+        "FF3E00",
+        "FFF3CD",
+        "FFF8F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian Manufacturing  |  03 TAM SAM SOM  |  Konfidensielt",
+      "footer": "Side  1",
+      "title": "TAM / SAM / SOM",
+      "tables": 10,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": false,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": false,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "03.02_CNC_Benchmark_Competitive_Landscape_V1.docx",
+      "rel_path": "03_Commercial_Market\\3.2_Competitive_Landscape\\03.02_CNC_Benchmark_Competitive_Landscape_V1.docx",
+      "score": 9,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2B2B2B",
+        "2E74B5",
+        "6B6B6B",
+        "F50537",
+        "F5F5F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian Manufacturing",
+      "footer": "CONFIDENTIAL \t Page  \tFebruary 2026",
+      "title": "Aurelian Manufacturing",
+      "tables": 8,
+      "dark_headers": true,
+      "alt_rows": true,
+      "confidential": true,
+      "references": true,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": true,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": true,
+        "Alternating row shading": true,
+        "References section": true
+      }
+    },
+    {
+      "file": "03_Go_To_Market_Strategy_V1.docx",
+      "rel_path": "03_Commercial_Market\\3.4_Go_To_Market_Strategy\\03_Go_To_Market_Strategy_V1.docx",
+      "score": 9,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2B2B2B",
+        "2E74B5",
+        "6B6B6B",
+        "F50537",
+        "F5F5F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian  Manufacturing",
+      "footer": "CONFIDENTIAL Side  2 February  2026",
+      "title": "Aurelian Manufacturing",
+      "tables": 9,
+      "dark_headers": true,
+      "alt_rows": true,
+      "confidential": true,
+      "references": true,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": true,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": true,
+        "Alternating row shading": true,
+        "References section": true
+      }
+    },
+    {
+      "file": "03_Pricing_Revenue_Model_V1.docx",
+      "rel_path": "03_Commercial_Market\\3.5_Pricing_Revenue_Model\\03_Pricing_Revenue_Model_V1.docx",
+      "score": 9,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2B2B2B",
+        "2E74B5",
+        "6B6B6B",
+        "F50537",
+        "F5F5F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian  Manufacturing",
+      "footer": "CONFIDENTIAL Side  2 February  2026",
+      "title": "Aurelian Manufacturing",
+      "tables": 11,
+      "dark_headers": true,
+      "alt_rows": true,
+      "confidential": true,
+      "references": true,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": true,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": true,
+        "Alternating row shading": true,
+        "References section": true
+      }
+    },
+    {
+      "file": "04_Concept_Note_Strategic_Production_Node.docx",
+      "rel_path": "04_Technical_Operations\\4.1_Technology_Overview\\04_Concept_Note_Strategic_Production_Node.docx",
+      "score": 0,
+      "max": 9,
+      "fonts": [
+        "Aptos",
+        "Arial"
+      ],
+      "colors": [
+        "272727",
+        "2F5496",
+        "404040",
+        "595959"
+      ],
+      "header": "",
+      "footer": "",
+      "title": "Aurelian Manufacturing",
+      "tables": 0,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": false,
+      "references": false,
+      "checks": {
+        "Calibri font": false,
+        "Aurelian Red (#F50537)": false,
+        "Header present": false,
+        "Header says Aurelian": false,
+        "Footer present": false,
+        "CONFIDENTIAL label": false,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "04_CNC_Equipment_Specifications_Mazak_4.docx",
+      "rel_path": "04_Technical_Operations\\4.2_CNC_Equipment\\Specifications\\04_CNC_Equipment_Specifications_Mazak_4.docx",
+      "score": 4,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1A1A1A",
+        "1F4D78",
+        "2E74B5",
+        "666666",
+        "FF3E00",
+        "FFF3E0",
+        "FFFFFF"
+      ],
+      "header": "Aurelian  Manufacturing   |   VDR 04 —  Technical  |    Confidential",
+      "footer": "04_CNC_Equipment_Specifications_ Mazak  |   Page  1",
+      "title": "CNC Equipment Specifications",
+      "tables": 12,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": false,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": false,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "04_Facility_Strategy_Norbygg_v3.docx",
+      "rel_path": "04_Technical_Operations\\4.4_Facility_Real_Estate\\Architectural_Plans\\04_Facility_Strategy_Norbygg_v3.docx",
+      "score": 9,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2B2B2B",
+        "2E74B5",
+        "6B6B6B",
+        "F50537",
+        "F5F5F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian  Manufacturing Facility   Strategy  —  Norbygg   Partnership",
+      "footer": "CONFIDENTIAL Page  2 15  February  2026",
+      "title": "VDR DOCUMENT 04",
+      "tables": 17,
+      "dark_headers": true,
+      "alt_rows": true,
+      "confidential": true,
+      "references": true,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": true,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": true,
+        "Alternating row shading": true,
+        "References section": true
+      }
+    },
+    {
+      "file": "04_Quality_Certification_Roadmap_V1.docx",
+      "rel_path": "04_Technical_Operations\\4.5_Quality_Certifications\\ISO_Roadmap\\04_Quality_Certification_Roadmap_V1.docx",
+      "score": 9,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2B2B2B",
+        "2E74B5",
+        "6B6B6B",
+        "F50537",
+        "F5F5F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian  Manufacturing",
+      "footer": "CONFIDENTIAL Side  2 February  2026",
+      "title": "Aurelian Manufacturing",
+      "tables": 10,
+      "dark_headers": true,
+      "alt_rows": true,
+      "confidential": true,
+      "references": true,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": true,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": true,
+        "Alternating row shading": true,
+        "References section": true
+      }
+    },
+    {
+      "file": "04_Production_Timeline_V1.docx",
+      "rel_path": "04_Technical_Operations\\4.6_Production_Timeline\\04_Production_Timeline_V1.docx",
+      "score": 9,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2B2B2B",
+        "2E74B5",
+        "6B6B6B",
+        "F50537",
+        "F5F5F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian  Manufacturing",
+      "footer": "CONFIDENTIAL Side  2 February  2026",
+      "title": "Aurelian Manufacturing",
+      "tables": 6,
+      "dark_headers": true,
+      "alt_rows": true,
+      "confidential": true,
+      "references": true,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": true,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": true,
+        "Alternating row shading": true,
+        "References section": true
+      }
+    },
+    {
+      "file": "04_Risk_Register_V1.docx",
+      "rel_path": "04_Technical_Operations\\4.7_Risk_Register\\04_Risk_Register_V1.docx",
+      "score": 9,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2B2B2B",
+        "2E74B5",
+        "6B6B6B",
+        "F50537",
+        "F5F5F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian  Manufacturing",
+      "footer": "CONFIDENTIAL Side  2 February  2026",
+      "title": "Aurelian Manufacturing",
+      "tables": 9,
+      "dark_headers": true,
+      "alt_rows": true,
+      "confidential": true,
+      "references": true,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": true,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": true,
+        "Alternating row shading": true,
+        "References section": true
+      }
+    },
+    {
+      "file": "05_IP_Assignment_Agreements_Founders.docx",
+      "rel_path": "05_Legal_IP\\5.1_IP_Ownership\\IP_Assignment_Agreements\\05_IP_Assignment_Agreements_Founders.docx",
+      "score": 4,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1A1A1A",
+        "1F4D78",
+        "2E74B5",
+        "666666",
+        "F5F5F5",
+        "FF3E00"
+      ],
+      "header": "Aurelian Manufacturing  |  VDR 05 — Legal  |  Konfidensielt",
+      "footer": "IP Assignment Declaration — Aurelian Manufacturing AS  |  Side",
+      "title": "IP ASSIGNMENT DECLARATION",
+      "tables": 0,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": false,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": false,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "02_Founder_Contribution_PreSeed_Valuation_1.docx",
+      "rel_path": "06_Team\\6.1_Founders\\02_Founder_Contribution_PreSeed_Valuation_1.docx",
+      "score": 5,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2E74B5",
+        "333333",
+        "555555",
+        "999999",
+        "CCCCCC",
+        "F5F5F5",
+        "FF3E00",
+        "FFFFFF"
+      ],
+      "header": "Aurelian Manufacturing — Founder Contribution &  PreSeed  Valuation Basis",
+      "footer": "Confidential  — Page  1",
+      "title": "Aurelian Manufacturing",
+      "tables": 13,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": true,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "06_ToreAusland_CV.docx",
+      "rel_path": "06_Team\\6.1_Founders\\CVs\\06_ToreAusland_CV.docx",
+      "score": 4,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1A1A1A",
+        "1F4D78",
+        "2E74B5",
+        "666666",
+        "FF3E00"
+      ],
+      "header": "Aurelian Manufacturing  |  VDR 06 — Team  |  Konfidensielt",
+      "footer": "Tore Ausland — CV  |  Side",
+      "title": "TORE AUSLAND",
+      "tables": 2,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": false,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": false,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "06_Key_Hires_Plan_V1.docx",
+      "rel_path": "06_Team\\6.4_Key_Hires_Plan\\06_Key_Hires_Plan_V1.docx",
+      "score": 9,
+      "max": 9,
+      "fonts": [
+        "Calibri"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2B2B2B",
+        "2E74B5",
+        "6B6B6B",
+        "F50537",
+        "F5F5F5",
+        "FFFFFF"
+      ],
+      "header": "Aurelian  Manufacturing",
+      "footer": "CONFIDENTIAL Side  2 February  2026",
+      "title": "Aurelian Manufacturing",
+      "tables": 11,
+      "dark_headers": true,
+      "alt_rows": true,
+      "confidential": true,
+      "references": true,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": true,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": true,
+        "Alternating row shading": true,
+        "References section": true
+      }
+    },
+    {
+      "file": "DRAFT_07_Investment_Teaser_OnePager.docx",
+      "rel_path": "07_Presentations\\7.2_One_Pagers\\DRAFT_07_Investment_Teaser_OnePager.docx",
+      "score": 4,
+      "max": 9,
+      "fonts": [
+        "Calibri",
+        "Times New Roman"
+      ],
+      "colors": [
+        "0563C1",
+        "1A1A1A",
+        "1F4D78",
+        "2E74B5",
+        "666666",
+        "D5E8F0",
+        "FF3E00"
+      ],
+      "header": "Aurelian  Manufacturing   |   Investment  Teaser   |   Konfidensielt",
+      "footer": "Aurelian Manufacturing AS  |  andre@aurelian.no  |  tore@aurelian.no",
+      "title": "AURELIAN MANUFACTURING",
+      "tables": 4,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": false,
+      "references": false,
+      "checks": {
+        "Calibri font": true,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": false,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    },
+    {
+      "file": "08_DD_Checklist_PreSeed_Round.docx",
+      "rel_path": "08_DD_Process_Internal\\8.1_Checklists\\08_DD_Checklist_PreSeed_Round.docx",
+      "score": 4,
+      "max": 9,
+      "fonts": [
+        "Arial"
+      ],
+      "colors": [
+        "0563C1",
+        "1F4D78",
+        "2E74B5",
+        "2E7D32",
+        "333333",
+        "999999",
+        "FF3E00",
+        "FFFFFF"
+      ],
+      "header": "Aurelian Manufacturing AS  |  VDR Document 08  |  February 2026",
+      "footer": "Confidential — Page",
+      "title": "Aurelian Manufacturing",
+      "tables": 7,
+      "dark_headers": false,
+      "alt_rows": false,
+      "confidential": true,
+      "references": false,
+      "checks": {
+        "Calibri font": false,
+        "Aurelian Red (#F50537)": false,
+        "Header present": true,
+        "Header says Aurelian": true,
+        "Footer present": true,
+        "CONFIDENTIAL label": true,
+        "Dark header tables (#2B2B2B)": false,
+        "Alternating row shading": false,
+        "References section": false
+      }
+    }
+  ]
+}

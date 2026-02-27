@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AM-QMS-2026-0042-001 | QMS Certificates</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 2.5cm;
+        }
+
+        body {
+            font-family: Calibri, sans-serif;
+            color: #2B2B2B;
+            background: #FFFFFF;
+            font-size: 11pt;
+            line-height: 1.15;
+            padding: 0;
+        }
+
+        .page-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 0 2.5cm 2.5cm 2.5cm;
+        }
+
+        /* ── Top red accent bar ── */
+        .top-bar {
+            width: 100%;
+            height: 3pt;
+            background: #F50537;
+            margin-bottom: 0;
+        }
+
+        /* ── Document header ── */
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20pt 2.5cm 12pt 2.5cm;
+            border-bottom: 0.5pt solid #D3D3D3;
+        }
+
+        .doc-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10pt;
+        }
+
+        .logo-stars {
+            font-size: 14pt;
+            color: #F50537;
+            letter-spacing: 2px;
+        }
+
+        .company-name {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2B2B2B;
+        }
+
+        .doc-header-right {
+            text-align: right;
+            font-size: 9pt;
+            color: #6B6B6B;
+        }
+
+        /* ── Title block ── */
+        .title-block {
+            padding: 24pt 0 12pt 0;
+            text-align: center;
+        }
+
+        .title-block h1 {
+            font-size: 22pt;
+            font-weight: bold;
+            color: #2B2B2B;
+            margin-bottom: 4pt;
+        }
+
+        .title-block .doc-subtitle {
+            font-size: 13pt;
+            font-weight: bold;
+            font-style: italic;
+            color: #F50537;
+            margin-bottom: 6pt;
+        }
+
+        .title-block .doc-number {
+            font-size: 11pt;
+            color: #6B6B6B;
+        }
+
+        /* ── Red accent divider ── */
+        .accent-divider {
+            width: 80mm;
+            height: 2pt;
+            background: #F50537;
+            margin: 8pt auto 20pt auto;
+        }
+
+        /* ── Section headings ── */
+        h2 {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #F50537;
+            margin: 24pt 0 8pt 0;
+        }
+
+        h3 {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #2B2B2B;
+            margin: 18pt 0 6pt 0;
+        }
+
+        p {
+            margin-bottom: 6pt;
+            line-height: 1.3;
+        }
+
+        /* ── Info panel ── */
+        .info-panel {
+            background: #F5F5F5;
+            padding: 12pt;
+            border-left: 3pt solid #F50537;
+            margin-bottom: 16pt;
+        }
+
+        .info-panel h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #F50537;
+            text-transform: uppercase;
+            margin: 0 0 6pt 0;
+            letter-spacing: 0.5px;
+        }
+
+        .info-panel table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-panel td {
+            font-size: 9.5pt;
+            padding: 2pt 0;
+            vertical-align: top;
+        }
+
+        .info-panel td:first-child {
+            color: #6B6B6B;
+            width: 35%;
+            padding-right: 8pt;
+        }
+
+        .info-panel td:last-child {
+            color: #2B2B2B;
+            font-weight: bold;
+        }
+
+        /* ── Certificate cards ── */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20pt;
+            margin: 16pt 0 24pt 0;
+        }
+
+        .cert-card {
+            border: 1pt solid #D3D3D3;
+            border-radius: 4px;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+
+        .cert-card-header {
+            background: #2B2B2B;
+            padding: 14pt 16pt;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cert-card-header h3 {
+            color: #FFFFFF;
+            font-size: 13pt;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .cert-standard {
+            font-size: 10pt;
+            color: #FFFFFF;
+            font-weight: normal;
+            opacity: 0.7;
+            margin-top: 2pt;
+        }
+
+        .cert-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5pt;
+            background: #F50537;
+            color: #FFFFFF;
+            font-size: 9pt;
+            font-weight: bold;
+            padding: 4pt 10pt;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .cert-status-badge .dot {
+            width: 6pt;
+            height: 6pt;
+            background: #FFFFFF;
+            border-radius: 50%;
+        }
+
+        .cert-card-body {
+            padding: 16pt;
+            background: #FFFFFF;
+        }
+
+        .cert-card-body .cert-body-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .cert-detail-group {
+            padding: 8pt 12pt 8pt 0;
+        }
+
+        .cert-detail-group:nth-child(even) {
+            padding: 8pt 0 8pt 12pt;
+            border-left: 0.5pt solid #D3D3D3;
+        }
+
+        .cert-detail-label {
+            font-size: 8.5pt;
+            color: #6B6B6B;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3pt;
+        }
+
+        .cert-detail-value {
+            font-size: 10.5pt;
+            color: #2B2B2B;
+            font-weight: bold;
+        }
+
+        .cert-detail-value.mono {
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 10pt;
+            color: #2B2B2B;
+        }
+
+        .cert-scope {
+            padding: 12pt 0 0 0;
+            margin-top: 12pt;
+            border-top: 0.5pt solid #D3D3D3;
+        }
+
+        .cert-scope .cert-detail-label {
+            margin-bottom: 4pt;
+        }
+
+        .cert-scope .cert-scope-text {
+            font-size: 10pt;
+            color: #2B2B2B;
+            font-style: italic;
+            line-height: 1.35;
+        }
+
+        /* ── Certification body watermark ── */
+        .cert-card-footer {
+            background: #F5F5F5;
+            padding: 10pt 16pt;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 0.5pt solid #D3D3D3;
+        }
+
+        .cert-body-logo {
+            display: flex;
+            align-items: center;
+            gap: 8pt;
+        }
+
+        .cert-body-logo-placeholder {
+            width: 36pt;
+            height: 36pt;
+            background: #2B2B2B;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 7pt;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        .cert-body-info {
+            font-size: 9pt;
+            color: #6B6B6B;
+        }
+
+        .cert-body-info strong {
+            color: #2B2B2B;
+            display: block;
+            font-size: 10pt;
+        }
+
+        .cert-accreditation {
+            font-size: 8.5pt;
+            color: #6B6B6B;
+            text-align: right;
+        }
+
+        .cert-accreditation strong {
+            color: #2B2B2B;
+        }
+
+        /* ── Summary table ── */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9.5pt;
+            margin: 12pt 0 20pt 0;
+        }
+
+        .summary-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            padding: 8pt;
+            text-align: left;
+            font-size: 9pt;
+        }
+
+        .summary-table tbody td {
+            padding: 7pt 8pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+            vertical-align: top;
+        }
+
+        .summary-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        .summary-table tbody tr:nth-child(odd) {
+            background: #FFFFFF;
+        }
+
+        .status-active {
+            display: inline-flex;
+            align-items: center;
+            gap: 4pt;
+            font-size: 9pt;
+            font-weight: bold;
+            color: #2B2B2B;
+        }
+
+        .status-active .dot-green {
+            width: 7pt;
+            height: 7pt;
+            background: #28a745;
+            border-radius: 50%;
+        }
+
+        /* ── Notes section ── */
+        .notes-list {
+            margin: 8pt 0 16pt 0;
+            padding-left: 20pt;
+        }
+
+        .notes-list li {
+            font-size: 9.5pt;
+            margin-bottom: 4pt;
+            color: #2B2B2B;
+        }
+
+        .notes-list li strong {
+            color: #F50537;
+        }
+
+        /* ── Footer ── */
+        .doc-footer {
+            margin-top: 30pt;
+            padding-top: 8pt;
+            border-top: 0.5pt solid #6B6B6B;
+            display: flex;
+            justify-content: space-between;
+            font-size: 8pt;
+            color: #6B6B6B;
+        }
+
+        .doc-footer .confidential {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── Print styles ── */
+        @media print {
+            body {
+                padding: 0;
+            }
+            .page-container {
+                padding: 0;
+                max-width: none;
+            }
+            .doc-header {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .cert-card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top red accent bar -->
+<div class="top-bar"></div>
+
+<!-- Document header -->
+<div class="doc-header">
+    <div class="doc-header-left">
+        <span class="logo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="company-name">Aurelian Manufacturing</span>
+    </div>
+    <div class="doc-header-right">
+        Aurelian Manufacturing AS<br>
+        Industriveien 12, 1531 Moss, Norway
+    </div>
+</div>
+
+<div class="page-container">
+
+    <!-- Title block -->
+    <div class="title-block">
+        <h1>QMS Certificates</h1>
+        <div class="doc-subtitle">MRB Section 2 &mdash; Manufacturing Record Book</div>
+        <div class="accent-divider"></div>
+        <div class="doc-number">
+            Document No: <strong>AM-QMS-2026-0042-001</strong> &nbsp;|&nbsp;
+            Rev: <strong>0</strong> &nbsp;|&nbsp;
+            Date: <strong>12 February 2026</strong>
+        </div>
+    </div>
+
+    <!-- Project information panel -->
+    <div class="info-panel">
+        <h3>Project Reference</h3>
+        <table>
+            <tr><td>Client:</td><td>Nordic Subsea Solutions AS</td></tr>
+            <tr><td>Purchase Order:</td><td>NSS-PO-2026-0042</td></tr>
+            <tr><td>Project:</td><td>Barents Sea Development Phase 2 (NSS-PRJ-BS2024)</td></tr>
+            <tr><td>Product:</td><td>Subsea Connector Assembly, Size 300 (Upfacing), Super Duplex UNS S32750</td></tr>
+            <tr><td>Tag / Serial:</td><td>NSS-BSP2-SCA-001 / AM-BSP2-300-001</td></tr>
+        </table>
+    </div>
+
+    <!-- Introduction -->
+    <h2>1. Purpose</h2>
+    <p>
+        This section of the Manufacturing Record Book (MRB) provides copies and summaries of the current
+        quality management system certifications held by Aurelian Manufacturing AS. These certifications
+        confirm the company's compliance with applicable international standards for quality, environmental,
+        health &amp; safety, and welding quality management.
+    </p>
+    <p>
+        All certificates listed below are current and valid as of the date of this document. Full certificate
+        copies are attached to the physical MRB package.
+    </p>
+
+    <!-- Certificate overview table -->
+    <h2>2. Certificate Summary</h2>
+
+    <table class="summary-table">
+        <thead>
+            <tr>
+                <th style="width: 16%;">Standard</th>
+                <th style="width: 22%;">Title</th>
+                <th style="width: 18%;">Certificate No.</th>
+                <th style="width: 13%;">Issued By</th>
+                <th style="width: 18%;">Validity Period</th>
+                <th style="width: 13%;">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>ISO 9001:2015</strong></td>
+                <td>Quality Management Systems</td>
+                <td style="font-family: Consolas, monospace; font-size: 8.5pt;">QMS-NO-2024-08821</td>
+                <td>DNV GL</td>
+                <td>15 Mar 2024 &ndash; 14 Mar 2027</td>
+                <td><span class="status-active"><span class="dot-green"></span> Active</span></td>
+            </tr>
+            <tr>
+                <td><strong>ISO 14001:2015</strong></td>
+                <td>Environmental Management Systems</td>
+                <td style="font-family: Consolas, monospace; font-size: 8.5pt;">EMS-NO-2024-04412</td>
+                <td>DNV GL</td>
+                <td>15 Mar 2024 &ndash; 14 Mar 2027</td>
+                <td><span class="status-active"><span class="dot-green"></span> Active</span></td>
+            </tr>
+            <tr>
+                <td><strong>ISO 45001:2018</strong></td>
+                <td>Occupational Health &amp; Safety</td>
+                <td style="font-family: Consolas, monospace; font-size: 8.5pt;">OHS-NO-2024-03358</td>
+                <td>DNV GL</td>
+                <td>15 Mar 2024 &ndash; 14 Mar 2027</td>
+                <td><span class="status-active"><span class="dot-green"></span> Active</span></td>
+            </tr>
+            <tr>
+                <td><strong>ISO 3834-2:2021</strong></td>
+                <td>Quality Requirements for Fusion Welding</td>
+                <td style="font-family: Consolas, monospace; font-size: 8.5pt;">WLD-NO-2023-11204</td>
+                <td>DNV GL</td>
+                <td>01 Sep 2023 &ndash; 31 Aug 2026</td>
+                <td><span class="status-active"><span class="dot-green"></span> Active</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Certificate cards -->
+    <h2>3. Certificate Details</h2>
+
+    <div class="cert-grid">
+
+        <!-- Certificate 1: ISO 9001 -->
+        <div class="cert-card">
+            <div class="cert-card-header">
+                <div>
+                    <h3>ISO 9001:2015</h3>
+                    <div class="cert-standard">Quality Management Systems</div>
+                </div>
+                <div class="cert-status-badge">
+                    <span class="dot"></span>
+                    Active
+                </div>
+            </div>
+            <div class="cert-card-body">
+                <div class="cert-body-grid">
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Certificate Number</div>
+                        <div class="cert-detail-value mono">QMS-NO-2024-08821</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Certified Organization</div>
+                        <div class="cert-detail-value">Aurelian Manufacturing AS</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Valid From</div>
+                        <div class="cert-detail-value">15 March 2024</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Valid Until</div>
+                        <div class="cert-detail-value">14 March 2027</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Certification Body</div>
+                        <div class="cert-detail-value">DNV GL (Det Norske Veritas)</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Registered Address</div>
+                        <div class="cert-detail-value">Industriveien 12, 1531 Moss, Norway</div>
+                    </div>
+                </div>
+                <div class="cert-scope">
+                    <div class="cert-detail-label">Scope of Certification</div>
+                    <div class="cert-scope-text">
+                        Design, manufacturing, and testing of precision-machined components and subsea equipment
+                        for the oil &amp; gas, defense, and aerospace industries.
+                    </div>
+                </div>
+            </div>
+            <div class="cert-card-footer">
+                <div class="cert-body-logo">
+                    <div class="cert-body-logo-placeholder">DNV<br>GL</div>
+                    <div class="cert-body-info">
+                        <strong>DNV GL &mdash; Business Assurance</strong>
+                        Veritasveien 1, 1363 H&oslash;vik, Norway
+                    </div>
+                </div>
+                <div class="cert-accreditation">
+                    <strong>Accreditation</strong><br>
+                    Norwegian Accreditation (NA)<br>
+                    Accreditation No: MSYS 002
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate 2: ISO 14001 -->
+        <div class="cert-card">
+            <div class="cert-card-header">
+                <div>
+                    <h3>ISO 14001:2015</h3>
+                    <div class="cert-standard">Environmental Management Systems</div>
+                </div>
+                <div class="cert-status-badge">
+                    <span class="dot"></span>
+                    Active
+                </div>
+            </div>
+            <div class="cert-card-body">
+                <div class="cert-body-grid">
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Certificate Number</div>
+                        <div class="cert-detail-value mono">EMS-NO-2024-04412</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Certified Organization</div>
+                        <div class="cert-detail-value">Aurelian Manufacturing AS</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Valid From</div>
+                        <div class="cert-detail-value">15 March 2024</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Valid Until</div>
+                        <div class="cert-detail-value">14 March 2027</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Certification Body</div>
+                        <div class="cert-detail-value">DNV GL (Det Norske Veritas)</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Registered Address</div>
+                        <div class="cert-detail-value">Industriveien 12, 1531 Moss, Norway</div>
+                    </div>
+                </div>
+                <div class="cert-scope">
+                    <div class="cert-detail-label">Scope of Certification</div>
+                    <div class="cert-scope-text">
+                        Environmental management for the design, manufacturing, and testing of precision-machined
+                        components and subsea equipment. Includes waste management, emissions control, and
+                        environmental impact assessment processes at the Moss manufacturing facility.
+                    </div>
+                </div>
+            </div>
+            <div class="cert-card-footer">
+                <div class="cert-body-logo">
+                    <div class="cert-body-logo-placeholder">DNV<br>GL</div>
+                    <div class="cert-body-info">
+                        <strong>DNV GL &mdash; Business Assurance</strong>
+                        Veritasveien 1, 1363 H&oslash;vik, Norway
+                    </div>
+                </div>
+                <div class="cert-accreditation">
+                    <strong>Accreditation</strong><br>
+                    Norwegian Accreditation (NA)<br>
+                    Accreditation No: MSYS 002
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate 3: ISO 45001 -->
+        <div class="cert-card">
+            <div class="cert-card-header">
+                <div>
+                    <h3>ISO 45001:2018</h3>
+                    <div class="cert-standard">Occupational Health &amp; Safety Management Systems</div>
+                </div>
+                <div class="cert-status-badge">
+                    <span class="dot"></span>
+                    Active
+                </div>
+            </div>
+            <div class="cert-card-body">
+                <div class="cert-body-grid">
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Certificate Number</div>
+                        <div class="cert-detail-value mono">OHS-NO-2024-03358</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Certified Organization</div>
+                        <div class="cert-detail-value">Aurelian Manufacturing AS</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Valid From</div>
+                        <div class="cert-detail-value">15 March 2024</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Valid Until</div>
+                        <div class="cert-detail-value">14 March 2027</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Certification Body</div>
+                        <div class="cert-detail-value">DNV GL (Det Norske Veritas)</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Registered Address</div>
+                        <div class="cert-detail-value">Industriveien 12, 1531 Moss, Norway</div>
+                    </div>
+                </div>
+                <div class="cert-scope">
+                    <div class="cert-detail-label">Scope of Certification</div>
+                    <div class="cert-scope-text">
+                        Occupational health and safety management for all manufacturing, machining, welding,
+                        testing, and assembly operations. Includes hazard identification, risk assessment,
+                        and incident management at the Moss production facility.
+                    </div>
+                </div>
+            </div>
+            <div class="cert-card-footer">
+                <div class="cert-body-logo">
+                    <div class="cert-body-logo-placeholder">DNV<br>GL</div>
+                    <div class="cert-body-info">
+                        <strong>DNV GL &mdash; Business Assurance</strong>
+                        Veritasveien 1, 1363 H&oslash;vik, Norway
+                    </div>
+                </div>
+                <div class="cert-accreditation">
+                    <strong>Accreditation</strong><br>
+                    Norwegian Accreditation (NA)<br>
+                    Accreditation No: MSYS 002
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate 4: ISO 3834-2 -->
+        <div class="cert-card">
+            <div class="cert-card-header">
+                <div>
+                    <h3>ISO 3834-2:2021</h3>
+                    <div class="cert-standard">Quality Requirements for Fusion Welding of Metallic Materials</div>
+                </div>
+                <div class="cert-status-badge">
+                    <span class="dot"></span>
+                    Active
+                </div>
+            </div>
+            <div class="cert-card-body">
+                <div class="cert-body-grid">
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Certificate Number</div>
+                        <div class="cert-detail-value mono">WLD-NO-2023-11204</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Certified Organization</div>
+                        <div class="cert-detail-value">Aurelian Manufacturing AS</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Valid From</div>
+                        <div class="cert-detail-value">01 September 2023</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Valid Until</div>
+                        <div class="cert-detail-value">31 August 2026</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Certification Body</div>
+                        <div class="cert-detail-value">DNV GL (Det Norske Veritas)</div>
+                    </div>
+                    <div class="cert-detail-group">
+                        <div class="cert-detail-label">Registered Address</div>
+                        <div class="cert-detail-value">Industriveien 12, 1531 Moss, Norway</div>
+                    </div>
+                </div>
+                <div class="cert-scope">
+                    <div class="cert-detail-label">Scope of Certification</div>
+                    <div class="cert-scope-text">
+                        Comprehensive quality requirements for fusion welding of metallic materials per EN ISO 3834-2.
+                        Covers GTAW (TIG), GMAW (MIG/MAG), SMAW, and SAW processes for carbon steel, stainless steel,
+                        duplex and super duplex stainless steel, and nickel-based alloys.
+                    </div>
+                </div>
+            </div>
+            <div class="cert-card-footer">
+                <div class="cert-body-logo">
+                    <div class="cert-body-logo-placeholder">DNV<br>GL</div>
+                    <div class="cert-body-info">
+                        <strong>DNV GL &mdash; Business Assurance</strong>
+                        Veritasveien 1, 1363 H&oslash;vik, Norway
+                    </div>
+                </div>
+                <div class="cert-accreditation">
+                    <strong>Accreditation</strong><br>
+                    Norwegian Accreditation (NA)<br>
+                    Accreditation No: MSYS 012
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Notes -->
+    <h2>4. Notes</h2>
+    <ul class="notes-list">
+        <li><strong>Certificate Copies:</strong> Full copies of all certificates listed above are included as appendices to the physical MRB package. Digital copies are available in the Aurelian Manufacturing document management system (DMS).</li>
+        <li><strong>Surveillance Audits:</strong> All certifications are subject to annual surveillance audits by DNV GL. The most recent surveillance audit was completed on 18 September 2025 with no major non-conformances identified.</li>
+        <li><strong>ISO 3834-2 Renewal:</strong> The ISO 3834-2:2021 welding quality certification is scheduled for renewal audit in June 2026. Aurelian Manufacturing confirms the certification will remain active through the duration of this project.</li>
+        <li><strong>Responsible Welding Coordinator (RWC):</strong> Mr. Thomas Bergstr&oslash;m, IWE (International Welding Engineer), serves as the designated Responsible Welding Coordinator per ISO 3834-2 requirements.</li>
+        <li><strong>Verification:</strong> Certificate validity may be independently verified through the DNV GL certificate portal at <em>certificatechecker.dnv.com</em>.</li>
+    </ul>
+
+    <!-- Prepared by -->
+    <h2>5. Document Prepared By</h2>
+    <div class="info-panel" style="margin-top: 8pt;">
+        <table>
+            <tr><td>Prepared By:</td><td>Karin Svendsen, QA Manager</td></tr>
+            <tr><td>Department:</td><td>Quality Assurance</td></tr>
+            <tr><td>Date:</td><td>12 February 2026</td></tr>
+            <tr><td>Reference ITP:</td><td>AM-ITP-2026-0042-001 Rev 1</td></tr>
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="doc-footer">
+        <span class="confidential">Confidential</span>
+        <span>AM-QMS-2026-0042-001 Rev 0</span>
+        <span>Page 1 of 1</span>
+    </div>
+
+</div>
+
+</body>
+</html>

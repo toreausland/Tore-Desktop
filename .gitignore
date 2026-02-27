@@ -1,8 +1,7 @@
 # Ekskluder store zip-filer som overstiger GitHub grense
 Tore Div/Aurelian ref files/wetransfer_3d-filer-mazak_2025-11-24_1706.zip
 
-# Ekskluder Aurelian-mappen
-Aurelian/
+# Aurelian-mappen er nå inkludert
 
 # Ekskluder zip-filer på skrivebordet
 *.zip

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AM-PTC-2026-0042-001 | Hydrostatic Pressure Test Certificate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 2.5cm;
+        }
+
+        body {
+            font-family: Calibri, sans-serif;
+            color: #2B2B2B;
+            background: #FFFFFF;
+            font-size: 11pt;
+            line-height: 1.15;
+            padding: 0;
+        }
+
+        .page-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 0 2.5cm 2.5cm 2.5cm;
+        }
+
+        /* ── Top red accent bar ── */
+        .top-bar {
+            width: 100%;
+            height: 3pt;
+            background: #F50537;
+            margin-bottom: 0;
+        }
+
+        /* ── Document header ── */
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20pt 2.5cm 12pt 2.5cm;
+            border-bottom: 0.5pt solid #D3D3D3;
+        }
+
+        .doc-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10pt;
+        }
+
+        .logo-stars {
+            font-size: 14pt;
+            color: #F50537;
+            letter-spacing: 2px;
+        }
+
+        .company-name {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2B2B2B;
+        }
+
+        .doc-header-right {
+            text-align: right;
+            font-size: 9pt;
+            color: #6B6B6B;
+        }
+
+        /* ── Title block ── */
+        .title-block {
+            padding: 24pt 0 12pt 0;
+            text-align: center;
+        }
+
+        .title-block h1 {
+            font-size: 22pt;
+            font-weight: bold;
+            color: #2B2B2B;
+            margin-bottom: 4pt;
+        }
+
+        .title-block .doc-subtitle {
+            font-size: 13pt;
+            font-weight: bold;
+            font-style: italic;
+            color: #F50537;
+            margin-bottom: 6pt;
+        }
+
+        .title-block .doc-number {
+            font-size: 11pt;
+            color: #6B6B6B;
+        }
+
+        /* ── Red accent divider ── */
+        .accent-divider {
+            width: 80mm;
+            height: 2pt;
+            background: #F50537;
+            margin: 8pt auto 20pt auto;
+        }
+
+        /* ── Info panels ── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12pt;
+            margin-bottom: 20pt;
+        }
+
+        .info-panel {
+            background: #F5F5F5;
+            padding: 12pt;
+            border-left: 3pt solid #F50537;
+        }
+
+        .info-panel h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #F50537;
+            text-transform: uppercase;
+            margin-bottom: 6pt;
+            letter-spacing: 0.5px;
+        }
+
+        .info-panel table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-panel td {
+            font-size: 9.5pt;
+            padding: 2pt 0;
+            vertical-align: top;
+        }
+
+        .info-panel td:first-child {
+            color: #6B6B6B;
+            width: 40%;
+            padding-right: 8pt;
+        }
+
+        .info-panel td:last-child {
+            color: #2B2B2B;
+            font-weight: bold;
+        }
+
+        /* ── Section headings ── */
+        h2 {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #F50537;
+            margin: 24pt 0 8pt 0;
+        }
+
+        h3.section-heading {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #2B2B2B;
+            margin: 18pt 0 6pt 0;
+        }
+
+        p {
+            margin-bottom: 6pt;
+            line-height: 1.3;
+        }
+
+        /* ── Callout box ── */
+        .callout {
+            background: #F5F5F5;
+            border-left: 3pt solid #F50537;
+            padding: 10pt 14pt;
+            margin: 10pt 0;
+            font-size: 10pt;
+        }
+
+        /* ── Equipment / conditions panel ── */
+        .equip-panel {
+            background: #F5F5F5;
+            padding: 12pt 16pt;
+            border-left: 3pt solid #F50537;
+            margin-bottom: 16pt;
+        }
+
+        .equip-panel h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #F50537;
+            text-transform: uppercase;
+            margin-bottom: 8pt;
+            letter-spacing: 0.5px;
+        }
+
+        .equip-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6pt 20pt;
+            font-size: 9.5pt;
+        }
+
+        .equip-grid .lbl {
+            color: #6B6B6B;
+            font-size: 8.5pt;
+        }
+
+        .equip-grid .val {
+            font-weight: bold;
+            color: #2B2B2B;
+        }
+
+        /* ── Tables ── */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+            margin: 8pt 0 16pt 0;
+        }
+
+        .data-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 8.5pt;
+            padding: 8pt 6pt;
+            text-align: left;
+            border-bottom: none;
+            white-space: nowrap;
+        }
+
+        .data-table thead th.center-col {
+            text-align: center;
+        }
+
+        .data-table thead th.right-col {
+            text-align: right;
+        }
+
+        .data-table tbody td {
+            padding: 6pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+            vertical-align: top;
+            font-size: 9pt;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        .data-table tbody tr:nth-child(odd) {
+            background: #FFFFFF;
+        }
+
+        .data-table tbody td.num {
+            text-align: right;
+        }
+
+        .data-table tbody td.center {
+            text-align: center;
+        }
+
+        /* ── Pressure readings table — highlight first/last rows ── */
+        .data-table tbody tr.row-start td {
+            border-top: 2pt solid #F50537;
+        }
+
+        .data-table tbody tr.row-end td {
+            border-bottom: 2pt solid #F50537;
+        }
+
+        /* ── Results summary panel ── */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12pt;
+            margin: 12pt 0 20pt 0;
+        }
+
+        .result-card {
+            background: #F5F5F5;
+            padding: 14pt;
+            text-align: center;
+        }
+
+        .result-card .result-label {
+            font-size: 8.5pt;
+            color: #6B6B6B;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4pt;
+        }
+
+        .result-card .result-value {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #2B2B2B;
+        }
+
+        .result-card .result-criteria {
+            font-size: 8.5pt;
+            color: #6B6B6B;
+            margin-top: 2pt;
+        }
+
+        .result-card.pass .result-value {
+            color: #2B8C2B;
+        }
+
+        /* ── PASSED stamp ── */
+        .test-stamp {
+            margin: 24pt auto;
+            text-align: center;
+        }
+
+        .test-stamp .stamp-box {
+            display: inline-block;
+            border: 3pt solid #2B8C2B;
+            padding: 16pt 40pt;
+            text-align: center;
+        }
+
+        .test-stamp .stamp-title {
+            font-size: 10pt;
+            color: #6B6B6B;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6pt;
+        }
+
+        .test-stamp .stamp-result {
+            font-size: 26pt;
+            font-weight: bold;
+            color: #2B8C2B;
+            letter-spacing: 3px;
+        }
+
+        .test-stamp .stamp-detail {
+            font-size: 9pt;
+            color: #6B6B6B;
+            margin-top: 6pt;
+        }
+
+        /* ── Result badges (for inline use) ── */
+        .result-pass {
+            display: inline-block;
+            background: #2B8C2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 8pt;
+            padding: 2pt 8pt;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Lists ── */
+        .doc-list {
+            margin: 8pt 0 16pt 0;
+            padding-left: 20pt;
+        }
+
+        .doc-list li {
+            font-size: 9.5pt;
+            margin-bottom: 4pt;
+            color: #2B2B2B;
+            line-height: 1.3;
+        }
+
+        /* ── Approval signatures ── */
+        .approval-section {
+            margin-top: 30pt;
+            page-break-inside: avoid;
+        }
+
+        .approval-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .approval-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 9.5pt;
+            padding: 8pt;
+            text-align: left;
+        }
+
+        .approval-table tbody td {
+            padding: 10pt 8pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+            font-size: 9.5pt;
+            vertical-align: bottom;
+        }
+
+        .approval-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        .signature-line {
+            display: block;
+            width: 120pt;
+            border-bottom: 1pt solid #2B2B2B;
+            margin-top: 18pt;
+        }
+
+        /* ── Revision history ── */
+        .rev-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+            margin: 8pt 0 20pt 0;
+        }
+
+        .rev-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            padding: 6pt 8pt;
+            text-align: left;
+        }
+
+        .rev-table tbody td {
+            padding: 6pt 8pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+        }
+
+        .rev-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        /* ── Footer ── */
+        .doc-footer {
+            margin-top: 30pt;
+            padding-top: 8pt;
+            border-top: 0.5pt solid #6B6B6B;
+            display: flex;
+            justify-content: space-between;
+            font-size: 8pt;
+            color: #6B6B6B;
+        }
+
+        .doc-footer .confidential {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── Print styles ── */
+        @media print {
+            body {
+                padding: 0;
+            }
+            .page-container {
+                padding: 0;
+                max-width: none;
+            }
+            .doc-header {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top red accent bar -->
+<div class="top-bar"></div>
+
+<!-- Document header -->
+<div class="doc-header">
+    <div class="doc-header-left">
+        <span class="logo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="company-name">Aurelian Manufacturing</span>
+    </div>
+    <div class="doc-header-right">
+        Aurelian Manufacturing AS<br>
+        Industriveien 12, 1531 Moss, Norway
+    </div>
+</div>
+
+<div class="page-container">
+
+    <!-- Title block -->
+    <div class="title-block">
+        <h1>Hydrostatic Pressure Test Certificate</h1>
+        <div class="doc-subtitle">MRB Section 18 &mdash; FAT Report &amp; Test Certificate</div>
+        <div class="accent-divider"></div>
+        <div class="doc-number">
+            Document No: <strong>AM-PTC-2026-0042-001</strong> &nbsp;|&nbsp;
+            Rev: <strong>0</strong> &nbsp;|&nbsp;
+            Date: <strong>04 June 2026</strong>
+        </div>
+    </div>
+
+    <!-- Project & product information panels -->
+    <div class="info-grid">
+        <div class="info-panel">
+            <h3>Project Information</h3>
+            <table>
+                <tr><td>Client:</td><td>Nordic Subsea Solutions AS</td></tr>
+                <tr><td>Client Address:</td><td>Forusbeen 35, 4033 Stavanger, Norway</td></tr>
+                <tr><td>Purchase Order:</td><td>NSS-PO-2026-0042</td></tr>
+                <tr><td>Project:</td><td>Barents Sea Development Phase 2</td></tr>
+                <tr><td>Project No:</td><td>NSS-PRJ-BS2024</td></tr>
+            </table>
+        </div>
+        <div class="info-panel">
+            <h3>Product Information</h3>
+            <table>
+                <tr><td>Product:</td><td>Subsea Connector Assembly</td></tr>
+                <tr><td>Size / Type:</td><td>300 (Upfacing)</td></tr>
+                <tr><td>Material:</td><td>Super Duplex UNS S32750</td></tr>
+                <tr><td>Tag Number:</td><td>NSS-BSP2-SCA-001</td></tr>
+                <tr><td>Serial Number:</td><td>AM-BSP2-300-001</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Test reference -->
+    <h2>1. Test Reference</h2>
+    <div class="callout">
+        <strong>Test Procedure:</strong> AM-PTP-2026-0042-001 Rev 1 &nbsp;&nbsp;|&nbsp;&nbsp;
+        <strong>ITP Item:</strong> 150 (Hold Point) &nbsp;&nbsp;|&nbsp;&nbsp;
+        <strong>Test Date:</strong> 04 June 2026
+    </div>
+
+    <div class="info-grid" style="margin-top: 12pt;">
+        <div class="info-panel">
+            <h3>Test Personnel</h3>
+            <table>
+                <tr><td>Test Engineer:</td><td>Magnus Strand</td></tr>
+                <tr><td>Role:</td><td>Aurelian Manufacturing &mdash; Test Engineer</td></tr>
+            </table>
+        </div>
+        <div class="info-panel">
+            <h3>Client Witness</h3>
+            <table>
+                <tr><td>NSS Witness:</td><td>Marte Lindgren</td></tr>
+                <tr><td>Role:</td><td>Nordic Subsea Solutions &mdash; QA Manager</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Test equipment -->
+    <h2>2. Test Equipment</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Equipment</th>
+                <th>Type</th>
+                <th>Serial No</th>
+                <th>Cal. Cert No</th>
+                <th>Cal. Due</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Pressure Gauge 1</strong></td>
+                <td>Bourdon 0&ndash;600 bar</td>
+                <td>PG-2024-112</td>
+                <td>CAL-2026-PG-112</td>
+                <td>October 2026</td>
+            </tr>
+            <tr>
+                <td><strong>Pressure Gauge 2</strong></td>
+                <td>Digital 0&ndash;700 bar</td>
+                <td>PG-2025-045</td>
+                <td>CAL-2026-PG-045</td>
+                <td>December 2026</td>
+            </tr>
+            <tr>
+                <td><strong>Chart Recorder</strong></td>
+                <td>Endress+Hauser</td>
+                <td>CR-2023-008</td>
+                <td>CAL-2026-CR-008</td>
+                <td>November 2026</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Environmental conditions -->
+    <h2>3. Environmental Conditions</h2>
+    <div class="equip-panel">
+        <h3>Conditions at Time of Test</h3>
+        <div class="equip-grid">
+            <div>
+                <div class="lbl">Air Temperature</div>
+                <div class="val">19&deg;C</div>
+            </div>
+            <div>
+                <div class="lbl">Water Temperature</div>
+                <div class="val">18&deg;C</div>
+            </div>
+            <div>
+                <div class="lbl">Weather / Location</div>
+                <div class="val">Indoor (controlled environment)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test parameters -->
+    <h2>4. Test Parameters</h2>
+    <div class="info-grid">
+        <div class="info-panel">
+            <h3>Pressure Data</h3>
+            <table>
+                <tr><td>Design Pressure:</td><td>345 barg</td></tr>
+                <tr><td>Test Pressure:</td><td>517 barg (1.5 &times; DP)</td></tr>
+                <tr><td>Hold Duration:</td><td>30 minutes</td></tr>
+            </table>
+        </div>
+        <div class="info-panel">
+            <h3>Test Medium</h3>
+            <table>
+                <tr><td>Medium:</td><td>Clean fresh water</td></tr>
+                <tr><td>Additive:</td><td>200 ppm biocide inhibitor</td></tr>
+                <tr><td>Safety Relief Valve:</td><td>Set at 545 barg</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pressure readings -->
+    <h2>5. Pressure Readings During Hold Period</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th class="center-col">Time (min)</th>
+                <th class="right-col">Gauge 1 (bar)</th>
+                <th class="right-col">Gauge 2 (bar)</th>
+                <th class="right-col">Water Temp (&deg;C)</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="row-start">
+                <td class="center"><strong>0 (start)</strong></td>
+                <td class="num">517.2</td>
+                <td class="num">517.4</td>
+                <td class="num">18.0</td>
+                <td>Hold started &mdash; pump isolated</td>
+            </tr>
+            <tr>
+                <td class="center">5</td>
+                <td class="num">517.1</td>
+                <td class="num">517.3</td>
+                <td class="num">18.1</td>
+                <td>No leaks observed</td>
+            </tr>
+            <tr>
+                <td class="center">10</td>
+                <td class="num">517.0</td>
+                <td class="num">517.2</td>
+                <td class="num">18.1</td>
+                <td>No leaks observed</td>
+            </tr>
+            <tr>
+                <td class="center">15</td>
+                <td class="num">516.9</td>
+                <td class="num">517.1</td>
+                <td class="num">18.2</td>
+                <td>No leaks observed</td>
+            </tr>
+            <tr>
+                <td class="center">20</td>
+                <td class="num">516.8</td>
+                <td class="num">517.0</td>
+                <td class="num">18.2</td>
+                <td>No leaks observed</td>
+            </tr>
+            <tr>
+                <td class="center">25</td>
+                <td class="num">516.7</td>
+                <td class="num">516.9</td>
+                <td class="num">18.3</td>
+                <td>No leaks observed</td>
+            </tr>
+            <tr class="row-end">
+                <td class="center"><strong>30 (end)</strong></td>
+                <td class="num">516.6</td>
+                <td class="num">516.8</td>
+                <td class="num">18.3</td>
+                <td>Hold complete &mdash; depressurisation commenced</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="callout">
+        <strong>Pressure drop (Gauge 1):</strong> 517.2 &minus; 516.6 = 0.6 bar &nbsp;&nbsp;|&nbsp;&nbsp;
+        <strong>Percentage:</strong> 0.12% of test pressure &nbsp;&nbsp;|&nbsp;&nbsp;
+        <strong>Acceptance criterion:</strong> &lt; 1% &nbsp;&nbsp;|&nbsp;&nbsp;
+        <strong>Result:</strong> <span class="result-pass">Pass</span>
+    </div>
+
+    <!-- Results summary -->
+    <h2>6. Results Summary</h2>
+
+    <div class="results-grid">
+        <div class="result-card pass">
+            <div class="result-label">Visual Inspection During Hold</div>
+            <div class="result-value">No Leaks Detected</div>
+            <div class="result-criteria">All joints, welds, and connections inspected under pressure</div>
+        </div>
+        <div class="result-card pass">
+            <div class="result-label">Pressure Drop</div>
+            <div class="result-value">0.12%</div>
+            <div class="result-criteria">Acceptance: &lt; 1% &mdash; 0.6 bar over 30 minutes</div>
+        </div>
+        <div class="result-card pass">
+            <div class="result-label">Post-Test Visual Inspection</div>
+            <div class="result-value">No Deformation</div>
+            <div class="result-criteria">No permanent deformation, cracking, or damage observed</div>
+        </div>
+        <div class="result-card pass">
+            <div class="result-label">Overall Verdict</div>
+            <div class="result-value">PASSED</div>
+            <div class="result-criteria">All acceptance criteria met per AM-PTP-2026-0042-001 Rev 1</div>
+        </div>
+    </div>
+
+    <!-- PASSED stamp -->
+    <div class="test-stamp">
+        <div class="stamp-box">
+            <div class="stamp-title">Hydrostatic Pressure Test</div>
+            <div class="stamp-result">PASSED</div>
+            <div class="stamp-detail">
+                Test Pressure: 517 barg &nbsp;|&nbsp; Hold: 30 min &nbsp;|&nbsp; Drop: 0.12%<br>
+                Date: 04 June 2026 &nbsp;|&nbsp; Witnessed by NSS
+            </div>
+        </div>
+    </div>
+
+    <!-- Certification statement -->
+    <h2>7. Certification Statement</h2>
+    <div class="callout">
+        We hereby certify that the hydrostatic pressure test of the Subsea Connector Assembly (Tag: NSS-BSP2-SCA-001, Serial: AM-BSP2-300-001) was performed in accordance with test procedure AM-PTP-2026-0042-001 Rev 1 and the requirements of ASME BPVC Section VIII Division 1. The test was conducted at 517 barg (1.5 &times; design pressure of 345 barg) with a hold time of 30 minutes. No leaks, permanent deformation, or other defects were observed. The assembly has satisfactorily passed the hydrostatic pressure test.
+    </div>
+
+    <!-- Revision history -->
+    <h2>8. Revision History</h2>
+    <table class="rev-table">
+        <thead>
+            <tr>
+                <th style="width: 60pt;">Rev</th>
+                <th style="width: 100pt;">Date</th>
+                <th>Description of Change</th>
+                <th style="width: 100pt;">Prepared By</th>
+                <th style="width: 100pt;">Approved By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>0</td>
+                <td>04 June 2026</td>
+                <td>Initial issue &mdash; hydrostatic test completed and accepted</td>
+                <td>M. Strand</td>
+                <td>K. Svendsen</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Approval signatures -->
+    <h2>9. Approval Signatures</h2>
+    <div class="approval-section">
+        <table class="approval-table">
+            <thead>
+                <tr>
+                    <th style="width: 26%;">Role</th>
+                    <th style="width: 22%;">Name</th>
+                    <th style="width: 26%;">Signature</th>
+                    <th style="width: 26%;">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Test Engineer</strong></td>
+                    <td>Magnus Strand</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>04 June 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>QC Inspector</strong></td>
+                    <td>Ingrid Haugen</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>04 June 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>Aurelian QA Manager</strong></td>
+                    <td>Karin Svendsen</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>04 June 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>NSS Witness (QA Manager)</strong></td>
+                    <td>Marte Lindgren</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>04 June 2026</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="doc-footer">
+        <span class="confidential">Confidential</span>
+        <span>AM-PTC-2026-0042-001 Rev 0</span>
+        <span>Page 1 of 1</span>
+    </div>
+
+</div>
+
+</body>
+</html>

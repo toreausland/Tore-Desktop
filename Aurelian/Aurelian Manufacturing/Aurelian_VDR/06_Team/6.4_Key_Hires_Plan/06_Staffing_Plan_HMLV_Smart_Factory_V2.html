@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bemanningsplan for HMLV Smart Factory — Aurelian Manufacturing</title>
+<style>
+:root{--red:#F50537;--black:#2B2B2B;--pure-black:#000;--white:#FFF;--gray:#6B6B6B;--panel:#F5F5F5;--divider:#D3D3D3;--chart-axis:#888}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:Calibri,"Segoe UI",sans-serif;color:var(--black);background:var(--white);line-height:1.15;max-width:210mm;margin:0 auto;padding:2.5cm}
+.top-bar{height:4px;background:var(--red);margin-bottom:24px}
+.doc-header{text-align:right;font-size:9pt;color:var(--gray);margin-bottom:8px}
+.title-block{margin-bottom:8px}
+.title-block h1{font-size:28pt;font-weight:700;color:var(--black);line-height:1.0;margin-bottom:6px}
+.title-block .subtitle{font-size:14pt;font-weight:700;font-style:italic;color:var(--red);margin-bottom:6px}
+.title-block .meta{font-size:9pt;color:var(--gray);margin-bottom:12px}
+.title-divider{border:none;border-bottom:1px solid var(--divider);margin-bottom:20px}
+h2{font-size:22pt;font-weight:700;color:var(--black);margin-top:28px;margin-bottom:8px}
+h3{font-size:16pt;font-weight:700;color:var(--red);margin-top:22px;margin-bottom:8px}
+h4{font-size:13pt;font-weight:700;color:var(--black);margin-top:14px;margin-bottom:6px}
+h5{font-size:11pt;font-weight:700;color:var(--gray);margin-top:14px;margin-bottom:6px}
+p{font-size:11pt;color:var(--black);margin-bottom:6px;line-height:1.15}
+.caption{font-size:9pt;color:var(--gray);margin-bottom:6px}
+.callout{background:var(--panel);border-left:4px solid var(--red);padding:14px 16px;margin:12px 0;font-size:11pt;line-height:1.35}
+.callout strong{display:block;margin-bottom:4px}
+ul.brand-list{list-style:none;padding-left:1.0cm;margin:6px 0 10px}
+ul.brand-list li{font-size:11pt;line-height:1.35;margin-bottom:4px;position:relative;padding-left:16px}
+ul.brand-list li::before{content:"2";color:var(--red);font-weight:700;position:absolute;left:0}
+table{width:100%;border-collapse:collapse;margin:10px 0 6px;font-size:10pt}
+table thead th{background:var(--black);color:var(--white);font-weight:700;text-align:left;padding:6px 10px;font-size:10pt;border:none}
+table thead th.right{text-align:right}
+table.accent thead th{background:var(--red)}
+table tbody td{padding:5px 10px;border-bottom:1px solid var(--divider);font-size:10pt;vertical-align:top}
+table tbody td.right{text-align:right}
+table tbody td.bold{font-weight:700}
+table tbody tr:nth-child(even) td{background:var(--panel)}
+table tfoot td{padding:6px 10px;font-weight:700;border-top:2.5px solid var(--black);font-size:10pt}
+table tfoot td.right{text-align:right}
+.org-chart{margin:10px 0 6px;font-size:10pt;width:100%;border-collapse:collapse}
+.org-chart td{padding:3px 8px;border-bottom:1px solid var(--panel);vertical-align:top}
+.org-chart .indent{color:var(--divider);white-space:pre;font-family:Consolas,"Courier New",monospace;width:80px;min-width:55px}
+.org-chart .name{font-weight:700;color:var(--black);min-width:160px}
+.org-chart .role{color:var(--gray)}
+.step{margin:10px 0 8px}
+.step .step-header{font-size:13pt;margin-bottom:3px}
+.step .step-number{color:var(--red);font-weight:700;margin-right:4px}
+.step .step-title{font-weight:700;color:var(--black);font-size:11pt}
+.step .step-desc{font-size:10pt;color:var(--gray);line-height:1.35;margin-left:0.7cm}
+.chart-container{margin:20px 0;text-align:center}
+.chart-container svg{max-width:100%;height:auto}
+.doc-footer{margin-top:40px;padding-top:10px;border-top:1px solid var(--gray);font-size:8pt;color:var(--gray);display:flex;justify-content:space-between}
+@media print{
+ @page{size:A4 portrait;margin:2.5cm}
+ body{max-width:none;padding:0;font-size:10pt}
+ .top-bar,table thead th,table.accent thead th,table tbody tr:nth-child(even) td,.callout,.org-chart td{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+ h2,h3,h4{page-break-after:avoid}
+ table,.callout,.step,.chart-container{page-break-inside:avoid}
+ .doc-footer{position:fixed;bottom:0;left:0;right:0;border-top:1px solid var(--gray);padding:6px 0;font-size:8pt}
+}
+</style>
+</head>
+<body>
+<div class="doc-header">Aurelian Manufacturing AS</div>
+<div class="top-bar"></div>
+
+<div class="title-block">
+  <h1>Bemanningsplan for HMLV Smart Factory</h1>
+  <div class="subtitle">Sublineær skaleringsmodell: 5 → 10 → 15 → 20 CNC-maskiner</div>
+  <div class="meta">V2 — 24. februar 2026 &nbsp;|&nbsp; Basert på Siemens Digital Enterprise-referansearkitektur, ISA-95 og RAMI 4.0</div>
+</div>
+
+<hr class="title-divider">
+
+<h2>1. Sammendrag</h2>
+
+<p>Denne bemanningsplanen beskriver hvordan Aurelian Manufacturing bygger operasjonell organisasjon fra oppstart med 5 CNC-maskiner til full skala med 20 maskiner. Planen følger en bevisst sublineær skaleringsmodell: hver ny maskingruppe krever færre nye ansatte enn den forrige, drevet av økende automasjonsgrad, AI-assistert utvikling og den vertikalt integrerte software-plattformen.</p>
+
+<div class="callout">
+  <strong>Deep tech-strategi — færre folk per maskin:</strong>
+  Aurelian Manufacturing er posisjonert som et deep tech-selskap med egenutviklede, vertikalt integrerte softwareløsninger tilpasset CNC-operasjoner. Software-utvikling har blitt dramatisk mer effektivt gjennom AI-verktøy, noe som gjør at et lite, senior team kan levere og vedlikeholde en komplett plattform — fra shopfloor-datainnsamling til MES/MOM og analyseplattform.
+  <br><br>
+  Tore Ausland besitter domenekunnskap og vil ta en midlertidig rolle som medutvikler og COO i utviklingsfasen av software-stacken.
+</div>
+
+<h4>Nøkkeltall</h4>
+
+<table>
+  <thead><tr><th>Indikator</th><th class="right">Verdi</th></tr></thead>
+  <tbody>
+    <tr><td>CNC-maskiner</td><td class="right">5 → 20 i fire faser</td></tr>
+    <tr><td>Operasjonelle FTE</td><td class="right">~9 → ~22 (sublineær skalering)</td></tr>
+    <tr><td>FTE/CNC ved full skala</td><td class="right">~1,10 (ned fra 1,80 i oppstart)</td></tr>
+    <tr><td>Maskinutnyttelse (HMLV-mål)</td><td class="right">65%</td></tr>
+    <tr><td>OEE-A målsetting</td><td class="right">80–85%</td></tr>
+  </tbody>
+</table>
+
+<h4>Sublineær skaleringskurve</h4>
+
+<table class="accent">
+  <thead><tr><th>Fase</th><th class="right">CNC</th><th class="right">FTE</th><th class="right">FTE/CNC</th><th class="right">Δ ny FTE</th><th class="right">Δ/maskin</th></tr></thead>
+  <tbody>
+    <tr><td>Fase 1 — Oppstart</td><td class="right">5</td><td class="right">9,0</td><td class="right">1,80</td><td class="right">—</td><td class="right">—</td></tr>
+    <tr><td>Fase 2 — Skalering</td><td class="right">10</td><td class="right">14,5</td><td class="right">1,45</td><td class="right">+5,5</td><td class="right">1,10</td></tr>
+    <tr><td>Fase 3 — Modning</td><td class="right">15</td><td class="right">18,5</td><td class="right">1,23</td><td class="right">+4,0</td><td class="right">0,80</td></tr>
+    <tr><td>Fase 4 — Full skala</td><td class="right">20</td><td class="right">22,0</td><td class="right">1,10</td><td class="right">+3,5</td><td class="right">0,70</td></tr>
+  </tbody>
+</table>
+
+<p class="caption">Tabellen viser avtagende FTE-behov per maskin. Drevet av automasjon, AI-assistert utvikling og plattformeffekter.</p>
+<div class="chart-container">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="600" height="320" role="img" aria-label="Sublinear FTE/CNC scaling curve">
+    <title>Sublineær FTE/CNC skaleringskurve</title>
+    <rect width="600" height="320" fill="#FFFFFF"/>
+    <text x="300" y="24" text-anchor="middle" font-family="Calibri,sans-serif" font-size="14" font-weight="700" fill="#2B2B2B">Sublineær skaleringskurve: FTE/CNC per fase</text>
+    <line x1="80" y1="50" x2="80" y2="260" stroke="#888" stroke-width="1"/>
+    <line x1="80" y1="260" x2="540" y2="260" stroke="#888" stroke-width="1"/>
+    <line x1="80" y1="201.7" x2="540" y2="201.7" stroke="#D3D3D3" stroke-width="0.5" stroke-dasharray="3,3"/>
+    <text x="72" y="205" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#6B6B6B">0,50</text>
+    <line x1="80" y1="143.3" x2="540" y2="143.3" stroke="#D3D3D3" stroke-width="0.5" stroke-dasharray="3,3"/>
+    <text x="72" y="147" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#6B6B6B">1,00</text>
+    <line x1="80" y1="85" x2="540" y2="85" stroke="#D3D3D3" stroke-width="0.5" stroke-dasharray="3,3"/>
+    <text x="72" y="89" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#6B6B6B">1,50</text>
+    <line x1="80" y1="50" x2="540" y2="50" stroke="#D3D3D3" stroke-width="0.5"/>
+    <text x="72" y="54" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#6B6B6B">2,00</text>
+    <text x="72" y="264" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#6B6B6B">0</text>
+    <text x="20" y="155" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B6B6B" transform="rotate(-90 20 155)">FTE / CNC</text>
+    <rect x="115" y="71" width="70" height="189" rx="3" ry="3" fill="#F50537"/>
+    <text x="150" y="63" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#2B2B2B">1,80</text>
+    <rect x="225" y="107.75" width="70" height="152.25" rx="3" ry="3" fill="#F50537"/>
+    <text x="260" y="100" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#2B2B2B">1,45</text>
+    <rect x="335" y="130.85" width="70" height="129.15" rx="3" ry="3" fill="#F50537"/>
+    <text x="370" y="123" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#2B2B2B">1,23</text>
+    <rect x="445" y="144.5" width="70" height="115.5" rx="3" ry="3" fill="#F50537"/>
+    <text x="480" y="137" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#2B2B2B">1,10</text>
+    <polyline points="150,71 260,107.75 370,130.85 480,144.5" fill="none" stroke="#2B2B2B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="150" cy="71" r="5" fill="#2B2B2B"/>
+    <circle cx="260" cy="107.75" r="5" fill="#2B2B2B"/>
+    <circle cx="370" cy="130.85" r="5" fill="#2B2B2B"/>
+    <circle cx="480" cy="144.5" r="5" fill="#2B2B2B"/>
+    <text x="150" y="280" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B6B6B">Fase 1</text>
+    <text x="150" y="293" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">5 CNC</text>
+    <text x="260" y="280" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B6B6B">Fase 2</text>
+    <text x="260" y="293" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">10 CNC</text>
+    <text x="370" y="280" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B6B6B">Fase 3</text>
+    <text x="370" y="293" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">15 CNC</text>
+    <text x="480" y="280" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B6B6B">Fase 4</text>
+    <text x="480" y="293" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">20 CNC</text>
+    <text x="150" y="308" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#888">9,0 FTE</text>
+    <text x="260" y="308" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#888">14,5 FTE</text>
+    <text x="370" y="308" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#888">18,5 FTE</text>
+    <text x="480" y="308" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#888">22,0 FTE</text>
+  </svg>
+</div>
+
+<h2>2. Organisasjonskart — initial struktur (5 CNC)</h2>
+
+<p>Tore Ausland (VP Business Development) tar en midlertidig COO-rolle i utviklingsfasen grunnet domenekunnskap som er nødvendig for utviklingen av software-stacken. Fredrik Vangsal (DMS) og Pablo (Software Development) inngår i den operasjonelle kjernen.</p>
+
+<h4>Organisasjonsstruktur — Fase 1 (5 CNC)</h4>
+
+<table class="org-chart">
+  <tbody>
+    <tr><td class="indent"></td><td class="name">Andre Tandberg</td><td class="role">CEO</td></tr>
+    <tr><td class="indent">├── </td><td class="name">Tore Ausland</td><td class="role">VP Business Development (midlertidig COO i utviklingsfasen)</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Fredrik Vangsal</td><td class="role">DMS &amp; Automation Advisor</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Pablo</td><td class="role">Software Development / Vertikal integrasjon</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Produksjonsplanlegger</td><td class="role">Leveranse &amp; dispatch — 1,0 FTE (ny ansettelse)</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Manufacturing Engineer</td><td class="role">CAM / Prosess — 1,0 FTE (ny ansettelse)</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Senior CNC-oppsetter</td><td class="role">Skiftleder / CNC Operatør — 1,0 FTE (ny ansettelse)</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">CNC-operatører (2)</td><td class="role">Oppsettere — 2,0 FTE (ny ansettelse)</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">QA &amp; Metrologi</td><td class="role">Kvalitet + metrologi — 0,5 FTE (ny, kombinert)</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Vedlikehold</td><td class="role">Mek/elektro — 0,5 FTE (ny, kombinert)</td></tr>
+    <tr><td class="indent">├── </td><td class="name">Henrik Strøm</td><td class="role">CFO — Strategisk brobygging</td></tr>
+  </tbody>
+</table>
+
+<p class="caption">Figur 1: Organisasjonskart for initial fase (5 CNC). Tore Auslands midlertidige COO-rolle skyldes domenekunnskap nødvendig for software-stacken.</p>
+<h2>3. Fase 1 — 5 CNC-maskiner (oppstart)</h2>
+
+<p>Oppstartsfasen drives primært i 1 skift. Flere roller kombineres for å holde bemanningen slank. Tore Ausland (VP Business Development) tar en midlertidig COO-rolle grunnet domenekunnskap nødvendig for software-stacken. Vertikal integrasjon gjennom Fredrik (DMS) og Pablo (Software) gir en effektiv digital kjerne uten behov for ekstern systemintegrasjon.</p>
+
+<table>
+  <thead><tr><th>Område</th><th>Rolle</th><th>Rapporterer til</th><th class="right">FTE</th><th>Kommentar</th></tr></thead>
+  <tbody>
+    <tr><td class="bold">Ledelse</td><td>VP Business Dev (midl. COO)</td><td>CEO</td><td class="right">1,0</td><td>Tore Ausland — midlertidig COO pga. domenekunnskap</td></tr>
+    <tr><td class="bold">DMS</td><td>DMS &amp; Automation Advisor</td><td>Ledelse</td><td class="right">1,0</td><td>Fredrik Vangsal — OT/IT-integrasjon, datakvalitet</td></tr>
+    <tr><td class="bold">Software</td><td>Software Dev / Vertikal integrasjon</td><td>Ledelse</td><td class="right">1,0</td><td>Pablo — MES/MOM-utvikling, datakontrakter</td></tr>
+    <tr><td class="bold">Prod.styring</td><td>Produksjonsplanlegger / leveransekoord.</td><td>Ledelse</td><td class="right">1,0</td><td>Ny ansettelse — HMLV krever sterk planlegging</td></tr>
+    <tr><td class="bold">Engineering</td><td>Manufacturing Engineer / CAM / prosess</td><td>Ledelse</td><td class="right">1,0</td><td>Ny ansettelse — standardiserer oppsett, NC-program</td></tr>
+    <tr><td class="bold">Produksjon</td><td>Skiftleder / Senior CNC-oppsetter</td><td>Ledelse</td><td class="right">1,0</td><td>Ny ansettelse — «player-coach» i oppstart</td></tr>
+    <tr><td class="bold">Produksjon</td><td>CNC-operatør/oppsetter</td><td>Skiftleder</td><td class="right">2,0</td><td>Ny ansettelse — 3 i cellen gir robusthet</td></tr>
+    <tr><td class="bold">Kvalitet</td><td>QA &amp; metrologitekniker</td><td>Ledelse</td><td class="right">0,5</td><td>Ny — kan kombineres med vedlikehold</td></tr>
+    <tr><td class="bold">Vedlikehold</td><td>Vedlikeholdstekniker (mek/elektro)</td><td>Ledelse</td><td class="right">0,5</td><td>Ny — kombineres med leverandørservice</td></tr>
+  </tbody>
+  <tfoot><tr><td class="bold">Sum operasjonelt</td><td></td><td></td><td class="right">9,0</td><td>Ekskl. CEO, CFO</td></tr></tfoot>
+</table>
+
+<div class="callout">
+  <strong>Vertikal integrasjon-effekt i Fase 1:</strong>
+  Referansemodellen (Siemens) anbefaler 0,5–1,0 FTE for OT/IT-integrasjon i tillegg til ekstern systemleverandør. Aurelians deep tech-modell med Fredrik (DMS) og Pablo (Software) som interne ressurser erstatter dette med egenutviklede løsninger — raskere tilpasning, lavere kost, og grunnlaget for sublineær skalering.
+</div>
+
+<h2>4. Skaleringsplan: 5 → 10 → 15 → 20 CNC</h2>
+
+<p>Skalering skjer i fire faser med 5 maskiner per trinn. Hvert trinn krever færre nye ansatte enn det forrige — en direkte konsekvens av at software-plattformen, automasjonsgraden og AI-verktøyene modner. Støttefunksjoner (DMS, Software, Engineering) skalerer vesentlig saktere enn maskinparken.</p>
+
+<h3>Fase 2 — 10 CNC-maskiner</h3>
+
+<h5>Organisatoriske grep</h5>
+<ul class="brand-list">
+  <li>Utvidet drift / begynnende 2-skift på utvalgte maskiner</li>
+  <li>Dedikert QA og vedlikehold (oppjustert fra kombinerte roller)</li>
+  <li>Andre CAM/prosessingeniør for å håndtere økt HMLV-kompleksitet</li>
+  <li>DMS: Fredrik håndterer OT/IT-integrasjon alene — automasjonsgrad og deep tech-plattform gjør dette mulig</li>
+  <li>Pablo tar med en senior utvikler for å akselerere den vertikalt integrerte software-plattformen</li>
+  <li>Bygg redundans på CAM Engineering eksternt</li>
+</ul>
+
+<table>
+  <thead><tr><th>Område</th><th>Rolle</th><th class="right">FTE F1</th><th class="right">Δ ny</th><th class="right">FTE F2</th></tr></thead>
+  <tbody>
+    <tr><td>Ledelse</td><td>Operasjonell ledelse (midl. COO)</td><td class="right">1,0</td><td class="right">—</td><td class="right">1,0</td></tr>
+    <tr><td>DMS</td><td>DMS (Fredrik)</td><td class="right">1,0</td><td class="right">—</td><td class="right">1,0</td></tr>
+    <tr><td>Software</td><td>Software-team (Pablo + senior)</td><td class="right">1,0</td><td class="right">+1,0</td><td class="right">2,0</td></tr>
+    <tr><td>Prod.styring</td><td>Produksjonsplanlegger</td><td class="right">1,0</td><td class="right">—</td><td class="right">1,0</td></tr>
+    <tr><td>Engineering</td><td>CAM / prosessingeniører</td><td class="right">1,0</td><td class="right">+1,0</td><td class="right">2,0</td></tr>
+    <tr><td>Produksjon</td><td>Skiftleder / Senior CNC-oppsetter</td><td class="right">1,0</td><td class="right">—</td><td class="right">1,0</td></tr>
+    <tr><td>Produksjon</td><td>CNC-operatører/oppsettere</td><td class="right">2,0</td><td class="right">+2,0</td><td class="right">4,0</td></tr>
+    <tr><td>Kvalitet</td><td>QA &amp; metrologi</td><td class="right">0,5</td><td class="right">+0,5</td><td class="right">1,0</td></tr>
+    <tr><td>Vedlikehold</td><td>Vedlikeholdstekniker</td><td class="right">0,5</td><td class="right">+0,5</td><td class="right">1,0</td></tr>
+    <tr><td>Logistikk</td><td>Lager/verktøy (tool crib)</td><td class="right">—</td><td class="right">+0,5</td><td class="right">0,5</td></tr>
+  </tbody>
+  <tfoot><tr><td class="bold">Sum operasjonelt</td><td></td><td class="right">9,0</td><td class="right">+5,5</td><td class="right">14,5</td></tr></tfoot>
+</table>
+
+<p>Kommentar: Bygg redundans på CAM Engineering eksternt.</p>
+<h3>Fase 3 — 15 CNC-maskiner</h3>
+
+<h5>Organisatoriske grep</h5>
+<ul class="brand-list">
+  <li>2-skift innføres på utvalgte celler — krever 2. skiftleder</li>
+  <li>Dedikert produksjonssjef overtar operasjonell styring — midlertidig COO-rolle avvikles</li>
+  <li>DMS og Software forblir uøkt — plattformmodenhet og AI-verktøy gjør dette mulig</li>
+  <li>Engineering vokser til 3 for HMLV-variantmangfold (pluss ekstern redundans)</li>
+  <li>Automasjonsgrad gjør at én CNC-operatør håndterer ~3 maskiner</li>
+  <li>In-prosess måling og prediktivt vedlikehold begrenser vekst i støttefunksjoner</li>
+</ul>
+
+<table>
+  <thead><tr><th>Område</th><th>Rolle</th><th class="right">FTE F2</th><th class="right">Δ ny</th><th class="right">FTE F3</th></tr></thead>
+  <tbody>
+    <tr><td>Ledelse</td><td>Produksjonssjef (erstatter midl. COO)</td><td class="right">1,0</td><td class="right">—</td><td class="right">1,0</td></tr>
+    <tr><td>DMS</td><td>DMS (Fredrik)</td><td class="right">1,0</td><td class="right">—</td><td class="right">1,0</td></tr>
+    <tr><td>Software</td><td>Software-team (Pablo + senior)</td><td class="right">2,0</td><td class="right">—</td><td class="right">2,0</td></tr>
+    <tr><td>Prod.styring</td><td>Produksjonsplanlegger</td><td class="right">1,0</td><td class="right">—</td><td class="right">1,0</td></tr>
+    <tr><td>Engineering</td><td>CAM / prosessingeniører</td><td class="right">2,0</td><td class="right">+1,0</td><td class="right">3,0</td></tr>
+    <tr><td>Produksjon</td><td>Skiftledere</td><td class="right">1,0</td><td class="right">+1,0</td><td class="right">2,0</td></tr>
+    <tr><td>Produksjon</td><td>CNC-operatører/oppsettere</td><td class="right">4,0</td><td class="right">+1,0</td><td class="right">5,0</td></tr>
+    <tr><td>Kvalitet</td><td>QA &amp; metrologi</td><td class="right">1,0</td><td class="right">+0,5</td><td class="right">1,5</td></tr>
+    <tr><td>Vedlikehold</td><td>Vedlikeholdstekniker</td><td class="right">1,0</td><td class="right">—</td><td class="right">1,0</td></tr>
+    <tr><td>Logistikk</td><td>Lager/verktøy/tool crib</td><td class="right">0,5</td><td class="right">+0,5</td><td class="right">1,0</td></tr>
+  </tbody>
+  <tfoot><tr><td class="bold">Sum operasjonelt</td><td></td><td class="right">14,5</td><td class="right">+4,0</td><td class="right">18,5</td></tr></tfoot>
+</table>
+
+<p class="caption">*Produksjonssjef erstatter Tore Auslands midlertidige COO-rolle (netto 0 ny FTE). DMS og Software vokser ikke — AI-verktøy og plattformmodenhet holder teamene slanke.</p>
+
+<h3>Fase 4 — 20 CNC-maskiner (full skala 1)</h3>
+
+<h5>Organisatoriske grep</h5>
+<ul class="brand-list">
+  <li>Full 2-skift som standard på alle celler</li>
+  <li>DMS utvides til 2 — DevOps/observability nødvendig ved 20-maskins skala</li>
+  <li>Software-teamet vokser til 3 for plattformutvidelse (MES, dataplattform, AI-modeller)</li>
+  <li>Engineering holder på 3 — ekstern CAM-redundans håndterer topper</li>
+  <li>Automasjonsgrad gjør at 2 skiftledere og 6 operatører håndterer 20 maskiner</li>
+  <li>Prediktivt vedlikehold og automatisert inspeksjon holder støttefunksjoner slanke</li>
+  <li>Vurder OT-cybersecurity som dedikert kapasitet (0,5–1,0 FTE) ved behov</li>
+</ul>
+
+<table class="accent">
+  <thead><tr><th>Område</th><th>Rolle</th><th class="right">FTE F3</th><th class="right">Δ ny</th><th class="right">FTE F4</th></tr></thead>
+  <tbody>
+    <tr><td class="bold">Ledelse</td><td>Produksjonssjef</td><td class="right">1,0</td><td class="right">—</td><td class="right">1,0</td></tr>
+    <tr><td class="bold">DMS</td><td>DMS lead (Fredrik) + DevOps</td><td class="right">1,0</td><td class="right">+1,0</td><td class="right">2,0</td></tr>
+    <tr><td class="bold">Software</td><td>Software lead (Pablo) + team</td><td class="right">2,0</td><td class="right">+1,0</td><td class="right">3,0</td></tr>
+    <tr><td class="bold">Prod.styring</td><td>Produksjonsplanlegger</td><td class="right">1,0</td><td class="right">—</td><td class="right">1,0</td></tr>
+    <tr><td class="bold">Engineering</td><td>Engineering / CAM (+ ekstern redundans)</td><td class="right">3,0</td><td class="right">—</td><td class="right">3,0</td></tr>
+    <tr><td class="bold">Produksjon</td><td>Skiftledere</td><td class="right">2,0</td><td class="right">—</td><td class="right">2,0</td></tr>
+    <tr><td class="bold">Produksjon</td><td>CNC-operatører/oppsettere</td><td class="right">5,0</td><td class="right">+1,0</td><td class="right">6,0</td></tr>
+    <tr><td class="bold">Kvalitet</td><td>QA &amp; metrologi</td><td class="right">1,5</td><td class="right">+0,5</td><td class="right">2,0</td></tr>
+    <tr><td class="bold">Vedlikehold</td><td>Vedlikeholdstekniker</td><td class="right">1,0</td><td class="right">—</td><td class="right">1,0</td></tr>
+    <tr><td class="bold">Logistikk</td><td>Lager/logistikk/tool crib</td><td class="right">1,0</td><td class="right">—</td><td class="right">1,0</td></tr>
+  </tbody>
+  <tfoot><tr><td class="bold">Sum operasjonelt</td><td></td><td class="right">18,5</td><td class="right">+3,5</td><td class="right">22,0</td></tr></tfoot>
+</table>
+
+<p class="caption">*OT-cybersecurity (0,5–1,0 FTE) kan legges til DMS-teamet ved behov. ~3,3 maskiner per operatør ved full skala.</p>
+<h2>5. Oppsummering — FTE per fase</h2>
+
+<table>
+  <thead><tr><th>Funksjon</th><th class="right">5 CNC</th><th class="right">10 CNC</th><th class="right">15 CNC</th><th class="right">20 CNC</th></tr></thead>
+  <tbody>
+    <tr><td class="bold">Ledelse / Prod.sjef</td><td class="right">1</td><td class="right">1</td><td class="right">1</td><td class="right">1</td></tr>
+    <tr><td class="bold">DMS &amp; Automation</td><td class="right">1</td><td class="right">1</td><td class="right">1</td><td class="right">2</td></tr>
+    <tr><td class="bold">Software Development</td><td class="right">1</td><td class="right">2</td><td class="right">2</td><td class="right">3</td></tr>
+    <tr><td class="bold">Prod.planlegging</td><td class="right">1</td><td class="right">1</td><td class="right">1</td><td class="right">1</td></tr>
+    <tr><td class="bold">Engineering / CAM</td><td class="right">1</td><td class="right">2</td><td class="right">3</td><td class="right">3</td></tr>
+    <tr><td class="bold">Skiftledere</td><td class="right">1</td><td class="right">1</td><td class="right">2</td><td class="right">2</td></tr>
+    <tr><td class="bold">CNC-operatører</td><td class="right">2</td><td class="right">4</td><td class="right">5</td><td class="right">6</td></tr>
+    <tr><td class="bold">Kvalitet &amp; metrologi</td><td class="right">0,5</td><td class="right">1</td><td class="right">1,5</td><td class="right">2</td></tr>
+    <tr><td class="bold">Vedlikehold</td><td class="right">0,5</td><td class="right">1</td><td class="right">1</td><td class="right">1</td></tr>
+    <tr><td class="bold">Logistikk / tool crib</td><td class="right">—</td><td class="right">0,5</td><td class="right">1</td><td class="right">1</td></tr>
+  </tbody>
+  <tfoot><tr><td class="bold">Total operasjonelt</td><td class="right">9,0</td><td class="right">14,5</td><td class="right">18,5</td><td class="right">22,0</td></tr></tfoot>
+</table>
+
+<p class="caption">*Eksklusive CEO (Andre Tandberg) og CFO (Henrik Strøm). Tore Ausland (VP BD) telles under ledelse i utviklingsfasen, erstattes av produksjonssjef ved Fase 3.</p>
+
+<div class="callout">
+  <strong>Sammenligning med referansemodell:</strong>
+  Siemens-referansen anbefaler 35–50 FTE operasjonelt ved 20 CNC i en tradisjonell modell. Aurelians deep tech-estimat på ~22 FTE representerer en 40–55% reduksjon — drevet av egenutviklet software-plattform, AI-assistert utvikling, automasjonsgrad på shopfloor, og ekstern redundans på CAM Engineering. Dette er kjernen i den sublineære skaleringsmodellen: plattformen skalerer, ikke headcount.
+</div>
+
+<h2>6. Sublineær skalering — drivere og forutsetninger</h2>
+
+<p>Aurelians mål er å bruke færre og færre folk per CNC-maskin for hver skaleringsrunde. Denne sublineære skaleringsmodellen er mulig gjennom fire hovedmekanismer:</p>
+
+<div class="step">
+  <div class="step-header"><span class="step-number">1.</span> <span class="step-title">AI-assistert software-utvikling</span></div>
+  <p class="step-desc">Software-utvikling har blitt dramatisk mer effektivt gjennom AI-verktøy. Et lite, senior team (Pablo + én senior utvikler) kan bygge og vedlikeholde en komplett vertikal plattform — fra edge-datainnsamling til MES/MOM og analyseplattform. Teamet holder på 2 FTE helt til 20 maskiner, der det vokser til 3 for plattformutvidelse. Tradisjonelt ville dette krevd 4–6 utviklere.</p>
+</div>
+
+<div class="step">
+  <div class="step-header"><span class="step-number">2.</span> <span class="step-title">Plattformeffekt — DMS skalerer med kode, ikke folk</span></div>
+  <p class="step-desc">Fredrik (DMS) håndterer OT/IT-integrasjon alene til 15 maskiner fordi Software-teamet eier den vertikale stacken. DMS fokuserer på driftsbarhet og OT-tilkobling. Først ved 20 maskiner trengs en DevOps-ressurs for observability og CI/CD. Referansemodellen ville hatt 3–4 FTE på dette stadiet.</p>
+</div>
+
+<div class="step">
+  <div class="step-header"><span class="step-number">3.</span> <span class="step-title">Automasjon på shopfloor</span></div>
+  <p class="step-desc">Automatisk verktøyoppsett, robotlasting og in-prosess måling gjør at én CNC-operatør kan håndtere ~3 maskiner (vs. tradisjonelt 1–2). Prediktivt vedlikehold fra software-plattformen holder vedlikeholdsbehovet på 1 FTE også ved 20 maskiner. Kvalitet skalerer sakte fordi automatisert inspeksjon fanger mesteparten.</p>
+</div>
+
+<div class="step">
+  <div class="step-header"><span class="step-number">4.</span> <span class="step-title">Ekstern redundans på CAM Engineering</span></div>
+  <p class="step-desc">I stedet for å vokse Engineering-teamet lineært, bygges kapasitet hos eksterne CAM-partnere for å håndtere topper i HMLV-variantmangfold. Internt team holder på 3 FTE fra Fase 3, med ekstern flexing ved behov.</p>
+</div>
+
+<div class="step">
+  <div class="step-header"><span class="step-number">5.</span> <span class="step-title">Domenekunnskap som akselerator</span></div>
+  <p class="step-desc">Tore Auslands midlertidige COO-rolle sikrer at software-plattformen bygges med riktig domeneforståelse fra dag 1. Når plattformen er moden (Fase 3), overtar dedikert produksjonssjef — og Tore går tilbake til ren forretningsutvikling.</p>
+</div>
+<h2>7. Målorganisasjon — 20 CNC (Fase 4)</h2>
+
+<h4>Organisasjonsstruktur — Fase 4 (20 CNC)</h4>
+
+<table class="org-chart">
+  <tbody>
+    <tr><td class="indent"></td><td class="name">Andre Tandberg</td><td class="role">CEO</td></tr>
+    <tr><td class="indent">├── </td><td class="name">Tore Ausland</td><td class="role">VP Business Development</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Produksjonssjef</td><td class="role">1 FTE: Daglig drift</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">DMS (Fredrik V.)</td><td class="role">2 FTE: Fredrik + DevOps</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Software (Pablo)</td><td class="role">3 FTE: MES, Planlegging, Dataplattform</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Engineering</td><td class="role">3 FTE: CAM / Prosess (+ ekstern redundans)</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Planlegging</td><td class="role">1 FTE: Dispatch / SCM</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Kvalitet</td><td class="role">2 FTE: QA &amp; Metrologi</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Vedlikehold</td><td class="role">1 FTE: Reliability + prediktivt vedlikehold</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Logistikk</td><td class="role">1 FTE: Tool crib / lager</td></tr>
+    <tr><td class="indent">│   ├── </td><td class="name">Maskineringscelle</td><td class="role">8 FTE: 2 skiftledere + 6 operatører</td></tr>
+    <tr><td class="indent">├── </td><td class="name">Henrik Strøm</td><td class="role">CFO</td></tr>
+  </tbody>
+</table>
+
+<p class="caption">Figur 3: Målorganisasjon ved 20 CNC. 22 FTE operasjonelt — ~1,1 FTE per maskin. Tore Ausland tilbake i ren BD-rolle.</p>
+
+<h2>8. Nøkkelprinsipper for skalering</h2>
+
+<div class="step">
+  <div class="step-header"><span class="step-number">1.</span> <span class="step-title">Plattformen skalerer — ikke headcount</span></div>
+  <p class="step-desc">Invester i software-plattformen tidlig så den håndterer økt maskinpark uten proporsjonalt flere mennesker. DMS og Software skal være flat eller svakt voksende.</p>
+</div>
+
+<div class="step">
+  <div class="step-header"><span class="step-number">2.</span> <span class="step-title">ISA-95 som ansvarsgrensekart</span></div>
+  <p class="step-desc">Bruk nivådelingen (ERP nivå 4, MES/MOM nivå 3, OT nivå 0–2) som grensesnitt mellom team. Reduserer konflikter og gjør integrasjon håndterbar ved vekst.</p>
+</div>
+
+<div class="step">
+  <div class="step-header"><span class="step-number">3.</span> <span class="step-title">DMS eier driftsbarhet — Software eier koden</span></div>
+  <p class="step-desc">Digital Manufacturing Systems (Fredrik) eier OT-tilkobling, datakontrakter og «production readiness»-validering. Software (Pablo) utvikler den vertikale plattformen. Denne arbeidsdelingen er kjernen i deep tech-modellen.</p>
+</div>
+
+<div class="step">
+  <div class="step-header"><span class="step-number">4.</span> <span class="step-title">Ekstern redundans fremfor intern vekst</span></div>
+  <p class="step-desc">Bygg kapasitet hos eksterne CAM-partnere og konsulenter for å håndtere topper. Holder fast headcount lavt og gir fleksibilitet.</p>
+</div>
+
+<div class="step">
+  <div class="step-header"><span class="step-number">5.</span> <span class="step-title">Automasjon før ansettelse</span></div>
+  <p class="step-desc">Før en ny rolle opprettes, vurder om automasjon, AI-verktøy eller plattformforbedring kan løse behovet. Målet: øke maskinparken uten å øke FTE/CNC-ratioen.</p>
+</div>
+
+<div class="step">
+  <div class="step-header"><span class="step-number">6.</span> <span class="step-title">Defense-in-Depth fra dag 1</span></div>
+  <p class="step-desc">OT/IT-konvergens krever segmentering, DMZ, rollebasert tilgang og sikret fjerntilgang. Ved 15+ maskiner bør OT-cybersecurity vurderes som dedikert kapasitet.</p>
+</div>
+
+<h3>Referanser</h3>
+
+<table>
+  <thead><tr><th>Kilde</th><th>Dokument</th></tr></thead>
+  <tbody>
+    <tr><td class="bold">Intern</td><td>Organisasjon og bemanning for en smart CNC-fabrikk med vertikal integrasjon</td></tr>
+    <tr><td class="bold">Siemens</td><td>Totally Integrated Automation (TIA) Brochure — Digital Enterprise prinsipper</td></tr>
+    <tr><td class="bold">ISA</td><td>ISA-95 / IEC 62264 — Enterprise-Control System Integration</td></tr>
+    <tr><td class="bold">ZVEI</td><td>RAMI 4.0 — Reference Architecture Model Industrie 4.0</td></tr>
+    <tr><td class="bold">Siemens</td><td>Industrial Edge — IT Specialists Platform Documentation</td></tr>
+    <tr><td class="bold">Siemens</td><td>Industrial Security Operational Guidelines — Defense-in-Depth</td></tr>
+  </tbody>
+</table>
+
+<div class="doc-footer">
+  <span>CONFIDENTIAL</span>
+  <span>Aurelian Manufacturing AS</span>
+  <span>24. februar 2026</span>
+</div>
+
+</body>
+</html>

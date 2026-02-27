@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — KDA Go-to-Market Strategi</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  /* Cover */
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  /* Content */
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  /* Cards grid */
+  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; margin: 1.5rem 0; }
+  .card { background: var(--gray-panel); padding: 1.5rem; position: relative; text-decoration: none; color: var(--black); transition: box-shadow 0.2s; }
+  .card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--red); }
+  .card-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--red); color: var(--white); font-size: 0.82rem; font-weight: 700; border-radius: 50%; margin-bottom: 0.7rem; }
+  .card h4 { font-size: 0.95rem; font-weight: 700; color: var(--black); margin-bottom: 0.4rem; }
+  .card p { font-size: 0.82rem; line-height: 1.5; color: var(--gray-medium); margin-bottom: 0.5rem; }
+  .card .card-meta { font-size: 0.74rem; color: var(--red); font-weight: 700; }
+
+  /* KPI strip */
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  /* Callout */
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  /* Bullet list */
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  /* Timeline */
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 140px; }
+
+  /* Dark panel */
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  /* Footer */
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+
+  /* File link styling */
+  .file-link { display: block; margin-top: 0.5rem; font-size: 0.78rem; color: var(--red); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">★ ★ ★ ★ ★</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">KDA Go-to-Market Strategi</div>
+    <div class="cover-subtitle">Kongsberg Defence & Aerospace — Segmentert tilnærming</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Februar 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section>
+    <div class="section-label">Sammendrag</div>
+    <h2>Hvorfor KDA er prioritet #1</h2>
+
+    <div class="callout">
+      <p><strong>Kongsberg Defence & Aerospace har en ordrebok på NOK 125 milliarder</strong> (Q4 2025), ansetter 200 fagarbeidere de sliter med å finne, og bruker 3x mer på norske underleverandører enn hva Forsvaret betaler dem. De trenger kapasitet. Aurelian tilbyr nøyaktig det.</p>
+    </div>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">125</div>
+        <div class="kpi-label">MRD NOK<br>Ordrebok</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">2 000+</div>
+        <div class="kpi-label">Norske<br>leverandører</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">200</div>
+        <div class="kpi-label">Fagarbeidere<br>de søker</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">10–30k</div>
+        <div class="kpi-label">Est. årlige<br>CNC-timer</div>
+      </div>
+    </div>
+
+    <p>Denne strategien deler KDA inn i fire forretningssegmenter — hvert med egen ledelse, eget innkjøp og ulike komponentbehov. Aurelians tilnærming tilpasses per segment for å maksimere relevans og konverteringssannsynlighet.</p>
+  </section>
+
+  <!-- FOUR SEGMENTS OVERVIEW -->
+  <section>
+    <div class="section-label">KDAs fire divisjoner</div>
+    <h2>Segmentoversikt — CNC-relevans og prioritet</h2>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-number">1</div>
+        <h4>Aerostructures & MRO</h4>
+        <p>Egen CNC-hall med 11 maskiner (Makino). F-35-deler, titanium, 5-akse. Trenger overflow-kapasitet. Inkluderer KAMS (F-35/F-16 vedlikehold, Rygge — nær Våler).</p>
+        <div class="card-meta">Prioritet: HØYEST — størst kortsiktig CNC-volum</div>
+        <span class="file-link">→ 01_KDA_Aerostructures_MRO.html</span>
+      </div>
+      <div class="card">
+        <div class="card-number">2</div>
+        <h4>Defence Systems</h4>
+        <p>NASAMS luftvern, Protector våpenstasjon, landbaserte systemer. Hus, rammer, braketter, strukturdeler. Rekordordrer fra Polen, Danmark, Norge.</p>
+        <div class="card-meta">Prioritet: HØY — stort og voksende volum</div>
+        <span class="file-link">→ 02_KDA_Defence_Systems.html</span>
+      </div>
+      <div class="card">
+        <div class="card-number">3</div>
+        <h4>Missiles & Space</h4>
+        <p>NSM/JSM missiler, romkomponenter. Missilkropper, seekerhus, finneassemblyer. Høy verdi, strengere krav. NOK 98 mrd etterslep.</p>
+        <div class="card-meta">Prioritet: HØY — høy verdi per del</div>
+        <span class="file-link">→ 03_KDA_Missiles_Space.html</span>
+      </div>
+      <div class="card">
+        <div class="card-number">4</div>
+        <h4>Naval Surface Vessels</h4>
+        <p>Helt ny divisjon (jan 2025). Inntil 28 marinefartøy planlagt. Bygger forsyningskjede fra scratch — unikt vindu for å komme tidlig inn.</p>
+        <div class="card-meta">Prioritet: STRATEGISK — langsiktig gull</div>
+        <span class="file-link">→ 04_KDA_Naval_Surface_Vessels.html</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY CONTACTS -->
+  <section class="dark-panel">
+    <div class="section-label">Kontakter</div>
+    <h2>Identifiserte nøkkelpersoner — alle divisjoner</h2>
+
+    <h3>Supply Chain & Innkjøp (Tier 1)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Tittel</th><th>Divisjon</th><th>Prioritet</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Petter Berg Spone</strong></td><td>VP Supply Chain (acting)</td><td>KDA konsern</td><td style="color: var(--red); font-weight: 700;">★★★</td></tr>
+        <tr><td><strong>Jon-André Olaussen</strong></td><td>Senior VP Strategic Sourcing & Supply Chain</td><td>Defence Systems</td><td style="color: var(--red); font-weight: 700;">★★★</td></tr>
+        <tr><td><strong>Ragnar Løkka</strong></td><td>VP KDA Operations</td><td>Aerostructures</td><td style="color: var(--red); font-weight: 700;">★★★</td></tr>
+        <tr><td><strong>Anne Mols</strong></td><td>Supply Chain Manager</td><td>KDA Oslo</td><td style="color: var(--red); font-weight: 700;">★★☆</td></tr>
+        <tr><td><strong>Ida Katrin Godejord</strong></td><td>Procurement Manager</td><td>KDA Kongsberg</td><td style="color: var(--red); font-weight: 700;">★★☆</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Kvalitet & Leverandørutvikling (Tier 1)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Tittel</th><th>Divisjon</th><th>Prioritet</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Erlend Barheim</strong></td><td>Director Quality Assurance</td><td>Aerostructures & MRO</td><td style="color: var(--red); font-weight: 700;">★★★</td></tr>
+        <tr><td><strong>Audun Frøysland</strong></td><td>Team Manager, Supply Chain QA</td><td>Missiles & Space</td><td style="color: var(--red); font-weight: 700;">★★☆</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Teknisk & Strategisk (Tier 2)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Tittel</th><th>Divisjon</th><th>Relevans</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Per Kristian Grønlund</strong></td><td>Principal Engineer, New Business & Emerging Tech</td><td>Aerostructures</td><td>Identifiserer komponentbehov</td></tr>
+        <tr><td><strong>Harald Aaro</strong></td><td>EVP Business Development & Strategy</td><td>KDA konsern</td><td>Strategisk kapasitetsplanlegging</td></tr>
+        <tr><td><strong>Ronny Opsjøen Langset</strong></td><td>EVP Naval Surface Vessels</td><td>Naval Vessels</td><td>Ny divisjon, bygger supply chain</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Eksisterende kontakter (Tier 3 — døråpnere)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Tittel</th><th>Status</th><th>Bruk</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Kyrre Lohne</strong></td><td>VP Government Relations & BD</td><td>Kontaktet — memorandum sendt</td><td>Be om introduksjon til Supply Chain</td></tr>
+        <tr><td><strong>Hugo Hermansen</strong></td><td>Director Special Projects, KAMS</td><td>Kontaktet — memorandum sendt</td><td>KAMS MRO-deler, Rygge-nærhet</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- QUALIFICATION ROADMAP -->
+  <section>
+    <div class="section-label">Kvalifisering</div>
+    <h2>Leverandørkvalifisering — tidslinje</h2>
+
+    <table class="timeline-table">
+      <thead><tr><th>Fase</th><th>Tidspunkt</th><th>Aktivitet</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Registrering</strong></td><td>Feb–Mar 2026</td><td>Fyll ut KDAs leverandørskjema. Informasjonen går til alle innkjøpere.</td><td style="color: var(--red); font-weight: 700;">NESTE STEG</td></tr>
+        <tr><td><strong>Første kontakt</strong></td><td>Mar 2026</td><td>LinkedIn-meldinger til Tier 1-kontakter. Capability Brief (1–2 sider).</td><td>Planlagt</td></tr>
+        <tr><td><strong>Tekniske møter</strong></td><td>Apr–Jun 2026</td><td>NDA, eksempeltegninger, prosesspaner. Besøk KDA Kongsberg.</td><td>Planlagt</td></tr>
+        <tr><td><strong>Maskinkonfigurasjon</strong></td><td>Mai–Aug 2026</td><td>KDA påvirker CNC-cellekonfigurasjon. Tidsvindu lukker Q3 2026.</td><td>Kritisk vindu</td></tr>
+        <tr><td><strong>Pre-kvalifisering</strong></td><td>Jul–Des 2026</td><td>Formell leverandørsøknad. Paper-based audit.</td><td>Planlagt</td></tr>
+        <tr><td><strong>Betinget godkjenning</strong></td><td>Q1 2027</td><td>Betinget leverandørstatus. Pilot-ordre planlegging.</td><td>Mål</td></tr>
+        <tr><td><strong>FAI</strong></td><td>Q3 2027</td><td>First Article Inspection på pilot-deler ved produksjonsstart.</td><td>Mål</td></tr>
+        <tr><td><strong>Full kvalifisering</strong></td><td>Q4 2027–2028</td><td>Produksjonsramp. AS9100 + AQAP 2110 sertifisering.</td><td>Mål</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Kritisk tidsvindu:</strong> Kunder som inngår dialog innen august 2026 kan påvirke CNC-cellenes maskinsammensetning, verktøymagasin og automasjonsgrad. Dette er Aurelians sterkeste kort overfor KDA — en mulighet ingen eksisterende leverandør kan tilby.</p>
+    </div>
+  </section>
+
+  <!-- APPROACH PRINCIPLES -->
+  <section>
+    <div class="section-label">Tilnærming</div>
+    <h2>Fem nøkkelbudskap til KDA</h2>
+
+    <ul class="clean-list">
+      <li><strong>«Vi løser kapasitetsproblemet deres»</strong> — KDA trenger CNC-timer, ikke visjoner. Led med kapasitet: 25 maskiner, 140 000 spindeltimer.</li>
+      <li><strong>«Norsk eierskap, ingen utenlandsk kontroll»</strong> — Et reelt kvalifiseringskrav i forsvar. Aurelian er 100% norsk.</li>
+      <li><strong>«Full digital sporbarhet fra dag 1»</strong> — De fleste tradisjonelle verksteder kan ikke levere dette. Aurelians digitale tråd er bygget inn, ikke lagt til.</li>
+      <li><strong>«Dere kan påvirke maskinkonfigurasjonen»</strong> — Tidsvindu som lukker seg Q3 2026. Ingen konkurrent kan tilby dette.</li>
+      <li><strong>«Vi designer for AQAP 2110 og AS9100»</strong> — Vis at vi forstår forsvarets kvalitetskrav og planlegger deretter.</li>
+    </ul>
+  </section>
+
+  <!-- FILE INDEX -->
+  <section>
+    <div class="section-label">Dokumenter</div>
+    <h2>Segmentstrategier — filindeks</h2>
+
+    <table>
+      <thead><tr><th>Fil</th><th>Segment</th><th>Innhold</th></tr></thead>
+      <tbody>
+        <tr><td><strong>00_KDA_Strategy_Overview.html</strong></td><td>Oversikt</td><td>Dette dokumentet — samlet strategi og kontakter</td></tr>
+        <tr><td><strong>01_KDA_Aerostructures_MRO.html</strong></td><td>Aerostructures & MRO</td><td>F-35, CNC-hall overflow, KAMS/Rygge, titanium</td></tr>
+        <tr><td><strong>02_KDA_Defence_Systems.html</strong></td><td>Defence Systems</td><td>NASAMS, Protector, Polen/Danmark-kontrakter</td></tr>
+        <tr><td><strong>03_KDA_Missiles_Space.html</strong></td><td>Missiles & Space</td><td>NSM/JSM, romkomponenter, høyverdi-deler</td></tr>
+        <tr><td><strong>04_KDA_Naval_Surface_Vessels.html</strong></td><td>Naval Surface Vessels</td><td>Ny divisjon, 28 fartøy, greenfield supply chain</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | KDA Go-to-Market Strategi V1.0 | Februar 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

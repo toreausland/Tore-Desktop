@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — MRB Index — ORD-2026-0034</title>
+<style>
+  /* ══════════════════════════════════════════════════════════
+     AURELIAN MANUFACTURING — DESIGN SYSTEM TOKENS
+     Pantone 032 C / Scandinavian Industrial Precision
+     ══════════════════════════════════════════════════════════ */
+
+  :root {
+    --red: #F50537;
+    --red-hover: #D0042E;
+    --black: #2B2B2B;
+    --pure-black: #000000;
+    --white: #FFFFFF;
+    --gray-med: #6B6B6B;
+    --gray-panel: #F5F5F5;
+    --gray-divider: #D3D3D3;
+    --gray-chart: #888888;
+
+    --green: #1C6E3D;
+    --green-bg: #E8F5EE;
+    --amber: #C47F17;
+    --amber-bg: #FFF8E7;
+    --red-bg: #FEE8EC;
+
+    --blue-steel: #3D6B8E;
+    --blue-bg: rgba(142,174,197,0.15);
+
+    --sidebar-w: 240px;
+    --topbar-h: 56px;
+    --font: 'Calibri', 'Segoe UI', Arial, sans-serif;
+    --mono: 'Consolas', 'SF Mono', 'Menlo', monospace;
+    --radius: 6px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
+    --transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ── Reset ─────────────────────────────────────────────── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 14px; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: var(--font);
+    color: var(--black);
+    background: var(--gray-panel);
+    overflow: hidden;
+    height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  /* ══════════════════════════════════════════════════════════
+     LAYOUT
+     ══════════════════════════════════════════════════════════ */
+
+  .app {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    grid-template-rows: var(--topbar-h) 1fr;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── Sidebar ───────────────────────────────────────────── */
+  .sidebar {
+    grid-row: 1 / -1;
+    background: var(--pure-black);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+  }
+  .sidebar::-webkit-scrollbar { display: none; }
+
+  .sidebar-logo { padding: 24px 20px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; }
+  .logo-stars { display: flex; justify-content: center; gap: 6px; margin-bottom: 10px; }
+  .logo-star { width: 10px; height: 10px; position: relative; }
+  .logo-star::before { content: '★'; color: var(--white); font-size: 14px; line-height: 1; }
+  .logo-stars .logo-star:nth-child(1) { transform: translateY(6px); }
+  .logo-stars .logo-star:nth-child(2) { transform: translateY(2px); }
+  .logo-stars .logo-star:nth-child(3) { transform: translateY(0px); }
+  .logo-stars .logo-star:nth-child(4) { transform: translateY(2px); }
+  .logo-stars .logo-star:nth-child(5) { transform: translateY(6px); }
+  .logo-text { font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--white); line-height: 1; }
+  .logo-sub { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-chart); margin-top: 6px; line-height: 1.2; }
+
+  .nav-section { padding: 16px 0 4px; }
+  .nav-section-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.25); padding: 0 20px; margin-bottom: 4px; }
+  .nav-item { display: flex; align-items: center; gap: 12px; padding: 9px 20px; font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.55); cursor: pointer; transition: all var(--transition); border-left: 3px solid transparent; position: relative; }
+  .nav-item:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.04); }
+  .nav-item.active { color: var(--white); background: rgba(245,5,55,0.08); border-left-color: var(--red); font-weight: 600; }
+  .nav-item .nav-icon { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; opacity: 0.7; }
+  .nav-item.active .nav-icon { opacity: 1; }
+  .nav-item .nav-badge { margin-left: auto; background: var(--red); color: var(--white); font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 10px; min-width: 18px; text-align: center; }
+
+  .sidebar-user { margin-top: auto; padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .user-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 13px; font-weight: 700; flex-shrink: 0; letter-spacing: 0.5px; }
+  .user-info { flex: 1; min-width: 0; }
+  .user-name { font-size: 12px; font-weight: 600; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .user-role { font-size: 10px; color: var(--gray-chart); margin-top: 1px; }
+  .user-logout { color: rgba(255,255,255,0.3); transition: color var(--transition); padding: 4px; }
+  .user-logout:hover { color: var(--red); }
+
+  /* ── Topbar ────────────────────────────────────────────── */
+  .topbar { background: var(--white); border-bottom: 1px solid var(--gray-divider); display: flex; align-items: center; padding: 0 28px; gap: 16px; z-index: 10; }
+  .topbar-title { font-size: 18px; font-weight: 700; color: var(--black); white-space: nowrap; }
+  .topbar-breadcrumb { font-size: 12px; color: var(--gray-med); display: flex; align-items: center; gap: 6px; }
+  .topbar-breadcrumb span { opacity: 0.5; }
+  .topbar-breadcrumb .bc-id { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--black); opacity: 1; }
+  .topbar-spacer { flex: 1; }
+  .topbar-search { position: relative; width: 220px; }
+  .topbar-search input { width: 100%; height: 34px; border: 1px solid var(--gray-divider); border-radius: var(--radius); padding: 0 12px 0 34px; font-size: 12px; font-family: var(--font); color: var(--black); background: var(--gray-panel); transition: all var(--transition); outline: none; }
+  .topbar-search input::placeholder { color: var(--gray-chart); }
+  .topbar-search input:focus { border-color: var(--red); background: var(--white); box-shadow: 0 0 0 3px rgba(245,5,55,0.06); }
+  .topbar-search .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--gray-chart); pointer-events: none; }
+  .topbar-actions { display: flex; align-items: center; gap: 8px; }
+  .topbar-btn { width: 34px; height: 34px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--gray-med); transition: all var(--transition); position: relative; }
+  .topbar-btn:hover { background: var(--gray-panel); color: var(--black); }
+  .topbar-btn .notif-dot { position: absolute; top: 6px; right: 5px; width: 16px; height: 16px; background: var(--red); border-radius: 50%; font-size: 9px; font-weight: 700; color: var(--white); display: flex; align-items: center; justify-content: center; border: 2px solid var(--white); }
+  .env-badge { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: var(--radius); background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(196,127,23,0.2); }
+
+  /* ── Main Content ──────────────────────────────────────── */
+  .main { overflow-y: auto; padding: 24px 28px; scrollbar-width: thin; scrollbar-color: var(--gray-divider) transparent; }
+  .main::-webkit-scrollbar { width: 6px; }
+  .main::-webkit-scrollbar-track { background: transparent; }
+  .main::-webkit-scrollbar-thumb { background: var(--gray-divider); border-radius: 3px; }
+
+  /* ══════════════════════════════════════════════════════════
+     MRB INDEX — Content Layout
+     ══════════════════════════════════════════════════════════ */
+
+  .index-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    align-items: start;
+  }
+
+  /* ── Order Header Bar ────────────────────────────────── */
+  .order-header {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(211,211,211,0.5);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .order-context { flex: 1; }
+  .order-top-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .order-id {
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
+    letter-spacing: 0.5px;
+  }
+
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background: var(--green-bg);
+    color: var(--green);
+    border: 1px solid rgba(28,110,61,0.15);
+  }
+  .live-badge .pulse-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+    animation: livePulse 2s ease-in-out infinite;
+  }
+  @keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+  .order-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 6px 28px;
+  }
+  .om-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--gray-chart); }
+  .om-value { font-size: 12px; font-weight: 600; color: var(--black); }
+  .om-value.mono { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3px; }
+
+  .industry-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 3px;
+  }
+  .industry-tag.oilgas { background: rgba(28,110,61,0.08); color: var(--green); }
+
+  /* Progress Ring */
+  .progress-ring-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+    padding-left: 24px;
+    border-left: 1px solid var(--gray-divider);
+  }
+
+  .progress-ring {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: conic-gradient(var(--green) 0deg 245deg, var(--amber) 245deg 274deg, rgba(196,127,23,0.4) 274deg 300deg, var(--gray-divider) 300deg 349deg, var(--red) 349deg 360deg);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .progress-ring-inner {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--white);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .progress-ring-pct { font-size: 18px; font-weight: 700; color: var(--black); line-height: 1; }
+  .progress-ring-sub { font-size: 8px; color: var(--gray-chart); text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .progress-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .progress-stats-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-med);
+    margin-bottom: 2px;
+  }
+  .stat-mini-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .stat-mini {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .stat-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+  }
+  .stat-mini.validated .stat-dot { background: var(--green); }
+  .stat-mini.validated { color: var(--green); }
+  .stat-mini.received .stat-dot { background: var(--blue-steel); }
+  .stat-mini.received { color: var(--blue-steel); }
+  .stat-mini.validating .stat-dot { background: var(--amber); }
+  .stat-mini.validating { color: var(--amber); }
+  .stat-mini.pending .stat-dot { background: var(--gray-chart); }
+  .stat-mini.pending { color: var(--gray-chart); }
+  .stat-mini.rejected { color: var(--white); }
+  .stat-mini.rejected .stat-dot {
+    background: var(--red); width: auto; height: auto; border-radius: 3px;
+    padding: 1px 5px; font-size: 9px; font-weight: 700; color: var(--white);
+  }
+  .stat-mini.waived .stat-dot { background: var(--gray-divider); }
+  .stat-mini.waived { color: var(--gray-chart); }
+
+  /* ── Section Tabs ───────────────────────────────────────── */
+  .section-tabs {
+    display: flex;
+    gap: 2px;
+    background: var(--white);
+    border-radius: var(--radius) var(--radius) 0 0;
+    border: 1px solid rgba(211,211,211,0.5);
+    border-bottom: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+    box-shadow: var(--shadow-sm);
+  }
+  .section-tabs::-webkit-scrollbar { display: none; }
+
+  .section-tab {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 10px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    border-bottom: 3px solid transparent;
+    position: relative;
+    background: var(--white);
+  }
+  .section-tab:hover { background: var(--gray-panel); }
+  .section-tab.active {
+    border-bottom-color: var(--red);
+    background: var(--white);
+  }
+
+  .tab-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 2px;
+  }
+  .section-tab.active .tab-num { color: var(--red); }
+
+  .tab-name {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray-med);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+  }
+
+  .tab-fraction {
+    font-size: 10px;
+    font-weight: 700;
+    font-family: var(--mono);
+    letter-spacing: 0.3px;
+  }
+  .tab-fraction.complete { color: var(--green); }
+  .tab-fraction.partial { color: var(--amber); }
+  .tab-fraction.early { color: var(--gray-chart); }
+
+  /* ── Document Index Table ─────────────────────────────── */
+  .index-table-card {
+    background: var(--white);
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(211,211,211,0.5);
+    border-top: none;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .index-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .index-table thead th {
+    background: var(--black);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 10px 12px;
+    text-align: left;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .index-table thead th.col-center { text-align: center; }
+  .index-table thead th.col-right { text-align: right; }
+
+  .index-table tbody tr {
+    border-bottom: 1px solid rgba(211,211,211,0.5);
+    transition: background var(--transition);
+    cursor: pointer;
+  }
+  .index-table tbody tr:nth-child(even) { background: var(--gray-panel); }
+  .index-table tbody tr:hover { background: rgba(245,5,55,0.02); }
+
+  .index-table tbody td {
+    padding: 10px 12px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .col-line {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    color: var(--black);
+  }
+  .col-title {
+    font-weight: 600;
+    color: var(--black);
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+  }
+  .col-standard {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray-med);
+    letter-spacing: 0.3px;
+  }
+  .col-source {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--gray-med);
+  }
+  .col-format {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 2px 5px;
+    border-radius: 2px;
+    background: var(--gray-panel);
+    color: var(--gray-med);
+    display: inline-block;
+  }
+  .col-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gray-chart);
+    text-align: center;
+  }
+  .col-date.empty { color: var(--gray-divider); }
+
+  /* Review tags */
+  .review-tag {
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 5px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+  .review-tag.approval { background: rgba(245,5,55,0.08); color: var(--red); }
+  .review-tag.review { background: var(--amber-bg); color: var(--amber); }
+  .review-tag.info { background: var(--gray-panel); color: var(--gray-chart); }
+
+  /* Criticality dots */
+  .crit-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .crit-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .crit-indicator.critical .crit-dot { background: var(--red); }
+  .crit-indicator.critical { color: var(--red); }
+  .crit-indicator.major .crit-dot { background: var(--amber); }
+  .crit-indicator.major { color: var(--amber); }
+  .crit-indicator.standard .crit-dot { background: var(--gray-chart); }
+  .crit-indicator.standard { color: var(--gray-chart); }
+
+  /* Status badges */
+  .status-badge-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .status-badge-sm.validated { background: var(--green-bg); color: var(--green); }
+  .status-badge-sm.rejected { background: var(--red); color: var(--white); }
+  .status-badge-sm.validating { background: var(--amber-bg); color: var(--amber); }
+  .status-badge-sm.received { background: var(--blue-bg); color: var(--blue-steel); }
+  .status-badge-sm.pending { background: rgba(136,136,136,0.1); color: var(--gray-chart); }
+
+  .status-dot-sm { width: 5px; height: 5px; border-radius: 50%; }
+  .status-badge-sm.validated .status-dot-sm { background: var(--green); }
+  .status-badge-sm.validating .status-dot-sm { background: var(--amber); animation: livePulse 2s ease-in-out infinite; }
+  .status-badge-sm.received .status-dot-sm { background: var(--blue-steel); }
+  .status-badge-sm.pending .status-dot-sm { background: var(--gray-chart); }
+
+  /* Rejected row highlight */
+  .index-table tbody tr.row-rejected {
+    background: rgba(245,5,55,0.025);
+    border-left: 3px solid var(--red);
+  }
+  .index-table tbody tr.row-rejected:hover {
+    background: rgba(245,5,55,0.04);
+  }
+
+  /* Action icons */
+  .action-btn {
+    width: 28px; height: 28px;
+    border-radius: 4px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--gray-med);
+    transition: all var(--transition);
+  }
+  .action-btn:hover { background: var(--gray-panel); color: var(--black); }
+  .action-btn.view-btn:hover { color: var(--green); }
+  .action-btn.retry-btn { color: var(--red); }
+  .action-btn.retry-btn:hover { background: var(--red-bg); }
+  .action-btn.upload-btn:hover { color: var(--red); background: var(--red-bg); }
+
+  .spin { animation: spin 1.2s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Alerts Panel ───────────────────────────────────────── */
+  .alerts-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .alert-card {
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(211,211,211,0.5);
+    background: var(--white);
+  }
+  .alert-card.rejection {
+    border-left: 3px solid var(--red);
+    background: rgba(254,232,236,0.3);
+  }
+  .alert-card.pending-info {
+    border-left: 3px solid var(--amber);
+    background: rgba(255,248,231,0.3);
+  }
+
+  .alert-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .alert-card.rejection .alert-title { color: var(--red); }
+  .alert-card.pending-info .alert-title { color: var(--amber); }
+
+  .alert-text {
+    font-size: 11px;
+    color: var(--gray-med);
+    line-height: 1.6;
+  }
+  .alert-text strong { color: var(--black); font-weight: 600; }
+  .alert-text .mono-ref {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--red);
+    font-weight: 600;
+  }
+
+  .alert-item {
+    padding: 4px 0;
+    font-size: 11px;
+    color: var(--gray-med);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.5;
+  }
+  .alert-item strong { color: var(--black); }
+  .alert-bullet {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .alert-card.pending-info .alert-bullet { background: var(--amber); }
+
+  /* ══════════════════════════════════════════════════════════
+     CONTEXT SIDEBAR (right panel)
+     ══════════════════════════════════════════════════════════ */
+
+  .context-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: sticky;
+    top: 0;
+  }
+
+  .ctx-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(211,211,211,0.5);
+    overflow: hidden;
+  }
+  .ctx-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gray-divider);
+  }
+  .ctx-title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--black);
+  }
+
+  /* State Machine */
+  .state-machine {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  .state-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .state-circle {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--gray-divider);
+    background: var(--white);
+    transition: all var(--transition);
+  }
+  .state-node.completed .state-circle { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+  .state-node.current .state-circle { border-color: var(--amber); background: var(--amber-bg); color: var(--amber); box-shadow: 0 0 0 3px rgba(196,127,23,0.12); }
+  .state-node.future .state-circle { border-color: var(--gray-divider); background: var(--gray-panel); color: var(--gray-divider); }
+  .state-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-chart); }
+  .state-node.current .state-label { color: var(--amber); font-weight: 700; }
+  .state-node.completed .state-label { color: var(--green); }
+
+  .state-connector { width: 28px; height: 2px; background: var(--gray-divider); margin-bottom: 18px; flex-shrink: 0; }
+  .state-connector.done { background: var(--green); }
+
+  /* Section Progress Bars */
+  .section-progress-list { padding: 14px 16px; }
+  .sp-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 10px;
+  }
+  .sp-row:last-child { margin-bottom: 0; }
+  .sp-label {
+    width: 72px;
+    font-weight: 600;
+    color: var(--gray-med);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+  }
+  .sp-row.highlight .sp-label { color: var(--red); font-weight: 700; }
+  .sp-bar-bg {
+    flex: 1;
+    height: 5px;
+    background: var(--gray-panel);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .sp-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .sp-bar-fill.green { background: var(--green); }
+  .sp-bar-fill.amber { background: var(--amber); }
+  .sp-bar-fill.gray { background: var(--gray-chart); }
+  .sp-frac {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 10px;
+    color: var(--gray-chart);
+    width: 28px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  @keyframes barFill { from { width: 0; } }
+  .sp-bar-fill { animation: barFill 800ms ease-out 500ms both; }
+
+  /* Validation Pipeline */
+  .val-pipeline { padding: 14px 16px; }
+  .val-layer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 11px;
+    border-bottom: 1px solid rgba(211,211,211,0.3);
+  }
+  .val-layer:last-child { border-bottom: none; }
+
+  .val-icon {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 10px;
+  }
+  .val-icon.done { background: var(--green-bg); color: var(--green); }
+  .val-icon.active { background: var(--amber-bg); color: var(--amber); }
+  .val-icon.wait { background: var(--gray-panel); color: var(--gray-divider); }
+
+  .val-name { font-weight: 600; color: var(--black); flex: 1; }
+  .val-layer .val-status { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .val-layer .val-status.done { color: var(--green); }
+  .val-layer .val-status.active { color: var(--amber); }
+  .val-layer .val-status.wait { color: var(--gray-chart); }
+
+  /* Quick Actions */
+  .ctx-actions { padding: 14px 16px; }
+  .ctx-btn {
+    display: flex; align-items: center; gap: 8px;
+    width: 100%; padding: 7px 10px;
+    font-size: 11px; font-weight: 600; color: var(--black);
+    border-radius: 4px; transition: all var(--transition); margin-bottom: 3px;
+  }
+  .ctx-btn:hover { background: var(--gray-panel); }
+  .ctx-btn .ctx-icon {
+    width: 22px; height: 22px; border-radius: 4px;
+    background: var(--gray-panel);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gray-med); flex-shrink: 0;
+  }
+  .ctx-btn:hover .ctx-icon { background: var(--red-bg); color: var(--red); }
+
+  /* ── Footer ───────────────────────────────────────────── */
+  .app-footer {
+    padding: 16px 0 4px; text-align: center;
+    font-size: 10px; color: var(--gray-chart); letter-spacing: 0.3px;
+  }
+  .app-footer .confidential { color: var(--red); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-size: 9px; }
+
+  /* ══════════════════════════════════════════════════════════
+     ANIMATIONS
+     ══════════════════════════════════════════════════════════ */
+
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes slideInLeft { from { opacity:0; transform:translateX(-8px); } to { opacity:1; transform:translateX(0); } }
+  @keyframes slideInRight { from { opacity:0; transform:translateX(12px); } to { opacity:1; transform:translateX(0); } }
+
+  .order-header { animation: fadeInUp 400ms ease-out 80ms both; }
+  .section-tabs { animation: fadeInUp 400ms ease-out 140ms both; }
+  .index-table-card { animation: fadeInUp 400ms ease-out 200ms both; }
+  .alerts-panel { animation: fadeInUp 400ms ease-out 320ms both; }
+
+  .ctx-card:nth-child(1) { animation: slideInRight 400ms ease-out 180ms both; }
+  .ctx-card:nth-child(2) { animation: slideInRight 400ms ease-out 260ms both; }
+  .ctx-card:nth-child(3) { animation: slideInRight 400ms ease-out 340ms both; }
+  .ctx-card:nth-child(4) { animation: slideInRight 400ms ease-out 420ms both; }
+
+  .nav-item { animation: slideInLeft 300ms ease-out both; }
+  .nav-section:nth-child(2) .nav-item:nth-child(2) { animation-delay: 40ms; }
+  .nav-section:nth-child(2) .nav-item:nth-child(3) { animation-delay: 80ms; }
+  .nav-section:nth-child(2) .nav-item:nth-child(4) { animation-delay: 120ms; }
+  .nav-section:nth-child(3) .nav-item { animation-delay: 160ms; }
+  .nav-section:nth-child(4) .nav-item { animation-delay: 240ms; }
+  .nav-section:nth-child(5) .nav-item { animation-delay: 320ms; }
+
+  /* ── Responsive ─────────────────────────────────────────── */
+  @media (max-width: 1280px) {
+    .index-layout { grid-template-columns: 1fr 260px; }
+    .order-meta-grid { grid-template-columns: repeat(2, auto); }
+  }
+  @media (max-width: 1024px) {
+    .index-layout { grid-template-columns: 1fr; }
+    .context-panel { position: static; display: grid; grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ═══════════════════════════════════════════════════════
+       SIDEBAR
+       ═══════════════════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <a href="MRB-Builder-App-Shell.html" class="sidebar-logo" style="text-decoration:none;cursor:pointer;">
+      <div class="logo-stars"><span class="logo-star"></span><span class="logo-star"></span><span class="logo-star"></span><span class="logo-star"></span><span class="logo-star"></span></div>
+      <div class="logo-text">Aurelian</div>
+      <div class="logo-sub">Manufacturing</div>
+    </a>
+
+    <nav class="nav-section">
+      <div class="nav-section-label">Operations</div>
+      <div class="nav-item" onclick="navigate('MRB-Builder-App-Shell.html')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg></span>
+        Dashboard
+      </div>
+      <div class="nav-item" onclick="navigate('MRB-Orders-List-Screen.html')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h2"/></svg></span>
+        Orders <span class="nav-badge">12</span>
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 1.5L14 5v6l-6 3.5L2 11V5L8 1.5z"/><path d="M8 8v6.5M2 5l6 3 6-3"/></svg></span>
+        Material Queue <span class="nav-badge">5</span>
+      </div>
+    </nav>
+
+    <nav class="nav-section">
+      <div class="nav-section-label">MRB Management</div>
+      <div class="nav-item active" onclick="navigate('MRB-Index-Screen.html')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 4h10M3 8h10M3 12h6"/></svg></span>
+        MRB Index
+      </div>
+      <div class="nav-item" onclick="navigate('MRB-Gate-Review-Screen.html')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 8l3 3 5-6"/><circle cx="8" cy="8" r="6.5"/></svg></span>
+        Gate Reviews <span class="nav-badge">5</span>
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4h3v10H2z"/><path d="M5 2h9v2H5z"/><path d="M7 4h7v10H7z"/><path d="M9 7h3M9 10h3"/></svg></span>
+        ITP Management
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h4"/></svg></span>
+        Documents <span class="nav-badge">23</span>
+      </div>
+    </nav>
+
+    <nav class="nav-section">
+      <div class="nav-section-label">Administration</div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="12" height="10" rx="1.5"/><path d="M5 4V2.5A1.5 1.5 0 0 1 6.5 1h3A1.5 1.5 0 0 1 11 2.5V4"/><path d="M2 8h12"/></svg></span>
+        Customers
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="7" width="8" height="6" rx="1"/><path d="M3 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+        Suppliers
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 14V8l-3 2V6l5-4 5 4v4l-3-2v6"/></svg></span>
+        Profiles
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></span>
+        Users
+      </div>
+    </nav>
+
+    <nav class="nav-section">
+      <div class="nav-section-label">System</div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h4"/></svg></span>
+        Audit Log
+      </div>
+      <div class="nav-item" onclick="navigate('#')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="2"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.4 1.4M11.55 11.55l1.4 1.4M3.05 12.95l1.4-1.4M11.55 4.45l1.4-1.4"/></svg></span>
+        Settings
+      </div>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="user-avatar">TA</div>
+      <div class="user-info">
+        <div class="user-name">Tore Ausland</div>
+        <div class="user-role">QA Engineer</div>
+      </div>
+      <button class="user-logout" title="Log out">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2H3.5A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14H6"/><path d="M10 11l3-3-3-3M5.5 8H13"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPBAR
+       ═══════════════════════════════════════════════════════ -->
+  <header class="topbar">
+    <div class="topbar-title">MRB Index</div>
+    <div class="topbar-breadcrumb">
+      <span>›</span> <a href="MRB-Builder-App-Shell.html" style="cursor:pointer;">MRB Management</a> <span>›</span> <a href="MRB-Index-Screen.html" style="cursor:pointer;">MRB Index</a> <span>›</span> <a href="MRB-Order-Detail-Screen.html" class="bc-id" style="cursor:pointer;">ORD-2026-0034</a>
+    </div>
+    <div class="topbar-spacer"></div>
+    <div class="topbar-search">
+      <span class="search-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg></span>
+      <input type="text" placeholder="Search documents, line items...">
+    </div>
+    <div class="topbar-actions">
+      <button class="topbar-btn" title="Notifications">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6a4 4 0 0 1 8 0c0 3 1.5 4.5 2 5H2c.5-.5 2-2 2-5z"/><path d="M6.5 13a1.5 1.5 0 0 0 3 0"/></svg>
+        <span class="notif-dot">7</span>
+      </button>
+      <span class="env-badge">Staging</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MAIN CONTENT — MRB Index FM-009-04
+       ═══════════════════════════════════════════════════════ -->
+  <main class="main">
+
+    <!-- Order Header Bar -->
+    <div class="order-header">
+      <div class="order-context">
+        <div class="order-top-row">
+          <a href="MRB-Order-Detail-Screen.html" class="order-id" style="cursor:pointer;text-decoration:none;">ORD-2026-0034</a>
+          <span class="live-badge"><span class="pulse-dot"></span> Live</span>
+          <span class="industry-tag oilgas">Oil &amp; Gas</span>
+        </div>
+        <div class="order-meta-grid">
+          <div><div class="om-label">Customer</div><div class="om-value">Equinor ASA</div></div>
+          <div><div class="om-label">PO Number</div><div class="om-value mono">PO-EQ-2026-4521</div></div>
+          <div><div class="om-label">Material</div><div class="om-value">Subsea Valve Assembly</div></div>
+          <div><div class="om-label">Grade</div><div class="om-value" style="font-weight:700;">ASTM A182 F316</div></div>
+        </div>
+      </div>
+      <div class="progress-ring-container">
+        <div class="progress-ring">
+          <div class="progress-ring-inner">
+            <div class="progress-ring-pct">68<span style="font-size:11px;font-weight:600;">%</span></div>
+            <div class="progress-ring-sub">Complete</div>
+          </div>
+        </div>
+        <div class="progress-stats">
+          <div class="progress-stats-title">23 of 34 documents validated</div>
+          <div class="stat-mini-row">
+            <span class="stat-mini validated"><span class="stat-dot"></span>23</span>
+            <span class="stat-mini received"><span class="stat-dot"></span>4</span>
+            <span class="stat-mini validating"><span class="stat-dot"></span>2</span>
+            <span class="stat-mini pending"><span class="stat-dot"></span>3</span>
+            <span class="stat-mini rejected"><span class="stat-dot" style="width:auto;height:auto;border-radius:3px;padding:1px 5px;font-size:9px;font-weight:700;color:var(--white);background:var(--red);">1</span></span>
+            <span class="stat-mini waived"><span class="stat-dot"></span>1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="index-layout">
+
+      <!-- ── Left Column ──────────────────────────────────── -->
+      <div class="index-main">
+
+        <!-- Section Tabs -->
+        <div class="section-tabs">
+          <div class="section-tab" onclick="switchTab(0)"><div class="tab-num">1</div><div class="tab-name">General</div><div class="tab-fraction complete">3/4</div></div>
+          <div class="section-tab" onclick="switchTab(1)"><div class="tab-num">2</div><div class="tab-name">Purchase &amp; Tech</div><div class="tab-fraction complete">4/5</div></div>
+          <div class="section-tab active" onclick="switchTab(2)"><div class="tab-num">3</div><div class="tab-name">Material</div><div class="tab-fraction partial">5/7</div></div>
+          <div class="section-tab" onclick="switchTab(3)"><div class="tab-num">4</div><div class="tab-name">Manufacturing</div><div class="tab-fraction partial">4/6</div></div>
+          <div class="section-tab" onclick="switchTab(4)"><div class="tab-num">5</div><div class="tab-name">Testing</div><div class="tab-fraction complete">4/5</div></div>
+          <div class="section-tab" onclick="switchTab(5)"><div class="tab-num">6</div><div class="tab-name">Compliance</div><div class="tab-fraction partial">2/4</div></div>
+          <div class="section-tab" onclick="switchTab(6)"><div class="tab-num">7</div><div class="tab-name">Preservation</div><div class="tab-fraction early">1/3</div></div>
+        </div>
+
+        <!-- Document Index Table -->
+        <div class="index-table-card">
+          <table class="index-table">
+            <thead>
+              <tr>
+                <th style="width:48px;">Line</th>
+                <th>Document Title</th>
+                <th>Standard</th>
+                <th>Source</th>
+                <th class="col-center">Format</th>
+                <th class="col-center">Review</th>
+                <th class="col-center">Crit.</th>
+                <th class="col-center">Status</th>
+                <th class="col-center">Received</th>
+                <th class="col-center">Validated</th>
+                <th class="col-center" style="width:44px;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 3.1 VALIDATED -->
+              <tr>
+                <td class="col-line">3.1</td>
+                <td class="col-title">Material Test Certificate (EN 10204 3.1)</td>
+                <td class="col-standard">EN 10204</td>
+                <td class="col-source">Supplier</td>
+                <td style="text-align:center;"><span class="col-format">PDF/A</span></td>
+                <td style="text-align:center;"><span class="review-tag approval">Approval</span></td>
+                <td style="text-align:center;"><span class="crit-indicator critical"><span class="crit-dot"></span></span></td>
+                <td style="text-align:center;"><span class="status-badge-sm validated"><span class="status-dot-sm"></span>Validated</span></td>
+                <td class="col-date">18 Feb</td>
+                <td class="col-date">19 Feb</td>
+                <td style="text-align:center;">
+                  <button class="action-btn view-btn" title="View document"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg></button>
+                </td>
+              </tr>
+              <!-- 3.2 VALIDATED -->
+              <tr>
+                <td class="col-line">3.2</td>
+                <td class="col-title">Material Test Certificate — Heat H-84729-A</td>
+                <td class="col-standard">EN 10204</td>
+                <td class="col-source">Supplier</td>
+                <td style="text-align:center;"><span class="col-format">PDF</span></td>
+                <td style="text-align:center;"><span class="review-tag review">Review</span></td>
+                <td style="text-align:center;"><span class="crit-indicator critical"><span class="crit-dot"></span></span></td>
+                <td style="text-align:center;"><span class="status-badge-sm validated"><span class="status-dot-sm"></span>Validated</span></td>
+                <td class="col-date">19 Feb</td>
+                <td class="col-date">20 Feb</td>
+                <td style="text-align:center;">
+                  <button class="action-btn view-btn" title="View document"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg></button>
+                </td>
+              </tr>
+              <!-- 3.3 VALIDATED -->
+              <tr>
+                <td class="col-line">3.3</td>
+                <td class="col-title">Chemical Analysis Report</td>
+                <td class="col-standard">ASTM E350</td>
+                <td class="col-source">Supplier</td>
+                <td style="text-align:center;"><span class="col-format">PDF</span></td>
+                <td style="text-align:center;"><span class="review-tag info">Info</span></td>
+                <td style="text-align:center;"><span class="crit-indicator major"><span class="crit-dot"></span></span></td>
+                <td style="text-align:center;"><span class="status-badge-sm validated"><span class="status-dot-sm"></span>Validated</span></td>
+                <td class="col-date">18 Feb</td>
+                <td class="col-date">19 Feb</td>
+                <td style="text-align:center;">
+                  <button class="action-btn view-btn" title="View document"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg></button>
+                </td>
+              </tr>
+              <!-- 3.4 REJECTED -->
+              <tr class="row-rejected">
+                <td class="col-line">3.4</td>
+                <td class="col-title">Mechanical Test Report</td>
+                <td class="col-standard">ASTM A370</td>
+                <td class="col-source">Supplier</td>
+                <td style="text-align:center;"><span class="col-format">PDF/A</span></td>
+                <td style="text-align:center;"><span class="review-tag review">Review</span></td>
+                <td style="text-align:center;"><span class="crit-indicator critical"><span class="crit-dot"></span></span></td>
+                <td style="text-align:center;"><span class="status-badge-sm rejected">Rejected</span></td>
+                <td class="col-date">20 Feb</td>
+                <td class="col-date empty">—</td>
+                <td style="text-align:center;">
+                  <button class="action-btn retry-btn" title="Re-validate"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 8a6 6 0 0 1 10.3-4.2"/><path d="M14 8a6 6 0 0 1-10.3 4.2"/><path d="M12 1v3.5h-3.5"/><path d="M4 15v-3.5h3.5"/></svg></button>
+                </td>
+              </tr>
+              <!-- 3.5 VALIDATING -->
+              <tr>
+                <td class="col-line">3.5</td>
+                <td class="col-title">PMI Report (Positive Material Identification)</td>
+                <td class="col-standard">NORSOK M-650</td>
+                <td class="col-source">Inspection</td>
+                <td style="text-align:center;"><span class="col-format">PDF</span></td>
+                <td style="text-align:center;"><span class="review-tag info">Info</span></td>
+                <td style="text-align:center;"><span class="crit-indicator major"><span class="crit-dot"></span></span></td>
+                <td style="text-align:center;"><span class="status-badge-sm validating"><span class="status-dot-sm"></span>Validating</span></td>
+                <td class="col-date">21 Feb</td>
+                <td class="col-date empty">—</td>
+                <td style="text-align:center;">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" class="spin"><circle cx="8" cy="8" r="5.5" stroke-dasharray="20 14"/></svg>
+                </td>
+              </tr>
+              <!-- 3.6 RECEIVED -->
+              <tr>
+                <td class="col-line">3.6</td>
+                <td class="col-title">Impact Test Report (−46°C)</td>
+                <td class="col-standard">ASTM A370</td>
+                <td class="col-source">Supplier</td>
+                <td style="text-align:center;"><span class="col-format">PDF</span></td>
+                <td style="text-align:center;"><span class="review-tag review">Review</span></td>
+                <td style="text-align:center;"><span class="crit-indicator critical"><span class="crit-dot"></span></span></td>
+                <td style="text-align:center;"><span class="status-badge-sm received"><span class="status-dot-sm"></span>Received</span></td>
+                <td class="col-date">22 Feb</td>
+                <td class="col-date empty">—</td>
+                <td style="text-align:center;">
+                  <button class="action-btn view-btn" title="Start validation" style="color:var(--blue-steel);"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 8l3 3 5-6"/></svg></button>
+                </td>
+              </tr>
+              <!-- 3.7 PENDING -->
+              <tr>
+                <td class="col-line">3.7</td>
+                <td class="col-title">Intergranular Corrosion Test</td>
+                <td class="col-standard">ASTM A262</td>
+                <td class="col-source" style="font-size:8px;">Spec. Process</td>
+                <td style="text-align:center;"><span class="col-format">PDF/A</span></td>
+                <td style="text-align:center;"><span class="review-tag approval">Approval</span></td>
+                <td style="text-align:center;"><span class="crit-indicator major"><span class="crit-dot"></span></span></td>
+                <td style="text-align:center;"><span class="status-badge-sm pending"><span class="status-dot-sm"></span>Pending</span></td>
+                <td class="col-date empty">—</td>
+                <td class="col-date empty">—</td>
+                <td style="text-align:center;">
+                  <button class="action-btn upload-btn" title="Upload document"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 12v2h12v-2"/><path d="M8 10V2M5 5l3-3 3 3"/></svg></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Alerts Panel -->
+        <div class="alerts-panel">
+          <div class="alert-card rejection">
+            <div class="alert-title">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l6 6M11 5l-6 6"/></svg>
+              1 Rejection Active
+            </div>
+            <div class="alert-text">
+              <strong>3.4 Mechanical Test Report</strong> — ASTM A370: Elongation value 28.5% below minimum 30.0% (linked to <a href="MRB-Gate-Review-Screen.html" class="mono-ref" style="cursor:pointer;text-decoration:none;">GR-2026-0047</a>, Check 3). Correction Request <a href="MRB-Correction-Request-Screen.html" class="mono-ref" style="cursor:pointer;text-decoration:none;">CR-2026-00015</a> sent to Sandvik Materials Technology.
+            </div>
+          </div>
+          <div class="alert-card pending-info">
+            <div class="alert-title">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2.5 1.5"/></svg>
+              3 Documents Pending
+            </div>
+            <div class="alert-item"><span class="alert-bullet"></span><div><strong>3.5 PMI Report:</strong> Validating — L3 completeness check in progress</div></div>
+            <div class="alert-item"><span class="alert-bullet"></span><div><strong>3.6 Impact Test:</strong> Received 22 Feb, awaiting validation start</div></div>
+            <div class="alert-item"><span class="alert-bullet"></span><div><strong>3.7 IGC Test:</strong> Not yet received from NADCAP lab (expected 24 Feb)</div></div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="app-footer">
+          <span class="confidential">Confidential</span>
+          <div style="margin-top:4px;">Aurelian Manufacturing AS — Digital MRB Builder — Phase 0 Staging — 22 February 2026</div>
+        </div>
+      </div>
+
+      <!-- ── Right Column: Context Panel ──────────────────── -->
+      <div class="context-panel">
+
+        <!-- Index State Machine -->
+        <div class="ctx-card">
+          <div class="ctx-header"><div class="ctx-title">Index State</div></div>
+          <div class="state-machine">
+            <div class="state-node completed">
+              <div class="state-circle"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3.5 3.5L13 5"/></svg></div>
+              <div class="state-label">Draft</div>
+            </div>
+            <div class="state-connector done"></div>
+            <div class="state-node current">
+              <div class="state-circle"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="8" r="3" fill="currentColor"/></svg></div>
+              <div class="state-label">Live</div>
+            </div>
+            <div class="state-connector"></div>
+            <div class="state-node future">
+              <div class="state-circle"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="10" height="10" rx="1.5"/></svg></div>
+              <div class="state-label">Final</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section Progress -->
+        <div class="ctx-card">
+          <div class="ctx-header"><div class="ctx-title">Section Progress</div></div>
+          <div class="section-progress-list">
+            <div class="sp-row"><span class="sp-label">1 General</span><div class="sp-bar-bg"><div class="sp-bar-fill green" style="width:75%"></div></div><span class="sp-frac">3/4</span></div>
+            <div class="sp-row"><span class="sp-label">2 Purchase</span><div class="sp-bar-bg"><div class="sp-bar-fill green" style="width:80%"></div></div><span class="sp-frac">4/5</span></div>
+            <div class="sp-row highlight"><span class="sp-label">3 Material</span><div class="sp-bar-bg"><div class="sp-bar-fill amber" style="width:71%"></div></div><span class="sp-frac">5/7</span></div>
+            <div class="sp-row"><span class="sp-label">4 Manufact.</span><div class="sp-bar-bg"><div class="sp-bar-fill amber" style="width:67%"></div></div><span class="sp-frac">4/6</span></div>
+            <div class="sp-row"><span class="sp-label">5 Testing</span><div class="sp-bar-bg"><div class="sp-bar-fill green" style="width:80%"></div></div><span class="sp-frac">4/5</span></div>
+            <div class="sp-row"><span class="sp-label">6 Compliance</span><div class="sp-bar-bg"><div class="sp-bar-fill amber" style="width:50%"></div></div><span class="sp-frac">2/4</span></div>
+            <div class="sp-row"><span class="sp-label">7 Preserv.</span><div class="sp-bar-bg"><div class="sp-bar-fill gray" style="width:33%"></div></div><span class="sp-frac">1/3</span></div>
+          </div>
+        </div>
+
+        <!-- Validation Pipeline -->
+        <div class="ctx-card">
+          <div class="ctx-header"><div class="ctx-title">Validation Pipeline</div></div>
+          <div class="val-pipeline">
+            <div class="val-layer">
+              <div class="val-icon done"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 8l3.5 3.5L13 5"/></svg></div>
+              <span class="val-name">L1 Existence</span>
+              <span class="val-status done">Pass</span>
+            </div>
+            <div class="val-layer">
+              <div class="val-icon done"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 8l3.5 3.5L13 5"/></svg></div>
+              <span class="val-name">L2 Format</span>
+              <span class="val-status done">Pass</span>
+            </div>
+            <div class="val-layer">
+              <div class="val-icon active"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="spin"><circle cx="8" cy="8" r="4.5" stroke-dasharray="14 10"/></svg></div>
+              <span class="val-name">L3 Completeness</span>
+              <span class="val-status active">Running</span>
+            </div>
+            <div class="val-layer">
+              <div class="val-icon wait"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="4.5"/></svg></div>
+              <span class="val-name">L4 Compliance</span>
+              <span class="val-status wait">Pending</span>
+            </div>
+            <div class="val-layer">
+              <div class="val-icon wait"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="4.5"/></svg></div>
+              <span class="val-name">L5 Traceability</span>
+              <span class="val-status wait">Pending</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="ctx-card">
+          <div class="ctx-header"><div class="ctx-title">Quick Actions</div></div>
+          <div class="ctx-actions">
+            <button class="ctx-btn">
+              <span class="ctx-icon"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 12v2h12v-2"/><path d="M8 10V2M5 5l3-3 3 3"/></svg></span>
+              Upload Document
+            </button>
+            <button class="ctx-btn">
+              <span class="ctx-icon"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 8l3 3 5-6"/></svg></span>
+              Trigger Validation
+            </button>
+            <button class="ctx-btn">
+              <span class="ctx-icon"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h4"/></svg></span>
+              Export Index (PDF)
+            </button>
+            <button class="ctx-btn" onclick="navigate('MRB-Correction-Request-Screen.html')">
+              <span class="ctx-icon"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 1v4M8 11v4M1 8h4M11 8h4"/><circle cx="8" cy="8" r="2.5"/></svg></span>
+              View Correction Requests
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function navigate(url) {
+    if (url && url !== '#') window.location.href = url;
+  }
+
+  function switchTab(index) {
+    document.querySelectorAll('.section-tab').forEach((tab, i) => {
+      tab.classList.toggle('active', i === index);
+    });
+    // In production, this would load different table content per section
+  }
+</script>
+
+</body>
+</html>

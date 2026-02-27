@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — NAMMO Large Caliber Systems Strategi</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  .step-list { list-style: none; padding: 0; margin: 1.2rem 0; counter-reset: step-counter; }
+  .step-list li { position: relative; padding-left: 2.6rem; margin-bottom: 1.2rem; font-size: 0.88rem; line-height: 1.5; }
+  .step-list li::before { counter-increment: step-counter; content: counter(step-counter); position: absolute; left: 0; top: 0; width: 28px; height: 28px; background: var(--red); color: var(--white); font-size: 0.82rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; line-height: 1; text-align: center; }
+  .step-date { font-size: 0.78rem; color: var(--gray-medium); display: block; margin-top: 0.15rem; }
+
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">NAMMO Large Caliber Systems</div>
+    <div class="cover-subtitle">Segmentstrategi &mdash; artilleri og storkaliberammunisjon</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Februar 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- SEGMENTOVERSIKT -->
+  <section>
+    <div class="section-label">Segmentoversikt</div>
+    <h2>Large Caliber Systems &mdash; NAMMOs st&oslash;rste vekstomr&aring;de</h2>
+
+    <p>NAMMOs Large Caliber Systems-divisjon er i en historisk oppskaleringsfase. Produksjonen av artilleriammunisjon skal <span class="red-accent">femdobles (5&times;)</span> som direkte respons p&aring; NATOs behov for &aring; bygge opp artillerilagre etter Ukraina-krigen. 155mm artilleriammunisjon er hovedproduktet og det st&oslash;rste vekstomr&aring;det i hele NAMMO-konsernet.</p>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">5&times;</div>
+        <div class="kpi-label">Produksjons-<br>&oslash;kning</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">155mm</div>
+        <div class="kpi-label">Hoved-<br>kaliber</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">39.8</div>
+        <div class="kpi-label">MRD NOK<br>Ordrebok</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">4&ndash;12k</div>
+        <div class="kpi-label">Est. CNC-<br>timer/&aring;r</div>
+      </div>
+    </div>
+
+    <p>NAMMO bygger en <strong>ny fabrikk p&aring; 11 000 m&sup2; p&aring; Raufoss</strong> dedikert til storkaliberproduksjon. Den norske regjeringen har bevilget <strong>NOK 2 milliarder</strong> til kapasitetsutvidelse &mdash; et tydelig signal om at artilleriproduksjon er nasjonal prioritet. Alle NATO-land ruster opp artillerilagrene sine, og NAMMO er en av sv&aelig;rt f&aring; vestlige produsenter med kapasitet til &aring; levere i volum.</p>
+
+    <p>Til tross for den nye fabrikken og massive investeringer vil intern maskinkapasitet ikke v&aelig;re tilstrekkelig for &aring; m&oslash;te den femdoble produksjons&oslash;kningen. NAMMOs mekaniske avdeling p&aring; Raufoss har over 300 ansatte, men er allerede fullstendig sprengt. De outsourcer CNC-arbeid til regionale verksteder &mdash; men trenger en permanent, skalerbar partner.</p>
+  </section>
+
+  <!-- CNC-KOMPONENTBEHOV -->
+  <section>
+    <div class="section-label">Komponentbehov</div>
+    <h2>CNC-komponentbehov i storkaliberproduksjon</h2>
+
+    <p>Produksjon av 155mm artilleriammunisjon og andre storkalibersystemer involverer en rekke presisjonsmaskineringsoperasjoner. Tabellen under viser de viktigste komponentene som krever CNC-kapasitet:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Komponent</th>
+          <th>Materiale</th>
+          <th>Operasjon</th>
+          <th>Volum</th>
+          <th>Kompleksitet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Prosjektilkropper (155mm)</strong></td>
+          <td>St&aring;l, spesialst&aring;l</td>
+          <td>Dreining, konturdreining</td>
+          <td style="color: var(--red); font-weight: 700;">Sv&aelig;rt h&oslash;yt</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Tennerkapper / fuse housings</strong></td>
+          <td>St&aring;l, messing</td>
+          <td>CNC-dreiing, fresing</td>
+          <td style="color: var(--red); font-weight: 700;">H&oslash;yt</td>
+          <td>Medium-H&oslash;y</td>
+        </tr>
+        <tr>
+          <td><strong>Drivladningshylser</strong></td>
+          <td>St&aring;l</td>
+          <td>Dreiing, bunnforming</td>
+          <td>H&oslash;yt</td>
+          <td>Lav-Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Base plates / bunnplater</strong></td>
+          <td>St&aring;l, aluminium</td>
+          <td>Fresing, boring</td>
+          <td>Medium</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Verkt&oslash;y og fixturer</strong></td>
+          <td>Verkt&oslash;ysst&aring;l</td>
+          <td>3-5 akse fresing</td>
+          <td>L&oslash;pende</td>
+          <td>H&oslash;y</td>
+        </tr>
+        <tr>
+          <td><strong>Prototypekomponenter</strong></td>
+          <td>Diverse</td>
+          <td>Alle operasjoner</td>
+          <td>Lav</td>
+          <td>H&oslash;y</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary"><strong>Hovedvolum:</strong> Prosjektilkropper i 155mm er den klart st&oslash;rste enkeltkomponenten m&aring;lt i CNC-timer. Hver prosjektilkropp krever dreiing i flere oppspenn, og volumet skalerer direkte med den femdoble produksjons&oslash;kningen. Dette er kjernen i Aurelians volumargument.</p>
+  </section>
+
+  <!-- CALLOUT — KAPASITETSUTFORDRING -->
+  <section>
+    <div class="section-label">N&oslash;kkelinnsikt</div>
+    <h2>Kapasitetsutfordringen &mdash; hvorfor NAMMO trenger ekstern CNC</h2>
+
+    <div class="callout">
+      <p><strong>NAMMO har 300+ ansatte i mekanisk avdeling p&aring; Raufoss, men 5&times; produksjons&oslash;kning betyr at intern kapasitet er fullstendig sprengt.</strong> De outsourcer allerede CNC-arbeid til regionale verksteder. Aurelian tilbyr en permanent, skalerbar l&oslash;sning.</p>
+    </div>
+
+    <p>Tradisjonelle norske CNC-verksteder har typisk 20&ndash;45% maskinutnyttelse og begrenset kapasitet. De kan h&aring;ndtere sm&aring; serier og prototyper, men mangler evnen til &aring; absorbere det volumet NAMMO trenger. NAMMO st&aring;r overfor et valg: investere hundrevis av millioner i egen maskinpark (med tilh&oslash;rende rekrutteringsrisiko), eller finne en partner som allerede har kapasiteten.</p>
+
+    <p>Aurelian er den partneren &mdash; med 25 CNC-maskiner, 24/7 autonom drift og en OPEX-modell som eliminerer behovet for CAPEX-investering hos NAMMO.</p>
+  </section>
+
+  <!-- AURELIANS MATCH — DARK PANEL -->
+  <section class="dark-panel">
+    <div class="section-label">Aurelians match</div>
+    <h2>Hvorfor Aurelian er en perfekt match for Large Caliber</h2>
+
+    <ul class="clean-list">
+      <li><strong>25 CNC-maskiner gir kapasitet for h&oslash;yvolum dreiing og fresing</strong> &mdash; Aurelians maskinpark er dimensjonert for industrielt volum, ikke sm&aring;serier. Ideelt for 155mm-produksjonens repetitive, h&oslash;yvolum dreieoperasjoner.</li>
+      <li><strong>24/7 autonom drift gir konsistent output uten nattskift-problematikk</strong> &mdash; NAMMOs interne produksjon er begrenset av tilgang p&aring; operatorer p&aring; kvelds- og nattskift. Aurelians lights-out drift eliminerer denne flaskehalsen.</li>
+      <li><strong>Mazak multi-tasking maskiner h&aring;ndterer dreiing + fresing i &eacute;n oppspenn</strong> &mdash; Reduserer antall operasjoner og forbedrer toleranser. S&aelig;rlig relevant for prosjektilkropper og tennerkapper som krever b&aring;de dreiing og fresing.</li>
+      <li><strong>Full digital sporbarhet &mdash; milit&aelig;r standard fra dag 1</strong> &mdash; Komplett digital tr&aring;d fra ordre til ferdig komponent. Ingen ettermontering av sporbarhetssystemer n&oslash;dvendig.</li>
+      <li><strong>OPEX-modell &mdash; NAMMO slipper CAPEX-investering i egne maskiner</strong> &mdash; Production as a Service betyr at NAMMO betaler for maskintimer, ikke maskinpark. Skalerbart opp og ned etter ordrebokens behov.</li>
+      <li><strong>N&aelig;r nok: Raufoss &rarr; V&aring;ler ca. 2 timer</strong> &mdash; Effektiv logistikk med daglige eller ukentlige transporter. Kort nok avstand for tekniske m&oslash;ter og kvalitetsoppf&oslash;lging p&aring; stedet.</li>
+    </ul>
+  </section>
+
+  <!-- ESTIMERT POTENSIAL -->
+  <section>
+    <div class="section-label">Estimert potensial</div>
+    <h2>Omsetningspotensial &mdash; Large Caliber Systems</h2>
+
+    <p>Tabellen under viser estimert &aring;rlig volum og omsetning per arbeidstype, basert p&aring; NAMMOs offentliggjorte produksjonsplaner og Aurelians kapasitetsmodell:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Type arbeid</th>
+          <th>Volum (timer/&aring;r)</th>
+          <th>Omsetning (MNOK)</th>
+          <th>Tidslinje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>155mm prosjektilkropper</strong></td>
+          <td>2 000 &ndash; 5 000</td>
+          <td>6 &ndash; 15</td>
+          <td>Q3 2027</td>
+        </tr>
+        <tr>
+          <td><strong>Tennere og fusekomponenter</strong></td>
+          <td>1 000 &ndash; 3 000</td>
+          <td>3 &ndash; 9</td>
+          <td>Q4 2027</td>
+        </tr>
+        <tr>
+          <td><strong>Verkt&oslash;y/fixturer/prototyper</strong></td>
+          <td>500 &ndash; 2 000</td>
+          <td>1.5 &ndash; 6</td>
+          <td>Q3 2027</td>
+        </tr>
+        <tr>
+          <td><strong>Drivladningskomponenter</strong></td>
+          <td>500 &ndash; 2 000</td>
+          <td>1.5 &ndash; 6</td>
+          <td>2028</td>
+        </tr>
+        <tr style="font-weight: 700; border-top: 2px solid var(--black);">
+          <td><strong>TOTAL</strong></td>
+          <td><strong>4 000 &ndash; 12 000</strong></td>
+          <td><strong>12 &ndash; 36 MNOK</strong></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary"><strong>Merk:</strong> Estimatene er basert p&aring; offentlig tilgjengelig informasjon om NAMMOs produksjonsplaner og generelle CNC-tidsestimater for tilsvarende komponenter. Faktisk volum vil avhenge av NAMMOs interne make-or-buy-beslutninger og spesifikke komponentkrav. Tallene vil presiseres etter innledende tekniske samtaler.</p>
+  </section>
+
+  <!-- N&Oslash;KKELKONTAKTER -->
+  <section>
+    <div class="section-label">Kontakter</div>
+    <h2>N&oslash;kkelkontakter &mdash; Large Caliber-segmentet</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Tittel</th>
+          <th>Rolle i kontekst</th>
+          <th>Prioritet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Quoc Bao Diep</strong></td>
+          <td>VP Large Caliber Systems</td>
+          <td>Prim&aelig;rkontakt for segmentet &mdash; eier produksjonskapasiteten for artilleri</td>
+          <td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9733;</td>
+        </tr>
+        <tr>
+          <td><strong>Per Olav Moen</strong></td>
+          <td>Procurement Director, Raufoss</td>
+          <td>Innkj&oslash;psbeslutninger &mdash; godkjenner leverand&oslash;rer og kontrakter p&aring; Raufoss</td>
+          <td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9733;</td>
+        </tr>
+        <tr>
+          <td><strong>Peter Lerche Raadal</strong></td>
+          <td>VP Procurement & Supply Chain, Group</td>
+          <td>Eskalering &mdash; strategisk leverand&oslash;rkjede og konsern-innkj&oslash;p</td>
+          <td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9734;</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary"><strong>Tilnærming:</strong> Start med Quoc Bao Diep for &aring; forst&aring; de tekniske behovene i Large Caliber-divisjonen, parallelt med Per Olav Moen for innkj&oslash;psprosessen. Peter Lerche Raadal brukes for eskalering og strategisk posisjonering p&aring; konsernniv&aring;.</p>
+  </section>
+
+  <!-- HANDLINGSPLAN -->
+  <section>
+    <div class="section-label">Handlingsplan</div>
+    <h2>Handlingsplan &mdash; Large Caliber-kvalifisering</h2>
+
+    <ol class="step-list">
+      <li>
+        <strong>LinkedIn-kontakt med Peter Lerche Raadal og Per Olav Moen</strong>
+        <span class="step-date">Mars 2026</span>
+        <br>Kort introduksjon av Aurelian Manufacturing med kapasitetsvinkel. Posisjonere som norsk CNC-partner for forsvarsproduksjon. Personlig melding, ikke generisk innkj&oslash;pspitch.
+      </li>
+      <li>
+        <strong>Innledende samtale &mdash; kartlegge konkrete outsourcing-behov</strong>
+        <span class="step-date">Mars&ndash;april 2026</span>
+        <br>F&oslash;rste dialog med innkj&oslash;p og/eller Quoc Bao Diep. M&aring;l: forst&aring; hvilke komponenter NAMMO vurderer &aring; outsource, hvilke krav de stiller, og n&aring;r behovet er mest akutt.
+      </li>
+      <li>
+        <strong>Bes&oslash;k Raufoss &mdash; presentasjon av kapabiliteter</strong>
+        <span class="step-date">April&ndash;mai 2026</span>
+        <br>Fysisk bes&oslash;k p&aring; Raufoss-anlegget. Presentere Aurelians maskinpark, kapasitetsmodell og digitale sporbarhet. Demonstrere relevans for 155mm-produksjon spesifikt.
+      </li>
+      <li>
+        <strong>Diskutere maskinkonfigurasjon &mdash; CNC-typer tilpasset 155mm-komponent</strong>
+        <span class="step-date">Mai&ndash;august 2026</span>
+        <br>Kritisk vindu: Aurelians CNC-cellekonfigurasjon kan p&aring;virkes av NAMMOs behov. Diskutere maskintyper, verkt&oslash;yholdere, og oppspennsl&oslash;sninger optimalisert for storkaliberkomponenter. Vinduet lukkes Q3 2026.
+      </li>
+      <li>
+        <strong>NDA og eksempeltegninger for pr&oslash;veproduksjon</strong>
+        <span class="step-date">Juni&ndash;september 2026</span>
+        <br>Signere formell NDA. Motta tekniske tegninger for utvalgte komponenter. Gjennomf&oslash;re produserbarhetsvurdering og utarbeide tilbud for pr&oslash;veproduksjon (First Article Inspection).
+      </li>
+    </ol>
+
+    <div class="callout">
+      <p><strong>Tidskritisk:</strong> Maskinkonfigurasjonsvinduet lukker seg Q3 2026. Dersom NAMMO-dialogen ikke er p&aring;begynt innen juni 2026, mister Aurelian muligheten til &aring; tilpasse maskinparken spesifikt for NAMMOs behov. Den f&oslash;rste LinkedIn-kontakten i mars er derfor avgj&oslash;rende.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | NAMMO Large Caliber Strategi V1.0 | Februar 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

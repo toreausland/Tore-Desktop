@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — KDA Salgsrapport</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --dark-charcoal: #1A1A1A; --navy-card: #253B52; --steel-blue: #8EAEC5;
+    --green: #1B7A3D; --amber: #D4870E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  /* Cover */
+  .cover { background: var(--pure-black); padding: 4rem 3.5rem 3rem; position: relative; overflow: hidden; min-height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 1.8rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 1.8rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 2.5rem; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  /* Content */
+  section { padding: 2.5rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.2rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.6rem; margin-bottom: 0.5rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.8rem; }
+  p.secondary { color: var(--gray-medium); font-size: 0.84rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: 0.84rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.6rem 0.8rem; font-size: 0.8rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+  tbody tr.total-row { border-top: 2px solid var(--black); background: transparent; }
+  tbody tr.total-row td { font-weight: 700; padding-top: 0.7rem; }
+
+  /* Badges */
+  .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; }
+  .badge-active { background: var(--red); color: var(--white); }
+  .badge-pending { background: var(--gray-divider); color: var(--black); }
+  .badge-planned { background: var(--black); color: var(--white); }
+  .badge-won { background: var(--green); color: var(--white); }
+  .badge-risk { background: var(--amber); color: var(--white); }
+
+  /* KPI strip */
+  .kpi-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.2rem 0.6rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-item.dark { background: var(--black); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.2rem; }
+  .kpi-item.highlight .kpi-value, .kpi-item.dark .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.64rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label, .kpi-item.dark .kpi-label { color: rgba(255,255,255,0.8); }
+
+  /* Callout */
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.1rem 1.3rem; margin: 1.2rem 0; }
+  .callout p { font-size: 0.84rem; margin-bottom: 0; line-height: 1.5; }
+
+  /* Progress bar */
+  .progress-container { margin: 1.2rem 0; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .progress-bar { height: 8px; background: var(--gray-panel); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--red); border-radius: 4px; transition: width 0.3s; }
+
+  /* Pipeline cards */
+  .pipeline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .pipeline-stage { padding: 1rem 0.6rem; text-align: center; border-right: 1px solid var(--gray-divider); }
+  .pipeline-stage:last-child { border-right: none; }
+  .pipeline-stage-name { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-medium); margin-bottom: 0.5rem; }
+  .pipeline-stage-count { font-size: 1.6rem; font-weight: 700; color: var(--black); margin-bottom: 0.2rem; }
+  .pipeline-stage.active { background: var(--red); }
+  .pipeline-stage.active .pipeline-stage-name, .pipeline-stage.active .pipeline-stage-count { color: var(--white); }
+
+  /* Bullet list */
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.5rem; font-size: 0.86rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  /* Dark panel */
+  .dark-panel { background: var(--dark-charcoal); padding: 2.5rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  /* Funnel visualization */
+  .funnel { margin: 1.5rem auto; max-width: 500px; }
+  .funnel-step { display: flex; align-items: center; margin-bottom: 0.4rem; }
+  .funnel-bar { height: 36px; background: var(--red); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 0.78rem; font-weight: 700; }
+  .funnel-bar.gray { background: var(--gray-divider); color: var(--black); }
+  .funnel-bar.dark { background: var(--black); color: var(--white); }
+  .funnel-label { font-size: 0.76rem; color: var(--gray-medium); margin-left: 0.8rem; white-space: nowrap; }
+
+  /* Footer */
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">★ ★ ★ ★ ★</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">KDA Salgsrapport</div>
+    <div class="cover-subtitle">Ukentlig rapport — Kongsberg Defence & Aerospace</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Rapportdato: 27. februar 2026</span>
+      <span>|</span>
+      <span>Uke 9</span>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE DASHBOARD -->
+  <section>
+    <div class="section-label">Dashboard</div>
+    <h2>KDA-konto — nøkkeltall</h2>
+
+    <div class="kpi-strip">
+      <div class="kpi-item highlight">
+        <div class="kpi-value">5</div>
+        <div class="kpi-label">Kontakter<br>initiert</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">3</div>
+        <div class="kpi-label">LinkedIn<br>sendt i dag</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">0</div>
+        <div class="kpi-label">Aksepterte<br>kontakter</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">0</div>
+        <div class="kpi-label">Møter<br>booket</div>
+      </div>
+      <div class="kpi-item dark">
+        <div class="kpi-value">—</div>
+        <div class="kpi-label">Leverandør-<br>registrering</div>
+      </div>
+    </div>
+
+    <!-- Pipeline funnel -->
+    <h3>Salgstrakt — KDA</h3>
+    <div class="funnel">
+      <div class="funnel-step">
+        <div class="funnel-bar" style="width: 100%;">9 identifisert</div>
+        <div class="funnel-label">Identifiserte kontakter</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar" style="width: 78%;">5 kontaktet</div>
+        <div class="funnel-label">Første henvendelse sendt</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar" style="width: 55%;">1 svar (Hugo)</div>
+        <div class="funnel-label">Akseptert kontakt / svar</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar gray" style="width: 33%;">0 møter</div>
+        <div class="funnel-label">Møter gjennomført</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar dark" style="width: 15%;">0</div>
+        <div class="funnel-label">NDA / formell prosess</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT STATUS PER DIVISION -->
+  <section>
+    <div class="section-label">Divisjonsstatus</div>
+    <h2>Kontaktstatus per KDA-divisjon</h2>
+
+    <table>
+      <thead><tr><th>Divisjon</th><th>Kontakter identifisert</th><th>Kontaktet</th><th>Akseptert</th><th>Møte</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>KDA Konsern (Supply Chain)</strong></td>
+          <td>Petter Berg Spone, Anne Mols, Ida K. Godejord</td>
+          <td>1 av 3</td>
+          <td>0</td>
+          <td>0</td>
+          <td><span class="badge badge-active">AKTIV</span></td>
+        </tr>
+        <tr>
+          <td><strong>Defence Systems</strong></td>
+          <td>Jon-André Olaussen</td>
+          <td>1 av 1</td>
+          <td>0</td>
+          <td>0</td>
+          <td><span class="badge badge-active">AKTIV</span></td>
+        </tr>
+        <tr>
+          <td><strong>Aerostructures & MRO</strong></td>
+          <td>Ragnar Løkka, Erlend Barheim, Per K. Grønlund</td>
+          <td>1 av 3</td>
+          <td>0</td>
+          <td>0</td>
+          <td><span class="badge badge-active">AKTIV</span></td>
+        </tr>
+        <tr>
+          <td><strong>KAMS</strong></td>
+          <td>Hugo Hermansen</td>
+          <td>1 av 1</td>
+          <td>1</td>
+          <td>0</td>
+          <td><span class="badge badge-won">VARM — STAKEHOLDER-MØTE UKE 10</span></td>
+        </tr>
+        <tr>
+          <td><strong>Missiles & Space</strong></td>
+          <td>Audun Frøysland</td>
+          <td>0 av 1</td>
+          <td>0</td>
+          <td>0</td>
+          <td><span class="badge badge-pending">IKKE STARTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Naval Surface Vessels</strong></td>
+          <td>(Ronny O. Langset identifisert)</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td><span class="badge badge-planned">PLANLAGT</span></td>
+        </tr>
+        <tr>
+          <td><strong>Gov. Relations</strong></td>
+          <td>Kyrre Lohne</td>
+          <td>1 av 1</td>
+          <td>0</td>
+          <td>0</td>
+          <td><span class="badge badge-pending">PARKERT — LITE INTERESSE</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ACTIVITIES THIS WEEK -->
+  <section class="dark-panel">
+    <div class="section-label">Ukeaktiviteter</div>
+    <h2>Gjennomførte aktiviteter — uke 9 (24.–28. feb 2026)</h2>
+
+    <table>
+      <thead><tr><th>Dato</th><th>Kontakt</th><th>Aktivitet</th><th>Kanal</th><th>Notat</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>26. feb</td>
+          <td><strong>Hugo Hermansen</strong></td>
+          <td>Svar mottatt — veldig interessert</td>
+          <td>E-post</td>
+          <td style="color: #1B7A3D; font-weight: 700;">GJENNOMBRUDD — Stakeholder-møte neste uke (Rygge). Kommer tilbake etter møtet.</td>
+        </tr>
+        <tr>
+          <td>26. feb</td>
+          <td><strong>Petter Berg Spone</strong></td>
+          <td>LinkedIn-invitasjon med notat</td>
+          <td>LinkedIn</td>
+          <td>200 tegn intro — CNC-fabrikk, forsvar, dialog om leverandørkjede</td>
+        </tr>
+        <tr>
+          <td>26. feb</td>
+          <td><strong>Jon-André Olaussen</strong></td>
+          <td>LinkedIn-invitasjon med notat</td>
+          <td>LinkedIn</td>
+          <td>200 tegn intro — Defence Systems-vinkel, styrke leverandørkjeden</td>
+        </tr>
+        <tr>
+          <td>26. feb</td>
+          <td><strong>Ragnar Løkka</strong></td>
+          <td>LinkedIn-invitasjon uten notat</td>
+          <td>LinkedIn</td>
+          <td>Teknisk begrensning — notat ikke lagt inn. Oppfølging ved aksept.</td>
+        </tr>
+        <tr>
+          <td>26. feb</td>
+          <td><strong>Kyrre Lohne</strong></td>
+          <td>Telefonsamtale (oppfølging)</td>
+          <td>Telefon</td>
+          <td style="color: var(--steel-blue);">Lite interesse. Parkert — feil rolle for leverandørkvalifisering.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Tidligere aktiviteter (før uke 9)</h3>
+    <table>
+      <thead><tr><th>Dato</th><th>Kontakt</th><th>Aktivitet</th><th>Kanal</th><th>Resultat</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Feb 2026</td>
+          <td><strong>Kyrre Lohne</strong></td>
+          <td>E-post med kapabilitetsmemorandum</td>
+          <td>E-post</td>
+          <td>Ikke mottatt svar</td>
+        </tr>
+        <tr>
+          <td>Feb 2026</td>
+          <td><strong>Hugo Hermansen</strong></td>
+          <td>E-post med kapabilitetsmemorandum</td>
+          <td>E-post</td>
+          <td>Ikke mottatt svar</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- OPPORTUNITY ASSESSMENT -->
+  <section>
+    <div class="section-label">Muligheter</div>
+    <h2>KDA — estimert potensial per divisjon</h2>
+
+    <table>
+      <thead><tr><th>Divisjon</th><th>Est. årlig CNC-timer</th><th>Est. årlig omsetning</th><th>Tidligste ordrer</th><th>Sannsynlighet</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Aerostructures & MRO</strong></td>
+          <td>3 000 – 10 000</td>
+          <td>9 – 30 MNOK</td>
+          <td>Q3 2027</td>
+          <td><span class="badge badge-active">MEDIUM-HØY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Defence Systems</strong></td>
+          <td>3 000 – 12 000</td>
+          <td>9 – 36 MNOK</td>
+          <td>Q4 2027</td>
+          <td><span class="badge badge-active">MEDIUM</span></td>
+        </tr>
+        <tr>
+          <td><strong>Missiles & Space</strong></td>
+          <td>2 000 – 8 000</td>
+          <td>6 – 24 MNOK</td>
+          <td>2028</td>
+          <td><span class="badge badge-pending">MEDIUM</span></td>
+        </tr>
+        <tr>
+          <td><strong>KAMS (MRO-deler)</strong></td>
+          <td>500 – 2 000</td>
+          <td>1.5 – 6 MNOK</td>
+          <td>Q3 2027</td>
+          <td><span class="badge badge-won">HØY — VARM LEAD</span></td>
+        </tr>
+        <tr>
+          <td><strong>Naval Surface Vessels</strong></td>
+          <td>2 000 – 8 000</td>
+          <td>6 – 24 MNOK</td>
+          <td>2029</td>
+          <td><span class="badge badge-planned">LANGSIKTIG</span></td>
+        </tr>
+        <tr class="total-row">
+          <td><strong>TOTALT KDA-POTENSIAL</strong></td>
+          <td><strong>10 500 – 40 000</strong></td>
+          <td><strong>31.5 – 120 MNOK</strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Kontekst:</strong> Aurelians 2028-mål er 37.5% utnyttelse på 5 CNC = ca. 16 425 timer. KDA-kontoen alene kan potensielt fylle 64–100% av dette behovet. Derfor er KDA den viktigste enkeltkunden å lande.</p>
+    </div>
+
+    <h3>Andel av Aurelians 2028-kapasitet</h3>
+    <div class="progress-container">
+      <div class="progress-label"><span>KDA konservativt estimat (10 500 t)</span><span>64% av 2028-mål</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 64%;"></div></div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-label"><span>KDA optimistisk estimat (40 000 t)</span><span>243% av 2028-mål</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+    </div>
+  </section>
+
+  <!-- RISK ASSESSMENT -->
+  <section>
+    <div class="section-label">Risikovurdering</div>
+    <h2>KDA-konto — risikofaktorer</h2>
+
+    <table>
+      <thead><tr><th>Risiko</th><th>Sannsynlighet</th><th>Konsekvens</th><th>Mitigering</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Ingen respons på LinkedIn</strong></td>
+          <td>Medium</td>
+          <td>Medium</td>
+          <td>Parallelle kanaler: leverandørportal, Kyrre som døråpner, industrimesser</td>
+        </tr>
+        <tr>
+          <td><strong>AS9100/AQAP ikke klar tidsnok</strong></td>
+          <td>Lav</td>
+          <td>Høy</td>
+          <td>Betinget kvalifisering mulig. ISO 9001 først. Mange KDA-leverandører opererer uten AS9100.</td>
+        </tr>
+        <tr>
+          <td><strong>KDA velger eksisterende leverandører</strong></td>
+          <td>Medium</td>
+          <td>Høy</td>
+          <td>Posisjonér som tilleggskapasitet, ikke erstatning. KDAs ordrebok tilsier at eksisterende leverandører er fulle.</td>
+        </tr>
+        <tr>
+          <td><strong>Fabrikken forsinket</strong></td>
+          <td>Lav</td>
+          <td>Høy</td>
+          <td>Pre-kvalifisering er papirbasert og uavhengig av fabrikk. Dialog starter nå, produksjon aug 2027.</td>
+        </tr>
+        <tr>
+          <td><strong>Feil kontaktpersoner</strong></td>
+          <td>Lav</td>
+          <td>Lav</td>
+          <td>Bred tilnærming over flere divisjoner. Leverandørportalen fanger opp alle innkjøpere.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- NEXT WEEK PLAN -->
+  <section>
+    <div class="section-label">Handlingsplan</div>
+    <h2>Prioriterte handlinger — uke 10 (3.–7. mars 2026)</h2>
+
+    <table>
+      <thead><tr><th>#</th><th>Handling</th><th>Eier</th><th>Frist</th><th>Prioritet</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td><strong>Fyll ut KDAs leverandørregistreringsskjema</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">kongsberg.com/kda/suppliers — informasjonen sendes til alle innkjøpere</span></td>
+          <td>Tore</td>
+          <td>3. mars</td>
+          <td><span class="badge badge-active">KRITISK</span></td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td><strong>Kyrre Lohne — PARKERT</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">Samtale gjennomført 26. feb. Lite interesse. Feil rolle. Fokus flyttes til Supply Chain-kontaktene.</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-pending">PARKERT</span></td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td><strong>Hugo Hermansen — VARM LEAD</strong><br><span style="font-size: 0.76rem; color: #1B7A3D;">Veldig interessert. Stakeholder-møte neste uke (Rygge). Venter på tilbakemelding. Forbered KAMS Capability Brief med MRO-vinkel.</span></td>
+          <td>Tore</td>
+          <td>Uke 10–11</td>
+          <td><span class="badge badge-won">GJENNOMBRUDD</span></td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td><strong>Forbered oppfølgingsmeldinger til Petter, Jon-André, Ragnar</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">Full kapabilitetspitch klar — sendes ved aksept av LinkedIn-invitasjon</span></td>
+          <td>Tore</td>
+          <td>5. mars</td>
+          <td><span class="badge badge-active">HØY</span></td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td><strong>Produser KDA Capability Brief (1–2 sider)</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">Kort, segmenttilpasset dokument for oppfølging og møteforespørsler</span></td>
+          <td>André/Tore</td>
+          <td>7. mars</td>
+          <td><span class="badge badge-planned">MEDIUM</span></td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td><strong>Identifiser flere kontakter via LinkedIn</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">Naval Surface Vessels-team, Missiles & Space innkjøp, Category Managers</span></td>
+          <td>Tore</td>
+          <td>7. mars</td>
+          <td><span class="badge badge-planned">MEDIUM</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- MILESTONE TRACKER -->
+  <section>
+    <div class="section-label">Milepæler</div>
+    <h2>KDA-kvalifisering — fremdrift</h2>
+
+    <div class="progress-container">
+      <div class="progress-label"><span>Kontaktfase (identifisere + kontakte nøkkelpersoner)</span><span>56%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 56%;"></div></div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-label"><span>Leverandørregistrering (portal + dokumentasjon)</span><span>0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-label"><span>Tekniske møter (kapabilitetspresentasjon)</span><span>0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-label"><span>NDA og eksempeltegninger</span><span>0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-label"><span>Pre-kvalifisering (formell søknad)</span><span>0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+    </div>
+
+    <p class="secondary" style="margin-top: 1rem;">Mål: Formell pre-kvalifiseringssøknad innsendt innen Q3 2026. Betinget leverandørgodkjenning Q1 2027. First Article Inspection Q3 2027.</p>
+  </section>
+
+  <!-- APPENDIX: FILE INDEX -->
+  <section>
+    <div class="section-label">Referanser</div>
+    <h2>KDA-strategi dokumenter</h2>
+
+    <table>
+      <thead><tr><th>Fil</th><th>Innhold</th><th>Sist oppdatert</th></tr></thead>
+      <tbody>
+        <tr><td>00_KDA_Strategy_Overview.html</td><td>Samlet strategi, kontaktliste, kvalifiseringstidslinje</td><td>26. feb 2026</td></tr>
+        <tr><td>01_KDA_Aerostructures_MRO.html</td><td>Aerostructures-divisjon: CNC overflow, KAMS, Rygge</td><td>26. feb 2026</td></tr>
+        <tr><td>02_KDA_Defence_Systems.html</td><td>Defence Systems: NASAMS, Protector, Polen-kontrakt</td><td>26. feb 2026</td></tr>
+        <tr><td>03_KDA_Missiles_Space.html</td><td>Missiles & Space: NSM/JSM, romkomponenter</td><td>26. feb 2026</td></tr>
+        <tr><td>04_KDA_Naval_Surface_Vessels.html</td><td>Naval Vessels: ny divisjon, 28 fartøy, Skjold</td><td>26. feb 2026</td></tr>
+        <tr><td>05_KDA_Contact_Log.html</td><td>Kontaktlogg med all aktivitetshistorikk</td><td>26. feb 2026</td></tr>
+        <tr><td><strong>06_KDA_Sales_Report.html</strong></td><td><strong>Denne rapporten</strong></td><td><strong>26. feb 2026</strong></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | KDA Salgsrapport Uke 9 | 27. februar 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

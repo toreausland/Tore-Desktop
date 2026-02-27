@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UML Sequence Diagrams — ERP ↔ MRB Builder Interface</title>
+    <style>
+        /* ── Aurelian Design Manual Tokens ── */
+        :root {
+            --red:       #F50537;
+            --black:     #2B2B2B;
+            --pure-black:#000000;
+            --white:     #FFFFFF;
+            --gray-med:  #6B6B6B;
+            --gray-panel:#F5F5F5;
+            --gray-div:  #D3D3D3;
+            --gray-axis: #888888;
+            --dark-char: #1A1A1A;
+            --dark-navy: #1C2D3F;
+            --navy-card: #253B52;
+            --slate-line:#3D5A7A;
+            --steel-blue:#8EAEC5;
+            --dark-red:  #D0042E;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: Calibri, 'Segoe UI', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.5;
+        }
+
+        /* ── Cover ── */
+        .cover {
+            background: var(--pure-black);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 40px;
+        }
+        .cover .stars { font-size: 36px; letter-spacing: 8px; margin-bottom: 16px; color: var(--red); }
+        .cover h1 { font-size: 48px; font-weight: 700; margin-bottom: 8px; }
+        .cover .bar { width: 200px; height: 3px; background: var(--red); margin: 20px auto; }
+        .cover .tagline { font-size: 20px; font-style: italic; color: var(--red); margin-bottom: 32px; }
+        .cover .subtitle { font-size: 16px; color: var(--gray-med); max-width: 600px; }
+        .cover .doc-id { font-size: 13px; color: var(--gray-med); margin-top: 40px; }
+        .cover .conf { font-size: 11px; color: var(--gray-med); margin-top: 8px; }
+
+        /* ── Page wrapper ── */
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        .page + .page { border-top: 1px solid var(--gray-div); }
+
+        /* ── Typography ── */
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+        h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--red);
+            margin-top: 32px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--black);
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+        p, li { font-size: 14px; color: var(--black); }
+        .muted { color: var(--gray-med); font-size: 13px; }
+        .accent { color: var(--red); font-weight: 700; }
+
+        /* ── Diagram Container ── */
+        .diagram-wrap {
+            background: var(--white);
+            border: 1px solid var(--gray-div);
+            border-radius: 4px;
+            padding: 32px 16px;
+            margin: 24px 0;
+            overflow-x: auto;
+        }
+        .diagram-wrap h4 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        /* ── SVG Sequence Diagram Styles ── */
+        .seq-diagram { display: block; margin: 0 auto; }
+        .seq-diagram .participant-box {
+            fill: var(--black);
+            stroke: none;
+            rx: 4;
+        }
+        .seq-diagram .participant-label {
+            fill: var(--white);
+            font-family: Calibri, sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-anchor: middle;
+            dominant-baseline: central;
+        }
+        .seq-diagram .lifeline {
+            stroke: var(--gray-div);
+            stroke-width: 1;
+            stroke-dasharray: 6 4;
+        }
+        .seq-diagram .msg-line {
+            stroke: var(--black);
+            stroke-width: 1.5;
+            marker-end: url(#arrowhead);
+        }
+        .seq-diagram .msg-line-return {
+            stroke: var(--gray-med);
+            stroke-width: 1;
+            stroke-dasharray: 6 3;
+            marker-end: url(#arrowhead-gray);
+        }
+        .seq-diagram .msg-line-red {
+            stroke: var(--red);
+            stroke-width: 2;
+            marker-end: url(#arrowhead-red);
+        }
+        .seq-diagram .msg-label {
+            font-family: Calibri, sans-serif;
+            font-size: 11px;
+            fill: var(--black);
+            font-weight: 600;
+        }
+        .seq-diagram .msg-detail {
+            font-family: Calibri, sans-serif;
+            font-size: 10px;
+            fill: var(--gray-med);
+        }
+        .seq-diagram .note-box {
+            fill: #FFF8E1;
+            stroke: #FFD54F;
+            stroke-width: 1;
+            rx: 3;
+        }
+        .seq-diagram .note-box-red {
+            fill: #FFEBEE;
+            stroke: var(--red);
+            stroke-width: 1;
+            rx: 3;
+        }
+        .seq-diagram .note-text {
+            font-family: Calibri, sans-serif;
+            font-size: 10px;
+            fill: var(--black);
+        }
+        .seq-diagram .stage-bar {
+            fill: var(--red);
+            opacity: 0.1;
+        }
+        .seq-diagram .stage-label {
+            font-family: Calibri, sans-serif;
+            font-size: 11px;
+            fill: var(--red);
+            font-weight: 700;
+            text-anchor: start;
+        }
+        .seq-diagram .alt-box {
+            fill: none;
+            stroke: var(--gray-med);
+            stroke-width: 1;
+            stroke-dasharray: 4 2;
+            rx: 2;
+        }
+        .seq-diagram .alt-label {
+            font-family: Calibri, sans-serif;
+            font-size: 10px;
+            fill: var(--white);
+            font-weight: 700;
+        }
+        .seq-diagram .alt-tag {
+            fill: var(--gray-med);
+            rx: 2;
+        }
+        .seq-diagram .loop-box {
+            fill: none;
+            stroke: var(--red);
+            stroke-width: 1.2;
+            rx: 3;
+        }
+        .seq-diagram .loop-tag {
+            fill: var(--red);
+            rx: 2;
+        }
+        .seq-diagram .loop-label {
+            font-family: Calibri, sans-serif;
+            font-size: 10px;
+            fill: var(--white);
+            font-weight: 700;
+        }
+        .seq-diagram .activation {
+            fill: var(--gray-panel);
+            stroke: var(--gray-div);
+            stroke-width: 1;
+        }
+        .seq-diagram .activation-red {
+            fill: #FFEBEE;
+            stroke: var(--red);
+            stroke-width: 1;
+        }
+
+        /* ── Tables ── */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+        thead th {
+            background: var(--black);
+            color: var(--white);
+            font-weight: 700;
+            text-align: left;
+            padding: 10px 12px;
+        }
+        tbody td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--gray-div);
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) { background: var(--gray-panel); }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .tag-def { background: var(--dark-navy); color: var(--white); }
+        .tag-og  { background: #1B5E20; color: var(--white); }
+        .tag-both { background: var(--red); color: var(--white); }
+        .tag-erp { background: var(--black); color: var(--white); }
+        .tag-mrb { background: var(--red); color: var(--white); }
+        .tag-bi  { background: var(--gray-med); color: var(--white); }
+
+        /* ── Callout ── */
+        .callout {
+            background: var(--gray-panel);
+            border-left: 4px solid var(--red);
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+        .callout strong { color: var(--red); }
+
+        /* ── Industry Comparison ── */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 24px 0;
+        }
+        .compare-card {
+            border: 1px solid var(--gray-div);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .compare-card .card-header {
+            padding: 12px 16px;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--white);
+        }
+        .compare-card.defence .card-header { background: var(--dark-navy); }
+        .compare-card.oilgas .card-header  { background: #1B5E20; }
+        .compare-card .card-body {
+            padding: 16px;
+            font-size: 13px;
+        }
+        .compare-card ul { padding-left: 20px; margin-top: 8px; }
+        .compare-card li { margin-bottom: 4px; font-size: 13px; }
+
+        /* ── Footer ── */
+        .page-footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 11px;
+            color: var(--gray-med);
+            border-top: 1px solid var(--gray-div);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 800px) {
+            .compare-grid { grid-template-columns: 1fr; }
+            .cover h1 { font-size: 32px; }
+        }
+
+        /* ── Print ── */
+        @media print {
+            .cover { min-height: auto; page-break-after: always; }
+            .page { page-break-inside: avoid; }
+            .diagram-wrap { border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     COVER
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="cover">
+    <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <h1>Aurelian Manufacturing</h1>
+    <div class="bar"></div>
+    <div class="tagline">UML Sequence Diagrams — ERP ↔ MRB Builder</div>
+    <div class="subtitle">
+        Complete order lifecycle interface mapping based on AM-IF-001 (20 interfaces),
+        PR-008 through PR-013, and ISA-95 Industry 4.0 architecture.<br>
+        Including industry-specific flows for Defence (AS9100/AQAP) and Oil &amp; Gas (NORSOK/API).
+    </div>
+    <div class="doc-id">Document Reference: AM-IF-001 · AM-TS-001 · PR-008–PR-013</div>
+    <div class="conf">CONFIDENTIAL &mdash; 27 February 2026</div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     DIAGRAM 1 — MAIN ERP ↔ MRB LIFECYCLE
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="page">
+    <h2>1. Full Order Lifecycle — ERP ↔ MRB Builder Sequence</h2>
+    <p class="muted" style="margin-bottom:8px;">
+        This diagram traces a single customer order from PO receipt through MRB archival,
+        showing all 20 interface events (IF-001 through IF-020), the 7-stage MRB pipeline,
+        and the ISA-95 Level 3/Level 4 boundary between shop floor and enterprise systems.
+    </p>
+
+    <div class="diagram-wrap">
+        <svg class="seq-diagram" viewBox="0 0 1140 2520" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <!-- ── Arrow Markers ── -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#2B2B2B" />
+                </marker>
+                <marker id="arrowhead-gray" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#6B6B6B" />
+                </marker>
+                <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#F50537" />
+                </marker>
+            </defs>
+
+            <!-- ── Participant Positions ──
+                 Customer: x=80   ERP: x=300   MRB: x=540   ShopFloor: x=760   Supplier: x=960   Archive: x=1080
+            -->
+
+            <!-- ── Participant Boxes (top) ── -->
+            <rect class="participant-box" x="20"  y="10" width="120" height="36" rx="4"/>
+            <text class="participant-label" x="80"  y="28">CUSTOMER</text>
+
+            <rect class="participant-box" x="230" y="10" width="140" height="36" rx="4"/>
+            <text class="participant-label" x="300" y="28">ERP SYSTEM</text>
+
+            <rect class="participant-box" x="470" y="10" width="140" height="36" rx="4"/>
+            <text class="participant-label" x="540" y="28">MRB BUILDER</text>
+
+            <rect class="participant-box" x="690" y="10" width="140" height="36" rx="4"/>
+            <text class="participant-label" x="760" y="28">SHOP FLOOR</text>
+
+            <rect class="participant-box" x="890" y="10" width="140" height="36" rx="4"/>
+            <text class="participant-label" x="960" y="28">SUPPLIER</text>
+
+            <!-- ── Lifelines ── -->
+            <line class="lifeline" x1="80"  y1="46" x2="80"  y2="2480"/>
+            <line class="lifeline" x1="300" y1="46" x2="300" y2="2480"/>
+            <line class="lifeline" x1="540" y1="46" x2="540" y2="2480"/>
+            <line class="lifeline" x1="760" y1="46" x2="760" y2="2480"/>
+            <line class="lifeline" x1="960" y1="46" x2="960" y2="2480"/>
+
+            <!-- ══════════════════════════════════════════════════════
+                 STAGE 0 — ORDER INITIATION (y: 70–260)
+                 ══════════════════════════════════════════════════════ -->
+            <rect class="stage-bar" x="0" y="65" width="1140" height="205"/>
+            <text class="stage-label" x="12" y="82">STAGE 0 — ORDER INITIATION</text>
+
+            <!-- Customer → ERP: Purchase Order -->
+            <line class="msg-line" x1="80" y1="110" x2="290" y2="110"/>
+            <text class="msg-label" x="130" y="105">Purchase Order</text>
+            <text class="msg-detail" x="130" y="118">PO with SDRL requirements</text>
+
+            <!-- ERP → MRB: IF-001 New Purchase Order -->
+            <line class="msg-line-red" x1="300" y1="150" x2="530" y2="150"/>
+            <text class="msg-label" x="340" y="145"><tspan fill="#F50537">IF-001</tspan> purchase_order.confirmed</text>
+            <text class="msg-detail" x="340" y="158">PO number, customer, industry_classification, order_lines</text>
+
+            <!-- MRB → ERP: Response (accepted) -->
+            <line class="msg-line-return" x1="530" y1="178" x2="310" y2="178"/>
+            <text class="msg-detail" x="350" y="176">mrb_number assigned, state → PARSING</text>
+
+            <!-- ERP → MRB: IF-002 SDRL Attachment -->
+            <line class="msg-line-red" x1="300" y1="210" x2="530" y2="210"/>
+            <text class="msg-label" x="340" y="205"><tspan fill="#F50537">IF-002</tspan> document.attached (SDRL)</text>
+            <text class="msg-detail" x="340" y="218">SDRL document_type, download_url, revision</text>
+
+            <!-- Note: SDRL parsing -->
+            <rect class="note-box" x="555" y="235" width="185" height="30" rx="3"/>
+            <text class="note-text" x="565" y="248">PR-009: Parse SDRL → Order</text>
+            <text class="note-text" x="565" y="258">Requirement Matrix + MRB Index</text>
+
+            <!-- ══════════════════════════════════════════════════════
+                 STAGE 1 — MATERIAL GATE (y: 280–530)
+                 ══════════════════════════════════════════════════════ -->
+            <rect class="stage-bar" x="0" y="280" width="1140" height="260"/>
+            <text class="stage-label" x="12" y="297">STAGE 1 — MATERIAL GATE (PR-008)</text>
+
+            <!-- ERP → MRB: IF-012 Customer Requirement Profile -->
+            <line class="msg-line-red" x1="300" y1="320" x2="530" y2="320"/>
+            <text class="msg-label" x="330" y="315"><tspan fill="#F50537">IF-012</tspan> customer.requirements_update</text>
+            <text class="msg-detail" x="330" y="328">governing_standards, material_profiles, chemical_overrides</text>
+
+            <!-- Supplier → ERP: IF-019 Certificate Submission -->
+            <line class="msg-line" x1="960" y1="360" x2="310" y2="360"/>
+            <text class="msg-label" x="510" y="355"><tspan fill="#F50537">IF-019</tspan> Supplier cert submission</text>
+            <text class="msg-detail" x="570" y="368">Material certificate uploaded to ERP</text>
+
+            <!-- ERP → MRB: IF-003 Goods Receiving -->
+            <line class="msg-line-red" x1="300" y1="400" x2="530" y2="400"/>
+            <text class="msg-label" x="330" y="395"><tspan fill="#F50537">IF-003</tspan> goods_receipt.completed</text>
+            <text class="msg-detail" x="330" y="408">receipt_number, heat_number, lot, target_orders[]</text>
+
+            <!-- ERP → MRB: IF-004 Material Certificate -->
+            <line class="msg-line-red" x1="300" y1="435" x2="530" y2="435"/>
+            <text class="msg-label" x="330" y="430"><tspan fill="#F50537">IF-004</tspan> certificate.attached</text>
+            <text class="msg-detail" x="330" y="443">EN 10204 type, download_url, heat_number</text>
+
+            <!-- MRB: Activation box for Material Gate -->
+            <rect class="activation-red" x="532" y="452" width="16" height="40"/>
+
+            <!-- Note: 5-point check -->
+            <rect class="note-box-red" x="558" y="452" width="200" height="40" rx="3"/>
+            <text class="note-text" x="568" y="466" style="fill:#F50537;font-weight:700;">MATERIAL GATE — 5-point check:</text>
+            <text class="note-text" x="568" y="480">Existence → Format → Completeness</text>
+            <text class="note-text" x="568" y="490">→ Compliance → Traceability</text>
+
+            <!-- MRB → ERP: IF-014 Supplier Approval Query -->
+            <line class="msg-line-return" x1="530" y1="505" x2="310" y2="505"/>
+            <text class="msg-label" x="345" y="500"><tspan fill="#6B6B6B">IF-014</tspan> GET supplier approval status</text>
+
+            <!-- MRB → ERP: IF-005 Material Gate Decision -->
+            <line class="msg-line-red" x1="540" y1="535" x2="310" y2="535"/>
+            <text class="msg-label" x="345" y="530"><tspan fill="#F50537">IF-005</tspan> material_gate.decision</text>
+            <text class="msg-detail" x="345" y="543">APPROVED / REJECTED / CONDITIONAL per order</text>
+
+            <!-- ══════════════════════════════════════════════════════
+                 STAGE 2 — PRODUCTION & DOCUMENT COLLECTION (y: 550–870)
+                 ══════════════════════════════════════════════════════ -->
+            <rect class="stage-bar" x="0" y="555" width="1140" height="330"/>
+            <text class="stage-label" x="12" y="572">STAGE 2 — PRODUCTION &amp; DOCUMENT COLLECTION (PR-009 §6.7)</text>
+
+            <!-- ERP → MRB: IF-006 Production Order Link -->
+            <line class="msg-line-red" x1="300" y1="600" x2="530" y2="600"/>
+            <text class="msg-label" x="330" y="595"><tspan fill="#F50537">IF-006</tspan> production_order.material_issued</text>
+            <text class="msg-detail" x="330" y="608">prod_order, serial_range, machines_assigned[]</text>
+
+            <!-- MRB → ERP: IF-008 Order State Update -->
+            <line class="msg-line" x1="540" y1="640" x2="310" y2="640"/>
+            <text class="msg-label" x="345" y="635"><tspan fill="#2B2B2B">IF-008</tspan> order_state → COLLECTING</text>
+
+            <!-- LOOP: Real-time data collection -->
+            <rect class="loop-box" x="520" y="665" width="270" height="140"/>
+            <rect class="loop-tag" x="520" y="665" width="80" height="18"/>
+            <text class="loop-label" x="530" y="678">LOOP</text>
+            <text class="note-text" x="606" y="678" style="fill:#F50537;">[ production duration ]</text>
+
+            <!-- Shop Floor → MRB: CNC data (direct, bypasses ERP) -->
+            <line class="msg-line" x1="760" y1="700" x2="550" y2="700"/>
+            <text class="msg-label" x="590" y="695">CNC inline data (MQTT/OPC-UA)</text>
+            <text class="msg-detail" x="590" y="712">Dimensional, tool wear, cycle times</text>
+
+            <!-- Shop Floor → MRB: CMM/Inspection data -->
+            <line class="msg-line" x1="760" y1="740" x2="550" y2="740"/>
+            <text class="msg-label" x="590" y="735">CMM / inspection reports</text>
+            <text class="msg-detail" x="590" y="752">Surface roughness, hardness</text>
+
+            <!-- Shop Floor → MRB: Metrology -->
+            <line class="msg-line" x1="760" y1="775" x2="550" y2="775"/>
+            <text class="msg-label" x="590" y="770">Metrology / environmental data</text>
+            <text class="msg-detail" x="590" y="787">Temperature, vibration monitoring</text>
+
+            <!-- Note: Machine data bypasses ERP -->
+            <rect class="note-box" x="800" y="695" width="195" height="42" rx="3"/>
+            <text class="note-text" x="810" y="710" style="font-weight:700;">ISA-95 Level 3 → MRB</text>
+            <text class="note-text" x="810" y="722">Machine data bypasses ERP</text>
+            <text class="note-text" x="810" y="732">Direct MQTT / OPC-UA</text>
+
+            <!-- Supplier docs → ERP → MRB (via ERP routing) -->
+            <line class="msg-line" x1="960" y1="830" x2="310" y2="830"/>
+            <text class="msg-label" x="510" y="825">Supplier docs (NDT, sub-supplier certs)</text>
+
+            <line class="msg-line-red" x1="300" y1="855" x2="530" y2="855"/>
+            <text class="msg-label" x="330" y="850"><tspan fill="#F50537">IF-004</tspan> Special process certs via ERP</text>
+            <text class="msg-detail" x="330" y="863">One cert → many orders (ERP manages 1:N linkage)</text>
+
+            <!-- ══════════════════════════════════════════════════════
+                 STAGE 3 — 5-LAYER VALIDATION (y: 895–1140)
+                 ══════════════════════════════════════════════════════ -->
+            <rect class="stage-bar" x="0" y="895" width="1140" height="260"/>
+            <text class="stage-label" x="12" y="912">STAGE 3 — 5-LAYER DOCUMENT VALIDATION (PR-010)</text>
+
+            <!-- MRB: Activation for validation -->
+            <rect class="activation-red" x="532" y="930" width="16" height="130"/>
+
+            <!-- Validation steps note -->
+            <rect class="note-box-red" x="558" y="930" width="230" height="80" rx="3"/>
+            <text class="note-text" x="568" y="945" style="fill:#F50537;font-weight:700;">5-LAYER VALIDATION ENGINE</text>
+            <text class="note-text" x="568" y="960">L1  Existence check</text>
+            <text class="note-text" x="568" y="973">L2  Format validation (PDF/A, structure)</text>
+            <text class="note-text" x="568" y="986">L3  Completeness (all fields present)</text>
+            <text class="note-text" x="568" y="999">L4  Compliance (values vs specification)</text>
+            <text class="note-text" x="568" y="1012">L5  Traceability (cross-document links)</text>
+
+            <!-- MRB → ERP: IF-013 Calibration Query -->
+            <line class="msg-line-return" x1="530" y1="1040" x2="310" y2="1040"/>
+            <text class="msg-label" x="340" y="1035"><tspan fill="#6B6B6B">IF-013</tspan> GET calibration status</text>
+            <text class="msg-detail" x="340" y="1048">instrument_id → CURRENT / EXPIRED</text>
+
+            <!-- MRB → ERP: IF-015 Employee Qualification Query -->
+            <line class="msg-line-return" x1="530" y1="1075" x2="310" y2="1075"/>
+            <text class="msg-label" x="340" y="1070"><tspan fill="#6B6B6B">IF-015</tspan> GET employee qualifications</text>
+            <text class="msg-detail" x="340" y="1083">inspector NDT level, cert expiry</text>
+
+            <!-- ALT: Validation failure → NCR -->
+            <rect class="alt-box" x="240" y="1100" width="320" height="55"/>
+            <rect class="alt-tag" x="240" y="1100" width="105" height="16"/>
+            <text class="alt-label" x="250" y="1112">ALT [failure]</text>
+
+            <!-- MRB ↔ ERP: IF-007 NCR -->
+            <line class="msg-line-red" x1="540" y1="1128" x2="310" y2="1128"/>
+            <text class="msg-label" x="345" y="1123"><tspan fill="#F50537">IF-007</tspan> ncr.created (bidirectional)</text>
+            <text class="msg-detail" x="345" y="1136">NCR number, severity, disposition_required</text>
+
+            <!-- MRB → ERP: IF-008 state → VALIDATING -->
+            <line class="msg-line" x1="540" y1="1170" x2="310" y2="1170"/>
+            <text class="msg-label" x="345" y="1165"><tspan fill="#2B2B2B">IF-008</tspan> order_state → VALIDATING</text>
+
+            <!-- ══════════════════════════════════════════════════════
+                 INDUSTRY BRANCH (y: 1200–1520)
+                 ══════════════════════════════════════════════════════ -->
+            <rect class="stage-bar" x="0" y="1195" width="1140" height="340"/>
+            <text class="stage-label" x="12" y="1212">STAGE 3b — INDUSTRY-SPECIFIC VALIDATION BRANCH</text>
+
+            <!-- ALT: Defence vs Oil & Gas -->
+            <rect style="fill:none;stroke:#1C2D3F;stroke-width:2;rx:4;" x="50" y="1230" width="1050" height="295"/>
+            <rect style="fill:#1C2D3F;rx:3;" x="50" y="1230" width="60" height="18"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;font-weight:700;" x="58" y="1243">ALT</text>
+
+            <!-- Defence branch -->
+            <rect style="fill:#1C2D3F;rx:3;" x="115" y="1230" width="235" height="18"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;font-weight:700;" x="125" y="1243">[ industry_classification = DEFENCE ]</text>
+
+            <!-- Defence: FAIR generation -->
+            <rect class="activation" x="532" y="1260" width="16" height="80"/>
+            <rect class="note-box" x="558" y="1260" width="240" height="60" rx="3"/>
+            <text class="note-text" x="568" y="1275" style="font-weight:700;">DEFENCE — FAIR (AS9102)</text>
+            <text class="note-text" x="568" y="1290">Generate Form 1 (Part), Form 2 (Material),</text>
+            <text class="note-text" x="568" y="1303">Form 3 (Characteristics). Link to CNC data.</text>
+            <text class="note-text" x="568" y="1316">AQAP 2110 compliance check, ECCN export ctrl</text>
+
+            <!-- Defence: MRB Section 6 with FAIR -->
+            <text class="msg-detail" x="560" y="1350" style="fill:#1C2D3F;font-weight:700;">
+                MRB: 8 sections, 25 line items. EN 10204 Type 3.2 required.
+            </text>
+            <text class="msg-detail" x="560" y="1362" style="fill:#1C2D3F;">
+                Retention: 30 years. Signature authority: LEVEL_2 minimum.
+            </text>
+
+            <!-- Dashed separator -->
+            <line style="stroke:#6B6B6B;stroke-width:1;stroke-dasharray:8 4;" x1="55" y1="1380" x2="1095" y2="1380"/>
+            <rect style="fill:#1B5E20;rx:3;" x="60" y="1373" width="255" height="18"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;font-weight:700;" x="68" y="1386">[ industry_classification = OIL_GAS ]</text>
+
+            <!-- Oil & Gas: ITP management -->
+            <rect class="activation" x="532" y="1400" width="16" height="80"/>
+            <rect class="note-box" x="558" y="1400" width="270" height="60" rx="3"/>
+            <text class="note-text" x="568" y="1415" style="font-weight:700;">OIL &amp; GAS — ITP Management</text>
+            <text class="note-text" x="568" y="1430">Hold (H), Witness (W), Review (R), Surveillance (S) points.</text>
+            <text class="note-text" x="568" y="1443">Customer notification 48-72h for Witness Points.</text>
+            <text class="note-text" x="568" y="1456">NORSOK M-630/M-650, API compliance check.</text>
+
+            <!-- Oil & Gas: ITP customer notification -->
+            <line class="msg-line" x1="540" y1="1490" x2="90" y2="1490"/>
+            <text class="msg-label" x="180" y="1485">ITP Witness/Hold Point notification</text>
+            <text class="msg-detail" x="180" y="1498">Customer attendance required at Hold Points</text>
+
+            <text class="msg-detail" x="560" y="1518" style="fill:#1B5E20;font-weight:700;">
+                MRB: 7 sections, 30 line items. EN 10204 Type 3.1/3.2 accepted.
+            </text>
+
+            <!-- ══════════════════════════════════════════════════════
+                 STAGE 4 — CoC GENERATION (y: 1545–1710)
+                 ══════════════════════════════════════════════════════ -->
+            <rect class="stage-bar" x="0" y="1545" width="1140" height="175"/>
+            <text class="stage-label" x="12" y="1562">STAGE 4 — CERTIFICATE OF CONFORMANCE (PR-011)</text>
+
+            <!-- MRB → ERP: IF-008 state → COC_PENDING -->
+            <line class="msg-line" x1="540" y1="1585" x2="310" y2="1585"/>
+            <text class="msg-label" x="345" y="1580"><tspan fill="#2B2B2B">IF-008</tspan> order_state → COC_PENDING</text>
+
+            <!-- MRB: CoC generation activation -->
+            <rect class="activation-red" x="532" y="1600" width="16" height="60"/>
+
+            <rect class="note-box-red" x="558" y="1600" width="270" height="60" rx="3"/>
+            <text class="note-text" x="568" y="1615" style="fill:#F50537;font-weight:700;">CoC GENERATION (PR-011)</text>
+            <text class="note-text" x="568" y="1630">Industry-specific template (Defence / Oil &amp; Gas)</text>
+            <text class="note-text" x="568" y="1643">Query all NCR dispositions for deviation declaration</text>
+            <text class="note-text" x="568" y="1656">Signature authority: LEVEL_1 / LEVEL_2 / LEVEL_3</text>
+
+            <!-- MRB → ERP: IF-010 CoC Registered -->
+            <line class="msg-line-red" x1="540" y1="1680" x2="310" y2="1680"/>
+            <text class="msg-label" x="345" y="1675"><tspan fill="#F50537">IF-010</tspan> coc.registered</text>
+            <text class="msg-detail" x="345" y="1688">coc_number, signed_by, authority_level, deviations_declared</text>
+
+            <!-- MRB → ERP: IF-008 state → COC_SIGNED -->
+            <line class="msg-line" x1="540" y1="1710" x2="310" y2="1710"/>
+            <text class="msg-label" x="345" y="1705"><tspan fill="#2B2B2B">IF-008</tspan> order_state → COC_SIGNED</text>
+
+            <!-- ══════════════════════════════════════════════════════
+                 STAGE 5 — MRB ASSEMBLY & RELEASE (y: 1730–1940)
+                 ══════════════════════════════════════════════════════ -->
+            <rect class="stage-bar" x="0" y="1730" width="1140" height="225"/>
+            <text class="stage-label" x="12" y="1747">STAGE 5 — MRB ASSEMBLY &amp; RELEASE (PR-012)</text>
+
+            <!-- MRB: Assembly activation -->
+            <rect class="activation-red" x="532" y="1770" width="16" height="80"/>
+
+            <rect class="note-box-red" x="558" y="1770" width="280" height="80" rx="3"/>
+            <text class="note-text" x="568" y="1785" style="fill:#F50537;font-weight:700;">MRB ASSEMBLY — 10-point quality check:</text>
+            <text class="note-text" x="568" y="1800">1. MRB Index complete    6. NCR dispositions closed</text>
+            <text class="note-text" x="568" y="1813">2. All docs validated     7. Traceability matrix verified</text>
+            <text class="note-text" x="568" y="1826">3. CoC signed             8. Page numbering correct</text>
+            <text class="note-text" x="568" y="1839">4. Cover page generated   9. PDF/A-3 compiled</text>
+            <text class="note-text" x="568" y="1852">5. Bookmarks inserted    10. SHA-256 checksum</text>
+
+            <!-- MRB → ERP: IF-009 MRB Completion -->
+            <line class="msg-line-red" x1="540" y1="1880" x2="310" y2="1880"/>
+            <text class="msg-label" x="345" y="1875"><tspan fill="#F50537">IF-009</tspan> mrb.released</text>
+            <text class="msg-detail" x="345" y="1888">mrb_number, document_count, total_pages, PDF/A package</text>
+
+            <!-- MRB → ERP: IF-008 state → READY -->
+            <line class="msg-line" x1="540" y1="1915" x2="310" y2="1915"/>
+            <text class="msg-label" x="345" y="1910"><tspan fill="#2B2B2B">IF-008</tspan> order_state → READY</text>
+
+            <!-- ERP → Customer: Order ready notification -->
+            <line class="msg-line" x1="300" y1="1940" x2="90" y2="1940"/>
+            <text class="msg-label" x="120" y="1935">Order documentation complete — ready for shipment</text>
+
+            <!-- ══════════════════════════════════════════════════════
+                 STAGE 6 — SHIPMENT & DELIVERY (y: 1965–2160)
+                 ══════════════════════════════════════════════════════ -->
+            <rect class="stage-bar" x="0" y="1965" width="1140" height="200"/>
+            <text class="stage-label" x="12" y="1982">STAGE 6 — SHIPMENT &amp; DELIVERY</text>
+
+            <!-- ERP ↔ MRB: IF-011 Shipment Release -->
+            <line class="msg-line-red" x1="300" y1="2010" x2="530" y2="2010"/>
+            <text class="msg-label" x="340" y="2005"><tspan fill="#F50537">IF-011</tspan> shipment.dispatched</text>
+            <text class="msg-detail" x="340" y="2018">shipment_number, tracking, physical_mrb_included</text>
+
+            <!-- MRB → ERP: IF-011 Electronic MRB delivered -->
+            <line class="msg-line-red" x1="540" y1="2050" x2="310" y2="2050"/>
+            <text class="msg-label" x="345" y="2045"><tspan fill="#F50537">IF-011</tspan> mrb.delivered (electronic)</text>
+            <text class="msg-detail" x="345" y="2058">delivery_method: CUSTOMER_PORTAL</text>
+
+            <!-- MRB → Customer: IF-016 Customer Portal Delivery -->
+            <line class="msg-line-red" x1="540" y1="2090" x2="90" y2="2090"/>
+            <text class="msg-label" x="180" y="2085"><tspan fill="#F50537">IF-016</tspan> Customer MRB Delivery</text>
+            <text class="msg-detail" x="180" y="2098">Customer downloads MRB, CoC via portal</text>
+
+            <!-- MRB → ERP: IF-008 state → SHIPPED -->
+            <line class="msg-line" x1="540" y1="2130" x2="310" y2="2130"/>
+            <text class="msg-label" x="345" y="2125"><tspan fill="#2B2B2B">IF-008</tspan> order_state → SHIPPED</text>
+
+            <!-- Customer → MRB: Confirmation -->
+            <line class="msg-line-return" x1="80" y1="2155" x2="530" y2="2155"/>
+            <text class="msg-detail" x="220" y="2150">recipient_confirmed: true</text>
+
+            <!-- ══════════════════════════════════════════════════════
+                 STAGE 7 — ARCHIVAL (y: 2175–2400)
+                 ══════════════════════════════════════════════════════ -->
+            <rect class="stage-bar" x="0" y="2175" width="1140" height="220"/>
+            <text class="stage-label" x="12" y="2192">STAGE 7 — ARCHIVAL (PR-013)</text>
+
+            <!-- MRB → ERP: IF-020 Archive Metadata Sync -->
+            <line class="msg-line-red" x1="540" y1="2220" x2="310" y2="2220"/>
+            <text class="msg-label" x="345" y="2215"><tspan fill="#F50537">IF-020</tspan> mrb.archived</text>
+            <text class="msg-detail" x="345" y="2228">archive_location, retention_expiry, checksum_sha256</text>
+
+            <!-- MRB → ERP: IF-008 state → ARCHIVED -->
+            <line class="msg-line" x1="540" y1="2260" x2="310" y2="2260"/>
+            <text class="msg-label" x="345" y="2255"><tspan fill="#2B2B2B">IF-008</tspan> order_state → ARCHIVED</text>
+
+            <!-- Archive note -->
+            <rect class="note-box" x="430" y="2290" width="260" height="70" rx="3"/>
+            <text class="note-text" x="440" y="2305" style="font-weight:700;">ARCHIVAL TIERS (PR-013)</text>
+            <text class="note-text" x="440" y="2320">ACTIVE archive: 2 years (hot storage)</text>
+            <text class="note-text" x="440" y="2333">DEEP archive: long-term (WORM storage)</text>
+            <text class="note-text" x="440" y="2346">Defence: 30 years | Oil &amp; Gas: 25 years</text>
+            <text class="note-text" x="440" y="2359">SHA-256 integrity verification</text>
+
+            <!-- Industry retention comparison -->
+            <rect style="fill:#1C2D3F;rx:3;" x="720" y="2300" width="120" height="20"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#FFF;font-weight:700;" x="730" y="2314">DEFENCE: 30 yr</text>
+            <rect style="fill:#1B5E20;rx:3;" x="720" y="2325" width="120" height="20"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#FFF;font-weight:700;" x="730" y="2339">OIL &amp; GAS: 25 yr</text>
+
+            <!-- ── Participant Boxes (bottom) ── -->
+            <rect class="participant-box" x="20"  y="2440" width="120" height="36" rx="4"/>
+            <text class="participant-label" x="80"  y="2458">CUSTOMER</text>
+
+            <rect class="participant-box" x="230" y="2440" width="140" height="36" rx="4"/>
+            <text class="participant-label" x="300" y="2458">ERP SYSTEM</text>
+
+            <rect class="participant-box" x="470" y="2440" width="140" height="36" rx="4"/>
+            <text class="participant-label" x="540" y="2458">MRB BUILDER</text>
+
+            <rect class="participant-box" x="690" y="2440" width="140" height="36" rx="4"/>
+            <text class="participant-label" x="760" y="2458">SHOP FLOOR</text>
+
+            <rect class="participant-box" x="890" y="2440" width="140" height="36" rx="4"/>
+            <text class="participant-label" x="960" y="2458">SUPPLIER</text>
+        </svg>
+    </div>
+
+    <div class="callout">
+        <strong>Key architecture principle:</strong> Machine data (CNC, CMM, metrology) flows directly from ISA-95 Level 3
+        to the MRB Builder via MQTT/OPC-UA — bypassing the ERP entirely. Supplier documents route through
+        ERP because one certificate may serve multiple orders (1:N allocation managed by ERP).
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     DIAGRAM 2 — INDUSTRY COMPARISON
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="page">
+    <h2>2. Industry-Specific Branching — Defence vs Oil &amp; Gas</h2>
+    <p class="muted" style="margin-bottom:16px;">
+        The MRB Builder handles both industries through a single pipeline with industry-specific
+        branching at three critical control points: SDRL parsing (MRB template selection),
+        validation (FAIR vs ITP), and CoC generation (template + signature authority).
+    </p>
+
+    <div class="diagram-wrap">
+        <svg class="seq-diagram" viewBox="0 0 1140 1280" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="ah2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#2B2B2B" />
+                </marker>
+                <marker id="ah2r" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#F50537" />
+                </marker>
+                <marker id="ah2d" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#1C2D3F" />
+                </marker>
+                <marker id="ah2g" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#1B5E20" />
+                </marker>
+            </defs>
+
+            <!-- Participants -->
+            <rect class="participant-box" x="20"  y="10" width="100" height="36" rx="4"/>
+            <text class="participant-label" x="70"  y="28">ERP</text>
+
+            <rect class="participant-box" x="190" y="10" width="120" height="36" rx="4"/>
+            <text class="participant-label" x="250" y="28">SDRL PARSER</text>
+
+            <rect style="fill:#1C2D3F" x="400" y="10" width="130" height="36" rx="4"/>
+            <text class="participant-label" x="465" y="28">DEFENCE PATH</text>
+
+            <rect style="fill:#1B5E20" x="610" y="10" width="130" height="36" rx="4"/>
+            <text class="participant-label" x="675" y="28">OIL &amp; GAS PATH</text>
+
+            <rect class="participant-box" x="830" y="10" width="130" height="36" rx="4"/>
+            <text class="participant-label" x="895" y="28">MRB ASSEMBLER</text>
+
+            <!-- Lifelines -->
+            <line class="lifeline" x1="70"  y1="46" x2="70"  y2="1240"/>
+            <line class="lifeline" x1="250" y1="46" x2="250" y2="1240"/>
+            <line style="stroke:#1C2D3F;stroke-width:1;stroke-dasharray:6 4;" x1="465" y1="46" x2="465" y2="1240"/>
+            <line style="stroke:#1B5E20;stroke-width:1;stroke-dasharray:6 4;" x1="675" y1="46" x2="675" y2="1240"/>
+            <line class="lifeline" x1="895" y1="46" x2="895" y2="1240"/>
+
+            <!-- ── BRANCHING POINT 1: SDRL Classification ── -->
+            <text class="stage-label" x="12" y="80">BRANCH 1 — SDRL CLASSIFICATION</text>
+
+            <!-- ERP → SDRL Parser -->
+            <line style="stroke:#2B2B2B;stroke-width:1.5;marker-end:url(#ah2);" x1="70" y1="100" x2="240" y2="100"/>
+            <text class="msg-label" x="95" y="95">IF-001 + IF-002: PO + SDRL</text>
+
+            <!-- SDRL Parser: classify -->
+            <rect class="activation-red" x="242" y="115" width="16" height="40"/>
+            <rect class="note-box-red" x="268" y="115" width="180" height="40" rx="3"/>
+            <text class="note-text" x="278" y="130" style="fill:#F50537;font-weight:700;">CLASSIFY INDUSTRY</text>
+            <text class="note-text" x="278" y="143">AS9100/AQAP → DEFENCE</text>
+            <text class="note-text" x="278" y="153">NORSOK/API → OIL &amp; GAS</text>
+
+            <!-- SDRL → Defence: 8-section template -->
+            <line style="stroke:#1C2D3F;stroke-width:1.5;marker-end:url(#ah2d);" x1="250" y1="175" x2="455" y2="175"/>
+            <text class="msg-label" x="280" y="170" style="fill:#1C2D3F;">Init 8-section MRB template</text>
+            <text class="msg-detail" x="280" y="183">25 line items, FAIR required</text>
+
+            <!-- SDRL → Oil & Gas: 7-section template -->
+            <line style="stroke:#1B5E20;stroke-width:1.5;marker-end:url(#ah2g);" x1="250" y1="210" x2="665" y2="210"/>
+            <text class="msg-label" x="380" y="205" style="fill:#1B5E20;">Init 7-section MRB template</text>
+            <text class="msg-detail" x="380" y="218">30 line items, ITP required</text>
+
+            <!-- Defence template detail -->
+            <rect style="fill:#1C2D3F;opacity:0.08;" x="400" y="240" width="180" height="170"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#1C2D3F;font-weight:700;" x="410" y="258">DEFENCE MRB (8 sections)</text>
+            <text class="note-text" x="410" y="274">1. Identification &amp; Index</text>
+            <text class="note-text" x="410" y="287">2. Contract Documentation</text>
+            <text class="note-text" x="410" y="300">3. Material Documentation</text>
+            <text class="note-text" x="410" y="313">4. Manufacturing Process</text>
+            <text class="note-text" x="410" y="326">5. Special Processes</text>
+            <text class="note-text" x="410" y="339">6. Inspection (incl. FAIR)</text>
+            <text class="note-text" x="410" y="352">7. Testing</text>
+            <text class="note-text" x="410" y="365">8. Compliance Declarations</text>
+
+            <!-- Oil & Gas template detail -->
+            <rect style="fill:#1B5E20;opacity:0.08;" x="610" y="240" width="190" height="155"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#1B5E20;font-weight:700;" x="620" y="258">OIL &amp; GAS MRB (7 sections)</text>
+            <text class="note-text" x="620" y="274">1. General Information &amp; ITP</text>
+            <text class="note-text" x="620" y="287">2. Purchase &amp; Technical</text>
+            <text class="note-text" x="620" y="300">3. Material Documentation</text>
+            <text class="note-text" x="620" y="313">4. Manufacturing Records</text>
+            <text class="note-text" x="620" y="326">5. Testing &amp; Inspection</text>
+            <text class="note-text" x="620" y="339">6. Compliance Documentation</text>
+            <text class="note-text" x="620" y="352">7. Preservation &amp; Shipping</text>
+
+            <!-- ── BRANCHING POINT 2: Validation ── -->
+            <text class="stage-label" x="12" y="440">BRANCH 2 — INDUSTRY-SPECIFIC VALIDATION</text>
+
+            <!-- Defence: FAIR -->
+            <rect style="fill:#1C2D3F;opacity:0.08;" x="380" y="460" width="210" height="150"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#1C2D3F;font-weight:700;" x="390" y="478">FAIR — First Article Inspection</text>
+            <text class="note-text" x="390" y="494">AS9102 Forms 1, 2, 3</text>
+            <text class="note-text" x="390" y="507">Form 1: Part Number Accountability</text>
+            <text class="note-text" x="390" y="520">Form 2: Material/Special Process</text>
+            <text class="note-text" x="390" y="533">Form 3: Characteristic Accountability</text>
+            <text class="note-text" x="390" y="550" style="font-weight:700;">Triggered by:</text>
+            <text class="note-text" x="390" y="563">- First production of part</text>
+            <text class="note-text" x="390" y="576">- Design change</text>
+            <text class="note-text" x="390" y="589">- Process/supplier change</text>
+            <text class="note-text" x="390" y="602">- 2+ year production gap</text>
+
+            <!-- Oil & Gas: ITP -->
+            <rect style="fill:#1B5E20;opacity:0.08;" x="610" y="460" width="210" height="150"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#1B5E20;font-weight:700;" x="620" y="478">ITP — Inspection &amp; Test Plan</text>
+            <text class="note-text" x="620" y="494">Hold / Witness / Review / Surveillance</text>
+            <text class="note-text" x="620" y="510">(H) Hold Point:</text>
+            <text class="note-text" x="630" y="523">Production STOPS. Customer must attend.</text>
+            <text class="note-text" x="620" y="540">(W) Witness Point:</text>
+            <text class="note-text" x="630" y="553">48-72h customer notification.</text>
+            <text class="note-text" x="620" y="570">(R) Review Point:</text>
+            <text class="note-text" x="630" y="583">Documentation review only.</text>
+            <text class="note-text" x="620" y="600">(S) Surveillance Point:</text>
+            <text class="note-text" x="630" y="613">Random verification.</text>
+
+            <!-- ── BRANCHING POINT 3: Certificate Requirements ── -->
+            <text class="stage-label" x="12" y="645">BRANCH 3 — CERTIFICATE &amp; COMPLIANCE REQUIREMENTS</text>
+
+            <!-- Defence certificates -->
+            <rect style="fill:#1C2D3F;opacity:0.08;" x="380" y="665" width="210" height="120"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#1C2D3F;font-weight:700;" x="390" y="683">DEFENCE CERT REQUIREMENTS</text>
+            <text class="note-text" x="390" y="699">EN 10204 Type: 3.2 (mandatory)</text>
+            <text class="note-text" x="390" y="712">Standards: AS9100, AQAP 2110</text>
+            <text class="note-text" x="390" y="725">Export: ECCN classification required</text>
+            <text class="note-text" x="390" y="738">Signature: LEVEL_2 minimum</text>
+            <text class="note-text" x="390" y="751">CoC template: Defence (AS9100/AQAP)</text>
+            <text class="note-text" x="390" y="764">Special: MIL-STD, STANAG, DEF-STAN</text>
+            <text class="note-text" x="390" y="777">Retention: 30 years</text>
+
+            <!-- Oil & Gas certificates -->
+            <rect style="fill:#1B5E20;opacity:0.08;" x="610" y="665" width="210" height="120"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#1B5E20;font-weight:700;" x="620" y="683">OIL &amp; GAS CERT REQUIREMENTS</text>
+            <text class="note-text" x="620" y="699">EN 10204 Type: 3.1 or 3.2</text>
+            <text class="note-text" x="620" y="712">Standards: NORSOK, API, ASME</text>
+            <text class="note-text" x="620" y="725">PMI: Mandatory per NORSOK</text>
+            <text class="note-text" x="620" y="738">Signature: As per ITP authority</text>
+            <text class="note-text" x="620" y="751">CoC template: Oil &amp; Gas (NORSOK/API)</text>
+            <text class="note-text" x="620" y="764">Special: DNV approval, MDS required</text>
+            <text class="note-text" x="620" y="777">Retention: 25 years</text>
+
+            <!-- ── BRANCHING POINT 4: CoC Generation ── -->
+            <text class="stage-label" x="12" y="820">BRANCH 4 — CoC GENERATION &amp; MRB ASSEMBLY</text>
+
+            <!-- Both paths converge to MRB Assembler -->
+            <line style="stroke:#1C2D3F;stroke-width:1.5;marker-end:url(#ah2d);" x1="465" y1="850" x2="885" y2="850"/>
+            <text class="msg-label" x="530" y="845" style="fill:#1C2D3F;">Defence CoC (AS9100/AQAP template)</text>
+            <text class="msg-detail" x="530" y="858">AQAP deviation declarations, ECCN compliance statement</text>
+
+            <line style="stroke:#1B5E20;stroke-width:1.5;marker-end:url(#ah2g);" x1="675" y1="885" x2="885" y2="885"/>
+            <text class="msg-label" x="700" y="880" style="fill:#1B5E20;">Oil &amp; Gas CoC (NORSOK/API template)</text>
+            <text class="msg-detail" x="700" y="893">NORSOK compliance statement, ITP completion sign-off</text>
+
+            <!-- MRB Assembler activation -->
+            <rect class="activation-red" x="887" y="910" width="16" height="60"/>
+            <rect class="note-box-red" x="913" y="910" width="210" height="60" rx="3"/>
+            <text class="note-text" x="923" y="925" style="fill:#F50537;font-weight:700;">MRB ASSEMBLY (PR-012)</text>
+            <text class="note-text" x="923" y="940">Both paths converge here.</text>
+            <text class="note-text" x="923" y="953">10-point quality check.</text>
+            <text class="note-text" x="923" y="966">PDF/A-3 compilation + SHA-256.</text>
+
+            <!-- MRB → ERP: Completion -->
+            <line style="stroke:#F50537;stroke-width:2;marker-end:url(#ah2r);" x1="895" y1="990" x2="80" y2="990"/>
+            <text class="msg-label" x="350" y="985"><tspan fill="#F50537">IF-009</tspan> mrb.released → ERP</text>
+            <text class="msg-detail" x="350" y="998">Same event structure regardless of industry — classification tag included</text>
+
+            <!-- ── Summary comparison boxes ── -->
+            <rect style="fill:#1C2D3F;opacity:0.08;" x="60" y="1030" width="500" height="195"/>
+            <rect style="fill:#1C2D3F;rx:3;" x="60" y="1030" width="190" height="20"/>
+            <text style="font-family:Calibri;font-size:12px;fill:#FFF;font-weight:700;" x="70" y="1045">DEFENCE SUMMARY</text>
+
+            <text class="note-text" x="75" y="1068" style="font-weight:700;">Standards:</text>
+            <text class="note-text" x="150" y="1068">AS9100, AQAP 2110, MIL-STD, STANAG, DEF-STAN</text>
+            <text class="note-text" x="75" y="1084" style="font-weight:700;">MRB Template:</text>
+            <text class="note-text" x="170" y="1084">8 sections, 25 line items</text>
+            <text class="note-text" x="75" y="1100" style="font-weight:700;">Key Document:</text>
+            <text class="note-text" x="170" y="1100">FAIR (AS9102 Forms 1/2/3)</text>
+            <text class="note-text" x="75" y="1116" style="font-weight:700;">Certificate:</text>
+            <text class="note-text" x="170" y="1116">EN 10204 Type 3.2 (mandatory)</text>
+            <text class="note-text" x="75" y="1132" style="font-weight:700;">Signature:</text>
+            <text class="note-text" x="170" y="1132">LEVEL_2 minimum authority</text>
+            <text class="note-text" x="75" y="1148" style="font-weight:700;">Export:</text>
+            <text class="note-text" x="170" y="1148">ECCN classification required</text>
+            <text class="note-text" x="75" y="1164" style="font-weight:700;">Retention:</text>
+            <text class="note-text" x="170" y="1164">30 years (WORM storage)</text>
+            <text class="note-text" x="75" y="1180" style="font-weight:700;">CoC Template:</text>
+            <text class="note-text" x="170" y="1180">Defence (AS9100/AQAP)</text>
+            <text class="note-text" x="75" y="1196" style="font-weight:700;">Special Req:</text>
+            <text class="note-text" x="170" y="1196">AQAP compliance, NATO codification</text>
+            <text class="note-text" x="75" y="1212" style="font-weight:700;">Trigger:</text>
+            <text class="note-text" x="170" y="1212">First article, design change, supplier change, 2yr gap</text>
+
+            <rect style="fill:#1B5E20;opacity:0.08;" x="580" y="1030" width="540" height="195"/>
+            <rect style="fill:#1B5E20;rx:3;" x="580" y="1030" width="190" height="20"/>
+            <text style="font-family:Calibri;font-size:12px;fill:#FFF;font-weight:700;" x="590" y="1045">OIL &amp; GAS SUMMARY</text>
+
+            <text class="note-text" x="595" y="1068" style="font-weight:700;">Standards:</text>
+            <text class="note-text" x="670" y="1068">NORSOK M-630/M-650, API, ASME, DNV</text>
+            <text class="note-text" x="595" y="1084" style="font-weight:700;">MRB Template:</text>
+            <text class="note-text" x="695" y="1084">7 sections, 30 line items</text>
+            <text class="note-text" x="595" y="1100" style="font-weight:700;">Key Document:</text>
+            <text class="note-text" x="695" y="1100">ITP (Hold / Witness / Review points)</text>
+            <text class="note-text" x="595" y="1116" style="font-weight:700;">Certificate:</text>
+            <text class="note-text" x="695" y="1116">EN 10204 Type 3.1 or 3.2 (flexible)</text>
+            <text class="note-text" x="595" y="1132" style="font-weight:700;">Signature:</text>
+            <text class="note-text" x="695" y="1132">Per ITP authority definition</text>
+            <text class="note-text" x="595" y="1148" style="font-weight:700;">PMI Policy:</text>
+            <text class="note-text" x="695" y="1148">Mandatory per NORSOK (Positive Material ID)</text>
+            <text class="note-text" x="595" y="1164" style="font-weight:700;">Retention:</text>
+            <text class="note-text" x="695" y="1164">25 years (WORM storage)</text>
+            <text class="note-text" x="595" y="1180" style="font-weight:700;">CoC Template:</text>
+            <text class="note-text" x="695" y="1180">Oil &amp; Gas (NORSOK/API)</text>
+            <text class="note-text" x="595" y="1196" style="font-weight:700;">Special Req:</text>
+            <text class="note-text" x="695" y="1196">DNV approval, MDS (Material Data Sheet)</text>
+            <text class="note-text" x="595" y="1212" style="font-weight:700;">Trigger:</text>
+            <text class="note-text" x="695" y="1212">ITP Hold Points stop production, Witness Points notify 48-72h</text>
+        </svg>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     DIAGRAM 3 — ISA-95 DATA FLOW ARCHITECTURE
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="page">
+    <h2>3. ISA-95 Architecture — ERP / MRB / Shop Floor Data Boundaries</h2>
+    <p class="muted" style="margin-bottom:16px;">
+        Based on Siemens Industry 4.0 research (ERP-Industri4.0-grundig-research-rapport) and AM-TS-001.
+        Shows the ISA-95 Level 3 / Level 4 boundary and how data flows between enterprise and manufacturing systems.
+    </p>
+
+    <div class="diagram-wrap">
+        <svg class="seq-diagram" viewBox="0 0 1000 620" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="ah3" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#2B2B2B" />
+                </marker>
+                <marker id="ah3r" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#F50537" />
+                </marker>
+            </defs>
+
+            <!-- ISA-95 Level Labels -->
+            <rect style="fill:#F5F5F5;stroke:#D3D3D3;" x="10" y="10" width="110" height="590" rx="4"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#6B6B6B;font-weight:700;text-anchor:middle;" transform="rotate(-90 55 300)" x="55" y="300">ISA-95 LEVELS</text>
+
+            <!-- Level 4 -->
+            <rect style="fill:#2B2B2B;rx:3;" x="20" y="20" width="90" height="180"/>
+            <text style="font-family:Calibri;font-size:12px;fill:#FFF;font-weight:700;text-anchor:middle;" x="65" y="70">LEVEL 4</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#8EAEC5;text-anchor:middle;" x="65" y="88">Enterprise</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#8EAEC5;text-anchor:middle;" x="65" y="102">Logistics</text>
+
+            <!-- Level 3 -->
+            <rect style="fill:#F50537;rx:3;" x="20" y="220" width="90" height="170"/>
+            <text style="font-family:Calibri;font-size:12px;fill:#FFF;font-weight:700;text-anchor:middle;" x="65" y="270">LEVEL 3</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#FFF;text-anchor:middle;" x="65" y="288">Manufacturing</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#FFF;text-anchor:middle;" x="65" y="302">Operations</text>
+
+            <!-- Level 2/1/0 -->
+            <rect style="fill:#6B6B6B;rx:3;" x="20" y="410" width="90" height="180"/>
+            <text style="font-family:Calibri;font-size:12px;fill:#FFF;font-weight:700;text-anchor:middle;" x="65" y="460">LEVEL 2-0</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#D3D3D3;text-anchor:middle;" x="65" y="478">Control</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#D3D3D3;text-anchor:middle;" x="65" y="492">&amp; Sensors</text>
+
+            <!-- ── Level 4: ERP System ── -->
+            <rect style="fill:#2B2B2B;rx:4;" x="150" y="20" width="280" height="180"/>
+            <text style="font-family:Calibri;font-size:16px;fill:#FFF;font-weight:700;" x="170" y="50">ERP SYSTEM</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#8EAEC5;" x="170" y="68">(Siemens-style enterprise backbone)</text>
+
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;" x="170" y="92">Finance &amp; Costing</text>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;" x="170" y="108">Purchasing / SCM</text>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;" x="170" y="124">Production Orders</text>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;" x="170" y="140">Inventory / Lot Tracking</text>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;" x="310" y="92">CRM / Sales</text>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;" x="310" y="108">HR / Qualifications</text>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;" x="310" y="124">Calibration Records</text>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;" x="310" y="140">Supplier Approval</text>
+
+            <text style="font-family:Calibri;font-size:11px;fill:#F50537;font-weight:700;" x="170" y="170">Document Management (material certs, supplier docs)</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#8EAEC5;" x="170" y="185">Shared docs live here — 1:N order allocation</text>
+
+            <!-- ── Level 4: External ── -->
+            <rect style="fill:#F5F5F5;stroke:#D3D3D3;rx:4;" x="480" y="20" width="160" height="80"/>
+            <text style="font-family:Calibri;font-size:13px;fill:#2B2B2B;font-weight:700;" x="500" y="45">CUSTOMERS</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#6B6B6B;" x="500" y="62">KDA, Equinor, TechnipFMC</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#6B6B6B;" x="500" y="76">PO + SDRL submission</text>
+
+            <rect style="fill:#F5F5F5;stroke:#D3D3D3;rx:4;" x="480" y="115" width="160" height="80"/>
+            <text style="font-family:Calibri;font-size:13px;fill:#2B2B2B;font-weight:700;" x="500" y="140">SUPPLIERS</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#6B6B6B;" x="500" y="157">Sandvik, Outokumpu</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#6B6B6B;" x="500" y="171">Material certs → ERP</text>
+
+            <!-- External arrows -->
+            <line style="stroke:#2B2B2B;stroke-width:1.5;marker-end:url(#ah3);" x1="478" y1="55" x2="432" y2="55"/>
+            <line style="stroke:#2B2B2B;stroke-width:1.5;marker-end:url(#ah3);" x1="478" y1="155" x2="432" y2="155"/>
+
+            <!-- ── Level 3: MRB Builder ── -->
+            <rect style="fill:#FFF;stroke:#F50537;stroke-width:2;rx:4;" x="150" y="220" width="500" height="170"/>
+            <text style="font-family:Calibri;font-size:16px;fill:#F50537;font-weight:700;" x="170" y="250">MRB BUILDER (Aurelian-built)</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#6B6B6B;" x="170" y="268">Manufacturing Operations Management — Digital Quality Layer</text>
+
+            <!-- MRB modules -->
+            <rect style="fill:#FFEBEE;rx:3;" x="170" y="282" width="110" height="45"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#F50537;font-weight:700;text-anchor:middle;" x="225" y="298">MATERIAL GATE</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#6B6B6B;text-anchor:middle;" x="225" y="312">PR-008</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#6B6B6B;text-anchor:middle;" x="225" y="322">5-point check</text>
+
+            <rect style="fill:#FFEBEE;rx:3;" x="295" y="282" width="100" height="45"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#F50537;font-weight:700;text-anchor:middle;" x="345" y="298">SDRL PARSER</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#6B6B6B;text-anchor:middle;" x="345" y="312">PR-009</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#6B6B6B;text-anchor:middle;" x="345" y="322">MRB Index gen</text>
+
+            <rect style="fill:#FFEBEE;rx:3;" x="410" y="282" width="100" height="45"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#F50537;font-weight:700;text-anchor:middle;" x="460" y="298">VALIDATOR</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#6B6B6B;text-anchor:middle;" x="460" y="312">PR-010</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#6B6B6B;text-anchor:middle;" x="460" y="322">5-layer check</text>
+
+            <rect style="fill:#FFEBEE;rx:3;" x="525" y="282" width="100" height="45"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#F50537;font-weight:700;text-anchor:middle;" x="575" y="298">CoC ENGINE</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#6B6B6B;text-anchor:middle;" x="575" y="312">PR-011</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#6B6B6B;text-anchor:middle;" x="575" y="322">Cert generation</text>
+
+            <rect style="fill:#FFEBEE;rx:3;" x="170" y="338" width="110" height="40"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#F50537;font-weight:700;text-anchor:middle;" x="225" y="354">ASSEMBLER</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#6B6B6B;text-anchor:middle;" x="225" y="368">PR-012: PDF/A-3</text>
+
+            <rect style="fill:#FFEBEE;rx:3;" x="295" y="338" width="100" height="40"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#F50537;font-weight:700;text-anchor:middle;" x="345" y="354">ARCHIVE</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#6B6B6B;text-anchor:middle;" x="345" y="368">PR-013: WORM</text>
+
+            <rect style="fill:#FFEBEE;rx:3;" x="410" y="338" width="100" height="40"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#F50537;font-weight:700;text-anchor:middle;" x="460" y="354">DASHBOARDS</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#6B6B6B;text-anchor:middle;" x="460" y="368">Real-time status</text>
+
+            <rect style="fill:#FFEBEE;rx:3;" x="525" y="338" width="100" height="40"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#F50537;font-weight:700;text-anchor:middle;" x="575" y="354">PORTAL</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#6B6B6B;text-anchor:middle;" x="575" y="368">IF-016/17/18</text>
+
+            <!-- ── ERP ↔ MRB API Layer ── -->
+            <line style="stroke:#F50537;stroke-width:2;" x1="290" y1="200" x2="290" y2="220"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#F50537;font-weight:700;" x="210" y="215">API LAYER (AM-IF-001 — 20 interfaces)</text>
+
+            <!-- Double arrow between ERP and MRB -->
+            <line style="stroke:#F50537;stroke-width:2;marker-end:url(#ah3r);" x1="270" y1="200" x2="270" y2="220"/>
+            <line style="stroke:#F50537;stroke-width:2;marker-end:url(#ah3r);" x1="310" y1="220" x2="310" y2="200"/>
+
+            <!-- ── Level 2-0: Shop Floor ── -->
+            <rect style="fill:#6B6B6B;rx:4;" x="150" y="410" width="500" height="180"/>
+            <text style="font-family:Calibri;font-size:16px;fill:#FFF;font-weight:700;" x="170" y="440">SHOP FLOOR (ISA-95 Level 2/1/0)</text>
+
+            <rect style="fill:#555;rx:3;" x="170" y="455" width="130" height="55"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;font-weight:700;text-anchor:middle;" x="235" y="475">CNC MACHINES</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#D3D3D3;text-anchor:middle;" x="235" y="490">MAZAK (5-axis)</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#D3D3D3;text-anchor:middle;" x="235" y="502">OPC-UA / MTConnect</text>
+
+            <rect style="fill:#555;rx:3;" x="320" y="455" width="130" height="55"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;font-weight:700;text-anchor:middle;" x="385" y="475">CMM / METROLOGY</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#D3D3D3;text-anchor:middle;" x="385" y="490">Zeiss Contura</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#D3D3D3;text-anchor:middle;" x="385" y="502">Direct integration</text>
+
+            <rect style="fill:#555;rx:3;" x="470" y="455" width="150" height="55"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;font-weight:700;text-anchor:middle;" x="545" y="475">INSPECTION ROOM</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#D3D3D3;text-anchor:middle;" x="545" y="490">Hardness, surface, visual</text>
+            <text style="font-family:Calibri;font-size:9px;fill:#D3D3D3;text-anchor:middle;" x="545" y="502">MQTT events</text>
+
+            <text style="font-family:Calibri;font-size:11px;fill:#FFF;font-weight:700;" x="170" y="545">Protocols: MQTT · OPC-UA · MTConnect</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#D3D3D3;" x="170" y="560">Real-time data: dimensional, tool wear, cycle times, temperature, vibration</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#FFF;font-weight:700;" x="170" y="578">→ Machine data bypasses ERP — flows directly to MRB Builder</text>
+
+            <!-- Shop Floor → MRB direct arrow -->
+            <line style="stroke:#FFF;stroke-width:2;marker-end:url(#ah3r);" x1="400" y1="410" x2="400" y2="390"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#FFF;font-weight:700;" x="415" y="405">MQTT / OPC-UA (direct)</text>
+
+            <!-- Note: No ERP mediation for machine data -->
+            <rect style="fill:#FFF8E1;stroke:#FFD54F;rx:3;" x="700" y="280" width="280" height="90"/>
+            <text style="font-family:Calibri;font-size:11px;fill:#2B2B2B;font-weight:700;" x="715" y="300">KEY ARCHITECTURE DECISIONS</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#2B2B2B;" x="715" y="318">1. Machine data → MRB (not via ERP)</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#2B2B2B;" x="715" y="333">2. Supplier certs → ERP → MRB (1:N alloc)</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#2B2B2B;" x="715" y="348">3. Single PostgreSQL (unified, not external)</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#2B2B2B;" x="715" y="363">4. Event-driven (webhooks → event bus)</text>
+
+            <!-- Siemens reference -->
+            <rect style="fill:#F5F5F5;stroke:#D3D3D3;rx:3;" x="700" y="400" width="280" height="65"/>
+            <text style="font-family:Calibri;font-size:10px;fill:#6B6B6B;font-weight:700;" x="715" y="418">Siemens / Fraunhofer Reference:</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#6B6B6B;" x="715" y="433">ERP at ISA-95 Level 4 (enterprise logistics)</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#6B6B6B;" x="715" y="448">MES/MOM at Level 3 (manufacturing ops)</text>
+            <text style="font-family:Calibri;font-size:10px;fill:#6B6B6B;" x="715" y="463">MRB Builder = Level 3 quality layer</text>
+        </svg>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     INTERFACE REGISTER TABLE
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="page">
+    <h2>4. Interface Register — All 20 Interfaces</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>IF-ID</th>
+                <th>Name</th>
+                <th>Direction</th>
+                <th>Trigger</th>
+                <th>Procedure</th>
+                <th>Stage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>IF-001</strong></td><td>New Purchase Order</td><td><span class="tag tag-erp">ERP → MRB</span></td><td>PO confirmed</td><td>PR-009</td><td>0</td></tr>
+            <tr><td><strong>IF-002</strong></td><td>SDRL Attachment</td><td><span class="tag tag-erp">ERP → MRB</span></td><td>SDRL attached to PO</td><td>PR-009</td><td>0</td></tr>
+            <tr><td><strong>IF-003</strong></td><td>Goods Receiving Notification</td><td><span class="tag tag-erp">ERP → MRB</span></td><td>Material received</td><td>PR-008</td><td>1</td></tr>
+            <tr><td><strong>IF-004</strong></td><td>Material Certificate Attached</td><td><span class="tag tag-erp">ERP → MRB</span></td><td>Cert attached to receipt</td><td>PR-008</td><td>1</td></tr>
+            <tr><td><strong>IF-005</strong></td><td>Material Gate Decision</td><td><span class="tag tag-mrb">MRB → ERP</span></td><td>Gate review completed</td><td>PR-008</td><td>1</td></tr>
+            <tr><td><strong>IF-006</strong></td><td>Production Order Link</td><td><span class="tag tag-erp">ERP → MRB</span></td><td>Prod order created</td><td>PR-009</td><td>2</td></tr>
+            <tr><td><strong>IF-007</strong></td><td>NCR Created / Updated</td><td><span class="tag tag-bi">Bidirectional</span></td><td>NCR raised</td><td>PR-004/010</td><td>3</td></tr>
+            <tr><td><strong>IF-008</strong></td><td>Order State Update</td><td><span class="tag tag-mrb">MRB → ERP</span></td><td>State transition</td><td>PR-009</td><td>All</td></tr>
+            <tr><td><strong>IF-009</strong></td><td>MRB Completion</td><td><span class="tag tag-mrb">MRB → ERP</span></td><td>MRB released</td><td>PR-012</td><td>5</td></tr>
+            <tr><td><strong>IF-010</strong></td><td>CoC Registered</td><td><span class="tag tag-mrb">MRB → ERP</span></td><td>CoC signed</td><td>PR-011</td><td>4</td></tr>
+            <tr><td><strong>IF-011</strong></td><td>Shipment Release</td><td><span class="tag tag-bi">Bidirectional</span></td><td>Dispatch confirmed</td><td>PR-012</td><td>6</td></tr>
+            <tr><td><strong>IF-012</strong></td><td>Customer Requirement Profile</td><td><span class="tag tag-erp">ERP → MRB</span></td><td>Customer onboarded</td><td>PR-008</td><td>1</td></tr>
+            <tr><td><strong>IF-013</strong></td><td>Calibration Status Query</td><td><span class="tag tag-mrb">MRB → ERP</span></td><td>L5 validation</td><td>PR-010</td><td>3</td></tr>
+            <tr><td><strong>IF-014</strong></td><td>Supplier Approval Status</td><td><span class="tag tag-mrb">MRB → ERP</span></td><td>Material gate check</td><td>PR-008</td><td>1</td></tr>
+            <tr><td><strong>IF-015</strong></td><td>Employee Qualification</td><td><span class="tag tag-mrb">MRB → ERP</span></td><td>L4/L5 validation</td><td>PR-010/011</td><td>3–4</td></tr>
+            <tr><td><strong>IF-016</strong></td><td>Customer MRB Delivery</td><td><span class="tag tag-mrb">MRB → Cust</span></td><td>MRB released</td><td>PR-012</td><td>6</td></tr>
+            <tr><td><strong>IF-017</strong></td><td>Customer SDRL Submission</td><td><span class="tag tag-erp">Cust → MRB</span></td><td>PO submitted</td><td>PR-009</td><td>0</td></tr>
+            <tr><td><strong>IF-018</strong></td><td>Customer Requirement Profile</td><td><span class="tag tag-erp">Cust → MRB</span></td><td>Profile update</td><td>PR-008</td><td>1</td></tr>
+            <tr><td><strong>IF-019</strong></td><td>Supplier Cert Submission</td><td><span class="tag tag-erp">Supp → ERP</span></td><td>Material shipped</td><td>PR-008</td><td>1</td></tr>
+            <tr><td><strong>IF-020</strong></td><td>Archive Metadata Sync</td><td><span class="tag tag-mrb">MRB → ERP</span></td><td>Order archived</td><td>PR-013</td><td>7</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     INDUSTRY COMPARISON ANALYSIS
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="page">
+    <h2>5. Industry Comparison — Defence vs Oil &amp; Gas</h2>
+
+    <h3>What Differs Between Industries?</h3>
+    <p style="margin-bottom:16px;">
+        The core ERP ↔ MRB pipeline is identical for both industries. The same 20 interfaces,
+        the same 7-stage pipeline, and the same 5-layer validation engine apply. However,
+        the <strong>content</strong> within each stage differs significantly at four branching points:
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Aspect</th>
+                <th><span class="tag tag-def">Defence</span></th>
+                <th><span class="tag tag-og">Oil &amp; Gas</span></th>
+                <th>Impact on Sequence</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Governing Standards</strong></td>
+                <td>AS9100, AQAP 2110, MIL-STD, STANAG, DEF-STAN</td>
+                <td>NORSOK M-630/M-650, API, ASME, DNV</td>
+                <td>Determines which validation rules are applied at L4 (Compliance)</td>
+            </tr>
+            <tr>
+                <td><strong>MRB Template</strong></td>
+                <td>8 sections, 25 line items</td>
+                <td>7 sections, 30 line items</td>
+                <td>Different MRB Index generated from SDRL at Stage 0</td>
+            </tr>
+            <tr>
+                <td><strong>Key Quality Document</strong></td>
+                <td>FAIR (AS9102 Forms 1/2/3)</td>
+                <td>ITP (Hold/Witness/Review points)</td>
+                <td>Defence: additional document slots in Section 6.<br>Oil &amp; Gas: production stops at Hold Points, customer notifications for Witness Points</td>
+            </tr>
+            <tr>
+                <td><strong>Certificate Type</strong></td>
+                <td>EN 10204 Type 3.2 (mandatory)</td>
+                <td>EN 10204 Type 3.1 or 3.2</td>
+                <td>Material Gate (PR-008) applies stricter acceptance for Defence — may REJECT cert type 3.1</td>
+            </tr>
+            <tr>
+                <td><strong>Signature Authority</strong></td>
+                <td>LEVEL_2 minimum</td>
+                <td>Per ITP authority definition</td>
+                <td>IF-015 Employee Qualification query validates different authority thresholds</td>
+            </tr>
+            <tr>
+                <td><strong>Export Controls</strong></td>
+                <td>ECCN classification required</td>
+                <td>Not applicable</td>
+                <td>Defence: additional compliance check in CoC (PR-011) — ECCN statement</td>
+            </tr>
+            <tr>
+                <td><strong>PMI Requirement</strong></td>
+                <td>Per contract specification</td>
+                <td>Mandatory per NORSOK</td>
+                <td>Oil &amp; Gas: PMI report always required in MRB Section 3</td>
+            </tr>
+            <tr>
+                <td><strong>CoC Template</strong></td>
+                <td>Defence (AS9100/AQAP)</td>
+                <td>Oil &amp; Gas (NORSOK/API)</td>
+                <td>Different CoC document generated at Stage 4 — different deviation declaration format</td>
+            </tr>
+            <tr>
+                <td><strong>Preservation &amp; Shipping</strong></td>
+                <td>Embedded in MRB Section 8 (if required)</td>
+                <td>Dedicated MRB Section 7</td>
+                <td>Oil &amp; Gas: separate preservation records, packing spec, transport docs</td>
+            </tr>
+            <tr>
+                <td><strong>Retention Period</strong></td>
+                <td>30 years (WORM)</td>
+                <td>25 years (WORM)</td>
+                <td>Different retention_expiry in IF-020 archive metadata</td>
+            </tr>
+            <tr>
+                <td><strong>Customer Interaction</strong></td>
+                <td>FAIR approval cycle, design review</td>
+                <td>ITP Hold/Witness attendance, 48-72h notification</td>
+                <td>Oil &amp; Gas: more real-time customer involvement during production</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>What Stays the Same?</h3>
+
+    <div class="callout">
+        <strong>Shared pipeline infrastructure:</strong>
+        All 20 ERP ↔ MRB interfaces (AM-IF-001) are used by both industries.
+        The 7-stage pipeline (Material Gate → SDRL Parse → Collect → Validate → CoC → Assemble → Archive)
+        is identical. The 5-layer validation engine (L1-L5) runs for both. The technology stack
+        (PostgreSQL, Supabase, Next.js, MQTT/OPC-UA) is shared. The ISA-95 Level 3/4 boundary
+        is the same. Only the <em>content</em> — templates, rules, standards, and thresholds — differs.
+    </div>
+
+    <div class="compare-grid">
+        <div class="compare-card defence">
+            <div class="card-header">Defence (AS9100/AQAP)</div>
+            <div class="card-body">
+                <strong>Characteristics:</strong>
+                <ul>
+                    <li>Product traceability to individual serial numbers</li>
+                    <li>First Article Inspection for new/changed parts</li>
+                    <li>Export control compliance (ECCN/ITAR)</li>
+                    <li>Stricter certificate requirements (Type 3.2)</li>
+                    <li>Longer retention (30 years for audit trail)</li>
+                    <li>NATO codification may apply</li>
+                    <li>Customer approval cycle for FAIR</li>
+                </ul>
+                <br>
+                <strong>Typical customers:</strong>
+                <ul>
+                    <li>Kongsberg Defence &amp; Aerospace</li>
+                    <li>Nammo, Saab, BAE Systems</li>
+                </ul>
+            </div>
+        </div>
+        <div class="compare-card oilgas">
+            <div class="card-header">Oil &amp; Gas (NORSOK/API)</div>
+            <div class="card-body">
+                <strong>Characteristics:</strong>
+                <ul>
+                    <li>Material traceability to heat/lot numbers</li>
+                    <li>ITP with Hold/Witness/Review points</li>
+                    <li>Mandatory PMI (Positive Material Identification)</li>
+                    <li>Preservation &amp; shipping documentation</li>
+                    <li>DNV/Bureau Veritas third-party involvement</li>
+                    <li>NORSOK M-630/M-650 material standards</li>
+                    <li>Real-time customer involvement at Hold Points</li>
+                </ul>
+                <br>
+                <strong>Typical customers:</strong>
+                <ul>
+                    <li>Equinor, TechnipFMC, Aker Solutions</li>
+                    <li>Nordic Subsea Solutions</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     REFERENCES
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="page">
+    <h2>References</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Document ID</th>
+                <th>Document</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>AM-IF-001</td><td>ERP ↔ MRB Builder Interface Specification (20 interfaces)</td></tr>
+            <tr><td>AM-TS-001</td><td>IT System Technical Specification (technology stack, architecture)</td></tr>
+            <tr><td>AM-FM-001</td><td>Form Templates (24 quality forms, ENUM registry)</td></tr>
+            <tr><td>PR-008</td><td>Incoming Material Review and Release (Material Gate)</td></tr>
+            <tr><td>PR-009</td><td>SDRL Processing and MRB Management</td></tr>
+            <tr><td>PR-010</td><td>Document Validation and Verification (5-layer engine)</td></tr>
+            <tr><td>PR-011</td><td>Certificate of Conformance</td></tr>
+            <tr><td>PR-012</td><td>MRB Assembly and Release</td></tr>
+            <tr><td>PR-013</td><td>Document Archival and Retention</td></tr>
+            <tr><td>—</td><td>ERP-Industri4.0-grundig-research-rapport (Siemens / Fraunhofer analysis)</td></tr>
+            <tr><td>—</td><td>MRB_Simulation (NSS-PO-2026-0042, NSS-SDRL-2026-0042, 19 MRB documents)</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="page-footer">
+    CONFIDENTIAL &mdash; Aurelian Manufacturing AS &mdash; 27 February 2026<br>
+    UML Sequence Diagrams: ERP ↔ MRB Builder Interface Architecture
+</div>
+
+</body>
+</html>

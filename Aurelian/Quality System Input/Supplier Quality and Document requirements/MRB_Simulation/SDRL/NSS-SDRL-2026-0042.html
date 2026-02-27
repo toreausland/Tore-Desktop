@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDRL &mdash; NSS-SDRL-2026-0042</title>
+<style>
+  @page { size: A4 landscape; margin: 2cm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 10pt; line-height: 1.15; background: #f0f0f0; }
+  .page { width: 297mm; min-height: 210mm; margin: 20px auto; background: #fff; padding: 2cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+  .page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #0057A0; }
+  .nss-blue { color: #0057A0; }
+
+  .doc-header { display: grid; grid-template-columns: 1fr auto; gap: 16px; border-bottom: 2px solid #0057A0; padding-bottom: 12px; margin-bottom: 16px; }
+  .doc-title { font-size: 18pt; font-weight: bold; color: #0057A0; }
+  .doc-subtitle { font-size: 11pt; color: #6B6B6B; margin-top: 2px; }
+  .doc-meta { text-align: right; font-size: 9pt; color: #6B6B6B; }
+  .doc-meta strong { color: #2B2B2B; font-size: 10pt; }
+
+  .info-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; font-size: 9pt; }
+  .info-cell { background: #F5F5F5; padding: 8px 10px; }
+  .info-cell .lbl { font-weight: bold; color: #6B6B6B; text-transform: uppercase; font-size: 8pt; margin-bottom: 2px; }
+  .info-cell .val { font-size: 10pt; color: #2B2B2B; }
+
+  h1 { font-size: 14pt; color: #0057A0; font-weight: bold; margin: 16px 0 8px 0; }
+  h2 { font-size: 11pt; color: #2B2B2B; font-weight: bold; margin: 12px 0 6px 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 16px 0; font-size: 8.5pt; }
+  table thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 5pt 6pt; text-align: left; font-size: 8pt; white-space: nowrap; }
+  table thead th.center { text-align: center; }
+  table tbody td { padding: 4pt 6pt; border-bottom: 0.5pt solid #D3D3D3; vertical-align: top; }
+  table tbody tr:nth-child(even) { background: #F5F5F5; }
+  table .center { text-align: center; }
+  table .category { font-weight: bold; background: #E8F0F8 !important; color: #0057A0; }
+  table .na { color: #999; font-style: italic; }
+
+  .abbrev-table { width: auto; font-size: 8.5pt; }
+  .abbrev-table td { padding: 3pt 8pt 3pt 0; border: none; }
+  .abbrev-table td:nth-child(odd) { font-weight: bold; color: #0057A0; width: 50px; }
+
+  .mrb-index th { background: #0057A0; }
+  .mrb-index td.check { text-align: center; font-size: 12pt; }
+
+  .footer { margin-top: 20px; border-top: 1px solid #D3D3D3; padding-top: 8px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+  .page-break { page-break-before: always; }
+
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: SDRL Header & Document List -->
+<div class="page">
+  <div class="doc-header">
+    <div>
+      <div class="doc-title">Supplier Document Requirements List (SDRL)</div>
+      <div class="doc-subtitle">Subsea Connector Assembly &mdash; Size 300, Barents Sea Development Phase 2</div>
+    </div>
+    <div class="doc-meta">
+      <strong>NSS-SDRL-2026-0042</strong><br>
+      Revision: 0<br>
+      Date: 15 January 2026<br>
+      Status: Issued for Order
+    </div>
+  </div>
+
+  <div class="info-row">
+    <div class="info-cell">
+      <div class="lbl">Client</div>
+      <div class="val">Nordic Subsea Solutions AS</div>
+    </div>
+    <div class="info-cell">
+      <div class="lbl">Supplier</div>
+      <div class="val">Aurelian Manufacturing AS</div>
+    </div>
+    <div class="info-cell">
+      <div class="lbl">PO Reference</div>
+      <div class="val">NSS-PO-2026-0042</div>
+    </div>
+    <div class="info-cell">
+      <div class="lbl">Scope</div>
+      <div class="val">Design verification, manufacturing of subsea connector assemblies</div>
+    </div>
+  </div>
+
+  <h1>Document Requirements</h1>
+  <p style="margin-bottom: 10px; font-size: 9pt; color: #6B6B6B;">Column legend: <strong>Resp.</strong> = NSS responsible department &bull; <strong>Due</strong> = Submission timing &bull; <strong>Review</strong> = To NSS for review (Yes/No) &bull; <strong>MRB</strong> = Include in Manufacturing Record Book &bull; <strong>Ship</strong> = Include in shipment documentation</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30px;">No.</th>
+        <th>Category / Document Title</th>
+        <th class="center" style="width:40px;">Resp.</th>
+        <th class="center" style="width:65px;">Due</th>
+        <th class="center" style="width:50px;">Review</th>
+        <th class="center" style="width:40px;">MRB</th>
+        <th class="center" style="width:40px;">Ship</th>
+        <th style="width:160px;">Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Category 1: General Documents -->
+      <tr class="category"><td colspan="8">1. General Documents</td></tr>
+      <tr><td>1.1</td><td>Supplier Document List (SDL)</td><td class="center">B</td><td class="center">4 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td>Update with each transmittal</td></tr>
+      <tr><td>1.2</td><td>4-Week Look-Ahead Report / Progress Report</td><td class="center">B</td><td class="center">Weekly</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td>Email to PM weekly</td></tr>
+
+      <!-- Category 2: Bid Documentation -->
+      <tr class="category"><td colspan="8">2. Bid Documentation (Technical)</td></tr>
+      <tr><td>2.1</td><td>Exceptions from specifications and requirements</td><td class="center">E</td><td class="center">BID</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>2.2</td><td>Inspection and Test Plan (ITP)</td><td class="center">Q</td><td class="center">4 WAO</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 1</td></tr>
+      <tr><td>2.3</td><td>Project Quality Plan</td><td class="center">Q</td><td class="center">BID</td><td class="center">Yes</td><td class="center">If appl.</td><td class="center">&mdash;</td><td>MRB Section 3</td></tr>
+
+      <!-- Category 3: Engineering Documentation -->
+      <tr class="category"><td colspan="8">3. Engineering Documentation</td></tr>
+      <tr><td>3.1</td><td>Data Sheets</td><td class="center">E</td><td class="center">6 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>3.2</td><td>Calculations, Curves and Tables</td><td class="center">E</td><td class="center">6 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>3.3</td><td>Safe Job Analysis Procedure</td><td class="center">E</td><td class="center">BID</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>3.4</td><td>GA Drawings</td><td class="center">E</td><td class="center">6 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>3.5</td><td>Detail / Manufacturing Drawings</td><td class="center">E</td><td class="center">2 WPM</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>3.6</td><td>As-Built Drawings / Mark-Ups</td><td class="center">E</td><td class="center">WFD</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 22</td></tr>
+      <tr><td>3.7</td><td>Main Equipment / BOM List</td><td class="center">E</td><td class="center">6 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+
+      <!-- Category 4: Dispatch / Storage -->
+      <tr class="category"><td colspan="8">4. Documentation for Dispatch, Receipt, Storage &amp; Installation</td></tr>
+      <tr><td>4.1</td><td>Packing and Preservation Procedure</td><td class="center">E</td><td class="center">BID</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>4.2</td><td>Packing List</td><td class="center">L</td><td class="center">WED</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td class="center">Yes</td><td></td></tr>
+      <tr><td>4.3</td><td>Inspection Report for Free-Issued Materials</td><td class="center">Q</td><td class="center">&mdash;</td><td class="center">If appl.</td><td class="center">If appl.</td><td class="center">&mdash;</td><td>As available</td></tr>
+      <tr><td>4.4</td><td>Delivery Schedule / Production Plan</td><td class="center">B</td><td class="center">4 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td>Include in progress report</td></tr>
+
+      <!-- Category 5: User Manual -->
+      <tr class="category"><td colspan="8">5. User Manual</td></tr>
+      <tr><td>5.1</td><td>User Manual</td><td class="center">E</td><td class="center">WFD</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">Yes</td><td></td></tr>
+      <tr><td>5.2</td><td>Index for User Manual</td><td class="center">E</td><td class="center">WFD</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">Yes</td><td></td></tr>
+
+      <!-- Category 6: Certificates -->
+      <tr class="category"><td colspan="8">6. Manufacturing &amp; Verifying (Certificates)</td></tr>
+      <tr><td>6.1</td><td>Material Certificates (EN 10204 3.2)</td><td class="center">Q</td><td class="center">WED</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 5</td></tr>
+      <tr><td>6.2</td><td>Lifting Certificates</td><td class="center">Q</td><td class="center">WED</td><td class="center">&mdash;</td><td class="center">If appl.</td><td class="center">&mdash;</td><td>MRB Section 15</td></tr>
+      <tr><td>6.3</td><td>Weight Certificate</td><td class="center">Q</td><td class="center">WED</td><td class="center">&mdash;</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 14</td></tr>
+      <tr><td>6.4</td><td>Balancing Certificate</td><td class="center">Q</td><td class="center">WED</td><td class="center">&mdash;</td><td class="center">If appl.</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>6.5</td><td>Pressure Test Certificate</td><td class="center">Q</td><td class="center">WED</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 18</td></tr>
+      <tr><td>6.6</td><td>Electrical Continuity Certificate</td><td class="center">Q</td><td class="center">WED</td><td class="center">&mdash;</td><td class="center">If appl.</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>6.7</td><td>Welder Certificates</td><td class="center">Q</td><td class="center">WED</td><td class="center">&mdash;</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 8</td></tr>
+      <tr><td>6.8</td><td>NDE Operator Certificates</td><td class="center">Q</td><td class="center">WED</td><td class="center">&mdash;</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 11</td></tr>
+      <tr><td>6.9</td><td>PMI Operator Certificates</td><td class="center">Q</td><td class="center">WED</td><td class="center">&mdash;</td><td class="center">Yes</td><td class="center">&mdash;</td><td>Included with material certs</td></tr>
+
+      <!-- Category 7: Procedures -->
+      <tr class="category"><td colspan="8">7. Manufacturing &amp; Verifying (Procedures)</td></tr>
+      <tr><td>7.1</td><td>WPS / WPQR / PWHT Procedures</td><td class="center">E</td><td class="center">BID</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 7. Pre-qualified WPS accepted</td></tr>
+      <tr><td>7.2</td><td>Non-Conformance Procedure</td><td class="center">Q</td><td class="center">6 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>7.3</td><td>Heat Treatment Procedure</td><td class="center">E</td><td class="center">8 WPM</td><td class="center">Yes</td><td class="center">If appl.</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>7.4</td><td>Fabrication Procedure</td><td class="center">E</td><td class="center">8 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>7.5</td><td>Non-Destructive Ferrite Content Program</td><td class="center">E</td><td class="center">8 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>7.6</td><td>PMI Procedure / Program</td><td class="center">E</td><td class="center">8 WPM</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>7.7</td><td>Traceability Procedure / Matrix</td><td class="center">Q</td><td class="center">6 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>7.8</td><td>Weld Log</td><td class="center">Q</td><td class="center">WAT</td><td class="center">&mdash;</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 6</td></tr>
+      <tr><td>7.9</td><td>NDE Procedure</td><td class="center">Q</td><td class="center">6 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>7.10</td><td>Weld Repair Procedure</td><td class="center">E</td><td class="center">BID</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td>Pre-qualified WPS accepted</td></tr>
+      <tr><td>7.11</td><td>Coating Procedure</td><td class="center">E</td><td class="center">8 WPM</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>7.12</td><td>Qualification Procedure</td><td class="center">E</td><td class="center">6 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+      <tr><td>7.13</td><td>Handling Welding Consumables Procedure</td><td class="center">E</td><td class="center">6 WAO</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">&mdash;</td><td></td></tr>
+
+      <!-- Category 8: Reports -->
+      <tr class="category"><td colspan="8">8. Manufacturing &amp; Verifying (Reports)</td></tr>
+      <tr><td>8.1</td><td>Certificate of Conformance</td><td class="center">Q</td><td class="center">WED</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">Yes</td><td>MRB Section 21</td></tr>
+      <tr><td>8.2</td><td>Material Traceability List / Record</td><td class="center">Q</td><td class="center">WED</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 4</td></tr>
+      <tr><td>8.3</td><td>Non-Conformance / Concession Reports</td><td class="center">Q</td><td class="center">As occurs</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 20. Report within 24 hrs</td></tr>
+      <tr><td>8.4</td><td>Inspection Reports (Visual, Dimensional)</td><td class="center">Q</td><td class="center">WAT</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Sections 9, 13</td></tr>
+      <tr><td>8.5</td><td>NDE Reports (RT, UT, PT, MT)</td><td class="center">Q</td><td class="center">WAT</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 10</td></tr>
+      <tr><td>8.6</td><td>Surface Treatment Inspection Report</td><td class="center">Q</td><td class="center">WAT</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 12</td></tr>
+      <tr><td>8.7</td><td>Pressure Test Procedure</td><td class="center">E</td><td class="center">2 WPM</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 17</td></tr>
+      <tr><td>8.8</td><td>Pressure Test Certificate / FAT Report</td><td class="center">Q</td><td class="center">WAT</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 18</td></tr>
+      <tr><td>8.9</td><td>As-Built Drawings / Mark-Ups</td><td class="center">E</td><td class="center">WFD</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 22</td></tr>
+      <tr><td>8.10</td><td>Photos of Equipment / Testing / Marking</td><td class="center">Q</td><td class="center">WFD</td><td class="center">&mdash;</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 23</td></tr>
+      <tr><td>8.11</td><td>QMS Certificates (ISO 9001, ISO 3834-2)</td><td class="center">Q</td><td class="center">4 WAO</td><td class="center">&mdash;</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 2</td></tr>
+      <tr><td>8.12</td><td>Mechanical Completion Dossier (MCD)</td><td class="center">Q</td><td class="center">WFD</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">Yes</td><td>MRB Section 24</td></tr>
+      <tr><td>8.13</td><td>Weld &amp; NDT Log (completed)</td><td class="center">Q</td><td class="center">WFD</td><td class="center">Yes</td><td class="center">Yes</td><td class="center">&mdash;</td><td>MRB Section 6</td></tr>
+      <tr><td>8.14</td><td>MRB (complete book)</td><td class="center">Q</td><td class="center">WFD</td><td class="center">Yes</td><td class="center">&mdash;</td><td class="center">Yes</td><td>All sections per MRB index below</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <span style="color: #0057A0; font-weight: bold; font-size: 8pt;">CONFIDENTIAL &mdash; Nordic Subsea Solutions AS</span>
+    <span>Page 1 of 2</span>
+    <span>NSS-SDRL-2026-0042 Rev 0</span>
+  </div>
+</div>
+
+<!-- PAGE 2: MRB Standard Index & Abbreviations -->
+<div class="page page-break">
+  <div class="doc-header">
+    <div>
+      <div class="doc-title">SDRL &mdash; MRB Standard Index</div>
+      <div class="doc-subtitle">NSS-SDRL-2026-0042 &bull; To be completed by the Supplier (ref 8.14)</div>
+    </div>
+    <div class="doc-meta">
+      <strong>Page 2 of 2</strong>
+    </div>
+  </div>
+
+  <h1>MRB Standard Index</h1>
+  <p style="margin-bottom: 10px; font-size: 9pt; color: #6B6B6B;">The Supplier shall indicate which sections are "In Use" or "N/A" for this order. All "In Use" sections must contain the corresponding documentation in the delivered MRB.</p>
+
+  <table class="mrb-index">
+    <thead>
+      <tr>
+        <th style="width: 40px;">Sec.</th>
+        <th>Document Type</th>
+        <th class="center" style="width: 80px;">In Use</th>
+        <th class="center" style="width: 80px;">N/A</th>
+        <th style="width: 200px;">Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Inspection &amp; Test Plan (ITP)</td><td class="check">&check;</td><td></td><td>Approved ITP rev</td></tr>
+      <tr><td>2</td><td>QMS Certificates</td><td class="check">&check;</td><td></td><td>ISO 9001, ISO 3834-2</td></tr>
+      <tr><td>3</td><td>Quality Plan</td><td></td><td class="check">&check;</td><td>Covered by ITP</td></tr>
+      <tr><td>4</td><td>Material Traceability List / Record</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>5</td><td>Material Certificates / PMI Reports</td><td class="check">&check;</td><td></td><td>EN 10204 Type 3.2</td></tr>
+      <tr><td>6</td><td>Weld &amp; NDT Log</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>7</td><td>WPS / WPQR / PWHT</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>8</td><td>Welder Certificates</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>9</td><td>Visual Inspection Reports</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>10</td><td>NDE Reports</td><td class="check">&check;</td><td></td><td>RT + PT</td></tr>
+      <tr><td>11</td><td>NDE Operator Certificates</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>12</td><td>Surface Treatment Inspection Reports</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>13</td><td>Dimensional Inspection Record</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>14</td><td>Weighing Certificate</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>15</td><td>Lifting Certificate</td><td></td><td class="check">&check;</td><td>No certified lifts required</td></tr>
+      <tr><td>16</td><td>Pressure Test Traceability Certificate</td><td></td><td class="check">&check;</td><td>Covered by FAT report</td></tr>
+      <tr><td>17</td><td>Pressure Test Procedure / FAT Procedure</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>18</td><td>Pressure Test Certificate / FAT Report</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>19</td><td>Documentation from Sub-Suppliers</td><td></td><td class="check">&check;</td><td>No sub-suppliers on this scope</td></tr>
+      <tr><td>20</td><td>Non-Conformance / Concession Records</td><td class="check">&check;</td><td></td><td>As applicable</td></tr>
+      <tr><td>21</td><td>Certificate of Conformance</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>22</td><td>As-Built Drawings / Mark-Ups</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>23</td><td>Photos of Equipment / Testing / Marking</td><td class="check">&check;</td><td></td><td></td></tr>
+      <tr><td>24</td><td>Mechanical Completion Dossier (MCD)</td><td class="check">&check;</td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h1>Abbreviations</h1>
+  <table class="abbrev-table">
+    <tr><td>E =</td><td>Engineering</td><td>L =</td><td>Logistics</td><td>MRB =</td><td>Manufacturing Record Book</td></tr>
+    <tr><td>Q =</td><td>Quality</td><td>M =</td><td>Material</td><td>MCD =</td><td>Mechanical Completion Dossier</td></tr>
+    <tr><td>B =</td><td>Buyer</td><td>SP =</td><td>Special Request</td><td>WED =</td><td>With Each Delivery</td></tr>
+    <tr><td>P =</td><td>Planning</td><td>BID =</td><td>Included in Bid</td><td>WPM =</td><td>Weeks Prior to Manufacturing</td></tr>
+    <tr><td>WAO =</td><td>Weeks After Order</td><td>WAT =</td><td>Weeks After Testing</td><td>WFD =</td><td>With Final Delivery</td></tr>
+  </table>
+
+  <h1>Revision History</h1>
+  <table>
+    <thead><tr><th>Rev</th><th>Date</th><th>Description</th><th>Prepared</th><th>Approved</th></tr></thead>
+    <tbody>
+      <tr><td>0</td><td>15 Jan 2026</td><td>Issued for order</td><td>M. Lindgren (NSS)</td><td>E. Johansen (NSS)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <span style="color: #0057A0; font-weight: bold; font-size: 8pt;">CONFIDENTIAL &mdash; Nordic Subsea Solutions AS</span>
+    <span>Page 2 of 2</span>
+    <span>NSS-SDRL-2026-0042 Rev 0</span>
+  </div>
+</div>
+
+</body>
+</html>

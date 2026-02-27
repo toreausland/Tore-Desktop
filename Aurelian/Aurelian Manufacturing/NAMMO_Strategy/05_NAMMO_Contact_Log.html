@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — NAMMO Kontaktlogg</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --dark-charcoal: #1A1A1A; --navy-card: #253B52; --steel-blue: #8EAEC5;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  /* Cover */
+  .cover { background: var(--pure-black); padding: 4rem 3.5rem 3rem; position: relative; overflow: hidden; min-height: 360px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 1.8rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 1.8rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 2.5rem; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  /* Content */
+  section { padding: 2.5rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.2rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.6rem; margin-bottom: 0.5rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.8rem; }
+  p.secondary { color: var(--gray-medium); font-size: 0.84rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: 0.84rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.6rem 0.8rem; font-size: 0.8rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  /* Status badges */
+  .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; }
+  .badge-sent { background: var(--red); color: var(--white); }
+  .badge-pending { background: var(--gray-divider); color: var(--black); }
+  .badge-accepted { background: #1B7A3D; color: var(--white); }
+  .badge-meeting { background: var(--black); color: var(--white); }
+  .badge-noresponse { background: var(--gray-medium); color: var(--white); }
+
+  /* Callout */
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.1rem 1.3rem; margin: 1.2rem 0; }
+  .callout p { font-size: 0.84rem; margin-bottom: 0; line-height: 1.5; }
+
+  /* Activity entry */
+  .activity-entry { border-left: 3px solid var(--gray-divider); padding: 1rem 1.4rem; margin: 1rem 0; position: relative; }
+  .activity-entry.active { border-left-color: var(--red); }
+  .activity-entry .activity-date { font-size: 0.74rem; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+  .activity-entry .activity-contact { font-size: 0.88rem; font-weight: 700; color: var(--black); margin-bottom: 0.2rem; }
+  .activity-entry .activity-role { font-size: 0.78rem; color: var(--gray-medium); margin-bottom: 0.4rem; }
+  .activity-entry .activity-channel { font-size: 0.74rem; color: var(--gray-medium); font-weight: 600; margin-bottom: 0.3rem; }
+  .activity-entry .activity-content { font-size: 0.84rem; color: var(--black); line-height: 1.5; margin-bottom: 0.4rem; }
+  .activity-entry .activity-message { background: var(--gray-panel); padding: 0.8rem 1rem; margin: 0.5rem 0; font-size: 0.82rem; line-height: 1.5; color: var(--black); font-style: italic; border-radius: 2px; }
+  .activity-entry .activity-status { margin-top: 0.4rem; }
+  .activity-entry .activity-next { font-size: 0.78rem; color: var(--gray-medium); margin-top: 0.3rem; }
+
+  /* Summary strip */
+  .summary-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.3rem 0; border: 1px solid var(--gray-divider); }
+  .summary-item { padding: 1.1rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .summary-item:last-child { border-right: none; }
+  .summary-item.highlight { background: var(--red); }
+  .summary-value { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.2rem; }
+  .summary-item.highlight .summary-value { color: var(--white); }
+  .summary-label { font-size: 0.66rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .summary-item.highlight .summary-label { color: rgba(255,255,255,0.85); }
+
+  /* Dark panel */
+  .dark-panel { background: var(--dark-charcoal); padding: 2.5rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  /* Footer */
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">★ ★ ★ ★ ★</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">NAMMO Kontaktlogg</div>
+    <div class="cover-subtitle">Aktivitetshistorikk — NAMMO AS</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Sist oppdatert: 26. februar 2026 — 1 kontakt initiert</span>
+    </div>
+  </div>
+
+  <!-- STATUS SUMMARY -->
+  <section>
+    <div class="section-label">Statusoversikt</div>
+    <h2>NAMMO-aktiviteter — sammendrag</h2>
+
+    <div class="summary-strip">
+      <div class="summary-item highlight">
+        <div class="summary-value">8</div>
+        <div class="summary-label">Kontakter<br>identifisert</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value">1</div>
+        <div class="summary-label">Kontakter<br>initiert</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value">0</div>
+        <div class="summary-label">Møter<br>booket</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value">0</div>
+        <div class="summary-label">NDA<br>signert</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Status:</strong> Research fullført. LinkedIn-invitasjon sendt til Peter Lerche Raadal (VP Procurement & Supply Chain, NAMMO Group) 26. februar 2026. <strong>Neste steg:</strong> Send LinkedIn-invitasjon til Per Olav Moen (Procurement Director, Raufoss). Vent på aksept fra Peter — send full kapabilitetspitch ved aksept.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT DIRECTORY -->
+  <section class="dark-panel">
+    <div class="section-label">Kontaktoversikt</div>
+    <h2>Alle NAMMO-kontakter — status</h2>
+
+    <table>
+      <thead>
+        <tr><th>Navn</th><th>Tittel</th><th>Enhet / Tier</th><th>Kanal</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Peter Lerche Raadal</strong></td>
+          <td>VP Procurement & Supply Chain</td>
+          <td>NAMMO Group / Tier 1</td>
+          <td>LinkedIn</td>
+          <td><span class="badge badge-sent">INVITASJON SENDT</span></td>
+        </tr>
+        <tr>
+          <td><strong>Per Olav Moen</strong></td>
+          <td>Procurement Director</td>
+          <td>NAMMO Raufoss / Tier 1</td>
+          <td>—</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Quoc Bao Diep</strong></td>
+          <td>VP Large Caliber Systems</td>
+          <td>Large Caliber / Tier 2</td>
+          <td>—</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Jostein Moe</strong></td>
+          <td>SVP Operational Excellence</td>
+          <td>NAMMO Group / Tier 2</td>
+          <td>—</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Frank Moller</strong></td>
+          <td>EVP Missile Products Division</td>
+          <td>Missile Products / Tier 3</td>
+          <td>—</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Jens-Petter Dieseth</strong></td>
+          <td>SVP Business Development</td>
+          <td>NAMMO Group / Tier 3</td>
+          <td>—</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Aksel Schjerpen</strong></td>
+          <td>Director BD</td>
+          <td>NAMMO Raufoss / Tier 3</td>
+          <td>—</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>QA Director (ukjent)</strong></td>
+          <td>Director Quality Assurance</td>
+          <td>NAMMO Raufoss / Tier 1</td>
+          <td>—</td>
+          <td><span class="badge badge-pending">MÅ IDENTIFISERES</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 1rem;"><strong>Tier-inndeling:</strong> Tier 1 = Innkjøp/QA (direkte beslutningstakere for leverandørkvalifisering). Tier 2 = Produksjon/Operasjoner (eier kapasitetsbeslutninger). Tier 3 = Strategi/BD (døråpnere, langsiktig relasjon). Tier 4 = Toppledelse (referansepunkter).</p>
+  </section>
+
+  <!-- ACTIVITY LOG -->
+  <section>
+    <div class="section-label">Aktivitetslogg</div>
+    <h2>Kronologisk hendelseslogg</h2>
+
+    <!-- Peter Lerche Raadal -->
+    <div class="activity-entry active">
+      <div class="activity-date">26. februar 2026</div>
+      <div class="activity-contact">Peter Lerche Raadal</div>
+      <div class="activity-role">VP Procurement & Supply Chain, NAMMO Group</div>
+      <div class="activity-channel">KANAL: LinkedIn — kontaktforespørsel med notat</div>
+      <div class="activity-content">Sendt LinkedIn-invitasjon med kort introduksjonsnotat. Fokus på kapasitet rettet mot forsvarsindustrien og ønske om dialog med NAMMOs innkjøp.</div>
+      <div class="activity-message">
+        «Hei Peter — vi bygger en ny autonom CNC-fabrikk i Østfold rettet mot forsvarsindustrien (25 maskiner, Mazak). Ønsker å utforske samarbeid med NAMMOs innkjøp. Kan vi ta en prat?»
+      </div>
+      <div class="activity-status"><span class="badge badge-sent">INVITASJON SENDT — VENTER AKSEPT</span></div>
+      <div class="activity-next"><strong>Neste:</strong> Når akseptert → send full kapabilitetspitch med Large Caliber/Aerospace Propulsion-vinkel. Foreslå 20 min Teams-samtale.</div>
+    </div>
+
+    <!-- Research entry -->
+    <div class="activity-entry">
+      <div class="activity-date">26. februar 2026</div>
+      <div class="activity-contact">Research fullført</div>
+      <div class="activity-role">NAMMO organisasjon, kontakter, segmenter, CNC-potensial</div>
+      <div class="activity-channel">KANAL: Desktop research + LinkedIn-søk</div>
+      <div class="activity-content">Fullført kartlegging av NAMMO-organisasjonen: 4 forretningsenheter + ny Missile Products-divisjon. Identifisert 8 nøkkelkontakter på tvers av Tier 1–3. Kartlagt CNC-komponentbehov per segment. Estimert totalt potensial: 8 300–26 500 CNC-timer/år (24.9–79.5 MNOK).</div>
+      <div class="activity-status"><span class="badge badge-meeting">RESEARCH FULLFØRT</span></div>
+      <div class="activity-next"><strong>Neste:</strong> Forbered LinkedIn-meldinger til Tier 1-kontakter (Peter Lerche Raadal, Per Olav Moen). Lag 200-tegns introduksjonsnotater tilpasset NAMMO.</div>
+    </div>
+
+    <p class="secondary" style="margin-top: 1.5rem; text-align: center; font-style: italic;">— Ingen tidligere aktiviteter registrert —</p>
+  </section>
+
+  <!-- PIPELINE NEXT ACTIONS -->
+  <section>
+    <div class="section-label">Neste steg</div>
+    <h2>Prioriterte handlinger — mars 2026</h2>
+
+    <table>
+      <thead><tr><th>#</th><th>Handling</th><th>Kontakt</th><th>Frist</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>LinkedIn-invitasjon til Peter Lerche Raadal med notat — <strong>SENDT</strong></td>
+          <td>Peter Lerche Raadal</td>
+          <td>26. feb ✓</td>
+          <td><span class="badge badge-sent">SENDT</span></td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>LinkedIn-invitasjon til Per Olav Moen med 200-tegns notat</td>
+          <td>Per Olav Moen</td>
+          <td>Uke 10</td>
+          <td><span class="badge badge-pending">KLAR</span></td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Identifiser QA Director via LinkedIn-søk (innlogget profil)</td>
+          <td>—</td>
+          <td>Uke 10</td>
+          <td><span class="badge badge-pending">IKKE STARTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>Forbered full kapabilitetspitch for NAMMO-oppfølging</td>
+          <td>—</td>
+          <td>Uke 11</td>
+          <td><span class="badge badge-pending">IKKE STARTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Undersøk om NAMMO har leverandørregistreringsportal</td>
+          <td>—</td>
+          <td>Uke 10</td>
+          <td><span class="badge badge-pending">IKKE STARTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td>LinkedIn-invitasjon til Quoc Bao Diep (Large Caliber VP)</td>
+          <td>Quoc Bao Diep</td>
+          <td>Uke 11</td>
+          <td><span class="badge badge-pending">ETTER TIER 1</span></td>
+        </tr>
+        <tr>
+          <td><strong>7</strong></td>
+          <td>LinkedIn-invitasjon til Frank Moller (Missile Products EVP)</td>
+          <td>Frank Moller</td>
+          <td>Uke 11–12</td>
+          <td><span class="badge badge-pending">ETTER TIER 1</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PREPARED LINKEDIN MESSAGES -->
+  <section>
+    <div class="section-label">Forberedte meldinger</div>
+    <h2>LinkedIn-introduksjoner — klare til sending</h2>
+
+    <h3>Peter Lerche Raadal — VP Procurement & Supply Chain</h3>
+    <div class="callout">
+      <p><strong>200 tegn (LinkedIn-notat):</strong><br>
+      «Hei Peter — vi bygger en ny autonom CNC-fabrikk i Østfold rettet mot forsvarsindustrien (25 maskiner, Mazak). Ønsker å utforske samarbeid med NAMMOs innkjøp. Kan vi ta en prat?»</p>
+    </div>
+    <p class="secondary">Tilpasset: Group-nivå innkjøp, leverandørkjede-vinkel, kapasitetsfokus.</p>
+
+    <h3>Per Olav Moen — Procurement Director, Raufoss</h3>
+    <div class="callout">
+      <p><strong>200 tegn (LinkedIn-notat):</strong><br>
+      «Hei Per Olav — vi etablerer en autonom CNC-fabrikk i Østfold for forsvarsindustrien (25 maskiner, 24/7). Kan vi diskutere kapasitetsbehov knyttet til Raufoss' produksjonsøkning?»</p>
+    </div>
+    <p class="secondary">Tilpasset: Raufoss-spesifikt, produksjonsøkning/kapasitetspress, direkte og konkret.</p>
+
+    <h3>Quoc Bao Diep — VP Large Caliber Systems (Tier 2 — send etter Tier 1)</h3>
+    <div class="callout">
+      <p><strong>200 tegn (LinkedIn-notat):</strong><br>
+      «Hei Quoc Bao — vi bygger Norges mest avanserte CNC-fabrikk i Østfold, designet for forsvarsindustri. Vil gjerne diskutere maskinkapasitet for Large Caliber-produksjonen. Prat?»</p>
+    </div>
+    <p class="secondary">Tilpasset: Large Caliber-segmentet direkte, maskinkapasitet-vinkel.</p>
+
+    <h3>Frank Moller — EVP Missile Products (Tier 3 — send etter Tier 1-2)</h3>
+    <div class="callout">
+      <p><strong>200 tegn (LinkedIn-notat):</strong><br>
+      «Hei Frank — gratulerer med Missile Products-divisjonen. Vi bygger en ny CNC-fabrikk i Østfold med 5-akse og full sporbarhet — designet for missilkomponenter. Kan vi snakke?»</p>
+    </div>
+    <p class="secondary">Tilpasset: Ny divisjon, 5-akse kapabilitet, greenfield supply chain-vinkel.</p>
+  </section>
+
+  <!-- SENT MATERIALS LOG -->
+  <section>
+    <div class="section-label">Materiell</div>
+    <h2>Sendte dokumenter og materiell</h2>
+
+    <table>
+      <thead><tr><th>Dato</th><th>Dokument</th><th>Sendt til</th><th>Kanal</th></tr></thead>
+      <tbody>
+        <tr>
+          <td colspan="4" style="text-align: center; color: var(--gray-medium); font-style: italic; padding: 1.5rem;">Ingen materiell sendt ennå. Forberedelser pågår.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary" style="margin-top: 1rem;">Materiell som bør produseres: NAMMO Capability Brief (1–2 sider, tilpasset artilleri/rakettmotor-vinkel), NDA-mal, referansedeler per segment.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | NAMMO Kontaktlogg | Sist oppdatert: 26. februar 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

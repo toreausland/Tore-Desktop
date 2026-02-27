@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AM-PTP-2026-0042-001 | Hydrostatic Pressure Test Procedure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 2.5cm;
+        }
+
+        body {
+            font-family: Calibri, sans-serif;
+            color: #2B2B2B;
+            background: #FFFFFF;
+            font-size: 11pt;
+            line-height: 1.15;
+            padding: 0;
+        }
+
+        .page-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 0 2.5cm 2.5cm 2.5cm;
+        }
+
+        /* ── Top red accent bar ── */
+        .top-bar {
+            width: 100%;
+            height: 3pt;
+            background: #F50537;
+            margin-bottom: 0;
+        }
+
+        /* ── Document header ── */
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20pt 2.5cm 12pt 2.5cm;
+            border-bottom: 0.5pt solid #D3D3D3;
+        }
+
+        .doc-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10pt;
+        }
+
+        .logo-stars {
+            font-size: 14pt;
+            color: #F50537;
+            letter-spacing: 2px;
+        }
+
+        .company-name {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2B2B2B;
+        }
+
+        .doc-header-right {
+            text-align: right;
+            font-size: 9pt;
+            color: #6B6B6B;
+        }
+
+        /* ── Title block ── */
+        .title-block {
+            padding: 24pt 0 12pt 0;
+            text-align: center;
+        }
+
+        .title-block h1 {
+            font-size: 22pt;
+            font-weight: bold;
+            color: #2B2B2B;
+            margin-bottom: 4pt;
+        }
+
+        .title-block .doc-subtitle {
+            font-size: 13pt;
+            font-weight: bold;
+            font-style: italic;
+            color: #F50537;
+            margin-bottom: 6pt;
+        }
+
+        .title-block .doc-number {
+            font-size: 11pt;
+            color: #6B6B6B;
+        }
+
+        /* ── Red accent divider ── */
+        .accent-divider {
+            width: 80mm;
+            height: 2pt;
+            background: #F50537;
+            margin: 8pt auto 20pt auto;
+        }
+
+        /* ── Info panels ── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12pt;
+            margin-bottom: 20pt;
+        }
+
+        .info-panel {
+            background: #F5F5F5;
+            padding: 12pt;
+            border-left: 3pt solid #F50537;
+        }
+
+        .info-panel h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #F50537;
+            text-transform: uppercase;
+            margin-bottom: 6pt;
+            letter-spacing: 0.5px;
+        }
+
+        .info-panel table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-panel td {
+            font-size: 9.5pt;
+            padding: 2pt 0;
+            vertical-align: top;
+        }
+
+        .info-panel td:first-child {
+            color: #6B6B6B;
+            width: 40%;
+            padding-right: 8pt;
+        }
+
+        .info-panel td:last-child {
+            color: #2B2B2B;
+            font-weight: bold;
+        }
+
+        /* ── Section headings ── */
+        h2 {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #F50537;
+            margin: 24pt 0 8pt 0;
+        }
+
+        h3.section-heading {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #2B2B2B;
+            margin: 18pt 0 6pt 0;
+        }
+
+        p {
+            margin-bottom: 6pt;
+            line-height: 1.3;
+        }
+
+        /* ── Callout box ── */
+        .callout {
+            background: #F5F5F5;
+            border-left: 3pt solid #F50537;
+            padding: 10pt 14pt;
+            margin: 10pt 0;
+            font-size: 10pt;
+        }
+
+        .callout-warning {
+            background: #FFF5F5;
+            border-left: 3pt solid #F50537;
+            padding: 10pt 14pt;
+            margin: 10pt 0;
+            font-size: 10pt;
+        }
+
+        .callout-warning strong {
+            color: #F50537;
+        }
+
+        /* ── Lists ── */
+        .doc-list {
+            margin: 8pt 0 16pt 0;
+            padding-left: 20pt;
+        }
+
+        .doc-list li {
+            font-size: 9.5pt;
+            margin-bottom: 4pt;
+            color: #2B2B2B;
+            line-height: 1.3;
+        }
+
+        .doc-list li strong {
+            color: #2B2B2B;
+        }
+
+        /* ── Test parameters table ── */
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+            margin: 8pt 0 16pt 0;
+        }
+
+        .param-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 8.5pt;
+            padding: 8pt 6pt;
+            text-align: left;
+            border-bottom: none;
+        }
+
+        .param-table tbody td {
+            padding: 6pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+            vertical-align: top;
+            font-size: 9pt;
+        }
+
+        .param-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        .param-table tbody tr:nth-child(odd) {
+            background: #FFFFFF;
+        }
+
+        .param-table tbody td:first-child {
+            color: #6B6B6B;
+            font-weight: bold;
+            width: 35%;
+        }
+
+        .param-table tbody td:last-child {
+            font-weight: bold;
+        }
+
+        /* ── Equipment table ── */
+        .equip-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+            margin: 8pt 0 16pt 0;
+        }
+
+        .equip-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 8.5pt;
+            padding: 8pt 6pt;
+            text-align: left;
+        }
+
+        .equip-table tbody td {
+            padding: 6pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+            font-size: 9pt;
+        }
+
+        .equip-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        /* ── Procedure steps ── */
+        .step-list {
+            margin: 12pt 0 20pt 0;
+            counter-reset: step-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .step-list li {
+            display: flex;
+            gap: 12pt;
+            margin-bottom: 12pt;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28pt;
+            height: 28pt;
+            background: #F50537;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 11pt;
+            border-radius: 50%;
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 4pt;
+        }
+
+        .step-content .step-title {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #2B2B2B;
+            margin-bottom: 2pt;
+        }
+
+        .step-content .step-desc {
+            font-size: 9pt;
+            color: #6B6B6B;
+            line-height: 1.3;
+        }
+
+        /* ── Approval signatures ── */
+        .approval-section {
+            margin-top: 30pt;
+            page-break-inside: avoid;
+        }
+
+        .approval-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .approval-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 9.5pt;
+            padding: 8pt;
+            text-align: left;
+        }
+
+        .approval-table tbody td {
+            padding: 10pt 8pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+            font-size: 9.5pt;
+            vertical-align: bottom;
+        }
+
+        .approval-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        .signature-line {
+            display: block;
+            width: 120pt;
+            border-bottom: 1pt solid #2B2B2B;
+            margin-top: 18pt;
+        }
+
+        /* ── Revision history ── */
+        .rev-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+            margin: 8pt 0 20pt 0;
+        }
+
+        .rev-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            padding: 6pt 8pt;
+            text-align: left;
+        }
+
+        .rev-table tbody td {
+            padding: 6pt 8pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+        }
+
+        .rev-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        /* ── Footer ── */
+        .doc-footer {
+            margin-top: 30pt;
+            padding-top: 8pt;
+            border-top: 0.5pt solid #6B6B6B;
+            display: flex;
+            justify-content: space-between;
+            font-size: 8pt;
+            color: #6B6B6B;
+        }
+
+        .doc-footer .confidential {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── Print styles ── */
+        @media print {
+            body {
+                padding: 0;
+            }
+            .page-container {
+                padding: 0;
+                max-width: none;
+            }
+            .doc-header {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top red accent bar -->
+<div class="top-bar"></div>
+
+<!-- Document header -->
+<div class="doc-header">
+    <div class="doc-header-left">
+        <span class="logo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="company-name">Aurelian Manufacturing</span>
+    </div>
+    <div class="doc-header-right">
+        Aurelian Manufacturing AS<br>
+        Industriveien 12, 1531 Moss, Norway
+    </div>
+</div>
+
+<div class="page-container">
+
+    <!-- Title block -->
+    <div class="title-block">
+        <h1>Hydrostatic Pressure Test Procedure</h1>
+        <div class="doc-subtitle">MRB Section 17 &mdash; Manufacturing Record Book</div>
+        <div class="accent-divider"></div>
+        <div class="doc-number">
+            Document No: <strong>AM-PTP-2026-0042-001</strong> &nbsp;|&nbsp;
+            Rev: <strong>1</strong> &nbsp;|&nbsp;
+            Date: <strong>01 June 2026</strong> &nbsp;|&nbsp;
+            Status: <strong style="color: #F50537;">APPROVED</strong>
+        </div>
+    </div>
+
+    <!-- Project & product information panels -->
+    <div class="info-grid">
+        <div class="info-panel">
+            <h3>Project Information</h3>
+            <table>
+                <tr><td>Client:</td><td>Nordic Subsea Solutions AS</td></tr>
+                <tr><td>Client Address:</td><td>Forusbeen 35, 4033 Stavanger, Norway</td></tr>
+                <tr><td>Purchase Order:</td><td>NSS-PO-2026-0042</td></tr>
+                <tr><td>Project:</td><td>Barents Sea Development Phase 2</td></tr>
+                <tr><td>Project No:</td><td>NSS-PRJ-BS2024</td></tr>
+            </table>
+        </div>
+        <div class="info-panel">
+            <h3>Product Information</h3>
+            <table>
+                <tr><td>Product:</td><td>Subsea Connector Assembly</td></tr>
+                <tr><td>Size / Type:</td><td>300 (Upfacing)</td></tr>
+                <tr><td>Material:</td><td>Super Duplex UNS S32750</td></tr>
+                <tr><td>Tag Number:</td><td>NSS-BSP2-SCA-001</td></tr>
+                <tr><td>Serial Number:</td><td>AM-BSP2-300-001</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- 1. Purpose & Scope -->
+    <h2>1. Purpose &amp; Scope</h2>
+    <p>
+        This procedure defines the requirements for the hydrostatic pressure test of the Subsea Connector Assembly, Size 300 (Upfacing), fabricated from Super Duplex Stainless Steel UNS S32750. The test is performed in accordance with ASME Boiler and Pressure Vessel Code Section VIII Division 1 and the purchase order requirements to verify the pressure-containing integrity of the assembly prior to delivery.
+    </p>
+    <p>
+        The test shall demonstrate that the connector assembly can withstand 1.5 times the design pressure without leakage, visible deformation, or other signs of distress.
+    </p>
+
+    <!-- 2. Reference Documents -->
+    <h2>2. Reference Documents</h2>
+    <ul class="doc-list">
+        <li><strong>ASME BPVC Section VIII Division 1</strong> &mdash; Rules for Construction of Pressure Vessels</li>
+        <li><strong>ASME B31.3</strong> &mdash; Process Piping</li>
+        <li><strong>NSS-PO-2026-0042</strong> &mdash; Purchase Order and Technical Specification</li>
+        <li><strong>AM-ITP-2026-0042-001 Rev 1</strong> &mdash; Inspection &amp; Test Plan (ITP Item 150)</li>
+        <li><strong>AM-DWG-SCA-300-001 Rev B</strong> &mdash; General Arrangement &amp; Detail Drawing</li>
+        <li><strong>API 6A / API 17D</strong> &mdash; Subsea Wellhead and Christmas Tree Equipment (as applicable)</li>
+    </ul>
+
+    <!-- 3. Test Parameters -->
+    <h2>3. Test Parameters</h2>
+    <table class="param-table">
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Design Pressure</td>
+                <td>345 barg</td>
+            </tr>
+            <tr>
+                <td>Test Pressure</td>
+                <td>517 barg (1.5 &times; Design Pressure)</td>
+            </tr>
+            <tr>
+                <td>Test Medium</td>
+                <td>Clean fresh water with 200 ppm biocide inhibitor</td>
+            </tr>
+            <tr>
+                <td>Hold Time</td>
+                <td>30 minutes minimum at test pressure</td>
+            </tr>
+            <tr>
+                <td>Minimum Ambient Temperature</td>
+                <td>15&deg;C</td>
+            </tr>
+            <tr>
+                <td>Water Temperature Range</td>
+                <td>15&ndash;40&deg;C</td>
+            </tr>
+            <tr>
+                <td>Pressurisation Rate</td>
+                <td>Maximum 10 bar/min above 80% of test pressure</td>
+            </tr>
+            <tr>
+                <td>Depressurisation Rate</td>
+                <td>Maximum 20 bar/min (controlled bleed-down)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 4. Equipment Required -->
+    <h2>4. Equipment Required</h2>
+    <table class="equip-table">
+        <thead>
+            <tr>
+                <th>Equipment</th>
+                <th>Type / Model</th>
+                <th>Specification</th>
+                <th>Requirement</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Test Pump</strong></td>
+                <td>Haskel AW-60</td>
+                <td>Air-driven, max 700 bar</td>
+                <td>Calibrated, in good working order</td>
+            </tr>
+            <tr>
+                <td><strong>Pressure Gauge 1</strong></td>
+                <td>Bourdon type, 0&ndash;600 bar</td>
+                <td>&plusmn;1% full scale accuracy</td>
+                <td>Valid calibration certificate</td>
+            </tr>
+            <tr>
+                <td><strong>Pressure Gauge 2</strong></td>
+                <td>Digital, 0&ndash;700 bar</td>
+                <td>&plusmn;0.25% full scale accuracy</td>
+                <td>Valid calibration certificate</td>
+            </tr>
+            <tr>
+                <td><strong>Chart Recorder</strong></td>
+                <td>Endress+Hauser</td>
+                <td>0&ndash;700 bar, continuous recording</td>
+                <td>Valid calibration certificate</td>
+            </tr>
+            <tr>
+                <td><strong>Safety Relief Valve</strong></td>
+                <td>Spring-loaded PRV</td>
+                <td>Set at 545 barg</td>
+                <td>Certified setting, seal intact</td>
+            </tr>
+            <tr>
+                <td><strong>Temperature Sensor</strong></td>
+                <td>Digital thermometer</td>
+                <td>&plusmn;0.5&deg;C accuracy</td>
+                <td>Valid calibration certificate</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="callout">
+        <strong>Note:</strong> All pressure measuring equipment shall have a range such that the test pressure falls within 25&ndash;75% of the gauge full scale, in accordance with ASME PCC-2. Minimum two independent pressure gauges are required.
+    </div>
+
+    <!-- 5. Test Procedure -->
+    <h2>5. Test Procedure</h2>
+
+    <ol class="step-list">
+        <li>
+            <span class="step-number">1</span>
+            <div class="step-content">
+                <div class="step-title">Visual Inspection &mdash; Pre-Test</div>
+                <div class="step-desc">Perform visual inspection of the connector assembly prior to test. Verify all welds, flanges, and surfaces are free from visible defects. Confirm all NDE activities are complete and accepted. Record pre-test condition in the inspection log.</div>
+            </div>
+        </li>
+        <li>
+            <span class="step-number">2</span>
+            <div class="step-content">
+                <div class="step-title">Install Test Fittings, Blinds, and Gauges</div>
+                <div class="step-desc">Install test blinds, end closures, and pressure fittings. Connect pressure gauges, chart recorder, and safety relief valve. Verify all connections are tight and properly torqued. Confirm the safety relief valve is set at 545 barg.</div>
+            </div>
+        </li>
+        <li>
+            <span class="step-number">3</span>
+            <div class="step-content">
+                <div class="step-title">Fill with Test Medium and Vent All High Points</div>
+                <div class="step-desc">Fill the assembly with clean fresh water containing 200 ppm biocide inhibitor. Vent all high points to remove entrapped air. Continue filling until water flows freely from all vent points. Close vent valves. Record water temperature.</div>
+            </div>
+        </li>
+        <li>
+            <span class="step-number">4</span>
+            <div class="step-content">
+                <div class="step-title">Pressurize to 50% Test Pressure &mdash; Preliminary Hold</div>
+                <div class="step-desc">Gradually pressurize to 50% of test pressure (approximately 259 barg). Hold for 5 minutes minimum. Perform visual inspection of all joints, connections, and the assembly body. Check for leaks. If satisfactory, proceed to Step 5.</div>
+            </div>
+        </li>
+        <li>
+            <span class="step-number">5</span>
+            <div class="step-content">
+                <div class="step-title">Pressurize to 100% Test Pressure (517 barg)</div>
+                <div class="step-desc">Continue pressurization gradually to the full test pressure of 517 barg. Do not exceed 10 bar/min above 80% of test pressure. Isolate the test pump once pressure is stabilised. Start the chart recorder at full test pressure. Record the time, pressure, and water temperature.</div>
+            </div>
+        </li>
+        <li>
+            <span class="step-number">6</span>
+            <div class="step-content">
+                <div class="step-title">Hold for 30 Minutes &mdash; Record Pressure and Temperature</div>
+                <div class="step-desc">Maintain test pressure for a minimum of 30 minutes. Record pressure (both gauges) and water temperature at 5-minute intervals. The chart recorder shall continuously log pressure throughout the hold period. Note any observations.</div>
+            </div>
+        </li>
+        <li>
+            <span class="step-number">7</span>
+            <div class="step-content">
+                <div class="step-title">Inspect All Joints, Welds, and Connections Under Pressure</div>
+                <div class="step-desc">While at full test pressure, perform thorough visual inspection of all welded joints, bolted connections, seal interfaces, and test fittings. Check for any signs of leakage, weeping, sweating, or deformation. Inspection to be performed only after pressure has been stable for at least 10 minutes.</div>
+            </div>
+        </li>
+        <li>
+            <span class="step-number">8</span>
+            <div class="step-content">
+                <div class="step-title">Depressurize Gradually</div>
+                <div class="step-desc">After successful completion of the hold period and visual inspection, depressurize the assembly gradually at a controlled rate not exceeding 20 bar/min. Do not vent rapidly. Record the final pressure reading and time.</div>
+            </div>
+        </li>
+        <li>
+            <span class="step-number">9</span>
+            <div class="step-content">
+                <div class="step-title">Drain and Dry</div>
+                <div class="step-desc">Drain all test water from the assembly. Flush with clean fresh water if required. Dry the assembly using clean compressed air. Ensure no residual moisture remains in seal grooves, bolt holes, or internal cavities.</div>
+            </div>
+        </li>
+        <li>
+            <span class="step-number">10</span>
+            <div class="step-content">
+                <div class="step-title">Visual Inspection &mdash; Post-Test</div>
+                <div class="step-desc">Perform final visual inspection of the assembly after depressurization. Check for any permanent deformation, cracking, or damage. Compare post-test condition to pre-test condition. Remove all test fittings and blinds. Record post-test condition.</div>
+            </div>
+        </li>
+    </ol>
+
+    <!-- 6. Acceptance Criteria -->
+    <h2>6. Acceptance Criteria</h2>
+    <div class="callout">
+        The hydrostatic pressure test shall be considered <strong>ACCEPTABLE</strong> when all of the following criteria are met:
+    </div>
+    <ul class="doc-list">
+        <li><strong>No visible leaks</strong> &mdash; No leakage, weeping, or sweating detected at any joint, weld, seal, or connection during the hold period.</li>
+        <li><strong>Pressure drop &le; 1%</strong> &mdash; The pressure drop during the 30-minute hold period shall not exceed 1% of the test pressure (i.e., maximum 5.17 bar drop from initial test pressure).</li>
+        <li><strong>No permanent deformation</strong> &mdash; No visible permanent deformation, bulging, or distortion of the assembly observed during post-test visual inspection.</li>
+        <li><strong>No cracking or damage</strong> &mdash; No cracks, surface damage, or other distress indications detected.</li>
+    </ul>
+
+    <!-- 7. Safety Requirements -->
+    <h2>7. Safety Requirements</h2>
+    <div class="callout-warning">
+        <strong>WARNING:</strong> Hydrostatic testing involves high-pressure operations. All personnel involved must be aware of the hazards and follow the safety requirements below.
+    </div>
+    <ul class="doc-list">
+        <li><strong>Exclusion zone:</strong> Establish a barricaded exclusion zone of minimum 2 metres around the test area during pressurization and hold. Only authorised personnel may enter the exclusion zone.</li>
+        <li><strong>Warning signage:</strong> Post clear warning signs: &ldquo;HIGH PRESSURE TEST IN PROGRESS &mdash; DO NOT ENTER&rdquo; at all access points to the exclusion zone.</li>
+        <li><strong>PPE:</strong> All personnel within the test area shall wear safety glasses, steel-toe boots, and hearing protection (if pneumatic pump is used).</li>
+        <li><strong>Communications:</strong> Maintain clear verbal communication between the pump operator and the test inspector at all times during pressurization.</li>
+        <li><strong>Safety relief valve:</strong> The safety relief valve set at 545 barg must be installed and verified before any pressurization begins. The relief valve shall not be isolated during the test.</li>
+        <li><strong>Pump isolation:</strong> Isolate the test pump from the assembly before commencing the hold period. The pump operator shall remain at the pump station throughout.</li>
+        <li><strong>Emergency procedure:</strong> In case of a leak or equipment failure, immediately stop pressurization, depressurize via the bleed valve, and evacuate the exclusion zone. Report to the test supervisor.</li>
+        <li><strong>Toolbox talk:</strong> Conduct a pre-test safety briefing (toolbox talk) with all personnel involved. Document attendance.</li>
+    </ul>
+
+    <!-- Revision history -->
+    <h2>8. Revision History</h2>
+    <table class="rev-table">
+        <thead>
+            <tr>
+                <th style="width: 60pt;">Rev</th>
+                <th style="width: 100pt;">Date</th>
+                <th>Description of Change</th>
+                <th style="width: 100pt;">Prepared By</th>
+                <th style="width: 100pt;">Approved By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>0</td>
+                <td>18 May 2026</td>
+                <td>Issued for NSS review</td>
+                <td>M. Strand</td>
+                <td>K. Svendsen</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>01 June 2026</td>
+                <td>Incorporated NSS comments. Updated pressurisation rate. Added preliminary hold at 50% test pressure. Approved for execution.</td>
+                <td>M. Strand</td>
+                <td>K. Svendsen</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Approval signatures -->
+    <h2>9. Approval Signatures</h2>
+    <div class="approval-section">
+        <table class="approval-table">
+            <thead>
+                <tr>
+                    <th style="width: 26%;">Role</th>
+                    <th style="width: 22%;">Name</th>
+                    <th style="width: 26%;">Signature</th>
+                    <th style="width: 26%;">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Aurelian QA Manager</strong></td>
+                    <td>Karin Svendsen</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>01 June 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>Aurelian Engineering Manager</strong></td>
+                    <td>Magnus Strand</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>01 June 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>NSS QA Representative</strong></td>
+                    <td>Marte Lindgren</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>01 June 2026</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="doc-footer">
+        <span class="confidential">Confidential</span>
+        <span>AM-PTP-2026-0042-001 Rev 1</span>
+        <span>Page 1 of 1</span>
+    </div>
+
+</div>
+
+</body>
+</html>

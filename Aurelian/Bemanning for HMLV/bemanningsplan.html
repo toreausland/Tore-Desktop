@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bemanningsplan — Aurelian Manufacturing AS</title>
+<style>
+  /* ── Brand Tokens ── */
+  :root {
+    --red: #F50537;
+    --black: #2B2B2B;
+    --pure-black: #000000;
+    --white: #FFFFFF;
+    --gray: #6B6B6B;
+    --panel: #F5F5F5;
+    --divider: #D3D3D3;
+    --axis: #888888;
+    --dark-charcoal: #1A1A1A;
+    --navy-card: #253B52;
+    --steel-blue: #8EAEC5;
+    --dark-red: #D0042E;
+  }
+
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 11pt; }
+
+  body {
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.15;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 2.5cm;
+  }
+
+  /* ── Top Red Bar (brand element) ── */
+  body::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3pt;
+    background: var(--red);
+    margin-bottom: 24pt;
+  }
+
+  /* ── Header ── */
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6pt;
+  }
+  .doc-header .company { font-size: 9pt; color: var(--gray); }
+  .doc-header .confidential { font-size: 9pt; color: var(--gray); }
+
+  /* ── Typography ── */
+  h1 {
+    font-size: 28pt;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 12pt;
+    line-height: 1.0;
+  }
+
+  h2 {
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--red);
+    margin-top: 24pt;
+    margin-bottom: 6pt;
+    line-height: 1.0;
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--black);
+    margin-top: 12pt;
+    margin-bottom: 4pt;
+    line-height: 1.0;
+  }
+
+  h4 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--gray);
+    margin-top: 12pt;
+    margin-bottom: 4pt;
+  }
+
+  p {
+    font-size: 11pt;
+    color: var(--black);
+    margin-bottom: 6pt;
+    line-height: 1.15;
+  }
+
+  .subtitle {
+    font-size: 14pt;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--red);
+    margin-bottom: 12pt;
+  }
+
+  .caption {
+    font-size: 9pt;
+    color: var(--gray);
+    margin-bottom: 4pt;
+  }
+
+  .meta {
+    font-size: 9pt;
+    color: var(--gray);
+    margin-bottom: 18pt;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--divider);
+    margin: 18pt 0;
+  }
+
+  /* ── Callout Box ── */
+  .callout {
+    background: var(--panel);
+    border-left: 3pt solid var(--red);
+    padding: 12pt;
+    margin: 12pt 0;
+  }
+  .callout p { margin-bottom: 3pt; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12pt 0;
+    font-size: 10pt;
+  }
+  thead tr {
+    background: var(--black);
+  }
+  thead th {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 10pt;
+    text-align: left;
+    padding: 6pt 8pt;
+    border: none;
+  }
+  thead th.num { text-align: right; }
+  tbody td {
+    padding: 6pt 8pt;
+    border-bottom: 0.5pt solid var(--divider);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: var(--panel); }
+  tbody td.num { text-align: right; }
+  tbody td.bold { font-weight: 700; }
+  tfoot td {
+    padding: 6pt 8pt;
+    font-weight: 700;
+    border-top: 1.5pt solid var(--black);
+  }
+  tfoot td.num { text-align: right; }
+
+  /* Accent table variant */
+  table.accent thead tr { background: var(--red); }
+
+  /* ── Org Chart ── */
+  .org-chart {
+    margin: 24pt 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .org-node {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8pt 14pt;
+    border: 1.5pt solid var(--black);
+    background: var(--white);
+    min-width: 120pt;
+    text-align: center;
+    position: relative;
+  }
+  .org-node .name {
+    font-size: 10pt;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.2;
+  }
+  .org-node .role {
+    font-size: 8pt;
+    color: var(--gray);
+    line-height: 1.2;
+    margin-top: 2pt;
+  }
+
+  .org-node.ceo {
+    background: var(--pure-black);
+    border-color: var(--pure-black);
+  }
+  .org-node.ceo .name { color: var(--white); }
+  .org-node.ceo .role { color: var(--steel-blue); }
+
+  .org-node.highlight {
+    border-color: var(--red);
+    border-width: 2pt;
+  }
+
+  .org-node.dms {
+    background: var(--panel);
+    border-color: var(--red);
+  }
+
+  .org-node.sw {
+    background: var(--panel);
+    border-color: var(--red);
+  }
+
+  .org-node.new-hire {
+    border-style: dashed;
+    border-color: var(--divider);
+  }
+
+  .org-level {
+    display: flex;
+    justify-content: center;
+    gap: 12pt;
+    flex-wrap: wrap;
+  }
+
+  .org-connector {
+    width: 1.5pt;
+    height: 16pt;
+    background: var(--divider);
+    margin: 0 auto;
+  }
+
+  .org-connector-red {
+    width: 1.5pt;
+    height: 16pt;
+    background: var(--red);
+    margin: 0 auto;
+  }
+
+  .org-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Horizontal connector line */
+  .org-hline {
+    height: 1.5pt;
+    background: var(--divider);
+    align-self: stretch;
+    margin: 0 60pt;
+  }
+
+  /* ── Structured Org using SVG ── */
+  .org-svg-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin: 18pt 0;
+  }
+  .org-svg-wrap svg {
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* ── KPI Badges ── */
+  .kpi-row {
+    display: flex;
+    gap: 12pt;
+    margin: 12pt 0;
+    flex-wrap: wrap;
+  }
+  .kpi-badge {
+    background: var(--red);
+    color: var(--white);
+    padding: 10pt 16pt;
+    text-align: center;
+    border-radius: 4pt;
+    flex: 1;
+    min-width: 100pt;
+  }
+  .kpi-badge .value {
+    font-size: 22pt;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .kpi-badge .label {
+    font-size: 8pt;
+    margin-top: 4pt;
+    opacity: 0.9;
+  }
+
+  /* Black variant */
+  .kpi-badge.dark {
+    background: var(--black);
+  }
+
+  /* ── Phase Cards ── */
+  .phase-card {
+    background: var(--panel);
+    padding: 14pt;
+    margin: 12pt 0;
+    page-break-inside: avoid;
+  }
+  .phase-card h3 {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 8pt;
+  }
+  .phase-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22pt;
+    height: 22pt;
+    background: var(--red);
+    color: var(--white);
+    font-size: 12pt;
+    font-weight: 700;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Scaling Bar Chart (pure CSS) ── */
+  .bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 18pt;
+    height: 160pt;
+    margin: 18pt 0 6pt 0;
+    padding-bottom: 24pt;
+    border-bottom: 1pt solid var(--axis);
+    position: relative;
+  }
+  .bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+  .bar {
+    width: 100%;
+    max-width: 60pt;
+    background: var(--red);
+    border-radius: 2pt 2pt 0 0;
+    position: relative;
+    min-height: 4pt;
+  }
+  .bar .bar-label {
+    position: absolute;
+    top: -16pt;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10pt;
+    font-weight: 700;
+    color: var(--black);
+    font-family: Arial, sans-serif;
+    white-space: nowrap;
+  }
+  .bar-group .axis-label {
+    margin-top: 6pt;
+    font-size: 9pt;
+    color: var(--gray);
+    text-align: center;
+  }
+
+  .bar-group:nth-child(2) .bar { background: var(--black); }
+  .bar-group:nth-child(3) .bar { background: var(--gray); }
+  .bar-group:nth-child(4) .bar { background: var(--divider); }
+
+  /* ── Footer ── */
+  .doc-footer {
+    margin-top: 36pt;
+    padding-top: 6pt;
+    border-top: 1pt solid var(--divider);
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: var(--gray);
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { padding: 2.5cm; max-width: none; }
+    .phase-card { break-inside: avoid; }
+    table { break-inside: avoid; }
+  }
+
+  /* ── Page break helper ── */
+  .page-break { page-break-before: always; margin-top: 24pt; }
+
+  /* ── Numbered step ── */
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10pt;
+    margin-bottom: 10pt;
+  }
+  .step-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24pt;
+    height: 24pt;
+    background: var(--red);
+    color: var(--white);
+    font-size: 13pt;
+    font-weight: 700;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 1pt;
+  }
+  .step-content { flex: 1; }
+  .step-content .step-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--black);
+  }
+  .step-content .step-desc {
+    font-size: 10pt;
+    color: var(--gray);
+    margin-top: 2pt;
+  }
+
+  ul { padding-left: 16pt; margin-bottom: 6pt; }
+  ul li {
+    font-size: 11pt;
+    color: var(--black);
+    margin-bottom: 3pt;
+    line-height: 1.15;
+  }
+  ul li::marker { color: var(--red); }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="doc-header">
+  <span class="confidential">CONFIDENTIAL</span>
+  <span class="company">Aurelian Manufacturing AS</span>
+</div>
+
+<!-- Title -->
+<h1>Bemanningsplan for HMLV Smart Factory</h1>
+<div class="subtitle">Skaleringsmodell: 5 → 10 → 15 → 20 CNC-maskiner</div>
+<p class="meta">UTKAST — 24. februar 2026 &nbsp;|&nbsp; Basert på Siemens Digital Enterprise-referansearkitektur, ISA-95 og RAMI 4.0</p>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: Sammendrag -->
+<!-- ============================================================ -->
+<h2>1. Sammendrag</h2>
+
+<p>
+  Denne bemanningsplanen beskriver hvordan Aurelian Manufacturing bygger operasjonell organisasjon fra oppstart med 5 CNC-maskiner til full skala med 20 maskiner. Planen er forankret i Siemens' Digital Enterprise-prinsipper med ISA-95 som ansvarsgrensekart mellom ERP, MES/MOM og shopfloor.
+</p>
+
+<div class="callout">
+  <p><strong>Effekt av vertikal integrasjon:</strong> Våre initielle bemanningsestimater er påvirket av at Aurelian har valgt å gå for <em>vertikal integrasjon av digitale programvareløsninger</em>. Ved å utvikle egne MES/MOM-, planleggings- og dataplattformverktøy internt — med Pablo (Software Development) og Fredrik Vangsal (DMS &amp; Automation) som kjerneressurser — reduserer vi behovet for eksterne systemintegratorer og kan holde DMS-funksjonen slankere enn referansemodellen tilsier. Domeneeksperter som kjenner produksjonen eier koden, noe som gir raskere iterasjon og lavere total FTE i integrasjonslaget.</p>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi-badge">
+    <div class="value">5 → 20</div>
+    <div class="label">CNC-maskiner i fire faser</div>
+  </div>
+  <div class="kpi-badge dark">
+    <div class="value">~9 → ~38</div>
+    <div class="label">Operasjonelle FTE (skalering)</div>
+  </div>
+  <div class="kpi-badge">
+    <div class="value">65%</div>
+    <div class="label">Maskinutnyttelse (HMLV-mål)</div>
+  </div>
+  <div class="kpi-badge dark">
+    <div class="value">80–85%</div>
+    <div class="label">OEE-A målsetting</div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 2: Organisasjonskart -->
+<!-- ============================================================ -->
+<h2>2. Organisasjonskart — initial struktur (5 CNC)</h2>
+
+<p>Tore Ausland (VP Business Development) ivaretar operasjonell oppfølging i utviklingsfasen, men hans primære rolle er forretningsutvikling. Fredrik Vangsal (DMS) og Pablo (Software Development) inngår i den operasjonelle kjernen. Organisasjonsstrukturen er tilpasset oppstartsfasen og vil utvikles etter hvert som dedikert operasjonell ledelse kommer på plass.</p>
+
+<div class="org-svg-wrap">
+<svg viewBox="0 0 820 400" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Calibri, Segoe UI, sans-serif">
+
+  <!-- ── CEO ── -->
+  <rect x="310" y="10" width="200" height="52" rx="0" fill="#000000" stroke="#000000" stroke-width="1.5"/>
+  <text x="410" y="32" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="700">Andre Tandberg</text>
+  <text x="410" y="48" text-anchor="middle" fill="#8EAEC5" font-size="9">CEO</text>
+
+  <!-- Connector CEO → level 2 -->
+  <line x1="410" y1="62" x2="410" y2="88" stroke="#D3D3D3" stroke-width="1.5"/>
+  <line x1="130" y1="88" x2="690" y2="88" stroke="#D3D3D3" stroke-width="1.5"/>
+
+  <!-- ── VP BD (midlertidig COO i utviklingsfase) ── -->
+  <line x1="130" y1="88" x2="130" y2="104" stroke="#D3D3D3" stroke-width="1.5"/>
+  <rect x="30" y="104" width="200" height="52" rx="0" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="130" y="122" text-anchor="middle" fill="#2B2B2B" font-size="11" font-weight="700">Tore Ausland</text>
+  <text x="130" y="136" text-anchor="middle" fill="#6B6B6B" font-size="9">VP Business Development</text>
+  <text x="130" y="148" text-anchor="middle" fill="#6B6B6B" font-size="7" font-style="italic">(midlertidig COO i utviklingsfase)</text>
+
+  <!-- ── CFO ── -->
+  <line x1="690" y1="88" x2="690" y2="104" stroke="#D3D3D3" stroke-width="1.5"/>
+  <rect x="590" y="104" width="200" height="52" rx="0" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="690" y="126" text-anchor="middle" fill="#2B2B2B" font-size="11" font-weight="700">Henrik Strøm</text>
+  <text x="690" y="142" text-anchor="middle" fill="#6B6B6B" font-size="9">CFO — Strategisk brobygging</text>
+
+  <!-- Connector level 2 → level 3 -->
+  <line x1="130" y1="156" x2="130" y2="182" stroke="#D3D3D3" stroke-width="1.5"/>
+  <line x1="30" y1="182" x2="740" y2="182" stroke="#D3D3D3" stroke-width="1.5"/>
+
+  <!-- Vertical drops from horizontal line to each node -->
+  <!-- DMS: x=70 -->
+  <line x1="70" y1="182" x2="70" y2="198" stroke="#D3D3D3" stroke-width="1.5"/>
+  <!-- Software: x=210 -->
+  <line x1="210" y1="182" x2="210" y2="198" stroke="#D3D3D3" stroke-width="1.5"/>
+  <!-- Prod.plan: x=340 -->
+  <line x1="340" y1="182" x2="340" y2="198" stroke="#D3D3D3" stroke-width="1.5"/>
+  <!-- Mfg Eng: x=470 -->
+  <line x1="470" y1="182" x2="470" y2="198" stroke="#D3D3D3" stroke-width="1.5"/>
+  <!-- Maskinering: x=600 -->
+  <line x1="600" y1="182" x2="600" y2="198" stroke="#D3D3D3" stroke-width="1.5"/>
+  <!-- QA/Vedl: x=730 -->
+  <line x1="730" y1="182" x2="730" y2="198" stroke="#D3D3D3" stroke-width="1.5"/>
+
+  <!-- ── DMS (Fredrik) ── -->
+  <rect x="10" y="198" width="120" height="56" rx="0" fill="#F5F5F5" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="70" y="218" text-anchor="middle" fill="#2B2B2B" font-size="10" font-weight="700">Fredrik Vangsal</text>
+  <text x="70" y="232" text-anchor="middle" fill="#2B2B2B" font-size="8" font-weight="700">DMS &amp; Automation</text>
+  <text x="70" y="244" text-anchor="middle" fill="#6B6B6B" font-size="8">Advisor</text>
+
+  <!-- ── Software (Pablo) ── -->
+  <rect x="150" y="198" width="120" height="56" rx="0" fill="#F5F5F5" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="210" y="218" text-anchor="middle" fill="#2B2B2B" font-size="10" font-weight="700">Pablo</text>
+  <text x="210" y="232" text-anchor="middle" fill="#2B2B2B" font-size="8" font-weight="700">Software Dev</text>
+  <text x="210" y="244" text-anchor="middle" fill="#6B6B6B" font-size="8">Vertikal integrasjon</text>
+
+  <!-- ── Produksjonsplanlegger ── -->
+  <rect x="282" y="198" width="116" height="56" rx="0" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="340" y="218" text-anchor="middle" fill="#2B2B2B" font-size="10" font-weight="700">Prod.planlegger</text>
+  <text x="340" y="232" text-anchor="middle" fill="#6B6B6B" font-size="8">Leveranse &amp; dispatch</text>
+  <text x="340" y="244" text-anchor="middle" fill="#6B6B6B" font-size="8">1.0 FTE — ny</text>
+
+  <!-- ── Manufacturing Engineering ── -->
+  <rect x="412" y="198" width="116" height="56" rx="0" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="470" y="218" text-anchor="middle" fill="#2B2B2B" font-size="10" font-weight="700">Mfg Engineer</text>
+  <text x="470" y="232" text-anchor="middle" fill="#6B6B6B" font-size="8">CAM / Prosess</text>
+  <text x="470" y="244" text-anchor="middle" fill="#6B6B6B" font-size="8">1.0 FTE — ny</text>
+
+  <!-- ── Maskineringscelle ── -->
+  <rect x="540" y="198" width="120" height="56" rx="0" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="600" y="218" text-anchor="middle" fill="#2B2B2B" font-size="10" font-weight="700">Maskineringscelle</text>
+  <text x="600" y="232" text-anchor="middle" fill="#6B6B6B" font-size="8">Skiftleder + 2 operatører</text>
+  <text x="600" y="244" text-anchor="middle" fill="#6B6B6B" font-size="8">3.0 FTE — ny</text>
+
+  <!-- ── QA + Vedlikehold ── -->
+  <rect x="672" y="198" width="116" height="56" rx="0" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="730" y="218" text-anchor="middle" fill="#2B2B2B" font-size="10" font-weight="700">QA &amp; Vedlikehold</text>
+  <text x="730" y="232" text-anchor="middle" fill="#6B6B6B" font-size="8">Kvalitet + metrologi</text>
+  <text x="730" y="244" text-anchor="middle" fill="#6B6B6B" font-size="8">1.0 FTE — ny (komb.)</text>
+
+  <!-- ── Sublevel: Maskinering detail ── -->
+  <line x1="600" y1="254" x2="600" y2="278" stroke="#D3D3D3" stroke-width="1"/>
+  <line x1="530" y1="278" x2="670" y2="278" stroke="#D3D3D3" stroke-width="1"/>
+
+  <line x1="540" y1="278" x2="540" y2="290" stroke="#D3D3D3" stroke-width="1"/>
+  <line x1="660" y1="278" x2="660" y2="290" stroke="#D3D3D3" stroke-width="1"/>
+
+  <rect x="484" y="290" width="112" height="42" rx="0" fill="#F5F5F5" stroke="#D3D3D3" stroke-width="1"/>
+  <text x="540" y="308" text-anchor="middle" fill="#2B2B2B" font-size="9" font-weight="700">Skiftleder</text>
+  <text x="540" y="322" text-anchor="middle" fill="#6B6B6B" font-size="8">Sr. CNC-oppsetter</text>
+
+  <rect x="604" y="290" width="112" height="42" rx="0" fill="#F5F5F5" stroke="#D3D3D3" stroke-width="1"/>
+  <text x="660" y="308" text-anchor="middle" fill="#2B2B2B" font-size="9" font-weight="700">CNC-operatører</text>
+  <text x="660" y="322" text-anchor="middle" fill="#6B6B6B" font-size="8">2.0 FTE</text>
+
+  <!-- ── Legend ── -->
+  <rect x="10" y="360" width="12" height="12" fill="#F5F5F5" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="28" y="370" fill="#6B6B6B" font-size="8">Eksisterende / navngitt ressurs</text>
+
+  <rect x="200" y="360" width="12" height="12" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="218" y="370" fill="#6B6B6B" font-size="8">Ny ansettelse (planlagt)</text>
+
+  <rect x="390" y="360" width="12" height="12" fill="#000000"/>
+  <text x="408" y="370" fill="#6B6B6B" font-size="8">Ledelse (CEO)</text>
+
+</svg>
+</div>
+
+<p class="caption">Figur 1: Organisasjonskart for initial fase (5 CNC). Stiplede bokser indikerer planlagte nyansettelser. Tore Auslands COO-funksjon er midlertidig i utviklingsfasen.</p>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 3: Detaljert bemanningstabell Fase 1 -->
+<!-- ============================================================ -->
+<h2>3. Fase 1 — 5 CNC-maskiner (oppstart)</h2>
+
+<p>Oppstartsfasen drives primært i 1 skift. Flere roller kombineres for å holde bemanningen slank. Tore Ausland (VP Business Development) ivaretar midlertidig operasjonell oppfølging i utviklingsfasen — hans primære fokus er forretningsutvikling. Vertikal integrasjon gjennom Fredrik (DMS) og Pablo (Software) gir en effektiv digital kjerne uten behov for ekstern systemintegrasjon.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Område</th>
+      <th>Rolle</th>
+      <th>Rapporterer til</th>
+      <th class="num">FTE</th>
+      <th>Kommentar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="bold">Ledelse</td>
+      <td>VP Business Development (midl. operasjonell oppfølging)</td>
+      <td>CEO</td>
+      <td class="num">1,0</td>
+      <td>Tore Ausland — ivaretar operasjonell oppfølging i utviklingsfasen</td>
+    </tr>
+    <tr>
+      <td class="bold">DMS</td>
+      <td>DMS & Automation Advisor</td>
+      <td>Ledelse</td>
+      <td class="num">1,0</td>
+      <td>Fredrik Vangsal — eier OT/IT-integrasjon, datakvalitet, production readiness</td>
+    </tr>
+    <tr>
+      <td class="bold">Software</td>
+      <td>Software Dev / Vertikal integrasjon</td>
+      <td>Ledelse</td>
+      <td class="num">1,0</td>
+      <td>Pablo — eier MES/MOM-utvikling, datakontrakter, edge-apper</td>
+    </tr>
+    <tr>
+      <td class="bold">Prod.styring</td>
+      <td>Produksjonsplanlegger / leveransekoordinator</td>
+      <td>Ledelse</td>
+      <td class="num">1,0</td>
+      <td>Ny ansettelse — HMLV krever sterk planlegging</td>
+    </tr>
+    <tr>
+      <td class="bold">Engineering</td>
+      <td>Manufacturing Engineer / CAM / prosess</td>
+      <td>Ledelse</td>
+      <td class="num">1,0</td>
+      <td>Ny ansettelse — standardiserer oppsett, NC-program, måleplan</td>
+    </tr>
+    <tr>
+      <td class="bold">Produksjon</td>
+      <td>Skiftleder / Senior CNC-oppsetter</td>
+      <td>Ledelse</td>
+      <td class="num">1,0</td>
+      <td>Ny ansettelse — "player-coach" i oppstart</td>
+    </tr>
+    <tr>
+      <td class="bold">Produksjon</td>
+      <td>CNC-operatør/oppsetter</td>
+      <td>Skiftleder</td>
+      <td class="num">2,0</td>
+      <td>Ny ansettelse — 3 personer i cellen gir robusthet</td>
+    </tr>
+    <tr>
+      <td class="bold">Kvalitet</td>
+      <td>QA & metrologitekniker</td>
+      <td>Ledelse</td>
+      <td class="num">0,5</td>
+      <td>Ny ansettelse — kan kombineres med vedlikehold i oppstart</td>
+    </tr>
+    <tr>
+      <td class="bold">Vedlikehold</td>
+      <td>Vedlikeholdstekniker (mek/elektro)</td>
+      <td>Ledelse</td>
+      <td class="num">0,5</td>
+      <td>Ny ansettelse — kombineres med leverandørservice</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3"><strong>Sum operasjonelt</strong></td>
+      <td class="num"><strong>9,0</strong></td>
+      <td>Ekskl. CEO, CFO</td>
+    </tr>
+  </tfoot>
+</table>
+
+<div class="callout">
+  <p><strong>Vertikal integrasjon-effekt i Fase 1:</strong> Referansemodellen (Siemens) anbefaler 0,5–1,0 FTE for OT/IT-integrasjon <em>i tillegg til</em> ekstern systemleverandør. Aurelians modell med Fredrik (DMS) og Pablo (Software) som interne ressurser erstatter dette med egenutviklede løsninger, noe som reduserer integrasjonskost og gir raskere tilpasning til HMLV-behovene. Effekten er at vi kan holde DMS-funksjonen smalere, men med høyere kompetansetetthet.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 4: Skalering -->
+<!-- ============================================================ -->
+<h2>4. Skaleringsplan: 5 → 10 → 15 → 20 CNC</h2>
+
+<p>Skalering skjer i fire faser med 5 maskiner per trinn. Hver fase utløser spesifikke organisatoriske grep. Prinsipper fra ISA-95 og Siemens Digital Enterprise sikrer at dataryggraden og ansvarsstrukturen vokser kontrollert.</p>
+
+<!-- Bar chart -->
+<div class="bar-chart">
+  <div class="bar-group">
+    <div class="bar" style="height: 36pt;"><span class="bar-label">~9</span></div>
+    <div class="axis-label">Fase 1<br>5 CNC</div>
+  </div>
+  <div class="bar-group">
+    <div class="bar" style="height: 60pt;"><span class="bar-label">~16</span></div>
+    <div class="axis-label">Fase 2<br>10 CNC</div>
+  </div>
+  <div class="bar-group">
+    <div class="bar" style="height: 94pt;"><span class="bar-label">~26</span></div>
+    <div class="axis-label">Fase 3<br>15 CNC</div>
+  </div>
+  <div class="bar-group">
+    <div class="bar" style="height: 140pt;"><span class="bar-label">~38</span></div>
+    <div class="axis-label">Fase 4<br>20 CNC</div>
+  </div>
+</div>
+<p class="caption">Figur 2: Operasjonelle FTE per skaleringsfase. Tallene inkluderer DMS og Software som interne funksjoner.</p>
+
+<hr>
+
+<!-- ── Fase 2: 10 CNC ── -->
+<div class="phase-card">
+  <h3><span class="phase-num">2</span> Fase 2 — 10 CNC-maskiner</h3>
+  <h4>Organisatoriske grep</h4>
+  <ul>
+    <li>Utvidet drift / begynnende 2-skift på utvalgte maskiner</li>
+    <li>Dedikert QA og vedlikehold (oppjustert fra kombinerte roller)</li>
+    <li>Andre CAM/prosessingeniør for å håndtere økt HMLV-kompleksitet</li>
+    <li>DMS: Fredrik bygger team med 1 OT/IT-støtteressurs</li>
+    <li>Pablo begynner å ta med en juniorutvikler for å skalere software</li>
+  </ul>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Område</th>
+        <th>Rolle</th>
+        <th class="num">FTE Fase 1</th>
+        <th class="num">Δ ny</th>
+        <th class="num">FTE Fase 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Ledelse</td><td>Operasjonell ledelse</td><td class="num">1,0</td><td class="num">—</td><td class="num">1,0</td></tr>
+      <tr><td>DMS</td><td>DMS-team (Fredrik + OT/IT)</td><td class="num">1,0</td><td class="num">+1,0</td><td class="num">2,0</td></tr>
+      <tr><td>Software</td><td>Software-team (Pablo + junior)</td><td class="num">1,0</td><td class="num">+1,0</td><td class="num">2,0</td></tr>
+      <tr><td>Prod.styring</td><td>Produksjonsplanlegger</td><td class="num">1,0</td><td class="num">—</td><td class="num">1,0</td></tr>
+      <tr><td>Engineering</td><td>CAM / prosessingeniører</td><td class="num">1,0</td><td class="num">+1,0</td><td class="num">2,0</td></tr>
+      <tr><td>Produksjon</td><td>Skiftledere</td><td class="num">1,0</td><td class="num">—</td><td class="num">1,0</td></tr>
+      <tr><td>Produksjon</td><td>CNC-operatører/oppsettere</td><td class="num">2,0</td><td class="num">+2,0</td><td class="num">4,0</td></tr>
+      <tr><td>Kvalitet</td><td>QA & metrologi</td><td class="num">0,5</td><td class="num">+0,5</td><td class="num">1,0</td></tr>
+      <tr><td>Vedlikehold</td><td>Vedlikeholdstekniker</td><td class="num">0,5</td><td class="num">+0,5</td><td class="num">1,0</td></tr>
+      <tr><td>Logistikk</td><td>Lager/verktøy (tool crib)</td><td class="num">—</td><td class="num">+1,0</td><td class="num">1,0</td></tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2"><strong>Sum operasjonelt</strong></td>
+        <td class="num"><strong>9,0</strong></td>
+        <td class="num"><strong>+7,0</strong></td>
+        <td class="num"><strong>16,0</strong></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<!-- ── Fase 3: 15 CNC ── -->
+<div class="phase-card">
+  <h3><span class="phase-num">3</span> Fase 3 — 15 CNC-maskiner</h3>
+  <h4>Organisatoriske grep</h4>
+  <ul>
+    <li>Full 2-skift drift innføres — krever 2 skiftledere</li>
+    <li>Produksjonssjef (daglig drift) overtar operasjonell styring</li>
+    <li>Kvalitetssjef med dedikert inspektør/metrolog</li>
+    <li>Vedlikeholdsleder med dedikert tekniker</li>
+    <li>DMS utvides med DevOps/data-ressurs for CI/CD og observability</li>
+    <li>Engineering-teamet vokser til 3 for å holde tritt med HMLV-variantmangfold</li>
+  </ul>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Område</th>
+        <th>Rolle</th>
+        <th class="num">FTE Fase 2</th>
+        <th class="num">Δ ny</th>
+        <th class="num">FTE Fase 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Ledelse</td><td>Operasjonell ledelse</td><td class="num">1,0</td><td class="num">—</td><td class="num">1,0</td></tr>
+      <tr><td>Produksjon</td><td>Produksjonssjef (daglig drift)</td><td class="num">—</td><td class="num">+1,0</td><td class="num">1,0</td></tr>
+      <tr><td>DMS</td><td>DMS-team (Fredrik + OT/IT + DevOps)</td><td class="num">2,0</td><td class="num">+1,0</td><td class="num">3,0</td></tr>
+      <tr><td>Software</td><td>Software-team (Pablo + utviklere)</td><td class="num">2,0</td><td class="num">+1,0</td><td class="num">3,0</td></tr>
+      <tr><td>Prod.styring</td><td>Produksjonsplanleggere</td><td class="num">1,0</td><td class="num">+1,0</td><td class="num">2,0</td></tr>
+      <tr><td>Engineering</td><td>CAM / prosessingeniører</td><td class="num">2,0</td><td class="num">+1,0</td><td class="num">3,0</td></tr>
+      <tr><td>Produksjon</td><td>Skiftledere</td><td class="num">1,0</td><td class="num">+1,0</td><td class="num">2,0</td></tr>
+      <tr><td>Produksjon</td><td>CNC-operatører/oppsettere</td><td class="num">4,0</td><td class="num">+3,0</td><td class="num">7,0</td></tr>
+      <tr><td>Kvalitet</td><td>Kvalitetssjef + inspektør</td><td class="num">1,0</td><td class="num">+1,0</td><td class="num">2,0</td></tr>
+      <tr><td>Vedlikehold</td><td>Vedlikeholdsleder + tekniker</td><td class="num">1,0</td><td class="num">+1,0</td><td class="num">2,0</td></tr>
+      <tr><td>Logistikk</td><td>Lager/verktøy/tool crib</td><td class="num">1,0</td><td class="num">—</td><td class="num">1,0</td></tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2"><strong>Sum operasjonelt</strong></td>
+        <td class="num"><strong>16,0</strong></td>
+        <td class="num"><strong>+10,0</strong></td>
+        <td class="num"><strong>26,0*</strong></td>
+      </tr>
+    </tfoot>
+  </table>
+  <p class="caption">*Inkl. produksjonssjef som dedikert operasjonell leder.</p>
+</div>
+
+<!-- ── Fase 4: 20 CNC ── -->
+<div class="phase-card">
+  <h3><span class="phase-num">4</span> Fase 4 — 20 CNC-maskiner (full skala 1)</h3>
+  <h4>Organisatoriske grep</h4>
+  <ul>
+    <li>Full 2-skift som standard, opsjon for utvidet drift/3. skift på utvalgte celler</li>
+    <li>Engineering lead koordinerer 4 CAM/prosessingeniører</li>
+    <li>Dedikert DMS lead (Fredrik), med team på 4: OT/IT, DevOps/plattform, data/AI-validering</li>
+    <li>Software-teamet (Pablo) vokser til 4 for å dekke MES, planlegging og dataplattform</li>
+    <li>Tydelig cellestruktur med 3 skiftledere</li>
+    <li>Kvalitet og vedlikehold er selvstendige team med egne ledere</li>
+    <li>Vurder OT-cybersecurity som dedikert kapasitet (0,5–1,0 FTE)</li>
+  </ul>
+
+  <table class="accent">
+    <thead>
+      <tr>
+        <th>Område</th>
+        <th>Rolle</th>
+        <th class="num">FTE Fase 3</th>
+        <th class="num">Δ ny</th>
+        <th class="num">FTE Fase 4</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="bold">Ledelse</td><td>Operasjonell ledelse</td><td class="num">1,0</td><td class="num">—</td><td class="num">1,0</td></tr>
+      <tr><td class="bold">Produksjon</td><td>Produksjonssjef</td><td class="num">1,0</td><td class="num">—</td><td class="num">1,0</td></tr>
+      <tr><td class="bold">Produksjon</td><td>Skiftledere</td><td class="num">2,0</td><td class="num">+1,0</td><td class="num">3,0</td></tr>
+      <tr><td class="bold">Produksjon</td><td>CNC-operatører/oppsettere</td><td class="num">7,0</td><td class="num">+5,0</td><td class="num">12,0</td></tr>
+      <tr><td class="bold">DMS</td><td>DMS lead (Fredrik) + team</td><td class="num">3,0</td><td class="num">+1,0</td><td class="num">4,0</td></tr>
+      <tr><td class="bold">Software</td><td>Software lead (Pablo) + team</td><td class="num">3,0</td><td class="num">+1,0</td><td class="num">4,0</td></tr>
+      <tr><td class="bold">Engineering</td><td>Engineering lead + CAM/prosess</td><td class="num">3,0</td><td class="num">+1,0</td><td class="num">4,0</td></tr>
+      <tr><td class="bold">Prod.styring</td><td>Produksjonsplanleggere</td><td class="num">2,0</td><td class="num">—</td><td class="num">2,0</td></tr>
+      <tr><td class="bold">Kvalitet</td><td>Kvalitetssjef + inspektører/metrologi</td><td class="num">2,0</td><td class="num">+1,0</td><td class="num">3,0</td></tr>
+      <tr><td class="bold">Vedlikehold</td><td>Vedlikeholdsleder + teknikere</td><td class="num">2,0</td><td class="num">+1,0</td><td class="num">3,0</td></tr>
+      <tr><td class="bold">Logistikk</td><td>Lager/logistikk/tool crib</td><td class="num">1,0</td><td class="num">+1,0</td><td class="num">2,0</td></tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2"><strong>Sum operasjonelt</strong></td>
+        <td class="num"><strong>26,0</strong></td>
+        <td class="num"><strong>+12,0</strong></td>
+        <td class="num"><strong>38,0*</strong></td>
+      </tr>
+    </tfoot>
+  </table>
+  <p class="caption">*OT-cybersecurity (0,5–1,0 FTE) kan legges til DMS-teamet når omfanget tilsier det. Total inkl. cybersecurity: 38,5–39,0.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 5: Samletabell -->
+<!-- ============================================================ -->
+<h2>5. Oppsummering — FTE per fase</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Funksjon</th>
+      <th class="num">5 CNC</th>
+      <th class="num">10 CNC</th>
+      <th class="num">15 CNC</th>
+      <th class="num">20 CNC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="bold">Operasjonell ledelse</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td></tr>
+    <tr><td class="bold">Produksjonsledelse</td><td class="num">—</td><td class="num">—</td><td class="num">1</td><td class="num">1</td></tr>
+    <tr><td class="bold">DMS & Automation</td><td class="num">1</td><td class="num">2</td><td class="num">3</td><td class="num">4</td></tr>
+    <tr><td class="bold">Software Development</td><td class="num">1</td><td class="num">2</td><td class="num">3</td><td class="num">4</td></tr>
+    <tr><td class="bold">Prod.planlegging</td><td class="num">1</td><td class="num">1</td><td class="num">2</td><td class="num">2</td></tr>
+    <tr><td class="bold">Engineering / CAM</td><td class="num">1</td><td class="num">2</td><td class="num">3</td><td class="num">4</td></tr>
+    <tr><td class="bold">Skiftledere</td><td class="num">1</td><td class="num">1</td><td class="num">2</td><td class="num">3</td></tr>
+    <tr><td class="bold">CNC-operatører</td><td class="num">2</td><td class="num">4</td><td class="num">7</td><td class="num">12</td></tr>
+    <tr><td class="bold">Kvalitet & metrologi</td><td class="num">0,5</td><td class="num">1</td><td class="num">2</td><td class="num">3</td></tr>
+    <tr><td class="bold">Vedlikehold</td><td class="num">0,5</td><td class="num">1</td><td class="num">2</td><td class="num">3</td></tr>
+    <tr><td class="bold">Logistikk / tool crib</td><td class="num">—</td><td class="num">1</td><td class="num">1</td><td class="num">2</td></tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td><strong>Total operasjonelt</strong></td>
+      <td class="num"><strong>9</strong></td>
+      <td class="num"><strong>16</strong></td>
+      <td class="num"><strong>26*</strong></td>
+      <td class="num"><strong>38*</strong></td>
+    </tr>
+  </tfoot>
+</table>
+
+<p class="caption">*Eksklusive CEO (Andre Tandberg) og CFO (Henrik Strøm). Inkluderer DMS og Software som operasjonelle funksjoner. Tore Ausland (VP BD) telles under operasjonell ledelse i utviklingsfasen.</p>
+
+<div class="callout">
+  <p><strong>Sammenligning med referansemodell:</strong> Siemens-referansen anbefaler 35–50 FTE operasjonelt ved 20 CNC. Aurelians estimat på ~38 FTE ligger i nedre del av dette intervallet, primært fordi vertikal integrasjon av software reduserer behovet for ekstern systemintegrasjon og gjør den digitale funksjonen mer effektiv. Ved økende automasjonsgrad (robotlasting, automatisk verktøybytte) kan operatørbehovet reduseres ytterligere.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 6: Vertikal integrasjon -->
+<!-- ============================================================ -->
+<h2>6. Vertikal integrasjon — effekt på bemanning</h2>
+
+<p>Aurelians strategiske valg om å utvikle egne digitale løsninger vertikalt — fra shopfloor-datainnsamling via edge til MES/MOM og analyseplattform — har tre direkte konsekvenser for bemanningsplanen:</p>
+
+<div class="step">
+  <span class="step-num">1</span>
+  <div class="step-content">
+    <div class="step-title">Lavere ekstern integrasjonskost</div>
+    <div class="step-desc">Tradisjonelt kreves 2–4 FTE eksternt for MES-implementering og vedlikehold. Aurelians modell med Pablo (software) og Fredrik (DMS) erstatter dette med interne ressurser som kjenner produksjonsprosessene intimt.</div>
+  </div>
+</div>
+
+<div class="step">
+  <span class="step-num">2</span>
+  <div class="step-content">
+    <div class="step-title">Raskere iterasjon og tilpasning</div>
+    <div class="step-desc">HMLV-produksjon krever hyppig tilpasning av planleggingslogikk, dispatch-regler og datakontrakter. Intern software-eierskap gir ukentlige release-sykluser vs. kvartalsvise med ekstern leverandør.</div>
+  </div>
+</div>
+
+<div class="step">
+  <span class="step-num">3</span>
+  <div class="step-content">
+    <div class="step-title">Domeneeksperter som kode-bidragsytere</div>
+    <div class="step-desc">Med AI-assistert utvikling (Siemens Engineering Copilot-prinsippet) kan prosessingeniører, vedlikehold og kvalitet bidra til kode og datavalidering — under tydelige guardrails (testkrav, code review, OT-sikkerhet). Dette utvider den effektive utviklingskapasiteten uten å øke headcount.</div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 7: Org chart 20 CNC -->
+<!-- ============================================================ -->
+<h2>7. Målorganisasjon — 20 CNC (Fase 4)</h2>
+
+<div class="org-svg-wrap">
+<svg viewBox="0 0 820 400" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Calibri, Segoe UI, sans-serif">
+
+  <!-- ── CEO ── -->
+  <rect x="310" y="8" width="200" height="48" rx="0" fill="#000000" stroke="#000000" stroke-width="1.5"/>
+  <text x="410" y="28" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="700">Andre Tandberg</text>
+  <text x="410" y="44" text-anchor="middle" fill="#8EAEC5" font-size="9">CEO</text>
+
+  <!-- Connector CEO → level 2 -->
+  <line x1="410" y1="56" x2="410" y2="78" stroke="#D3D3D3" stroke-width="1.5"/>
+  <line x1="130" y1="78" x2="690" y2="78" stroke="#D3D3D3" stroke-width="1.5"/>
+
+  <!-- ── VP BD (midlertidig COO) ── -->
+  <line x1="130" y1="78" x2="130" y2="92" stroke="#D3D3D3" stroke-width="1.5"/>
+  <rect x="30" y="92" width="200" height="48" rx="0" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="130" y="108" text-anchor="middle" fill="#2B2B2B" font-size="11" font-weight="700">Tore Ausland</text>
+  <text x="130" y="122" text-anchor="middle" fill="#6B6B6B" font-size="9">VP Business Development</text>
+  <text x="130" y="134" text-anchor="middle" fill="#6B6B6B" font-size="7" font-style="italic">(midl. ops i utviklingsfase)</text>
+
+  <!-- ── CFO ── -->
+  <line x1="690" y1="78" x2="690" y2="92" stroke="#D3D3D3" stroke-width="1.5"/>
+  <rect x="590" y="92" width="200" height="48" rx="0" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="690" y="112" text-anchor="middle" fill="#2B2B2B" font-size="11" font-weight="700">Henrik Strøm</text>
+  <text x="690" y="128" text-anchor="middle" fill="#6B6B6B" font-size="9">CFO</text>
+
+  <!-- Connector level 2 → level 3 (main horizontal) -->
+  <line x1="130" y1="140" x2="130" y2="164" stroke="#D3D3D3" stroke-width="1.5"/>
+  <line x1="18" y1="164" x2="808" y2="164" stroke="#D3D3D3" stroke-width="1.5"/>
+
+  <!-- 8 columns at x: 50, 150, 260, 370, 470, 570, 670, 770 -->
+  <!-- Drops -->
+  <line x1="50" y1="164" x2="50" y2="178" stroke="#D3D3D3" stroke-width="1.5"/>
+  <line x1="150" y1="164" x2="150" y2="178" stroke="#D3D3D3" stroke-width="1.5"/>
+  <line x1="260" y1="164" x2="260" y2="178" stroke="#D3D3D3" stroke-width="1.5"/>
+  <line x1="370" y1="164" x2="370" y2="178" stroke="#D3D3D3" stroke-width="1.5"/>
+  <line x1="470" y1="164" x2="470" y2="178" stroke="#D3D3D3" stroke-width="1.5"/>
+  <line x1="570" y1="164" x2="570" y2="178" stroke="#D3D3D3" stroke-width="1.5"/>
+  <line x1="670" y1="164" x2="670" y2="178" stroke="#D3D3D3" stroke-width="1.5"/>
+  <line x1="770" y1="164" x2="770" y2="178" stroke="#D3D3D3" stroke-width="1.5"/>
+
+  <!-- DMS -->
+  <rect x="4" y="178" width="92" height="52" rx="0" fill="#F5F5F5" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="50" y="196" text-anchor="middle" fill="#2B2B2B" font-size="9" font-weight="700">DMS</text>
+  <text x="50" y="208" text-anchor="middle" fill="#2B2B2B" font-size="7" font-weight="700">Fredrik V.</text>
+  <text x="50" y="220" text-anchor="middle" fill="#6B6B6B" font-size="7">4 FTE</text>
+
+  <!-- Software -->
+  <rect x="104" y="178" width="92" height="52" rx="0" fill="#F5F5F5" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="150" y="196" text-anchor="middle" fill="#2B2B2B" font-size="9" font-weight="700">Software</text>
+  <text x="150" y="208" text-anchor="middle" fill="#2B2B2B" font-size="7" font-weight="700">Pablo</text>
+  <text x="150" y="220" text-anchor="middle" fill="#6B6B6B" font-size="7">4 FTE</text>
+
+  <!-- Prod.sjef -->
+  <rect x="214" y="178" width="92" height="52" rx="0" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="260" y="196" text-anchor="middle" fill="#2B2B2B" font-size="9" font-weight="700">Prod.sjef</text>
+  <text x="260" y="208" text-anchor="middle" fill="#6B6B6B" font-size="7">Daglig drift</text>
+  <text x="260" y="220" text-anchor="middle" fill="#6B6B6B" font-size="7">1 FTE</text>
+
+  <!-- Engineering -->
+  <rect x="324" y="178" width="92" height="52" rx="0" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="370" y="196" text-anchor="middle" fill="#2B2B2B" font-size="9" font-weight="700">Engineering</text>
+  <text x="370" y="208" text-anchor="middle" fill="#6B6B6B" font-size="7">CAM / Prosess</text>
+  <text x="370" y="220" text-anchor="middle" fill="#6B6B6B" font-size="7">4 FTE</text>
+
+  <!-- Planlegging -->
+  <rect x="424" y="178" width="92" height="52" rx="0" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="470" y="196" text-anchor="middle" fill="#2B2B2B" font-size="9" font-weight="700">Planlegging</text>
+  <text x="470" y="208" text-anchor="middle" fill="#6B6B6B" font-size="7">Dispatch / SCM</text>
+  <text x="470" y="220" text-anchor="middle" fill="#6B6B6B" font-size="7">2 FTE</text>
+
+  <!-- Kvalitet -->
+  <rect x="524" y="178" width="92" height="52" rx="0" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="570" y="196" text-anchor="middle" fill="#2B2B2B" font-size="9" font-weight="700">Kvalitet</text>
+  <text x="570" y="208" text-anchor="middle" fill="#6B6B6B" font-size="7">QA & Metrologi</text>
+  <text x="570" y="220" text-anchor="middle" fill="#6B6B6B" font-size="7">3 FTE</text>
+
+  <!-- Vedlikehold -->
+  <rect x="624" y="178" width="92" height="52" rx="0" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="670" y="196" text-anchor="middle" fill="#2B2B2B" font-size="9" font-weight="700">Vedlikehold</text>
+  <text x="670" y="208" text-anchor="middle" fill="#6B6B6B" font-size="7">Reliability</text>
+  <text x="670" y="220" text-anchor="middle" fill="#6B6B6B" font-size="7">3 FTE</text>
+
+  <!-- Logistikk -->
+  <rect x="724" y="178" width="92" height="52" rx="0" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.5"/>
+  <text x="770" y="196" text-anchor="middle" fill="#2B2B2B" font-size="9" font-weight="700">Logistikk</text>
+  <text x="770" y="208" text-anchor="middle" fill="#6B6B6B" font-size="7">Tool crib / lager</text>
+  <text x="770" y="220" text-anchor="middle" fill="#6B6B6B" font-size="7">2 FTE</text>
+
+  <!-- Sublevel: Under Prod.sjef - Maskineringscelle -->
+  <line x1="260" y1="230" x2="260" y2="252" stroke="#D3D3D3" stroke-width="1"/>
+  <rect x="206" y="252" width="108" height="48" rx="0" fill="#F5F5F5" stroke="#2B2B2B" stroke-width="1"/>
+  <text x="260" y="270" text-anchor="middle" fill="#2B2B2B" font-size="9" font-weight="700">Maskineringscelle</text>
+  <text x="260" y="284" text-anchor="middle" fill="#6B6B6B" font-size="7">3 skiftledere + 12 op.</text>
+  <text x="260" y="294" text-anchor="middle" fill="#6B6B6B" font-size="7">15 FTE</text>
+
+  <!-- DMS sublevel -->
+  <line x1="50" y1="230" x2="50" y2="252" stroke="#D3D3D3" stroke-width="1"/>
+  <line x1="18" y1="252" x2="82" y2="252" stroke="#D3D3D3" stroke-width="1"/>
+
+  <line x1="24" y1="252" x2="24" y2="264" stroke="#D3D3D3" stroke-width="1"/>
+  <rect x="4" y="264" width="40" height="30" rx="0" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="0.75"/>
+  <text x="24" y="278" text-anchor="middle" fill="#6B6B6B" font-size="6">OT/IT</text>
+  <text x="24" y="288" text-anchor="middle" fill="#6B6B6B" font-size="6">1 FTE</text>
+
+  <line x1="50" y1="252" x2="50" y2="264" stroke="#D3D3D3" stroke-width="1"/>
+  <rect x="30" y="264" width="40" height="30" rx="0" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="0.75"/>
+  <text x="50" y="278" text-anchor="middle" fill="#6B6B6B" font-size="6">DevOps</text>
+  <text x="50" y="288" text-anchor="middle" fill="#6B6B6B" font-size="6">1 FTE</text>
+
+  <line x1="76" y1="252" x2="76" y2="264" stroke="#D3D3D3" stroke-width="1"/>
+  <rect x="56" y="264" width="40" height="30" rx="0" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="0.75"/>
+  <text x="76" y="278" text-anchor="middle" fill="#6B6B6B" font-size="6">Data/AI</text>
+  <text x="76" y="288" text-anchor="middle" fill="#6B6B6B" font-size="6">1 FTE</text>
+
+  <!-- Software sublevel -->
+  <line x1="150" y1="230" x2="150" y2="252" stroke="#D3D3D3" stroke-width="1"/>
+  <line x1="118" y1="252" x2="182" y2="252" stroke="#D3D3D3" stroke-width="1"/>
+
+  <line x1="124" y1="252" x2="124" y2="264" stroke="#D3D3D3" stroke-width="1"/>
+  <rect x="104" y="264" width="40" height="30" rx="0" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="0.75"/>
+  <text x="124" y="278" text-anchor="middle" fill="#6B6B6B" font-size="6">MES</text>
+  <text x="124" y="288" text-anchor="middle" fill="#6B6B6B" font-size="6">1 FTE</text>
+
+  <line x1="150" y1="252" x2="150" y2="264" stroke="#D3D3D3" stroke-width="1"/>
+  <rect x="130" y="264" width="40" height="30" rx="0" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="0.75"/>
+  <text x="150" y="278" text-anchor="middle" fill="#6B6B6B" font-size="6">Plan.</text>
+  <text x="150" y="288" text-anchor="middle" fill="#6B6B6B" font-size="6">1 FTE</text>
+
+  <line x1="176" y1="252" x2="176" y2="264" stroke="#D3D3D3" stroke-width="1"/>
+  <rect x="156" y="264" width="40" height="30" rx="0" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="0.75"/>
+  <text x="176" y="278" text-anchor="middle" fill="#6B6B6B" font-size="6">Data</text>
+  <text x="176" y="288" text-anchor="middle" fill="#6B6B6B" font-size="6">1 FTE</text>
+
+  <!-- Dotted line DMS ↔ Software (backlog/release-gates) -->
+  <line x1="96" y1="204" x2="104" y2="204" stroke="#6B6B6B" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="100" y="198" text-anchor="middle" fill="#6B6B6B" font-size="5" font-style="italic">backlog</text>
+
+  <!-- Total badge -->
+  <rect x="310" y="330" width="200" height="44" rx="4" fill="#F50537"/>
+  <text x="410" y="350" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700">Total: ~38 FTE</text>
+  <text x="410" y="366" text-anchor="middle" fill="#FFFFFF" font-size="8">operasjonelt (ekskl. CEO/CFO)</text>
+
+</svg>
+</div>
+
+<p class="caption">Figur 3: Målorganisasjon ved 20 CNC (Fase 4). Stiplet linje mellom DMS og Software indikerer felles backlog og release-gates. Tore Ausland (VP BD) ivaretar midlertidig operasjonell oppfølging i utviklingsfasen.</p>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 8: Nøkkelprinsipper -->
+<!-- ============================================================ -->
+<h2>8. Nøkkelprinsipper for skalering</h2>
+
+<div class="step">
+  <span class="step-num">1</span>
+  <div class="step-content">
+    <div class="step-title">ISA-95 som ansvarsgrensekart</div>
+    <div class="step-desc">Bruk nivådelingen (ERP nivå 4, MES/MOM nivå 3, OT nivå 0–2) som grensesnitt mellom team. Reduserer konflikter og gjør integrasjon håndterbar ved vekst.</div>
+  </div>
+</div>
+
+<div class="step">
+  <span class="step-num">2</span>
+  <div class="step-content">
+    <div class="step-title">DMS eier den vertikale integrasjonen</div>
+    <div class="step-desc">Digital Manufacturing Systems (Fredrik) eier OT-tilkobling, datakontrakter, driftsbarhet og "production readiness"-validering. Software (Pablo) utvikler; DMS sikrer driftsbarhet og utrulling.</div>
+  </div>
+</div>
+
+<div class="step">
+  <span class="step-num">3</span>
+  <div class="step-content">
+    <div class="step-title">Planlegging er flaskehalsen — ikke maskinkapasitet</div>
+    <div class="step-desc">I HMLV er flaskehalsen ofte planlegging, rigg/oppsett, verktøylogistikk og datadisiplin. Invester tidlig i sterk produksjonsplanlegger og digitale planleggingsverktøy.</div>
+  </div>
+</div>
+
+<div class="step">
+  <span class="step-num">4</span>
+  <div class="step-content">
+    <div class="step-title">Defense-in-Depth fra dag 1</div>
+    <div class="step-desc">OT/IT-konvergens krever segmentering, DMZ, rollebasert tilgang og sikret fjerntilgang. Ved 15+ maskiner bør OT-cybersecurity bli en dedikert kapasitet.</div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- References -->
+<!-- ============================================================ -->
+<h2>Referanser</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Kilde</th>
+      <th>Dokument</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="bold">Intern</td>
+      <td>Organisasjon og bemanning for en smart CNC-fabrikk med vertikal integrasjon (Bemanning for HMLV)</td>
+    </tr>
+    <tr>
+      <td class="bold">Siemens</td>
+      <td>Totally Integrated Automation (TIA) Brochure — Digital Enterprise prinsipper</td>
+    </tr>
+    <tr>
+      <td class="bold">ISA</td>
+      <td>ISA-95 / IEC 62264 — Enterprise-Control System Integration</td>
+    </tr>
+    <tr>
+      <td class="bold">ZVEI</td>
+      <td>RAMI 4.0 — Reference Architecture Model Industrie 4.0</td>
+    </tr>
+    <tr>
+      <td class="bold">Siemens</td>
+      <td>Industrial Edge — IT Specialists Platform Documentation</td>
+    </tr>
+    <tr>
+      <td class="bold">Siemens</td>
+      <td>Industrial Security Operational Guidelines — Defense-in-Depth</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- ── Footer ── -->
+<div class="doc-footer">
+  <span>CONFIDENTIAL</span>
+  <span>Aurelian Manufacturing AS — Bemanningsplan HMLV</span>
+  <span>24. februar 2026</span>
+</div>
+
+</body>
+</html>

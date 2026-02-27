@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — NAMMO Go-to-Market Strategi</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  /* Cover */
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  /* Content */
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  /* Cards grid */
+  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; margin: 1.5rem 0; }
+  .card { background: var(--gray-panel); padding: 1.5rem; position: relative; text-decoration: none; color: var(--black); transition: box-shadow 0.2s; }
+  .card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--red); }
+  .card-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--red); color: var(--white); font-size: 0.82rem; font-weight: 700; border-radius: 50%; margin-bottom: 0.7rem; }
+  .card h4 { font-size: 0.95rem; font-weight: 700; color: var(--black); margin-bottom: 0.4rem; }
+  .card p { font-size: 0.82rem; line-height: 1.5; color: var(--gray-medium); margin-bottom: 0.5rem; }
+  .card .card-meta { font-size: 0.74rem; color: var(--red); font-weight: 700; }
+
+  /* KPI strip */
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  /* Callout */
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  /* Bullet list */
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  /* Timeline */
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 140px; }
+
+  /* Dark panel */
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  /* Footer */
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+
+  /* File link styling */
+  .file-link { display: block; margin-top: 0.5rem; font-size: 0.78rem; color: var(--red); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">★ ★ ★ ★ ★</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">NAMMO Go-to-Market Strategi</div>
+    <div class="cover-subtitle">Segmentert tilnærming — Raufoss & globale operasjoner</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Februar 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section>
+    <div class="section-label">Sammendrag</div>
+    <h2>Hvorfor NAMMO er prioritet #2</h2>
+
+    <div class="callout">
+      <p><strong>NAMMO femdobler artilleriproduksjonen, har en ordrebok på NOK 39.8 milliarder (+57% YoY)</strong>, bygger en ny fabrikk på 11 000 m² på Raufoss, og har fått NOK 2 milliarder i statlig tilskudd for kapasitetsutvidelse. De har 300+ ansatte i mekanisk avdeling — men trenger langt mer kapasitet enn de kan bygge internt. Aurelian tilbyr nøyaktig det.</p>
+    </div>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">39.8</div>
+        <div class="kpi-label">MRD NOK<br>Ordrebok</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">10.9</div>
+        <div class="kpi-label">MRD NOK<br>Omsetning 2024</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">5×</div>
+        <div class="kpi-label">Artilleri-<br>produksjon</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">8–25k</div>
+        <div class="kpi-label">Est. årlige<br>CNC-timer</div>
+      </div>
+    </div>
+
+    <p>NAMMO er organisert i fire forretningsenheter pluss en ny Missile Products-divisjon. Hver enhet har ulike CNC-behov — fra høyvolum dreieoperasjoner (ammunisjon) til avansert 5-akse fresing (rakettmotorer, missilkomponenter). Aurelians tilnærming tilpasses per segment.</p>
+
+    <h3>Hvorfor NAMMO passer Aurelian</h3>
+    <ul class="clean-list">
+      <li><strong>Eksplosiv vekst:</strong> Ordreboken vokste 57% på ett år. Intern kapasitet holder ikke tritt.</li>
+      <li><strong>Raufoss-hub:</strong> NAMMOs mekaniske avdeling (300+ ansatte) er allerede under press — de outsourcer allerede CNC-arbeid.</li>
+      <li><strong>Statlig backing:</strong> NOK 2 mrd fra Forsvarsdepartementet til kapasitetsutvidelse. NAMMO har mandat til å investere i leverandørkjeden.</li>
+      <li><strong>Norsk leverandørkjede:</strong> Krav om nasjonal forsyningssikkerhet matcher Aurelians posisjon.</li>
+      <li><strong>Komplementær til KDA:</strong> NAMMO og KDA er partnere (NAMMO lager motorer, KDA lager missiler). Leverandørstatus hos begge forsterker posisjonen.</li>
+    </ul>
+  </section>
+
+  <!-- NAMMO ORGANIZATIONAL STRUCTURE -->
+  <section>
+    <div class="section-label">Organisasjon</div>
+    <h2>NAMMO — selskapsstruktur og CNC-relevans</h2>
+
+    <p><strong>NAMMO AS</strong> er eid 50/50 av norske staten (via Patria) og den finske staten. Hovedkontor og hovedproduksjon ligger på Raufoss, Innlandet. Selskapet har ~3 000 ansatte globalt med produksjonsanlegg i Norge, Finland, Sverige, Tyskland, Spania, USA og India.</p>
+
+    <h3>Eierstruktur og implikasjoner</h3>
+    <ul class="clean-list">
+      <li><strong>50% Patria (Finland) / 50% Nærings- og fiskeridepartementet (Norge)</strong></li>
+      <li>Statlig eierskap betyr politisk press for nasjonal leverandørkjede</li>
+      <li>Beredskapshensyn er innebygd i eiermandatet</li>
+      <li>Finansielt sterke eiere — kapasitetsutvidelse er politisk ønsket</li>
+    </ul>
+
+    <h3>Produksjonslokasjoner i Norge</h3>
+    <table>
+      <thead><tr><th>Lokasjon</th><th>Aktivitet</th><th>Ansatte (ca.)</th><th>CNC-relevans</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Raufoss</strong></td><td>Hovedfabrikk — ammunisjon, mekanisk avdeling, montering</td><td>~1 500</td><td>HØYEST — 300+ i mekanisk avd.</td></tr>
+        <tr><td><strong>Løkken Verk</strong></td><td>Sprengstoffproduksjon</td><td>~100</td><td>LAV — prosessindustri</td></tr>
+        <tr><td><strong>Aurskog</strong></td><td>Demontering og resirkulering</td><td>~50</td><td>LAV</td></tr>
+      </tbody>
+    </table>
+
+    <p class="secondary"><strong>Raufoss er nøkkelen.</strong> All vesentlig CNC-maskinering skjer på Raufoss-anlegget. NAMMOs mekaniske avdeling har allerede 300+ ansatte, men produksjonsøkningene krever langt mer kapasitet. Raufoss → Våler er ca. 2 timer med bil — nær nok for effektiv logistikk.</p>
+  </section>
+
+  <!-- FOUR SEGMENTS OVERVIEW -->
+  <section>
+    <div class="section-label">NAMMOs forretningsenheter</div>
+    <h2>Segmentoversikt — CNC-relevans og prioritet</h2>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-number">1</div>
+        <h4>Large Caliber Systems</h4>
+        <p>155mm artilleriammunisjon, stridsvognsammunisjon, granatkasteammunisjon. Femdobler produksjonen. Dreiede og freste komponenter i store volumer — prosjektilkropper, tennerkapper, hylser.</p>
+        <div class="card-meta">Prioritet: HØYEST — størst CNC-volum, eksplosiv vekst</div>
+        <span class="file-link">→ 01_NAMMO_Large_Caliber.html</span>
+      </div>
+      <div class="card">
+        <div class="card-number">2</div>
+        <h4>Aerospace Propulsion</h4>
+        <p>Rakettmotorer for taktiske missiler (AMRAAM, ESSM, IRIS-T), romfartsfremdrift. Inconel, titanium, 5-akse. Høy verdi per del, strenge toleranser.</p>
+        <div class="card-meta">Prioritet: HØY — høyverdi, krevende materialer</div>
+        <span class="file-link">→ 02_NAMMO_Aerospace_Propulsion.html</span>
+      </div>
+      <div class="card">
+        <div class="card-number">3</div>
+        <h4>Small & Medium Caliber</h4>
+        <p>Raufoss Mk 211 (12.7mm), 20mm, 25mm, 30mm. Høyvolum produksjonslinjer. CNC for verktøy, spesialkomponenter, prototyper og tennere.</p>
+        <div class="card-meta">Prioritet: MEDIUM — mer forming/pressing enn CNC</div>
+        <span class="file-link">→ 03_NAMMO_Small_Medium_Caliber.html</span>
+      </div>
+      <div class="card">
+        <div class="card-number">4</div>
+        <h4>Missile Products</h4>
+        <p>Ny divisjon. Loitering munitions, missilintegrasjon, kamphodemontasje. Missilkropper, styringshus, finneassemblyer. Bygger opp leverandørkjede fra scratch.</p>
+        <div class="card-meta">Prioritet: STRATEGISK — ny divisjon, langsiktig gull</div>
+        <span class="file-link">→ 04_NAMMO_Missile_Products.html</span>
+      </div>
+    </div>
+
+    <p class="secondary"><strong>Merk:</strong> Commercial Products (jakt/sport-ammunisjon) er utelatt fra strategien — lav CNC-relevans og lav marging-profil for Aurelian.</p>
+  </section>
+
+  <!-- KEY CONTACTS -->
+  <section class="dark-panel">
+    <div class="section-label">Kontakter</div>
+    <h2>Identifiserte nøkkelpersoner — alle nivåer</h2>
+
+    <h3>Innkjøp & Supply Chain (Tier 1)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Tittel</th><th>Enhet</th><th>Prioritet</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Peter Lerche Raadal</strong></td><td>VP Procurement & Supply Chain</td><td>NAMMO Group</td><td style="color: var(--red); font-weight: 700;">★★★</td></tr>
+        <tr><td><strong>Per Olav Moen</strong></td><td>Procurement Director</td><td>NAMMO Raufoss</td><td style="color: var(--red); font-weight: 700;">★★★</td></tr>
+        <tr><td><strong>Ledig stilling</strong></td><td>Manager Technical Purchasing</td><td>Raufoss</td><td style="color: var(--red); font-weight: 700;">★★☆</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Produksjon & Operasjoner (Tier 2)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Tittel</th><th>Enhet</th><th>Relevans</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Quoc Bao Diep</strong></td><td>VP Large Caliber Systems</td><td>Large Caliber</td><td>Eier produksjonskapasitet for artilleri</td></tr>
+        <tr><td><strong>Jostein Moe</strong></td><td>SVP Operational Excellence</td><td>NAMMO Group</td><td>Overordnet produksjonsstrategi</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Strategisk & Business Development (Tier 3)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Tittel</th><th>Enhet</th><th>Relevans</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Frank Moller</strong></td><td>EVP Missile Products Division</td><td>Missile Products</td><td>Ny divisjon — bygger leverandørkjede</td></tr>
+        <tr><td><strong>Jens-Petter Dieseth</strong></td><td>SVP Business Development</td><td>NAMMO Group</td><td>Strategisk kapasitetsplanlegging</td></tr>
+        <tr><td><strong>Aksel Schjerpen</strong></td><td>Director BD</td><td>NAMMO Raufoss</td><td>Lokal forretningsutvikling</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Toppledelse (Tier 4 — referansepunkter)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Tittel</th><th>Rolle i kontekst</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Morten Brandtzæg</strong></td><td>President & CEO</td><td>Overordnet strategisk beslutning om leverandørkjede</td></tr>
+        <tr><td><strong>Vegard Sande</strong></td><td>EVP & CFO</td><td>Finansiell godkjenning av store kontrakter</td></tr>
+        <tr><td><strong>Christian Hedelin</strong></td><td>EVP Strategy & M&A</td><td>Strategisk retning, oppkjøp, partnerskap</td></tr>
+      </tbody>
+    </table>
+
+    <p style="color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 1rem;"><strong>Merk:</strong> Kvalitetskontakter (QA Director, Supplier QA) er ikke identifisert offentlig. Krever LinkedIn-søk med innlogget profil eller dialog med innkjøp. Dette er en prioritert oppgave i kontaktfasen.</p>
+  </section>
+
+  <!-- QUALIFICATION ROADMAP -->
+  <section>
+    <div class="section-label">Kvalifisering</div>
+    <h2>Leverandørkvalifisering — tidslinje NAMMO</h2>
+
+    <table class="timeline-table">
+      <thead><tr><th>Fase</th><th>Tidspunkt</th><th>Aktivitet</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Research</strong></td><td>Feb 2026</td><td>Kartlegge NAMMO-organisasjon, kontakter, CNC-behov per segment.</td><td style="color: var(--red); font-weight: 700;">FULLFØRT</td></tr>
+        <tr><td><strong>Første kontakt</strong></td><td>Mar 2026</td><td>LinkedIn-meldinger til Peter Lerche Raadal og Per Olav Moen. Kort intro + kapasitetsvinkel.</td><td style="color: var(--red); font-weight: 700;">NESTE STEG</td></tr>
+        <tr><td><strong>Leverandørdialog</strong></td><td>Mar–Apr 2026</td><td>Innledende samtaler med innkjøp. Kartlegge outsourcing-behov og spesifikasjoner.</td><td>Planlagt</td></tr>
+        <tr><td><strong>Tekniske møter</strong></td><td>Apr–Jun 2026</td><td>Besøk Raufoss. Presentasjon av CNC-kapabiliteter. Diskutere komponenttyper.</td><td>Planlagt</td></tr>
+        <tr><td><strong>Maskinkonfigurasjon</strong></td><td>Mai–Aug 2026</td><td>NAMMO påvirker CNC-cellekonfigurasjon. Vindu lukker Q3 2026.</td><td>Kritisk vindu</td></tr>
+        <tr><td><strong>NDA & tegninger</strong></td><td>Jun–Sep 2026</td><td>Formell NDA. Motta eksempeltegninger for prøveproduksjon.</td><td>Planlagt</td></tr>
+        <tr><td><strong>Pre-kvalifisering</strong></td><td>Q4 2026</td><td>Formell leverandørsøknad. Paper-based audit.</td><td>Mål</td></tr>
+        <tr><td><strong>FAI</strong></td><td>Q3–Q4 2027</td><td>First Article Inspection på pilot-deler ved produksjonsstart.</td><td>Mål</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>NAMMO vs. KDA — viktig forskjell:</strong> NAMMO har mer intern CNC-kapasitet enn KDA, men den interne kapasiteten er totalt sprengt pga. 5× produksjonsøkning. De outsourcer allerede. Aurelians pitch er: «Vi avlaster mekanisk avdeling og gir dere skalerbar kapasitet uten å ansette 100 CNC-operatører.»</p>
+    </div>
+  </section>
+
+  <!-- APPROACH PRINCIPLES -->
+  <section>
+    <div class="section-label">Tilnærming</div>
+    <h2>Fem nøkkelbudskap til NAMMO</h2>
+
+    <ul class="clean-list">
+      <li><strong>«Vi løser kapasitetsflaskehalsen»</strong> — NAMMO femdobler artilleri, men kan ikke femdoble mekanisk avdeling over natten. Aurelian tilbyr 25 CNC-maskiner, 140 000 spindeltimer — skalerbar kapasitet uten rekrutteringsrisiko.</li>
+      <li><strong>«Norsk produksjon, ingen leverandørkjederisiko»</strong> — Våler, Østfold. 100% norsk eierskap. Ingen utenlandsk kontroll. Politisk ukomplisert for et statlig eid selskap.</li>
+      <li><strong>«Autonom drift = forutsigbar levering»</strong> — 24/7 lights-out drift betyr at leveringstider ikke avhenger av å finne nattskift-operatører. Aurelian leverer konsistent.</li>
+      <li><strong>«Full digital sporbarhet»</strong> — Komplett digital tråd fra ordre til levering. Militær sporbarhet bygget inn fra dag 1 — ikke boltet på etterpå.</li>
+      <li><strong>«Dere kan påvirke maskinkonfigurasjonen»</strong> — Tidsvindu som lukker seg Q3 2026. Ingen eksisterende leverandør kan tilby dette.</li>
+    </ul>
+  </section>
+
+  <!-- COMPETITIVE POSITION VS EXISTING SUPPLIERS -->
+  <section>
+    <div class="section-label">Konkurranseposisjon</div>
+    <h2>Aurelian vs. NAMMOs nåværende alternativer</h2>
+
+    <table>
+      <thead><tr><th>Alternativ</th><th>Styrker</th><th>Svakheter</th><th>Aurelians fordel</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Intern mekanisk avd. (Raufoss)</strong></td>
+          <td>Full kontroll, nær produksjon, eksisterende kompetanse</td>
+          <td>Kapasitetssprengt. Rekruttering vanskelig. Ikke skalerbar.</td>
+          <td>Aurelian avlaster uten at NAMMO må investere i egne maskiner/ansatte</td>
+        </tr>
+        <tr>
+          <td><strong>Tradisjonelle norske verksteder</strong></td>
+          <td>Kjente, etablerte relasjoner</td>
+          <td>Typisk 20–45% utnyttelse. Begrenset kapasitet. Lite digital sporbarhet.</td>
+          <td>25 maskiner, 24/7 drift, komplett digital tråd. Langt større kapasitet.</td>
+        </tr>
+        <tr>
+          <td><strong>Europeiske underleverandører</strong></td>
+          <td>Ledig kapasitet, noen ganger lavere pris</td>
+          <td>Leverandørkjederisiko. Lengre ledetid. Geopolitisk usikkerhet.</td>
+          <td>Norsk produksjon. Samme juridiske ramme. Beredskapsgodkjent.</td>
+        </tr>
+        <tr>
+          <td><strong>Bygge mer intern kapasitet</strong></td>
+          <td>Full kontroll</td>
+          <td>CAPEX 50–200 MNOK. 18–24 mnd byggetid. Utnyttelsesrisiko.</td>
+          <td>Null CAPEX for NAMMO. OPEX-modell. Produksjonsklar Q3 2027.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SYNERGY WITH KDA -->
+  <section>
+    <div class="section-label">Synergi</div>
+    <h2>NAMMO + KDA — dobbelt ankerfeste</h2>
+
+    <p>NAMMO og KDA er strategiske partnere — NAMMO produserer rakettmotorer som brukes i KDAs NSM/JSM-missiler og AMRAAM. Ved å bli kvalifisert leverandør for begge selskapene oppnår Aurelian:</p>
+
+    <ul class="clean-list">
+      <li><strong>Kryssreferanse:</strong> Leverandørgodkjenning hos den ene styrker søknaden hos den andre.</li>
+      <li><strong>Volum-sikkerhet:</strong> To ankerkunder reduserer utnyttelsesrisiko drastisk.</li>
+      <li><strong>Komplementære komponenter:</strong> KDA-deler (missilkropper) og NAMMO-deler (motorhus) kan kjøres på samme maskinpark.</li>
+      <li><strong>Forhandlingsposisjon:</strong> «Vi leverer allerede til KDA/NAMMO» er den sterkeste referansen i norsk forsvarsindustri.</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Strategisk mål:</strong> Land begge kundene innen Q1 2028. Sammen representerer KDA + NAMMO potensielt 18 500–65 000 CNC-timer/år — nok til å fylle Aurelians Phase 1 og utløse Phase 2 ekspansjon.</p>
+    </div>
+  </section>
+
+  <!-- FILE INDEX -->
+  <section>
+    <div class="section-label">Dokumenter</div>
+    <h2>Segmentstrategier — filindeks</h2>
+
+    <table>
+      <thead><tr><th>Fil</th><th>Segment</th><th>Innhold</th></tr></thead>
+      <tbody>
+        <tr><td><strong>00_NAMMO_Strategy_Overview.html</strong></td><td>Oversikt</td><td>Dette dokumentet — samlet strategi, kontakter, kvalifisering</td></tr>
+        <tr><td><strong>01_NAMMO_Large_Caliber.html</strong></td><td>Large Caliber Systems</td><td>155mm artilleri, 5× produksjonsøkning, dreiing/fresing</td></tr>
+        <tr><td><strong>02_NAMMO_Aerospace_Propulsion.html</strong></td><td>Aerospace Propulsion</td><td>Rakettmotorer, Inconel/titanium, 5-akse</td></tr>
+        <tr><td><strong>03_NAMMO_Small_Medium_Caliber.html</strong></td><td>Small & Medium Caliber</td><td>Raufoss Mk 211, verktøy, spesialkomponenter</td></tr>
+        <tr><td><strong>04_NAMMO_Missile_Products.html</strong></td><td>Missile Products</td><td>Ny divisjon, loitering munitions, missilkropper</td></tr>
+        <tr><td><strong>05_NAMMO_Contact_Log.html</strong></td><td>Kontaktlogg</td><td>Aktivitetshistorikk og kontaktstatus</td></tr>
+        <tr><td><strong>06_NAMMO_Sales_Report.html</strong></td><td>Salgsrapport</td><td>Ukentlig rapportering, pipeline, estimater</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | NAMMO Go-to-Market Strategi V1.0 | Februar 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

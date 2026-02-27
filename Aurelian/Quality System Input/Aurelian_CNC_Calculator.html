@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CNC Capacity Calculator — Aurelian Manufacturing</title>
+<style>
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --red: #F50537;
+    --dark-red: #D0042E;
+    --black: #000000;
+    --text-primary: #2B2B2B;
+    --text-secondary: #6B6B6B;
+    --white: #FFFFFF;
+    --panel: #F5F5F5;
+    --divider: #D3D3D3;
+    --chart-axis: #888888;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    color: var(--text-primary);
+    background: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--black);
+    padding: 28px 40px 24px;
+    text-align: center;
+  }
+
+  .header-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+
+  .header-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+  }
+
+  .red-bar {
+    height: 3px;
+    background: var(--red);
+    width: 100%;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    flex: 1;
+    max-width: 1120px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 40px 24px;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  /* ── SUMMARY METRICS ── */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .metric-card-big {
+    background: var(--panel);
+    padding: 24px 20px 20px;
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  .metric-card-big .metric-value-badge {
+    display: inline-block;
+    background: var(--red);
+    color: var(--white);
+    font-size: 28px;
+    font-weight: 700;
+    padding: 6px 20px;
+    border-radius: 4px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .metric-card-big .metric-value-plain {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .metric-card-big .metric-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .metric-card-big .metric-sublabel {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* ── SCALING TABLE ── */
+  .table-section {
+    margin-bottom: 32px;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .data-table thead th {
+    background: var(--text-primary);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 12px 16px;
+    text-align: left;
+    border: none;
+  }
+
+  .data-table thead th.num {
+    text-align: right;
+  }
+
+  .data-table thead th.center {
+    text-align: center;
+  }
+
+  .data-table tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--divider);
+    color: var(--text-primary);
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  .data-table tbody td.num {
+    text-align: right;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .data-table tbody td.center {
+    text-align: center;
+  }
+
+  .data-table tbody tr:nth-child(even) {
+    background: var(--panel);
+  }
+
+  .data-table tbody tr:nth-child(odd) {
+    background: var(--white);
+  }
+
+  .status-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--text-primary);
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── UTILIZATION INPUT IN TABLE ── */
+  .util-input-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .util-input-wrap input[type="range"] {
+    width: 100px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--divider);
+    outline: none;
+    cursor: pointer;
+  }
+
+  .util-input-wrap input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--red);
+    cursor: pointer;
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 1px var(--divider);
+  }
+
+  .util-input-wrap input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--red);
+    cursor: pointer;
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 1px var(--divider);
+  }
+
+  .util-input-wrap input[type="range"]::-moz-range-progress {
+    background: var(--red);
+    height: 5px;
+    border-radius: 3px;
+  }
+
+  .util-input-wrap input[type="number"] {
+    width: 52px;
+    height: 32px;
+    border: 1px solid var(--divider);
+    border-radius: 3px;
+    text-align: center;
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    outline: none;
+    background: var(--white);
+    -moz-appearance: textfield;
+  }
+
+  .util-input-wrap input[type="number"]::-webkit-inner-spin-button,
+  .util-input-wrap input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .util-input-wrap input[type="number"]:focus {
+    border-color: var(--red);
+  }
+
+  .util-pct {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-secondary);
+  }
+
+  /* ── SET ALL CONTROL ── */
+  .set-all-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    background: var(--panel);
+    border-radius: 4px;
+    border-left: 3px solid var(--red);
+  }
+
+  .set-all-bar .set-all-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .set-all-bar input[type="range"] {
+    flex: 1;
+    max-width: 300px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--divider);
+    outline: none;
+    cursor: pointer;
+  }
+
+  .set-all-bar input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--red);
+    cursor: pointer;
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 1px var(--divider);
+  }
+
+  .set-all-bar input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--red);
+    cursor: pointer;
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 1px var(--divider);
+  }
+
+  .set-all-bar input[type="range"]::-moz-range-progress {
+    background: var(--red);
+    height: 5px;
+    border-radius: 3px;
+  }
+
+  .set-all-bar input[type="number"] {
+    width: 56px;
+    height: 36px;
+    border: 1px solid var(--divider);
+    border-radius: 3px;
+    text-align: center;
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    outline: none;
+    background: var(--white);
+    -moz-appearance: textfield;
+  }
+
+  .set-all-bar input[type="number"]::-webkit-inner-spin-button,
+  .set-all-bar input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .set-all-bar input[type="number"]:focus {
+    border-color: var(--red);
+  }
+
+  .set-all-pct {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-secondary);
+  }
+
+  .set-all-hint {
+    font-size: 11px;
+    color: var(--chart-axis);
+    margin-left: 4px;
+  }
+
+  /* ── TOTALS ROW ── */
+  .data-table tbody tr.totals-row td {
+    border-top: 2px solid var(--text-primary);
+    border-bottom: none;
+    font-weight: 700;
+    font-size: 15px;
+    background: var(--white);
+    padding-top: 14px;
+  }
+
+  /* ── ASSUMPTIONS ── */
+  .assumptions {
+    background: var(--panel);
+    border-left: 3px solid var(--red);
+    padding: 16px 20px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--divider);
+    padding: 20px 40px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .metrics-row {
+      grid-template-columns: 1fr;
+    }
+    .main {
+      padding: 24px 20px 16px;
+    }
+    .header {
+      padding: 20px 20px 16px;
+    }
+    .footer {
+      padding: 16px 20px;
+    }
+    .util-input-wrap input[type="range"] {
+      width: 70px;
+    }
+    .set-all-bar {
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .header-title {
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+    .header-subtitle {
+      font-size: 13px;
+    }
+    .metric-card-big .metric-value-badge {
+      font-size: 22px;
+      padding: 5px 14px;
+    }
+    .metric-card-big .metric-value-plain {
+      font-size: 22px;
+    }
+    .data-table {
+      font-size: 12px;
+    }
+    .data-table thead th,
+    .data-table tbody td {
+      padding: 8px 10px;
+    }
+    .util-input-wrap input[type="range"] {
+      width: 50px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-title">AURELIAN MANUFACTURING</div>
+  <div class="header-subtitle">CNC Capacity Calculator</div>
+</div>
+<div class="red-bar"></div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- SUMMARY METRICS -->
+  <div class="section-label">Capacity Summary</div>
+  <div class="metrics-row">
+    <div class="metric-card-big">
+      <div class="metric-value-badge" id="totalHours">0</div>
+      <div class="metric-label">Total CNC Hours</div>
+      <div class="metric-sublabel">Across all periods (weighted)</div>
+    </div>
+    <div class="metric-card-big">
+      <div class="metric-value-plain" id="totalTheoretical">0</div>
+      <div class="metric-label">Theoretical Maximum</div>
+      <div class="metric-sublabel">At 100% utilization</div>
+    </div>
+    <div class="metric-card-big">
+      <div class="metric-value-plain" id="weightedUtil">0%</div>
+      <div class="metric-label">Weighted Avg Utilization</div>
+      <div class="metric-sublabel">Hours-weighted across periods</div>
+    </div>
+  </div>
+
+  <!-- SCALING TABLE WITH PER-PERIOD UTILIZATION -->
+  <div class="section-label">Scaling Timeline &mdash; Set Utilization per Period</div>
+
+  <div class="set-all-bar">
+    <span class="set-all-label">Set all to:</span>
+    <input type="range" id="setAllSlider" min="5" max="100" value="65" step="1">
+    <input type="number" id="setAllNumber" min="5" max="100" value="65" step="1">
+    <span class="set-all-pct">%</span>
+    <span class="set-all-hint">(overrides all rows)</span>
+  </div>
+
+  <div class="table-section">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Period</th>
+          <th class="center">CNC</th>
+          <th class="center">Utilization</th>
+          <th class="num">Capacity Hours</th>
+          <th class="num">Theoretical Max</th>
+          <th class="num">Hours / CNC</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="scalingTableBody">
+        <!-- Populated by JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ASSUMPTIONS -->
+  <div class="assumptions">
+    Based on 8,760 theoretical hours/CNC/year (24h &times; 365d) &bull; H2 2027 uses 153 operational days (Aug 1 &ndash; Dec 31) &bull; Adjust utilization per period to model realistic ramp-up
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  CONFIDENTIAL &bull; aurelian.no &bull; V&aring;ler, Norway
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // Constants
+  var HOURS_PER_YEAR = 8760;
+
+  // Timeline with default utilization from master doc (REV8 Section 2.2)
+  var TIMELINE = [
+    { period: 'H2 2027', cnc: 5,  days: 153, status: 'Production starts', defaultUtil: 20 },
+    { period: '2028',    cnc: 10, days: 365, status: 'Serie A T1',        defaultUtil: 38 },
+    { period: '2029',    cnc: 15, days: 365, status: 'Tranche 2',         defaultUtil: 43 },
+    { period: '2030',    cnc: 20, days: 365, status: 'Full base',         defaultUtil: 48 },
+    { period: '2031',    cnc: 20, days: 365, status: 'Steady state',      defaultUtil: 53 },
+    { period: '2032',    cnc: 20, days: 365, status: 'Mature ops',        defaultUtil: 58 },
+    { period: '2033+',   cnc: 25, days: 365, status: 'Expansion',         defaultUtil: 65 }
+  ];
+
+  // Per-row utilization values (mutable)
+  var utilValues = TIMELINE.map(function(row) { return row.defaultUtil; });
+
+  // DOM refs
+  var totalHoursEl = document.getElementById('totalHours');
+  var totalTheoreticalEl = document.getElementById('totalTheoretical');
+  var weightedUtilEl = document.getElementById('weightedUtil');
+  var scalingTableBody = document.getElementById('scalingTableBody');
+  var setAllSlider = document.getElementById('setAllSlider');
+  var setAllNumber = document.getElementById('setAllNumber');
+
+  function fmt(n) {
+    return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function updateSliderFill(slider) {
+    var min = parseFloat(slider.min);
+    var max = parseFloat(slider.max);
+    var val = parseFloat(slider.value);
+    var pct = ((val - min) / (max - min)) * 100;
+    slider.style.background = 'linear-gradient(to right, #F50537 0%, #F50537 ' + pct + '%, #D3D3D3 ' + pct + '%, #D3D3D3 100%)';
+  }
+
+  function render() {
+    var grandTotalHours = 0;
+    var grandTotalTheoretical = 0;
+
+    var html = '';
+    for (var i = 0; i < TIMELINE.length; i++) {
+      var row = TIMELINE[i];
+      var util = utilValues[i];
+      var utilFrac = util / 100;
+      var theoreticalHours = row.cnc * row.days * 24;
+      var capacityHours = theoreticalHours * utilFrac;
+      var hoursPerCnc = row.days * 24 * utilFrac;
+
+      grandTotalHours += capacityHours;
+      grandTotalTheoretical += theoreticalHours;
+
+      html += '<tr>';
+      html += '<td><strong>' + row.period + '</strong></td>';
+      html += '<td class="center">' + row.cnc + '</td>';
+      html += '<td class="center">';
+      html += '<div class="util-input-wrap">';
+      html += '<input type="range" min="5" max="100" step="1" value="' + util + '" data-row="' + i + '" class="row-slider">';
+      html += '<input type="number" min="5" max="100" step="1" value="' + util + '" data-row="' + i + '" class="row-number">';
+      html += '<span class="util-pct">%</span>';
+      html += '</div>';
+      html += '</td>';
+      html += '<td class="num">' + fmt(capacityHours) + '</td>';
+      html += '<td class="num">' + fmt(theoreticalHours) + '</td>';
+      html += '<td class="num">' + fmt(hoursPerCnc) + '</td>';
+      html += '<td><span class="status-badge">' + row.status + '</span></td>';
+      html += '</tr>';
+    }
+
+    // Totals row
+    var weightedUtil = grandTotalTheoretical > 0 ? (grandTotalHours / grandTotalTheoretical * 100) : 0;
+    html += '<tr class="totals-row">';
+    html += '<td>TOTAL</td>';
+    html += '<td class="center">&mdash;</td>';
+    html += '<td class="center" style="font-size:13px;color:#6B6B6B;">' + Math.round(weightedUtil) + '% weighted avg</td>';
+    html += '<td class="num">' + fmt(grandTotalHours) + '</td>';
+    html += '<td class="num">' + fmt(grandTotalTheoretical) + '</td>';
+    html += '<td class="num">&mdash;</td>';
+    html += '<td></td>';
+    html += '</tr>';
+
+    scalingTableBody.innerHTML = html;
+
+    // Update summary cards
+    totalHoursEl.textContent = fmt(grandTotalHours);
+    totalTheoreticalEl.textContent = fmt(grandTotalTheoretical);
+    weightedUtilEl.textContent = Math.round(weightedUtil) + '%';
+
+    // Attach event listeners to new slider/number inputs
+    attachRowListeners();
+  }
+
+  function attachRowListeners() {
+    var sliders = document.querySelectorAll('.row-slider');
+    var numbers = document.querySelectorAll('.row-number');
+
+    sliders.forEach(function(slider) {
+      updateSliderFill(slider);
+      slider.addEventListener('input', function() {
+        var idx = parseInt(this.getAttribute('data-row'), 10);
+        var val = parseInt(this.value, 10);
+        utilValues[idx] = val;
+        render();
+      });
+    });
+
+    numbers.forEach(function(numInput) {
+      numInput.addEventListener('input', function() {
+        var idx = parseInt(this.getAttribute('data-row'), 10);
+        var val = parseInt(this.value, 10);
+        if (isNaN(val)) return;
+        if (val < 5) val = 5;
+        if (val > 100) val = 100;
+        utilValues[idx] = val;
+        render();
+      });
+      numInput.addEventListener('change', function() {
+        var idx = parseInt(this.getAttribute('data-row'), 10);
+        var val = parseInt(this.value, 10);
+        if (isNaN(val) || val < 5) val = 5;
+        if (val > 100) val = 100;
+        this.value = val;
+        utilValues[idx] = val;
+        render();
+      });
+    });
+  }
+
+  // "Set all" controls
+  function setAll(val) {
+    if (val < 5) val = 5;
+    if (val > 100) val = 100;
+    for (var i = 0; i < utilValues.length; i++) {
+      utilValues[i] = val;
+    }
+    setAllSlider.value = val;
+    setAllNumber.value = val;
+    updateSliderFill(setAllSlider);
+    render();
+  }
+
+  setAllSlider.addEventListener('input', function() {
+    setAllNumber.value = this.value;
+    updateSliderFill(setAllSlider);
+    setAll(parseInt(this.value, 10));
+  });
+
+  setAllNumber.addEventListener('input', function() {
+    var v = parseInt(this.value, 10);
+    if (isNaN(v)) return;
+    setAllSlider.value = v;
+    setAll(v);
+  });
+
+  setAllNumber.addEventListener('change', function() {
+    var v = parseInt(this.value, 10);
+    if (isNaN(v) || v < 5) v = 5;
+    if (v > 100) v = 100;
+    this.value = v;
+    setAllSlider.value = v;
+    setAll(v);
+  });
+
+  // Initial render
+  updateSliderFill(setAllSlider);
+  render();
+})();
+</script>
+</body>
+</html>

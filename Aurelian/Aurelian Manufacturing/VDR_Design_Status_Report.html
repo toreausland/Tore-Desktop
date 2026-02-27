@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — VDR Design Compliance Status Report</title>
+<style>
+  :root {
+    --red: #F50537;
+    --near-black: #2B2B2B;
+    --secondary: #6B6B6B;
+    --panel: #F5F5F5;
+    --white: #FFFFFF;
+    --green: #2E7D32;
+    --amber: #E65100;
+    --red-score: #C62828;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    color: var(--near-black);
+    background: var(--white);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: #000;
+    color: var(--white);
+    padding: 40px 48px 32px;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--red);
+    margin-top: 20px;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  header .subtitle {
+    font-size: 15px;
+    color: #999;
+    font-weight: 400;
+  }
+  header .date {
+    font-size: 13px;
+    color: #777;
+    margin-top: 8px;
+  }
+  header .company {
+    font-size: 13px;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 48px 80px;
+  }
+
+  /* SECTION HEADINGS */
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--near-black);
+    margin: 48px 0 8px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--red);
+    display: inline-block;
+  }
+  h2 + p.section-desc {
+    color: var(--secondary);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--near-black);
+    margin: 32px 0 12px;
+  }
+
+  /* SUMMARY CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 32px 0 48px;
+  }
+  .card {
+    background: var(--panel);
+    border-radius: 6px;
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 4px solid var(--near-black);
+    transition: transform 0.15s;
+  }
+  .card:hover { transform: translateY(-2px); }
+  .card .number {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .card .label {
+    font-size: 13px;
+    color: var(--secondary);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .card .sublabel {
+    font-size: 12px;
+    color: #999;
+    margin-top: 2px;
+  }
+  .card.green { border-top-color: var(--green); }
+  .card.green .number { color: var(--green); }
+  .card.amber { border-top-color: var(--amber); }
+  .card.amber .number { color: var(--amber); }
+  .card.red { border-top-color: var(--red-score); }
+  .card.red .number { color: var(--red-score); }
+  .card.dark { border-top-color: var(--red); }
+  .card.dark .number { color: var(--red); }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 32px;
+    font-size: 14px;
+  }
+  thead th {
+    background: var(--near-black);
+    color: var(--white);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+  }
+  thead th:first-child { border-radius: 4px 0 0 0; }
+  thead th:last-child { border-radius: 0 4px 0 0; }
+  tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #E0E0E0;
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: var(--panel); }
+  tbody tr:hover { background: #EDEDED; }
+
+  /* SCORE BADGES */
+  .badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    min-width: 48px;
+    text-align: center;
+  }
+  .badge.green { background: var(--green); }
+  .badge.amber { background: var(--amber); }
+  .badge.red { background: var(--red-score); }
+  .badge.na { background: #9E9E9E; }
+
+  /* STATUS TAGS */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tag.new { background: #E8F5E9; color: var(--green); }
+  .tag.partial { background: #FFF3E0; color: var(--amber); }
+  .tag.old { background: #FFEBEE; color: var(--red-score); }
+  .tag.perfect { background: var(--green); color: var(--white); }
+  .tag.missing { background: var(--red-score); color: var(--white); }
+  .tag.exists { background: #E8F5E9; color: var(--green); }
+  .tag.draft { background: #FFF3E0; color: var(--amber); }
+  .tag.done { background: var(--green); color: var(--white); }
+  .tag.fixed { background: #1565C0; color: var(--white); }
+  .tag.user { background: #7B1FA2; color: var(--white); }
+
+  /* TIER BLOCKS */
+  .tier {
+    background: var(--panel);
+    border-radius: 6px;
+    padding: 24px;
+    margin: 16px 0;
+    border-left: 4px solid var(--near-black);
+  }
+  .tier.t1 { border-left-color: var(--green); }
+  .tier.t2 { border-left-color: var(--green); }
+  .tier.t3 { border-left-color: var(--green); }
+  .tier.t4 { border-left-color: var(--green); }
+  .tier.t5 { border-left-color: var(--green); }
+  .tier.t6 { border-left-color: var(--green); }
+  .tier h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .tier ol {
+    margin-left: 20px;
+  }
+  .tier li {
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  .tier li .note {
+    color: var(--secondary);
+    font-size: 12px;
+    font-style: italic;
+  }
+  .tier li .done-note {
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* ISSUE CARDS */
+  .issue {
+    background: #FFF8E1;
+    border-left: 4px solid var(--amber);
+    padding: 16px 20px;
+    margin: 10px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .issue.resolved {
+    background: #E8F5E9;
+    border-left-color: var(--green);
+  }
+  .issue .file {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .issue .desc {
+    font-size: 13px;
+    color: var(--secondary);
+    margin-top: 4px;
+  }
+  .issue .resolution {
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 600;
+    margin-top: 6px;
+  }
+  .issue .method {
+    font-size: 12px;
+    color: #1565C0;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* RECOMMENDATION BOX */
+  .reco-box {
+    background: #000;
+    color: var(--white);
+    border-radius: 6px;
+    padding: 32px;
+    margin: 32px 0;
+  }
+  .reco-box h3 {
+    color: var(--red);
+    margin-top: 0;
+    font-size: 18px;
+  }
+  .reco-box p {
+    color: #CCC;
+    font-size: 14px;
+    margin: 8px 0;
+  }
+  .reco-box .highlight {
+    color: var(--white);
+    font-weight: 600;
+  }
+  .reco-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  .reco-table th {
+    background: var(--near-black);
+    color: var(--white);
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .reco-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #444;
+    color: #CCC;
+    font-size: 13px;
+  }
+  .reco-table tbody tr:nth-child(even) { background: #1A1A1A; }
+  .reco-table .check { color: var(--green); font-weight: 700; }
+  .reco-table .cross { color: var(--red); font-weight: 700; }
+
+  /* PROGRESS BAR */
+  .progress-wrap {
+    margin: 24px 0 40px;
+  }
+  .progress-bar {
+    background: #E0E0E0;
+    border-radius: 8px;
+    height: 28px;
+    overflow: hidden;
+    display: flex;
+  }
+  .progress-bar .seg {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--white);
+    transition: width 0.4s;
+  }
+  .progress-bar .seg.green { background: var(--green); }
+  .progress-bar .seg.amber { background: var(--amber); }
+  .progress-bar .seg.red { background: var(--red-score); }
+  .progress-legend {
+    display: flex;
+    gap: 24px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--secondary);
+  }
+  .progress-legend span::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .progress-legend .lg::before { background: var(--green); }
+  .progress-legend .la::before { background: var(--amber); }
+  .progress-legend .lr::before { background: var(--red-score); }
+
+  /* CHANGELOG */
+  .changelog {
+    background: var(--panel);
+    border-radius: 6px;
+    padding: 24px;
+    margin: 24px 0;
+    border-left: 4px solid var(--red);
+  }
+  .changelog h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--red);
+  }
+  .changelog ul {
+    margin-left: 20px;
+    font-size: 14px;
+  }
+  .changelog li {
+    margin-bottom: 6px;
+  }
+  .changelog .date-label {
+    font-weight: 700;
+    color: var(--near-black);
+  }
+
+  /* LESSON LEARNED BOX */
+  .lesson-box {
+    background: #FFF8E1;
+    border-left: 4px solid var(--amber);
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .lesson-box h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--amber);
+  }
+  .lesson-box ol {
+    margin-left: 20px;
+    font-size: 13px;
+  }
+  .lesson-box li {
+    margin-bottom: 4px;
+  }
+
+  /* REMAINING ITEMS CALLOUT */
+  .remaining-callout {
+    background: linear-gradient(135deg, #FFF8E1 0%, #FFF3E0 100%);
+    border: 2px solid var(--amber);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 32px 0;
+  }
+  .remaining-callout h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 12px;
+  }
+  .remaining-callout ul {
+    margin-left: 20px;
+    font-size: 14px;
+  }
+  .remaining-callout li {
+    margin-bottom: 6px;
+  }
+  .remaining-callout .priority {
+    font-weight: 700;
+    color: var(--near-black);
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 32px 48px;
+    border-top: 1px solid #E0E0E0;
+    color: #999;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  footer .conf {
+    color: var(--red);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+    main { padding: 24px; }
+    header { padding: 24px; }
+    table { font-size: 12px; }
+    thead th, tbody td { padding: 8px 10px; }
+  }
+  @media (max-width: 500px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header>
+  <div class="company">Aurelian Manufacturing AS</div>
+  <h1>VDR Design Compliance Status Report</h1>
+  <div class="subtitle">Design Manual v2.0 Compliance Audit &mdash; All .docx Files in Virtual Data Room</div>
+  <div class="date">17 February 2026 &mdash; v7.0 &mdash; 36/36 .docx at compliance &mdash; Master REV8 &mdash; 4-founder cap table</div>
+</header>
+
+<!-- ==================== MAIN ==================== -->
+<main>
+
+<!-- ===== CHANGELOG ===== -->
+<div class="changelog">
+  <h4>Change Log</h4>
+  <ul>
+    <li><span class="date-label">15 Feb 2026 (v1.0):</span> Initial file-by-file inspection &mdash; 29 files scored.</li>
+    <li><span class="date-label">15 Feb 2026 (v2.0):</span> Tier 2 completed (3 files fixed). Tier 3 completed (5 files rebuilt). <strong>17 files at full compliance.</strong></li>
+    <li><span class="date-label">15 Feb 2026 (v3.0):</span> Tier 1 completed (Executive Summary + Investment Teaser redesigned). Tier 4 completed (10 files &mdash; XML-level fixes for colors, fonts, banned patterns). User revised &ldquo;The Opportunity&rdquo; sections. Executive Summary renamed (DRAFT prefix removed). Investment Teaser synced to 07_Presentations. <strong>27 of 28 .docx files now at full compliance.</strong> Only the master document (excluded from scope) remains unmodified.</li>
+    <li><span class="date-label">16 Feb 2026 (v4.0):</span> Master document upgraded to REV7 with full Design Manual v2.0 compliance (9/9) &mdash; complete rebuild with correct colors, dark headers, alternating rows, horizontal-only borders, Calibri throughout, compliant header/footer. Executive Summary content flags resolved (P1: Pre-Seed&rarr;Seed, P36: site size corrected, P40-42: round details updated to Seed). Investor Pitch Deck V4 built (14 slides, 17/17 financial checkpoints verified, zero red-text violations). <strong>28 of 28 .docx files at full compliance. 100% design compliance achieved.</strong></li>
+    <li><span class="date-label">16 Feb 2026 (v5.0):</span> <strong>8 new VDR documents created</strong> as .md source files: Company Fact Sheet (VDR 00.03), Henrik Str&oslash;m CV (VDR 06.01), Advisor Bios &amp; Relevance (VDR 06.03), Employment Agreement Template (VDR 05.02), Advisory Agreement Template (VDR 05.02), MAZAK/Ravema LOI (VDR 04.02), Customer LOI Template (VDR 03.03), NDA &amp; Data Room Access (VDR 08.05). User revised Customer LOI (added additive manufacturing, supplier quality, pre-qualification requirements) and Henrik CV (Board date 2024&rarr;2026). Complete Cowork instruction prepared for .docx conversion with Design Manual v2.0 styling. <strong>Seed readiness updated: ~75%.</strong></li>
+    <li><span class="date-label">17 Feb 2026 (v7.0):</span> <strong>Master document upgraded to REV8</strong> (4-founder cap table: Fredrik Vangsal / Roadcode AS added as Co-Founder, 5.00%). Andr&eacute; 53.125%, Tore 31.875%, Henrik 10.00%, Fredrik 5.00% founding. <strong>24+ files updated across entire VDR</strong> in 7 phases: master data (REV8 + 2 Excel files), legal &amp; corporate (4 files), financial (2 files), investor (2 files), team (3 files), DD (1 file), configuration (MEMORY.md, 7 skills, project instructions, SessionStart hook). Both pitch decks Slide 11 rebuilt with 4-founder layout. Red thread verification: 94 files scanned, 0 active issues. Skills registered to <code>.claude/skills/</code> (13 skills). Shareholders Agreement share counts updated (531,250 / 318,750 / 100,000 / 50,000). All backups as <code>_BACKUP_PRE_REV8</code>.</li>
+    <li><span class="date-label">16 Feb 2026 (v6.0):</span> <strong>All 8 Tier 7 documents converted to .docx</strong> with full Design Manual v2.0 styling. Transferred into VDR folder structure. <strong>36 of 36 .docx files now at full 9/9 compliance. 100% design compliance across entire VDR.</strong></li>
+  </ul>
+</div>
+
+
+<!-- ===== SECTION 1: SUMMARY ===== -->
+<h2>1. Summary</h2>
+<p class="section-desc">Design Manual v2.0 compliance across all VDR documents. 36 .docx files at full 9/9 compliance (Tier 1&ndash;8 complete). Master document REV8 with 4-founder cap table (Fredrik Vangsal / Roadcode AS). 24+ files updated for co-founder integration. Red thread verified clean (94 files scanned). PreSeed readiness 100% (closed). Seed readiness ~75%.</p>
+
+<!-- Progress Bar -->
+<div class="progress-wrap">
+  <div class="progress-bar">
+    <div class="seg green" style="width:100%;">40 files compliant &mdash; 36 .docx (9/9) + 2 .xlsx + 2 .pptx &mdash; REV8 verified</div>
+  </div>
+  <div class="progress-legend">
+    <span class="lg">36 .docx at 9/9 + 2 .xlsx at REV8 + 2 .pptx at REV8 = 40 compliant files. Plus 12 PDFs + 1 .protonsheet tracked (not design-scored).</span>
+  </div>
+</div>
+
+<!-- Cards — Design Compliance -->
+<div class="cards">
+  <div class="card green">
+    <div class="number">40</div>
+    <div class="label">Files Compliant</div>
+    <div class="sublabel">36 .docx (9/9) + 2 .xlsx (REV8) + 2 .pptx (REV8). Plus 12 PDFs &amp; 1 .protonsheet tracked.</div>
+  </div>
+  <div class="card green">
+    <div class="number">100%</div>
+    <div class="label">Design Compliance</div>
+    <div class="sublabel">All Tiers 1&ndash;8 complete</div>
+  </div>
+  <div class="card green">
+    <div class="number">9/9</div>
+    <div class="label">Master Doc REV8</div>
+    <div class="sublabel">4-founder cap table &mdash; Design Manual v2.0</div>
+  </div>
+  <div class="card green">
+    <div class="number">2x V4</div>
+    <div class="label">Pitch Decks</div>
+    <div class="sublabel">PreSeed + Seed &mdash; 14 slides &mdash; 4-founder Slide 11</div>
+  </div>
+</div>
+
+<!-- Cards — Round Readiness -->
+<h3 style="margin-top:8px;">Funding Round Readiness</h3>
+<div class="cards" style="grid-template-columns: repeat(2, 1fr); margin-top:16px;">
+  <div class="card green" style="border-top-width:6px;">
+    <div class="number">100%</div>
+    <div class="label">PreSeed Ready</div>
+    <div class="sublabel">22 / 22 items &mdash; all categories complete</div>
+    <div style="margin-top:12px;text-align:left;font-size:12px;color:var(--secondary);line-height:1.8;">
+      <div>&check; Corporate Structure <span style="float:right;color:var(--green);font-weight:700;">4/4</span></div>
+      <div>&check; Team <span style="float:right;color:var(--green);font-weight:700;">4/4</span></div>
+      <div>&check; Market &amp; Commercial <span style="float:right;color:var(--green);font-weight:700;">5/5</span></div>
+      <div>&check; Financial <span style="float:right;color:var(--green);font-weight:700;">5/5</span></div>
+      <div>&check; Technology &amp; Operations <span style="float:right;color:var(--green);font-weight:700;">4/4</span></div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:var(--secondary);">5 MNOK equity &mdash; 25 MNOK pre-money &mdash; <strong style="color:var(--green);">Closed</strong></div>
+  </div>
+  <div class="card amber" style="border-top-width:6px;">
+    <div class="number">~75%</div>
+    <div class="label">Seed Ready</div>
+    <div class="sublabel">60 have / 20 need</div>
+    <div style="margin-top:12px;text-align:left;font-size:12px;color:var(--secondary);line-height:1.8;">
+      <div>&check; Executive Summary <span style="float:right;color:var(--green);font-weight:700;">100%</span></div>
+      <div>&check; Financial <span style="float:right;color:var(--green);font-weight:700;">86%</span></div>
+      <div>&check; Commercial &amp; Market <span style="float:right;color:var(--green);font-weight:700;">86%</span></div>
+      <div>&check; Team <span style="float:right;color:var(--green);font-weight:700;">80%</span></div>
+      <div>&check; Corporate &amp; Governance <span style="float:right;color:var(--green);font-weight:700;">73%</span></div>
+      <div>&check; Technical &amp; Operations <span style="float:right;color:var(--green);font-weight:700;">71%</span></div>
+      <div>&#9679; Presentations <span style="float:right;color:var(--amber);font-weight:700;">50%</span></div>
+      <div>&#9679; Legal &amp; IP <span style="float:right;color:var(--amber);font-weight:700;">38%</span></div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:var(--secondary);">51.3 MNOK equity &mdash; 130 MNOK pre-money &mdash; <strong style="color:var(--amber);">Active</strong></div>
+  </div>
+</div>
+
+
+<!-- ===== SECTION 2: DETAILED RESULTS ===== -->
+<h2>2. Detailed File-by-File Results</h2>
+<p class="section-desc">Every .docx file in the VDR scored against 9 Design Manual v2.0 criteria: colors, font, dark header tables, alternating rows, red accent, header, footer, CONFIDENTIAL label, references section.</p>
+
+<!-- 2a: FULL COMPLIANCE -->
+<h3>2a. Full Compliance &mdash; 9/9 (36 files)</h3>
+<p style="font-size:13px;color:var(--secondary);margin-bottom:16px;">All files verified: correct Calibri font, Aurelian Red #F50537, dark header tables #2B2B2B, alternating rows #F5F5F5, horizontal-only borders, CONFIDENTIAL footer, Aurelian Manufacturing header, References section, revision-agnostic references. Content scan confirmed: no REV references, no banned names, no retired document references. Includes 8 Tier 7 documents converted to .docx. <strong>Tier 8 (v7.0):</strong> 24+ files updated for 4th co-founder (Fredrik Vangsal / Roadcode AS, 5.00%). Master document upgraded to REV8. Red thread verification: 94 files scanned, 0 active issues remaining.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>File</th>
+      <th>Score</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- TIER 1 FILES (Investor-Facing) -->
+    <tr>
+      <td>1</td>
+      <td>00_Executive_Summary.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag fixed">Tier 4 Fixed</span> <span class="tag user">User Revised</span> <span class="tag done">Content Fixed</span></td>
+      <td>FF3E00&rarr;F50537, REV6 removed from headings. User revised Opportunity section + renamed file (DRAFT prefix removed). Content flags resolved (v4.0): P1 Pre-Seed&rarr;Seed, P36 site size corrected, P40-42 round details updated to Seed (51.3 MNOK, 130 MNOK pre-money).</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>00_Investment_Teaser_OnePager.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Rebuilt</span> <span class="tag user">User Revised</span></td>
+      <td>Full rebuild via template. User made 11 text revisions (Opportunity, team roles, financing table). THE ASK section added via XML. Synced to 07_Presentations.</td>
+    </tr>
+    <!-- TIER 2 FILES -->
+    <tr>
+      <td>3</td>
+      <td>02_Financing_Plan_V3.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag fixed">Tier 2 Fixed</span></td>
+      <td>Added References section. Fixed footer: KONFIDENSIELT&rarr;CONFIDENTIAL. Removed REV6.</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>02_Valuation_Methodology_V2.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag fixed">Tier 2 Fixed</span></td>
+      <td>Removed all REV6 references from footer, headings, body text, and References table.</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>03_Market_Trends_Projections.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag fixed">Tier 2 Fixed</span></td>
+      <td>Fixed header: VDR 03.05&rarr;03.06. Added References. Replaced &ldquo;Market Analysis Master&rdquo;.</td>
+    </tr>
+    <!-- TIER 3 FILES -->
+    <tr>
+      <td>6</td>
+      <td>02_Use_of_Funds_Seed_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 3 New</span></td>
+      <td>Created from .md source. Full Design Manual v2.0 compliance.</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>02_Founder_Contribution_PreSeed_Valuation_1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 3 Rebuilt</span></td>
+      <td>Rebuilt from old format. Fixed REV5 ref, updated document references.</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>02_CAPEX_Breakdown_By_Phase.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 3 Rebuilt</span></td>
+      <td>Rebuilt from 1/9. Removed &ldquo;Vedlegg E&rdquo; banned name.</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>03_TAM_SAM_SOM_Norwegian_Nordic.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 3 Rebuilt</span></td>
+      <td>Rebuilt + translated to English. Replaced 3x retired document names, removed invalid cross-references.</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>04_Concept_Note_Strategic_Production_Node.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 3 Rebuilt</span></td>
+      <td>Rebuilt + translated to English. Site area corrected to 9,000 m&sup2;.</td>
+    </tr>
+    <!-- TIER 4 FILES (XML-level fixes) -->
+    <tr>
+      <td>11</td>
+      <td>01_Shareholders_Agreement.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag fixed">Tier 4 Fixed</span></td>
+      <td>FF3E00&rarr;F50537 via XML. Bilingual NO/EN document preserved.</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>01_Org_Chart_Current.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag fixed">Tier 4 Fixed</span></td>
+      <td>Courier New&rarr;Calibri, FF3E00&rarr;F50537 via XML. Rebuilt via template.</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>01_Acceleration_Terms_Double_Trigger.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag fixed">Tier 4 Fixed</span></td>
+      <td>FF3E00&rarr;F50537 via XML. Bilingual NO/EN document preserved.</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>02_Model_Assumptions_Valuation.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag fixed">Tier 4 Fixed</span></td>
+      <td>REV6 removed, Konfidensielt&rarr;Confidential, Finansieringsplan corrected. Rebuilt via template.</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>04_CNC_Equipment_Specifications_Mazak_4.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag fixed">Tier 4 Fixed</span></td>
+      <td>FF3E00&rarr;F50537 via XML. 3 embedded images preserved.</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>05_IP_Assignment_Agreements_Founders.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 4 Rebuilt</span></td>
+      <td>Full rebuild via template. FF3E00&rarr;F50537.</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>06_ToreAusland_CV.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag fixed">Tier 4 Fixed</span></td>
+      <td>FF3E00&rarr;F50537 via XML.</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>08_DD_Checklist_PreSeed_Round.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag fixed">Tier 4 Fixed</span></td>
+      <td>REV6 removed, Arial&rarr;Calibri, &ldquo;Market Analysis Master&rdquo;&rarr;VDR 03.06, advisor names corrected, FF3E00&rarr;F50537. All via XML.</td>
+    </tr>
+    <!-- ORIGINAL PERFECT FILES -->
+    <tr>
+      <td>19</td>
+      <td>02_Sensitivity_Analysis_V4.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag perfect">Perfect</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>03.02_CNC_Benchmark_Competitive_Landscape_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag perfect">Perfect</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>03_Go_To_Market_Strategy_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag perfect">Perfect</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>03_Pricing_Revenue_Model_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag perfect">Perfect</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>04_Facility_Strategy_Norbygg_v3.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag perfect">Perfect</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>04_Quality_Certification_Roadmap_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag perfect">Perfect</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>04_Production_Timeline_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag perfect">Perfect</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>04_Risk_Register_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag perfect">Perfect</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>06_Key_Hires_Plan_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag perfect">Perfect</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <!-- MASTER DOCUMENT — now REV7 at full compliance -->
+    <tr>
+      <td>28</td>
+      <td>02_Economic_Tables_Projections_REV8.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 5 Rebuilt</span> <span class="tag fixed">REV8 Updated</span></td>
+      <td>MASTER DOCUMENT. REV7&rarr;REV8: 4-founder cap table (Fredrik Vangsal / Roadcode AS added, 5.00%). Andr&eacute; 53.125%, Tore 31.875%, Henrik 10.00%, Fredrik 5.00%. All dilution tables updated. REV8 history entry added. Design Manual v2.0 compliance maintained (9/9). 17/17 financial checkpoints verified.</td>
+    </tr>
+    <!-- TIER 7 FILES (New Documents — converted to .docx) -->
+    <tr>
+      <td>29</td>
+      <td>00_Company_Fact_Sheet_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 7 New</span></td>
+      <td>One-page company overview. Key projections, financing summary, milestones, customer segments. &sect;2.2 disclaimer included. Converted from .md source.</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>06_HenrikStrom_CV_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 7 New</span> <span class="tag user">User Revised</span></td>
+      <td>English CV. Matches Andre Tandberg CV format. User corrected Board date 2024&rarr;2026. Converted from .md source.</td>
+    </tr>
+    <tr>
+      <td>30b</td>
+      <td>06_FredrikVangsal_CV_V2.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 8 New</span></td>
+      <td>Co-Founder CV (English). CEO Veira AS, IoT/AI/sensor systems, MSc Innovation &amp; Entrepreneurship (NMBU), Azure &amp; Databricks certified. Created during REV8 co-founder integration.</td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td>06_Advisor_Bios_Relevance_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 7 New</span></td>
+      <td>Advisory board profiles: Torsnes (Industry), Mollatt (Capital). Fredrik Vangsal now listed as Co-Founder &amp; Technical Advisor (dual role). Composition rationale table. Converted from .md source. Updated for REV8 (4 founders).</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>05_Employment_Agreement_Template_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 7 New</span> <span class="tag draft">DRAFT</span></td>
+      <td>DRAFT. Employment agreement template with role-specific schedules. Requires legal review. Converted from .md source.</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>05_Advisory_Agreement_Template_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 7 New</span> <span class="tag draft">DRAFT</span></td>
+      <td>DRAFT. Advisory agreement with domain-specific scope. 24-month term. Requires legal review. Converted from .md source.</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>04_LOI_Ravema_Mazak_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 7 New</span> <span class="tag draft">DRAFT</span></td>
+      <td>DRAFT. Non-binding LOI for CNC equipment from Ravema AB. Site Zero: ~58.6 MNOK. Requires supplier signature. Converted from .md source.</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>03_Customer_LOI_Template_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 7 New</span> <span class="tag user">User Revised</span></td>
+      <td>TEMPLATE. Customer LOI with quality cert checkboxes. User added additive mfg, supplier quality, pre-qualification. Converted from .md source.</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>08_NDA_Investor_DataRoom_Access_V1.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td><span class="tag done">Tier 7 New</span></td>
+      <td>NDA with Data Room Access Authorization. Round-specific tick-off boxes. Appendix A: VDR visibility matrix. Converted from .md source.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 2b: MASTER DOC — NOW AT FULL COMPLIANCE -->
+<h3>2b. Master Document &mdash; REV8 at Full Compliance</h3>
+<p style="font-size:13px;color:var(--secondary);margin-bottom:16px;">The master document was upgraded from REV6 (5/9) to REV7 (9/9) on 16 February 2026, then to REV8 on 17 February 2026 (4-founder cap table: Fredrik Vangsal / Roadcode AS added as Co-Founder). Design Manual v2.0 styling maintained. 17/17 financial checkpoints confirmed. REV6 and REV7 retained as archive.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Score</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>02_Economic_Tables_Projections_REV8.docx</td>
+      <td><span class="badge green">9/9</span></td>
+      <td>MASTER DOCUMENT &mdash; source of truth for all financial figures. <strong>Full Design Manual v2.0 compliance.</strong> REV8: 4-founder cap table (Andr&eacute; 53.125%, Tore 31.875%, Henrik 10.00%, Fredrik 5.00%). All dilution waterfall tables updated. 17/17 checkpoints verified.</td>
+    </tr>
+    <tr>
+      <td style="color:var(--secondary);">02_Economic_Tables_Projections_REV7.docx</td>
+      <td><span class="badge na">Archive</span></td>
+      <td style="color:var(--secondary);">Previous revision (3-founder cap table). Superseded by REV8. Retained for audit trail.</td>
+    </tr>
+    <tr>
+      <td style="color:var(--secondary);">02_Economic_Tables_Projections_REV6.docx / .pdf</td>
+      <td><span class="badge na">Archive</span></td>
+      <td style="color:var(--secondary);">Original revision (pre-Design Manual). Superseded by REV7/REV8.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 2c: DUPLICATES -->
+<h3>2c. Duplicate Files (kept in sync)</h3>
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Location</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>02_Founder_Contribution_PreSeed_Valuation_1.docx</td>
+      <td>06_Team (duplicate of 02_Financial version)</td>
+      <td>Kept in sync with the 02_Financial primary copy (9/9)</td>
+    </tr>
+    <tr>
+      <td>00_Investment_Teaser_OnePager.docx</td>
+      <td>07_Presentations/7.2_One_Pagers (duplicate of 00 folder version)</td>
+      <td>Synced &mdash; both copies identical (32,810 bytes)</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 2d: NON-DOCX FILES -->
+<h3>2d. Non-.docx Files (tracked assets)</h3>
+<p style="font-size:13px;color:var(--secondary);margin-bottom:16px;">These files are tracked VDR assets but use different compliance criteria than .docx files. Spreadsheets and presentations were updated during Tier 8 (REV8 co-founder integration). PDFs are external/official documents not subject to design scoring.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>File</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>S1</td>
+      <td>01_Cap_Table_ProForma_All_Rounds.xlsx</td>
+      <td>Spreadsheet</td>
+      <td><span class="badge green">REV8</span></td>
+      <td>6 sheets: Assumptions, Cap Table, Dilution Waterfall, Exit Distribution, Validation, Change Log. Updated Tier 8: Eier D (Roadcode AS) added, all dilution formulas recalculated.</td>
+    </tr>
+    <tr>
+      <td>S2</td>
+      <td>02_Aurelian_Financial_Model_8.xlsx</td>
+      <td>Spreadsheet</td>
+      <td><span class="badge green">REV8</span></td>
+      <td>Multi-sheet financial model: Assumptions, Cap Table, Sensitivity, P&amp;L, Cash Flow. Updated Tier 8: Eier D rows added to cap table, dilution waterfall, exit values, vesting schedule.</td>
+    </tr>
+    <tr>
+      <td>P1</td>
+      <td>07_Investor_Pitch_Deck_PreSeed_V4.pptx</td>
+      <td>Presentation</td>
+      <td><span class="badge green">REV8</span></td>
+      <td>14 slides, Design Manual v2.0. 17/17 checkpoints. Slide 11 rebuilt Tier 8: 4-founder layout + 2 advisors. Fredrik bio from CV.</td>
+    </tr>
+    <tr>
+      <td>P2</td>
+      <td>07_Investor_Pitch_Deck_Seed_V4.pptx</td>
+      <td>Presentation</td>
+      <td><span class="badge green">REV8</span></td>
+      <td>14 slides, Design Manual v2.0. 17/17 checkpoints. Slide 11 rebuilt Tier 8: 4-founder layout + 2 advisors. Fredrik bio from CV.</td>
+    </tr>
+    <tr>
+      <td>P3</td>
+      <td>07_Investor_Pitch_Deck_V3.pptx</td>
+      <td>Presentation</td>
+      <td><span class="badge na">Superseded</span></td>
+      <td>Previous version. Superseded by PreSeed V4 &amp; Seed V4.</td>
+    </tr>
+    <tr>
+      <td>P4</td>
+      <td>Aurelian_Customer_Presentation_v6.pptx</td>
+      <td>Presentation</td>
+      <td><span class="badge na">Customer</span></td>
+      <td>Customer-facing deck. Not investor DD scope.</td>
+    </tr>
+    <tr>
+      <td>P5</td>
+      <td>Aurelian_Customer_Presentation_v7.pptx</td>
+      <td>Presentation</td>
+      <td><span class="badge na">Customer</span></td>
+      <td>Customer-facing deck. Not investor DD scope.</td>
+    </tr>
+    <tr>
+      <td>O1</td>
+      <td>01_Vesting_Schedule_4yr_Cliff.protonsheet</td>
+      <td>Other</td>
+      <td><span class="badge na">External</span></td>
+      <td>Proton sheet format. Vesting schedule reference.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 style="margin-top:24px; font-size:14px; color:var(--secondary);">PDF Files (external/official &mdash; not design-scored)</h4>
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>File</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>PDF1</td><td>01_Articles_of_Incorporation.pdf</td><td>Corporate</td></tr>
+    <tr><td>PDF2</td><td>01_Registration_Certificate_Br&oslash;nn&oslash;ysund.pdf</td><td>Corporate</td></tr>
+    <tr><td>PDF3</td><td>01_Bylaws_Vedtekter.pdf</td><td>Corporate</td></tr>
+    <tr><td>PDF4</td><td>03_Defence_Market_NATO_Spending.pdf</td><td>Market Research</td></tr>
+    <tr><td>PDF5</td><td>03_Energy_Market_Transition_Offshore.pdf</td><td>Market Research</td></tr>
+    <tr><td>PDF6</td><td>03_Critical_Infrastructure_Supply_Chain.pdf</td><td>Market Research</td></tr>
+    <tr><td>PDF7</td><td>03_Letters_of_Intent_LOIs_PhysicalRobotics.pdf</td><td>Commercial</td></tr>
+    <tr><td>PDF8</td><td>02_European_VC_Practice_Benchmarks.pdf</td><td>Financial</td></tr>
+    <tr><td>PDF9</td><td>04_Automation_Feasibility_Study.pdf</td><td>Technical</td></tr>
+    <tr><td>PDF10</td><td>04_CNC_Resale_Value_Analysis.pdf</td><td>Technical</td></tr>
+    <tr><td>PDF11</td><td>03_Market_Trends_Drivers&amp;Strategic_Projections.pdf</td><td>Market Research</td></tr>
+    <tr><td>PDF12</td><td>Henrik_Syverstad_Stroem_CV.pdf</td><td>Team</td></tr>
+  </tbody>
+</table>
+<p style="font-size:12px;color:var(--secondary);margin-top:8px;">PDFs are external/official documents (government registrations, third-party research, signed LOIs). Not subject to Design Manual scoring. Counted in Section 4 Seed Readiness inventory.</p>
+
+
+<!-- 2e: TIER 7 — NEW DOCUMENTS (.md created, .docx conversion pending) -->
+<h3>2e. Tier 7 &mdash; New Documents Created (8 files &mdash; .docx conversion complete)</h3>
+<p style="font-size:13px;color:var(--secondary);margin-bottom:16px;">8 new VDR documents created as Markdown source files during sessions 2 &amp; 3 (16 February 2026), then converted to .docx with full Design Manual v2.0 styling and transferred to VDR folder structure. All 8 files now at 9/9 compliance.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>File (.docx)</th>
+      <th>VDR ref</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>29</td>
+      <td>00_Company_Fact_Sheet_V1.docx</td>
+      <td>00.03</td>
+      <td><span class="badge green">9/9</span> <span class="tag done">Tier 7</span></td>
+      <td>One-page company overview for investor/partner meetings. Key projections, financing summary, milestones, customer segments, equipment platform, quality roadmap. &sect;2.2 disclaimer included.</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>06_HenrikStrom_CV_V1.docx</td>
+      <td>06.01</td>
+      <td><span class="badge green">9/9</span> <span class="tag done">Tier 7</span> <span class="tag user">User Revised</span></td>
+      <td>English translation of Norwegian PDF CV. Matches Andre Tandberg CV format. 7 years Askim &amp; Spydeberg Sparebank. User corrected Board Member date: 2024&rarr;2026.</td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td>06_Advisor_Bios_Relevance_V1.docx</td>
+      <td>06.03</td>
+      <td><span class="badge green">9/9</span> <span class="tag done">Tier 7</span></td>
+      <td>Advisory board profiles with composition rationale. Fredrik Vangsal updated to Co-Founder &amp; Technical Advisor (dual role, REV8). Bj&oslash;rnar Torsnes (Industry &amp; Scaling), Andreas Mollatt (Capital &amp; Scaleups). Table mapping advisors to execution risks.</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>05_Employment_Agreement_Template_V1.docx</td>
+      <td>05.02</td>
+      <td><span class="badge green">9/9</span> <span class="tag done">Tier 7</span> <span class="tag draft">DRAFT</span></td>
+      <td>DRAFT. Employment agreement template with role-specific schedules: CEO (Andre), VP BD (Tore), CFO pathway (Henrik). Aligned with Shareholders Agreement &sect;&sect;2,8,9,10. Requires legal review.</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>05_Advisory_Agreement_Template_V1.docx</td>
+      <td>05.02</td>
+      <td><span class="badge green">9/9</span> <span class="tag done">Tier 7</span> <span class="tag draft">DRAFT</span></td>
+      <td>DRAFT. Advisory agreement with domain-specific scope for 3 advisor types. 24-month term, 6-month cliff vesting, equity framework. Requires legal review.</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>04_LOI_Ravema_Mazak_V1.docx</td>
+      <td>04.02</td>
+      <td><span class="badge green">9/9</span> <span class="tag done">Tier 7</span> <span class="tag draft">DRAFT</span></td>
+      <td>DRAFT. Non-binding LOI for CNC equipment from Ravema AB. Site Zero: ~58.6 MNOK (5 CNC + shop base). Expansion: up to 15 additional CNC (~150 MNOK). DDP terms, preferred supplier status. Requires supplier signature.</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>03_Customer_LOI_Template_V1.docx</td>
+      <td>03.03</td>
+      <td><span class="badge green">9/9</span> <span class="tag done">Tier 7</span> <span class="tag user">User Revised</span></td>
+      <td>TEMPLATE. Customer manufacturing service LOI with checkboxes for quality certs, services, mutual intentions. User added: additive manufacturing/3D metal printing, Supplier Quality Requirements, Pre-qualification requirements.</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>08_NDA_Investor_DataRoom_Access_V1.docx</td>
+      <td>08.05</td>
+      <td><span class="badge green">9/9</span> <span class="tag done">Tier 7</span></td>
+      <td>NDA with integrated Data Room Access Authorization. Tick-off boxes for PreSeed/Seed/Serie A round access. Appendix A: VDR section visibility matrix by round. 3-year term, Norwegian law, Oslo District Court.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== SECTION 3: ALL COMPLETED FIXES ===== -->
+<h2>3. Completed Fixes &mdash; All Tiers</h2>
+<p class="section-desc">Complete record of every fix applied across Tiers 1&ndash;6. All issues resolved.</p>
+
+<h3>3a. Tier 1 &mdash; Investor-Facing Documents (2 files)</h3>
+
+<div class="issue resolved">
+  <div class="file">1. 00_Executive_Summary.docx (formerly DRAFT_00_Executive_Summary.docx)</div>
+  <div class="desc">Old format (4/9). Used FF3E00, no dark headers, no alternating rows. Contained REV6 references in headings.</div>
+  <div class="resolution">&check; RESOLVED: FF3E00&rarr;F50537, REV6 removed from all section headings via XML-level fix. User revised Opportunity section (aligned with Investment Teaser). File renamed: DRAFT prefix removed.</div>
+  <div class="method">Method: XML-level zipfile fix (color + text replacement in document.xml and styles.xml)</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">2. 00_Investment_Teaser_OnePager.docx</div>
+  <div class="desc">Old format (4/9). Duplicate existed at 07_Presentations with old name.</div>
+  <div class="resolution">&check; RESOLVED: Full rebuild via aurelian_docx_template.py. User made 11 text revisions: simplified defense bullet, rewrote energy bullet (HMLV focus), added labor shortage context, changed &ldquo;0.8 FTE/CNC&rdquo; to &ldquo;low FTE/CNC&rdquo;, updated team roles (Board positions), adjusted Serie A fields to &ldquo;-&rdquo;, removed ROI column. THE ASK section added back via XML. Synced to 07_Presentations.</div>
+  <div class="method">Method: Full template rebuild + XML insertion for THE ASK section + shutil.copy2 sync</div>
+</div>
+
+<h3>3b. Tier 2 &mdash; Minor Fixes in New-Design Files (3 files)</h3>
+
+<div class="issue resolved">
+  <div class="file">3. 02_Valuation_Methodology_V2.docx</div>
+  <div class="desc">Footer contained &ldquo;REV6&rdquo; reference. Body text and headings also contained bare REV6 references.</div>
+  <div class="resolution">&check; RESOLVED: All REV6 removed from footer, Chapter 1, Section 1.2 heading, body text, and References table.</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">4. 03_Market_Trends_Projections.docx</div>
+  <div class="desc">Header said &ldquo;VDR 03.05&rdquo; (wrong &mdash; should be 03.06). Missing References section. Body referenced retired &ldquo;Market Analysis Master&rdquo;.</div>
+  <div class="resolution">&check; RESOLVED: Header corrected to 03.06. References table added. &ldquo;Market Analysis Master&rdquo; replaced with &ldquo;03 Market Trends &amp; Projections (VDR 03.06)&rdquo;.</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">5. 02_Financing_Plan_V3.docx</div>
+  <div class="desc">Missing References section. Footer used Norwegian &ldquo;KONFIDENSIELT&rdquo; and &ldquo;Februar&rdquo;. Body contained &ldquo;Konfidensielt&rdquo;. REV6 in table cells.</div>
+  <div class="resolution">&check; RESOLVED: References section added. Footer corrected. All Norwegian terms replaced. Split-run REV6 references fixed.</div>
+</div>
+
+<h3>3c. Tier 3 &mdash; Full Rebuild to New Design (5 files)</h3>
+
+<div class="issue resolved">
+  <div class="file">6. 02_Use_of_Funds_Seed_V1.docx</div>
+  <div class="desc">Only existed as .md (Markdown). No .docx version in VDR.</div>
+  <div class="resolution">&check; RESOLVED: Created new .docx from .md source using aurelian_docx_template.py.</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">7. 02_Founder_Contribution_PreSeed_Valuation_1.docx</div>
+  <div class="desc">Old format (5/9). Contained REV5 reference and &ldquo;Investor pitch deck (V3)&rdquo;.</div>
+  <div class="resolution">&check; RESOLVED: Rebuilt in new design. REV5 &rarr; master doc name. Document references updated.</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">8. 02_CAPEX_Breakdown_By_Phase.docx</div>
+  <div class="desc">Old format (1/9). No header, no footer, no design elements. Contained &ldquo;Vedlegg E&rdquo; banned name.</div>
+  <div class="resolution">&check; RESOLVED: Rebuilt in new design. Banned name replaced with VDR reference.</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">9. 03_TAM_SAM_SOM_Norwegian_Nordic.docx</div>
+  <div class="desc">Old format (4/9). Norwegian text. Referenced retired &ldquo;Markedsanalyse Master V3&rdquo; (3x), &ldquo;Investor Pitch V3&rdquo; (2x).</div>
+  <div class="resolution">&check; RESOLVED: Rebuilt + translated to English. All retired references replaced. Invalid cross-references removed.</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">10. 04_Concept_Note_Strategic_Production_Node.docx</div>
+  <div class="desc">Old format (0/9). Used Aptos + Arial fonts. Norwegian text.</div>
+  <div class="resolution">&check; RESOLVED: Rebuilt + translated to English. Site area corrected to 9,000 m&sup2;.</div>
+</div>
+
+<h3>3d. Tier 4 &mdash; XML-Level Compliance Fixes (10 files)</h3>
+<p style="font-size:13px;color:var(--secondary);margin-bottom:16px;">All Tier 4 files used the older Aurelian style with #FF3E00 (orange-red) instead of #F50537 (Aurelian Red). Most were fixed via surgical XML-level replacements using Python&rsquo;s zipfile module &mdash; opening the .docx as a ZIP, replacing strings in document.xml/styles.xml, and saving back. This preserved all existing content, images, and formatting while fixing specific compliance issues.</p>
+
+<div class="issue resolved">
+  <div class="file">11. 01_Shareholders_Agreement.docx</div>
+  <div class="desc">FF3E00 color (2 locations). Bilingual NO/EN document.</div>
+  <div class="resolution">&check; RESOLVED: FF3E00&rarr;F50537 via XML. Content preserved.</div>
+  <div class="method">Method: zipfile XML replacement</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">12. 01_Org_Chart_Current.docx</div>
+  <div class="desc">Courier New font. FF3E00 color.</div>
+  <div class="resolution">&check; RESOLVED: Courier New&rarr;Calibri, FF3E00&rarr;F50537. Rebuilt via template.</div>
+  <div class="method">Method: Template rebuild + XML fix</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">13. 01_Acceleration_Terms_Double_Trigger.docx</div>
+  <div class="desc">FF3E00 color. &ldquo;Vedlegg&rdquo; (2 locations). Bilingual NO/EN document.</div>
+  <div class="resolution">&check; RESOLVED: FF3E00&rarr;F50537 via XML. Content preserved (Vedlegg is part of legal text).</div>
+  <div class="method">Method: zipfile XML replacement</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">14. 02_Model_Assumptions_Valuation.docx</div>
+  <div class="desc">REV6 (3 locations). &ldquo;Konfidensielt&rdquo;. &ldquo;Finansieringsplan&rdquo; (2 locations). FF3E00 color. Norwegian text.</div>
+  <div class="resolution">&check; RESOLVED: REV6 removed, Konfidensielt&rarr;Confidential, Finansieringsplan&rarr;Financing Plan. Rebuilt via template.</div>
+  <div class="method">Method: Template rebuild</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">15. 04_CNC_Equipment_Specifications_Mazak_4.docx</div>
+  <div class="desc">FF3E00 color. Contains 3 embedded images (machine photos).</div>
+  <div class="resolution">&check; RESOLVED: FF3E00&rarr;F50537 via XML. All images preserved.</div>
+  <div class="method">Method: zipfile XML replacement (image-safe)</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">16. 05_IP_Assignment_Agreements_Founders.docx</div>
+  <div class="desc">FF3E00 color. Old style.</div>
+  <div class="resolution">&check; RESOLVED: Full rebuild via aurelian_docx_template.py.</div>
+  <div class="method">Method: Template rebuild</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">17. 06_ToreAusland_CV.docx</div>
+  <div class="desc">FF3E00 color. Norwegian labels.</div>
+  <div class="resolution">&check; RESOLVED: FF3E00&rarr;F50537 via XML.</div>
+  <div class="method">Method: zipfile XML replacement</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">18. 08_DD_Checklist_PreSeed_Round.docx</div>
+  <div class="desc">REV6 (3 locations). &ldquo;Market Analysis Master&rdquo; (retired name). Arial font (not Calibri). FF3E00 color. Incorrect advisor names.</div>
+  <div class="resolution">&check; RESOLVED: REV6&rarr;full document name, &ldquo;Market Analysis Master&rdquo;&rarr;VDR 03.06 reference, Arial&rarr;Calibri, FF3E00&rarr;F50537, advisor names corrected (Vartdal&rarr;Vangsal, R&oslash;nnestad&rarr;Torsnes, Skauen&rarr;Mollatt). All via XML.</div>
+  <div class="method">Method: zipfile XML replacement (6 separate replacements in single pass)</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">19. 06_AndreTandberg_CV.docx</div>
+  <div class="desc">FF3E00 color.</div>
+  <div class="resolution">&check; RESOLVED: FF3E00&rarr;F50537 via XML.</div>
+  <div class="method">Method: zipfile XML replacement</div>
+</div>
+
+<h3>3e. Tier 5 &mdash; Master Document REV7 (1 file)</h3>
+
+<div class="issue resolved">
+  <div class="file">28. 02_Economic_Tables_Projections_REV7.docx</div>
+  <div class="desc">REV6 scored 5/9 (pre-Design Manual): all colors wrong (#FF3E00 instead of #F50537, #333333 instead of #2B2B2B, #666666 instead of #6B6B6B), all 30 table headers had wrong red background, no alternating row shading, full grid borders, no explicit font set, heading sizes wrong.</div>
+  <div class="resolution">&check; RESOLVED: Complete rebuild as REV7. Full Design Manual v2.0 compliance: correct color palette throughout, 30 tables with dark headers (#2B2B2B) + alternating rows (#F5F5F5) + horizontal-only borders, Calibri font, proper heading hierarchy (H1: 22pt #2B2B2B, H2: 16pt #F50537), compliant header/footer with red accent line, CONFIDENTIAL footer. All content verified: 30/30 tables identical to REV6, 17/17 financial checkpoints confirmed, 0 banned values.</div>
+  <div class="method">Method: Complete python-docx rebuild from content extraction (build_rev7.py, ~900 lines)</div>
+</div>
+
+<h3>3f. Tier 6 &mdash; Content Fixes &amp; Presentation (2 items)</h3>
+
+<div class="issue resolved">
+  <div class="file">Executive Summary &mdash; Content Flags (P1, P36, P40-42)</div>
+  <div class="desc">Three content items flagged during Tier 4 audit: P1 said &ldquo;Pre-Seed Round&rdquo;, P36 had site size issues, P40-42 still described PreSeed round details.</div>
+  <div class="resolution">&check; RESOLVED: P1 updated Pre-Seed&rarr;Seed. P36 corrected (site 30,000 m&sup2;, facility 3,600 m&sup2;, typo &ldquo;zice&rdquo;&rarr;&ldquo;size&rdquo;). P40 header updated to SEED. P41 rewritten with Seed round details (51.3 MNOK, 130 MNOK pre-money, 28.3% dilution, 80.6 MNOK total). P42 ROI updated to 12.7x Seed return, founders 50.60%.</div>
+  <div class="method">Method: python-docx paragraph editing (fix_exec_summary.py)</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">07_Investor_Pitch_Deck_V4.pptx</div>
+  <div class="desc">V3 used old design. Needed complete redesign to Design Manual v2.0 presentation rules (16:9, black cover/closing, white content slides).</div>
+  <div class="resolution">&check; RESOLVED: Built V4 from scratch. 14 slides. Design Manual v2.0 compliant: black cover/closing, white content, Calibri font, #F50537 accents (never on numeric text), flat 2D charts. 17/17 financial checkpoints verified, 0 red-text violations, 0 font violations, 0 banned values. User subsequently edited V4 manually.</div>
+  <div class="method">Method: python-pptx full build (aurelian_pitch_build.py, ~1350 lines)</div>
+</div>
+
+
+<h3>3g. Tier 8 &mdash; Co-Founder Integration: REV8 / Fredrik Vangsal (24+ files)</h3>
+<p style="font-size:13px;color:var(--secondary);margin-bottom:16px;">Fredrik Vangsal / Roadcode AS added as 4th Co-Founder (5.00% founding). Master document upgraded REV7&rarr;REV8. All cap table percentages updated across entire VDR. Red thread verification: 94 files scanned, 0 active issues.</p>
+
+<div class="issue resolved">
+  <div class="file">Phase 1 &mdash; Master Data (3 files)</div>
+  <div class="desc">Master document, Financial Model Excel, Cap Table ProForma Excel needed 4-founder cap table.</div>
+  <div class="resolution">&check; RESOLVED: REV8 built with 4 founders. Both Excel files updated (new Eier D rows, dilution waterfall, vesting schedules). All backups as _BACKUP_PRE_REV8.</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">Phase 2 &mdash; Legal &amp; Corporate (4 files)</div>
+  <div class="desc">Shareholders Agreement, Org Chart, Acceleration Terms, IP Assignment needed Fredrik/Roadcode AS.</div>
+  <div class="resolution">&check; RESOLVED: Parties clause updated (531,250 / 318,750 / 100,000 / 50,000 shares). Signature blocks added. 4-founder headcount. Board composition updated.</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">Phase 3&ndash;6 &mdash; Financial, Investor, Team, DD (7 files)</div>
+  <div class="desc">Financing Plan, Founder Contribution (2 copies), Executive Summary, Company Fact Sheet, Advisor Bios, DD Checklist needed updated cap table / founder references.</div>
+  <div class="resolution">&check; RESOLVED: All cap table percentages updated. Fredrik added to founder lists. Advisor Bios updated for dual role. DD Checklist founder names/percentages corrected.</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">Phase 7 &mdash; Configuration &amp; Skills (20+ files)</div>
+  <div class="desc">MEMORY.md, 7 SKILL.md files, claude-project-instructions.md, SessionStart hook, .claude/skills/ registration.</div>
+  <div class="resolution">&check; RESOLVED: All config files updated REV7&rarr;REV8. All dilution formulas corrected. 13 skills registered to .claude/skills/ directory. Known wrong values table updated.</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">Pitch Decks &mdash; Slide 11 (2 files)</div>
+  <div class="desc">PreSeed V4 and Seed V4 had 3-founder layout on Team &amp; Advisors slide.</div>
+  <div class="resolution">&check; RESOLVED: Slide 11 rebuilt from scratch with 4 equal-width founder cards + 2 centered advisor cards. Fredrik bio from CV: CEO Veira AS, IoT/AI/sensor systems, MSc NMBU, Azure &amp; Databricks certified. Rebuilt from BACKUP to ensure clean state.</div>
+</div>
+
+<div class="issue resolved">
+  <div class="file">Red Thread Verification &mdash; 94 files scanned</div>
+  <div class="desc">Full VDR scan for old 3-founder values (56.25%, 33.75%, 28.46%, 17.08%, &ldquo;3 founders&rdquo;).</div>
+  <div class="resolution">&check; RESOLVED: 0 active issues. All 15 remaining hits are intentional: change logs (REV8 revision history), archived files (REV7), known-wrong-values tables (MEMORY.md), and staffing headcounts (Financial Model). New values confirmed across 17&ndash;37 files each.</div>
+</div>
+
+<!-- Lesson Learned -->
+<div class="lesson-box">
+  <h4>Lessons Learned &mdash; Applied Across All Tiers</h4>
+  <ol>
+    <li><strong>XML-level zipfile fixes are the most reliable approach</strong> for targeted changes (color, font, text swaps). They preserve all existing content, images, and formatting. Template rebuilds are better for heavily restructured files.</li>
+    <li><strong>Scan the entire document</strong> for all instances of any issue &mdash; not just the specific location flagged in reports.</li>
+    <li><strong>Check for retired document names</strong> (Markedsanalyse Master, Market Analysis Master, DRAFT_03) &mdash; these propagate from source content.</li>
+    <li><strong>Check for version numbers in document references</strong> (V3, V2, etc.) &mdash; only VDR reference numbers are allowed per Design Manual &sect;13.6.</li>
+    <li><strong>Verify chapter/section cross-references</strong> still make sense when the target document has been replaced by a new document with different structure.</li>
+    <li><strong>Check for banned Norwegian terms</strong> (Konfidensielt, Vedlegg, Komplett) and translate to English.</li>
+    <li><strong>Handle split XML runs</strong> &mdash; Word often splits text across multiple runs; simple string search on individual runs misses cross-run patterns like &ldquo;REV&rdquo; + &ldquo;6&rdquo;.</li>
+    <li><strong>Always copy to temp before reading</strong> to avoid file lock errors when user has file open in Word.</li>
+    <li><strong>Use glob for path resolution</strong> to handle Norwegian characters in OneDrive paths.</li>
+  </ol>
+</div>
+
+
+<!-- ===== SECTION 4: VDR READINESS ===== -->
+<h2>4. VDR Seed Readiness</h2>
+<p class="section-desc">Cross-reference of VDR README against actual files on disk. Counts ALL tracked VDR assets (.docx, .xlsx, .pptx, .pdf, .protonsheet). Updated 17 February 2026 for Tier 8 (REV8 co-founder integration, Fredrik CV V2). Aligned with README v4.0 and MEMORY.md (~75% readiness).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Have</th>
+      <th>Need</th>
+      <th>Readiness</th>
+      <th>Change (v5.0)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Executive Summary</td>
+      <td>3</td>
+      <td>0</td>
+      <td><span class="badge green">100%</span></td>
+      <td>+1 (Company Fact Sheet)</td>
+    </tr>
+    <tr>
+      <td>Corporate &amp; Governance</td>
+      <td>8</td>
+      <td>3</td>
+      <td><span class="badge green">73%</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>Financial</td>
+      <td>12</td>
+      <td>2</td>
+      <td><span class="badge green">86%</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>Commercial &amp; Market</td>
+      <td>12</td>
+      <td>2</td>
+      <td><span class="badge green">86%</span></td>
+      <td>+1 (Customer LOI Template)</td>
+    </tr>
+    <tr>
+      <td>Technical &amp; Operations</td>
+      <td>10</td>
+      <td>4</td>
+      <td><span class="badge green">71%</span></td>
+      <td>+1 (MAZAK/Ravema LOI)</td>
+    </tr>
+    <tr>
+      <td>Legal &amp; IP</td>
+      <td>3</td>
+      <td>5</td>
+      <td><span class="badge amber">38%</span></td>
+      <td>+2 (Employment Agreement, Advisory Agreement templates)</td>
+    </tr>
+    <tr>
+      <td>Team</td>
+      <td>8</td>
+      <td>2</td>
+      <td><span class="badge green">80%</span></td>
+      <td>+3 (Henrik CV, Advisor Bios, Fredrik CV V2)</td>
+    </tr>
+    <tr>
+      <td>Presentations</td>
+      <td>2</td>
+      <td>2</td>
+      <td><span class="badge amber">50%</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>DD &amp; Internal</td>
+      <td>2</td>
+      <td>0</td>
+      <td><span class="badge green">100%</span></td>
+      <td>+1 (NDA &amp; Data Room Access)</td>
+    </tr>
+    <tr style="font-weight:700;">
+      <td><strong>TOTAL</strong></td>
+      <td><strong>60</strong>*</td>
+      <td><strong>20</strong>*</td>
+      <td><span class="badge green">75%</span></td>
+      <td><strong>+9 documents</strong> (8 Tier 7 + Fredrik CV V2)</td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-size:12px;color:var(--secondary);margin-top:8px;">* Note: Count includes all tracked VDR assets (.docx, .xlsx, .pptx, .pdf, .protonsheet). All &ldquo;Have&rdquo; items verified present in VDR structure. &ldquo;Need&rdquo; items are primarily external (tax confirmations, business permits, signed agreements, pipeline spreadsheet, ESOP plan).</p>
+
+
+<!-- ===== SECTION 5: REMAINING WORK ===== -->
+<h2>5. Remaining Work</h2>
+<p class="section-desc">All design compliance work is complete (36/36 .docx files + PPTX). Remaining items are external documents and action items only.</p>
+
+<!-- All completed tiers -->
+<div class="tier t1">
+  <h4 style="color:var(--green);">TIER 1 &mdash; First Impression (Investor-Facing) &mdash; COMPLETE &check;</h4>
+  <ol>
+    <li><s>Executive Summary</s> <span class="done-note">&check; Done &mdash; FF3E00 fixed, REV6 removed, user revised Opportunity, DRAFT prefix removed</span></li>
+    <li><s>Investment Teaser One-Pager</s> <span class="done-note">&check; Done &mdash; full rebuild, user made 11 revisions, THE ASK added, synced to 07_Presentations</span></li>
+  </ol>
+</div>
+
+<div class="tier t2">
+  <h4 style="color:var(--green);">TIER 2 &mdash; Minor Fixes in New Design Files &mdash; COMPLETE &check;</h4>
+  <ol start="3">
+    <li><s>Valuation Methodology V2</s> <span class="done-note">&check; Done</span></li>
+    <li><s>Financing Plan V3</s> <span class="done-note">&check; Done</span></li>
+    <li><s>Market Trends &amp; Projections</s> <span class="done-note">&check; Done</span></li>
+  </ol>
+</div>
+
+<div class="tier t3">
+  <h4 style="color:var(--green);">TIER 3 &mdash; Convert to New Design &mdash; COMPLETE &check;</h4>
+  <ol start="6">
+    <li><s>Use of Funds</s> <span class="done-note">&check; Done</span></li>
+    <li><s>Founder Contribution &amp; PreSeed Valuation</s> <span class="done-note">&check; Done</span></li>
+    <li><s>CAPEX Breakdown</s> <span class="done-note">&check; Done</span></li>
+    <li><s>TAM/SAM/SOM</s> <span class="done-note">&check; Done</span></li>
+    <li><s>Concept Note</s> <span class="done-note">&check; Done</span></li>
+    <li><s>Economic Tables (Master)</s> <span class="done-note">&check; Done &mdash; REV7 with full Design Manual v2.0 compliance (9/9)</span></li>
+  </ol>
+</div>
+
+<div class="tier t4">
+  <h4 style="color:var(--green);">TIER 4 &mdash; Legal, Governance &amp; Legacy Files (10 files) &mdash; COMPLETE &check;</h4>
+  <ol start="12">
+    <li><s>Shareholders Agreement</s> <span class="done-note">&check; Done &mdash; XML color fix</span></li>
+    <li><s>Org Chart</s> <span class="done-note">&check; Done &mdash; font + color fix</span></li>
+    <li><s>Acceleration Terms</s> <span class="done-note">&check; Done &mdash; XML color fix</span></li>
+    <li><s>Model Assumptions &amp; Valuation</s> <span class="done-note">&check; Done &mdash; full rebuild</span></li>
+    <li><s>CNC Equipment Specs</s> <span class="done-note">&check; Done &mdash; XML color fix (images preserved)</span></li>
+    <li><s>IP Assignment</s> <span class="done-note">&check; Done &mdash; full rebuild</span></li>
+    <li><s>Tore Ausland CV</s> <span class="done-note">&check; Done &mdash; XML color fix</span></li>
+    <li><s>DD Checklist</s> <span class="done-note">&check; Done &mdash; 6 XML fixes in single pass</span></li>
+    <li><s>Andr&eacute; Tandberg CV</s> <span class="done-note">&check; Done &mdash; XML color fix</span></li>
+    <li><s>Executive Summary</s> <span class="done-note">&check; Done (see Tier 1)</span></li>
+  </ol>
+</div>
+
+<!-- Remaining items -->
+<div class="tier t5">
+  <h4 style="color:var(--green);">TIER 5 &mdash; Master Document REV7 &mdash; COMPLETE &check;</h4>
+  <ol start="22">
+    <li><s>Economic Tables &amp; Projections REV7</s> <span class="done-note">&check; Done &mdash; complete rebuild with Design Manual v2.0 (9/9), 30/30 tables verified, 17/17 checkpoints confirmed</span></li>
+  </ol>
+</div>
+
+<div class="tier t6">
+  <h4 style="color:var(--green);">TIER 6 &mdash; Content Fixes &amp; Presentation &mdash; COMPLETE &check;</h4>
+  <ol start="23">
+    <li><s>Executive Summary content flags</s> <span class="done-note">&check; Done &mdash; P1/P36/P40-42 resolved (Pre-Seed&rarr;Seed, site size, round details)</span></li>
+    <li><s>Investor Pitch Deck V4</s> <span class="done-note">&check; Done &mdash; 14 slides, 17/17 checkpoints, Design Manual v2.0 compliant. User made additional manual edits.</span></li>
+  </ol>
+</div>
+
+<div class="tier t6" style="border-left-color:var(--green);">
+  <h4 style="color:var(--green);">TIER 7 &mdash; New Document Creation &amp; .docx Conversion (8 files) &mdash; COMPLETE &check;</h4>
+  <ol start="25">
+    <li><s>Company Fact Sheet</s> <span class="done-note">&check; Done &mdash; 00_Company_Fact_Sheet_V1.docx (VDR 00.03) &mdash; 9/9</span></li>
+    <li><s>Henrik Str&oslash;m CV</s> <span class="done-note">&check; Done &mdash; 06_HenrikStrom_CV_V1.docx (VDR 06.01) &mdash; 9/9. User revised Board date 2024&rarr;2026.</span></li>
+    <li><s>Advisor Bios &amp; Relevance</s> <span class="done-note">&check; Done &mdash; 06_Advisor_Bios_Relevance_V1.docx (VDR 06.03) &mdash; 9/9</span></li>
+    <li><s>Employment Agreements (founders)</s> <span class="done-note">&check; Done &mdash; 05_Employment_Agreement_Template_V1.docx (VDR 05.02) &mdash; 9/9. DRAFT. Requires legal review.</span></li>
+    <li><s>Advisory Agreements</s> <span class="done-note">&check; Done &mdash; 05_Advisory_Agreement_Template_V1.docx (VDR 05.02) &mdash; 9/9. DRAFT. Requires legal review.</span></li>
+    <li><s>MAZAK/Ravema LOI</s> <span class="done-note">&check; Done &mdash; 04_LOI_Ravema_Mazak_V1.docx (VDR 04.02) &mdash; 9/9. DRAFT. Requires supplier signature.</span></li>
+    <li><s>Customer LOI Template</s> <span class="done-note">&check; Done &mdash; 03_Customer_LOI_Template_V1.docx (VDR 03.03) &mdash; 9/9. User revised.</span></li>
+    <li><s>NDA &amp; Data Room Access</s> <span class="done-note">&check; Done &mdash; 08_NDA_Investor_DataRoom_Access_V1.docx (VDR 08.05) &mdash; 9/9</span></li>
+  </ol>
+  <p style="font-size:13px;color:var(--green);font-weight:700;margin-top:12px;">All 8 files converted to .docx with Design Manual v2.0 styling and transferred to VDR folder structure.</p>
+</div>
+
+
+<div class="tier t6" style="border-left-color:var(--green);">
+  <h4 style="color:var(--green);">TIER 8 &mdash; Co-Founder Integration: REV8 / Fredrik Vangsal (24+ files) &mdash; COMPLETE &check;</h4>
+  <ol start="42">
+    <li><s>Master document REV7&rarr;REV8</s> <span class="done-note">&check; Done &mdash; 4-founder cap table, all dilution tables updated</span></li>
+    <li><s>Financial Model &amp; Cap Table Excel</s> <span class="done-note">&check; Done &mdash; Eier D rows added, vesting schedules updated</span></li>
+    <li><s>Legal &amp; Corporate (4 files)</s> <span class="done-note">&check; Done &mdash; share counts, signature blocks, board composition</span></li>
+    <li><s>Financial, Investor, Team, DD (7 files)</s> <span class="done-note">&check; Done &mdash; cap table %, founder lists, advisor dual role</span></li>
+    <li><s>Configuration &amp; Skills (20+ files)</s> <span class="done-note">&check; Done &mdash; MEMORY.md, 7 skills, project instructions, SessionStart hook</span></li>
+    <li><s>Pitch Decks Slide 11 (2 files)</s> <span class="done-note">&check; Done &mdash; 4-founder layout rebuilt from scratch</span></li>
+    <li><s>Fredrik Vangsal CV V2</s> <span class="done-note">&check; Done &mdash; 06_FredrikVangsal_CV_V2.docx (VDR 06.01)</span></li>
+    <li><s>Red thread verification</s> <span class="done-note">&check; Done &mdash; 94 files scanned, 0 active issues</span></li>
+  </ol>
+  <p style="font-size:13px;color:var(--green);font-weight:700;margin-top:12px;">All files updated with 4-founder cap table. Red thread clean.</p>
+</div>
+
+<div class="tier" style="border-left-color:var(--amber);">
+  <h4 style="color:var(--amber);">REMAINING &mdash; External / Action Items (Not Claude Code Scope)</h4>
+  <ol start="33">
+    <li><strong>Tax Registration Confirmations</strong> &mdash; obtain from authorities <span class="note">(Andre scope)</span></li>
+    <li><strong>Business Permits</strong> &mdash; obtain from authorities <span class="note">(Andre scope)</span></li>
+    <li><strong>Norbygg Lease Agreement</strong> &mdash; obtain from Norbygg <span class="note">(Tore scope)</span></li>
+    <li><strong>Signed MAZAK/Ravema LOI</strong> &mdash; obtain supplier signature <span class="note">(draft ready, needs Ravema countersign)</span></li>
+    <li><strong>Signed Customer LOIs</strong> &mdash; obtain customer signatures <span class="note">(template ready, needs customer engagement)</span></li>
+    <li><strong>Signed Employment/Advisory Agreements</strong> &mdash; legal review + execution <span class="note">(drafts ready, pending legal counsel)</span></li>
+    <li><strong>Pipeline Spreadsheet</strong> &mdash; customer pipeline tracking <span class="note">(content gap)</span></li>
+    <li><strong>ESOP Plan</strong> &mdash; employee stock option plan <span class="note">(content gap)</span></li>
+  </ol>
+</div>
+
+<div class="tier" style="border-left-color:var(--green);">
+  <h4 style="color:var(--green);">.docx Conversion &mdash; COMPLETE &check;</h4>
+  <ol start="41">
+    <li><s>Convert 8 .md files to .docx</s> <span class="done-note">&check; Done &mdash; all 8 files converted with Design Manual v2.0 styling and transferred to VDR structure.</span></li>
+  </ol>
+</div>
+
+
+<!-- Remaining callout — RESOLVED -->
+<div class="remaining-callout" style="background:linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);border-color:var(--green);">
+  <h4 style="color:var(--green);">Executive Summary &mdash; Content Flags RESOLVED &check;</h4>
+  <p style="font-size:13px;margin-bottom:12px;">All three content items flagged during the Tier 4 audit have been resolved (v4.0, 16 February 2026):</p>
+  <ul>
+    <li><span class="priority">P1:</span> <s>&ldquo;Pre-Seed Round&rdquo;</s> &rarr; &ldquo;Seed Round&rdquo; <span class="tag done">Fixed</span></li>
+    <li><span class="priority">P36:</span> <s>Site size issues</s> &rarr; Site 30,000 m&sup2;, facility 3,600 m&sup2;, typo corrected <span class="tag done">Fixed</span></li>
+    <li><span class="priority">P40-42:</span> <s>PreSeed round details</s> &rarr; Seed round (51.3 MNOK, 130 MNOK pre-money, 28.3% dilution) <span class="tag done">Fixed</span></li>
+  </ul>
+</div>
+
+
+<!-- ===== SECTION 6: METHODOLOGY ===== -->
+<h2>6. Methodology &amp; Tools</h2>
+<p class="section-desc">Four complementary approaches used across all tiers, proven reliable through 36 .docx file completions + 1 PPTX presentation.</p>
+
+<div class="reco-box">
+  <h3>Quad Approach: Template Rebuild + XML Surgery + PPTX Build + Content Creation</h3>
+  <p><span class="highlight">Approach 1 &mdash; Template Rebuild</span> (aurelian_docx_template.py / python-docx): Used for files requiring heavy restructuring or translation. Produces guaranteed 9/9 output with consistent styling. Used for: Use of Funds, Founder Contribution, CAPEX, TAM/SAM/SOM, Concept Note, IP Assignment, Investment Teaser, Org Chart, Model Assumptions, <strong>Economic Tables REV7</strong>.</p>
+  <p style="margin-top:12px;"><span class="highlight">Approach 2 &mdash; XML-Level Fix</span> (zipfile module): Used for surgical corrections &mdash; color swaps (#FF3E00&rarr;#F50537), font changes (Arial&rarr;Calibri), text replacements (REV6, banned names). Preserves all existing content, images, tables, and formatting. Used for: Shareholders Agreement, Acceleration Terms, CNC Equipment, Tore CV, Andr&eacute; CV, DD Checklist, Executive Summary.</p>
+  <p style="margin-top:12px;"><span class="highlight">Approach 3 &mdash; PPTX Build</span> (python-pptx): Used for presentations. Built Investor Pitch Deck V4 (14 slides) from scratch with Design Manual v2.0 presentation rules.</p>
+  <p style="margin-top:12px;"><span class="highlight">Approach 4 &mdash; Content Creation</span> (.md source files): Used for new document creation from scratch. Content written as Markdown, verified against master document (17 checkpoints), reviewed/revised by user. Conversion to .docx via Cowork with Design Manual v2.0 specifications. Used for: Company Fact Sheet, Henrik CV, Advisor Bios, Employment Agreement, Advisory Agreement, MAZAK LOI, Customer LOI, NDA.</p>
+  <p style="margin-top:12px;"><span class="highlight">Approach 5 &mdash; Cap Table Cascade</span> (python-docx + openpyxl + python-pptx): Used for multi-document co-founder integration. Systematic 7-phase update across .docx, .xlsx, .pptx, .md, and .json files. Table row insertion with deepcopy styling. Red thread verification scan across 94 files. Used for: REV8 co-founder integration (24+ files).</p>
+  <p style="margin-top:12px;"><span class="highlight">Key insight:</span> XML-level fixes are instant and reliable for targeted changes. Template rebuilds are better when the file structure needs significant modification. The .md-first approach for new documents allows rapid content iteration with user, followed by batch .docx conversion. All approaches produce verifiable results with automated checkpoint verification.</p>
+
+  <table class="reco-table" style="margin-top:24px;">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Total .docx files in VDR</td>
+        <td class="check">38 .docx (36 compliant + REV7 archive + REV6 archive)</td>
+      </tr>
+      <tr>
+        <td>Total tracked non-.docx assets</td>
+        <td class="check">8 (2 .xlsx + 4 .pptx + 1 .protonsheet + 12 PDFs) &mdash; 4 at REV8 compliance</td>
+      </tr>
+      <tr>
+        <td>.docx files at full compliance (9/9)</td>
+        <td class="check">36 of 36 (100%)</td>
+      </tr>
+      <tr>
+        <td>Non-.docx files at REV8 compliance</td>
+        <td class="check">4 of 4 (2 .xlsx + 2 .pptx &mdash; all updated for 4-founder cap table)</td>
+      </tr>
+      <tr>
+        <td>Tier 7 documents (new, converted to .docx)</td>
+        <td class="check">8 &mdash; all at 9/9 compliance, transferred to VDR structure</td>
+      </tr>
+      <tr>
+        <td>Master document</td>
+        <td class="check">REV8 &mdash; 4-founder cap table &mdash; full Design Manual v2.0 compliance (9/9)</td>
+      </tr>
+      <tr>
+        <td>Investor Pitch Decks</td>
+        <td class="check">PreSeed V4 + Seed V4 &mdash; 14 slides each, 17/17 checkpoints, Slide 11 rebuilt (4 founders)</td>
+      </tr>
+      <tr>
+        <td>Files fixed via template rebuild</td>
+        <td>10 (including master document REV7)</td>
+      </tr>
+      <tr>
+        <td>Files fixed via XML surgery</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>Files already perfect (no changes needed)</td>
+        <td>9</td>
+      </tr>
+      <tr>
+        <td>New documents created (.md &rarr; .docx)</td>
+        <td class="check">8 (Tier 7 &mdash; converted and transferred to VDR)</td>
+      </tr>
+      <tr>
+        <td>Content fixes applied</td>
+        <td>Executive Summary P1/P36/P40-42 (Tier 6)</td>
+      </tr>
+      <tr>
+        <td>Seed readiness</td>
+        <td class="check">~75% (60 have / 20 need) &mdash; up from 65%</td>
+      </tr>
+      <tr>
+        <td>Backup files created</td>
+        <td>All modified files backed up to _BACKUPS_TIER* folders</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Next Steps &mdash; Priority Order</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Priority</th>
+      <th>Action</th>
+      <th>Owner</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background:#E8F5E9;">
+      <td>1</td>
+      <td>Fix design compliance in all 28 .docx files (Tiers 1-5)</td>
+      <td>Claude Code</td>
+      <td><span class="tag done">Complete</span></td>
+    </tr>
+    <tr style="background:#E8F5E9;">
+      <td>2</td>
+      <td>Update VDR README.md to reflect actual file structure</td>
+      <td>Claude Code</td>
+      <td><span class="tag done">Complete</span></td>
+    </tr>
+    <tr style="background:#E8F5E9;">
+      <td>3</td>
+      <td>Generate VDR Design Status Report (this document)</td>
+      <td>Claude Code</td>
+      <td><span class="tag done">Complete</span></td>
+    </tr>
+    <tr style="background:#E8F5E9;">
+      <td>4</td>
+      <td>Resolve Executive Summary content flags (P1, P36, P40-42)</td>
+      <td>Claude Code</td>
+      <td><span class="tag done">Complete</span></td>
+    </tr>
+    <tr style="background:#E8F5E9;">
+      <td>5</td>
+      <td>Upgrade master document to REV7 (Design Manual v2.0)</td>
+      <td>Claude Code</td>
+      <td><span class="tag done">Complete</span></td>
+    </tr>
+    <tr style="background:#E8F5E9;">
+      <td>6</td>
+      <td>Build Investor Pitch Deck V4 (PPTX)</td>
+      <td>Claude Code</td>
+      <td><span class="tag done">Complete</span></td>
+    </tr>
+    <tr style="background:#E8F5E9;">
+      <td>7</td>
+      <td>Create 8 new VDR documents as .md source files (Tier 7)</td>
+      <td>Claude Code</td>
+      <td><span class="tag done">Complete</span></td>
+    </tr>
+    <tr style="background:#E8F5E9;">
+      <td>8</td>
+      <td>Prepare Cowork instruction for .docx conversion (all 8 files)</td>
+      <td>Claude Code</td>
+      <td><span class="tag done">Complete</span></td>
+    </tr>
+    <tr style="background:#E8F5E9;">
+      <td>9</td>
+      <td>Execute .docx conversion (Design Manual v2.0 styling) &mdash; all 8 files</td>
+      <td>Cowork</td>
+      <td><span class="tag done">Complete</span></td>
+    </tr>
+    <tr style="background:#E8F5E9;">
+      <td>10</td>
+      <td>Co-founder integration: REV8 / Fredrik Vangsal (24+ files, red thread verified)</td>
+      <td>Claude Code</td>
+      <td><span class="tag done">Complete</span></td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Legal review of Employment &amp; Advisory Agreement drafts</td>
+      <td>Legal Counsel</td>
+      <td><span class="tag missing">External</span></td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Obtain supplier signature on MAZAK/Ravema LOI</td>
+      <td>Founders</td>
+      <td><span class="tag missing">External</span></td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Obtain tax confirmations, business permits, Norbygg lease</td>
+      <td>Founders</td>
+      <td><span class="tag missing">External</span></td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Create pipeline spreadsheet and ESOP plan</td>
+      <td>Founders + Claude Code</td>
+      <td><span class="tag draft">Pending</span></td>
+    </tr>
+  </tbody>
+</table>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="conf">CONFIDENTIAL</div>
+  <div>Aurelian Manufacturing AS &mdash; VDR Design Compliance Report &mdash; 17 February 2026</div>
+  <div style="margin-top:4px;">v7.0 &mdash; Generated by Claude Code &mdash; 36/36 .docx compliant (Tier 1&ndash;8 complete) &mdash; REV8 &mdash; ~75% Seed ready</div>
+</footer>
+
+</body>
+</html>

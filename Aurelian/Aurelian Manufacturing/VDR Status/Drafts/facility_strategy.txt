@@ -1,0 +1,143 @@
+Verksted- og Eiendomsstrategi
+
+Vedlegg G --- Samarbeid med utbyggerpartner Norbygg
+
+Aurelian Manufacturing AS \| VDR Dokument 04 \| Februar 2026 \|
+Konfidensielt
+
+G.1 Formål
+
+Dette vedlegget dokumenterer Aurelian Manufacturing sin verksted- og
+eiendomsstrategi, herunder samarbeid med utbyggerpartner Norbygg.
+Formålet er å vise hvordan den fysiske infrastrukturen understøtter
+forretningsmodellen, reduserer kapitalbinding og bidrar til forutsigbar,
+bankmessig robust drift i ramp-up og videre skalering.
+
+Vedlegget er ment som et komplement til Markedsanalysen og
+Investeringsmemorandumet, og gir et beslutningsrelevant bilde av
+eiendomsløsningen sett fra et finansierings- og risikoperspektiv.
+
+G.2 Overordnet eiendoms- og verkstedstrategi
+
+Aurelian Manufacturing har valgt leie av verkstedlokaler fremfor
+eierskap i etablerings- og skaleringsfasen. Dette er et bevisst valg for
+å:
+
+-   begrense kapitalbinding utenfor kjernevirksomheten
+
+-   prioritere kapital til maskiner, automasjon og digital infrastruktur
+
+-   sikre høy finansiell fleksibilitet i ramp-up-perioden
+
+-   redusere balanse- og gjennomføringsrisiko
+
+Eiendom betraktes som en støttende infrastruktur, ikke som en
+verdidriver i seg selv. Strategien bidrar til lavere finansiell risiko
+og bedre kapitaldisiplin, noe som er sentralt i bankens vurdering av
+prosjektet.
+
+G.3 Samarbeidet med Norbygg -- rollefordeling
+
+Samarbeidet med Norbygg er strukturert som et tydelig partnerskap mellom
+industriell leietaker og profesjonell eiendomsutvikler:
+
+Norbygg (utbyggerpartner):
+
+-   utvikler, eier og forvalter bygningsmassen
+
+-   tilpasser lokaler i henhold til Aurelians funksjonelle krav
+
+-   bærer eiendomsrelatert investerings- og restverdirisiko
+
+Aurelian Manufacturing (leietaker):
+
+-   definerer krav til layout, tekniske føringer og logistikk
+
+-   leier ferdig tilpassede lokaler gjennom langsiktig, kommersiell
+    > leieavtale
+
+-   unngår egen CAPEX knyttet til bygg og fast infrastruktur
+
+Denne rollefordelingen gir et klart og bankmessig ryddig skille mellom
+industriell drift og verdiskaping, og eiendomsutvikling og eierskap.
+
+G.4 Verkstedutforming -- bankrelevante prinsipper
+
+Verkstedet er utformet for å støtte autonom CNC-drift og høy
+maskinutnyttelse, med følgende føringer:
+
+-   modulbasert, fleksibel layout
+
+-   tilrettelagt for palletterte CNC-celler og automatisert materialflyt
+
+-   dimensjonert for ubemannet drift kveld, natt og helg
+
+-   enkelt å skalere innen samme bygningsvolum eller ved utvidelse
+
+Utformingen er bevisst holdt industrielt generisk, slik at lokalene har
+alternativ anvendelse, ikke er spesialtilpasset én leietaker, og dermed
+gir utbygger god restverdisikkerhet. Dette reduserer indirekte også
+Aurelians leierisiko over tid.
+
+G.5 Leiemodell og kostnadsforankring
+
+Leieforholdet er strukturert som en ordinær, langsiktig
+næringsleieavtale med:
+
+-   forutsigbar årlig leie
+
+-   OPEX-karakter (ingen balanseført eiendom)
+
+-   fleksibilitet ved endret kapasitetsbehov
+
+Årlig leie er anslått til 5,2 MNOK. Dette nivået er benyttet som et
+konservativt planleggingsanslag og vil bli justert når endelig areal,
+teknisk standard og felleskostnader er fastlagt.
+
+I Markedsanalysen er husleie inkludert i Øvrige driftskostnader, jf.
+punkt 6.3 -- Kostnadsstruktur -- full skala. Leien inngår dermed
+eksplisitt i den samlede økonomiske modellen som ligger til grunn for
+lønnsomhets-, robusthets- og sensitivitetsanalysene.
+
+G.6 Skalerbarhet og fremtidig replikering
+
+Eiendoms- og verkstedkonseptet er utviklet for å være repeterbart:
+
+-   samme grunnprinsipp kan benyttes ved nye lokasjoner
+
+-   tekniske og funksjonelle krav kan standardiseres
+
+-   reduserer etableringsrisiko ved videre ekspansjon
+
+Dette gir Aurelian mulighet til å skalere virksomheten uten å binde
+kapital i eiendom, samtidig som bankens sikkerhets- og risikoperspektiv
+ivaretas.
+
+G.7 Bruk av skisser og kostnadsunderlag
+
+Dette vedlegget er tilrettelagt for å suppleres med:
+
+-   verkstedskisser og plantegninger
+
+-   illustrasjoner av maskinlayout og logistikkflyt
+
+-   detaljert kostnadsbilde for leie, felleskostnader og energi
+
+Slike elementer kan inkluderes direkte i Vedlegg G eller som underbilag
+(G1--G3) uten å endre hovedrapportens struktur.
+
+G.8 Samlet vurdering -- bankperspektiv
+
+Valgt verksted- og eiendomsstrategi gir:
+
+-   lavere kapitalbinding og redusert balansebelastning
+
+-   høy fleksibilitet i ramp-up og videre skalering
+
+-   forutsigbare driftskostnader
+
+-   tydelig risikodeling mellom industriell drift og eiendom
+
+Samarbeidet med Norbygg og bruken av leie fremfor eierskap styrker
+prosjektets finansielle robusthet og understøtter Aurelians posisjon som
+et bankbart, skalerbart industrikonsept.

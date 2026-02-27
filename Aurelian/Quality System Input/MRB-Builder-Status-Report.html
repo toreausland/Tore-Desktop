@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Digital MRB Builder: Build Status Report V3</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --red: #F50537;
+    --black: #2B2B2B;
+    --pure-black: #000000;
+    --white: #FFFFFF;
+    --gray-med: #6B6B6B;
+    --gray-panel: #F5F5F5;
+    --gray-divider: #D3D3D3;
+    --dark-charcoal: #1A1A1A;
+    --navy-card: #253B52;
+    --steel-blue: #8EAEC5;
+    --green: #1C6E3D;
+    --amber: #C47F17;
+  }
+
+  body {
+    font-family: Calibri, 'Segoe UI', Arial, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.5;
+  }
+
+  /* === COVER === */
+  .cover {
+    background: var(--pure-black);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+  }
+  .cover-label {
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gray-med);
+    margin-bottom: 30px;
+  }
+  .cover h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .cover-bar {
+    width: 200px;
+    height: 3px;
+    background: var(--red);
+    margin: 20px auto;
+  }
+  .cover h2 {
+    font-size: 22px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+  .cover .subtitle {
+    font-size: 15px;
+    color: var(--gray-med);
+    max-width: 700px;
+    line-height: 1.6;
+  }
+  .cover-footer {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    font-size: 11px;
+    color: var(--gray-med);
+  }
+  .cover-meta {
+    margin-top: 40px;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+  }
+  .cover-meta-item {
+    text-align: center;
+  }
+  .cover-meta-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray-med);
+  }
+  .cover-meta-value {
+    font-size: 14px;
+    color: var(--white);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  /* === SECTIONS === */
+  .section {
+    padding: 60px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-dark {
+    background: var(--dark-charcoal);
+    max-width: 100%;
+    padding: 60px 60px;
+  }
+  .section-dark .inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .section h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .section-dark h2 { color: var(--white); }
+  .section h3 {
+    font-size: 15px;
+    color: var(--gray-med);
+    font-weight: 400;
+    margin-bottom: 30px;
+    max-width: 900px;
+  }
+  .section-dark h3 { color: var(--steel-blue); }
+
+  /* === STATS === */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin: 30px 0;
+  }
+  .stat-card {
+    background: var(--navy-card);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--steel-blue);
+    margin-top: 4px;
+  }
+
+  /* === TABLES === */
+  table.doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 30px;
+    font-size: 13px;
+  }
+  table.doc-table thead th {
+    background: var(--black);
+    color: var(--white);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  table.doc-table tbody tr:nth-child(even) { background: var(--gray-panel); }
+  table.doc-table tbody td {
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--gray-divider);
+    vertical-align: top;
+  }
+  table.doc-table-dark thead th {
+    background: var(--navy-card);
+    color: var(--white);
+  }
+  table.doc-table-dark tbody tr:nth-child(even) { background: rgba(255,255,255,0.03); }
+  table.doc-table-dark tbody td {
+    border-bottom-color: rgba(255,255,255,0.08);
+    color: var(--steel-blue);
+  }
+
+  /* === BADGES === */
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+  .badge-done { background: var(--green); color: white; }
+  .badge-pending { background: var(--amber); color: white; }
+  .badge-not-started { background: var(--gray-med); color: white; }
+  .badge-defence { background: var(--red); color: white; }
+  .badge-oilgas { background: var(--navy-card); color: white; }
+  .badge-both { background: var(--black); color: white; }
+  .badge-iso { background: var(--gray-panel); color: var(--black); border: 1px solid var(--gray-divider); }
+  .badge-new { background: var(--red); color: white; font-size: 9px; padding: 1px 6px; letter-spacing: 1px; }
+
+  /* === CONTEXT BOX === */
+  .context-box {
+    background: var(--gray-panel);
+    border-left: 4px solid var(--red);
+    padding: 20px 24px;
+    margin: 20px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .context-box h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+  .context-box p, .context-box li {
+    font-size: 13px;
+    color: var(--gray-med);
+    line-height: 1.6;
+  }
+  .context-box ul { padding-left: 18px; }
+
+  /* === FLOW === */
+  .flow-chain {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 20px 0;
+  }
+  .flow-step {
+    background: var(--gray-panel);
+    border: 1px solid var(--gray-divider);
+    border-radius: 6px;
+    padding: 10px 16px;
+    text-align: center;
+    min-width: 120px;
+  }
+  .flow-step-active {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+  }
+  .flow-step h5 {
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .flow-step-active h5 { color: var(--white); }
+  .flow-step p {
+    font-size: 10px;
+    color: var(--gray-med);
+  }
+  .flow-step-active p { color: rgba(255,255,255,0.8); }
+  .flow-arrow {
+    font-size: 18px;
+    color: var(--red);
+    font-weight: 700;
+    padding: 0 6px;
+  }
+
+  /* === PROGRESS BAR === */
+  .progress-bar {
+    background: var(--gray-panel);
+    border-radius: 4px;
+    height: 8px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s;
+  }
+  .progress-fill-green { background: var(--green); }
+  .progress-fill-amber { background: var(--amber); }
+  .progress-fill-red { background: var(--red); }
+
+  /* === TWO COL === */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 20px 0;
+  }
+
+  /* === KEY INSIGHT === */
+  .insight {
+    background: var(--pure-black);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 20px 0;
+  }
+  .insight p {
+    color: var(--white);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .insight strong { color: var(--red); }
+
+  /* === TIMELINE === */
+  .timeline-h {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin: 20px 0;
+    position: relative;
+  }
+  .timeline-h::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gray-divider);
+  }
+  .tl-phase {
+    text-align: center;
+    position: relative;
+    padding: 0 8px;
+  }
+  .tl-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--red);
+    margin: 18px auto 12px;
+    position: relative;
+    z-index: 2;
+  }
+  .tl-dot-outline {
+    background: var(--dark-charcoal);
+    border: 3px solid var(--red);
+    width: 16px;
+    height: 16px;
+    margin-top: 17px;
+  }
+  .tl-dot-future { background: var(--gray-divider); }
+  .tl-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  .tl-date {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .tl-items {
+    text-align: left;
+    font-size: 11px;
+    color: var(--gray-med);
+    line-height: 1.5;
+  }
+
+  /* === DECISION CARD === */
+  .decision-card {
+    background: var(--navy-card);
+    border-radius: 6px;
+    padding: 18px 22px;
+  }
+  .decision-card h5 {
+    color: var(--red);
+    font-size: 12px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .decision-card p {
+    color: var(--steel-blue);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .decision-resolved {
+    border-left: 4px solid var(--green);
+  }
+  .decision-open {
+    border-left: 4px solid var(--amber);
+  }
+
+  /* === FOOTER === */
+  .page-footer {
+    background: var(--pure-black);
+    padding: 40px 60px;
+    text-align: center;
+  }
+  .page-footer p {
+    color: var(--gray-med);
+    font-size: 11px;
+  }
+  .page-footer .confidential {
+    color: var(--red);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* === DIVIDER === */
+  .divider {
+    height: 1px;
+    background: var(--gray-divider);
+    margin: 30px 0;
+  }
+
+  /* === CHECKLIST === */
+  .checklist {
+    counter-reset: cl-step;
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+  }
+  .cl-item {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 0;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .cl-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 25px;
+    top: 52px;
+    bottom: -20px;
+    width: 2px;
+    background: var(--gray-divider);
+  }
+  .cl-number {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--red);
+    color: var(--white);
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .cl-body {
+    background: var(--gray-panel);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 22px;
+    border-left: 4px solid var(--red);
+  }
+  .cl-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+  .cl-time {
+    font-size: 11px;
+    color: var(--white);
+    background: var(--black);
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .cl-desc {
+    font-size: 13px;
+    color: var(--gray-med);
+    line-height: 1.6;
+  }
+  .cl-desc strong { color: var(--black); }
+  .cl-questions {
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: var(--white);
+    border-radius: 4px;
+    border: 1px solid var(--gray-divider);
+  }
+  .cl-questions h6 {
+    font-size: 11px;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .cl-questions li {
+    font-size: 12px;
+    color: var(--black);
+    line-height: 1.7;
+    margin-left: 16px;
+  }
+  .cl-file {
+    font-size: 11px;
+    color: var(--gray-med);
+    margin-top: 8px;
+    font-style: italic;
+  }
+  .cl-deliverable {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--green);
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* === VERSION BANNER === */
+  .version-banner {
+    background: var(--red);
+    color: var(--white);
+    text-align: center;
+    padding: 8px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  /* === PRINT / RESPONSIVE === */
+  @media (max-width: 900px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+    .timeline-h { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .timeline-h::before { display: none; }
+    .section { padding: 30px 20px; }
+    .section-dark { padding: 30px 20px; }
+    .cover h1 { font-size: 30px; }
+    .flow-chain { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+
+  @media print {
+    .cover { min-height: auto; padding: 40px; page-break-after: always; }
+    .section-dark { background: #f0f0f0 !important; color: #000 !important; }
+    .section-dark h2, .section-dark h3 { color: #000 !important; }
+    .stat-card { border: 1px solid #ccc; background: #f9f9f9 !important; }
+    .stat-number { color: #000 !important; }
+    .stat-label { color: #666 !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== VERSION BANNER ========== -->
+<div class="version-banner">
+  V3.0 &mdash; Updated 22 February 2026 &mdash; Interactive UI Prototype delivered (7 screens). Fredrik&rsquo;s Technical Review Checklist added (5 steps, ~3&ndash;4 hrs). Start with the UI prototype, then review AM-TS-001 and AM-MVP-001, decide ERP scope, and schedule sprint planning session.
+</div>
+
+<!-- ========== COVER ========== -->
+<div class="cover">
+  <div class="cover-label">Aurelian Manufacturing AS &mdash; Technical Review</div>
+  <h1>Digital MRB Builder</h1>
+  <div class="cover-bar"></div>
+  <h2>Build Status Report &mdash; V3</h2>
+  <p class="subtitle">Updated status of the Digital MRB Builder quality system design. Reflects completed work packages, interactive UI prototype with 7 connected screens, and readiness for Phase 0 software development.</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Prepared For</div>
+      <div class="cover-meta-value">Fredrik Vangsal &mdash; Technical Advisor</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Date</div>
+      <div class="cover-meta-value">22 February 2026</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Version</div>
+      <div class="cover-meta-value" style="color: var(--red);">V3 &mdash; Post WP-1/WP-2/WP-3/WP-4/WP-6 + Review + Interactive UI Prototype (7 screens)</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Status</div>
+      <div class="cover-meta-value" style="color: var(--red);">Technical Review</div>
+    </div>
+  </div>
+  <div class="cover-footer">
+    <span>CONFIDENTIAL</span>
+    <span>Aurelian Manufacturing AS &mdash; Org.nr 835 679 632</span>
+  </div>
+</div>
+
+<!-- ========== 1. EXECUTIVE SUMMARY ========== -->
+<div class="section">
+  <div class="section-label">Section 1</div>
+  <h2>Executive Summary</h2>
+  <h3>What has been built, what has changed, and where we are now.</h3>
+
+  <div class="context-box">
+    <h4>What is the Digital MRB Builder?</h4>
+    <p>A Manufacturing Record Book (MRB) is the complete documentation package that accompanies every manufactured product to the customer. In defence and oil &amp; gas, this is not optional &mdash; it is a contractual and regulatory requirement. An incomplete or incorrect MRB can block shipment, trigger penalties, and jeopardize certifications.</p>
+    <p style="margin-top: 8px;">The Digital MRB Builder is Aurelian&rsquo;s in-house software system that automates the entire MRB lifecycle: from parsing customer documentation requirements at order intake, through material gate review, document collection from CNC machines and suppliers, 5-layer document validation, Certificate of Conformance generation, final MRB assembly, delivery, and 15&ndash;30+ year archival.</p>
+    <p style="margin-top: 8px;"><strong style="color: var(--red);">It is not a document management system.</strong> It is an active quality engine that enforces compliance in real time, catches errors before they reach the customer, and generates legally binding documentation automatically from validated source data.</p>
+  </div>
+
+  <!-- V3 UPDATE CALLOUT -->
+  <div style="background: var(--pure-black); border: 2px solid var(--red); border-radius: 8px; padding: 24px 28px; margin: 20px 0;">
+    <h4 style="color: var(--red); font-size: 14px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">What has changed since V2 (21 February)</h4>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div>
+        <p style="color: var(--white); font-size: 13px; line-height: 1.8;">
+          <strong style="color: var(--red); font-size: 15px;">&#9733;</strong> <strong style="color: var(--white);">Interactive UI Prototype delivered &mdash; 7 screens</strong><br>
+          <strong style="color: var(--green);">&check;</strong> Dashboard (MRB-Builder-App-Shell.html)<br>
+          <strong style="color: var(--green);">&check;</strong> Orders List (MRB-Orders-List-Screen.html)<br>
+          <strong style="color: var(--green);">&check;</strong> Order Detail (MRB-Order-Detail-Screen.html)<br>
+          <strong style="color: var(--green);">&check;</strong> MRB Index (MRB-Index-Screen.html)<br>
+          <strong style="color: var(--green);">&check;</strong> Gate Review (MRB-Gate-Review-Screen.html)<br>
+          <strong style="color: var(--green);">&check;</strong> SDRL Parser (MRB-SDRL-Parser-Screen.html)<br>
+          <strong style="color: var(--green);">&check;</strong> Correction Request (MRB-Correction-Request-Screen.html)
+        </p>
+      </div>
+      <div>
+        <p style="color: var(--white); font-size: 13px; line-height: 1.8;">
+          <strong style="color: var(--green);">&check;</strong> All screens interconnected with working navigation<br>
+          <strong style="color: var(--green);">&check;</strong> Sidebar, breadcrumbs, table rows, stat cards all clickable<br>
+          <strong style="color: var(--green);">&check;</strong> Aurelian design system applied consistently<br>
+          <strong style="color: var(--green);">&check;</strong> Demo data narrative: ORD-2026-0034 (Equinor, ASTM A182 F316)<br>
+          <strong style="color: var(--green);">&check;</strong> 12-state pipeline visualized across all screens<br>
+          <strong style="color: var(--green);">&check;</strong> 5-layer validation pipeline demonstrated<br>
+          <strong style="color: var(--green);">&check;</strong> FM-009-01 (SDRL) and FM-010-01 (CR) form specs realized<br>
+          <strong style="color: var(--green);">&check;</strong> All 15 review findings remain implemented
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- V2 CHANGES (previous) -->
+  <div style="background: var(--gray-panel); border-left: 4px solid var(--gray-divider); border-radius: 0 8px 8px 0; padding: 18px 24px; margin: 16px 0; opacity: 0.7;">
+    <h4 style="color: var(--gray-med); font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Previously in V2 (19&ndash;21 February)</h4>
+    <p style="font-size: 12px; color: var(--gray-med); line-height: 1.6;">
+      WP-1 (IT/System Spec) &bull; WP-2 (Customer Templates) &bull; WP-3 (24 Form Templates) &bull; WP-4 (13 Work Instructions + 7 QRCs) &bull; WP-6 (MVP Scope: 11 epics, 58 stories) &bull; Build own ERP decision &bull; Oil &amp; Gas Phase 0 primary &bull; AM-TS-001 Rev 1.3 (36 entities, 27 ENUMs) &bull; All 15 review findings implemented
+    </p>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-number">6</div>
+      <div class="stat-label">QMS Procedures</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">24</div>
+      <div class="stat-label">Quality Forms</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">13</div>
+      <div class="stat-label">Work Instructions</div>
+    </div>
+    <div class="stat-card" style="border: 2px solid var(--red);">
+      <div class="stat-number" style="color: var(--red);">7</div>
+      <div class="stat-label">UI Prototype Screens</div>
+    </div>
+    <div class="stat-card" style="border: 2px solid var(--red);">
+      <div class="stat-number" style="color: var(--red);">5 / 6</div>
+      <div class="stat-label">Work Packages Done</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FREDRIK'S REVIEW CHECKLIST ========== -->
+<div class="section-dark">
+  <div class="inner">
+    <div class="section-label" style="color: var(--red);">Fredrik &mdash; Start Here <span class="badge-new">NEW IN V3</span></div>
+    <h2>Technical Review Checklist</h2>
+    <h3>5 steps, in order. Everything you need to review before we start Phase 0 sprint planning. Estimated total: 3&ndash;4 hours.</h3>
+
+    <ul class="checklist">
+
+      <!-- STEP 1 -->
+      <li class="cl-item">
+        <div class="cl-number">1</div>
+        <div class="cl-body">
+          <div class="cl-title">Click Through the UI Prototype</div>
+          <div class="cl-time">~15 min</div>
+          <p class="cl-desc">Open <strong>MRB-Builder-App-Shell.html</strong> in your browser. This is the Dashboard. Click through all 7 screens to see the system in context before reading the specs. The demo data follows one order end-to-end:</p>
+          <p class="cl-desc" style="margin-top: 8px;">
+            <strong style="color: var(--red);">Dashboard</strong> &rarr; <strong>Orders List</strong> (12 orders) &rarr; <strong>Order Detail</strong> (ORD-2026-0034, Equinor) &rarr; <strong>MRB Index</strong> (7 sections, 34 docs) &rarr; <strong>Gate Review</strong> (GR-2026-0047, elongation finding) &rarr; <strong>SDRL Parser</strong> (FM-009-01, 34 line items) &rarr; <strong>Correction Request</strong> (CR-2026-00015, ASTM A182 F316 elongation 28.5% &lt; 30.0%)
+          </p>
+          <p class="cl-file">File: Quality System Input\MRB-Builder-App-Shell.html (all 7 screens in the same folder)</p>
+          <div class="cl-deliverable">Deliverable: Familiarity with system scope and UX</div>
+        </div>
+      </li>
+
+      <!-- STEP 2 -->
+      <li class="cl-item">
+        <div class="cl-number">2</div>
+        <div class="cl-body">
+          <div class="cl-title">Review AM-TS-001 &mdash; IT/System Technical Specification</div>
+          <div class="cl-time">~90 min</div>
+          <p class="cl-desc">This is the binding specification for the development team. Currently at <strong>Rev 1.3</strong> (36 entities, 27 ENUM types). Focus on feasibility and implementation approach &mdash; the business rules are already validated by Tore.</p>
+          <div class="cl-questions">
+            <h6>Key sections to review</h6>
+            <ul>
+              <li><strong>&sect;5 System Architecture</strong> &mdash; Unified Aurelian Platform (ERP module + MRB Builder). Is the shared-database, two-schema approach sound?</li>
+              <li><strong>&sect;6 Technology Stack</strong> &mdash; Self-hosted Supabase, Next.js + TypeScript, PostgREST + RPC. Any concerns?</li>
+              <li><strong>&sect;7 Data Model</strong> &mdash; 36 entities across erp.* and mrb.* schemas. 27 ENUM types. Are relationships correct? Anything missing?</li>
+              <li><strong>&sect;8 Security</strong> &mdash; Zero Trust via Postgres RLS, AES-256, tenant isolation, ITAR/EAR handling. Sufficient for Phase 0?</li>
+              <li><strong>&sect;9 Machine Integration</strong> &mdash; MQTT/OPC-UA, canonical event schema, edge buffer. Practical with our CNC fleet?</li>
+              <li><strong>&sect;10 Internal Module Integration</strong> &mdash; PostgreSQL triggers, NOTIFY/LISTEN, cross-schema views. Performance concerns?</li>
+              <li><strong>&sect;16 Phase Mapping</strong> &mdash; Does the Phase 0 scope (O&amp;G simulation, no live CNC) match development capacity?</li>
+            </ul>
+          </div>
+          <div class="cl-questions" style="margin-top: 8px; border-left: 3px solid var(--amber);">
+            <h6 style="color: var(--amber);">Decisions needed from you</h6>
+            <ul>
+              <li>Are the 36 entities implementable in Supabase/PostgreSQL as specified?</li>
+              <li>Any entities that should be merged, split, or restructured?</li>
+              <li>Is the MQTT canonical event schema realistic for CNC integration?</li>
+              <li>RPO 15 min / RTO 2 hr &mdash; achievable with self-hosted Supabase on AWS?</li>
+            </ul>
+          </div>
+          <p class="cl-file">File: AM-TS-001 Rev 1.3 (.docx in Quality System Input folder)</p>
+          <div class="cl-deliverable">Deliverable: Written feedback or approval &mdash; findings list if changes needed</div>
+        </div>
+      </li>
+
+      <!-- STEP 3 -->
+      <li class="cl-item">
+        <div class="cl-number">3</div>
+        <div class="cl-body">
+          <div class="cl-title">Review AM-MVP-001 &mdash; MVP Scope &amp; Sprint Plan</div>
+          <div class="cl-time">~60 min</div>
+          <p class="cl-desc">Defines <strong>what gets built</strong> and <strong>in what order</strong>. 11 epics, 58 user stories, 9-sprint delivery plan with 5 milestones. Currently at <strong>Rev 1.1</strong>. Focus on the infrastructure/technical epics and whether the sprint sequence is realistic.</p>
+          <div class="cl-questions">
+            <h6>Key sections to review</h6>
+            <ul>
+              <li><strong>&sect;3&ndash;4 Epics &amp; Stories</strong> &mdash; Focus on technical epics: EPIC-01 (Infrastructure), EPIC-02 (Auth &amp; RBAC), EPIC-07 (Validation Engine), EPIC-08 (CoC Generator), EPIC-10 (Reporting), EPIC-11 (Machine Integration)</li>
+              <li><strong>&sect;8 Dependency Chain</strong> &mdash; Is the epic ordering correct? Any hidden dependencies?</li>
+              <li><strong>&sect;9 NFRs</strong> &mdash; Performance targets, security requirements, availability SLAs</li>
+              <li><strong>&sect;11 Milestone Schedule</strong> &mdash; 9 sprints across Phase 0. Realistic with our dev team size?</li>
+            </ul>
+          </div>
+          <div class="cl-questions" style="margin-top: 8px; border-left: 3px solid var(--amber);">
+            <h6 style="color: var(--amber);">Decisions needed from you</h6>
+            <ul>
+              <li>Sprint duration preference: 2-week or 3-week sprints?</li>
+              <li>Dev team capacity: how many FTEs for Phase 0?</li>
+              <li>Any epics that should be re-ordered or de-scoped for Phase 0?</li>
+              <li>Is the NFR target set realistic for a Phase 0 build?</li>
+            </ul>
+          </div>
+          <p class="cl-file">File: AM-MVP-001 Rev 1.1 (.docx in Quality System Input folder)</p>
+          <div class="cl-deliverable">Deliverable: Approved sprint plan or adjusted sequence</div>
+        </div>
+      </li>
+
+      <!-- STEP 4 -->
+      <li class="cl-item">
+        <div class="cl-number">4</div>
+        <div class="cl-body">
+          <div class="cl-title">Decide: ERP Module Scope Depth (F4b)</div>
+          <div class="cl-time">~15 min</div>
+          <p class="cl-desc">Aurelian builds its own ERP module (decided). The question is <strong>how deep Phase 0&ndash;1 goes</strong>. This does not block MRB Builder development, but it affects Phase 1 scope and dev capacity planning.</p>
+          <div class="cl-questions">
+            <h6 style="color: var(--amber);">The question</h6>
+            <ul>
+              <li><strong>Option A &mdash; Minimal:</strong> PO management + basic inventory + material tracking. Enough for MRB Builder to function. Production scheduling, procurement, and invoicing come later.</li>
+              <li><strong>Option B &mdash; Extended:</strong> Add production scheduling and procurement from the start. More work upfront, but avoids rework when scaling.</li>
+              <li><strong>Option C &mdash; Full:</strong> Complete manufacturing ERP from Phase 0. High risk of scope creep but maximum integration from day one.</li>
+            </ul>
+          </div>
+          <p class="cl-file">Context: AM-TS-001 &sect;10 (Internal Module Integration)</p>
+          <div class="cl-deliverable">Deliverable: Decision on scope (A, B, or C) with rationale</div>
+        </div>
+      </li>
+
+      <!-- STEP 5 -->
+      <li class="cl-item">
+        <div class="cl-number">5</div>
+        <div class="cl-body" style="border-left-color: var(--green);">
+          <div class="cl-title">Joint Session: Phase 0 Sprint Planning</div>
+          <div class="cl-time">~60 min &bull; Fredrik + Tore</div>
+          <p class="cl-desc">After steps 1&ndash;4, we sit down and finalize the sprint plan. Using AM-MVP-001 &sect;8 dependency chain and &sect;11 milestone schedule. Assign epics to sprints, agree on dev team structure, set Phase 0 start date.</p>
+          <div class="cl-questions">
+            <h6>Agenda</h6>
+            <ul>
+              <li>Walk through any findings from steps 2&ndash;3 &mdash; implement changes if needed</li>
+              <li>Confirm ERP module scope depth (step 4)</li>
+              <li>Assign epics to 9-sprint sequence with resource allocation</li>
+              <li>Set Phase 0 kick-off date and first milestone target</li>
+              <li>Agree on dev environment setup (Supabase instance, repo structure, CI/CD)</li>
+            </ul>
+          </div>
+          <div class="cl-deliverable">Deliverable: Approved Phase 0 plan &mdash; development starts</div>
+        </div>
+      </li>
+
+    </ul>
+
+    <div style="background: var(--navy-card); border-radius: 6px; padding: 18px 22px; margin-top: 8px;">
+      <h5 style="color: var(--red); font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Context: What Tore Has Already Reviewed</h5>
+      <p style="color: var(--steel-blue); font-size: 12px; line-height: 1.7;">
+        Tore reviewed all documents from the industry/requirements perspective and produced 15 findings (9 on AM-FM-001, 3 on AM-MVP-001, 3 on AM-TS-001). <strong style="color: var(--white);">All 15 findings are already implemented</strong> in Rev 1.1/1.3 of each document. You are reviewing the updated versions. The full finding details are in Section 13 if you want context, but <strong style="color: var(--white);">you do not need to re-validate Tore&rsquo;s findings</strong> &mdash; focus on the technical/implementation feasibility.
+      </p>
+    </div>
+
+    <div style="background: var(--navy-card); border-radius: 6px; padding: 18px 22px; margin-top: 12px;">
+      <h5 style="color: var(--red); font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Reference Documents (all in Quality System Input folder)</h5>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+        <p style="color: var(--steel-blue); font-size: 12px; line-height: 1.8;">
+          <strong style="color: var(--white);">&bull;</strong> AM-TS-001 Rev 1.3 &mdash; IT/System Tech Spec<br>
+          <strong style="color: var(--white);">&bull;</strong> AM-MVP-001 Rev 1.1 &mdash; MVP Scope Definition<br>
+          <strong style="color: var(--white);">&bull;</strong> AM-FM-001 Rev 1.1 &mdash; Form Templates (24 forms)<br>
+          <strong style="color: var(--white);">&bull;</strong> AM-CT-001 &mdash; Customer Templates<br>
+          <strong style="color: var(--white);">&bull;</strong> AM-WI-001 &mdash; Work Instructions (13 WIs)
+        </p>
+        <p style="color: var(--steel-blue); font-size: 12px; line-height: 1.8;">
+          <strong style="color: var(--white);">&bull;</strong> PR-008&ndash;013 &mdash; QMS Procedures<br>
+          <strong style="color: var(--white);">&bull;</strong> AM-IF-001 &mdash; Interface Specification<br>
+          <strong style="color: var(--white);">&bull;</strong> MRB-Builder-App-Shell.html &mdash; UI Prototype (start here)<br>
+          <strong style="color: var(--white);">&bull;</strong> MRB-Builder-Architecture.html &mdash; System Architecture Visual<br>
+          <strong style="color: var(--white);">&bull;</strong> MRB-Builder-Status-Report.html &mdash; This report
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========== 2. KEY DECISIONS MADE ========== -->
+<div class="section-dark">
+  <div class="inner">
+    <div class="section-label" style="color: var(--red);">Section 2 <span class="badge-new">NEW IN V2</span></div>
+    <h2>Key Architectural Decisions</h2>
+    <h3>Four strategic decisions have been made since V1. These fundamentally shape the system architecture and development approach.</h3>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+
+      <div class="decision-card decision-resolved">
+        <h5>Decision 1 &mdash; Build Own ERP Module</h5>
+        <p><strong style="color: var(--white);">Decision:</strong> Aurelian will build its own ERP module as part of a unified platform, rather than purchasing a third-party ERP (e.g., Epicor, SAP).</p>
+        <p style="margin-top: 8px;"><strong style="color: var(--white);">Rationale:</strong> Ensures seamless integration in our digital tech stack. The ERP module and MRB Builder share one PostgreSQL database with separate schemas (<code style="color: var(--white);">erp.*</code> and <code style="color: var(--white);">mrb.*</code>). Internal module boundaries replace the 20 external API interfaces defined in AM-IF-001.</p>
+        <p style="margin-top: 8px;"><strong style="color: var(--white);">Impact:</strong> AM-TS-001 Section 10 rewritten. Architecture diagram updated to &ldquo;ERP Module (In-House)&rdquo;. AM-IF-001 becomes an internal boundary specification. PR-009 updated &mdash; Epicor references removed, state machine harmonized.</p>
+      </div>
+
+      <div class="decision-card decision-resolved">
+        <h5>Decision 2 &mdash; Oil &amp; Gas First</h5>
+        <p><strong style="color: var(--white);">Decision:</strong> Phase 0 begins with an Oil &amp; Gas order simulation. Defence templates follow in Phase 0.5.</p>
+        <p style="margin-top: 8px;"><strong style="color: var(--white);">Rationale:</strong> Real Oil &amp; Gas data (SDRLs, material certificates, customer specs) will be available within days. Defence data is harder to obtain due to classification and longer sales cycles.</p>
+        <p style="margin-top: 8px;"><strong style="color: var(--white);">Impact:</strong> AM-TS-001 Phase 0 mapping updated. AM-CT-001 Oil &amp; Gas SDRL template is primary. Full documentation chain from PO receipt to delivery will be simulated for O&amp;G first.</p>
+      </div>
+
+      <div class="decision-card decision-resolved">
+        <h5>Decision 3 &mdash; E-Signature Required</h5>
+        <p><strong style="color: var(--white);">Decision:</strong> The system must include an e-signature methodology for CoC signing and gate approvals.</p>
+        <p style="margin-top: 8px;"><strong style="color: var(--white);">Rationale:</strong> CoC is a legally binding document. Digital workflow requires digital signing. Paper signatures are not scalable for autonomous manufacturing.</p>
+        <p style="margin-top: 8px;"><strong style="color: var(--amber);">Open:</strong> Specific implementation (embedded vs third-party service) is a question for Fredrik. See Section 9.</p>
+      </div>
+
+      <div class="decision-card decision-resolved">
+        <h5>Decision 4 &mdash; Real SDRLs for Simulation</h5>
+        <p><strong style="color: var(--white);">Decision:</strong> Phase 0 simulation will use real SDRLs from Oil &amp; Gas customers, not synthetic/generated data.</p>
+        <p style="margin-top: 8px;"><strong style="color: var(--white);">Rationale:</strong> Synthetic SDRLs may miss edge cases and real-world complexity. Real data validates the system against actual customer expectations.</p>
+        <p style="margin-top: 8px;"><strong style="color: var(--white);">Status:</strong> SDRLs are being sourced as part of the O&amp;G order simulation preparation.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========== 3. WHAT HAS BEEN BUILT ========== -->
+<div class="section">
+  <div class="section-label">Section 3</div>
+  <h2>What Has Been Built</h2>
+  <h3>Complete inventory of all documents and artifacts produced. Updated to reflect WP-1 and WP-2 delivery.</h3>
+
+  <h4 style="font-size: 15px; margin-bottom: 12px; color: var(--black);">3.1 &mdash; Quality System Documents</h4>
+
+  <table class="doc-table">
+    <thead>
+      <tr>
+        <th>Document</th>
+        <th>Title</th>
+        <th>ISO 9001</th>
+        <th>Industry</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>QM-001 Rev 2 Addendum</strong></td>
+        <td>Quality Manual &mdash; Digital MRB Builder Integration</td>
+        <td>All</td>
+        <td><span class="badge badge-both">Both</span></td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td><strong>PR-008</strong></td>
+        <td>Incoming Material Review and Release</td>
+        <td>8.4, 8.5.2, 8.6</td>
+        <td><span class="badge badge-both">Both</span></td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td><strong>PR-009</strong></td>
+        <td>SDRL Processing and MRB Management</td>
+        <td>8.1, 8.2, 8.5.1</td>
+        <td><span class="badge badge-both">Both</span></td>
+        <td><span class="badge badge-done">Complete</span> <span class="badge badge-pending" style="font-size: 8px;">NEEDS UPDATE</span></td>
+      </tr>
+      <tr>
+        <td><strong>PR-010</strong></td>
+        <td>Document Validation and Verification</td>
+        <td>7.5, 8.6</td>
+        <td><span class="badge badge-both">Both</span></td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td><strong>PR-011</strong></td>
+        <td>Certificate of Conformance</td>
+        <td>8.5.1, 8.6</td>
+        <td><span class="badge badge-both">Both</span></td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td><strong>PR-012</strong></td>
+        <td>MRB Assembly and Release</td>
+        <td>8.6, 7.5.2, 7.5.3</td>
+        <td><span class="badge badge-both">Both</span></td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td><strong>PR-013</strong></td>
+        <td>Document Archival and Retention</td>
+        <td>7.5.2, 7.5.3</td>
+        <td><span class="badge badge-both">Both</span></td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td><strong>AM-IF-001</strong></td>
+        <td>ERP &harr; MRB Builder Interface Specification</td>
+        <td>&mdash;</td>
+        <td><span class="badge badge-both">Both</span></td>
+        <td><span class="badge badge-done">Complete</span> <span style="font-size: 11px; color: var(--gray-med);">(now internal boundaries)</span></td>
+      </tr>
+      <tr style="background: rgba(245,5,55,0.06);">
+        <td><strong>AM-TS-001</strong> <span class="badge-new">NEW</span></td>
+        <td>IT/System Technical Specification</td>
+        <td>&mdash;</td>
+        <td><span class="badge badge-both">Both</span></td>
+        <td><span class="badge badge-done">Complete</span> <span style="font-size: 11px; color: var(--gray-med);">(WP-1)</span></td>
+      </tr>
+      <tr style="background: rgba(245,5,55,0.06);">
+        <td><strong>AM-CT-001</strong> <span class="badge-new">NEW</span></td>
+        <td>Customer-Facing Templates &mdash; SDRL, MRB Index, Requirement Profiles</td>
+        <td>&mdash;</td>
+        <td><span class="badge badge-both">Both</span></td>
+        <td><span class="badge badge-done">Complete</span> <span style="font-size: 11px; color: var(--gray-med);">(WP-2)</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 style="font-size: 15px; margin-bottom: 12px; color: var(--black);">3.2 &mdash; Visuals, Reports &amp; Interactive UI Prototype</h4>
+
+  <table class="doc-table">
+    <thead>
+      <tr><th>File</th><th>Description</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>MRB-Builder-Architecture.html</td>
+        <td>Interactive system architecture visual (cover, 3-layer diagram, 7-stage pipeline, data flow, 20 interfaces, 5-phase timeline, QMS map)</td>
+        <td><span class="badge badge-done">Complete</span> <span class="badge badge-pending" style="font-size: 8px;">NEEDS UPDATE</span></td>
+      </tr>
+      <tr>
+        <td>MRB-Builder-Status-Report.html</td>
+        <td>This document &mdash; build status report V3 for technical review</td>
+        <td><span class="badge badge-done">V3</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 style="font-size: 15px; margin: 20px 0 12px; color: var(--black);">3.2b &mdash; Interactive UI Prototype <span class="badge-new">NEW IN V3</span></h4>
+  <p style="font-size: 13px; color: var(--gray-med); margin-bottom: 12px;">7 fully connected HTML screens demonstrating the complete MRB lifecycle. All screens use the Aurelian design system and navigate between each other via sidebar, breadcrumbs, table rows, stat cards, and action buttons. Open <strong>MRB-Builder-App-Shell.html</strong> to start.</p>
+
+  <table class="doc-table">
+    <thead>
+      <tr><th>File</th><th>Description</th><th>Key Content</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr style="background: rgba(245,5,55,0.06);">
+        <td><strong>MRB-Builder-App-Shell.html</strong> <span class="badge-new">NEW</span></td>
+        <td>Dashboard &mdash; entry point to the system</td>
+        <td>4 KPI stat cards, activity feed (5 orders), MRB progress panel (3 active), quick actions. Clickable stat cards and table rows.</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr style="background: rgba(245,5,55,0.06);">
+        <td><strong>MRB-Orders-List-Screen.html</strong> <span class="badge-new">NEW</span></td>
+        <td>Orders List &mdash; all 12 orders with filters and sorting</td>
+        <td>5 stat cards, filter toolbar (state groups, industry, search), sortable table with MRB progress bars, 12 demo orders across 6 customers, pagination.</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr style="background: rgba(245,5,55,0.06);">
+        <td><strong>MRB-Order-Detail-Screen.html</strong> <span class="badge-new">NEW</span></td>
+        <td>Order Detail &mdash; ORD-2026-0034 (Equinor)</td>
+        <td>Order profile header, 12-state pipeline visualization, gate review history (3 reviews), MRB section progress (7 sections), quick actions. ASTM A182 F316, Sandvik supplier.</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr style="background: rgba(245,5,55,0.06);">
+        <td><strong>MRB-Index-Screen.html</strong> <span class="badge-new">NEW</span></td>
+        <td>MRB Index &mdash; 7-section document matrix for ORD-2026-0034</td>
+        <td>Section tabs (7 O&amp;G sections), document completeness tracking, validation status per document, section alerts (1 CR open, 1 gate review pending), 34 line items with status badges.</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr style="background: rgba(245,5,55,0.06);">
+        <td><strong>MRB-Gate-Review-Screen.html</strong> <span class="badge-new">NEW</span></td>
+        <td>Gate Review &mdash; GR-2026-0047 material cert review</td>
+        <td>15-point checklist with pass/fail/conditional, findings panel (elongation 28.5% &lt; 30.0%), decision workflow (APPROVED/REJECTED/CONDITIONAL_APPROVAL), activity timeline, related documents.</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr style="background: rgba(245,5,55,0.06);">
+        <td><strong>MRB-SDRL-Parser-Screen.html</strong> <span class="badge-new">NEW</span></td>
+        <td>SDRL Parser &mdash; FM-009-01 realized for ORD-2026-0034</td>
+        <td>34 line items across 7 sections, section tabs with counts, ENUM columns (Format, Review Code, Criticality, Data Source), 7 validation rules (6 pass, 1 warning), parse info panel.</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr style="background: rgba(245,5,55,0.06);">
+        <td><strong>MRB-Correction-Request-Screen.html</strong> <span class="badge-new">NEW</span></td>
+        <td>Correction Request &mdash; CR-2026-00015 (elongation failure)</td>
+        <td>FM-010-01 form realized, failure detail (28.5% vs 30.0% minimum), finding/action cards, 5-state machine visualization (OPEN &rarr; IN_PROGRESS &rarr; RESOLVED, with ESCALATED/WAIVED branches), resolution workflow.</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="context-box" style="border-left-color: var(--red);">
+    <h4 style="color: var(--red);">Prototype Navigation Architecture</h4>
+    <p>All 7 screens share a consistent sidebar with 13 nav items. Screens with implementations navigate directly; placeholder items (Material Queue, ITP Management, Documents, Admin) use <code>#</code> for future Phase 1+ screens. The demo data narrative flows consistently: <strong>ORD-2026-0034</strong> (Equinor) &rarr; <strong>GR-2026-0047</strong> (gate review with elongation finding) &rarr; <strong>CR-2026-00015</strong> (correction request for ASTM A182 F316, Heat H-84731-C).</p>
+  </div>
+
+  <div class="context-box" style="border-left-color: var(--green);">
+    <h4 style="color: var(--green);">Document Updates Completed (V2.3)</h4>
+    <ul>
+      <li><strong style="color: var(--green);">&check;</strong> <strong>PR-009:</strong> &ldquo;Epicor&rdquo; references replaced with &ldquo;ERP module&rdquo;. State machine harmonized to AM-TS-001&rsquo;s 12-state model.</li>
+      <li><strong style="color: var(--green);">&check;</strong> <strong>PR-013:</strong> &ldquo;Epicor&rdquo; reference removed from ERP System Migration section.</li>
+      <li><strong style="color: var(--green);">&check;</strong> <strong>MRB-Builder-Architecture.html:</strong> Updated to &ldquo;ERP Module (In-House)&rdquo; and &ldquo;Unified Aurelian Platform&rdquo;.</li>
+      <li><strong style="color: var(--green);">&check;</strong> <strong>AM-TS-001:</strong> Updated to Rev 1.2 with 16 new entities (36 total) and 27 ENUM types from AM-FM-001.</li>
+    </ul>
+  </div>
+
+  <h4 style="font-size: 15px; margin: 20px 0 12px; color: var(--black);">3.3 &mdash; Forms Defined (24 total &mdash; templates not yet built)</h4>
+
+  <div class="two-col">
+    <div>
+      <table class="doc-table" style="font-size: 12px;">
+        <thead><tr><th>Form</th><th>Title</th><th>Proc</th></tr></thead>
+        <tbody>
+          <tr><td>FM-008-01</td><td>Material Gate Review Checklist</td><td>PR-008</td></tr>
+          <tr><td>FM-008-02</td><td>Physical Inspection Report</td><td>PR-008</td></tr>
+          <tr><td>FM-008-03</td><td>Material Requirement Profile</td><td>PR-008</td></tr>
+          <tr><td>FM-008-04</td><td>Material Traceability Matrix</td><td>PR-008</td></tr>
+          <tr><td>FM-009-01</td><td>Order Requirement Matrix</td><td>PR-009</td></tr>
+          <tr><td>FM-009-02</td><td>ITP Tracker (Oil &amp; Gas)</td><td>PR-009</td></tr>
+          <tr><td>FM-009-03</td><td>MRB Initialization Record</td><td>PR-009</td></tr>
+          <tr><td>FM-009-04</td><td>MRB Index (SDRL-derived)</td><td>PR-009</td></tr>
+          <tr><td>FM-010-01</td><td>Correction Request</td><td>PR-010</td></tr>
+          <tr><td>FM-010-02</td><td>Document Validation Log</td><td>PR-010</td></tr>
+          <tr><td>FM-010-03</td><td>Traceability Verification Record</td><td>PR-010</td></tr>
+          <tr><td>FM-010-04</td><td>CoC Prerequisite Gate Checklist</td><td>PR-010</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table class="doc-table" style="font-size: 12px;">
+        <thead><tr><th>Form</th><th>Title</th><th>Proc</th></tr></thead>
+        <tbody>
+          <tr><td>FM-011-01</td><td>CoC Register</td><td>PR-011</td></tr>
+          <tr><td>FM-011-02</td><td>CoC Revision/Void Record</td><td>PR-011</td></tr>
+          <tr><td>FM-011-03</td><td>Authorized Signatory Register</td><td>PR-011</td></tr>
+          <tr><td>FM-012-01</td><td>MRB Assembly Checklist</td><td>PR-012</td></tr>
+          <tr><td>FM-012-02</td><td>MRB Quality Check &amp; Release</td><td>PR-012</td></tr>
+          <tr><td>FM-012-03</td><td>Customer Pre-Shipment Approval</td><td>PR-012</td></tr>
+          <tr><td>FM-012-04</td><td>MRB Delivery Confirmation</td><td>PR-012</td></tr>
+          <tr><td>FM-013-01</td><td>Archive Register</td><td>PR-013</td></tr>
+          <tr><td>FM-013-02</td><td>Archive Access Log</td><td>PR-013</td></tr>
+          <tr><td>FM-013-03</td><td>Disposition Request</td><td>PR-013</td></tr>
+          <tr><td>FM-013-04</td><td>Disposition Record</td><td>PR-013</td></tr>
+          <tr><td>FM-013-05</td><td>Annual Archive Integrity Report</td><td>PR-013</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 4. UPDATED ARCHITECTURE ========== -->
+<div class="section-dark">
+  <div class="inner">
+    <div class="section-label" style="color: var(--red);">Section 4 <span class="badge-new">UPDATED IN V2</span></div>
+    <h2>System Architecture &mdash; Unified Aurelian Platform</h2>
+    <h3>The &ldquo;buy ERP&rdquo; model from V1 has been replaced with a unified platform. ERP module and MRB Builder share one database, communicate through internal module boundaries.</h3>
+
+    <div style="font-family: 'Courier New', monospace; font-size: 12px; color: var(--steel-blue); background: var(--navy-card); padding: 24px; border-radius: 6px; line-height: 2.0; margin: 20px 0;">
+<pre style="color: var(--steel-blue); white-space: pre; overflow-x: auto;">
+<span style="color: var(--white);">                    AURELIAN PLATFORM (unified)</span>
+<span style="color: var(--red);"> ┌─────────────────────────────────────────────────────────┐</span>
+<span style="color: var(--red);"> │</span>                                                         <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>  <span style="color: var(--white);">ERP MODULE</span>            <span style="color: var(--white);">MRB BUILDER MODULE</span>               <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>  <span style="color: var(--gray-med);">┌──────────────┐</span>     <span style="color: var(--gray-med);">┌──────────────────────┐</span>       <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>  <span style="color: var(--gray-med);">│</span> Customers    <span style="color: var(--gray-med);">│</span>     <span style="color: var(--gray-med);">│</span> SDRL Parser          <span style="color: var(--gray-med);">│</span>       <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>  <span style="color: var(--gray-med);">│</span> Suppliers    <span style="color: var(--gray-med);">│</span> <span style="color: var(--red);">&larr;&rarr;</span> <span style="color: var(--gray-med);">│</span> Material Gate        <span style="color: var(--gray-med);">│</span>       <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>  <span style="color: var(--gray-med);">│</span> Purchase Ord <span style="color: var(--gray-med);">│</span>     <span style="color: var(--gray-med);">│</span> Validation Engine    <span style="color: var(--gray-med);">│</span>       <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>  <span style="color: var(--gray-med);">│</span> Prod Orders  <span style="color: var(--gray-med);">│</span>     <span style="color: var(--gray-med);">│</span> CoC Generator        <span style="color: var(--gray-med);">│</span>       <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>  <span style="color: var(--gray-med);">│</span> Inventory    <span style="color: var(--gray-med);">│</span>     <span style="color: var(--gray-med);">│</span> MRB Assembler        <span style="color: var(--gray-med);">│</span>       <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>  <span style="color: var(--gray-med);">│</span> Quotes       <span style="color: var(--gray-med);">│</span>     <span style="color: var(--gray-med);">│</span> Archive Manager      <span style="color: var(--gray-med);">│</span>       <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>  <span style="color: var(--gray-med);">└──────────────┘</span>     <span style="color: var(--gray-med);">└──────────────────────┘</span>       <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>                                                         <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>  <span style="color: var(--white);">PostgreSQL (shared)</span>                                    <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>  <span style="color: var(--gray-med);">erp.* schema  &harr;  mrb.* schema</span>                        <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> │</span>  <span style="color: var(--gray-med);">Triggers + NOTIFY/LISTEN + cross-schema views</span>          <span style="color: var(--red);">│</span>
+<span style="color: var(--red);"> └─────────────────────────────────────────────────────────┘</span>
+              <span style="color: var(--red);">&uarr;</span>
+    <span style="color: var(--white);">Shop Floor (MQTT/OPC-UA)</span> &mdash; Direct to MRB Builder
+    <span style="color: var(--gray-med);">CNC machines &bull; CMM &bull; Metrology &bull; Edge buffer</span>
+</pre>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+      <div style="background: var(--navy-card); border-radius: 6px; padding: 18px 22px;">
+        <h5 style="color: var(--red); font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">V1 Model (Replaced)</h5>
+        <p style="color: var(--steel-blue); font-size: 12px; line-height: 1.6;">
+          Buy third-party ERP (e.g., Epicor) &bull; 20 external API interfaces &bull; REST/Webhook integration &bull; ERP-agnostic design &bull; Database-level isolation
+        </p>
+      </div>
+      <div style="background: var(--navy-card); border-radius: 6px; padding: 18px 22px; border: 1px solid var(--green);">
+        <h5 style="color: var(--green); font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">V2 Model (Current)</h5>
+        <p style="color: var(--steel-blue); font-size: 12px; line-height: 1.6;">
+          Build own ERP module &bull; Unified platform with shared PostgreSQL &bull; Internal module boundaries (triggers, NOTIFY/LISTEN, cross-schema views) &bull; One deployment &bull; Seamless data flow
+        </p>
+      </div>
+    </div>
+
+    <div style="background: var(--navy-card); border-radius: 6px; padding: 18px 22px; margin-top: 16px;">
+      <h5 style="color: var(--red); font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Technology Stack (AM-TS-001)</h5>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 8px;">
+        <div>
+          <p style="color: var(--white); font-size: 11px; font-weight: 700;">Database &amp; Backend</p>
+          <p style="color: var(--steel-blue); font-size: 11px;">Self-hosted Supabase (PostgreSQL)<br>AWS eu-north-1 (Stockholm)<br>PostgREST + RPC + RLS</p>
+        </div>
+        <div>
+          <p style="color: var(--white); font-size: 11px; font-weight: 700;">Frontend &amp; App</p>
+          <p style="color: var(--steel-blue); font-size: 11px;">Next.js + TypeScript<br>QA Workbench &bull; ERP Workbench<br>Customer Portal (Phase 2)</p>
+        </div>
+        <div>
+          <p style="color: var(--white); font-size: 11px; font-weight: 700;">Storage &amp; Security</p>
+          <p style="color: var(--steel-blue); font-size: 11px;">Supabase Storage (AWS S3)<br>Supabase Vault &rarr; HashiCorp Vault<br>MQTT broker &bull; Grafana stack</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 5. WP-1 SUMMARY ========== -->
+<div class="section">
+  <div class="section-label">Section 5 <span class="badge-new">NEW IN V2</span></div>
+  <h2>WP-1: IT/System Technical Specification</h2>
+  <h3>AM-TS-001 &mdash; 19 sections covering the complete technical architecture. This is the binding specification for the development team.</h3>
+
+  <table class="doc-table">
+    <thead>
+      <tr><th>Section</th><th>Content</th><th>Key Detail</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>&sect;1&ndash;2</td><td>Purpose &amp; Scope</td><td>Gate blocker for dev start. Covers unified platform architecture.</td></tr>
+      <tr><td>&sect;3&ndash;4</td><td>Definitions &amp; References</td><td>Links to all procedures (PR-008&ndash;013), industry standards</td></tr>
+      <tr><td>&sect;5</td><td><strong>System Architecture</strong></td><td>Unified Aurelian Platform: ERP module + MRB Builder, shared PostgreSQL, two schemas</td></tr>
+      <tr><td>&sect;6</td><td><strong>Technology Stack</strong></td><td>Supabase, Next.js+TS, PostgREST, RPC, MQTT, Grafana stack</td></tr>
+      <tr><td>&sect;7</td><td><strong>Data Model</strong></td><td>ERP entities (Customer, Supplier, PO, Production_Order, Inventory, Quote) + MRB entities (Order, SDRL, MRB, Documents, Validation, Gate, CoC)</td></tr>
+      <tr><td>&sect;8</td><td><strong>Security</strong></td><td>Zero Trust: RBAC + ABAC via Postgres RLS, AES-256, tenant isolation, ITAR/EAR handling</td></tr>
+      <tr><td>&sect;9</td><td>Machine Data Integration</td><td>MQTT canonical event schema, edge buffer, CNC/CMM/metrology data flow</td></tr>
+      <tr><td>&sect;10</td><td><strong>Internal Module Integration</strong></td><td>PostgreSQL triggers, NOTIFY/LISTEN, cross-schema views. Replaces external API model.</td></tr>
+      <tr><td>&sect;11&ndash;13</td><td>Documents, Availability, Portal</td><td>PDF/A-3 strategy, RPO 15min / RTO 2hr, customer portal architecture</td></tr>
+      <tr><td>&sect;14&ndash;15</td><td>Deployment &amp; Testing</td><td>CI/CD, environments, module boundary tests, validation engine tests</td></tr>
+      <tr><td>&sect;16</td><td><strong>Phase Mapping</strong></td><td>Phase 0: O&amp;G primary, simulated lifecycle. Phase 0.5: Defence templates. Phase 1: Production MVP.</td></tr>
+      <tr><td>&sect;17</td><td><strong>Open Decisions &amp; Fredrik Questions</strong></td><td>4 resolved decisions + 4 questions requiring Fredrik&rsquo;s input (see Section 9)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== 6. WP-2 SUMMARY ========== -->
+<div class="section-dark">
+  <div class="inner">
+    <div class="section-label" style="color: var(--red);">Section 6 <span class="badge-new">NEW IN V2</span></div>
+    <h2>WP-2: Customer-Facing Templates</h2>
+    <h3>AM-CT-001 &mdash; 11 sections defining all SDRL templates, MRB Index templates, and Customer Requirement Profiles. This is the system&rsquo;s input layer.</h3>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+
+      <div style="background: var(--navy-card); border-radius: 6px; padding: 18px 22px;">
+        <h5 style="color: var(--red); font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Oil &amp; Gas SDRL Template (Phase 0 Primary)</h5>
+        <p style="color: var(--steel-blue); font-size: 12px; line-height: 1.6;">
+          <strong style="color: var(--white);">Template ID:</strong> SDRL-OG-001<br>
+          <strong style="color: var(--white);">Sections:</strong> 7 (General, Purchase/Tech, Material, Manufacturing, Testing/Inspection, Compliance, Preservation/Shipping)<br>
+          <strong style="color: var(--white);">Line items:</strong> 39 defined (incl. conditional)<br>
+          <strong style="color: var(--white);">Standards:</strong> NORSOK M-650, Z-CR-006, EN 10204, API Q1<br>
+          <strong style="color: var(--white);">Each line item has:</strong> Line ID, Document Title, Standard, Format, Review Code, Criticality, Data Source
+        </p>
+      </div>
+
+      <div style="background: var(--navy-card); border-radius: 6px; padding: 18px 22px;">
+        <h5 style="color: var(--red); font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Defence SDRL Template (Phase 0.5)</h5>
+        <p style="color: var(--steel-blue); font-size: 12px; line-height: 1.6;">
+          <strong style="color: var(--white);">Template ID:</strong> SDRL-DEF-001<br>
+          <strong style="color: var(--white);">Sections:</strong> 8 (Identification, Contract, Material, Manufacturing, Special Process, Inspection, Test, Compliance)<br>
+          <strong style="color: var(--white);">Line items:</strong> 31 defined (incl. conditional)<br>
+          <strong style="color: var(--white);">Standards:</strong> AS9100D, AQAP 2110, MIL-STDs, DEF-STANs<br>
+          <strong style="color: var(--white);">Includes:</strong> FAIR (AS9102), Counterfeit Prevention, DFARS Specialty Metals
+        </p>
+      </div>
+
+      <div style="background: var(--navy-card); border-radius: 6px; padding: 18px 22px;">
+        <h5 style="color: var(--red); font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">MRB Index Baseline</h5>
+        <p style="color: var(--steel-blue); font-size: 12px; line-height: 1.6;">
+          <strong style="color: var(--white);">14-column tracking structure:</strong> Line Item, Section, Title, Standard, Source, Responsible, Format, Review Code, Criticality, Status, Received Date, Validated Date, Page Range, Notes<br>
+          <strong style="color: var(--white);">Lifecycle:</strong> DRAFT &rarr; LIVE &rarr; FINAL<br>
+          <strong style="color: var(--white);">Generated from SDRL parsing.</strong> Not a fixed template &mdash; order-specific.
+        </p>
+      </div>
+
+      <div style="background: var(--navy-card); border-radius: 6px; padding: 18px 22px;">
+        <h5 style="color: var(--red); font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Customer Requirement Profile</h5>
+        <p style="color: var(--steel-blue); font-size: 12px; line-height: 1.6;">
+          <strong style="color: var(--white);">Customer header:</strong> Industry, default cert type, PMI/FAIR/ITP flags, retention, export classification<br>
+          <strong style="color: var(--white);">Material entries:</strong> Per material grade per customer<br>
+          <strong style="color: var(--white);">JSONB structures:</strong> Chemical limits, mechanical limits, hardness limits, supplementary tests<br>
+          <strong style="color: var(--white);">Used by:</strong> Material Gate (PR-008), SDRL Parser (PR-009), Validation Engine (PR-010), CoC Generator (PR-011)
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========== 7. HOW IT WORKS ========== -->
+<div class="section">
+  <div class="section-label">Section 7</div>
+  <h2>How It Works &mdash; The Pipeline</h2>
+  <h3>End-to-end order lifecycle from customer PO to archived MRB. Each stage is governed by a procedure, supported by forms, and connected internally via module boundaries.</h3>
+
+  <div class="flow-chain" style="justify-content: center; margin: 30px 0;">
+    <div class="flow-step"><h5>Customer PO</h5><p>SDRL attached</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step flow-step-active"><h5>Material Gate</h5><p>PR-008</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>SDRL Parse</h5><p>PR-009</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>MRB Index</h5><p>PR-009 &sect;6.6</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>Collect Docs</h5><p>CNC + ERP + Suppliers</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>Validate</h5><p>PR-010 (5 layers)</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>CoC</h5><p>PR-011</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>Assemble</h5><p>PR-012</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>Archive</h5><p>PR-013</p></div>
+  </div>
+</div>
+
+<!-- ========== 8. CONSISTENCY AUDIT ========== -->
+<div class="section-dark">
+  <div class="inner">
+    <div class="section-label" style="color: var(--red);">Section 8 <span class="badge-new">UPDATED V2.3</span></div>
+    <h2>Cross-Document Consistency Audit</h2>
+    <h3>All critical and major consistency issues resolved in V2.3. Remaining items are minor refinements.</h3>
+
+    <h4 style="color: var(--green); font-size: 13px; margin: 20px 0 12px; text-transform: uppercase; letter-spacing: 1px;">Confirmed Consistent (no action needed)</h4>
+
+    <table class="doc-table doc-table-dark" style="font-size: 12px;">
+      <thead><tr><th>Aspect</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>MRB section counts (7 O&amp;G, 8 Defence)</td><td style="color: var(--green); font-weight: 700;">All 3 docs agree &check;</td></tr>
+        <tr><td>MRB section titles</td><td style="color: var(--green); font-weight: 700;">Consistent &check;</td></tr>
+        <tr><td>Data source ENUM values (7 values)</td><td style="color: var(--green); font-weight: 700;">Identical &check;</td></tr>
+        <tr><td>Review codes (FOR_INFO, FOR_REVIEW, FOR_APPROVAL)</td><td style="color: var(--green); font-weight: 700;">Identical &check;</td></tr>
+        <tr><td>Criticality levels (CRITICAL, MAJOR, STANDARD)</td><td style="color: var(--green); font-weight: 700;">Identical &check;</td></tr>
+        <tr><td>Form numbers (FM-009-01, FM-009-04)</td><td style="color: var(--green); font-weight: 700;">Correct &check;</td></tr>
+        <tr><td>MRB Index lifecycle (DRAFT/LIVE/FINAL)</td><td style="color: var(--green); font-weight: 700;">Identical &check;</td></tr>
+        <tr><td>Industry classifications</td><td style="color: var(--green); font-weight: 700;">Consistent &check;</td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="color: var(--green); font-size: 13px; margin: 30px 0 12px; text-transform: uppercase; letter-spacing: 1px;">Resolved in V2.3</h4>
+
+    <table class="doc-table doc-table-dark" style="font-size: 12px;">
+      <thead><tr><th style="width: 30px;">#</th><th style="width: 70px;">Status</th><th>Issue</th><th>Resolution</th></tr></thead>
+      <tbody>
+        <tr style="opacity: 0.5;">
+          <td>&check;</td>
+          <td><span class="badge badge-done" style="font-size: 9px;">RESOLVED</span></td>
+          <td><strong style="color: var(--white);">Order lifecycle state machine mismatch.</strong> PR-009 had 10 states vs AM-TS-001&rsquo;s 12 states.</td>
+          <td>PR-009 updated to 12-state model matching AM-TS-001.</td>
+        </tr>
+        <tr style="opacity: 0.5;">
+          <td>&check;</td>
+          <td><span class="badge badge-done" style="font-size: 9px;">RESOLVED</span></td>
+          <td><strong style="color: var(--white);">Stale &ldquo;Epicor&rdquo; references.</strong> PR-009 and PR-013 referenced Epicor.</td>
+          <td>All &ldquo;Epicor&rdquo; references replaced with &ldquo;ERP module&rdquo; across PR-009 and PR-013.</td>
+        </tr>
+        <tr style="opacity: 0.5;">
+          <td>&check;</td>
+          <td><span class="badge badge-done" style="font-size: 9px;">RESOLVED</span></td>
+          <td><strong style="color: var(--white);">SDRL data model ambiguity.</strong> Relational vs JSONB question.</td>
+          <td>Decision R8: Relational model adopted. SDRL_Line_Item entity with typed columns. All docs aligned.</td>
+        </tr>
+        <tr style="opacity: 0.5;">
+          <td>&check;</td>
+          <td><span class="badge badge-done" style="font-size: 9px;">RESOLVED</span></td>
+          <td><strong style="color: var(--white);">MRB_Document entity incomplete.</strong> Missing review_code, criticality, data_source fields.</td>
+          <td>AM-TS-001 Rev 1.1 extended MRB_Document with all required fields from AM-CT-001.</td>
+        </tr>
+        <tr style="opacity: 0.5;">
+          <td>&check;</td>
+          <td><span class="badge badge-done" style="font-size: 9px;">RESOLVED</span></td>
+          <td><strong style="color: var(--white);">Document status values differ.</strong> Inconsistent state counts across documents.</td>
+          <td>AM-FM-001 &sect;6 defines canonical validation_status ENUM (8 values). AM-TS-001 Rev 1.2 &sect;7.5 formalizes all 27 ENUMs.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4 style="color: var(--amber); font-size: 13px; margin: 30px 0 12px; text-transform: uppercase; letter-spacing: 1px;">Remaining Minor Items (do not block Phase 0)</h4>
+
+    <table class="doc-table doc-table-dark" style="font-size: 12px;">
+      <thead><tr><th style="width: 30px;">#</th><th style="width: 70px;">Severity</th><th>Issue</th><th>Resolution Needed</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>6</td>
+          <td><span class="badge badge-not-started" style="font-size: 9px;">MINOR</span></td>
+          <td><strong style="color: var(--white);">Line item count discrepancy.</strong> Both docs state &ldquo;30 default items&rdquo; (O&amp;G) and &ldquo;25&rdquo; (Defence). Actual templates define 39 and 31 respectively (including conditional items).</td>
+          <td>Clarify that stated counts refer to &ldquo;typically required&rdquo; vs &ldquo;total defined.&rdquo;</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><span class="badge badge-not-started" style="font-size: 9px;">MINOR</span></td>
+          <td><strong style="color: var(--white);">Material_Requirement_Profile entity.</strong> AM-TS-001 could be extended with hardness_limits, impact test fields, grain_size fields, NORSOK MDS ref, PMI method from AM-CT-001.</td>
+          <td>Low priority. Can be addressed during Phase 0 development as edge cases surface.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="background: rgba(30,110,61,0.15); border-radius: 6px; padding: 14px 18px; margin-top: 16px;">
+      <p style="color: var(--white); font-size: 12px;"><strong style="color: var(--green);">Assessment:</strong> All critical and major consistency issues have been resolved. The quality system documents (PR-008&ndash;013, AM-TS-001, AM-CT-001, AM-FM-001, AM-IF-001) are now fully aligned. Only 2 minor items remain, neither of which blocks Phase 0 development.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 9. QUESTIONS FOR FREDRIK ========== -->
+<div class="section">
+  <div class="section-label">Section 9 <span class="badge-new">UPDATED V2.3</span></div>
+  <h2>Technical Questions &mdash; Resolution Status</h2>
+  <h3>5 of 5 technical questions resolved. AM-TS-001 Rev 1.1 updated with all decisions (R1&ndash;R9). Only ERP module scope depth remains open (non-blocking for Phase 0).</h3>
+
+  <h4 style="font-size: 13px; color: var(--green); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">All Technical Questions Resolved (5 of 5)</h4>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+
+    <div class="context-box" style="border-left-color: var(--green); background: #F0FFF4;">
+      <h4 style="color: var(--green);">F1 &mdash; Cloud Hosting &check;</h4>
+      <p><strong>Decision: AWS (eu-north-1, Stockholm)</strong></p>
+      <p style="margin-top: 8px;">Mature ecosystem, native S3 compatibility for Supabase Storage, EEA data sovereignty.</p>
+      <p style="margin-top: 8px;"><strong style="color: var(--green);">AM-TS-001:</strong> &sect;6.1, &sect;12.2, &sect;15.4, &sect;16 &rarr; R5</p>
+    </div>
+
+    <div class="context-box" style="border-left-color: var(--green); background: #F0FFF4;">
+      <h4 style="color: var(--green);">F2 &mdash; PDF/A Storage &check;</h4>
+      <p><strong>Decision: Supabase Storage</strong> with database structure and access control.</p>
+      <p style="margin-top: 8px;">AWS S3 backend. PostgreSQL metadata. RLS + signed URLs for per-customer access.</p>
+      <p style="margin-top: 8px;"><strong style="color: var(--green);">AM-TS-001:</strong> &sect;14 rewritten &rarr; R6</p>
+    </div>
+
+    <div class="context-box" style="border-left-color: var(--green); background: #F0FFF4;">
+      <h4 style="color: var(--green);">F5 &mdash; KMS &check;</h4>
+      <p><strong>Decision: Phased.</strong> Supabase Vault now, HashiCorp Vault later.</p>
+      <p style="margin-top: 8px;">pgsodium for Phase 0&ndash;1. Vault migration for Defence/ITAR in Phase 2+.</p>
+      <p style="margin-top: 8px;"><strong style="color: var(--green);">AM-TS-001:</strong> &sect;8.4 &rarr; R7</p>
+    </div>
+
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+
+    <div class="context-box" style="border-left-color: var(--green); background: #F0FFF4;">
+      <h4 style="color: var(--green);">F3 &mdash; SDRL Data Storage Model &check;</h4>
+      <p><strong>Decision: Relational.</strong> SDRL line items stored as individual typed rows in <code>mrb.sdrl_line_item</code>.</p>
+      <p style="margin-top: 8px;">SDRLs have limited practical variation between orders &mdash; relational gives type safety, direct SQL joins, and consistent validation without schema drift.</p>
+      <p style="margin-top: 8px;"><strong style="color: var(--green);">AM-TS-001:</strong> &sect;7 data model + diagram &rarr; R8</p>
+    </div>
+
+    <div class="context-box" style="border-left-color: var(--green); background: #F0FFF4;">
+      <h4 style="color: var(--green);">F4 &mdash; E-Signature Implementation &check;</h4>
+      <p><strong>Decision: Custom internal PKI e-signature</strong> with cryptographic audit trail. BankID as optional add-on for Norwegian customers.</p>
+      <p style="margin-top: 8px;">International customers require a universal solution. Internal PKI provides SHA-256 hash + signer identity + timestamp. CoC entity updated with <code>signature_method</code> ENUM (INTERNAL_PKI / BANKID / MANUAL).</p>
+      <p style="margin-top: 8px;"><strong style="color: var(--green);">AM-TS-001:</strong> &sect;7 CoC entity &rarr; R9</p>
+    </div>
+
+  </div>
+
+  <h4 style="font-size: 13px; color: var(--amber); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 1px;">Remaining Open (non-blocking)</h4>
+
+  <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+
+    <div class="context-box" style="border-left-color: var(--amber); background: #FFFBF0;">
+      <h4 style="color: var(--amber);">F4b &mdash; ERP Module Scope Depth</h4>
+      <p><strong>Context:</strong> Aurelian builds its own ERP module (decided). But how deep does Phase 0&ndash;1 go?</p>
+      <p style="margin-top: 8px;"><strong>Question:</strong> Minimal order management + material tracking, or also production scheduling, procurement, and invoicing from the start?</p>
+      <p style="margin-top: 8px;"><strong style="color: var(--amber);">Impact:</strong> Non-blocking for MRB Builder Phase 0 &mdash; core MRB pipeline works regardless. Affects Phase 1 scope and dev capacity planning.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========== 10. BUILD PROGRESS ========== -->
+<div class="section-dark">
+  <div class="inner">
+    <div class="section-label" style="color: var(--red);">Section 10 <span class="badge-new">UPDATED IN V3</span></div>
+    <h2>Build Progress &mdash; What Is Done, What Remains</h2>
+    <h3>Current status of every deliverable in the MRB Builder project. Updated to reflect UI prototype delivery (7 interactive screens).</h3>
+
+    <h4 style="color: var(--white); font-size: 14px; margin-bottom: 12px;">Overall Progress</h4>
+    <div style="display: grid; grid-template-columns: 200px 1fr 60px; gap: 8px; align-items: center; margin-bottom: 20px;">
+      <span style="font-size: 13px; font-weight: 600; color: var(--steel-blue);">QMS Procedures</span>
+      <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width: 100%;"></div></div>
+      <span style="font-size: 13px; font-weight: 700; color: var(--green);">6 / 6</span>
+
+      <span style="font-size: 13px; font-weight: 600; color: var(--steel-blue);">Quality Manual Update</span>
+      <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width: 100%;"></div></div>
+      <span style="font-size: 13px; font-weight: 700; color: var(--green);">Done</span>
+
+      <span style="font-size: 13px; font-weight: 600; color: var(--steel-blue);">Interface Specification</span>
+      <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width: 100%;"></div></div>
+      <span style="font-size: 13px; font-weight: 700; color: var(--green);">20 / 20</span>
+
+      <span style="font-size: 13px; font-weight: 600; color: var(--steel-blue);">Architecture Visual</span>
+      <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width: 100%;"></div></div>
+      <span style="font-size: 13px; font-weight: 700; color: var(--green);">Done</span>
+
+      <span style="font-size: 13px; font-weight: 600; color: var(--white);">IT/System Tech Spec (WP-1)</span>
+      <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width: 100%;"></div></div>
+      <span style="font-size: 13px; font-weight: 700; color: var(--green);">Done &check;</span>
+
+      <span style="font-size: 13px; font-weight: 600; color: var(--white);">Customer Templates (WP-2)</span>
+      <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width: 100%;"></div></div>
+      <span style="font-size: 13px; font-weight: 700; color: var(--green);">Done &check;</span>
+
+      <span style="font-size: 13px; font-weight: 600; color: var(--white);">Form Templates (WP-3)</span>
+      <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width: 100%;"></div></div>
+      <span style="font-size: 13px; font-weight: 700; color: var(--green);">24 / 24 &check;</span>
+
+      <span style="font-size: 13px; font-weight: 600; color: var(--white);">Work Instructions (WP-4)</span>
+      <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width: 100%;"></div></div>
+      <span style="font-size: 13px; font-weight: 700; color: var(--green);">13 / 13 &check;</span>
+
+      <span style="font-size: 13px; font-weight: 600; color: var(--steel-blue);">Training Packages (WP-5)</span>
+      <div class="progress-bar"><div class="progress-fill progress-fill-amber" style="width: 0%;"></div></div>
+      <span style="font-size: 13px; font-weight: 700; color: var(--amber);">Not started</span>
+
+      <span style="font-size: 13px; font-weight: 600; color: var(--white);">MVP Scope Definition (WP-6)</span>
+      <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width: 100%;"></div></div>
+      <span style="font-size: 13px; font-weight: 700; color: var(--green);">Done &check;</span>
+
+      <span style="font-size: 13px; font-weight: 600; color: var(--white);">Interactive UI Prototype</span>
+      <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width: 100%;"></div></div>
+      <span style="font-size: 13px; font-weight: 700; color: var(--green);">7 / 7 &check;</span>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 11. UPDATED CRITICAL PATH ========== -->
+<div class="section">
+  <div class="section-label">Section 11 <span class="badge-new">UPDATED V3</span></div>
+  <h2>Critical Path &mdash; Updated</h2>
+  <h3>All gate blockers cleared. 5 of 6 work packages delivered. Interactive UI prototype with 7 screens delivered. Phase 0 development ready to begin.</h3>
+
+  <!-- CRITICAL PATH VISUAL -->
+  <div style="background: var(--gray-panel); border-radius: 8px; padding: 28px; overflow-x: auto;">
+    <div style="font-family: 'Courier New', monospace; font-size: 12px; line-height: 2.2; color: var(--black); min-width: 700px;">
+
+      <!-- ROW 1: COMPLETED -->
+      <div style="display: grid; grid-template-columns: 160px 40px 160px 40px 160px 40px 160px; align-items: center; margin-bottom: 4px;">
+        <div style="background: var(--green); color: white; padding: 8px 12px; border-radius: 4px; text-align: center; font-weight: 700; font-size: 11px;">
+          &check; PR-008&ndash;013<br><span style="font-weight: 400; font-size: 10px;">Business Rules</span>
+        </div>
+        <div style="text-align: center; color: var(--green); font-weight: 700;">&rarr;</div>
+        <div style="background: var(--green); color: white; padding: 8px 12px; border-radius: 4px; text-align: center; font-weight: 700; font-size: 11px;">
+          &check; AM-IF-001<br><span style="font-weight: 400; font-size: 10px;">Interface Contracts</span>
+        </div>
+        <div style="text-align: center; color: var(--green); font-weight: 700;">&rarr;</div>
+        <div style="background: var(--green); color: white; padding: 8px 12px; border-radius: 4px; text-align: center; font-weight: 700; font-size: 11px;">
+          &check; AM-TS-001<br><span style="font-weight: 400; font-size: 10px;">IT/System Spec (WP-1)</span>
+        </div>
+        <div style="text-align: center; color: var(--green); font-weight: 700;">&rarr;</div>
+        <div style="background: var(--green); color: white; padding: 8px 12px; border-radius: 4px; text-align: center; font-weight: 700; font-size: 11px;">
+          &check; AM-CT-001<br><span style="font-weight: 400; font-size: 10px;">Templates (WP-2)</span>
+        </div>
+      </div>
+
+      <div style="text-align: center; padding: 4px 0; color: var(--green); font-size: 18px; font-weight: 700;">&#x25BC;</div>
+
+      <!-- ROW 2: WP-3 (COMPLETED) -->
+      <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin: 8px 0;">
+        <div style="background: var(--green); color: white; padding: 10px 14px; border-radius: 4px; text-align: center;">
+          <div style="font-weight: 700; font-size: 14px;">&check; WP-3: Form Templates (24 FM-xxx) &mdash; AM-FM-001</div>
+          <div style="font-size: 11px; opacity: 0.85;">Field definitions, validation rules, auto-population specs, cross-form references &mdash; all 24 forms delivered</div>
+          <div style="font-size: 10px; margin-top: 4px; opacity: 0.7;">GATE BLOCKER CLEARED &mdash; Phase 0 development unblocked</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; padding: 4px 0; color: var(--green); font-size: 18px; font-weight: 700;">&#x25BC;</div>
+
+      <!-- ROW 3: PHASE 0 START (NOW READY) -->
+      <div style="background: var(--pure-black); color: white; padding: 14px 20px; border-radius: 6px; text-align: center; border: 2px solid var(--red);">
+        <div style="font-weight: 700; font-size: 14px; color: var(--red);">PHASE 0 START &mdash; Software Development Can Begin</div>
+        <div style="font-size: 12px; margin-top: 4px;">Target: End of Q2 2026 &nbsp;&bull;&nbsp; Oil &amp; Gas order simulation &nbsp;&bull;&nbsp; Real SDRL data</div>
+      </div>
+
+      <div style="text-align: center; padding: 4px 0; color: var(--gray-med); font-size: 18px; font-weight: 700;">&#x25BC;</div>
+
+      <!-- ROW 4: WP-6 (COMPLETED) + WP-4 (PENDING) -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0;">
+        <div style="background: var(--green); color: white; padding: 10px 14px; border-radius: 4px; text-align: center;">
+          <div style="font-weight: 700; font-size: 12px;">&check; WP-6: MVP Scope Definition &mdash; AM-MVP-001</div>
+          <div style="font-size: 10px; opacity: 0.85;">11 epics, 58 user stories/capabilities, 9-sprint plan defined</div>
+        </div>
+        <div style="background: var(--green); color: white; padding: 10px 14px; border-radius: 4px; text-align: center;">
+          <div style="font-weight: 700; font-size: 12px;">&check; WP-4: Work Instructions &mdash; AM-WI-001</div>
+          <div style="font-size: 10px; opacity: 0.85;">13 work instructions, 7 quick reference cards</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; padding: 4px 0; color: var(--green); font-size: 18px; font-weight: 700;">&#x25BC;</div>
+
+      <!-- ROW 5: UI PROTOTYPE (COMPLETED) -->
+      <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin: 8px 0;">
+        <div style="background: var(--green); color: white; padding: 10px 14px; border-radius: 4px; text-align: center;">
+          <div style="font-weight: 700; font-size: 14px;">&check; Interactive UI Prototype &mdash; 7 Screens Connected</div>
+          <div style="font-size: 11px; opacity: 0.85;">Dashboard, Orders List, Order Detail, MRB Index, Gate Review, SDRL Parser, Correction Request &mdash; fully navigable</div>
+          <div style="font-size: 10px; margin-top: 4px; opacity: 0.7;">Demo data: ORD-2026-0034 (Equinor) &bull; ASTM A182 F316 &bull; Elongation failure narrative end-to-end</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; padding: 4px 0; color: var(--red); font-size: 18px; font-weight: 700;">&#x25BC;</div>
+      <div style="text-align: center; font-size: 10px; font-weight: 700; color: var(--red); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;">You are here &mdash; 5/6 WPs done + UI prototype delivered. Fredrik&rsquo;s review + WP-5 remaining.</div>
+      <div style="text-align: center; padding: 4px 0; color: var(--red); font-size: 18px; font-weight: 700;">&#x25BC;</div>
+
+      <!-- ROW 6: PARALLEL WITH DEV -->
+      <div style="background: var(--gray-panel); border: 1px dashed var(--gray-divider); padding: 10px 14px; border-radius: 4px; text-align: center;">
+        <div style="font-weight: 700; font-size: 11px; color: var(--gray-med);">WP-5: Training Packages &mdash; Built in parallel with software development (Q1&ndash;Q2 2027)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DETAILED TODO TABLE -->
+  <h4 style="font-size: 14px; margin: 20px 0 12px;">Remaining Work Packages</h4>
+
+  <table class="doc-table">
+    <thead>
+      <tr>
+        <th style="width: 35px;">#</th>
+        <th>Work Package</th>
+        <th>Description</th>
+        <th>Depends On</th>
+        <th style="width: 80px;">Priority</th>
+        <th style="width: 70px;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- COMPLETED -->
+      <tr style="opacity: 0.4;">
+        <td>&check;</td>
+        <td>WP-1: IT/System Technical Specification</td>
+        <td>AM-TS-001 &mdash; 19 sections. Tech stack, database, security, architecture, phase mapping.</td>
+        <td>AM-IF-001</td>
+        <td>&mdash;</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr style="opacity: 0.4;">
+        <td>&check;</td>
+        <td>WP-2: Customer-Facing Templates</td>
+        <td>AM-CT-001 &mdash; 11 sections. O&amp;G SDRL (39 items), Defence SDRL (31 items), MRB Index, CRP.</td>
+        <td>PR-009</td>
+        <td>&mdash;</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+
+      <!-- WP-3: COMPLETED -->
+      <tr style="opacity: 0.4;">
+        <td>&check;</td>
+        <td>WP-3: Form Templates (24 FM-xxx)</td>
+        <td>AM-FM-001 &mdash; 24 form templates. Field definitions, validation rules, auto-population specs, cross-form references, workflow integration, data model mapping. 14 new DB entities identified.</td>
+        <td>PR-008&ndash;013</td>
+        <td>&mdash;</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+
+      <!-- WP-4, 5, 6 -->
+      <tr style="opacity: 0.4;">
+        <td>&check;</td>
+        <td>WP-4: Work Instructions (WI-xxx)</td>
+        <td>AM-WI-001 &mdash; 13 work instructions covering Phase 0 operator workflows. 7 quick reference cards for critical WIs. Covers SDRL processing, material gate, document upload, validation, correction requests.</td>
+        <td>WP-3 + IT Spec</td>
+        <td>&mdash;</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>WP-5: Training Packages</td>
+        <td>Role-based training materials. Built during Phase 0.5 alongside UAT.</td>
+        <td>WI-xxx + software</td>
+        <td><span class="badge badge-not-started" style="background: var(--gray-med);">Low</span></td>
+        <td><span class="badge badge-not-started">Not Started</span></td>
+      </tr>
+      <tr style="opacity: 0.4;">
+        <td>&check;</td>
+        <td>WP-6: MVP Scope Definition</td>
+        <td>AM-MVP-001 &mdash; 11 epics, 58 user stories/capabilities. Acceptance criteria, screen descriptions, 9-sprint delivery plan, cross-epic dependencies, NFRs.</td>
+        <td>WP-1 + WP-2 + WP-3</td>
+        <td>&mdash;</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <div class="two-col">
+    <div class="context-box" style="border-left-color: var(--green);">
+      <h4 style="color: var(--green);">5 of 6 Work Packages Delivered + Interactive UI Prototype</h4>
+      <p>WP-1 (IT/System Spec), WP-2 (Customer Templates), WP-3 (Form Templates), WP-4 (Work Instructions), and WP-6 (MVP Scope Definition) are all delivered. The dev team has specifications, templates, acceptance criteria, operator guides, and a sprint plan.</p>
+      <p style="margin-top: 8px;"><strong style="color: var(--red);">New in V3:</strong> Interactive UI prototype with 7 fully connected screens validates the system design and gives the development team a concrete reference for every core screen in the MRB Builder.</p>
+    </div>
+    <div class="context-box" style="border-left-color: var(--green);">
+      <h4 style="color: var(--green);">Progress Summary</h4>
+      <p>Gate blockers completed: <strong style="color: var(--green);">3 of 3</strong></p>
+      <p style="margin-top: 8px;">Total work packages completed: <strong>5 of 6</strong></p>
+      <p style="margin-top: 8px;">UI prototype screens: <strong style="color: var(--red);">7 of 7</strong></p>
+      <p style="margin-top: 8px;">Documents in quality system: <strong>13</strong></p>
+      <p style="margin-top: 8px;">Key decisions resolved: <strong>5</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 12. TIMELINE ========== -->
+<div class="section-dark">
+  <div class="inner">
+    <div class="section-label" style="color: var(--red);">Section 12</div>
+    <h2>5-Phase Implementation Roadmap</h2>
+    <h3>Updated to reflect Oil &amp; Gas primary priority and unified platform architecture.</h3>
+
+    <div class="timeline-h">
+      <div class="tl-phase">
+        <div class="tl-dot tl-dot-outline"></div>
+        <div class="tl-label">Phase 0</div>
+        <div class="tl-date" style="color: var(--white);">Q2&ndash;Q4 2026</div>
+        <div class="tl-items" style="color: var(--steel-blue);">
+          <strong style="color: var(--red);">Simulation &amp; Build</strong><br>
+          <strong style="color: var(--white);">O&amp;G primary</strong> &mdash; real SDRLs<br>
+          Core MRB engine dev<br>
+          ERP module (basic PO/inventory)<br>
+          Simulated lifecycle runs<br>
+          Material Gate + validation<br>
+          <strong style="color: var(--white);">0 CNC (all simulated)</strong>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-dot tl-dot-outline"></div>
+        <div class="tl-label">Phase 0.5</div>
+        <div class="tl-date" style="color: var(--white);">Q1&ndash;Q2 2027</div>
+        <div class="tl-items" style="color: var(--steel-blue);">
+          <strong style="color: var(--red);">Integration &amp; Defence</strong><br>
+          Defence templates onboarded<br>
+          Real CNC data (Q2 delivery)<br>
+          End-to-end dry runs<br>
+          UAT with QA engineers<br>
+          E-signature integration<br>
+          <strong style="color: var(--white);">System ready by Q3 2027</strong>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Phase 1</div>
+        <div class="tl-date" style="color: var(--white);">Q3 2027</div>
+        <div class="tl-items" style="color: var(--steel-blue);">
+          <strong style="color: var(--red);">Production MVP</strong><br>
+          First real MRBs<br>
+          Tested system goes live<br>
+          Semi-auto SDRL parsing<br>
+          Assisted validation (L1&ndash;L3)<br>
+          <strong style="color: var(--white);">5 CNC &bull; 5&ndash;15 MRBs/month</strong>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-dot tl-dot-future"></div>
+        <div class="tl-label">Phase 2</div>
+        <div class="tl-date" style="color: var(--white);">Q1&ndash;Q3 2028</div>
+        <div class="tl-items" style="color: var(--steel-blue);">
+          <strong style="color: var(--red);">Intelligent</strong><br>
+          Full CNC auto-export<br>
+          AI-assisted validation<br>
+          Electronic signatures<br>
+          Customer portal pilot<br>
+          <strong style="color: var(--white);">15&ndash;30 MRBs/month</strong>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-dot tl-dot-future"></div>
+        <div class="tl-label">Phase 3</div>
+        <div class="tl-date" style="color: var(--white);">2029+</div>
+        <div class="tl-items" style="color: var(--steel-blue);">
+          <strong style="color: var(--red);">Autonomous</strong><br>
+          Zero-touch repeat orders<br>
+          Digital twin integration<br>
+          Customer system APIs<br>
+          Multi-site support<br>
+          <strong style="color: var(--white);">60&ndash;100+ MRBs/month</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 13. NEXT ACTIONS ========== -->
+<div class="section">
+  <div class="section-label">Section 13 <span class="badge-new">UPDATED V3</span></div>
+  <h2>Next Actions</h2>
+  <h3>Interactive UI prototype delivered (7 screens). All 15 review findings implemented. Awaiting Fredrik&rsquo;s technical review of AM-TS-001 and AM-MVP-001.</h3>
+
+  <h4 style="font-size: 13px; color: var(--green); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Completed Since V2.2</h4>
+
+  <table class="doc-table" style="font-size: 13px; opacity: 0.5;">
+    <thead>
+      <tr><th style="width: 35px;">#</th><th>Action</th><th>Owner</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr style="opacity: 1; background: rgba(245,5,55,0.06);">
+        <td>&check;</td>
+        <td><strong>Interactive UI Prototype &mdash; 7 screens delivered</strong> &mdash; Dashboard, Orders List, Order Detail, MRB Index, Gate Review, SDRL Parser, Correction Request. All screens interconnected with navigation (sidebar, breadcrumbs, table rows, stat cards, action buttons). Aurelian design system applied. Demo data narrative: ORD-2026-0034 (Equinor, ASTM A182 F316, elongation failure). FM-009-01 and FM-010-01 form specifications realized as interactive screens.</td>
+        <td>Tore</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td>&check;</td>
+        <td><strong>WP-3: Form Templates</strong> &mdash; AM-FM-001 delivered with all 24 forms, field definitions, validation rules, auto-population specs, cross-form references, workflow integration, and data model mapping.</td>
+        <td>Tore</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td>&check;</td>
+        <td><strong>F1&ndash;F5 resolved</strong> &mdash; AWS hosting (R5), Supabase Storage (R6), KMS phased (R7), SDRL relational (R8), custom e-signature (R9).</td>
+        <td>Fredrik + Tore</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td>&check;</td>
+        <td><strong>AM-TS-001 updated to Rev 1.2</strong> &mdash; 16 new entities added (36 total), 27 ENUM types formalized in &sect;7.5, AM-FM-001 and AM-CT-001 added to references.</td>
+        <td>Tore</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td>&check;</td>
+        <td><strong>PR-009 harmonized</strong> &mdash; Epicor references removed. State machine updated from 10 to 12 states matching AM-TS-001.</td>
+        <td>Tore</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td>&check;</td>
+        <td><strong>Architecture HTML updated</strong> &mdash; &ldquo;ERP System&rdquo; renamed to &ldquo;ERP Module (In-House)&rdquo;. Phase labels updated.</td>
+        <td>Tore</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td>&check;</td>
+        <td><strong>WP-6: MVP Scope Definition</strong> &mdash; AM-MVP-001 delivered. 11 epics, 58 user stories/capabilities, acceptance criteria, screen descriptions, cross-epic dependencies, 9-sprint delivery plan, NFRs, 5 milestones.</td>
+        <td>Tore</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+      <tr>
+        <td>&check;</td>
+        <td><strong>WP-4: Work Instructions</strong> &mdash; AM-WI-001 delivered. 13 work instructions covering Phase 0 operator workflows: SDRL processing (WI-004&ndash;006), material gate (WI-007&ndash;008), document collection (WI-009&ndash;010), correction requests (WI-011), customer portal (WI-012), seed data (WI-013). 7 Quick Reference Cards for critical WIs.</td>
+        <td>Tore</td>
+        <td><span class="badge badge-done">Complete</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 style="font-size: 13px; color: var(--red); margin: 24px 0 10px; text-transform: uppercase; letter-spacing: 1px;">Immediate Next Steps</h4>
+
+  <table class="doc-table" style="font-size: 13px;">
+    <thead>
+      <tr><th style="width: 35px;">#</th><th>Action</th><th>Owner</th><th>Priority</th></tr>
+    </thead>
+    <tbody>
+      <tr style="opacity: 0.5;">
+        <td>&check;</td>
+        <td><strong>Review AM-FM-001</strong> (Form Templates) &mdash; 9 findings: add CONDITIONAL_RELEASE to gate_decision, add MONITOR to ITP point types, add document_review_response ENUM, extend HOLD/WITNESS notifications, update retention defaults to 25/30 years, allow custom MRB sections, update chemical JSONB examples. <em>Changes pending implementation.</em></td>
+        <td>Tore</td>
+        <td><span class="badge badge-done">Reviewed</span></td>
+      </tr>
+      <tr style="opacity: 0.5;">
+        <td>&check;</td>
+        <td><strong>Review AM-MVP-001 &mdash; industry acceptance criteria</strong> &mdash; 3 findings: clarify Defence as commercial priority while O&amp;G remains Phase 0 test scenario, AI-assisted cert review moved to Phase 0.5, gate decision terminology unified system-wide (APPROVED/REJECTED/CONDITIONAL_APPROVAL). <em>Changes pending implementation.</em></td>
+        <td>Tore</td>
+        <td><span class="badge badge-done">Reviewed</span></td>
+      </tr>
+      <tr style="opacity: 0.5;">
+        <td>&check;</td>
+        <td><strong>Review AM-TS-001 &mdash; industry domain</strong> &mdash; 3 findings: ERP module evolution wording (minor), shop floor device expansion (humanoid robots + AMR from Q3 2027, Phase 1+), MRB delivery granularity (per PO or per line item, normalization Phase 0.5). <em>Changes pending implementation.</em></td>
+        <td>Tore</td>
+        <td><span class="badge badge-done">Reviewed</span></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Review AM-TS-001 Rev 1.2 &mdash; technical scope</strong> &mdash; validate 16 new entities, 27 ENUM types, data model, and Supabase/PostgreSQL implementation. Review shop floor integration architecture (&sect;5, &sect;9) and ERP module scope (&sect;10).</td>
+        <td>Fredrik</td>
+        <td><span class="badge badge-defence" style="font-size: 9px;">CRITICAL</span></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>Review AM-MVP-001 &mdash; technical scope &amp; sprint plan</strong> &mdash; validate infrastructure epics (EPIC-01, 02, 07, 08, 10, 11), 9-sprint sequence, NFRs, and delivery milestones against development capacity.</td>
+        <td>Fredrik</td>
+        <td><span class="badge badge-defence" style="font-size: 9px;">CRITICAL</span></td>
+      </tr>
+      <tr style="opacity: 0.5;">
+        <td>&check;</td>
+        <td><strong>Implement 15 review findings</strong> &mdash; AM-FM-001 Rev 1.1 (9 changes), AM-MVP-001 Rev 1.1 (3 changes), AM-TS-001 Rev 1.3 (3 changes + ENUM cascade). All documents updated. Review .docx files regenerated. <em>Complete.</em></td>
+        <td>Tore</td>
+        <td><span class="badge badge-done">Done</span></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><strong>Phase 0 Sprint Planning</strong> &mdash; using AM-MVP-001 &sect;8 dependency chain and &sect;11 milestone schedule. Assign epics to 9-sprint sequence.</td>
+        <td>Fredrik + Tore</td>
+        <td><span class="badge badge-pending" style="font-size: 9px;">HIGH</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- AM-FM-001 REVIEW FINDINGS -->
+  <div style="background: var(--gray-panel); border-left: 3px solid var(--red); border-radius: 0 6px 6px 0; padding: 18px 22px; margin: 20px 0;">
+    <h4 style="font-size: 13px; color: var(--red); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">AM-FM-001 Review Findings &mdash; Tore Ausland (22 Feb 2026)</h4>
+    <p style="font-size: 12px; color: var(--gray-med); margin-bottom: 12px;">EN 10204 reference certificates (Types 2.1, 2.2, 3.1, 3.2) reviewed against form specifications. 14 items evaluated, 9 actionable findings.</p>
+    <table class="doc-table" style="font-size: 12px;">
+      <thead>
+        <tr><th style="width: 30px;">#</th><th style="width: 180px;">Finding</th><th>Action Required</th><th style="width: 70px;">Impact</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Rename gate_decision ENUM: <code>APPROVED / REJECTED / CONDITIONAL_APPROVAL</code></td>
+          <td>System-wide decision terminology. APPROVED replaces RELEASED. CONDITIONAL_APPROVAL = approved with open conditions (auto-creates CR). REVIEW removed from decision ENUM &mdash; escalation to QM handled via <code>qm_override</code> field, not as a decision status.</td>
+          <td><span class="badge badge-defence" style="font-size: 9px;">ENUM</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Add <code>CONDITIONAL</code> to gate_check_result ENUM</td>
+          <td>QA Engineer can mark individual checks as conditionally passed (distinct from auto-calculated BORDERLINE).</td>
+          <td><span class="badge badge-defence" style="font-size: 9px;">ENUM</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>New ENUM: <code>document_review_response</code></td>
+          <td>APPROVED, APPROVED_WITH_COMMENTS, CONDITIONAL_APPROVAL, REJECTED, REVISE_AND_RESUBMIT. Captures customer feedback on submitted documents per SDRL review workflow.</td>
+          <td><span class="badge badge-defence" style="font-size: 9px;">ENUM</span></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Add <code>MONITOR</code> to itp_point_type ENUM</td>
+          <td>Standard O&amp;G ITP point type &mdash; customer has right to attend but not binding. Distinct from SURVEILLANCE (supplier&rsquo;s own monitoring).</td>
+          <td><span class="badge badge-defence" style="font-size: 9px;">ENUM</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Order-level default notification lead time</td>
+          <td>Add <code>default_notification_lead_hours</code> field on order level. Pre-populates ITP point lead times. Period defined in PO/contract, varies per order.</td>
+          <td><span class="badge badge-pending" style="font-size: 9px;">FIELD</span></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>HOLD point notifications</td>
+          <td>Extend auto-notification system to cover HOLD points (currently only WITNESS). Customer must be informed when HOLD point approaches.</td>
+          <td><span class="badge badge-pending" style="font-size: 9px;">FIELD</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Retention default: 25 years O&amp;G, 30 years Defence</td>
+          <td>Current default 15 years is too low. Typical equipment lifetime 20&ndash;30 years. Update VR-013-01-002 minimum from &ge;10 to &ge;20. Configurable per contract.</td>
+          <td><span class="badge badge-pending" style="font-size: 9px;">CONFIG</span></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Allow custom MRB sections</td>
+          <td>Enable QA Engineer to add ad-hoc sections beyond the standard 7 (O&amp;G) or 8 (Defence) when special customer requirements do not fit standard structure.</td>
+          <td><span class="badge badge-pending" style="font-size: 9px;">FEATURE</span></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Chemical JSONB: show min+max</td>
+          <td>FM-008-01 example JSONB shows only <code>max</code>. EN 10204 certs use ranges (e.g., Cr: 16.0&ndash;18.0). Update example to include both <code>min</code> and <code>max</code> per element.</td>
+          <td><span class="badge badge-pending" style="font-size: 9px;">DOC</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 11px; color: var(--gray-med); margin-top: 10px;"><strong>5 items already covered</strong> by existing specs: FM-008-02 single-form interaction &check;, MRB subsections via SDRL line items &check;, alternative SDRL communication via MANUAL parse method &check;, ITP auto-notifications partially covered &check;, PKI is documented (Phase 0.5+) &check;. <strong>2 items deferred</strong>: ITP&rarr;activity planning integration (Phase 1+), batch number field (verify need).</p>
+  </div>
+
+  <!-- AM-MVP-001 REVIEW FINDINGS -->
+  <div style="background: var(--gray-panel); border-left: 3px solid var(--red); border-radius: 0 6px 6px 0; padding: 18px 22px; margin: 20px 0;">
+    <h4 style="font-size: 13px; color: var(--red); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">AM-MVP-001 Review Findings &mdash; Tore Ausland (22 Feb 2026)</h4>
+    <p style="font-size: 12px; color: var(--gray-med); margin-bottom: 12px;">MVP scope reviewed against industry domain knowledge. 3 actionable findings, all confirmed.</p>
+    <table class="doc-table" style="font-size: 12px;">
+      <thead>
+        <tr><th style="width: 30px;">#</th><th style="width: 200px;">Finding</th><th>Action Required</th><th style="width: 70px;">Impact</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Defence = commercial top priority</td>
+          <td>Update &sect;2.2 Industry Focus to distinguish technical preparation (both sectors equal) from commercial priority (Defence first). O&amp;G remains Phase 0 test scenario due to data availability. Decision 2 in Status Report to be nuanced accordingly. Defence seed data (E04-C03) should be expanded for more thorough Phase 0 testing.</td>
+          <td><span class="badge badge-pending" style="font-size: 9px;">SCOPE</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>AI-assisted certificate pre-review</td>
+          <td>Move from Phase 2+ to <strong>Phase 0.5</strong>. LLM-based document parsing (not traditional ML) &mdash; AI reads PDF cert, extracts values, compares against Material Requirement Profile, generates pre-review report. QA Engineer reviews and confirms. Phase 0 designs the manual flow with auto-fill stub for seamless AI integration. Customer requirements remain the authoritative source.</td>
+          <td><span class="badge badge-defence" style="font-size: 9px;">PHASE</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>System-wide gate decision terminology</td>
+          <td><strong>Architectural decision:</strong> All reviewable entities in the system use unified terminology. <code>gate_decision</code>: APPROVED / REJECTED / CONDITIONAL_APPROVAL (REVIEW removed &mdash; escalation via field, not status). <code>gate_check_result</code>: PASS / FAIL / CONDITIONAL / BORDERLINE / N_A. Applies to: material certs, SDRL docs, MRB documents, MRB package, CoC &mdash; any entity undergoing review. Affects all documents: AM-FM-001, AM-MVP-001, AM-TS-001, PR-008, AM-WI-001, AM-CT-001.</td>
+          <td><span class="badge badge-defence" style="font-size: 9px;">ARCH</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 11px; color: var(--gray-med); margin-top: 10px;"><strong>Reference material added:</strong> EN 10204 certificate templates (Types 2.1, 2.2, 3.1, 3.2) added to project folder as development reference for real certificate structure and field layouts.</p>
+  </div>
+
+  <!-- AM-TS-001 REVIEW FINDINGS -->
+  <div style="background: var(--gray-panel); border-left: 3px solid var(--red); border-radius: 0 6px 6px 0; padding: 18px 22px; margin: 20px 0;">
+    <h4 style="font-size: 13px; color: var(--red); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">AM-TS-001 Review Findings &mdash; Tore Ausland (22 Feb 2026)</h4>
+    <p style="font-size: 12px; color: var(--gray-med); margin-bottom: 12px;">IT/System Technical Specification reviewed against industry domain knowledge. 3 items evaluated, 3 actionable findings (1 minor wording, 2 substantive).</p>
+    <table class="doc-table" style="font-size: 12px;">
+      <thead>
+        <tr><th style="width: 30px;">#</th><th style="width: 200px;">Finding</th><th>Action Required</th><th style="width: 70px;">Impact</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>ERP module evolution language</td>
+          <td>Minor wording update in &sect;10.3. Add note that ERP module is designed for progressive expansion from Phase 0 core (PO management, basic inventory) to full manufacturing ERP. Already well covered &mdash; small clarification only.</td>
+          <td><span class="badge badge-pending" style="font-size: 9px;">DOC</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Shop floor device expansion: humanoid robots + AMR</td>
+          <td>Update &sect;5 (System Context) and &sect;9 (Machine Integration) to include humanoid robots and AMR (Autonomous Mobile Robots) as Phase 1+ device types alongside existing CNC/CMM/Metrology. AMR integration expected from <strong>Q3 2027</strong>. Architecture must be extensible via existing MQTT/OPC-UA framework. No Phase 0 impact.</td>
+          <td><span class="badge badge-defence" style="font-size: 9px;">ARCH</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>MRB delivery granularity: per PO or per line item</td>
+          <td>Update &sect;7.2 (Data Model) to clarify that MRB can be delivered per entire PO or per individual PO line item (for large orders). Current FK structure supports this. Add explicit note on delivery granularity options. Full normalization of PO line items planned for Phase 0.5.</td>
+          <td><span class="badge badge-pending" style="font-size: 9px;">DATA</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 11px; color: var(--gray-med); margin-top: 10px;"><strong>Note:</strong> Fredrik&rsquo;s technical review of AM-TS-001 is still pending &mdash; will focus on database implementation feasibility, Supabase/PostgreSQL architecture, and MQTT/OPC-UA integration specifics.</p>
+  </div>
+
+  <h4 style="font-size: 13px; color: var(--red); margin: 24px 0 10px; text-transform: uppercase; letter-spacing: 1px;">Parallel / Ongoing</h4>
+
+  <table class="doc-table" style="font-size: 13px;">
+    <thead>
+      <tr><th style="width: 35px;">#</th><th>Action</th><th>Owner</th><th>Target</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>7</td>
+        <td><strong>Review AM-WI-001</strong> (Work Instructions) &mdash; Tore reviews workflow accuracy against O&amp;G industry practices. Fredrik reviews screen references against planned UI implementation. <em>Note: may need updates after gate decision terminology changes are implemented.</em></td>
+        <td>Tore + Fredrik</td>
+        <td>Q1 2026</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td><strong>Source real O&amp;G SDRLs</strong> for Phase 0 simulation data.</td>
+        <td>Tore</td>
+        <td>Ongoing</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td><strong>Decide F4b: ERP Module Scope Depth</strong> &mdash; non-blocking, but needed before Phase 1 planning.</td>
+        <td>Fredrik</td>
+        <td>Q1 2026</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="background: var(--gray-panel); border-radius: 6px; padding: 14px 18px; margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div>
+      <h5 style="font-size: 12px; color: var(--black); margin-bottom: 4px;">Tore Ausland &mdash; Industry &amp; Requirements</h5>
+      <p style="font-size: 11px; color: var(--gray-med);">Customer requirements, industry standards (AS9100, NORSOK, EN 10204), SDRL structures, documentation practices, validation rules, customer-facing materials, form template field definitions</p>
+    </div>
+    <div>
+      <h5 style="font-size: 12px; color: var(--black); margin-bottom: 4px;">Fredrik Vangsal &mdash; Technical &amp; Architecture</h5>
+      <p style="font-size: 11px; color: var(--gray-med);">System architecture, technology stack, database design, SDRL storage model, e-signature, KMS, machine integration (MQTT/OPC-UA), security, deployment, PDF/A-3 generation</p>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div class="page-footer">
+  <p class="confidential">Confidential</p>
+  <p>Aurelian Manufacturing AS &mdash; Org.nr 835 679 632 &mdash; V&aring;ler, &Oslash;stfold, Norway</p>
+  <p style="margin-top: 4px;">Digital MRB Builder &mdash; Build Status Report V3.0 &mdash; 22 February 2026 &mdash; UI Prototype Delivered (7 Screens) &mdash; All Reviews Complete (Tore) &mdash; 15 Findings Implemented</p>
+  <p style="margin-top: 8px; font-size: 10px; color: var(--gray-med);">
+    Companion documents: MRB-Builder-Architecture.html (system visual) &bull; MRB-Builder-App-Shell.html (UI prototype entry point) &bull; AM-TS-001 (IT/System Spec) &bull; AM-CT-001 (Customer Templates) &bull; AM-FM-001 (Form Templates) &bull; AM-MVP-001 (MVP Scope Definition) &bull; AM-WI-001 (Work Instructions) &bull; PR-008&ndash;PR-013 (procedures) &bull; AM-IF-001 (interface spec) &bull; QM-001 Rev 2 Addendum
+  </p>
+</div>
+
+</body>
+</html>

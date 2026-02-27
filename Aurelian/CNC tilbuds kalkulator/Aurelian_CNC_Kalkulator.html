@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — CNC Tilbudskalkulator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --au-gold: #C9A84C;
+    --au-dark: #1a1a2e;
+    --au-navy: #16213e;
+    --au-blue: #0f3460;
+    --au-accent: #e94560;
+    --au-bg: #f8f9fa;
+    --au-card: #ffffff;
+    --au-border: #e0e0e0;
+    --au-text: #2d2d2d;
+    --au-muted: #6c757d;
+    --au-green: #28a745;
+    --au-orange: #fd7e14;
+    --au-red: #dc3545;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--au-bg); color: var(--au-text); line-height: 1.5; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, var(--au-dark), var(--au-navy)); color: white; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .header h1 { font-size: 22px; font-weight: 600; letter-spacing: 0.5px; }
+  .header h1 span { color: var(--au-gold); }
+  .header .subtitle { font-size: 13px; color: #a0aec0; margin-top: 2px; }
+  .header .badge { background: var(--au-gold); color: var(--au-dark); padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+
+  /* Tabs */
+  .tabs { display: flex; background: white; border-bottom: 2px solid var(--au-border); padding: 0 24px; overflow-x: auto; }
+  .tab { padding: 14px 24px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--au-muted); border-bottom: 3px solid transparent; transition: all 0.2s; white-space: nowrap; }
+  .tab:hover { color: var(--au-blue); }
+  .tab.active { color: var(--au-blue); border-bottom-color: var(--au-gold); font-weight: 600; }
+
+  /* Content */
+  .content { max-width: 1400px; margin: 0 auto; padding: 24px; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Cards */
+  .card { background: var(--au-card); border: 1px solid var(--au-border); border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .card h2 { font-size: 18px; color: var(--au-navy); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--au-gold); }
+  .card h3 { font-size: 15px; color: var(--au-blue); margin: 16px 0 10px; }
+
+  /* Grid layouts */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 900px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+  /* Form elements */
+  .form-group { margin-bottom: 14px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--au-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .form-group input, .form-group select {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--au-border); border-radius: 8px;
+    font-size: 14px; transition: border-color 0.2s; background: white;
+  }
+  .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--au-gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
+  .form-group .unit { font-size: 11px; color: var(--au-muted); margin-top: 2px; }
+
+  /* Results */
+  .result-box { background: linear-gradient(135deg, #f0f4ff, #e8f0ff); border: 2px solid var(--au-blue); border-radius: 12px; padding: 20px; text-align: center; }
+  .result-box.gold { background: linear-gradient(135deg, #fff9e6, #fff3cc); border-color: var(--au-gold); }
+  .result-box.green { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-color: var(--au-green); }
+  .result-box .big-number { font-size: 36px; font-weight: 700; color: var(--au-navy); }
+  .result-box .label { font-size: 12px; color: var(--au-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .result-box .sublabel { font-size: 13px; color: var(--au-muted); margin-top: 4px; }
+
+  /* Table */
+  .cost-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .cost-table th { background: var(--au-navy); color: white; padding: 10px 12px; text-align: left; font-weight: 500; }
+  .cost-table td { padding: 8px 12px; border-bottom: 1px solid var(--au-border); }
+  .cost-table tr:hover { background: #f8f9ff; }
+  .cost-table .total-row { background: #f0f4ff; font-weight: 700; }
+  .cost-table .total-row td { border-top: 2px solid var(--au-blue); }
+  .cost-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Machine cards */
+  .machine-card { border: 2px solid var(--au-border); border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.2s; text-align: center; }
+  .machine-card:hover { border-color: var(--au-gold); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .machine-card.selected { border-color: var(--au-gold); background: linear-gradient(135deg, #fff9e6, #fff3cc); }
+  .machine-card .icon { font-size: 32px; margin-bottom: 8px; }
+  .machine-card .name { font-weight: 600; font-size: 14px; color: var(--au-navy); }
+  .machine-card .rate { font-size: 20px; font-weight: 700; color: var(--au-gold); margin-top: 4px; }
+  .machine-card .desc { font-size: 11px; color: var(--au-muted); margin-top: 4px; }
+
+  /* Segment badges */
+  .segment-btn { display: inline-block; padding: 8px 20px; border: 2px solid var(--au-border); border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; margin-right: 8px; margin-bottom: 8px; }
+  .segment-btn:hover { border-color: var(--au-blue); }
+  .segment-btn.active { border-color: var(--au-gold); background: var(--au-gold); color: var(--au-dark); font-weight: 600; }
+
+  /* Progress bar for utilization */
+  .util-bar { height: 24px; background: #e9ecef; border-radius: 12px; overflow: hidden; position: relative; margin: 8px 0; }
+  .util-fill { height: 100%; border-radius: 12px; transition: width 0.5s ease; }
+  .util-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 12px; font-weight: 600; color: var(--au-dark); }
+
+  /* Chart container */
+  .chart-container { position: relative; height: 300px; }
+
+  /* Info banner */
+  .info-banner { background: #e3f2fd; border-left: 4px solid var(--au-blue); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-bottom: 16px; font-size: 13px; }
+  .info-banner strong { color: var(--au-blue); }
+
+  .warning-banner { background: #fff3cd; border-left: 4px solid var(--au-orange); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-bottom: 16px; font-size: 13px; }
+
+  /* Print styles */
+  @media print {
+    .header, .tabs { page-break-after: avoid; }
+    .card { page-break-inside: avoid; }
+    body { background: white; }
+  }
+
+  /* Waterfall bars */
+  .waterfall-row { display: flex; align-items: center; margin-bottom: 6px; }
+  .waterfall-label { width: 140px; font-size: 12px; text-align: right; padding-right: 12px; color: var(--au-muted); }
+  .waterfall-bar-wrap { flex: 1; height: 28px; position: relative; }
+  .waterfall-bar { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 12px; font-weight: 600; color: white; min-width: 40px; transition: width 0.5s; }
+
+  /* Tooltip */
+  .tooltip-icon { display: inline-block; width: 16px; height: 16px; background: var(--au-muted); color: white; border-radius: 50%; font-size: 10px; text-align: center; line-height: 16px; cursor: help; margin-left: 4px; }
+
+  /* 50/50 visualizer */
+  .split-viz { display: flex; height: 60px; border-radius: 8px; overflow: hidden; margin: 12px 0; }
+  .split-aurelian { background: var(--au-navy); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 13px; transition: width 0.5s; }
+  .split-customer { background: var(--au-gold); display: flex; align-items: center; justify-content: center; color: var(--au-dark); font-weight: 600; font-size: 13px; transition: width 0.5s; }
+  .split-base { background: #6c757d; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; transition: width 0.5s; }
+
+  /* Footer */
+  .footer { text-align: center; padding: 24px; color: var(--au-muted); font-size: 12px; border-top: 1px solid var(--au-border); margin-top: 32px; }
+
+  .btn { padding: 10px 24px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .btn-primary { background: var(--au-gold); color: var(--au-dark); }
+  .btn-primary:hover { background: #b8953f; }
+  .btn-outline { background: transparent; border: 2px solid var(--au-blue); color: var(--au-blue); }
+  .btn-outline:hover { background: var(--au-blue); color: white; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1><span>AURELIAN</span> MANUFACTURING</h1>
+    <div class="subtitle">CNC Tilbudskalkulator &mdash; Industri 4.0 TDABC Prisingsmodell</div>
+  </div>
+  <div class="badge">v1.0 &bull; REV6 Calibrated</div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="showTab('rate')">Satsberegning (3 000 NOK/t)</div>
+  <div class="tab" onclick="showTab('quote')">Tilbudskalkulator</div>
+  <div class="tab" onclick="showTab('profit')">50/50 Kundemodell</div>
+  <div class="tab" onclick="showTab('sensitivity')">Sensitivitet</div>
+</div>
+
+<!-- ============================== TAB 1: RATE JUSTIFICATION ============================== -->
+<div class="content">
+<div id="tab-rate" class="tab-content active">
+
+  <div class="info-banner">
+    <strong>Formål:</strong> Denne fanen viser hvordan Aurelians gjennomsnittlige rate på <strong>3 000 NOK/spindeltime</strong> bygges opp fra faktiske kostnader (TDABC) pluss margin. Juster parameterne for å se effekten.
+  </div>
+
+  <div class="grid-2">
+    <!-- LEFT: Input parameters -->
+    <div>
+      <div class="card">
+        <h2>Maskin &amp; CAPEX</h2>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>CAPEX per CNC (inkl. automasjon)</label>
+            <input type="number" id="r_capex" value="10000000" step="500000" onchange="calcRate()">
+            <div class="unit">NOK &mdash; REV6: 10 MNOK</div>
+          </div>
+          <div class="form-group">
+            <label>Avskrivningstid</label>
+            <input type="number" id="r_depr_years" value="8" onchange="calcRate()">
+            <div class="unit">&#229;r (lineær)</div>
+          </div>
+          <div class="form-group">
+            <label>Serviceavtale / vedlikehold</label>
+            <input type="number" id="r_maint" value="350000" step="10000" onchange="calcRate()">
+            <div class="unit">NOK/&#229;r per CNC</div>
+          </div>
+          <div class="form-group">
+            <label>Finanskost (rente)</label>
+            <input type="number" id="r_finance_pct" value="7.5" step="0.5" onchange="calcRate()">
+            <div class="unit">% av CAPEX/&#229;r</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Kapasitet &amp; Utnyttelse</h2>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Timer/&#229;r (kalender)</label>
+            <input type="number" id="r_hours_year" value="8760" onchange="calcRate()">
+            <div class="unit">8 760 = 24/7/365</div>
+          </div>
+          <div class="form-group">
+            <label>Utnyttelsesgrad</label>
+            <input type="number" id="r_util" value="60" step="5" onchange="calcRate()">
+            <div class="unit">% &mdash; REV6 steady state: 60%</div>
+          </div>
+          <div class="form-group">
+            <label>Tilgjengelighet (OEE-A)</label>
+            <input type="number" id="r_avail" value="90" step="1" onchange="calcRate()">
+            <div class="unit">% &mdash; maskin oppe/planlagt</div>
+          </div>
+        </div>
+        <div class="util-bar">
+          <div class="util-fill" id="r_util_bar" style="width:60%; background: linear-gradient(90deg, var(--au-green), var(--au-gold));"></div>
+          <div class="util-label" id="r_util_label">60% utnyttelse = 4 730 spindeltimer</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Personell &amp; Overhead</h2>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Operatør FTE per CNC</label>
+            <input type="number" id="r_op_fte" value="0.8" step="0.1" onchange="calcRate()">
+            <div class="unit">REV6: 0.8 (autonom drift)</div>
+          </div>
+          <div class="form-group">
+            <label>Operatørkost (fulllastet)</label>
+            <input type="number" id="r_op_cost" value="800000" step="50000" onchange="calcRate()">
+            <div class="unit">NOK/&#229;r per FTE</div>
+          </div>
+          <div class="form-group">
+            <label>Fasilitetsandel per CNC</label>
+            <input type="number" id="r_facility" value="260000" step="10000" onchange="calcRate()">
+            <div class="unit">NOK/&#229;r (5.2M / 20 CNC)</div>
+          </div>
+          <div class="form-group">
+            <label>Admin/indirekte per CNC</label>
+            <input type="number" id="r_admin" value="160000" step="10000" onchange="calcRate()">
+            <div class="unit">NOK/&#229;r (4 FTE / 20 CNC)</div>
+          </div>
+          <div class="form-group">
+            <label>IT, lisenser, forsikring</label>
+            <input type="number" id="r_it" value="150000" step="10000" onchange="calcRate()">
+            <div class="unit">NOK/&#229;r per CNC</div>
+          </div>
+          <div class="form-group">
+            <label>Energikost per spindeltime</label>
+            <input type="number" id="r_energy" value="85" step="5" onchange="calcRate()">
+            <div class="unit">NOK/time</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Margin &amp; Variabel kost</h2>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Variabel kost (forbruk, verkt&oslash;y)</label>
+            <input type="number" id="r_variable_pct" value="8" step="1" onchange="calcRate()">
+            <div class="unit">% av omsetning &mdash; REV6: 8% steady state</div>
+          </div>
+          <div class="form-group">
+            <label>M&aring;lmargin</label>
+            <input type="number" id="r_margin" value="20" step="1" onchange="calcRate()">
+            <div class="unit">% p&aring;slag p&aring; totalkost</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Results -->
+    <div>
+      <div class="card">
+        <h2>Beregnet Rate per Spindeltime</h2>
+        <div class="grid-3" style="margin-bottom: 20px;">
+          <div class="result-box">
+            <div class="label">Internkost</div>
+            <div class="big-number" id="r_cost_per_h">0</div>
+            <div class="sublabel">NOK/spindeltime</div>
+          </div>
+          <div class="result-box gold">
+            <div class="label">Tilbudssats (inkl. margin)</div>
+            <div class="big-number" id="r_price_per_h">0</div>
+            <div class="sublabel">NOK/spindeltime</div>
+          </div>
+          <div class="result-box green">
+            <div class="label">&#197;rlig omsetning per CNC</div>
+            <div class="big-number" id="r_revenue_year" style="font-size: 24px;">0</div>
+            <div class="sublabel">MNOK</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Kostnadsbrudd per Spindeltime</h2>
+        <div id="rate-waterfall"></div>
+        <div style="margin-top: 16px;">
+          <div class="chart-container" style="height: 280px;">
+            <canvas id="ratePieChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>&#197;rlig &Oslash;konomi per CNC</h2>
+        <table class="cost-table" id="rate-annual-table">
+          <thead><tr><th>Kostnadspost</th><th style="text-align:right">NOK/&#229;r</th><th style="text-align:right">NOK/time</th><th style="text-align:right">Andel</th></tr></thead>
+          <tbody id="rate-annual-body"></tbody>
+        </table>
+      </div>
+
+      <div class="card" style="background: linear-gradient(135deg, #e8f5e9, #f1f8e9); border-color: var(--au-green);">
+        <h2 style="border-color: var(--au-green);">Oppsummering: Hvorfor 3 000 NOK/t er Riktig</h2>
+        <div id="rate-justification" style="font-size: 14px; line-height: 1.8;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== TAB 2: JOB QUOTE CALCULATOR ============================== -->
+<div id="tab-quote" class="tab-content">
+
+  <div class="info-banner">
+    <strong>Tilbudskalkulator:</strong> Beregn kostnadsbrudd og tilbudspris for en spesifikk jobb. Velg maskin, tast inn tider og materialkost, og f&aring; komplett prisforslag med P50/P80 usikkerhet.
+  </div>
+
+  <!-- Machine selection -->
+  <div class="card">
+    <h2>1. Velg Maskin</h2>
+    <div class="grid-3">
+      <div class="machine-card selected" id="mc-5axis" onclick="selectMachine('5axis')">
+        <div class="icon">&#9881;</div>
+        <div class="name">Mazak 5-akse</div>
+        <div class="rate" id="mc-5axis-rate">1 850</div>
+        <div class="desc">INTEGREX / VARIAXIS<br>H&oslash;ypresisjon, komplekse geometrier</div>
+      </div>
+      <div class="machine-card" id="mc-3axis" onclick="selectMachine('3axis')">
+        <div class="icon">&#9881;</div>
+        <div class="name">Mazak 3-akse VMC</div>
+        <div class="rate" id="mc-3axis-rate">1 300</div>
+        <div class="desc">VCN / VTC-serie<br>Allround fresing</div>
+      </div>
+      <div class="machine-card" id="mc-turnmill" onclick="selectMachine('turnmill')">
+        <div class="icon">&#9881;</div>
+        <div class="name">Mazak Turn-Mill</div>
+        <div class="rate" id="mc-turnmill-rate">1 500</div>
+        <div class="desc">QUICK TURN / INTEGREX<br>Dreiing + fresing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Segment selection -->
+  <div class="card">
+    <h2>2. Segment &amp; Krav</h2>
+    <div>
+      <span class="segment-btn active" id="seg-standard" onclick="selectSegment('standard')">Standard Industri</span>
+      <span class="segment-btn" id="seg-defense" onclick="selectSegment('defense')">Forsvar (AQAP)</span>
+      <span class="segment-btn" id="seg-oilgas" onclick="selectSegment('oilgas')">Olje &amp; Gass (NORSOK)</span>
+    </div>
+    <div id="segment-info" style="margin-top: 12px; font-size: 13px; color: var(--au-muted);"></div>
+  </div>
+
+  <div class="grid-2">
+    <!-- LEFT: Job inputs -->
+    <div>
+      <div class="card">
+        <h2>3. Jobb-parametere</h2>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Batchst&oslash;rrelse (N)</label>
+            <input type="number" id="q_batch" value="10" min="1" onchange="calcQuote()">
+          </div>
+          <div class="form-group">
+            <label>Materialkost per del</label>
+            <input type="number" id="q_mat" value="500" step="50" onchange="calcQuote()">
+            <div class="unit">NOK (r&aring;emne + svinn)</div>
+          </div>
+        </div>
+
+        <h3>Tider (timer)</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Programmering / CAM</label>
+            <input type="number" id="q_prog" value="4.0" step="0.5" onchange="calcQuote()">
+            <div class="unit">timer (engangskost)</div>
+          </div>
+          <div class="form-group">
+            <label>Setup / Omstilling</label>
+            <input type="number" id="q_setup" value="2.0" step="0.5" onchange="calcQuote()">
+            <div class="unit">timer (engangskost)</div>
+          </div>
+          <div class="form-group">
+            <label>Syklustid per del</label>
+            <input type="number" id="q_cycle" value="0.5" step="0.05" onchange="calcQuote()">
+            <div class="unit">timer/del (maskintid)</div>
+          </div>
+          <div class="form-group">
+            <label>H&aring;ndtering per del</label>
+            <input type="number" id="q_hand" value="0.1" step="0.05" onchange="calcQuote()">
+            <div class="unit">timer/del (lasting, merking)</div>
+          </div>
+          <div class="form-group">
+            <label>Etterarbeid per del</label>
+            <input type="number" id="q_post" value="0.15" step="0.05" onchange="calcQuote()">
+            <div class="unit">timer/del (deburr, vask)</div>
+          </div>
+          <div class="form-group">
+            <label>QC / Inspeksjon per del</label>
+            <input type="number" id="q_qc" value="0.15" step="0.05" onchange="calcQuote()">
+            <div class="unit">timer/del (m&aring;ling, rapport)</div>
+          </div>
+        </div>
+
+        <h3>Tilleggskost</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Verkt&oslash;ykost (batch)</label>
+            <input type="number" id="q_tool" value="1500" step="100" onchange="calcQuote()">
+            <div class="unit">NOK totalt for batch</div>
+          </div>
+          <div class="form-group">
+            <label>Ekstern prosess (HT, NDT, coating)</label>
+            <input type="number" id="q_ext" value="0" step="100" onchange="calcQuote()">
+            <div class="unit">NOK totalt for batch</div>
+          </div>
+        </div>
+
+        <h3>Risiko &amp; Margin</h3>
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Skraprate</label>
+            <input type="number" id="q_scrap" value="5" step="1" onchange="calcQuote()">
+            <div class="unit">%</div>
+          </div>
+          <div class="form-group">
+            <label>Rework-rate</label>
+            <input type="number" id="q_rework" value="3" step="1" onchange="calcQuote()">
+            <div class="unit">%</div>
+          </div>
+          <div class="form-group">
+            <label>M&aring;lmargin</label>
+            <input type="number" id="q_margin" value="20" step="1" onchange="calcQuote()">
+            <div class="unit">%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Quote results -->
+    <div>
+      <div class="card">
+        <h2>Tilbudspris</h2>
+        <div class="grid-3" style="margin-bottom: 20px;">
+          <div class="result-box">
+            <div class="label">Internkost / del</div>
+            <div class="big-number" id="q_cost_unit">0</div>
+            <div class="sublabel">NOK</div>
+          </div>
+          <div class="result-box gold">
+            <div class="label">Tilbudspris / del (P50)</div>
+            <div class="big-number" id="q_price_unit">0</div>
+            <div class="sublabel">NOK</div>
+          </div>
+          <div class="result-box">
+            <div class="label">Tilbudspris / del (P80)</div>
+            <div class="big-number" id="q_price_p80">0</div>
+            <div class="sublabel">NOK (konservativt)</div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="result-box green">
+            <div class="label">Batchpris P50</div>
+            <div class="big-number" id="q_batch_price" style="font-size:28px;">0</div>
+            <div class="sublabel">NOK</div>
+          </div>
+          <div class="result-box" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0); border-color: var(--au-accent);">
+            <div class="label">Effektiv timepris (blended)</div>
+            <div class="big-number" id="q_eff_hourly" style="font-size:28px;">0</div>
+            <div class="sublabel">NOK/spindeltime</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Kostnadsbrudd</h2>
+        <table class="cost-table">
+          <thead><tr><th>Kostelement</th><th style="text-align:right">Timer</th><th style="text-align:right">Sats</th><th style="text-align:right">Kost (NOK)</th><th style="text-align:right">%</th></tr></thead>
+          <tbody id="q-cost-body"></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Kostnadsfordeling</h2>
+        <div class="chart-container" style="height: 260px;">
+          <canvas id="quotePieChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== TAB 3: 50/50 PROFIT MODEL ============================== -->
+<div id="tab-profit" class="tab-content">
+
+  <div class="info-banner">
+    <strong>50/50 Partnerskapsmodell:</strong> Aurelians un ike kundemodell &mdash; over 45% utnyttelse deles kapasitetsgevinsten 50/50 med strategiske kunder. Dette gir kunden direkte insentiv til &aring; levere jevnt volum.
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <h2>Modellparametere</h2>
+        <div class="form-group">
+          <label>Kundens bestilte timer / m&aring;ned</label>
+          <input type="number" id="p_hours" value="400" step="50" onchange="calcProfit()">
+        </div>
+        <div class="form-group">
+          <label>Base timepris (under 45% util.)</label>
+          <input type="number" id="p_base_rate" value="3000" step="100" onchange="calcProfit()">
+          <div class="unit">NOK/spindeltime</div>
+        </div>
+        <div class="form-group">
+          <label>Aurelians internkost per time</label>
+          <input type="number" id="p_cost_rate" value="2400" step="100" onchange="calcProfit()">
+          <div class="unit">NOK/spindeltime</div>
+        </div>
+        <div class="form-group">
+          <label>Antall CNC tilordnet kunde</label>
+          <input type="number" id="p_cnc_count" value="2" min="1" max="25" onchange="calcProfit()">
+        </div>
+        <div class="form-group">
+          <label>45%-grense timer/m&aring;ned per CNC</label>
+          <input type="number" id="p_threshold" value="328" step="10" onchange="calcProfit()">
+          <div class="unit">8760 &times; 45% / 12 = 328 timer</div>
+        </div>
+
+        <h3 style="margin-top: 20px;">Resultat</h3>
+        <div id="profit-summary" style="font-size: 14px; line-height: 1.8; margin-top: 8px;"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <h2>Profittfordeling</h2>
+        <div class="split-viz" id="split-viz">
+          <div class="split-base" id="split-base">Kost</div>
+          <div class="split-aurelian" id="split-au">Aurelian</div>
+          <div class="split-customer" id="split-cust">Kunde</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--au-muted); margin-top:4px;">
+          <span>0 NOK</span>
+          <span id="split-total-label">Total omsetning</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>M&aring;nedlig &Oslash;konomi</h2>
+        <div class="grid-2" style="margin-bottom: 16px;">
+          <div class="result-box">
+            <div class="label">Omsetning (m&aring;ned)</div>
+            <div class="big-number" id="p_revenue" style="font-size:24px;">0</div>
+            <div class="sublabel">NOK</div>
+          </div>
+          <div class="result-box green">
+            <div class="label">Kundens besparelse</div>
+            <div class="big-number" id="p_saving" style="font-size:24px;">0</div>
+            <div class="sublabel">NOK/m&aring;ned</div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="result-box gold">
+            <div class="label">Aurelian margin</div>
+            <div class="big-number" id="p_au_margin" style="font-size:24px;">0</div>
+            <div class="sublabel">NOK/m&aring;ned</div>
+          </div>
+          <div class="result-box">
+            <div class="label">Kundens effektive pris</div>
+            <div class="big-number" id="p_eff_rate" style="font-size:24px;">0</div>
+            <div class="sublabel">NOK/time</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Utnyttelse vs. Profittdeling</h2>
+        <div class="chart-container" style="height: 300px;">
+          <canvas id="profitChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== TAB 4: SENSITIVITY ============================== -->
+<div id="tab-sensitivity" class="tab-content">
+
+  <div class="info-banner">
+    <strong>Sensitivitetsanalyse:</strong> Se hvordan endring i &eacute;n parameter p&aring;virker stykk-kost. Basert p&aring; siste beregning i Tilbudskalkulatoren.
+  </div>
+
+  <div class="card">
+    <h2>Tornado-diagram: Topp kostnadsdrivere</h2>
+    <div class="chart-container" style="height: 350px;">
+      <canvas id="tornadoChart"></canvas>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2>Stykkpris vs. Batchst&oslash;rrelse</h2>
+      <div class="chart-container" style="height: 280px;">
+        <canvas id="batchChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Stykkpris vs. Syklustid</h2>
+      <div class="chart-container" style="height: 280px;">
+        <canvas id="cycleChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<div class="footer">
+  AURELIAN MANUFACTURING AS &bull; KONFIDENSIELT &bull; CNC Tilbudskalkulator v1.0 &bull; TDABC/Industri 4.0 Prisingsmodell
+</div>
+
+<script>
+// ============ STATE ============
+let selectedMachine = '5axis';
+let selectedSegment = 'standard';
+
+const machines = {
+  '5axis':    { name: 'Mazak 5-akse',    rate: 1850 },
+  '3axis':    { name: 'Mazak 3-akse VMC', rate: 1300 },
+  'turnmill': { name: 'Mazak Turn-Mill',  rate: 1500 }
+};
+
+const segments = {
+  'standard': { qcMult: 1.0, indirectMult: 1.0, label: 'Standard industriell kvalitet' },
+  'defense':  { qcMult: 1.25, indirectMult: 1.15, label: 'AQAP-2110 / NATO-kvalitetskrav: +25% QC-tid, +15% indirekte kost' },
+  'oilgas':   { qcMult: 1.15, indirectMult: 1.10, label: 'NORSOK / Achilles JQS: +15% QC-tid, +10% indirekte kost' }
+};
+
+const opRate = 750;
+const engRate = 900;
+const qcRate = 950;
+
+// Chart instances
+let ratePieChartInstance = null;
+let quotePieChartInstance = null;
+let profitChartInstance = null;
+let tornadoChartInstance = null;
+let batchChartInstance = null;
+let cycleChartInstance = null;
+
+// ============ TAB NAVIGATION ============
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab')[['rate','quote','profit','sensitivity'].indexOf(id)].classList.add('active');
+
+  if (id === 'rate') calcRate();
+  if (id === 'quote') calcQuote();
+  if (id === 'profit') calcProfit();
+  if (id === 'sensitivity') calcSensitivity();
+}
+
+// ============ MACHINE SELECTION ============
+function selectMachine(type) {
+  selectedMachine = type;
+  document.querySelectorAll('.machine-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('mc-' + type).classList.add('selected');
+  calcQuote();
+}
+
+// ============ SEGMENT SELECTION ============
+function selectSegment(seg) {
+  selectedSegment = seg;
+  document.querySelectorAll('.segment-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('seg-' + seg).classList.add('active');
+  document.getElementById('segment-info').textContent = segments[seg].label;
+  calcQuote();
+}
+
+// ============ FORMAT HELPERS ============
+function fmt(n) { return Math.round(n).toLocaleString('nb-NO'); }
+function fmtDec(n, d) { return n.toLocaleString('nb-NO', {minimumFractionDigits: d, maximumFractionDigits: d}); }
+
+// ============ TAB 1: RATE CALCULATION ============
+function calcRate() {
+  const capex = +document.getElementById('r_capex').value;
+  const deprYears = +document.getElementById('r_depr_years').value;
+  const maint = +document.getElementById('r_maint').value;
+  const finPct = +document.getElementById('r_finance_pct').value;
+  const hoursYear = +document.getElementById('r_hours_year').value;
+  const util = +document.getElementById('r_util').value;
+  const avail = +document.getElementById('r_avail').value;
+  const opFte = +document.getElementById('r_op_fte').value;
+  const opCost = +document.getElementById('r_op_cost').value;
+  const facility = +document.getElementById('r_facility').value;
+  const admin = +document.getElementById('r_admin').value;
+  const itCost = +document.getElementById('r_it').value;
+  const energy = +document.getElementById('r_energy').value;
+  const varPct = +document.getElementById('r_variable_pct').value;
+  const margin = +document.getElementById('r_margin').value;
+
+  const practicalHours = hoursYear * (util / 100) * (avail / 100);
+  const depreciation = capex / deprYears;
+  const finance = capex * (finPct / 100);
+  const personnel = opFte * opCost;
+
+  // Fixed costs per year
+  const fixedTotal = depreciation + finance + maint + personnel + facility + admin + itCost;
+  const fixedPerHour = fixedTotal / practicalHours;
+  const totalCostPerHour = fixedPerHour + energy;
+
+  // Variable cost is on revenue, so we need to solve: price = (cost + var% * price) * (1+margin)
+  // price = cost_per_hour * (1 + margin/100) / (1 - varPct/100 * (1 + margin/100))
+  // Simplified: costWithVar = totalCostPerHour / (1 - varPct/100)
+  const costWithVar = totalCostPerHour / (1 - varPct / 100);
+  const pricePerHour = costWithVar * (1 + margin / 100);
+
+  const revenueYear = pricePerHour * practicalHours;
+
+  // Update utilization bar
+  document.getElementById('r_util_bar').style.width = util + '%';
+  document.getElementById('r_util_label').textContent = util + '% utnyttelse = ' + fmt(practicalHours) + ' spindeltimer';
+
+  // Update result boxes
+  document.getElementById('r_cost_per_h').textContent = fmt(totalCostPerHour);
+  document.getElementById('r_price_per_h').textContent = fmt(pricePerHour);
+  document.getElementById('r_revenue_year').textContent = fmtDec(revenueYear / 1e6, 1);
+
+  // Cost breakdown items
+  const items = [
+    { name: 'Avskrivning', yearly: depreciation, color: '#1a1a2e' },
+    { name: 'Finanskost', yearly: finance, color: '#16213e' },
+    { name: 'Vedlikehold/service', yearly: maint, color: '#0f3460' },
+    { name: 'Personell (operatør)', yearly: personnel, color: '#e94560' },
+    { name: 'Fasilitet', yearly: facility, color: '#C9A84C' },
+    { name: 'Admin/indirekte', yearly: admin, color: '#6c757d' },
+    { name: 'IT/lisenser/forsikring', yearly: itCost, color: '#28a745' },
+    { name: 'Energi', yearly: energy * practicalHours, color: '#fd7e14' },
+  ];
+
+  // Annual table
+  let tbody = '';
+  let grandTotal = 0;
+  items.forEach(item => {
+    grandTotal += item.yearly;
+    const perH = item.yearly / practicalHours;
+    const pct = (item.yearly / fixedTotal * 100) || 0;
+    tbody += `<tr><td>${item.name}</td><td class="num">${fmt(item.yearly)}</td><td class="num">${fmt(perH)}</td><td class="num">${fmtDec(item.yearly / (fixedTotal + energy * practicalHours) * 100, 1)}%</td></tr>`;
+  });
+  tbody += `<tr class="total-row"><td>Sum internkost</td><td class="num">${fmt(grandTotal)}</td><td class="num">${fmt(totalCostPerHour)}</td><td class="num">100%</td></tr>`;
+  const varCost = varPct / 100 * pricePerHour * practicalHours;
+  const marginAmt = (pricePerHour - costWithVar) * practicalHours;
+  tbody += `<tr><td>Variabel kost (${varPct}%)</td><td class="num">${fmt(varCost)}</td><td class="num">${fmt(varCost/practicalHours)}</td><td class="num">&mdash;</td></tr>`;
+  tbody += `<tr style="color:var(--au-green);font-weight:600"><td>Margin (${margin}%)</td><td class="num">${fmt(marginAmt)}</td><td class="num">${fmt(marginAmt/practicalHours)}</td><td class="num">&mdash;</td></tr>`;
+  tbody += `<tr class="total-row" style="background:#e8f5e9;"><td><strong>Tilbudssats (omsetning)</strong></td><td class="num"><strong>${fmt(revenueYear)}</strong></td><td class="num"><strong>${fmt(pricePerHour)}</strong></td><td class="num">&mdash;</td></tr>`;
+
+  document.getElementById('rate-annual-body').innerHTML = tbody;
+
+  // Waterfall
+  const maxVal = Math.max(...items.map(i => i.yearly / practicalHours));
+  let waterfallHtml = '';
+  items.forEach(item => {
+    const perH = item.yearly / practicalHours;
+    const pct = (perH / pricePerHour) * 100;
+    waterfallHtml += `<div class="waterfall-row">
+      <div class="waterfall-label">${item.name}</div>
+      <div class="waterfall-bar-wrap">
+        <div class="waterfall-bar" style="width:${Math.max(pct, 3)}%; background:${item.color};">${fmt(perH)}</div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('rate-waterfall').innerHTML = waterfallHtml;
+
+  // Pie chart
+  if (ratePieChartInstance) ratePieChartInstance.destroy();
+  ratePieChartInstance = new Chart(document.getElementById('ratePieChart'), {
+    type: 'doughnut',
+    data: {
+      labels: items.map(i => i.name),
+      datasets: [{ data: items.map(i => i.yearly), backgroundColor: items.map(i => i.color), borderWidth: 2 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+
+  // Justification text
+  const diff3000 = pricePerHour - 3000;
+  const comparison = diff3000 > 0
+    ? `Med gjeldende parametre er beregnet sats <strong>${fmt(pricePerHour)} NOK/t</strong>, altså ${fmt(Math.abs(diff3000))} NOK over 3 000. Du kan senke marginen eller øke utnyttelsen.`
+    : diff3000 < -100
+    ? `Med gjeldende parametre er beregnet sats <strong>${fmt(pricePerHour)} NOK/t</strong>, under 3 000. Det gir rom for 3 000 NOK/t med en <strong>reell margin på ${fmtDec((3000 - totalCostPerHour) / 3000 * 100, 1)}%</strong>.`
+    : `Med gjeldende parametre treffer du <strong>${fmt(pricePerHour)} NOK/t</strong> — svært nær 3 000 NOK-målet.`;
+
+  document.getElementById('rate-justification').innerHTML = `
+    <p>${comparison}</p>
+    <p style="margin-top:8px;">
+      <strong>Nøkkelargumenter for 3 000 NOK/t:</strong><br>
+      &bull; Avskrivning på ${fmt(capex/1e6)} MNOK CAPEX over ${deprYears} år = ${fmt(depreciation/practicalHours)} NOK/t<br>
+      &bull; Autonom drift med kun ${opFte} FTE/CNC reduserer personellkost til ${fmt(personnel/practicalHours)} NOK/t<br>
+      &bull; ${util}% utnyttelse gir ${fmt(practicalHours)} spindeltimer — bedre enn bransjesnitt (35-45%)<br>
+      &bull; Norsk verkstedtime ligger på ~980 NOK (standard) — Aurelians rate reflekterer 5-akse presisjon + AQAP/NORSOK<br>
+      &bull; Industri 4.0-automasjon gir lavere variabel kost (${varPct}%) enn tradisjonelle verksteder (13-18%)
+    </p>
+  `;
+}
+
+// ============ TAB 2: QUOTE CALCULATION ============
+function calcQuote() {
+  const R_m = machines[selectedMachine].rate;
+  const seg = segments[selectedSegment];
+  const R_op = opRate;
+  const R_eng = engRate;
+  const R_qc = qcRate * seg.qcMult;
+
+  const N = +document.getElementById('q_batch').value;
+  const matPerUnit = +document.getElementById('q_mat').value;
+  const t_prog = +document.getElementById('q_prog').value;
+  const t_setup = +document.getElementById('q_setup').value;
+  const t_cycle = +document.getElementById('q_cycle').value;
+  const t_hand = +document.getElementById('q_hand').value;
+  const t_post = +document.getElementById('q_post').value;
+  const t_qc = +document.getElementById('q_qc').value * seg.qcMult;
+  const C_tool = +document.getElementById('q_tool').value;
+  const C_ext = +document.getElementById('q_ext').value;
+  const scrapPct = +document.getElementById('q_scrap').value / 100;
+  const reworkPct = +document.getElementById('q_rework').value / 100;
+  const marginPct = +document.getElementById('q_margin').value / 100;
+
+  // Costs
+  const costProg = R_eng * t_prog;
+  const costSetupMachine = R_m * t_setup;
+  const costSetupOp = R_op * t_setup;
+  const costCycle = N * R_m * t_cycle;
+  const costHand = N * R_op * t_hand;
+  const costPost = N * R_op * t_post;
+  const costQC = N * R_qc * t_qc;
+  const costMat = N * matPerUnit;
+
+  // Indirect multiplier for defense/oilgas
+  const indirectMult = seg.indirectMult;
+
+  const directCost = costProg + costSetupMachine + costSetupOp + costCycle + costHand + costPost + costQC + C_tool + costMat + C_ext;
+  const batchCost = directCost * indirectMult;
+
+  // Scrap adjustment
+  const N_eff = N * (1 - scrapPct);
+  const unitCost = batchCost / N_eff;
+
+  // Price
+  const unitPriceP50 = unitCost * (1 + marginPct);
+  // P80: add ~15% uncertainty buffer on top
+  const unitPriceP80 = unitCost * 1.15 * (1 + marginPct);
+
+  const batchPriceP50 = unitPriceP50 * N;
+
+  // Effective hourly rate
+  const totalMachineHours = t_setup + N * t_cycle;
+  const effHourly = totalMachineHours > 0 ? batchPriceP50 / totalMachineHours : 0;
+
+  // Update displays
+  document.getElementById('q_cost_unit').textContent = fmt(unitCost);
+  document.getElementById('q_price_unit').textContent = fmt(unitPriceP50);
+  document.getElementById('q_price_p80').textContent = fmt(unitPriceP80);
+  document.getElementById('q_batch_price').textContent = fmt(batchPriceP50);
+  document.getElementById('q_eff_hourly').textContent = fmt(effHourly);
+
+  // Cost breakdown table
+  const costItems = [
+    { name: 'Programmering/CAM', hours: t_prog, rate: R_eng, cost: costProg },
+    { name: 'Setup (maskin)', hours: t_setup, rate: R_m, cost: costSetupMachine },
+    { name: 'Setup (operatør)', hours: t_setup, rate: R_op, cost: costSetupOp },
+    { name: `Syklustid (${fmtDec(t_cycle,2)}h × ${N})`, hours: N*t_cycle, rate: R_m, cost: costCycle },
+    { name: `Håndtering (${fmtDec(t_hand,2)}h × ${N})`, hours: N*t_hand, rate: R_op, cost: costHand },
+    { name: `Etterarbeid (${fmtDec(t_post,2)}h × ${N})`, hours: N*t_post, rate: R_op, cost: costPost },
+    { name: `QC/Inspeksjon (${fmtDec(t_qc,2)}h × ${N})`, hours: N*t_qc, rate: R_qc, cost: costQC },
+    { name: 'Verktøy', hours: '—', rate: '—', cost: C_tool },
+    { name: 'Material', hours: '—', rate: '—', cost: costMat },
+    { name: 'Ekstern prosess', hours: '—', rate: '—', cost: C_ext },
+  ];
+
+  if (indirectMult > 1) {
+    costItems.push({ name: `Segment-tillegg (${selectedSegment === 'defense' ? 'AQAP' : 'NORSOK'})`, hours: '—', rate: '—', cost: batchCost - directCost });
+  }
+
+  let html = '';
+  costItems.forEach(item => {
+    if (item.cost === 0 && item.hours === '—') return;
+    const pct = batchCost > 0 ? (item.cost / batchCost * 100) : 0;
+    html += `<tr>
+      <td>${item.name}</td>
+      <td class="num">${typeof item.hours === 'number' ? fmtDec(item.hours, 1) : item.hours}</td>
+      <td class="num">${typeof item.rate === 'number' ? fmt(item.rate) : item.rate}</td>
+      <td class="num">${fmt(item.cost)}</td>
+      <td class="num">${fmtDec(pct, 1)}%</td>
+    </tr>`;
+  });
+  html += `<tr class="total-row"><td>Sum batchkost</td><td></td><td></td><td class="num">${fmt(batchCost)}</td><td class="num">100%</td></tr>`;
+  html += `<tr><td>÷ Skrapjustering (${(scrapPct*100).toFixed(0)}%)</td><td></td><td></td><td class="num">÷ ${fmtDec(N_eff,1)} deler</td><td></td></tr>`;
+  html += `<tr class="total-row" style="background:#fff3cd"><td><strong>Stykkpris (internkost)</strong></td><td></td><td></td><td class="num"><strong>${fmt(unitCost)}</strong></td><td></td></tr>`;
+  html += `<tr style="color:var(--au-green);font-weight:600"><td>+ Margin (${(marginPct*100).toFixed(0)}%)</td><td></td><td></td><td class="num">${fmt(unitPriceP50 - unitCost)}</td><td></td></tr>`;
+  html += `<tr class="total-row" style="background:#e8f5e9"><td><strong>Tilbudspris P50</strong></td><td></td><td></td><td class="num"><strong>${fmt(unitPriceP50)} NOK/stk</strong></td><td></td></tr>`;
+
+  document.getElementById('q-cost-body').innerHTML = html;
+
+  // Pie chart
+  const pieData = [
+    { label: 'Programmering', value: costProg, color: '#1a1a2e' },
+    { label: 'Setup', value: costSetupMachine + costSetupOp, color: '#0f3460' },
+    { label: 'Maskintid', value: costCycle, color: '#e94560' },
+    { label: 'Operatør', value: costHand + costPost, color: '#C9A84C' },
+    { label: 'QC', value: costQC, color: '#28a745' },
+    { label: 'Verktøy', value: C_tool, color: '#fd7e14' },
+    { label: 'Material', value: costMat, color: '#6c757d' },
+  ];
+
+  if (quotePieChartInstance) quotePieChartInstance.destroy();
+  quotePieChartInstance = new Chart(document.getElementById('quotePieChart'), {
+    type: 'doughnut',
+    data: {
+      labels: pieData.filter(d => d.value > 0).map(d => d.label),
+      datasets: [{ data: pieData.filter(d => d.value > 0).map(d => d.value), backgroundColor: pieData.filter(d => d.value > 0).map(d => d.color), borderWidth: 2 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
+  });
+}
+
+// ============ TAB 3: 50/50 PROFIT MODEL ============
+function calcProfit() {
+  const hours = +document.getElementById('p_hours').value;
+  const baseRate = +document.getElementById('p_base_rate').value;
+  const costRate = +document.getElementById('p_cost_rate').value;
+  const cncCount = +document.getElementById('p_cnc_count').value;
+  const threshold = +document.getElementById('p_threshold').value;
+
+  const thresholdTotal = threshold * cncCount;
+  const baseHours = Math.min(hours, thresholdTotal);
+  const excessHours = Math.max(0, hours - thresholdTotal);
+
+  const baseRevenue = baseHours * baseRate;
+  const excessRevenue = excessHours * baseRate;
+  const totalRevenue = baseRevenue + excessRevenue;
+
+  const totalCost = hours * costRate;
+  const grossProfit = totalRevenue - totalCost;
+
+  // 50/50 on excess hours profit
+  const excessProfit = excessHours * (baseRate - costRate);
+  const customerShare = excessProfit * 0.5;
+  const aurelianKeeps = grossProfit - customerShare;
+
+  const effRateForCustomer = hours > 0 ? (totalRevenue - customerShare) / hours : 0;
+
+  // Summary
+  const utilPct = hours / (cncCount * 730) * 100; // 730 = avg hours/month
+  document.getElementById('profit-summary').innerHTML = `
+    <strong>Utnyttelse:</strong> ${fmtDec(utilPct, 0)}% (${fmt(hours)} timer p&aring; ${cncCount} CNC)<br>
+    <strong>Terskel (45%):</strong> ${fmt(thresholdTotal)} timer/m&aring;ned<br>
+    <strong>Timer over terskel:</strong> ${fmt(excessHours)} (utl&oslash;ser 50/50)<br>
+    <strong>Kundens rabatt:</strong> ${fmt(customerShare)} NOK/m&aring;ned (${hours > 0 ? fmtDec(customerShare/hours, 0) : 0} NOK/time)<br>
+    <strong>Kundens effektive pris:</strong> ${fmt(effRateForCustomer)} NOK/time (vs ${fmt(baseRate)} liste)
+  `;
+
+  document.getElementById('p_revenue').textContent = fmt(totalRevenue);
+  document.getElementById('p_saving').textContent = fmt(customerShare);
+  document.getElementById('p_au_margin').textContent = fmt(aurelianKeeps);
+  document.getElementById('p_eff_rate').textContent = fmt(effRateForCustomer);
+
+  // Split viz
+  const costPct = totalRevenue > 0 ? (totalCost / totalRevenue * 100) : 50;
+  const auPct = totalRevenue > 0 ? (aurelianKeeps / totalRevenue * 100) : 25;
+  const custPct = totalRevenue > 0 ? (customerShare / totalRevenue * 100) : 0;
+  document.getElementById('split-base').style.width = costPct + '%';
+  document.getElementById('split-base').textContent = 'Kost ' + fmt(totalCost);
+  document.getElementById('split-au').style.width = Math.max(auPct - costPct, 2) + '%';
+  document.getElementById('split-au').textContent = 'Aurelian ' + fmt(aurelianKeeps);
+  document.getElementById('split-cust').style.width = Math.max(custPct, 0) + '%';
+  document.getElementById('split-cust').textContent = custPct > 3 ? 'Kunde ' + fmt(customerShare) : '';
+  document.getElementById('split-total-label').textContent = 'Total: ' + fmt(totalRevenue) + ' NOK';
+
+  // Profit chart: show how profit splits at different utilization levels
+  const labels = [];
+  const auData = [];
+  const custData = [];
+  for (let u = 10; u <= 90; u += 5) {
+    const h = (u / 100) * 730 * cncCount;
+    labels.push(u + '%');
+    const bH = Math.min(h, thresholdTotal);
+    const eH = Math.max(0, h - thresholdTotal);
+    const rev = h * baseRate;
+    const cost = h * costRate;
+    const gp = rev - cost;
+    const ep = eH * (baseRate - costRate);
+    const cs = ep * 0.5;
+    auData.push(Math.round(gp - cs));
+    custData.push(Math.round(cs));
+  }
+
+  if (profitChartInstance) profitChartInstance.destroy();
+  profitChartInstance = new Chart(document.getElementById('profitChart'), {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        { label: 'Aurelian margin', data: auData, backgroundColor: '#16213e', stack: 'a' },
+        { label: 'Kundebesparelse', data: custData, backgroundColor: '#C9A84C', stack: 'a' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { title: { display: true, text: 'Utnyttelsesgrad' } },
+        y: { title: { display: true, text: 'NOK / måned' }, stacked: true, ticks: { callback: v => fmt(v) } }
+      },
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + fmt(ctx.raw) + ' NOK' } },
+        annotation: {
+          annotations: {
+            line1: { type: 'line', xMin: '45%', xMax: '45%', borderColor: '#e94560', borderWidth: 2, borderDash: [6,3],
+              label: { content: '45% terskel', display: true, position: 'start' }
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+// ============ TAB 4: SENSITIVITY ============
+function calcSensitivity() {
+  // Get current quote parameters
+  const R_m = machines[selectedMachine].rate;
+  const seg = segments[selectedSegment];
+  const N = +document.getElementById('q_batch').value;
+  const matPerUnit = +document.getElementById('q_mat').value;
+  const t_prog = +document.getElementById('q_prog').value;
+  const t_setup = +document.getElementById('q_setup').value;
+  const t_cycle = +document.getElementById('q_cycle').value;
+  const t_hand = +document.getElementById('q_hand').value;
+  const t_post = +document.getElementById('q_post').value;
+  const t_qc_base = +document.getElementById('q_qc').value;
+  const C_tool = +document.getElementById('q_tool').value;
+  const scrapPct = +document.getElementById('q_scrap').value / 100;
+  const marginPct = +document.getElementById('q_margin').value / 100;
+
+  function calcUnit(params) {
+    const p = Object.assign({ N, matPerUnit, t_prog, t_setup, t_cycle, t_hand, t_post, t_qc: t_qc_base, C_tool, scrapPct, marginPct, R_m }, params);
+    const batchCost = engRate * p.t_prog + (p.R_m + opRate) * p.t_setup +
+      p.N * (p.R_m * p.t_cycle + opRate * p.t_hand + opRate * p.t_post + qcRate * p.t_qc) +
+      p.C_tool + p.N * p.matPerUnit;
+    const adjusted = batchCost * seg.indirectMult;
+    const nEff = p.N * (1 - p.scrapPct);
+    return (adjusted / nEff) * (1 + p.marginPct);
+  }
+
+  const basePrice = calcUnit({});
+
+  // Tornado: vary each parameter ±30%
+  const params = [
+    { name: 'Syklustid', key: 't_cycle', base: t_cycle },
+    { name: 'Batchstørrelse', key: 'N', base: N },
+    { name: 'Maskinsats', key: 'R_m', base: R_m },
+    { name: 'Setup-tid', key: 't_setup', base: t_setup },
+    { name: 'Materialkost', key: 'matPerUnit', base: matPerUnit },
+    { name: 'QC-tid', key: 't_qc', base: t_qc_base },
+    { name: 'Programmering', key: 't_prog', base: t_prog },
+    { name: 'Skraprate', key: 'scrapPct', base: scrapPct },
+  ];
+
+  const tornado = params.map(p => {
+    const low = calcUnit({ [p.key]: p.base * 0.7 });
+    const high = calcUnit({ [p.key]: p.base * 1.3 });
+    return { name: p.name, low: Math.min(low, high), high: Math.max(low, high), base: basePrice };
+  }).sort((a, b) => (b.high - b.low) - (a.high - a.low));
+
+  if (tornadoChartInstance) tornadoChartInstance.destroy();
+  tornadoChartInstance = new Chart(document.getElementById('tornadoChart'), {
+    type: 'bar',
+    data: {
+      labels: tornado.map(t => t.name),
+      datasets: [
+        { label: '-30%', data: tornado.map(t => t.low - basePrice), backgroundColor: '#28a745', barPercentage: 0.6 },
+        { label: '+30%', data: tornado.map(t => t.high - basePrice), backgroundColor: '#e94560', barPercentage: 0.6 }
+      ]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { title: { display: true, text: 'Endring i stykkpris (NOK) fra base ' + fmt(basePrice) },
+          ticks: { callback: v => (v >= 0 ? '+' : '') + fmt(v) }
+        }
+      },
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + (ctx.raw >= 0 ? '+' : '') + fmt(ctx.raw) + ' NOK' } }
+      }
+    }
+  });
+
+  // Batch size curve
+  const batchSizes = [1, 2, 5, 10, 20, 50, 100, 200, 500];
+  const batchPrices = batchSizes.map(n => calcUnit({ N: n }));
+
+  if (batchChartInstance) batchChartInstance.destroy();
+  batchChartInstance = new Chart(document.getElementById('batchChart'), {
+    type: 'line',
+    data: {
+      labels: batchSizes.map(String),
+      datasets: [{
+        label: 'Stykkpris (NOK)',
+        data: batchPrices,
+        borderColor: '#C9A84C', backgroundColor: 'rgba(201,168,76,0.1)',
+        fill: true, tension: 0.3, pointRadius: 5
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { title: { display: true, text: 'Batchstørrelse (N)' } },
+        y: { title: { display: true, text: 'NOK/stk' }, ticks: { callback: v => fmt(v) } }
+      },
+      plugins: { tooltip: { callbacks: { label: ctx => fmt(ctx.raw) + ' NOK/stk' } } }
+    }
+  });
+
+  // Cycle time curve
+  const cycleTimes = [0.05, 0.1, 0.2, 0.3, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0];
+  const cyclePrices = cycleTimes.map(t => calcUnit({ t_cycle: t }));
+
+  if (cycleChartInstance) cycleChartInstance.destroy();
+  cycleChartInstance = new Chart(document.getElementById('cycleChart'), {
+    type: 'line',
+    data: {
+      labels: cycleTimes.map(t => t + 'h'),
+      datasets: [{
+        label: 'Stykkpris (NOK)',
+        data: cyclePrices,
+        borderColor: '#e94560', backgroundColor: 'rgba(233,69,96,0.1)',
+        fill: true, tension: 0.3, pointRadius: 5
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { title: { display: true, text: 'Syklustid per del (timer)' } },
+        y: { title: { display: true, text: 'NOK/stk' }, ticks: { callback: v => fmt(v) } }
+      },
+      plugins: { tooltip: { callbacks: { label: ctx => fmt(ctx.raw) + ' NOK/stk' } } }
+    }
+  });
+}
+
+// ============ INITIALIZE ============
+document.addEventListener('DOMContentLoaded', () => {
+  selectSegment('standard');
+  calcRate();
+  calcQuote();
+  calcProfit();
+});
+</script>
+</body>
+</html>

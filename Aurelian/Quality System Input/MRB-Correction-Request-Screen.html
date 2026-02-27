@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Correction Request — CR-2026-00015</title>
+<style>
+  :root {
+    --red: #F50537; --red-hover: #D0042E;
+    --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-med: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3; --gray-chart: #888888;
+    --green: #1C6E3D; --green-bg: #E8F5EE;
+    --amber: #C47F17; --amber-bg: #FFF8E7;
+    --red-bg: #FEE8EC;
+    --blue-steel: #3D6B8E; --blue-bg: rgba(142,174,197,0.15);
+    --sidebar-w: 240px; --topbar-h: 56px;
+    --font: 'Calibri', 'Segoe UI', Arial, sans-serif;
+    --mono: 'Consolas', 'SF Mono', 'Menlo', monospace;
+    --radius: 6px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
+    --transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { font-size:14px; -webkit-font-smoothing:antialiased; }
+  body { font-family:var(--font); color:var(--black); background:var(--gray-panel); overflow:hidden; height:100vh; }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:inherit; cursor:pointer; border:none; background:none; }
+
+  /* ── Layout ──────────────────────────────────────────── */
+  .app { display:grid; grid-template-columns:var(--sidebar-w) 1fr; grid-template-rows:var(--topbar-h) 1fr; height:100vh; overflow:hidden; }
+
+  /* ── Sidebar ─────────────────────────────────────────── */
+  .sidebar { grid-row:1/-1; background:var(--pure-black); display:flex; flex-direction:column; overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+  .sidebar::-webkit-scrollbar { display:none; }
+  .sidebar-logo { padding:24px 20px 20px; text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); flex-shrink:0; }
+  .logo-stars { display:flex; justify-content:center; gap:6px; margin-bottom:10px; }
+  .logo-star { width:10px; height:10px; position:relative; }
+  .logo-star::before { content:'★'; color:var(--white); font-size:14px; line-height:1; }
+  .logo-stars .logo-star:nth-child(1){transform:translateY(6px)} .logo-stars .logo-star:nth-child(2){transform:translateY(2px)} .logo-stars .logo-star:nth-child(3){transform:translateY(0)} .logo-stars .logo-star:nth-child(4){transform:translateY(2px)} .logo-stars .logo-star:nth-child(5){transform:translateY(6px)}
+  .logo-text { font-size:13px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--white); line-height:1; }
+  .logo-sub { font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gray-chart); margin-top:6px; }
+  .nav-section { padding:16px 0 4px; }
+  .nav-section-label { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.25); padding:0 20px; margin-bottom:4px; }
+  .nav-item { display:flex; align-items:center; gap:12px; padding:9px 20px; font-size:13px; font-weight:400; color:rgba(255,255,255,0.55); cursor:pointer; transition:all var(--transition); border-left:3px solid transparent; }
+  .nav-item:hover { color:rgba(255,255,255,0.85); background:rgba(255,255,255,0.04); }
+  .nav-item.active { color:var(--white); background:rgba(245,5,55,0.08); border-left-color:var(--red); font-weight:600; }
+  .nav-item .nav-icon { width:18px; height:18px; display:flex; align-items:center; justify-content:center; flex-shrink:0; opacity:0.7; }
+  .nav-item.active .nav-icon { opacity:1; }
+  .nav-item .nav-badge { margin-left:auto; background:var(--red); color:var(--white); font-size:10px; font-weight:700; padding:1px 6px; border-radius:10px; min-width:18px; text-align:center; }
+  .sidebar-user { margin-top:auto; padding:16px 20px; border-top:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; gap:10px; flex-shrink:0; }
+  .user-avatar { width:34px; height:34px; border-radius:50%; background:var(--red); display:flex; align-items:center; justify-content:center; color:var(--white); font-size:13px; font-weight:700; flex-shrink:0; }
+  .user-info { flex:1; min-width:0; }
+  .user-name { font-size:12px; font-weight:600; color:var(--white); }
+  .user-role { font-size:10px; color:var(--gray-chart); margin-top:1px; }
+  .user-logout { color:rgba(255,255,255,0.3); transition:color var(--transition); padding:4px; }
+  .user-logout:hover { color:var(--red); }
+
+  /* ── Topbar ──────────────────────────────────────────── */
+  .topbar { background:var(--white); border-bottom:1px solid var(--gray-divider); display:flex; align-items:center; padding:0 28px; gap:16px; z-index:10; }
+  .topbar-title { font-size:18px; font-weight:700; color:var(--black); white-space:nowrap; }
+  .topbar-breadcrumb { font-size:12px; color:var(--gray-med); display:flex; align-items:center; gap:6px; }
+  .topbar-breadcrumb span { opacity:0.5; }
+  .topbar-breadcrumb .bc-id { font-family:var(--mono); font-size:11px; font-weight:600; color:var(--black); opacity:1; }
+  .topbar-spacer { flex:1; }
+  .topbar-search { position:relative; width:220px; }
+  .topbar-search input { width:100%; height:34px; border:1px solid var(--gray-divider); border-radius:var(--radius); padding:0 12px 0 34px; font-size:12px; font-family:var(--font); color:var(--black); background:var(--gray-panel); transition:all var(--transition); outline:none; }
+  .topbar-search input::placeholder { color:var(--gray-chart); }
+  .topbar-search input:focus { border-color:var(--red); background:var(--white); box-shadow:0 0 0 3px rgba(245,5,55,0.06); }
+  .topbar-search .search-icon { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--gray-chart); pointer-events:none; }
+  .topbar-actions { display:flex; align-items:center; gap:8px; }
+  .topbar-btn { width:34px; height:34px; border-radius:var(--radius); display:flex; align-items:center; justify-content:center; color:var(--gray-med); transition:all var(--transition); position:relative; }
+  .topbar-btn:hover { background:var(--gray-panel); color:var(--black); }
+  .topbar-btn .notif-dot { position:absolute; top:6px; right:5px; width:16px; height:16px; background:var(--red); border-radius:50%; font-size:9px; font-weight:700; color:var(--white); display:flex; align-items:center; justify-content:center; border:2px solid var(--white); }
+  .env-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:4px 10px; border-radius:var(--radius); background:var(--amber-bg); color:var(--amber); border:1px solid rgba(196,127,23,0.2); }
+
+  /* ── Main ─────────────────────────────────────────────── */
+  .main { overflow-y:auto; padding:24px 28px; scrollbar-width:thin; scrollbar-color:var(--gray-divider) transparent; }
+  .main::-webkit-scrollbar { width:6px; }
+  .main::-webkit-scrollbar-track { background:transparent; }
+  .main::-webkit-scrollbar-thumb { background:var(--gray-divider); border-radius:3px; }
+
+  /* ══════════════════════════════════════════════════════
+     CORRECTION REQUEST — Content
+     ══════════════════════════════════════════════════════ */
+
+  .cr-layout { display:grid; grid-template-columns:1fr 290px; gap:20px; align-items:start; }
+
+  /* ── CR Header ────────────────────────────────────────── */
+  .cr-header { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow-sm); border:1px solid rgba(211,211,211,0.5); padding:20px 24px; margin-bottom:16px; border-left:4px solid var(--red); }
+  .cr-top { display:flex; align-items:center; gap:14px; margin-bottom:14px; }
+  .cr-form-id { font-family:var(--mono); font-size:10px; font-weight:700; color:var(--gray-chart); letter-spacing:0.5px; padding:2px 6px; background:var(--gray-panel); border-radius:3px; }
+  .cr-number { font-family:var(--mono); font-size:20px; font-weight:700; color:var(--black); letter-spacing:0.5px; }
+  .cr-status-badge { display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:700; padding:4px 10px; border-radius:4px; text-transform:uppercase; letter-spacing:0.5px; }
+  .cr-status-badge.open { background:var(--red-bg); color:var(--red); border:1px solid rgba(245,5,55,0.15); }
+  .cr-status-badge.open .csb-dot { width:7px; height:7px; border-radius:50%; background:var(--red); animation:pulse 2s ease-in-out infinite; }
+  .cr-status-badge.in-progress { background:var(--amber-bg); color:var(--amber); border:1px solid rgba(196,127,23,0.15); }
+  .cr-status-badge.in-progress .csb-dot { width:7px; height:7px; border-radius:50%; background:var(--amber); animation:pulse 2s ease-in-out infinite; }
+  .cr-status-badge.resolved { background:var(--green-bg); color:var(--green); }
+  .cr-status-badge.escalated { background:var(--blue-bg); color:var(--blue-steel); }
+  .cr-status-badge.waived { background:var(--gray-panel); color:var(--gray-chart); }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+  .cr-meta { display:grid; grid-template-columns:repeat(4,1fr); gap:10px 20px; padding-top:14px; border-top:1px solid var(--gray-divider); }
+  .cm-field { display:flex; flex-direction:column; gap:2px; }
+  .cm-label { font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color:var(--gray-chart); }
+  .cm-value { font-size:12px; font-weight:600; color:var(--black); }
+  .cm-value.mono { font-family:var(--mono); font-size:11px; letter-spacing:0.3px; }
+
+  /* Failure classification badges */
+  .failure-badge { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:700; padding:3px 8px; border-radius:3px; text-transform:uppercase; letter-spacing:0.3px; }
+  .failure-badge.non-compliant { background:var(--red-bg); color:var(--red); }
+  .failure-badge.missing { background:var(--amber-bg); color:var(--amber); }
+  .failure-badge.format-error { background:var(--blue-bg); color:var(--blue-steel); }
+  .failure-badge.incomplete { background:var(--amber-bg); color:var(--amber); }
+  .failure-badge.traceability { background:rgba(107,107,107,0.1); color:var(--gray-med); }
+
+  .layer-badge { display:inline-flex; align-items:center; gap:4px; font-size:9px; font-weight:700; padding:2px 7px; border-radius:3px; text-transform:uppercase; letter-spacing:0.3px; background:var(--gray-panel); color:var(--gray-med); font-family:var(--mono); }
+
+  /* ── Section Title ───────────────────────────────────── */
+  .section-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--red); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .section-title::after { content:''; flex:1; height:1px; background:var(--gray-divider); }
+
+  /* ── Cards ────────────────────────────────────────────── */
+  .card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow-sm); border:1px solid rgba(211,211,211,0.5); overflow:hidden; margin-bottom:16px; }
+  .card-pad { padding:20px; }
+
+  /* ── Finding & Action Cards ──────────────────────────── */
+  .finding-card { border-left:4px solid var(--red); }
+  .action-card { border-left:4px solid var(--amber); }
+
+  .fd-label { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:var(--gray-chart); margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+  .fd-label .fd-icon { width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .fd-label .fd-icon.red { background:var(--red-bg); color:var(--red); }
+  .fd-label .fd-icon.amber { background:var(--amber-bg); color:var(--amber); }
+  .fd-text { font-size:13px; color:var(--black); line-height:1.55; }
+  .fd-text .spec-ref { font-family:var(--mono); font-size:11px; color:var(--red); font-weight:600; background:var(--red-bg); padding:1px 5px; border-radius:2px; }
+  .fd-text .value-ref { font-family:var(--mono); font-size:12px; font-weight:700; }
+
+  /* ── Validation Failure Detail ────────────────────────── */
+  .fail-detail { background:var(--red-bg); border-radius:var(--radius); padding:14px 16px; margin-bottom:16px; }
+  .fail-detail-title { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:var(--red); margin-bottom:8px; }
+  .fail-row { display:flex; align-items:baseline; gap:8px; padding:3px 0; font-size:12px; }
+  .fail-row .fr-label { color:var(--red); font-weight:600; font-size:11px; width:100px; flex-shrink:0; }
+  .fail-row .fr-value { color:var(--black); font-weight:500; }
+  .fail-row .fr-value.mono { font-family:var(--mono); font-size:11px; }
+  .fail-row .fr-fail { color:var(--red); font-weight:700; }
+  .fail-row .fr-spec { color:var(--gray-med); font-size:11px; }
+
+  /* ── Assignment Card ──────────────────────────────────── */
+  .assign-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; }
+  .ag-field { display:flex; flex-direction:column; gap:2px; }
+  .ag-label { font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:0.6px; color:var(--gray-chart); }
+  .ag-value { font-size:12px; font-weight:600; color:var(--black); }
+  .ag-value.mono { font-family:var(--mono); font-size:11px; }
+  .role-tag { display:inline-flex; align-items:center; font-size:9px; font-weight:600; letter-spacing:0.3px; text-transform:uppercase; padding:2px 7px; border-radius:3px; }
+  .role-tag.purchasing { background:var(--amber-bg); color:var(--amber); }
+  .role-tag.qa { background:var(--green-bg); color:var(--green); }
+  .role-tag.supplier { background:rgba(107,107,107,0.08); color:var(--gray-med); }
+  .due-date-value { font-family:var(--mono); font-size:12px; font-weight:700; color:var(--black); }
+  .due-date-value.overdue { color:var(--red); }
+  .days-remaining { font-size:10px; color:var(--amber); font-weight:600; }
+
+  /* ── Status State Machine ────────────────────────────── */
+  .state-machine { display:flex; align-items:center; gap:0; padding:16px 0; overflow-x:auto; }
+  .sm-node { display:flex; flex-direction:column; align-items:center; gap:4px; flex-shrink:0; }
+  .sm-circle { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; border:2px solid var(--gray-divider); background:var(--white); color:var(--gray-chart); transition:all var(--transition); }
+  .sm-node.active .sm-circle { border-color:var(--red); background:var(--red-bg); color:var(--red); box-shadow:0 0 0 4px rgba(245,5,55,0.1); }
+  .sm-node.done .sm-circle { border-color:var(--green); background:var(--green-bg); color:var(--green); }
+  .sm-node.future .sm-circle { border-color:var(--gray-divider); background:var(--gray-panel); }
+  .sm-label { font-size:8px; font-weight:600; text-transform:uppercase; letter-spacing:0.3px; color:var(--gray-chart); text-align:center; max-width:64px; }
+  .sm-node.active .sm-label { color:var(--red); font-weight:700; }
+  .sm-connector { width:20px; height:2px; background:var(--gray-divider); flex-shrink:0; margin-top:-16px; }
+  .sm-connector.done { background:var(--green); }
+
+  /* ── Resolution Section (empty / future) ─────────────── */
+  .resolution-empty { padding:24px; text-align:center; }
+  .re-icon { color:var(--gray-divider); margin-bottom:8px; }
+  .re-text { font-size:12px; color:var(--gray-chart); }
+  .re-hint { font-size:10px; color:var(--gray-divider); margin-top:4px; }
+
+  /* ── Action Buttons ──────────────────────────────────── */
+  .actions-bar { display:flex; gap:10px; margin-bottom:16px; }
+  .btn-action { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; font-size:12px; font-weight:600; border-radius:var(--radius); transition:all var(--transition); }
+  .btn-action.primary { color:var(--white); background:var(--red); }
+  .btn-action.primary:hover { background:var(--red-hover); }
+  .btn-action.outline { color:var(--gray-med); border:1px solid var(--gray-divider); }
+  .btn-action.outline:hover { border-color:var(--gray-chart); color:var(--black); }
+  .btn-action.escalate { color:var(--amber); border:1px solid rgba(196,127,23,0.3); background:var(--amber-bg); }
+  .btn-action.escalate:hover { background:rgba(255,248,231,0.8); color:var(--black); }
+
+  /* ══════════════════════════════════════════════════════
+     CONTEXT SIDEBAR (right panel)
+     ══════════════════════════════════════════════════════ */
+  .context-panel { display:flex; flex-direction:column; gap:14px; position:sticky; top:0; }
+  .ctx-card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow-sm); border:1px solid rgba(211,211,211,0.5); overflow:hidden; }
+  .ctx-header { padding:12px 16px; border-bottom:1px solid var(--gray-divider); }
+  .ctx-title { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:var(--black); }
+  .ctx-field { padding:6px 16px; display:flex; flex-direction:column; gap:1px; }
+  .ctx-field:first-of-type { padding-top:12px; }
+  .ctx-field:last-of-type { padding-bottom:12px; }
+  .ctx-label { font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:0.6px; color:var(--gray-chart); }
+  .ctx-value { font-size:12px; font-weight:600; color:var(--black); }
+  .ctx-value.mono { font-family:var(--mono); font-size:11px; }
+  .ctx-value.small { font-size:11px; font-weight:400; color:var(--gray-med); }
+
+  /* Timeline */
+  .timeline { padding:8px 16px 12px; }
+  .tl-item { display:flex; gap:10px; position:relative; padding-bottom:12px; }
+  .tl-item:last-child { padding-bottom:0; }
+  .tl-marker { display:flex; flex-direction:column; align-items:center; flex-shrink:0; padding-top:2px; }
+  .tl-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; z-index:1; }
+  .tl-dot.red { background:var(--red); }
+  .tl-dot.amber { background:var(--amber); }
+  .tl-dot.green { background:var(--green); }
+  .tl-dot.blue { background:var(--blue-steel); }
+  .tl-dot.gray { background:var(--gray-chart); }
+  .tl-line { width:1.5px; flex:1; background:var(--gray-divider); margin-top:3px; }
+  .tl-content { flex:1; min-width:0; }
+  .tl-text { font-size:11px; color:var(--black); line-height:1.35; }
+  .tl-text strong { font-weight:600; }
+  .tl-time { font-size:9px; color:var(--gray-chart); font-family:var(--mono); margin-top:1px; }
+
+  /* Related docs */
+  .rel-doc { display:flex; align-items:center; gap:8px; padding:6px 16px; border-bottom:1px solid rgba(211,211,211,0.2); transition:background var(--transition); cursor:pointer; }
+  .rel-doc:last-child { border-bottom:none; }
+  .rel-doc:hover { background:var(--gray-panel); }
+  .rd-icon { width:24px; height:24px; border-radius:4px; background:var(--gray-panel); display:flex; align-items:center; justify-content:center; color:var(--gray-med); flex-shrink:0; }
+  .rd-info { flex:1; min-width:0; }
+  .rd-name { font-size:11px; font-weight:600; color:var(--black); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rd-meta { font-size:9px; color:var(--gray-chart); }
+  .rd-arrow { color:var(--gray-divider); }
+  .rel-doc:hover .rd-arrow { color:var(--red); }
+
+  /* Quick Actions */
+  .ctx-actions { padding:12px 16px; }
+  .ctx-btn { display:flex; align-items:center; gap:8px; width:100%; padding:7px 10px; font-size:11px; font-weight:600; color:var(--black); border-radius:4px; transition:all var(--transition); margin-bottom:3px; }
+  .ctx-btn:hover { background:var(--gray-panel); }
+  .ctx-btn .ctx-icon { width:22px; height:22px; border-radius:4px; background:var(--gray-panel); display:flex; align-items:center; justify-content:center; color:var(--gray-med); flex-shrink:0; }
+  .ctx-btn:hover .ctx-icon { background:var(--red-bg); color:var(--red); }
+
+  /* ── Footer ──────────────────────────────────────────── */
+  .app-footer { padding:16px 0 4px; text-align:center; font-size:10px; color:var(--gray-chart); }
+  .app-footer .confidential { color:var(--red); font-weight:600; letter-spacing:1px; text-transform:uppercase; font-size:9px; }
+
+  /* ── Animations ──────────────────────────────────────── */
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes slideInLeft { from{opacity:0;transform:translateX(-8px)} to{opacity:1;transform:translateX(0)} }
+  @keyframes slideInRight { from{opacity:0;transform:translateX(12px)} to{opacity:1;transform:translateX(0)} }
+  .cr-header { animation:fadeInUp 400ms ease-out 80ms both; }
+  .fail-detail { animation:fadeInUp 400ms ease-out 140ms both; }
+  .card.finding-card { animation:fadeInUp 400ms ease-out 180ms both; }
+  .card.action-card { animation:fadeInUp 400ms ease-out 220ms both; }
+  .card.assign-card { animation:fadeInUp 400ms ease-out 260ms both; }
+  .card.status-card { animation:fadeInUp 400ms ease-out 300ms both; }
+  .card.resolution-card { animation:fadeInUp 400ms ease-out 340ms both; }
+  .actions-bar { animation:fadeInUp 400ms ease-out 380ms both; }
+  .ctx-card:nth-child(1){animation:slideInRight 400ms ease-out 180ms both} .ctx-card:nth-child(2){animation:slideInRight 400ms ease-out 260ms both} .ctx-card:nth-child(3){animation:slideInRight 400ms ease-out 340ms both} .ctx-card:nth-child(4){animation:slideInRight 400ms ease-out 420ms both}
+  .nav-item { animation:slideInLeft 300ms ease-out both; }
+  .nav-section:nth-child(2) .nav-item:nth-child(2){animation-delay:40ms} .nav-section:nth-child(2) .nav-item:nth-child(3){animation-delay:80ms} .nav-section:nth-child(2) .nav-item:nth-child(4){animation-delay:120ms}
+  .nav-section:nth-child(3) .nav-item{animation-delay:160ms} .nav-section:nth-child(4) .nav-item{animation-delay:240ms} .nav-section:nth-child(5) .nav-item{animation-delay:320ms}
+
+  @media(max-width:1280px){ .cr-layout{grid-template-columns:1fr 250px} .cr-meta{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:1024px){ .cr-layout{grid-template-columns:1fr} .context-panel{position:static;display:grid;grid-template-columns:repeat(2,1fr)} }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-stars"><span class="logo-star"></span><span class="logo-star"></span><span class="logo-star"></span><span class="logo-star"></span><span class="logo-star"></span></div>
+      <div class="logo-text">Aurelian</div>
+      <div class="logo-sub">Manufacturing</div>
+    </div>
+    <nav class="nav-section">
+      <div class="nav-section-label">Operations</div>
+      <div class="nav-item" onclick="navigate('MRB-Builder-App-Shell.html')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg></span>Dashboard</div>
+      <div class="nav-item active" onclick="navigate('MRB-Orders-List-Screen.html')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h2"/></svg></span>Orders<span class="nav-badge">12</span></div>
+      <div class="nav-item" onclick="navigate('#')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 1.5L14 5v6l-6 3.5L2 11V5L8 1.5z"/><path d="M8 8v6.5M2 5l6 3 6-3"/></svg></span>Material Queue<span class="nav-badge">5</span></div>
+    </nav>
+    <nav class="nav-section">
+      <div class="nav-section-label">MRB Management</div>
+      <div class="nav-item" onclick="navigate('MRB-Index-Screen.html')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 4h10M3 8h10M3 12h6"/></svg></span>MRB Index</div>
+      <div class="nav-item" onclick="navigate('MRB-Gate-Review-Screen.html')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 8l3 3 5-6"/><circle cx="8" cy="8" r="6.5"/></svg></span>Gate Reviews<span class="nav-badge">5</span></div>
+      <div class="nav-item" onclick="navigate('#')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4h3v10H2z"/><path d="M5 2h9v2H5z"/><path d="M7 4h7v10H7z"/><path d="M9 7h3M9 10h3"/></svg></span>ITP Management</div>
+      <div class="nav-item" onclick="navigate('#')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h4"/></svg></span>Documents<span class="nav-badge">23</span></div>
+    </nav>
+    <nav class="nav-section">
+      <div class="nav-section-label">Administration</div>
+      <div class="nav-item" onclick="navigate('#')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="12" height="10" rx="1.5"/><path d="M5 4V2.5A1.5 1.5 0 0 1 6.5 1h3A1.5 1.5 0 0 1 11 2.5V4"/><path d="M2 8h12"/></svg></span>Customers</div>
+      <div class="nav-item" onclick="navigate('#')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="7" width="8" height="6" rx="1"/><path d="M3 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/><circle cx="12" cy="10" r="2.5"/></svg></span>Suppliers</div>
+      <div class="nav-item" onclick="navigate('#')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 14V8l-3 2V6l5-4 5 4v4l-3-2v6"/></svg></span>Profiles</div>
+      <div class="nav-item" onclick="navigate('#')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></span>Users</div>
+    </nav>
+    <nav class="nav-section">
+      <div class="nav-section-label">System</div>
+      <div class="nav-item" onclick="navigate('#')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h4"/></svg></span>Audit Log</div>
+      <div class="nav-item" onclick="navigate('#')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="2"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.4 1.4M11.55 11.55l1.4 1.4M3.05 12.95l1.4-1.4M11.55 4.45l1.4-1.4"/></svg></span>Settings</div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar">TA</div>
+      <div class="user-info"><div class="user-name">Tore Ausland</div><div class="user-role">QA Engineer</div></div>
+      <button class="user-logout" title="Log out"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2H3.5A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14H6"/><path d="M10 11l3-3-3-3M5.5 8H13"/></svg></button>
+    </div>
+  </aside>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-title">Correction Request</div>
+    <div class="topbar-breadcrumb"><span>›</span> Operations <span>›</span> <a href="MRB-Orders-List-Screen.html" style="cursor:pointer;color:var(--gray-med);">Orders</a> <span>›</span> <a href="MRB-Order-Detail-Screen.html" class="bc-id" style="cursor:pointer;">ORD-2026-0034</a> <span>›</span> <span class="bc-id">CR-2026-00015</span></div>
+    <div class="topbar-spacer"></div>
+    <div class="topbar-search"><span class="search-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg></span><input type="text" placeholder="Search orders, materials, documents..."></div>
+    <div class="topbar-actions">
+      <button class="topbar-btn" title="Notifications"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6a4 4 0 0 1 8 0c0 3 1.5 4.5 2 5H2c.5-.5 2-2 2-5z"/><path d="M6.5 13a1.5 1.5 0 0 0 3 0"/></svg><span class="notif-dot">7</span></button>
+      <span class="env-badge">Staging</span>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    <div class="cr-layout">
+
+      <!-- ════ LEFT COLUMN ════ -->
+      <div class="cr-main">
+
+        <!-- CR Header -->
+        <div class="cr-header">
+          <div class="cr-top">
+            <span class="cr-form-id">FM-010-01</span>
+            <span class="cr-number">CR-2026-00015</span>
+            <span class="cr-status-badge open"><span class="csb-dot"></span>Open</span>
+            <span class="failure-badge non-compliant">Non-Compliant</span>
+            <span class="layer-badge">L4 Compliance</span>
+          </div>
+          <div class="cr-meta">
+            <div class="cm-field"><span class="cm-label">Order</span><span class="cm-value mono">ORD-2026-0034</span></div>
+            <div class="cm-field"><span class="cm-label">Customer</span><span class="cm-value">Equinor ASA</span></div>
+            <div class="cm-field"><span class="cm-label">PO Number</span><span class="cm-value mono">PO-EQ-2026-4521</span></div>
+            <div class="cm-field"><span class="cm-label">MRB Section</span><span class="cm-value">3 — Material</span></div>
+            <div class="cm-field"><span class="cm-label">Document</span><span class="cm-value">Mechanical Test Report</span></div>
+            <div class="cm-field"><span class="cm-label">Line Item</span><span class="cm-value mono">OG-03-03</span></div>
+            <div class="cm-field"><span class="cm-label">Created</span><span class="cm-value mono">20 Feb 2026 · 11:15</span></div>
+            <div class="cm-field"><span class="cm-label">Created By</span><span class="cm-value">Tore Ausland</span></div>
+          </div>
+        </div>
+
+        <!-- Validation Failure Detail -->
+        <div class="fail-detail">
+          <div class="fail-detail-title">Validation Failure — Layer 4: Compliance</div>
+          <div class="fail-row"><span class="fr-label">Property</span><span class="fr-value">Elongation (% in 50mm gauge length)</span></div>
+          <div class="fail-row"><span class="fr-label">Measured</span><span class="fr-value mono fr-fail">28.5%</span></div>
+          <div class="fail-row"><span class="fr-label">Minimum Req.</span><span class="fr-value mono">30.0%</span></div>
+          <div class="fail-row"><span class="fr-label">Specification</span><span class="fr-value">ASTM A182 F316 — ASTM A370 Section 7.3</span></div>
+          <div class="fail-row"><span class="fr-label">Heat Number</span><span class="fr-value mono">H-84731-C</span></div>
+          <div class="fail-row"><span class="fr-label">Supplier</span><span class="fr-value">Sandvik Materials Technology</span></div>
+        </div>
+
+        <!-- Specific Finding -->
+        <div class="section-title">Specific Finding</div>
+        <div class="card finding-card">
+          <div class="card-pad">
+            <div class="fd-label"><span class="fd-icon red"><svg width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 4l8 8M12 4L4 12"/></svg></span>Finding Description</div>
+            <div class="fd-text">
+              Mechanical test report for Heat <span class="value-ref">H-84731-C</span> shows elongation of <span class="value-ref">28.5%</span> in 50mm gauge length. This is below the minimum requirement of <span class="value-ref">30.0%</span> specified in <span class="spec-ref">ASTM A182 F316</span> per <span class="spec-ref">ASTM A370 Section 7.3</span>.
+              <br><br>
+              The tensile strength (520 MPa) and yield strength (218 MPa) are within specification. Only the elongation value is non-compliant. The shortfall is 1.5 percentage points (5.0% below minimum).
+              <br><br>
+              This failure was detected during Gate Review <span class="value-ref">GR-2026-0047</span>, Check 3 (Mechanical Properties).
+            </div>
+          </div>
+        </div>
+
+        <!-- Required Action -->
+        <div class="section-title">Required Action</div>
+        <div class="card action-card">
+          <div class="card-pad">
+            <div class="fd-label"><span class="fd-icon amber"><svg width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M8 3v6M8 11.5v.5"/></svg></span>Corrective Action Required</div>
+            <div class="fd-text">
+              Request updated mechanical test report from Sandvik Materials Technology for Heat <span class="value-ref">H-84731-C</span>. Options:
+              <br><br>
+              <strong>Option 1 (Preferred):</strong> Request re-testing of elongation from same heat. Sandvik to conduct new tensile test per ASTM A370 on retained test specimens and issue corrected certificate.
+              <br><br>
+              <strong>Option 2:</strong> If re-test confirms non-compliance, request replacement material from alternative heat with compliant mechanical properties. New material must include full EN 10204 3.1 certificate.
+              <br><br>
+              <strong>Option 3 (Escalation):</strong> If neither option feasible within delivery timeline, escalate to Quality Manager for potential customer waiver request per NORSOK M-650 Section 6.4.
+            </div>
+          </div>
+        </div>
+
+        <!-- Assignment -->
+        <div class="section-title">Assignment</div>
+        <div class="card assign-card">
+          <div class="card-pad">
+            <div class="assign-grid">
+              <div class="ag-field"><span class="ag-label">Assigned To</span><span class="ag-value">Erik Moen</span></div>
+              <div class="ag-field"><span class="ag-label">Responsible Role</span><span class="role-tag purchasing">Purchasing</span></div>
+              <div class="ag-field"><span class="ag-label">Due Date</span><span class="due-date-value">25 Feb 2026</span> <span class="days-remaining">3 days remaining</span></div>
+              <div class="ag-field"><span class="ag-label">Supplier Contact</span><span class="ag-value small" style="font-weight:400;color:var(--gray-med)">anna.lindqvist@sandvik.com</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Status State Machine -->
+        <div class="section-title">Status Progression</div>
+        <div class="card status-card">
+          <div class="card-pad">
+            <div class="state-machine">
+              <div class="sm-node active">
+                <div class="sm-circle"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="4"/></svg></div>
+                <div class="sm-label">Open</div>
+              </div>
+              <div class="sm-connector"></div>
+              <div class="sm-node future">
+                <div class="sm-circle">2</div>
+                <div class="sm-label">In Progress</div>
+              </div>
+              <div class="sm-connector"></div>
+              <div class="sm-node future">
+                <div class="sm-circle">3</div>
+                <div class="sm-label">Resolved</div>
+              </div>
+              <div style="width:16px"></div>
+              <div style="width:1px;height:24px;background:var(--gray-divider);margin:0 8px;align-self:center;"></div>
+              <div style="width:16px"></div>
+              <div class="sm-node future">
+                <div class="sm-circle" style="border-color:var(--amber);"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 4v5M8 11.5v.5"/></svg></div>
+                <div class="sm-label">Escalated</div>
+              </div>
+              <div class="sm-connector"></div>
+              <div class="sm-node future">
+                <div class="sm-circle" style="border-color:var(--gray-chart);">W</div>
+                <div class="sm-label">Waived</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resolution (empty — CR is OPEN) -->
+        <div class="section-title">Resolution</div>
+        <div class="card resolution-card">
+          <div class="resolution-empty">
+            <div class="re-icon"><svg width="32" height="32" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 5h4M6 8h4M6 11h2"/><path d="M10 10l2 2" stroke-dasharray="1 1"/></svg></div>
+            <div class="re-text">No resolution submitted yet</div>
+            <div class="re-hint">When the corrected document is uploaded, this section will show the resolution details and trigger re-validation.</div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="actions-bar">
+          <button class="btn-action primary" onclick="startProgress()"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 3l8 5-8 5V3z"/></svg>Start Progress</button>
+          <button class="btn-action escalate"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 12V4M5 7l3-3 3 3"/></svg>Escalate to QM</button>
+          <button class="btn-action outline"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 5h4M6 8h4"/></svg>Add Comment</button>
+          <button class="btn-action outline" onclick="navigate('MRB-Order-Detail-Screen.html')"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 8H2M2 8l4-4M2 8l4 4"/></svg>Back to Order</button>
+        </div>
+
+      </div>
+
+      <!-- ════ RIGHT COLUMN — Context Panel ════ -->
+      <div class="context-panel">
+
+        <!-- CR Timeline -->
+        <div class="ctx-card">
+          <div class="ctx-header"><div class="ctx-title">Activity Timeline</div></div>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-marker"><div class="tl-dot red"></div><div class="tl-line"></div></div>
+              <div class="tl-content">
+                <div class="tl-text"><strong>CR Created</strong> — Mechanical Test Report rejected at L4 Compliance</div>
+                <div class="tl-time">20 Feb · 11:15</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-marker"><div class="tl-dot amber"></div><div class="tl-line"></div></div>
+              <div class="tl-content">
+                <div class="tl-text"><strong>Assigned</strong> to Erik Moen (Purchasing) — Due 25 Feb</div>
+                <div class="tl-time">20 Feb · 11:20</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-marker"><div class="tl-dot blue"></div><div class="tl-line"></div></div>
+              <div class="tl-content">
+                <div class="tl-text"><strong>Email sent</strong> to Sandvik (anna.lindqvist@sandvik.com) requesting re-test</div>
+                <div class="tl-time">20 Feb · 14:30</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-marker"><div class="tl-dot gray"></div></div>
+              <div class="tl-content">
+                <div class="tl-text"><strong>Awaiting</strong> supplier response — re-test or replacement heat</div>
+                <div class="tl-time">22 Feb · current</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Affected Document -->
+        <div class="ctx-card">
+          <div class="ctx-header"><div class="ctx-title">Affected Document</div></div>
+          <div class="ctx-field"><span class="ctx-label">Document</span><span class="ctx-value">Mechanical Test Report</span></div>
+          <div class="ctx-field"><span class="ctx-label">Line Item</span><span class="ctx-value mono">OG-03-03</span></div>
+          <div class="ctx-field"><span class="ctx-label">Standard</span><span class="ctx-value small">ASTM A370</span></div>
+          <div class="ctx-field"><span class="ctx-label">MRB Status</span><span class="failure-badge non-compliant" style="margin-top:2px;">Rejected</span></div>
+          <div class="ctx-field"><span class="ctx-label">Criticality</span><span class="failure-badge" style="background:var(--red-bg);color:var(--red);margin-top:2px;">Critical</span></div>
+        </div>
+
+        <!-- Related Documents -->
+        <div class="ctx-card">
+          <div class="ctx-header"><div class="ctx-title">Related Documents</div></div>
+          <div class="rel-doc">
+            <div class="rd-icon"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 5h4M6 8h4"/></svg></div>
+            <div class="rd-info"><div class="rd-name">MTR-H84731C.pdf</div><div class="rd-meta">Original cert · Sandvik · 2.1 MB</div></div>
+            <span class="rd-arrow"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg></span>
+          </div>
+          <div class="rel-doc" onclick="navigate('MRB-Gate-Review-Screen.html')">
+            <div class="rd-icon"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 8l3 3 5-6"/><circle cx="8" cy="8" r="6.5"/></svg></div>
+            <div class="rd-info"><div class="rd-name">GR-2026-0047</div><div class="rd-meta">Gate Review · In Progress</div></div>
+            <span class="rd-arrow"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg></span>
+          </div>
+          <div class="rel-doc" onclick="navigate('MRB-Index-Screen.html')">
+            <div class="rd-icon"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 4h10M3 8h10M3 12h6"/></svg></div>
+            <div class="rd-info"><div class="rd-name">MRB Index — §3 Material</div><div class="rd-meta">Row 3.3 · Status: REJECTED</div></div>
+            <span class="rd-arrow"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg></span>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="ctx-card">
+          <div class="ctx-header"><div class="ctx-title">Quick Actions</div></div>
+          <div class="ctx-actions">
+            <button class="ctx-btn"><span class="ctx-icon"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 12l3-3M14 4l-3 3M5 9L2 12h12l-3-3"/></svg></span>Upload Corrected Document</button>
+            <button class="ctx-btn" onclick="navigate('MRB-Order-Detail-Screen.html')"><span class="ctx-icon"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h2"/></svg></span>View Order Detail</button>
+            <button class="ctx-btn" onclick="navigate('MRB-Gate-Review-Screen.html')"><span class="ctx-icon"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 8l3 3 5-6"/><circle cx="8" cy="8" r="6.5"/></svg></span>Open Gate Review</button>
+            <button class="ctx-btn"><span class="ctx-icon"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="1" width="10" height="14" rx="1.5"/><path d="M6 4h4M6 7h4M6 10h4"/></svg></span>Audit History</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="app-footer">
+      <span class="confidential">Confidential</span> &nbsp;·&nbsp; Aurelian Manufacturing AS &nbsp;·&nbsp; Phase 0 Staging &nbsp;·&nbsp; 22 February 2026
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // Sidebar navigation
+  function navigate(url) {
+    if (url && url !== '#') window.location.href = url;
+  }
+
+  // Start Progress action
+  function startProgress() {
+    const badge = document.querySelector('.cr-status-badge');
+    badge.className = 'cr-status-badge in-progress';
+    badge.innerHTML = '<span class="csb-dot"></span>In Progress';
+
+    // Update state machine
+    const nodes = document.querySelectorAll('.sm-node');
+    nodes[0].classList.remove('active');
+    nodes[0].classList.add('done');
+    nodes[0].querySelector('.sm-circle').innerHTML = '<svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 8l3.5 3.5L13 5"/></svg>';
+    nodes[1].classList.remove('future');
+    nodes[1].classList.add('active');
+    nodes[1].querySelector('.sm-circle').innerHTML = '<svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="4"/></svg>';
+
+    // Update connector
+    document.querySelector('.sm-connector').classList.add('done');
+
+    console.log('CR status changed to IN_PROGRESS');
+  }
+</script>
+</body>
+</html>

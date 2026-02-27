@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Conformance — AM-COC-2026-0042-001</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+        .page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+        .page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #F50537; }
+        .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #D3D3D3; padding-bottom: 12px; margin-bottom: 16px; }
+        .logo { font-size: 16pt; font-weight: bold; color: #2B2B2B; }
+        .logo span { display: block; font-size: 9pt; font-weight: normal; color: #6B6B6B; }
+        .doc-info { text-align: right; font-size: 9pt; color: #6B6B6B; }
+        .doc-info strong { color: #2B2B2B; font-size: 10pt; }
+        h1 { font-size: 18pt; color: #2B2B2B; font-weight: bold; margin: 16px 0 6px 0; }
+        h2 { font-size: 13pt; color: #F50537; font-weight: bold; margin: 14px 0 6px 0; }
+        p { margin-bottom: 6pt; font-size: 10pt; }
+        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+        .meta-box { background: #F5F5F5; padding: 10px; font-size: 9pt; }
+        .meta-box .lbl { font-weight: bold; color: #6B6B6B; text-transform: uppercase; font-size: 8pt; }
+        table { width: 100%; border-collapse: collapse; margin: 8px 0 14px 0; font-size: 9pt; }
+        thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 5pt 6pt; text-align: left; font-size: 8.5pt; }
+        tbody td { padding: 4pt 6pt; border-bottom: 0.5pt solid #D3D3D3; }
+        tbody tr:nth-child(even) { background: #F5F5F5; }
+        .center { text-align: center; }
+        .right { text-align: right; }
+        .sig-block { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 18px; }
+        .sig-line { border-bottom: 1px solid #2B2B2B; height: 30px; margin-bottom: 3px; }
+        .sig-label { font-size: 8pt; color: #6B6B6B; }
+        .sig-name { font-size: 9pt; font-weight: bold; }
+        .sig-date { font-size: 8pt; color: #6B6B6B; margin-top: 2px; }
+        .footer { margin-top: 24px; border-top: 1px solid #D3D3D3; padding-top: 8px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+        .stamp { border: 2px solid #F50537; padding: 8px 16px; display: inline-block; font-size: 10pt; font-weight: bold; color: #F50537; margin: 10px 0; }
+        .callout { background: #F5F5F5; border-left: 3px solid #F50537; padding: 10px 14px; margin: 10px 0; font-size: 10pt; }
+
+        .coc-title-block { text-align: center; margin: 20px 0 24px 0; }
+        .coc-title-block h1 { font-size: 22pt; color: #2B2B2B; letter-spacing: 1px; margin-bottom: 8px; }
+        .coc-accent-bar { width: 80px; height: 3px; background: #F50537; margin: 0 auto 16px auto; }
+        .coc-statement { font-size: 10.5pt; line-height: 1.4; color: #2B2B2B; text-align: left; margin-bottom: 16px; }
+
+        .product-table td:first-child { font-weight: bold; color: #6B6B6B; width: 180px; font-size: 8.5pt; text-transform: uppercase; }
+        .product-table td:last-child { color: #2B2B2B; font-size: 9.5pt; }
+
+        .compliance-list { list-style: none; padding: 0; margin: 8px 0 14px 0; counter-reset: compliance; }
+        .compliance-list li { font-size: 9.5pt; line-height: 1.4; padding: 6px 0 6px 28px; border-bottom: 0.5pt solid #D3D3D3; position: relative; counter-increment: compliance; }
+        .compliance-list li::before { content: counter(compliance); position: absolute; left: 0; top: 6px; width: 20px; height: 20px; background: #F50537; color: #fff; font-size: 8pt; font-weight: bold; text-align: center; line-height: 20px; border-radius: 50%; }
+
+        .company-stamp { border: 2px solid #2B2B2B; padding: 16px 24px; display: inline-block; text-align: center; margin: 16px 0; }
+        .company-stamp .stamp-company { font-size: 11pt; font-weight: bold; color: #2B2B2B; }
+        .company-stamp .stamp-sub { font-size: 8pt; color: #6B6B6B; }
+
+        @media print {
+            body { background: #fff; }
+            .page { box-shadow: none; margin: 0; padding: 2cm; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="header">
+        <div class="logo">
+            Aurelian Manufacturing
+            <span>Industriveien 12, 1531 Moss, Norway</span>
+        </div>
+        <div class="doc-info">
+            <strong>Certificate of Conformance</strong><br>
+            MRB Section 21<br>
+            Doc No: AM-COC-2026-0042-001<br>
+            Rev: 0 &nbsp;|&nbsp; Date: 25 June 2026
+        </div>
+    </div>
+
+    <!-- TITLE BLOCK -->
+    <div class="coc-title-block">
+        <h1>CERTIFICATE OF CONFORMANCE</h1>
+        <div class="coc-accent-bar"></div>
+    </div>
+
+    <!-- CERTIFICATION STATEMENT -->
+    <p class="coc-statement">
+        Aurelian Manufacturing AS hereby certifies that the following equipment has been manufactured, inspected, and tested in accordance with the requirements of Purchase Order NSS-PO-2026-0042 and all referenced specifications, codes, and standards.
+    </p>
+
+    <!-- PRODUCT DETAILS -->
+    <h2>Product Details</h2>
+    <table class="product-table">
+        <tbody>
+            <tr>
+                <td>Purchase Order</td>
+                <td>NSS-PO-2026-0042</td>
+            </tr>
+            <tr>
+                <td>Client</td>
+                <td>Nordic Subsea Solutions AS</td>
+            </tr>
+            <tr>
+                <td>Project</td>
+                <td>Barents Sea Development Phase 2</td>
+            </tr>
+            <tr>
+                <td>Tag Number</td>
+                <td>NSS-BSP2-SCA-001</td>
+            </tr>
+            <tr>
+                <td>Serial Number</td>
+                <td>AM-BSP2-300-001</td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>Subsea Connector Assembly, Size 300 (Upfacing Configuration)</td>
+            </tr>
+            <tr>
+                <td>Material</td>
+                <td>Super Duplex UNS S32750 (ASTM A182 F53)</td>
+            </tr>
+            <tr>
+                <td>Quantity</td>
+                <td>1 unit</td>
+            </tr>
+            <tr>
+                <td>Weight</td>
+                <td>391.2 kg (coated, with fasteners)</td>
+            </tr>
+            <tr>
+                <td>Design Pressure</td>
+                <td>345 barg</td>
+            </tr>
+            <tr>
+                <td>Test Pressure</td>
+                <td>517 barg (Hydrostatic)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- COMPLIANCE STATEMENTS -->
+    <h2>Compliance Statements</h2>
+    <ol class="compliance-list">
+        <li>All materials comply with NORSOK M-001 and ASTM A182 F53, with material certificates per EN 10204 Type 3.2.</li>
+        <li>All welding has been performed in accordance with qualified welding procedures (ASME IX / EN ISO 15614) by qualified welders (EN ISO 9606).</li>
+        <li>Non-destructive examination (VT, RT, PT, PMI) performed per applicable codes with all results meeting acceptance criteria.</li>
+        <li>Hydrostatic pressure test performed at 517 barg with 30-minute hold. No leaks detected. Pressure drop 0.12% (acceptance &lt;1%).</li>
+        <li>Dimensional inspection confirmed all critical dimensions within specified tolerances.</li>
+        <li>Surface treatment applied per NSS-SPEC-CT-001 Rev 2. All DFT measurements within specification.</li>
+        <li>Two non-conformance reports were raised during manufacturing (AM-NCR-2026-0042-001, -002). Both have been dispositioned and closed with NSS approval.</li>
+        <li>All documentation compiled in Manufacturing Record Book AM-MRB-2026-0042-001.</li>
+    </ol>
+
+    <!-- MRB REFERENCE -->
+    <div class="callout">
+        <strong>Manufacturing Record Book:</strong> The complete Manufacturing Record Book (MRB) accompanies this certificate. Reference: AM-MRB-2026-0042-001.
+    </div>
+
+    <!-- COMPANY STAMP -->
+    <h2>Company Stamp</h2>
+    <div class="company-stamp">
+        <div class="stamp-company">AURELIAN MANUFACTURING AS</div>
+        <div class="stamp-sub">Industriveien 12, 1531 Moss, Norway</div>
+        <div class="stamp-sub">Org. Nr. 931 234 567</div>
+        <div class="stamp-sub" style="margin-top: 4px; font-style: italic;">Quality System: ISO 9001:2015 / EN ISO 3834-2</div>
+    </div>
+
+    <!-- SIGNATURES -->
+    <h2>Authorised Signatures</h2>
+    <p style="font-size: 9pt; color: #6B6B6B; margin-bottom: 12px;">This certificate is valid only when bearing all four signatures below.</p>
+
+    <div class="sig-block">
+        <div>
+            <div class="sig-name">Anna Nordstr&ouml;m</div>
+            <div class="sig-label">Quality Manager — Aurelian Manufacturing AS</div>
+            <div class="sig-line"></div>
+            <div class="sig-date">Date: 25 June 2026</div>
+        </div>
+        <div>
+            <div class="sig-name">Thomas Eriksen</div>
+            <div class="sig-label">Project Manager — Aurelian Manufacturing AS</div>
+            <div class="sig-line"></div>
+            <div class="sig-date">Date: 25 June 2026</div>
+        </div>
+        <div>
+            <div class="sig-name">Marte Lindgren</div>
+            <div class="sig-label">Quality Manager — Nordic Subsea Solutions AS</div>
+            <div class="sig-line"></div>
+            <div class="sig-date">Date: 26 June 2026</div>
+        </div>
+        <div>
+            <div class="sig-name">Erik Johansen</div>
+            <div class="sig-label">Project Manager — Nordic Subsea Solutions AS</div>
+            <div class="sig-line"></div>
+            <div class="sig-date">Date: 26 June 2026</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>CONFIDENTIAL</span>
+        <span>Aurelian Manufacturing AS — MRB Section 21</span>
+        <span>25 June 2026</span>
+    </div>
+</div>
+
+</body>
+</html>

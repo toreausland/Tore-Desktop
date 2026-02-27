@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surface Treatment Inspection Report — AM-STR-2026-0042-001</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+.page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+.page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #F50537; }
+.header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #D3D3D3; padding-bottom: 12px; margin-bottom: 16px; }
+.logo { font-size: 16pt; font-weight: bold; color: #2B2B2B; }
+.logo span { display: block; font-size: 9pt; font-weight: normal; color: #6B6B6B; }
+.doc-info { text-align: right; font-size: 9pt; color: #6B6B6B; }
+.doc-info strong { color: #2B2B2B; font-size: 10pt; }
+h1 { font-size: 18pt; color: #2B2B2B; font-weight: bold; margin: 16px 0 6px 0; }
+h2 { font-size: 13pt; color: #F50537; font-weight: bold; margin: 14px 0 6px 0; }
+h3 { font-size: 11pt; color: #2B2B2B; font-weight: bold; margin: 10px 0 4px 0; }
+p { margin-bottom: 6pt; font-size: 10pt; }
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.meta-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
+.meta-box { background: #F5F5F5; padding: 10px; font-size: 9pt; }
+.meta-box .lbl { font-weight: bold; color: #6B6B6B; text-transform: uppercase; font-size: 8pt; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 14px 0; font-size: 9pt; }
+thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 5pt 6pt; text-align: left; font-size: 8.5pt; }
+tbody td { padding: 4pt 6pt; border-bottom: 0.5pt solid #D3D3D3; }
+tbody tr:nth-child(even) { background: #F5F5F5; }
+tbody tr.spec-row { background: #F50537; color: #fff; font-weight: bold; }
+tbody tr.spec-row td { border-bottom: none; }
+.center { text-align: center; }
+.right { text-align: right; }
+.sig-block { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; margin-top: 24px; }
+.sig-line { border-bottom: 1px solid #2B2B2B; height: 30px; margin-bottom: 3px; }
+.sig-label { font-size: 8pt; color: #6B6B6B; }
+.sig-name { font-size: 9pt; font-weight: bold; }
+.footer { margin-top: 24px; border-top: 1px solid #D3D3D3; padding-top: 8px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+.stamp { border: 2px solid #F50537; padding: 8px 16px; display: inline-block; font-size: 10pt; font-weight: bold; color: #F50537; margin: 10px 0; }
+.accepted { border: 2px solid #2B8C2B; padding: 6px 14px; display: inline-block; color: #2B8C2B; font-weight: bold; font-size: 10pt; }
+.env-pass {
+    display: inline-block;
+    background: #2B8C2B;
+    color: #fff;
+    font-size: 8pt;
+    font-weight: bold;
+    padding: 2px 8px;
+    margin-left: 4px;
+}
+.callout {
+    background: #F5F5F5;
+    border-left: 3px solid #F50537;
+    padding: 10px 14px;
+    margin: 10px 0 14px 0;
+    font-size: 9pt;
+}
+@media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; padding: 2cm; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            Aurelian Manufacturing
+            <span>Industriveien 12, 1531 Moss, Norway</span>
+        </div>
+        <div class="doc-info">
+            <strong>SURFACE TREATMENT INSPECTION REPORT</strong><br>
+            Doc No: AM-STR-2026-0042-001<br>
+            Rev: 0<br>
+            Date: 28 May 2026<br>
+            Page 1 of 1
+        </div>
+    </div>
+
+    <!-- Title -->
+    <h1>Surface Treatment &amp; Coating Inspection Report</h1>
+    <p style="font-size: 9pt; color: #6B6B6B;">MRB Section 12 — Surface Preparation, Coating Application &amp; Final Inspection</p>
+
+    <!-- Project Metadata -->
+    <h2>Project &amp; Product Information</h2>
+    <div class="meta-grid">
+        <div class="meta-box">
+            <div class="lbl">Client</div>
+            Nordic Subsea Solutions AS<br>
+            Forusbeen 35, 4033 Stavanger, Norway
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Purchase Order</div>
+            NSS-PO-2026-0042<br>
+            Project: Barents Sea Development Phase 2 (NSS-PRJ-BS2024)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Product</div>
+            Subsea Connector Assembly, Size 300 (Upfacing)<br>
+            Material: Super Duplex UNS S32750
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Identification</div>
+            Tag: NSS-BSP2-SCA-001<br>
+            Serial: AM-BSP2-300-001
+        </div>
+    </div>
+
+    <!-- Coating Specification -->
+    <h2>Coating System Specification</h2>
+    <div class="meta-grid three-col">
+        <div class="meta-box">
+            <div class="lbl">Specification</div>
+            NSS-SPEC-CT-001, Rev 2
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Coating System</div>
+            Jotun Hardtop AX<br>(Epoxy primer + Polyurethane topcoat)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Color / Finish</div>
+            RAL 7035 (Light Grey) — Semi-gloss
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Coat</th>
+                <th>Product</th>
+                <th>Generic Type</th>
+                <th class="center">Specified DFT (&mu;m)</th>
+                <th class="center">Batch No</th>
+                <th class="center">Shelf Life OK</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Primer</td>
+                <td>Jotun Penguard Express MIO</td>
+                <td>Epoxy mastic</td>
+                <td class="center">75 &ndash; 125</td>
+                <td class="center">JP-2026-04-1187</td>
+                <td class="center"><span class="accepted" style="font-size: 8pt; padding: 2px 8px;">OK</span></td>
+            </tr>
+            <tr>
+                <td>Topcoat</td>
+                <td>Jotun Hardtop AX</td>
+                <td>Acrylic polyurethane</td>
+                <td class="center">50 &ndash; 75</td>
+                <td class="center">JH-2026-03-0934</td>
+                <td class="center"><span class="accepted" style="font-size: 8pt; padding: 2px 8px;">OK</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Surface Preparation -->
+    <h2>Surface Preparation</h2>
+    <div class="meta-grid three-col">
+        <div class="meta-box">
+            <div class="lbl">Method</div>
+            Abrasive blast cleaning
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Standard / Grade</div>
+            ISO 8501-1 — Sa 2&frac12;
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Abrasive</div>
+            Aluminium oxide, Grade G24
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Surface Profile</div>
+            50 &ndash; 75 &mu;m (Rz)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Measurement Method</div>
+            Testex Press-O-Film replica tape + micrometer
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Surface Cleanliness Check</div>
+            Passed &mdash; dust &le; Rating 2 per ISO 8502-3
+        </div>
+    </div>
+
+    <!-- Environmental Conditions -->
+    <h2>Environmental Conditions During Application</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th class="center">Primer Application</th>
+                <th class="center">Topcoat Application</th>
+                <th class="center">Requirement</th>
+                <th class="center">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Air Temperature</td>
+                <td class="center">18&deg;C</td>
+                <td class="center">19&deg;C</td>
+                <td class="center">10&ndash;35&deg;C</td>
+                <td class="center"><span class="env-pass">PASS</span></td>
+            </tr>
+            <tr>
+                <td>Steel Temperature</td>
+                <td class="center">19&deg;C</td>
+                <td class="center">20&deg;C</td>
+                <td class="center">&ge;3&deg;C above dew point</td>
+                <td class="center"><span class="env-pass">PASS</span></td>
+            </tr>
+            <tr>
+                <td>Relative Humidity</td>
+                <td class="center">52%</td>
+                <td class="center">48%</td>
+                <td class="center">&le;85%</td>
+                <td class="center"><span class="env-pass">PASS</span></td>
+            </tr>
+            <tr>
+                <td>Dew Point</td>
+                <td class="center">8&deg;C</td>
+                <td class="center">8&deg;C</td>
+                <td class="center">&mdash;</td>
+                <td class="center">&mdash;</td>
+            </tr>
+            <tr>
+                <td>Steel &ndash; Dew Point Margin</td>
+                <td class="center">11&deg;C</td>
+                <td class="center">12&deg;C</td>
+                <td class="center">&ge;3&deg;C</td>
+                <td class="center"><span class="env-pass">PASS</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="callout">
+        All environmental readings taken with calibrated Elcometer 319 dewpoint meter (Cert: CAL-ELC-2026-011, valid to 14 November 2026). Readings recorded at start, midpoint, and end of each application.
+    </div>
+
+    <!-- DFT Measurements -->
+    <h2>Dry Film Thickness (DFT) Measurements</h2>
+    <p style="font-size: 9pt; color: #6B6B6B;">Gauge: Elcometer 456 (Cert: CAL-ELC-2026-037, valid to 22 September 2026). Measurements per SSPC-PA 2.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th class="center">Primer DFT (&mu;m)</th>
+                <th class="center">Topcoat DFT (&mu;m)</th>
+                <th class="center">Total DFT (&mu;m)</th>
+                <th class="center">Holiday Test</th>
+                <th class="center">Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="spec-row">
+                <td>SPECIFICATION</td>
+                <td class="center">75 &ndash; 125</td>
+                <td class="center">50 &ndash; 75</td>
+                <td class="center">&ge;125</td>
+                <td class="center">No holidays</td>
+                <td class="center">&mdash;</td>
+            </tr>
+            <tr>
+                <td>MP-1 &mdash; Body top (12 o&rsquo;clock)</td>
+                <td class="center">92</td>
+                <td class="center">61</td>
+                <td class="center">153</td>
+                <td class="center">No holidays</td>
+                <td class="center"><span class="accepted" style="font-size: 8pt; padding: 2px 8px;">ACCEPTED</span></td>
+            </tr>
+            <tr>
+                <td>MP-2 &mdash; Body side (3 o&rsquo;clock)</td>
+                <td class="center">88</td>
+                <td class="center">58</td>
+                <td class="center">146</td>
+                <td class="center">No holidays</td>
+                <td class="center"><span class="accepted" style="font-size: 8pt; padding: 2px 8px;">ACCEPTED</span></td>
+            </tr>
+            <tr>
+                <td>MP-3 &mdash; Body bottom (6 o&rsquo;clock)</td>
+                <td class="center">95</td>
+                <td class="center">63</td>
+                <td class="center">158</td>
+                <td class="center">No holidays</td>
+                <td class="center"><span class="accepted" style="font-size: 8pt; padding: 2px 8px;">ACCEPTED</span></td>
+            </tr>
+            <tr>
+                <td>MP-4 &mdash; Body side (9 o&rsquo;clock)</td>
+                <td class="center">85</td>
+                <td class="center">56</td>
+                <td class="center">141</td>
+                <td class="center">No holidays</td>
+                <td class="center"><span class="accepted" style="font-size: 8pt; padding: 2px 8px;">ACCEPTED</span></td>
+            </tr>
+            <tr>
+                <td>MP-5 &mdash; Hub flange face</td>
+                <td class="center">102</td>
+                <td class="center">68</td>
+                <td class="center">170</td>
+                <td class="center">No holidays</td>
+                <td class="center"><span class="accepted" style="font-size: 8pt; padding: 2px 8px;">ACCEPTED</span></td>
+            </tr>
+            <tr>
+                <td>MP-6 &mdash; Lifting lug area</td>
+                <td class="center">90</td>
+                <td class="center">55</td>
+                <td class="center">145</td>
+                <td class="center">No holidays</td>
+                <td class="center"><span class="accepted" style="font-size: 8pt; padding: 2px 8px;">ACCEPTED</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="font-size: 9pt; color: #6B6B6B;">Holiday testing method: Low voltage wet sponge (67.5 V) per NACE SP0188. Sponge traversed over 100% of coated surface. No holidays detected at any location.</p>
+
+    <!-- Cure Verification -->
+    <h2>Cure Verification</h2>
+    <div class="meta-grid three-col">
+        <div class="meta-box">
+            <div class="lbl">Test Method</div>
+            MEK Rub Test (ASTM D5402)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Result</div>
+            &gt;50 double rubs — no softening, no colour transfer
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Verdict</div>
+            <span class="accepted" style="font-size: 8pt; padding: 2px 8px;">PASSED</span>
+        </div>
+    </div>
+
+    <!-- Final Verdict -->
+    <h2>Inspection Verdict</h2>
+    <p style="font-weight: bold;">Surface preparation, coating application, DFT measurements, holiday testing, and cure verification have been completed and all results conform to NSS-SPEC-CT-001 Rev 2. The coating system is accepted for service.</p>
+    <div class="stamp">ACCEPTED</div>
+
+    <!-- Remarks -->
+    <h2>Remarks</h2>
+    <p style="font-size: 9pt;">Minor overspray on masking tape border at seal ring groove interface. Area cleaned and verified. No impact on coating integrity or seal face preparation. Internal bore surfaces (CRA overlay) excluded from coating per specification.</p>
+
+    <!-- Signature Block -->
+    <h2>Authorisation</h2>
+    <div class="sig-block" style="grid-template-columns: 1fr 1fr;">
+        <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Thomas Berg</div>
+            <div class="sig-label">Coating Inspector — FROSIO Level III<br>Cert: AM-COAT-INS-009<br>Date: 28 May 2026</div>
+        </div>
+        <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Lars Halvorsen</div>
+            <div class="sig-label">QC Supervisor<br>Aurelian Manufacturing AS<br>Date: 28 May 2026</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span>CONFIDENTIAL</span>
+        <span>Aurelian Manufacturing AS — Quality Department</span>
+        <span>AM-STR-2026-0042-001 Rev 0</span>
+    </div>
+
+</div>
+
+</body>
+</html>

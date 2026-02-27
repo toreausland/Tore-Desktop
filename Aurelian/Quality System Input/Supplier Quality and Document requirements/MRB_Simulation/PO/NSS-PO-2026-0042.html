@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purchase Order NSS-PO-2026-0042</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+  .page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+  .page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #0057A0; }
+
+  /* NSS Branding - Oil & Gas blue theme */
+  .nss-blue { color: #0057A0; }
+  .header-bar { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0057A0; padding-bottom: 16px; margin-bottom: 20px; }
+  .nss-logo { font-size: 22pt; font-weight: bold; color: #0057A0; letter-spacing: -0.5px; }
+  .nss-logo span { display: block; font-size: 10pt; font-weight: normal; color: #6B6B6B; letter-spacing: 0; }
+  .po-badge { background: #0057A0; color: #fff; padding: 10px 20px; text-align: center; }
+  .po-badge .label { font-size: 9pt; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+  .po-badge .number { font-size: 16pt; font-weight: bold; letter-spacing: 0.5px; }
+
+  h1 { font-size: 18pt; color: #0057A0; font-weight: bold; margin: 20px 0 8px 0; border-bottom: 1px solid #D3D3D3; padding-bottom: 4px; }
+  h2 { font-size: 13pt; color: #2B2B2B; font-weight: bold; margin: 14px 0 6px 0; }
+  h3 { font-size: 11pt; color: #0057A0; font-weight: bold; margin: 10px 0 4px 0; }
+  p { margin-bottom: 6pt; }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .meta-box { background: #F5F5F5; padding: 12px; }
+  .meta-box h3 { margin-top: 0; }
+  .meta-box .row { display: flex; margin-bottom: 3px; }
+  .meta-box .label { width: 140px; font-weight: bold; font-size: 9pt; color: #6B6B6B; text-transform: uppercase; }
+  .meta-box .value { flex: 1; font-size: 10pt; }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px 0; font-size: 10pt; }
+  table thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 6pt 8pt; text-align: left; font-size: 9pt; }
+  table tbody td { padding: 6pt 8pt; border-bottom: 0.5pt solid #D3D3D3; }
+  table tbody tr:nth-child(even) { background: #F5F5F5; }
+  table .right { text-align: right; }
+
+  .terms-list { padding-left: 0; list-style: none; counter-reset: term-counter; }
+  .terms-list li { counter-increment: term-counter; margin-bottom: 8px; padding-left: 28px; position: relative; font-size: 10pt; }
+  .terms-list li::before { content: counter(term-counter) "."; position: absolute; left: 0; font-weight: bold; color: #0057A0; }
+
+  .footer { margin-top: 30px; border-top: 1px solid #D3D3D3; padding-top: 10px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+  .confidential { color: #0057A0; font-weight: bold; font-size: 8pt; text-transform: uppercase; }
+  .signature-block { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; padding-top: 16px; border-top: 1px solid #D3D3D3; }
+  .sig-line { border-bottom: 1px solid #2B2B2B; height: 40px; margin-bottom: 4px; }
+  .sig-label { font-size: 9pt; color: #6B6B6B; }
+  .sig-name { font-size: 10pt; font-weight: bold; }
+
+  .highlight-box { background: #E8F0F8; border-left: 3px solid #0057A0; padding: 10px 14px; margin: 10px 0; font-size: 10pt; }
+
+  .page-break { page-break-before: always; }
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; padding: 2.5cm; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: PO Header & Scope -->
+<div class="page">
+  <div class="header-bar">
+    <div>
+      <div class="nss-logo">
+        Nordic Subsea Solutions
+        <span>Subsea Systems &bull; Flow Control &bull; Connectors</span>
+      </div>
+    </div>
+    <div class="po-badge">
+      <div class="label">Purchase Order</div>
+      <div class="number">NSS-PO-2026-0042</div>
+    </div>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-box">
+      <h3 class="nss-blue">Buyer</h3>
+      <div class="row"><span class="label">Company</span><span class="value">Nordic Subsea Solutions AS</span></div>
+      <div class="row"><span class="label">Address</span><span class="value">Forusbeen 35, 4033 Stavanger, Norway</span></div>
+      <div class="row"><span class="label">Org. No.</span><span class="value">NO 987 654 321 MVA</span></div>
+      <div class="row"><span class="label">Buyer</span><span class="value">Erik Johansen, Project Manager</span></div>
+      <div class="row"><span class="label">Email</span><span class="value">erik.johansen@nordicsub.no</span></div>
+      <div class="row"><span class="label">Phone</span><span class="value">+47 51 00 12 34</span></div>
+    </div>
+    <div class="meta-box">
+      <h3 class="nss-blue">Supplier</h3>
+      <div class="row"><span class="label">Company</span><span class="value">Aurelian Manufacturing AS</span></div>
+      <div class="row"><span class="label">Address</span><span class="value">Industriveien 12, 1531 Moss, Norway</span></div>
+      <div class="row"><span class="label">Org. No.</span><span class="value">NO 912 345 678 MVA</span></div>
+      <div class="row"><span class="label">Contact</span><span class="value">Thomas Eriksen, Project Manager</span></div>
+      <div class="row"><span class="label">Email</span><span class="value">thomas.eriksen@aurelian.no</span></div>
+      <div class="row"><span class="label">Phone</span><span class="value">+47 69 00 45 67</span></div>
+    </div>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-box">
+      <h3 class="nss-blue">Order Details</h3>
+      <div class="row"><span class="label">PO Number</span><span class="value" style="font-weight:bold;">NSS-PO-2026-0042</span></div>
+      <div class="row"><span class="label">PO Date</span><span class="value">15 January 2026</span></div>
+      <div class="row"><span class="label">Revision</span><span class="value">0 (Original)</span></div>
+      <div class="row"><span class="label">Currency</span><span class="value">NOK</span></div>
+      <div class="row"><span class="label">Incoterms</span><span class="value">FCA Moss, Norway (Incoterms 2020)</span></div>
+    </div>
+    <div class="meta-box">
+      <h3 class="nss-blue">Project Reference</h3>
+      <div class="row"><span class="label">Project</span><span class="value" style="font-weight:bold;">Barents Sea Development Phase 2</span></div>
+      <div class="row"><span class="label">Project No.</span><span class="value">NSS-PRJ-BS2024</span></div>
+      <div class="row"><span class="label">End Client</span><span class="value">Operator (Confidential)</span></div>
+      <div class="row"><span class="label">Field</span><span class="value">Barents Sea, Norwegian Sector</span></div>
+      <div class="row"><span class="label">Delivery</span><span class="value">30 June 2026</span></div>
+    </div>
+  </div>
+
+  <h1>1. Scope of Supply</h1>
+
+  <p>This Purchase Order covers the design verification, manufacturing, inspection, testing, and documentation of the following equipment in accordance with the technical specifications and quality requirements referenced herein.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Description</th>
+        <th>Material</th>
+        <th>Qty</th>
+        <th>Tag No.</th>
+        <th class="right">Unit Price (NOK)</th>
+        <th class="right">Total (NOK)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>Subsea Connector Assembly, Size 300</strong><br>Upfacing Configuration, Jig Size 300<br>Complete with all fasteners, seals, and test fittings</td>
+        <td>Super Duplex UNS S32750 (SAF 2507)</td>
+        <td>1</td>
+        <td>NSS-BSP2-SCA-001</td>
+        <td class="right">485,000</td>
+        <td class="right">485,000</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>Subsea Connector Assembly, Size 300</strong><br>Downfacing Configuration, Jig Size 300<br>Complete with all fasteners, seals, and test fittings</td>
+        <td>Super Duplex UNS S32750 (SAF 2507)</td>
+        <td>1</td>
+        <td>NSS-BSP2-SCA-002</td>
+        <td class="right">485,000</td>
+        <td class="right">485,000</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Spare Parts Kit</strong><br>Seal kit, fastener set, and test fittings as per BOM</td>
+        <td>Various</td>
+        <td>1 set</td>
+        <td>NSS-BSP2-SPK-001</td>
+        <td class="right">42,000</td>
+        <td class="right">42,000</td>
+      </tr>
+      <tr style="font-weight: bold; border-top: 1.5pt solid #2B2B2B;">
+        <td colspan="6" class="right"><strong>Total Order Value (excl. VAT)</strong></td>
+        <td class="right"><strong>NOK 1,012,000</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>2. Technical Requirements</h1>
+
+  <h2>2.1 Applicable Standards</h2>
+  <table>
+    <thead>
+      <tr><th>Standard</th><th>Title / Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>NORSOK M-001</td><td>Materials Selection</td></tr>
+      <tr><td>NORSOK M-630</td><td>Material Data Sheets for Piping</td></tr>
+      <tr><td>NORSOK M-650</td><td>Qualification of Manufacturers of Special Materials</td></tr>
+      <tr><td>EN 10204</td><td>Metallic Products &mdash; Types of Inspection Documents (3.2 required)</td></tr>
+      <tr><td>ASME B16.5</td><td>Pipe Flanges and Flanged Fittings</td></tr>
+      <tr><td>ASME VIII Div. 1</td><td>Pressure Vessel Code (design basis)</td></tr>
+      <tr><td>ISO 9001:2015</td><td>Quality Management Systems</td></tr>
+      <tr><td>ISO 3834-2</td><td>Quality Requirements for Fusion Welding of Metallic Materials</td></tr>
+      <tr><td>DNV-OS-F101</td><td>Submarine Pipeline Systems</td></tr>
+    </tbody>
+  </table>
+
+  <h2>2.2 Material Requirements</h2>
+  <ul style="margin-left: 20px; margin-bottom: 10px; font-size: 10pt;">
+    <li>All primary pressure-containing components: Super Duplex Stainless Steel UNS S32750 per ASTM A182 F53</li>
+    <li>Minimum PREN &ge; 40 for all corrosion-resistant alloy (CRA) components</li>
+    <li>Material certificates per EN 10204 Type 3.2 required for all pressure-containing and load-bearing parts</li>
+    <li>100% positive material identification (PMI) on all CRA components</li>
+    <li>Heat treatment records required for all forged components</li>
+  </ul>
+
+  <h2>2.3 Design Data</h2>
+  <table>
+    <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Design Pressure</td><td>345 barg</td></tr>
+      <tr><td>Design Temperature</td><td>-29&deg;C to +120&deg;C</td></tr>
+      <tr><td>Test Pressure (hydrostatic)</td><td>517 barg (1.5 &times; DP)</td></tr>
+      <tr><td>Nominal Size</td><td>300 mm (12&quot;)</td></tr>
+      <tr><td>Service</td><td>Hydrocarbon, sour service (NACE MR0175)</td></tr>
+      <tr><td>Weight (estimated per unit)</td><td>385 kg &plusmn; 5%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <span class="confidential">Confidential &mdash; Nordic Subsea Solutions AS</span>
+    <span>Page 1 of 5</span>
+    <span>NSS-PO-2026-0042 Rev 0</span>
+  </div>
+</div>
+
+<!-- PAGE 2: Documentation & Quality Requirements -->
+<div class="page page-break">
+  <div class="header-bar">
+    <div class="nss-logo" style="font-size:14pt;">Nordic Subsea Solutions <span>Purchase Order NSS-PO-2026-0042</span></div>
+    <div style="font-size:9pt; color:#6B6B6B;">Page 2 of 5</div>
+  </div>
+
+  <h1>3. Documentation Requirements</h1>
+
+  <h2>3.1 Supplier Document Requirements List (SDRL)</h2>
+  <p>All documentation shall be provided in accordance with the Supplier Document Requirements List (SDRL), document no. <strong>NSS-SDRL-2026-0042</strong>, attached as Appendix A to this Purchase Order.</p>
+
+  <p>The SDRL defines the complete list of documents required, including submission timing, review requirements, and whether documents are to be included in the Manufacturing Record Book (MRB).</p>
+
+  <h2>3.2 Supplier Document List (SDL)</h2>
+  <p>The Supplier shall prepare and maintain a Supplier Document List (SDL) in accordance with NSS template <strong>NSS-SDL-TEMPLATE-001</strong>. The SDL shall be submitted within 4 weeks after order (WAO) and updated with each document transmittal.</p>
+
+  <h2>3.3 Manufacturing Record Book (MRB)</h2>
+
+  <div class="highlight-box">
+    <strong>MRB Requirement:</strong> The Supplier shall compile and deliver a complete Manufacturing Record Book (MRB) containing all quality documentation as defined in the SDRL. The MRB shall be submitted with each delivery and must be approved by NSS Quality prior to shipment release.
+  </div>
+
+  <p>The MRB shall contain, as a minimum:</p>
+  <table>
+    <thead>
+      <tr><th>Section</th><th>Document</th><th>Required</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Inspection &amp; Test Plan (ITP)</td><td>Yes</td></tr>
+      <tr><td>2</td><td>QMS Certificates (ISO 9001, ISO 3834-2)</td><td>Yes</td></tr>
+      <tr><td>3</td><td>Quality Plan</td><td>If applicable</td></tr>
+      <tr><td>4</td><td>Material Traceability List / Record</td><td>Yes</td></tr>
+      <tr><td>5</td><td>Material Certificates / PMI Reports</td><td>Yes (EN 10204 3.2)</td></tr>
+      <tr><td>6</td><td>Weld &amp; NDT Log</td><td>Yes</td></tr>
+      <tr><td>7</td><td>WPS / WPQR / PWHT Records</td><td>Yes</td></tr>
+      <tr><td>8</td><td>Welder Certificates</td><td>Yes</td></tr>
+      <tr><td>9</td><td>Visual Inspection Reports</td><td>Yes</td></tr>
+      <tr><td>10</td><td>NDE Reports</td><td>Yes</td></tr>
+      <tr><td>11</td><td>NDE Operator Certificates</td><td>Yes</td></tr>
+      <tr><td>12</td><td>Surface Treatment Inspection Reports</td><td>Yes</td></tr>
+      <tr><td>13</td><td>Dimensional Inspection Record</td><td>Yes</td></tr>
+      <tr><td>14</td><td>Weighing Certificate</td><td>Yes</td></tr>
+      <tr><td>15</td><td>Lifting Certificate</td><td>If applicable</td></tr>
+      <tr><td>16</td><td>Pressure Test Traceability Certificate</td><td>If applicable</td></tr>
+      <tr><td>17</td><td>Pressure Test Procedure / FAT Procedure</td><td>Yes</td></tr>
+      <tr><td>18</td><td>Pressure Test Certificate / FAT Report</td><td>Yes</td></tr>
+      <tr><td>19</td><td>Documentation from Sub-Suppliers</td><td>If applicable</td></tr>
+      <tr><td>20</td><td>Non-Conformance / Concession Records</td><td>If applicable</td></tr>
+      <tr><td>21</td><td>Certificate of Conformance</td><td>Yes</td></tr>
+      <tr><td>22</td><td>As-Built Drawings / Mark-Ups</td><td>Yes</td></tr>
+      <tr><td>23</td><td>Photos of Equipment / Testing / Marking</td><td>Yes</td></tr>
+      <tr><td>24</td><td>Mechanical Completion Dossier (MCD)</td><td>Yes</td></tr>
+    </tbody>
+  </table>
+
+  <h1>4. Quality Requirements</h1>
+
+  <h2>4.1 Quality Management System</h2>
+  <p>The Supplier shall hold valid certification to <strong>ISO 9001:2015</strong> and <strong>ISO 3834-2</strong>. Copies of certificates shall be included in the MRB (Section 2). The Supplier's QMS shall be available for audit by NSS upon request.</p>
+
+  <h2>4.2 Inspection &amp; Test Plan (ITP)</h2>
+  <p>The Supplier shall submit an Inspection &amp; Test Plan for NSS review and approval within <strong>4 weeks after order (WAO)</strong>. The ITP shall detail all inspection, testing, and hold/witness points. NSS reserves the right to witness any operation marked as Hold (H) or Witness (W) point.</p>
+
+  <h2>4.3 Welding Requirements</h2>
+  <ul style="margin-left: 20px; margin-bottom: 10px; font-size: 10pt;">
+    <li>All welding procedures (WPS) to be qualified per ASME IX or EN ISO 15614</li>
+    <li>All welders to be qualified per ASME IX or EN ISO 9606</li>
+    <li>PWHT per applicable code requirements</li>
+    <li>Weld log to track all production welds with full traceability</li>
+    <li>Ferrite content: 30&ndash;70% (measured per ASTM E562)</li>
+  </ul>
+
+  <h2>4.4 NDE Requirements</h2>
+  <ul style="margin-left: 20px; margin-bottom: 10px; font-size: 10pt;">
+    <li>100% visual inspection on all welds</li>
+    <li>100% radiographic or ultrasonic examination on all pressure-containing welds</li>
+    <li>100% liquid penetrant (PT) on all accessible surfaces</li>
+    <li>PMI on all CRA welds and base materials</li>
+    <li>NDE operators qualified to EN ISO 9712 Level 2 minimum</li>
+  </ul>
+
+  <div class="footer">
+    <span class="confidential">Confidential &mdash; Nordic Subsea Solutions AS</span>
+    <span>Page 2 of 5</span>
+    <span>NSS-PO-2026-0042 Rev 0</span>
+  </div>
+</div>
+
+<!-- PAGE 3: Testing, HSE, Delivery -->
+<div class="page page-break">
+  <div class="header-bar">
+    <div class="nss-logo" style="font-size:14pt;">Nordic Subsea Solutions <span>Purchase Order NSS-PO-2026-0042</span></div>
+    <div style="font-size:9pt; color:#6B6B6B;">Page 3 of 5</div>
+  </div>
+
+  <h2>4.5 Pressure Testing</h2>
+  <p>Hydrostatic pressure test shall be performed at <strong>517 barg</strong> (1.5 &times; design pressure) with a minimum hold time of <strong>30 minutes</strong>. Test medium: clean fresh water with inhibitor. All pressure test equipment shall have valid calibration certificates.</p>
+
+  <h2>4.6 Dimensional Inspection</h2>
+  <p>Full dimensional inspection per approved manufacturing drawings. Critical dimensions to be recorded on the dimensional inspection report. Dimensional inspection to be performed at ambient temperature (20 &plusmn; 5&deg;C).</p>
+
+  <h2>4.7 Surface Treatment</h2>
+  <p>All external surfaces shall be prepared and coated per NSS Specification NSS-SPEC-CT-001 Rev 2. Minimum dry film thickness: 250 &micro;m. Coating inspection report required.</p>
+
+  <h2>4.8 Non-Conformance</h2>
+  <p>All non-conformances shall be reported to NSS Quality immediately upon discovery. No concession or deviation from specification shall be accepted without prior written approval from NSS. NCR records shall be included in the MRB (Section 20).</p>
+
+  <h1>5. HSE Requirements</h1>
+  <p>The Supplier shall comply with all applicable Norwegian HSE legislation and NSS HSE requirements as detailed in <strong>NSS-HSE-REQ-001 Rev 3</strong>. Key requirements include:</p>
+  <ul style="margin-left: 20px; margin-bottom: 10px; font-size: 10pt;">
+    <li>Valid HSE management system certified to ISO 14001 and ISO 45001</li>
+    <li>Safe Job Analysis (SJA) for all critical operations</li>
+    <li>Incident reporting within 24 hours</li>
+    <li>NSS right of access for HSE audits</li>
+  </ul>
+
+  <h1>6. Delivery &amp; Packing</h1>
+
+  <h2>6.1 Delivery Schedule</h2>
+  <table>
+    <thead><tr><th>Milestone</th><th>Deadline</th></tr></thead>
+    <tbody>
+      <tr><td>ITP submission for review</td><td>4 WAO (12 February 2026)</td></tr>
+      <tr><td>SDL first issue</td><td>4 WAO (12 February 2026)</td></tr>
+      <tr><td>Material order confirmation</td><td>6 WAO (26 February 2026)</td></tr>
+      <tr><td>Manufacturing start</td><td>8 WAO (12 March 2026)</td></tr>
+      <tr><td>Pressure test (H)</td><td>20 WAO (04 June 2026)</td></tr>
+      <tr><td>Final inspection &amp; FAT (W)</td><td>22 WAO (18 June 2026)</td></tr>
+      <tr><td>MRB submission for review</td><td>23 WAO (25 June 2026)</td></tr>
+      <tr><td>Delivery FCA Moss</td><td>24 WAO (30 June 2026)</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size: 9pt; color: #6B6B6B;">WAO = Weeks After Order. Order date: 15 January 2026. H = Hold point, W = Witness point.</p>
+
+  <h2>6.2 Packing &amp; Preservation</h2>
+  <ul style="margin-left: 20px; margin-bottom: 10px; font-size: 10pt;">
+    <li>All items to be packed suitable for overseas sea transport</li>
+    <li>Preservation of machined surfaces with approved VCI protection</li>
+    <li>All openings to be sealed with steel/plastic caps</li>
+    <li>Packing and preservation procedure to be submitted for review 8 weeks prior to manufacturing</li>
+    <li>Packing list to be included with each shipment</li>
+  </ul>
+
+  <h2>6.3 Marking</h2>
+  <p>All items shall be permanently marked with: Tag number, PO number, heat number, material grade, supplier name, and weight. Marking per NSS marking specification NSS-SPEC-MK-001.</p>
+
+  <h1>7. Payment Terms</h1>
+  <table>
+    <thead><tr><th>Milestone</th><th>%</th><th>Amount (NOK)</th><th>Condition</th></tr></thead>
+    <tbody>
+      <tr><td>Upon PO acceptance</td><td>30%</td><td class="right">303,600</td><td>Pro-forma invoice</td></tr>
+      <tr><td>Material on site</td><td>20%</td><td class="right">202,400</td><td>Material certs submitted</td></tr>
+      <tr><td>Upon successful FAT</td><td>30%</td><td class="right">303,600</td><td>FAT report approved</td></tr>
+      <tr><td>Upon MRB approval &amp; delivery</td><td>20%</td><td class="right">202,400</td><td>MRB approved, FCA delivered</td></tr>
+      <tr style="font-weight: bold; border-top: 1.5pt solid #2B2B2B;">
+        <td>Total</td><td>100%</td><td class="right"><strong>1,012,000</strong></td><td></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Payment net 30 days from invoice date. All invoices to reference PO number NSS-PO-2026-0042.</p>
+
+  <div class="footer">
+    <span class="confidential">Confidential &mdash; Nordic Subsea Solutions AS</span>
+    <span>Page 3 of 5</span>
+    <span>NSS-PO-2026-0042 Rev 0</span>
+  </div>
+</div>
+
+<!-- PAGE 4: Terms & Conditions -->
+<div class="page page-break">
+  <div class="header-bar">
+    <div class="nss-logo" style="font-size:14pt;">Nordic Subsea Solutions <span>Purchase Order NSS-PO-2026-0042</span></div>
+    <div style="font-size:9pt; color:#6B6B6B;">Page 4 of 5</div>
+  </div>
+
+  <h1>8. General Terms &amp; Conditions</h1>
+
+  <ol class="terms-list">
+    <li><strong>Governing Law:</strong> This Purchase Order shall be governed by Norwegian law. Any disputes shall be settled by the Stavanger District Court.</li>
+    <li><strong>Order Acceptance:</strong> The Supplier shall confirm acceptance of this Purchase Order within 5 business days of receipt. Failure to respond within this period shall be deemed acceptance.</li>
+    <li><strong>Warranty:</strong> The Supplier warrants all goods and services for a period of 24 months from delivery or 12 months from commissioning, whichever is longer.</li>
+    <li><strong>Liquidated Damages:</strong> In the event of late delivery, the Buyer reserves the right to deduct 0.5% of the total order value per week of delay, up to a maximum of 10%.</li>
+    <li><strong>Insurance:</strong> The Supplier shall maintain adequate product liability and professional indemnity insurance.</li>
+    <li><strong>Confidentiality:</strong> All information related to this Purchase Order is confidential and shall not be disclosed to third parties without prior written consent from the Buyer.</li>
+    <li><strong>Intellectual Property:</strong> All drawings, specifications, and technical data provided by the Buyer remain the property of Nordic Subsea Solutions AS.</li>
+    <li><strong>Right of Access:</strong> The Buyer and its representatives shall have right of access to the Supplier's and sub-suppliers' premises for inspection, audit, and surveillance purposes upon reasonable notice.</li>
+    <li><strong>Sub-contracting:</strong> No part of this order may be sub-contracted without prior written approval from the Buyer.</li>
+    <li><strong>Changes:</strong> Any changes to scope, schedule, or price must be agreed in writing by both parties through a formal Change Order.</li>
+    <li><strong>Termination:</strong> The Buyer may terminate this order for convenience with 30 days written notice. Payment shall be made for work completed and materials procured.</li>
+    <li><strong>Force Majeure:</strong> Neither party shall be liable for delays caused by events beyond reasonable control, provided immediate written notice is given.</li>
+    <li><strong>Compliance:</strong> The Supplier shall comply with all applicable laws, including anti-corruption legislation (Norwegian Criminal Code &sect;387), export control regulations, and applicable sanctions regimes.</li>
+    <li><strong>Assignment:</strong> This Purchase Order may not be assigned by the Supplier without prior written consent from the Buyer.</li>
+  </ol>
+
+  <h1>9. Attachments &amp; Referenced Documents</h1>
+  <table>
+    <thead><tr><th>Ref</th><th>Document No.</th><th>Title</th><th>Rev</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td>NSS-SDRL-2026-0042</td><td>Supplier Document Requirements List (SDRL)</td><td>0</td></tr>
+      <tr><td>B</td><td>NSS-DWG-SCA-300-GA</td><td>General Arrangement Drawing &mdash; Size 300 Connector Assembly</td><td>A</td></tr>
+      <tr><td>C</td><td>NSS-SPEC-SCA-300</td><td>Technical Specification &mdash; Subsea Connector Assembly</td><td>2</td></tr>
+      <tr><td>D</td><td>NSS-SPEC-CT-001</td><td>Coating Specification</td><td>2</td></tr>
+      <tr><td>E</td><td>NSS-SPEC-MK-001</td><td>Marking Specification</td><td>1</td></tr>
+      <tr><td>F</td><td>NSS-HSE-REQ-001</td><td>HSE Requirements for Suppliers</td><td>3</td></tr>
+      <tr><td>G</td><td>NSS-SQR-001</td><td>Supplier Quality Requirements</td><td>4</td></tr>
+      <tr><td>H</td><td>NSS-SDL-TEMPLATE-001</td><td>SDL Template</td><td>1</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size: 10pt; margin-top: 12px;">In case of conflict between documents, the following order of priority shall apply:</p>
+  <ol style="margin-left: 20px; font-size: 10pt;">
+    <li>This Purchase Order</li>
+    <li>Technical Specification (Attachment C)</li>
+    <li>General Arrangement Drawing (Attachment B)</li>
+    <li>SDRL (Attachment A)</li>
+    <li>NSS general standards and specifications</li>
+    <li>Industry codes and standards</li>
+  </ol>
+
+  <div class="footer">
+    <span class="confidential">Confidential &mdash; Nordic Subsea Solutions AS</span>
+    <span>Page 4 of 5</span>
+    <span>NSS-PO-2026-0042 Rev 0</span>
+  </div>
+</div>
+
+<!-- PAGE 5: Signatures -->
+<div class="page page-break">
+  <div class="header-bar">
+    <div class="nss-logo" style="font-size:14pt;">Nordic Subsea Solutions <span>Purchase Order NSS-PO-2026-0042</span></div>
+    <div style="font-size:9pt; color:#6B6B6B;">Page 5 of 5</div>
+  </div>
+
+  <h1>10. Order Acceptance</h1>
+
+  <p>By signing below, the Supplier confirms acceptance of this Purchase Order and all attached documents, and commits to deliver the goods and services in accordance with the terms, conditions, and specifications stated herein.</p>
+
+  <div class="highlight-box">
+    <strong>Important:</strong> The Supplier shall return a signed copy of this Purchase Order to the Buyer within <strong>5 business days</strong> of receipt. The signed PO shall be sent to: <strong>procurement@nordicsub.no</strong>
+  </div>
+
+  <div class="signature-block">
+    <div>
+      <h3 class="nss-blue">For the Buyer</h3>
+      <p style="font-size: 10pt; color: #6B6B6B; margin-bottom: 8px;">Nordic Subsea Solutions AS</p>
+      <div class="sig-line"></div>
+      <div class="sig-name">Erik Johansen</div>
+      <div class="sig-label">Project Manager &mdash; Barents Sea Development Phase 2</div>
+      <br>
+      <div class="sig-line"></div>
+      <div class="sig-name">Marte Lindgren</div>
+      <div class="sig-label">Quality Manager &mdash; Supply Chain Quality</div>
+      <br>
+      <div class="sig-line"></div>
+      <div class="sig-label">Date</div>
+    </div>
+    <div>
+      <h3 class="nss-blue">For the Supplier</h3>
+      <p style="font-size: 10pt; color: #6B6B6B; margin-bottom: 8px;">Aurelian Manufacturing AS</p>
+      <div class="sig-line"></div>
+      <div class="sig-name">Thomas Eriksen</div>
+      <div class="sig-label">Project Manager</div>
+      <br>
+      <div class="sig-line"></div>
+      <div class="sig-name">Anna Nordstr&ouml;m</div>
+      <div class="sig-label">Quality Manager</div>
+      <br>
+      <div class="sig-line"></div>
+      <div class="sig-label">Date</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 60px; padding: 16px; background: #F5F5F5; font-size: 9pt; color: #6B6B6B;">
+    <strong>Nordic Subsea Solutions AS</strong><br>
+    Forusbeen 35, 4033 Stavanger, Norway<br>
+    Org. No.: NO 987 654 321 MVA &bull; Tel: +47 51 00 00 00 &bull; www.nordicsub.no<br><br>
+    This document and its contents are the property of Nordic Subsea Solutions AS and are confidential. It must not be reproduced, disclosed, or used without the express written consent of Nordic Subsea Solutions AS.
+  </div>
+
+  <div class="footer">
+    <span class="confidential">Confidential &mdash; Nordic Subsea Solutions AS</span>
+    <span>Page 5 of 5</span>
+    <span>NSS-PO-2026-0042 Rev 0 &bull; 15 January 2026</span>
+  </div>
+</div>
+
+</body>
+</html>

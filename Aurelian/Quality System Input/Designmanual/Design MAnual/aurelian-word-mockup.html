@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Word Document Mockup</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Calibri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #e0e0e0;
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 40px;
+  }
+
+  .page-label {
+    font-family: Calibri, sans-serif;
+    font-size: 13px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: -30px;
+  }
+
+  /* A4 page: 210mm x 297mm */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: #ffffff;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    padding: 25mm;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Orange top bar — brand element */
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3pt;
+    background: #FF3E00;
+  }
+
+  /* ===== HEADER ===== */
+  .doc-header {
+    position: absolute;
+    top: 12mm;
+    left: 25mm;
+    right: 25mm;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 4mm;
+    border-bottom: 0.5pt solid #FF3E00;
+  }
+  .doc-header span {
+    font-size: 9pt;
+    color: #6B6B6B;
+  }
+
+  /* ===== FOOTER ===== */
+  .doc-footer {
+    position: absolute;
+    bottom: 12mm;
+    left: 25mm;
+    right: 25mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 4mm;
+    border-top: 0.5pt solid #D3D3D3;
+    font-size: 8pt;
+    color: #6B6B6B;
+  }
+
+  /* ===== TYPOGRAPHY ===== */
+  .doc-title {
+    font-size: 28pt;
+    font-weight: 700;
+    color: #2B2B2B;
+    margin-bottom: 4mm;
+    line-height: 1.15;
+  }
+
+  .doc-subtitle {
+    font-size: 14pt;
+    font-weight: 700;
+    font-style: italic;
+    color: #FF3E00;
+    margin-bottom: 10mm;
+  }
+
+  .doc-meta {
+    font-size: 10pt;
+    color: #6B6B6B;
+    margin-bottom: 8mm;
+    line-height: 1.5;
+  }
+
+  .divider {
+    width: 60mm;
+    height: 2pt;
+    background: #FF3E00;
+    margin-bottom: 8mm;
+  }
+
+  h1.section {
+    font-size: 22pt;
+    font-weight: 700;
+    color: #2B2B2B;
+    margin-top: 10mm;
+    margin-bottom: 3mm;
+    line-height: 1.2;
+  }
+
+  h2.subsection {
+    font-size: 16pt;
+    font-weight: 700;
+    color: #FF3E00;
+    margin-top: 7mm;
+    margin-bottom: 3mm;
+    line-height: 1.2;
+  }
+
+  h3.sub-subsection {
+    font-size: 13pt;
+    font-weight: 700;
+    color: #2B2B2B;
+    margin-top: 5mm;
+    margin-bottom: 2mm;
+  }
+
+  p {
+    font-size: 11pt;
+    color: #2B2B2B;
+    line-height: 1.4;
+    margin-bottom: 3mm;
+    text-align: justify;
+  }
+
+  p.caption {
+    font-size: 9pt;
+    color: #6B6B6B;
+    margin-bottom: 2mm;
+    text-align: left;
+  }
+
+  /* ===== CALLOUT BOX ===== */
+  .callout {
+    background: #F5F5F5;
+    border-left: 3pt solid #FF3E00;
+    padding: 4mm 5mm;
+    margin: 5mm 0;
+  }
+  .callout p {
+    margin-bottom: 0;
+    font-size: 11pt;
+    color: #2B2B2B;
+    text-align: left;
+  }
+
+  /* ===== BULLET LIST ===== */
+  ul.brand-list {
+    list-style: none;
+    padding-left: 5mm;
+    margin-bottom: 4mm;
+  }
+  ul.brand-list li {
+    font-size: 11pt;
+    color: #2B2B2B;
+    line-height: 1.5;
+    padding-left: 4mm;
+    position: relative;
+  }
+  ul.brand-list li::before {
+    content: '\2022';
+    color: #FF3E00;
+    font-weight: bold;
+    position: absolute;
+    left: -2mm;
+  }
+
+  /* ===== TABLE ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 5mm 0;
+    font-size: 11pt;
+  }
+  thead th {
+    background: #2B2B2B;
+    color: #FFFFFF;
+    font-weight: 700;
+    text-align: left;
+    padding: 2.5mm 3mm;
+    font-size: 11pt;
+    border: none;
+  }
+  thead th:last-child,
+  tbody td:last-child {
+    text-align: right;
+  }
+  tbody tr {
+    border-bottom: 0.5pt solid #D3D3D3;
+  }
+  tbody tr:nth-child(even) {
+    background: #F5F5F5;
+  }
+  tbody td {
+    padding: 2.5mm 3mm;
+    color: #2B2B2B;
+    font-size: 11pt;
+  }
+  tfoot td {
+    font-weight: 700;
+    padding: 2.5mm 3mm;
+    color: #2B2B2B;
+    font-size: 11pt;
+    border-top: 1.5pt solid #2B2B2B;
+  }
+
+  /* ===== ACCENT TABLE ===== */
+  table.accent thead th {
+    background: #FF3E00;
+  }
+
+  /* ===== KEY METRICS ROW ===== */
+  .metrics {
+    display: flex;
+    gap: 5mm;
+    margin: 6mm 0;
+  }
+  .metric-card {
+    flex: 1;
+    background: #F5F5F5;
+    padding: 5mm;
+    text-align: center;
+  }
+  .metric-card .number {
+    font-size: 28pt;
+    font-weight: 700;
+    color: #FF3E00;
+    line-height: 1.1;
+  }
+  .metric-card .label {
+    font-size: 10pt;
+    color: #6B6B6B;
+    margin-top: 1mm;
+  }
+
+  /* ===== NUMBERED STEPS ===== */
+  .steps {
+    margin: 5mm 0;
+  }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 4mm;
+    margin-bottom: 4mm;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 8mm;
+    height: 8mm;
+    border-radius: 50%;
+    background: #FF3E00;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 12pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5mm;
+  }
+  .step-content .step-title {
+    font-size: 13pt;
+    font-weight: 700;
+    color: #2B2B2B;
+    margin-bottom: 1mm;
+  }
+  .step-content .step-desc {
+    font-size: 11pt;
+    color: #6B6B6B;
+    line-height: 1.35;
+  }
+
+  /* ===== INLINE CHART (SVG) ===== */
+  .chart-container {
+    margin: 5mm 0;
+    padding: 4mm;
+    border: 0.5pt solid #D3D3D3;
+  }
+  .chart-title {
+    font-size: 13pt;
+    font-weight: 700;
+    color: #2B2B2B;
+    margin-bottom: 1mm;
+  }
+  .chart-subtitle {
+    font-size: 10pt;
+    color: #6B6B6B;
+    margin-bottom: 3mm;
+  }
+
+  /* ===== PAGE 2 adjustment ===== */
+  .page.page2 {
+    padding-top: 20mm;
+  }
+  .page.page2::before {
+    height: 3pt;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== PAGE 1 ==================== -->
+<div class="page-label">Page 1 — Cover & Introduction</div>
+<div class="page">
+
+  <!-- Header -->
+  <div class="doc-header">
+    <span>Aurelian Manufacturing</span>
+  </div>
+
+  <!-- Title Block -->
+  <div style="margin-top: 15mm;">
+    <div class="doc-title">Operational Readiness Report</div>
+    <div class="doc-subtitle">Phase 1 — Facility Setup & Equipment Commissioning</div>
+    <div class="divider"></div>
+    <div class="doc-meta">
+      <strong>Prepared by:</strong> André Tandberg, Co-Founder & CEO<br>
+      <strong>Date:</strong> 13 February 2026<br>
+      <strong>Version:</strong> 1.0 &nbsp;|&nbsp; CONFIDENTIAL
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <h1 class="section">1. Executive Summary</h1>
+  <p>
+    Aurelian Manufacturing has completed the first phase of facility buildout on schedule and within budget. The greenfield autonomous production platform in Moss, Norway is now equipped with five-axis CNC machining centres, collaborative robotic cells, and a fully integrated MES infrastructure capable of supporting 24/7 lights-out operation.
+  </p>
+
+  <div class="callout">
+    <p><strong>Key takeaway:</strong> The facility achieved first-part-off at 94.7% dimensional accuracy on 12 January 2026 — exceeding the 92% target by 2.7 percentage points.</p>
+  </div>
+
+  <p>
+    This report details the current state of equipment commissioning, workforce readiness, quality management system certification progress, and the projected timeline for achieving full operational capacity by Q3 2026.
+  </p>
+
+  <!-- Key Metrics -->
+  <h2 class="subsection">Key Performance Indicators</h2>
+
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="number">94.7%</div>
+      <div class="label">First-Part Accuracy</div>
+    </div>
+    <div class="metric-card">
+      <div class="number">5</div>
+      <div class="label">CNC Cells Online</div>
+    </div>
+    <div class="metric-card">
+      <div class="number">87%</div>
+      <div class="label">Commissioning Complete</div>
+    </div>
+    <div class="metric-card">
+      <div class="number">Q3 '26</div>
+      <div class="label">Full Capacity Target</div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <h1 class="section">2. Commissioning Status</h1>
+  <h2 class="subsection">2.1 Equipment Overview</h2>
+  <p>
+    The following table summarises the commissioning status of all primary production equipment as of the reporting date. Each unit has undergone factory acceptance testing (FAT) and site acceptance testing (SAT).
+  </p>
+
+  <!-- Standard Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Equipment</th>
+        <th>Vendor</th>
+        <th>Status</th>
+        <th>Utilisation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5-Axis CNC Cell A1</td>
+        <td>DMG Mori</td>
+        <td>Operational</td>
+        <td>72%</td>
+      </tr>
+      <tr>
+        <td>5-Axis CNC Cell A2</td>
+        <td>DMG Mori</td>
+        <td>Operational</td>
+        <td>68%</td>
+      </tr>
+      <tr>
+        <td>Robotic Welding Station</td>
+        <td>KUKA</td>
+        <td>Calibrating</td>
+        <td>35%</td>
+      </tr>
+      <tr>
+        <td>CMM Inspection Bay</td>
+        <td>Zeiss</td>
+        <td>Operational</td>
+        <td>81%</td>
+      </tr>
+      <tr>
+        <td>Additive Manufacturing Unit</td>
+        <td>EOS</td>
+        <td>Installation</td>
+        <td>0%</td>
+      </tr>
+      <tr>
+        <td>Automated Storage System</td>
+        <td>Kardex</td>
+        <td>Operational</td>
+        <td>90%</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">Weighted Average Utilisation</td>
+        <td style="text-align:right;">57.7%</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <span>CONFIDENTIAL</span>
+    <span>1</span>
+    <span>13 February 2026</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 2 ==================== -->
+<div class="page-label">Page 2 — Process, Chart & Comparison</div>
+<div class="page page2">
+
+  <!-- Header -->
+  <div class="doc-header">
+    <span>Aurelian Manufacturing</span>
+  </div>
+
+  <h2 class="subsection">2.2 Commissioning Process</h2>
+  <p>Each production unit follows a standardised four-step commissioning process before being cleared for customer work.</p>
+
+  <!-- Numbered Steps -->
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Factory Acceptance Testing (FAT)</div>
+        <div class="step-desc">Vendor-site validation of all mechanical, electrical, and software subsystems against purchase specifications.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Site Acceptance Testing (SAT)</div>
+        <div class="step-desc">On-premise verification of installation, utility connections, and integration with the facility MES and ERP systems.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">First Article Inspection (FAI)</div>
+        <div class="step-desc">Production of a reference part with full dimensional inspection per AS9102 standard. Must achieve ≥92% Cpk on critical features.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Production Release</div>
+        <div class="step-desc">Formal sign-off by Quality and Operations. Equipment enters the production schedule for customer orders.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart -->
+  <h1 class="section">3. Revenue Projection</h1>
+  <h2 class="subsection">3.1 Monthly Revenue Ramp-Up</h2>
+
+  <div class="chart-container">
+    <div class="chart-title">Projected Monthly Revenue — 2026</div>
+    <div class="chart-subtitle">NOK thousands, based on current order pipeline and capacity ramp</div>
+    <svg viewBox="0 0 640 220" style="width:100%;height:auto;">
+      <!-- Gridlines -->
+      <line x1="60" y1="30" x2="620" y2="30" stroke="#D3D3D3" stroke-width="0.5"/>
+      <line x1="60" y1="70" x2="620" y2="70" stroke="#D3D3D3" stroke-width="0.5"/>
+      <line x1="60" y1="110" x2="620" y2="110" stroke="#D3D3D3" stroke-width="0.5"/>
+      <line x1="60" y1="150" x2="620" y2="150" stroke="#D3D3D3" stroke-width="0.5"/>
+      <!-- Axis -->
+      <line x1="60" y1="190" x2="620" y2="190" stroke="#888888" stroke-width="1"/>
+      <line x1="60" y1="30" x2="60" y2="190" stroke="#888888" stroke-width="1"/>
+      <!-- Y Labels -->
+      <text x="55" y="34" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">5,000</text>
+      <text x="55" y="74" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">3,750</text>
+      <text x="55" y="114" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">2,500</text>
+      <text x="55" y="154" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">1,250</text>
+      <text x="55" y="194" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">0</text>
+      <!-- X Labels -->
+      <text x="107" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">Jan</text>
+      <text x="154" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">Feb</text>
+      <text x="201" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">Mar</text>
+      <text x="247" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">Apr</text>
+      <text x="294" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">May</text>
+      <text x="341" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">Jun</text>
+      <text x="387" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">Jul</text>
+      <text x="434" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">Aug</text>
+      <text x="481" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">Sep</text>
+      <text x="527" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">Oct</text>
+      <text x="574" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">Nov</text>
+      <text x="620" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6B6B6B">Dec</text>
+      <!-- Line -->
+      <polyline points="107,178 154,174 201,166 247,155 294,142 341,126 387,110 434,90 481,74 527,58 574,44 620,34"
+        fill="none" stroke="#FF3E00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Data points -->
+      <circle cx="107" cy="178" r="4" fill="#FF3E00"/>
+      <circle cx="154" cy="174" r="4" fill="#FF3E00"/>
+      <circle cx="201" cy="166" r="4" fill="#FF3E00"/>
+      <circle cx="247" cy="155" r="4" fill="#FF3E00"/>
+      <circle cx="294" cy="142" r="4" fill="#FF3E00"/>
+      <circle cx="341" cy="126" r="4" fill="#FF3E00"/>
+      <circle cx="387" cy="110" r="4" fill="#FF3E00"/>
+      <circle cx="434" cy="90" r="4" fill="#FF3E00"/>
+      <circle cx="481" cy="74" r="4" fill="#FF3E00"/>
+      <circle cx="527" cy="58" r="4" fill="#FF3E00"/>
+      <circle cx="574" cy="44" r="4" fill="#FF3E00"/>
+      <circle cx="620" cy="34" r="4" fill="#FF3E00"/>
+      <!-- Data labels (selected) -->
+      <text x="107" y="170" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#2B2B2B">375</text>
+      <text x="341" y="118" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#2B2B2B">2,000</text>
+      <text x="481" y="66" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#2B2B2B">3,625</text>
+      <text x="620" y="26" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#2B2B2B">4,875</text>
+    </svg>
+  </div>
+
+  <!-- Accent Table -->
+  <h2 class="subsection">3.2 Capability Comparison</h2>
+  <p>Benchmarking Aurelian's autonomous platform against traditional HMLV workshops on key operational metrics.</p>
+
+  <table class="accent">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Traditional Workshop</th>
+        <th>Aurelian Platform</th>
+        <th>Improvement</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Operating Hours</strong></td>
+        <td>8–16 hrs/day</td>
+        <td>24 hrs/day</td>
+        <td style="color:#FF3E00;font-weight:700;">+150%</td>
+      </tr>
+      <tr>
+        <td><strong>Setup Time</strong></td>
+        <td>2–4 hours</td>
+        <td>15–30 minutes</td>
+        <td style="color:#FF3E00;font-weight:700;">-87%</td>
+      </tr>
+      <tr>
+        <td><strong>First-Pass Yield</strong></td>
+        <td>82–88%</td>
+        <td>94–97%</td>
+        <td style="color:#FF3E00;font-weight:700;">+12pp</td>
+      </tr>
+      <tr>
+        <td><strong>Labour per Part</strong></td>
+        <td>1.0 FTE</td>
+        <td>0.1 FTE</td>
+        <td style="color:#FF3E00;font-weight:700;">-90%</td>
+      </tr>
+      <tr>
+        <td><strong>Gross Margin</strong></td>
+        <td>25–35%</td>
+        <td>60–65%</td>
+        <td style="color:#FF3E00;font-weight:700;">+30pp</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p><strong>Note:</strong> All improvement figures are based on Q4 2025 pilot production data compared against industry benchmarks published by Norsk Industri. Margin projections assume ≥15% utilisation rate.</p>
+  </div>
+
+  <h1 class="section">4. Next Steps</h1>
+  <ul class="brand-list">
+    <li>Complete robotic welding station calibration by 28 February 2026</li>
+    <li>Install and commission EOS additive manufacturing unit (March 2026)</li>
+    <li>Achieve AS9100D certification — audit scheduled April 2026</li>
+    <li>Onboard first defence customer for serial production (Q2 2026)</li>
+    <li>Reach 60% weighted average utilisation by end of Q3 2026</li>
+  </ul>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <span>CONFIDENTIAL</span>
+    <span>2</span>
+    <span>13 February 2026</span>
+  </div>
+</div>
+
+</body>
+</html>

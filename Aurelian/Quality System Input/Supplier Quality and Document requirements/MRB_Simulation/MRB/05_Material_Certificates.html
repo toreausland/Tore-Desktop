@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Material Certificates &amp; PMI Reports — AM-MTC-2026-0042-001</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+  .page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+  .page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #F50537; }
+
+  /* Aurelian Branding */
+  .accent { color: #F50537; }
+  .header-bar { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #F50537; padding-bottom: 14px; margin-bottom: 20px; }
+  .am-logo { display: flex; align-items: center; gap: 10px; }
+  .am-logo-stars { font-size: 14pt; color: #F50537; letter-spacing: 2px; }
+  .am-logo-text { font-size: 18pt; font-weight: bold; color: #2B2B2B; letter-spacing: -0.3px; }
+  .am-logo-text span { display: block; font-size: 9pt; font-weight: normal; color: #6B6B6B; letter-spacing: 0; }
+  .doc-badge { background: #2B2B2B; color: #fff; padding: 8px 16px; text-align: center; }
+  .doc-badge .label { font-size: 8pt; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+  .doc-badge .number { font-size: 12pt; font-weight: bold; letter-spacing: 0.3px; }
+
+  h1 { font-size: 18pt; color: #2B2B2B; font-weight: bold; margin: 24pt 0 6pt 0; border-bottom: 1px solid #D3D3D3; padding-bottom: 4px; }
+  h2 { font-size: 13pt; color: #F50537; font-weight: bold; margin: 18pt 0 6pt 0; }
+  h3 { font-size: 11pt; color: #2B2B2B; font-weight: bold; margin: 12pt 0 4pt 0; }
+  p { margin-bottom: 6pt; font-size: 10pt; }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .meta-box { background: #F5F5F5; padding: 12px; }
+  .meta-box h3 { margin-top: 0; color: #F50537; font-size: 10pt; }
+  .meta-box .row { display: flex; margin-bottom: 3px; }
+  .meta-box .label { width: 130px; font-weight: bold; font-size: 9pt; color: #6B6B6B; text-transform: uppercase; }
+  .meta-box .value { flex: 1; font-size: 10pt; }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px 0; font-size: 9pt; }
+  table thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 6pt 6pt; text-align: left; font-size: 8pt; text-transform: uppercase; letter-spacing: 0.3px; }
+  table tbody td { padding: 5pt 6pt; border-bottom: 0.5pt solid #D3D3D3; vertical-align: top; }
+  table tbody tr:nth-child(even) { background: #F5F5F5; }
+  table .right { text-align: right; }
+  table .center { text-align: center; }
+
+  .callout { background: #F5F5F5; border-left: 3px solid #F50537; padding: 10px 14px; margin: 12px 0; font-size: 10pt; }
+  .callout strong { color: #2B2B2B; }
+
+  /* Mill Certificate Specific Styles */
+  .mill-cert-header { background: #2B2B2B; color: #fff; padding: 16px 20px; margin-bottom: 0; }
+  .mill-cert-header h1 { color: #fff; border: none; margin: 0 0 4pt 0; padding: 0; font-size: 16pt; }
+  .mill-cert-header .subtitle { color: #F50537; font-size: 11pt; font-weight: bold; }
+  .mill-cert-header .mill-name { font-size: 13pt; color: #fff; margin-top: 8pt; }
+  .mill-cert-header .mill-addr { font-size: 9pt; color: #D3D3D3; }
+
+  .mill-cert-body { border: 1px solid #D3D3D3; border-top: none; padding: 16px 20px; margin-bottom: 16px; }
+
+  .cert-ref-bar { background: #F5F5F5; padding: 8px 20px; border: 1px solid #D3D3D3; border-top: none; display: flex; justify-content: space-between; font-size: 9pt; margin-bottom: 16px; }
+  .cert-ref-bar .ref-item { }
+  .cert-ref-bar .ref-label { color: #6B6B6B; font-weight: bold; text-transform: uppercase; font-size: 8pt; }
+  .cert-ref-bar .ref-value { font-weight: bold; color: #2B2B2B; }
+
+  .spec-table { margin: 8px 0 14px 0; }
+  .spec-table thead th { font-size: 8pt; padding: 5pt 6pt; }
+  .spec-table tbody td { font-size: 9pt; padding: 4pt 6pt; }
+  .spec-table .pass { color: #2B2B2B; font-weight: bold; }
+  .spec-table .spec-range { color: #6B6B6B; font-style: italic; }
+
+  .result-badge { display: inline-block; padding: 2px 10px; font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+  .result-pass { background: #2B2B2B; color: #fff; }
+  .result-conform { background: #F50537; color: #fff; }
+
+  .stamp-box { border: 2px dashed #D3D3D3; padding: 20px; margin: 16px 0; text-align: center; min-height: 100px; }
+  .stamp-box .stamp-title { font-size: 10pt; color: #6B6B6B; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; }
+  .stamp-circle { width: 80px; height: 80px; border: 3px solid #2B2B2B; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 7pt; font-weight: bold; text-align: center; color: #2B2B2B; line-height: 1.2; }
+
+  .signature-block { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px; padding-top: 16px; border-top: 1px solid #D3D3D3; }
+  .sig-line { border-bottom: 1px solid #2B2B2B; height: 36px; margin-bottom: 4px; }
+  .sig-label { font-size: 8pt; color: #6B6B6B; }
+  .sig-name { font-size: 10pt; font-weight: bold; }
+  .sig-title { font-size: 9pt; color: #6B6B6B; }
+
+  .footer { margin-top: 30px; border-top: 1px solid #D3D3D3; padding-top: 8px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+  .confidential { color: #F50537; font-weight: bold; font-size: 8pt; text-transform: uppercase; }
+
+  .status-badge { display: inline-block; padding: 2px 8px; font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+  .status-pass { background: #2B2B2B; color: #fff; }
+
+  .pmi-section { background: #F5F5F5; border: 1px solid #D3D3D3; padding: 16px 20px; margin-top: 20px; }
+  .pmi-section h2 { margin-top: 0; }
+
+  .page-break { page-break-before: always; }
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; padding: 2.5cm; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: Cover / Index -->
+<div class="page">
+  <div class="header-bar">
+    <div class="am-logo">
+      <div>
+        <div class="am-logo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="am-logo-text">
+          Aurelian Manufacturing
+          <span>Production as a Service &mdash; Autonomous, Data-Driven, and Scalable</span>
+        </div>
+      </div>
+    </div>
+    <div class="doc-badge">
+      <div class="label">MRB Section 5</div>
+      <div class="number">AM-MTC-2026-0042-001</div>
+    </div>
+  </div>
+
+  <h1 style="margin-top: 0;">Material Certificates &amp; PMI Reports</h1>
+  <p style="font-size: 11pt; color: #6B6B6B; margin-bottom: 16pt;">Manufacturing Record Book &mdash; Section 5: Material Test Certificates, Mill Certificates, and Positive Material Identification Reports</p>
+
+  <div class="meta-grid">
+    <div class="meta-box">
+      <h3>Document Information</h3>
+      <div class="row"><span class="label">Document No.</span><span class="value" style="font-weight:bold;">AM-MTC-2026-0042-001</span></div>
+      <div class="row"><span class="label">Revision</span><span class="value">0 (Original Issue)</span></div>
+      <div class="row"><span class="label">Date</span><span class="value">20 March 2026</span></div>
+      <div class="row"><span class="label">Classification</span><span class="value">Confidential</span></div>
+    </div>
+    <div class="meta-box">
+      <h3>Project Reference</h3>
+      <div class="row"><span class="label">Client</span><span class="value">Nordic Subsea Solutions AS</span></div>
+      <div class="row"><span class="label">Project</span><span class="value" style="font-weight:bold;">Barents Sea Development Phase 2</span></div>
+      <div class="row"><span class="label">PO Number</span><span class="value">NSS-PO-2026-0042</span></div>
+      <div class="row"><span class="label">Tag / Serial</span><span class="value">NSS-BSP2-SCA-001 / AM-BSP2-300-001</span></div>
+    </div>
+  </div>
+
+  <h2>Certificate Index</h2>
+  <p>This section contains the material test certificates and PMI verification reports for all materials incorporated into the Subsea Connector Assembly (Tag: NSS-BSP2-SCA-001). Certificates are listed in order of material register item number, cross-referenced to MRB Section 4 (Material Traceability List, AM-MTL-2026-0042-001).</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Page</th>
+        <th>Item</th>
+        <th>Certificate No</th>
+        <th>Type</th>
+        <th>Material</th>
+        <th>Heat / Lot</th>
+        <th>Issuing Party</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2&ndash;4</td>
+        <td>1, 6</td>
+        <td style="font-weight:bold;">SMT-24-5587-01</td>
+        <td>EN 10204 Type 3.2</td>
+        <td>UNS S32750</td>
+        <td>H24-5587</td>
+        <td>Sandvik Materials Technology</td>
+      </tr>
+      <tr>
+        <td>&mdash;</td>
+        <td>2</td>
+        <td style="font-weight:bold;">SMT-24-5612-01</td>
+        <td>EN 10204 Type 3.2</td>
+        <td>UNS S32750</td>
+        <td>H24-5612</td>
+        <td>Sandvik Materials Technology</td>
+      </tr>
+      <tr>
+        <td>&mdash;</td>
+        <td>3</td>
+        <td style="font-weight:bold;">SM-INC-24-2201</td>
+        <td>EN 10204 Type 3.2</td>
+        <td>UNS N06625</td>
+        <td>N24-2201</td>
+        <td>Special Metals Corporation</td>
+      </tr>
+      <tr>
+        <td>&mdash;</td>
+        <td>4</td>
+        <td style="font-weight:bold;">BX-24-3344-A193</td>
+        <td>EN 10204 Type 3.1</td>
+        <td>ASTM A193 B8M Cl.2</td>
+        <td>B24-3344</td>
+        <td>Bumax AB</td>
+      </tr>
+      <tr>
+        <td>&mdash;</td>
+        <td>5</td>
+        <td style="font-weight:bold;">BX-24-1122-A194</td>
+        <td>EN 10204 Type 3.1</td>
+        <td>ASTM A194 8M</td>
+        <td>N24-1122</td>
+        <td>Bumax AB</td>
+      </tr>
+      <tr>
+        <td>&mdash;</td>
+        <td>7</td>
+        <td style="font-weight:bold;">FLX-24-0088-SW</td>
+        <td>EN 10204 Type 3.1</td>
+        <td>316L / Graphite</td>
+        <td>G24-0088</td>
+        <td>Flexitallic Group</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>1&ndash;6</td>
+        <td style="font-weight:bold;">AM-PMI-2026-0112 to 0117</td>
+        <td>PMI Report</td>
+        <td>Various CRA</td>
+        <td>Various</td>
+        <td>Aurelian Manufacturing AS</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Note:</strong> In this MRB simulation, the full mill test certificate for Heat H24-5587 (Items 1 and 6, Main Body Forging and Test Port Plug) is reproduced in detail on pages 2&ndash;4. Remaining certificates (Items 2&ndash;5, 7) are referenced by certificate number and would be attached as scanned originals in the physical MRB dossier. The PMI verification summary is provided on page 5.
+  </div>
+
+  <div class="footer">
+    <span class="confidential">Confidential</span>
+    <span>Page 1 of 5</span>
+    <span>AM-MTC-2026-0042-001 Rev 0</span>
+  </div>
+</div>
+
+<!-- PAGE 2: Mill Test Certificate - Page 1 of 3 -->
+<div class="page page-break">
+  <!-- Mill Certificate Header - styled as a separate document within the MRB -->
+  <div class="mill-cert-header">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div>
+        <h1>Mill Test Certificate</h1>
+        <div class="subtitle">Inspection Certificate per EN 10204 Type 3.2</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:9pt; color:#D3D3D3; text-transform:uppercase; letter-spacing:1px;">Certificate No</div>
+        <div style="font-size:16pt; font-weight:bold; color:#F50537;">SMT-24-5587-01</div>
+      </div>
+    </div>
+    <div style="margin-top:12px; border-top:1px solid #6B6B6B; padding-top:8px;">
+      <div class="mill-name">Sandvik Materials Technology</div>
+      <div class="mill-addr">SE-811 81 Sandviken, Sweden &bull; Org. No.: SE 556000-3468 &bull; Tel: +46 26 26 00 00</div>
+    </div>
+  </div>
+
+  <div class="cert-ref-bar">
+    <div class="ref-item"><div class="ref-label">Heat Number</div><div class="ref-value">H24-5587</div></div>
+    <div class="ref-item"><div class="ref-label">Order No</div><div class="ref-value">SMT-SO-2026-04881</div></div>
+    <div class="ref-item"><div class="ref-label">Customer</div><div class="ref-value">Aurelian Manufacturing AS</div></div>
+    <div class="ref-item"><div class="ref-label">Customer PO</div><div class="ref-value">AM-PO-MAT-2026-0088</div></div>
+    <div class="ref-item"><div class="ref-label">Date</div><div class="ref-value">22 February 2026</div></div>
+  </div>
+
+  <div class="mill-cert-body" style="padding-top:12px;">
+    <h2 style="margin-top:0;">1. Product Information</h2>
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th style="width:35%;">Parameter</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Product</td><td><strong>Forged Bar</strong></td></tr>
+        <tr><td>Material Designation</td><td><strong>UNS S32750 (SAF 2507)</strong></td></tr>
+        <tr><td>Specification</td><td>ASTM A182 Grade F53</td></tr>
+        <tr><td>Additional Requirements</td><td>NORSOK M-630 MDS D45, NACE MR0175/ISO 15156</td></tr>
+        <tr><td>Heat Number</td><td><strong>H24-5587</strong></td></tr>
+        <tr><td>Dimensions</td><td>&Oslash;350 mm &times; 500 mm (L)</td></tr>
+        <tr><td>Quantity</td><td>2 pcs</td></tr>
+        <tr><td>Weight</td><td>378.6 kg (total)</td></tr>
+        <tr><td>Marking</td><td>H24-5587 / S32750 / F53 / SMT / 3.2</td></tr>
+        <tr><td>Surface Condition</td><td>Machined (turned), free from scale and defects</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. Chemical Composition (Heat Analysis)</h2>
+    <p style="font-size: 9pt; color: #6B6B6B; margin-bottom: 8px;">Analysis performed per ASTM A751. All values in weight percent (wt%).</p>
+
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Element</th>
+          <th>Symbol</th>
+          <th>Specification Limits</th>
+          <th>Actual Value</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Carbon</td>
+          <td>C</td>
+          <td class="spec-range">max 0.030</td>
+          <td class="pass">0.018</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td>Silicon</td>
+          <td>Si</td>
+          <td class="spec-range">max 0.80</td>
+          <td class="pass">0.35</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td>Manganese</td>
+          <td>Mn</td>
+          <td class="spec-range">max 1.20</td>
+          <td class="pass">0.82</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td>Phosphorus</td>
+          <td>P</td>
+          <td class="spec-range">max 0.035</td>
+          <td class="pass">0.022</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td>Sulphur</td>
+          <td>S</td>
+          <td class="spec-range">max 0.020</td>
+          <td class="pass">0.001</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td>Chromium</td>
+          <td>Cr</td>
+          <td class="spec-range">24.0 &ndash; 26.0</td>
+          <td class="pass">25.1</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td>Nickel</td>
+          <td>Ni</td>
+          <td class="spec-range">6.0 &ndash; 8.0</td>
+          <td class="pass">6.9</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td>Molybdenum</td>
+          <td>Mo</td>
+          <td class="spec-range">3.0 &ndash; 5.0</td>
+          <td class="pass">3.8</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td>Nitrogen</td>
+          <td>N</td>
+          <td class="spec-range">0.24 &ndash; 0.32</td>
+          <td class="pass">0.27</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td>Copper</td>
+          <td>Cu</td>
+          <td class="spec-range">max 0.50</td>
+          <td class="pass">0.18</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr style="background: #F5F5F5; border-top: 1.5pt solid #2B2B2B;">
+          <td colspan="2"><strong>PREN<sub>W</sub></strong><br><span style="font-size:8pt; color:#6B6B6B;">%Cr + 3.3(%Mo + 0.5%W) + 16%N</span></td>
+          <td class="spec-range"><strong>min 40.0</strong></td>
+          <td class="pass" style="font-size:11pt;"><strong>42.8</strong></td>
+          <td><span class="result-badge result-conform">Conform</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span class="confidential">Confidential</span>
+    <span>Page 2 of 5</span>
+    <span>AM-MTC-2026-0042-001 Rev 0 &bull; Certificate SMT-24-5587-01</span>
+  </div>
+</div>
+
+<!-- PAGE 3: Mill Test Certificate - Page 2 of 3 (Mechanical, Impact, Corrosion) -->
+<div class="page page-break">
+  <div class="header-bar">
+    <div class="am-logo">
+      <div>
+        <div class="am-logo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="am-logo-text" style="font-size:14pt;">
+          Aurelian Manufacturing
+          <span>MRB Section 5 &mdash; Certificate SMT-24-5587-01 (continued)</span>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:9pt; color:#6B6B6B;">Page 3 of 5</div>
+  </div>
+
+  <h2 style="margin-top:0;">3. Mechanical Properties</h2>
+  <p style="font-size: 9pt; color: #6B6B6B; margin-bottom: 8px;">Testing performed at room temperature (23 &plusmn; 5&deg;C) per ASTM A370. Specimen orientation: transverse.</p>
+
+  <table class="spec-table">
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Test Method</th>
+        <th>Specification Requirement</th>
+        <th>Actual Value</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tensile Strength (R<sub>m</sub>)</td>
+        <td>ASTM A370</td>
+        <td class="spec-range">min 795 MPa</td>
+        <td class="pass"><strong>862 MPa</strong></td>
+        <td><span class="result-badge result-pass">Pass</span></td>
+      </tr>
+      <tr>
+        <td>Yield Strength (R<sub>p0.2</sub>)</td>
+        <td>ASTM A370</td>
+        <td class="spec-range">min 550 MPa</td>
+        <td class="pass"><strong>628 MPa</strong></td>
+        <td><span class="result-badge result-pass">Pass</span></td>
+      </tr>
+      <tr>
+        <td>Elongation (A<sub>5d</sub>)</td>
+        <td>ASTM A370</td>
+        <td class="spec-range">min 15%</td>
+        <td class="pass"><strong>28%</strong></td>
+        <td><span class="result-badge result-pass">Pass</span></td>
+      </tr>
+      <tr>
+        <td>Reduction of Area (Z)</td>
+        <td>ASTM A370</td>
+        <td class="spec-range">min 35%</td>
+        <td class="pass"><strong>62%</strong></td>
+        <td><span class="result-badge result-pass">Pass</span></td>
+      </tr>
+      <tr>
+        <td>Hardness</td>
+        <td>ASTM E18</td>
+        <td class="spec-range">max 32 HRC</td>
+        <td class="pass"><strong>28 HRC</strong></td>
+        <td><span class="result-badge result-pass">Pass</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. Impact Test (Charpy V-Notch)</h2>
+  <p style="font-size: 9pt; color: #6B6B6B; margin-bottom: 8px;">Test performed per ASTM A370 / EN ISO 148-1. Specimen size: 10 &times; 10 mm. Orientation: transverse.</p>
+
+  <table class="spec-table">
+    <thead>
+      <tr>
+        <th>Test Temperature</th>
+        <th>Requirement</th>
+        <th>Specimen 1</th>
+        <th>Specimen 2</th>
+        <th>Specimen 3</th>
+        <th>Average</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>&minus;46&deg;C</strong></td>
+        <td class="spec-range">min 27 J (single)<br>min 40 J (average)</td>
+        <td class="pass"><strong>185 J</strong></td>
+        <td class="pass"><strong>192 J</strong></td>
+        <td class="pass"><strong>178 J</strong></td>
+        <td class="pass" style="font-size:11pt;"><strong>185 J</strong></td>
+        <td><span class="result-badge result-pass">Pass</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>5. Corrosion Test</h2>
+  <table class="spec-table">
+    <thead>
+      <tr>
+        <th>Test Method</th>
+        <th>Temperature</th>
+        <th>Duration</th>
+        <th>Requirement</th>
+        <th>Result</th>
+        <th>Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ASTM G48 Method A<br><span style="color:#6B6B6B; font-size:8pt;">Ferric Chloride Pitting Test</span></td>
+        <td class="pass"><strong>40&deg;C</strong></td>
+        <td class="pass"><strong>24 hours</strong></td>
+        <td class="spec-range">No pitting at 40&deg;C<br>Weight loss &lt; 4.0 g/m&sup2;</td>
+        <td class="pass"><strong>No pitting observed</strong><br>Weight loss: 0.3 g/m&sup2;</td>
+        <td><span class="result-badge result-pass">Pass</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>6. Ferrite Content</h2>
+  <table class="spec-table">
+    <thead>
+      <tr>
+        <th>Test Method</th>
+        <th>Location</th>
+        <th>Requirement</th>
+        <th>Actual Value</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ASTM E562<br><span style="color:#6B6B6B; font-size:8pt;">Point counting method</span></td>
+        <td>Mid-radius, transverse section</td>
+        <td class="spec-range">30% &ndash; 70%</td>
+        <td class="pass"><strong>45%</strong></td>
+        <td><span class="result-badge result-pass">Pass</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>7. Microstructure Examination</h2>
+  <table class="spec-table">
+    <thead>
+      <tr>
+        <th>Test Method</th>
+        <th>Requirement</th>
+        <th>Result</th>
+        <th>Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ASTM E3 / ASTM E407<br><span style="color:#6B6B6B; font-size:8pt;">Optical metallography, &times;200 and &times;500 magnification</span></td>
+        <td class="spec-range">Dual-phase austenite-ferrite microstructure.<br>No detrimental intermetallic phases (sigma, chi, nitrides).<br>Per NORSOK M-650 / ASTM A923 Method C.</td>
+        <td class="pass"><strong>Satisfactory</strong><br>Balanced austenite-ferrite structure observed.<br>No sigma phase, chi phase, or chromium nitrides detected.</td>
+        <td><span class="result-badge result-pass">Pass</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>8. Heat Treatment</h2>
+  <table class="spec-table">
+    <thead>
+      <tr>
+        <th>Process</th>
+        <th>Temperature</th>
+        <th>Hold Time</th>
+        <th>Cooling Method</th>
+        <th>Furnace No</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Solution Annealing</strong></td>
+        <td class="pass"><strong>1100&deg;C</strong> (&plusmn;15&deg;C)</td>
+        <td>Minimum 1 hour per 25 mm section</td>
+        <td><strong>Water quenched</strong><br><span style="color:#6B6B6B; font-size:8pt;">Rapid cooling to below 400&deg;C within 3 minutes</span></td>
+        <td>SMT-HT-F12</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <span class="confidential">Confidential</span>
+    <span>Page 3 of 5</span>
+    <span>AM-MTC-2026-0042-001 Rev 0 &bull; Certificate SMT-24-5587-01</span>
+  </div>
+</div>
+
+<!-- PAGE 4: Mill Test Certificate - Page 3 of 3 (UT, Certification, Signatures) -->
+<div class="page page-break">
+  <div class="header-bar">
+    <div class="am-logo">
+      <div>
+        <div class="am-logo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="am-logo-text" style="font-size:14pt;">
+          Aurelian Manufacturing
+          <span>MRB Section 5 &mdash; Certificate SMT-24-5587-01 (continued)</span>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:9pt; color:#6B6B6B;">Page 4 of 5</div>
+  </div>
+
+  <h2 style="margin-top:0;">9. Ultrasonic Testing</h2>
+  <table class="spec-table">
+    <thead>
+      <tr>
+        <th>Test Method</th>
+        <th>Equipment</th>
+        <th>Acceptance Criteria</th>
+        <th>Result</th>
+        <th>Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ASTM A388<br><span style="color:#6B6B6B; font-size:8pt;">Straight beam contact method</span></td>
+        <td>Olympus Epoch 650<br><span style="color:#6B6B6B; font-size:8pt;">Probe: 4 MHz, &Oslash;24mm<br>Cal. valid to 30 June 2026</span></td>
+        <td class="spec-range">No recordable indications<br>exceeding &Oslash;3.2 mm flat<br>bottom hole (FBH) equivalent.<br>100% volumetric coverage.</td>
+        <td class="pass"><strong>No recordable indications</strong><br>100% volume scanned.<br>Back-wall echo: satisfactory.</td>
+        <td><span class="result-badge result-pass">Pass</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>10. Certification Statement</h2>
+
+  <div class="callout" style="background: #fff; border-left: 4px solid #F50537; padding: 14px 18px; margin-bottom: 16px;">
+    <p style="font-size: 10pt; margin-bottom: 8pt; font-weight: bold;">Declaration of Conformity per EN 10204 Type 3.2</p>
+    <p style="font-size: 10pt; margin-bottom: 8pt;">We hereby certify that the material described in this certificate has been manufactured, tested, and inspected in accordance with the specifications and requirements stated above, and conforms in all respects to the ordered requirements.</p>
+    <p style="font-size: 10pt; margin-bottom: 8pt;">This certificate has been validated by the manufacturer&rsquo;s authorized inspection representative and the independent inspection body (TPI) as required by EN 10204 Type 3.2.</p>
+    <p style="font-size: 9pt; color: #6B6B6B; margin-bottom: 0;">This document is electronically generated and valid without signature when bearing the Sandvik quality seal and document control reference.</p>
+  </div>
+
+  <h2>11. Authorized Signatures</h2>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 16px;">
+    <div>
+      <div style="font-size: 9pt; color: #6B6B6B; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">Manufacturer&rsquo;s Inspector</div>
+      <div class="sig-line"></div>
+      <div class="sig-name">Dr. Karin Svensson</div>
+      <div class="sig-label">Quality Control Manager<br>Sandvik Materials Technology</div>
+    </div>
+    <div>
+      <div style="font-size: 9pt; color: #6B6B6B; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">Independent TPI</div>
+      <div class="sig-line"></div>
+      <div class="sig-name">Johan Bergstr&ouml;m</div>
+      <div class="sig-label">Lead Inspector<br>DNV GL &mdash; Sandviken Office</div>
+    </div>
+    <div>
+      <div style="font-size: 9pt; color: #6B6B6B; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">Date of Issue</div>
+      <div class="sig-line" style="display:flex; align-items:flex-end; padding-bottom:4px;">
+        <span style="font-size:10pt; font-weight:bold;">22 February 2026</span>
+      </div>
+      <div class="sig-label">Certificate valid from date of issue</div>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 20px; margin-top: 24px; justify-content: center;">
+    <div class="stamp-box" style="flex: 0 0 200px;">
+      <div class="stamp-title">Manufacturer&rsquo;s Quality Seal</div>
+      <div class="stamp-circle">
+        SANDVIK<br>MATERIALS<br>TECHNOLOGY<br>&#9733; QC &#9733;
+      </div>
+    </div>
+    <div class="stamp-box" style="flex: 0 0 200px;">
+      <div class="stamp-title">TPI Stamp</div>
+      <div class="stamp-circle">
+        DNV GL<br>INSPECTION<br>SANDVIKEN<br>TPI-3.2
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px; padding: 10px 14px; background: #F5F5F5; font-size: 8pt; color: #6B6B6B; border-left: 3px solid #D3D3D3;">
+    <strong>Document Control:</strong> This certificate is issued under Sandvik Materials Technology document control system. Certificate reference: SMT-24-5587-01. Supersedes: None. This is the original issue. Reproduction of this certificate is permitted only in its entirety. Any partial reproduction requires written authorization from Sandvik Materials Technology Quality Department.
+  </div>
+
+  <div style="margin-top: 20px; border-top: 2px solid #F50537; padding-top: 12px;">
+    <p style="font-size:10pt; font-weight:bold; color:#2B2B2B; margin-bottom: 4pt;">End of Mill Test Certificate SMT-24-5587-01</p>
+    <p style="font-size:9pt; color:#6B6B6B;">Sandvik Materials Technology &bull; SE-811 81 Sandviken, Sweden &bull; VAT No.: SE 556000-3468-01</p>
+  </div>
+
+  <div class="footer">
+    <span class="confidential">Confidential</span>
+    <span>Page 4 of 5</span>
+    <span>AM-MTC-2026-0042-001 Rev 0</span>
+  </div>
+</div>
+
+<!-- PAGE 5: PMI Verification Summary -->
+<div class="page page-break">
+  <div class="header-bar">
+    <div class="am-logo">
+      <div>
+        <div class="am-logo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="am-logo-text" style="font-size:14pt;">
+          Aurelian Manufacturing
+          <span>MRB Section 5 &mdash; PMI Verification Summary</span>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:9pt; color:#6B6B6B;">Page 5 of 5</div>
+  </div>
+
+  <div class="pmi-section">
+    <h2 style="margin-top: 0;">Positive Material Identification (PMI) &mdash; Goods Receipt Verification</h2>
+
+    <div class="meta-grid" style="margin-top: 12px;">
+      <div class="meta-box" style="background: #fff;">
+        <h3>PMI Equipment</h3>
+        <div class="row"><span class="label">Instrument</span><span class="value">Olympus Vanta M Series</span></div>
+        <div class="row"><span class="label">Type</span><span class="value">Handheld XRF Analyser</span></div>
+        <div class="row"><span class="label">Serial No</span><span class="value">VXM-24-0871</span></div>
+        <div class="row"><span class="label">Calibration</span><span class="value">Valid to 15 September 2026</span></div>
+        <div class="row"><span class="label">Cal. Cert. No</span><span class="value">OLY-CAL-2025-0871</span></div>
+      </div>
+      <div class="meta-box" style="background: #fff;">
+        <h3>PMI Procedure</h3>
+        <div class="row"><span class="label">Procedure</span><span class="value">AM-QP-PMI-001 Rev 3</span></div>
+        <div class="row"><span class="label">Standard</span><span class="value">NORSOK M-650, ASTM E1476</span></div>
+        <div class="row"><span class="label">Location</span><span class="value">Aurelian Manufacturing, Moss</span></div>
+        <div class="row"><span class="label">Performed By</span><span class="value">Lars Henriksen (QCI)</span></div>
+        <div class="row"><span class="label">Cert. No</span><span class="value">AM-QCI-2024-018</span></div>
+      </div>
+    </div>
+
+    <p style="margin-top: 12px;">PMI verification was performed on all Corrosion Resistant Alloy (CRA) materials at goods receipt. Each item was tested on a clean, ground surface with a minimum of three readings per item. Results were compared against the corresponding mill test certificate and UNS designation composition limits. All items confirmed to match their declared material grade.</p>
+
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>PMI Report No</th>
+          <th>Date</th>
+          <th>Item / Part</th>
+          <th>Heat No</th>
+          <th>Expected Grade</th>
+          <th>PMI Grade Identified</th>
+          <th>Cr</th>
+          <th>Ni</th>
+          <th>Mo</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:bold;">AM-PMI-2026-0112</td>
+          <td>05 Mar 2026</td>
+          <td>Main Body Forging</td>
+          <td>H24-5587</td>
+          <td>UNS S32750</td>
+          <td class="pass">UNS S32750</td>
+          <td>25.0</td>
+          <td>6.8</td>
+          <td>3.7</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">AM-PMI-2026-0113</td>
+          <td>05 Mar 2026</td>
+          <td>Hub Forging</td>
+          <td>H24-5612</td>
+          <td>UNS S32750</td>
+          <td class="pass">UNS S32750</td>
+          <td>24.9</td>
+          <td>7.0</td>
+          <td>3.9</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">AM-PMI-2026-0114</td>
+          <td>07 Mar 2026</td>
+          <td>Seal Ring</td>
+          <td>N24-2201</td>
+          <td>UNS N06625</td>
+          <td class="pass">UNS N06625</td>
+          <td>21.8</td>
+          <td>61.2</td>
+          <td>9.0</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">AM-PMI-2026-0115</td>
+          <td>07 Mar 2026</td>
+          <td>Hex Bolts M24&times;80</td>
+          <td>B24-3344</td>
+          <td>316 type (B8M)</td>
+          <td class="pass">316 / S31600</td>
+          <td>17.1</td>
+          <td>11.8</td>
+          <td>2.2</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">AM-PMI-2026-0116</td>
+          <td>07 Mar 2026</td>
+          <td>Hex Nuts M24</td>
+          <td>N24-1122</td>
+          <td>316 type (8M)</td>
+          <td class="pass">316 / S31600</td>
+          <td>16.9</td>
+          <td>12.0</td>
+          <td>2.1</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">AM-PMI-2026-0117</td>
+          <td>12 Mar 2026</td>
+          <td>Test Port Plug</td>
+          <td>H24-5587</td>
+          <td>UNS S32750</td>
+          <td class="pass">UNS S32750</td>
+          <td>25.1</td>
+          <td>6.9</td>
+          <td>3.8</td>
+          <td><span class="result-badge result-pass">Pass</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout" style="margin-top: 12px;">
+      <strong>PMI Conclusion:</strong> All CRA materials verified by XRF analysis at goods receipt. Measured compositions are consistent with the declared material grades and corresponding mill test certificates. No discrepancies found. All materials are accepted for use in production of Tag NSS-BSP2-SCA-001.
+    </div>
+  </div>
+
+  <h2>Approval Signatures</h2>
+
+  <div class="signature-block">
+    <div>
+      <h3 style="color: #F50537; margin-bottom: 8px;">PMI Performed By</h3>
+      <div class="sig-line"></div>
+      <div class="sig-name">Lars Henriksen</div>
+      <div class="sig-title">QC Inspector &mdash; Materials &amp; Receiving</div>
+      <div class="sig-label">Cert. No.: AM-QCI-2024-018</div>
+      <br>
+      <div class="sig-line" style="width: 60%;"></div>
+      <div class="sig-label">Date</div>
+    </div>
+    <div>
+      <h3 style="color: #F50537; margin-bottom: 8px;">Reviewed &amp; Approved By</h3>
+      <div class="sig-line"></div>
+      <div class="sig-name">Anna Nordstr&ouml;m</div>
+      <div class="sig-title">Quality Assurance Manager</div>
+      <div class="sig-label">Aurelian Manufacturing AS</div>
+      <br>
+      <div class="sig-line" style="width: 60%;"></div>
+      <div class="sig-label">Date</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 30px; padding: 12px; background: #F5F5F5; font-size: 8pt; color: #6B6B6B;">
+    <strong>Aurelian Manufacturing AS</strong><br>
+    Industriveien 12, 1531 Moss, Norway<br>
+    Org. No.: NO 912 345 678 MVA &bull; Tel: +47 69 00 45 67 &bull; www.aurelian.no<br><br>
+    This document and its contents are the property of Aurelian Manufacturing AS and are confidential. Distribution is limited to the project team and client (Nordic Subsea Solutions AS) as defined in the project document distribution matrix.
+  </div>
+
+  <div class="footer">
+    <span class="confidential">Confidential</span>
+    <span>Page 5 of 5</span>
+    <span>AM-MTC-2026-0042-001 Rev 0 &bull; 20 March 2026</span>
+  </div>
+</div>
+
+</body>
+</html>

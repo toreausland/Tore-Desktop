@@ -1,0 +1,176 @@
+**Revidert Verdivurderingsmetodikk**
+
+Ramp-up, transjevis skalering og økonomisk utvikling
+
+Aurelian Manufacturing AS \| VDR Dokument 02 \| Februar 2026 \|
+Konfidensielt
+
+Dette dokumentet presenterer en konsistent, låst og
+bank-/investor-lesbar fremstilling av ramp-up for Aurelian Manufacturing
+sitt første verksted, basert på hoveddokumentet Markedsanalyse,
+sammenligning og økonomisk potensial ved autonom CNC-drift samt Vedlegg
+B -- Økonomiske tabeller.
+
+**1. Låst metodikk og forutsetninger**
+
+**1.1 Kapasitetsgrunnlag**
+
+> • Teoretiske tilgjengelige timer per CNC-maskin: 8 760 timer/år (24/7)
+>
+> • Normalisert timepris: 3 000 NOK
+>
+> • Teoretisk omsetning per CNC ved 100 % utnyttelse: 8 760 × 3 000 =
+> 26,28 MNOK per år
+
+Utnyttelsesgrad (%) refererer eksplisitt til andel av 8 760 teoretiske
+timer, ikke til et begrenset driftstimetall.
+
+**1.2 Kostnadsstruktur (fra Vedlegg B)**
+
+> • Variable kostnader: 8 % av omsetning (moden drift; 13 % i
+> oppstartsfasen)
+>
+> • Faste kostnader ved 20 CNC (steady state): \~92,75 MNOK
+>
+> • Faste kostnader skaleres konservativt i ramp-up (sub-lineær
+> bemanning, men ikke maksimal operating leverage i tidlig fase)
+
+Presisering: Vedlegg B reflekterer en steady state-kostnadsstruktur med
+moden risikoprofil. I ramp-up-fasen justeres finanskostnader transjevis
+i hovedmodellen for å reflektere varierende egenkapitalkrav og
+risikoreduksjon over tid. Operative og variable kostnader følger
+fortsatt Vedlegg B.
+
+Alle tall er angitt i MNOK, avrundet.
+
+**2. Transjevis ramp-up 2028--2031 (justert finansieringsstruktur)**
+
+I denne oppdateringen er kostnadsbildet eksplisitt justert for
+varierende egenkapitalkrav per transje, i tråd med selskapets overgang
+fra pre-revenue til stabil, bankbar drift:
+
+> • Transje 1: 50 % egenkapital / 50 % gjeld
+>
+> • Transje 2: 40 % egenkapital / 60 % gjeld
+>
+> • Transje 3: 30 % egenkapital / 70 % gjeld
+
+Effekten slår ut i finanskostnader, mens operasjonelle kostnader og
+variable kostnader er uendret. Det gir et mer realistisk og samtidig
+fortsatt konservativt bilde av ramp-up.
+
+**Transje 1 -- Etablering og kommersiell validering (2028--Q2 2029)**
+
+  -------------------- -----------
+  **Parameter**        **Verdi**
+  CNC-maskiner         8
+  Utnyttelsesgrad      37,5 %
+  Omsetning            78,8
+  Kostnader            44,5
+  Fortjeneste          34,3
+  Implisitt EK-andel   50 %
+  -------------------- -----------
+
+**Transje 2 -- Operativ skalering (2029 Q3--2030)**
+
+  -------------------- -----------
+  **Parameter**        **Verdi**
+  CNC-maskiner         14
+  Utnyttelsesgrad      45 %
+  Omsetning            165,6
+  Kostnader            66,5
+  Fortjeneste          99,1
+  Implisitt EK-andel   40 %
+  -------------------- -----------
+
+**Transje 3 -- Full første verkstedskala (2031)**
+
+  ----------------------------------- -----------
+  **Parameter**                       **Verdi**
+  CNC-maskiner                        20
+  Utnyttelsesgrad                     50 %
+  Omsetning                           262,8
+  Kostnader                           98,5
+  Fortjeneste (før kundeinsentiv)     164,3
+  Kundeinsentiv (\>45 %, 40 %)        -7,9
+  Fortjeneste (etter kundeinsentiv)   156,4
+  Implisitt EK-andel                  30 %
+  ----------------------------------- -----------
+
+**3. Modent verksted -- videre utvikling uten ny egenkapital**
+
+**3A. Omsetning per regnskapsår**
+
+Modellen reflekterer en 50/50-deling av fortjeneste generert over 45 %
+utnyttelsesgrad, med strategiske kunder som oppnår dokumentert høy flyt.
+
+  ----------------- --------------- ---------------------- ---------------------- ---------------------- ------------------------------------- ---------------
+  **Regnskapsår**   **Snitt CNC**   **Snitt utnyttelse**   **Omsetning (MNOK)**   **Kostnader (MNOK)**   **Fortjeneste etter deling (MNOK)**   **Kommentar**
+  2028              8               35%                    73                     44                     29                                    Under terskel
+  2029              11              40%                    116                    56                     60                                    Under terskel
+  2030              14              45%                    166                    67                     99                                    Terskelnivå
+  2031              20              50%                    263                    99                     150                                   50/50 deling
+  2032              20              55%                    289                    108                    160                                   Økt flyt
+  2033              22              57,5%                  333                    116                    190                                   Delt oppside
+  2034              24              60%                    378                    124                    220                                   Høy flyt
+  2035              25              65%                    427                    133                    245                                   Modent nivå
+  ----------------- --------------- ---------------------- ---------------------- ---------------------- ------------------------------------- ---------------
+
+**4. Akkumulert finansiell prognose -- første verksted (50/50
+delingsmodell over 45 %)**
+
+Tabellen viser årlig og akkumulert fortjeneste for Aurelian
+Manufacturing under kontrollerte vekstforutsetninger.
+Kundeinsentivordningen er aktivert kun når utnyttelsesgraden overstiger
+45 %.
+
+  -------- --------------------- ------------------------ ------------------------------- -------------------- -------------------------- -------------------------------------
+  **År**   **Årlig omsetning**   **Fortjeneste totalt**   **Fortjenestegrunnlag \>45%**   **Kundeandel 50%**   **Fortjeneste Aurelian**   **Akkumulert fortjeneste Aurelian**
+  2028     73                    29                       0                               0                    29                         29
+  2029     116                   60                       0                               0                    60                         89
+  2030     166                   99                       0                               0                    99                         188
+  2031     263                   164                      30                              15                   149                        337
+  2032     289                   181                      48                              24                   157                        494
+  2033     333                   217                      76                              38                   179                        673
+  2034     378                   254                      110                             55                   199                        872
+  2035     427                   294                      144                             72                   222                        1 094
+  -------- --------------------- ------------------------ ------------------------------- -------------------- -------------------------- -------------------------------------
+
+**4.1 Tolkning (bank- og investorrelevant)**
+
+> • Delingsmekanismen aktiveres først etter dokumentert flyt (\>45 %
+> utnyttelse)
+>
+> • Nedside og basislønnsomhet påvirkes ikke
+>
+> • Kundeandel synliggjøres eksplisitt som egen linje, ikke skjult i
+> margin
+>
+> • Aurelians akkumulerte fortjeneste forblir svært sterk (\>1,0 mrd.
+> NOK)
+>
+> • Ordningen fremstår som et operativt insentiv, ikke en strukturell
+> marginreduksjon
+
+**4.2 Note -- akkumulert verdifordeling mellom Aurelian og kunder**
+
+Basert på tabellen over kan den akkumulerte effekten av delingsmodellen
+oppsummeres slik (indikativt):
+
+> • Akkumulert fortjeneste generert over 45 % utnyttelse (2031--2035):
+> ca. 408 MNOK
+>
+> • Akkumulert kundeandel (50 % av overskudd over 45 %): ca. 204 MNOK
+>
+> • Akkumulert fortjeneste som tilfaller Aurelian etter deling: ca. 1
+> 094 MNOK
+
+Dette innebærer at: kundene samlet mottar en materiell, men kontrollert
+andel av oppsiden som direkte kan knyttes til forbedret flyt og
+ordresekvensering. Aurelians aksjonærer beholder hoveddelen av
+verdiskapingen, samtidig som sannsynligheten for å realisere høy
+utnyttelse økes.
+
+Tallene er illustrerende og basert på modellforutsetningene i dette
+dokumentet. Endelig utforming av kundeinsentivordningen vil avhenge av
+kontraktsstruktur, kvalifikasjonskriterier og faktisk kundeatferd.

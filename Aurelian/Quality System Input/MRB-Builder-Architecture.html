@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Digital MRB Builder Architecture</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --red: #F50537;
+    --black: #2B2B2B;
+    --pure-black: #000000;
+    --white: #FFFFFF;
+    --gray-med: #6B6B6B;
+    --gray-panel: #F5F5F5;
+    --gray-divider: #D3D3D3;
+    --dark-charcoal: #1A1A1A;
+    --dark-navy: #1C2D3F;
+    --navy-card: #253B52;
+    --slate-line: #3D5A7A;
+    --steel-blue: #8EAEC5;
+  }
+
+  body {
+    font-family: Calibri, 'Segoe UI', Arial, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.4;
+  }
+
+  /* === COVER === */
+  .cover {
+    background: var(--pure-black);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+  }
+  .cover-label {
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gray-med);
+    margin-bottom: 30px;
+  }
+  .cover h1 {
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .cover-bar {
+    width: 200px;
+    height: 3px;
+    background: var(--red);
+    margin: 20px auto;
+  }
+  .cover h2 {
+    font-size: 22px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+  .cover .subtitle {
+    font-size: 15px;
+    color: var(--gray-med);
+    max-width: 600px;
+  }
+  .cover-footer {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    font-size: 11px;
+    color: var(--gray-med);
+  }
+
+  /* === SECTIONS === */
+  .section {
+    padding: 80px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-dark {
+    background: var(--dark-charcoal);
+    max-width: 100%;
+    padding: 80px 60px;
+  }
+  .section-dark .inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .section-dark h2 {
+    color: var(--white);
+  }
+  .section h3 {
+    font-size: 16px;
+    color: var(--gray-med);
+    font-weight: 400;
+    margin-bottom: 40px;
+  }
+  .section-dark h3 {
+    color: var(--steel-blue);
+  }
+
+  /* === PIPELINE VISUAL === */
+  .pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .pipeline-stage {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0;
+    position: relative;
+  }
+  .stage-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .stage-number {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--red);
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+  .stage-line {
+    width: 3px;
+    flex-grow: 1;
+    background: var(--gray-divider);
+    min-height: 20px;
+  }
+  .stage-content {
+    background: var(--white);
+    border: 1px solid var(--gray-divider);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    margin-left: 20px;
+    position: relative;
+    transition: box-shadow 0.2s;
+  }
+  .stage-content:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .stage-content h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+  .stage-content .stage-ref {
+    font-size: 12px;
+    color: var(--red);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .stage-content p {
+    font-size: 13px;
+    color: var(--gray-med);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .stage-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .tag-skill {
+    background: var(--dark-charcoal);
+    color: var(--white);
+  }
+  .tag-proc {
+    background: var(--red);
+    color: var(--white);
+  }
+  .tag-form {
+    background: var(--gray-panel);
+    color: var(--black);
+    border: 1px solid var(--gray-divider);
+  }
+  .tag-if {
+    background: var(--navy-card);
+    color: var(--white);
+  }
+
+  /* === GATE HIGHLIGHT === */
+  .gate-badge {
+    display: inline-block;
+    background: var(--red);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 12px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+
+  /* === SYSTEM ARCHITECTURE === */
+  .arch-grid {
+    display: grid;
+    grid-template-columns: 1fr 100px 1fr 100px 1fr;
+    gap: 0;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .arch-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .arch-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 60px;
+  }
+  .arch-connector-label {
+    font-size: 10px;
+    color: var(--red);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .arch-connector-arrow {
+    font-size: 22px;
+    color: var(--red);
+    margin: 4px 0;
+  }
+  .arch-box {
+    border-radius: 8px;
+    padding: 20px 24px;
+  }
+  .arch-box-dark {
+    background: var(--dark-charcoal);
+    color: var(--white);
+  }
+  .arch-box-red {
+    background: var(--red);
+    color: var(--white);
+  }
+  .arch-box-light {
+    background: var(--gray-panel);
+    color: var(--black);
+    border: 1px solid var(--gray-divider);
+  }
+  .arch-box h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .arch-box-dark h4 { color: var(--white); }
+  .arch-box-red h4 { color: var(--white); }
+  .arch-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .arch-box ul li {
+    font-size: 11px;
+    padding: 2px 0;
+    color: var(--steel-blue);
+  }
+  .arch-box-red ul li { color: rgba(255,255,255,0.85); }
+  .arch-box-light ul li { color: var(--gray-med); }
+  .arch-box ul li::before {
+    content: ">";
+    margin-right: 6px;
+    color: var(--red);
+    font-weight: 700;
+  }
+  .arch-box-red ul li::before { color: rgba(255,255,255,0.5); }
+
+  /* === DATA FLOW === */
+  .flow-row {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    align-items: center;
+    margin: 8px 0;
+  }
+  .flow-from, .flow-to {
+    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: 4px;
+  }
+  .flow-from {
+    background: var(--navy-card);
+    color: var(--white);
+    text-align: right;
+  }
+  .flow-to {
+    background: var(--gray-panel);
+    color: var(--black);
+    border: 1px solid var(--gray-divider);
+  }
+  .flow-arrow {
+    text-align: center;
+    color: var(--red);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* === STATS ROW === */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 40px 0;
+  }
+  .stat-card {
+    background: var(--navy-card);
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+  }
+  .stat-number {
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--steel-blue);
+    margin-top: 4px;
+  }
+
+  /* === INTERFACE TABLE === */
+  .if-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    font-size: 12px;
+  }
+  .if-table thead th {
+    background: var(--black);
+    color: var(--white);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .if-table tbody tr:nth-child(even) { background: var(--gray-panel); }
+  .if-table tbody td {
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--gray-divider);
+    vertical-align: top;
+  }
+  .dir-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+  }
+  .dir-in { background: #1C6E3D; color: white; }
+  .dir-out { background: var(--red); color: white; }
+  .dir-bi { background: var(--navy-card); color: white; }
+
+  /* === PHASE TIMELINE === */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 30px;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 26px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gray-divider);
+  }
+  .phase {
+    text-align: center;
+    position: relative;
+    padding: 0 10px;
+  }
+  .phase-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--red);
+    margin: 18px auto 16px;
+    position: relative;
+    z-index: 2;
+  }
+  .phase-dot.future { background: var(--gray-divider); }
+  .phase-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .phase-date {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+  .phase-items {
+    text-align: left;
+    font-size: 11px;
+    color: var(--gray-med);
+    line-height: 1.6;
+  }
+
+  /* === FOOTER === */
+  .page-footer {
+    background: var(--pure-black);
+    padding: 40px 60px;
+    text-align: center;
+  }
+  .page-footer p {
+    color: var(--gray-med);
+    font-size: 11px;
+  }
+  .page-footer .confidential {
+    color: var(--red);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    .arch-grid { grid-template-columns: 1fr; }
+    .arch-connector { display: none; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .timeline { grid-template-columns: repeat(2, 1fr); gap: 20px !important; }
+    .timeline::before { display: none; }
+    .section { padding: 40px 20px; }
+    .section-dark { padding: 40px 20px; }
+    .cover h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== COVER ========== -->
+<div class="cover">
+  <div class="cover-label">Aurelian Manufacturing AS</div>
+  <h1>Digital MRB Builder</h1>
+  <div class="cover-bar"></div>
+  <h2>System Architecture Overview</h2>
+  <p class="subtitle">End-to-end Manufacturing Record Book lifecycle — from customer order to final archival. Defence, Oil &amp; Gas, Maritime.</p>
+  <div class="cover-footer">
+    <span>CONFIDENTIAL</span>
+    <span>February 2026 &mdash; Partner Review</span>
+  </div>
+</div>
+
+<!-- ========== STATS ========== -->
+<div class="section-dark">
+  <div class="inner">
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-number">7</div>
+        <div class="stat-label">Pipeline Stages</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">6</div>
+        <div class="stat-label">QMS Procedures</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">20</div>
+        <div class="stat-label">Module Interfaces</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">24</div>
+        <div class="stat-label">Quality Forms</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SYSTEM ARCHITECTURE ========== -->
+<div class="section">
+  <div class="section-label">System Architecture</div>
+  <h2>Three-Layer Design</h2>
+  <h3>Unified Aurelian Platform: ERP module handles business operations. MRB Builder handles quality documentation. Machines feed data directly.</h3>
+
+  <div class="arch-grid">
+    <!-- LEFT: EXTERNAL -->
+    <div class="arch-col">
+      <div class="arch-box arch-box-light">
+        <h4>Customers</h4>
+        <ul>
+          <li>Purchase Orders</li>
+          <li>SDRLs</li>
+          <li>Material Requirements</li>
+          <li>Pre-shipment Review</li>
+          <li>MRB Download</li>
+        </ul>
+      </div>
+      <div class="arch-box arch-box-light">
+        <h4>Suppliers</h4>
+        <ul>
+          <li>Material Certificates</li>
+          <li>Special Process Certs</li>
+          <li>Sub-supplier Declarations</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CONNECTOR -->
+    <div class="arch-connector">
+      <div>
+        <div class="arch-connector-label">API</div>
+        <div class="arch-connector-arrow">&harr;</div>
+      </div>
+    </div>
+
+    <!-- CENTER: ERP -->
+    <div class="arch-col">
+      <div class="arch-box arch-box-dark">
+        <h4>ERP Module (In-House)</h4>
+        <ul>
+          <li>Financial Management</li>
+          <li>Purchasing / SCM</li>
+          <li>Production Orders</li>
+          <li>Inventory / Lot Tracking</li>
+          <li>CRM / Sales</li>
+          <li>HR / Payroll</li>
+          <li>Document Management</li>
+          <li>Quality Module (NCR)</li>
+          <li>Calibration Records</li>
+          <li>Supplier Approvals</li>
+          <li>Compliance Management</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CONNECTOR -->
+    <div class="arch-connector">
+      <div>
+        <div class="arch-connector-label">20 Interfaces</div>
+        <div class="arch-connector-arrow">&harr;</div>
+        <div class="arch-connector-label">AM-IF-001</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: MRB BUILDER -->
+    <div class="arch-col">
+      <div class="arch-box arch-box-red">
+        <h4>MRB Builder (Aurelian-Built)</h4>
+        <ul>
+          <li>Material Gate (PR-008)</li>
+          <li>SDRL Parser (PR-009)</li>
+          <li>Document Validator (PR-010)</li>
+          <li>CoC Generator (PR-011)</li>
+          <li>MRB Assembler (PR-012)</li>
+          <li>Archive Engine (PR-013)</li>
+          <li>Customer Portal</li>
+          <li>Real-time Dashboards</li>
+        </ul>
+      </div>
+      <div class="arch-box arch-box-dark">
+        <h4>Shop Floor Direct</h4>
+        <ul>
+          <li>CNC Machines (MAZAK)</li>
+          <li>CMM / Inspection Room</li>
+          <li>Metrology Systems</li>
+          <li>MQTT / OPC-UA / MTConnect</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 7-STAGE PIPELINE ========== -->
+<div class="section-dark">
+  <div class="inner">
+    <div class="section-label" style="color: var(--red);">MRB Lifecycle</div>
+    <h2 style="color: var(--white);">7-Stage Pipeline</h2>
+    <h3 style="color: var(--steel-blue);">From customer PO to archived MRB &mdash; every document tracked, validated, and compiled.</h3>
+
+    <div class="pipeline">
+
+      <!-- STAGE 0: Material Gate (pre-production) -->
+      <div class="pipeline-stage">
+        <div class="stage-indicator">
+          <div class="stage-number" style="background: var(--pure-black); border: 3px solid var(--red);">G</div>
+          <div class="stage-line"></div>
+        </div>
+        <div class="stage-content" style="border-left: 4px solid var(--red);">
+          <div class="gate-badge">Pre-Production Quality Gate</div>
+          <h4>Material Gate</h4>
+          <div class="stage-ref">PR-008 &bull; aurelian-material-gate</div>
+          <p>AI-assisted incoming material review. 5-point certificate check against customer-specific requirement profiles. 3-way decision: RELEASED / REJECTED / REVIEW. Prevents non-conforming material from reaching the shop floor.</p>
+          <div class="stage-tags">
+            <span class="tag tag-proc">PR-008</span>
+            <span class="tag tag-skill">material-gate</span>
+            <span class="tag tag-if">IF-003</span>
+            <span class="tag tag-if">IF-004</span>
+            <span class="tag tag-if">IF-005</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 1: SDRL Intake -->
+      <div class="pipeline-stage">
+        <div class="stage-indicator">
+          <div class="stage-number">1</div>
+          <div class="stage-line"></div>
+        </div>
+        <div class="stage-content">
+          <h4>SDRL Intake &amp; Parsing</h4>
+          <div class="stage-ref">PR-009 &bull; aurelian-sdrl-parser</div>
+          <p>Customer SDRL extracted from PO. Parsed into Order Requirement Matrix. Industry classification (Defence 8-section / Oil &amp; Gas 7-section). Data source routing assigned per document.</p>
+          <div class="stage-tags">
+            <span class="tag tag-proc">PR-009</span>
+            <span class="tag tag-skill">sdrl-parser</span>
+            <span class="tag tag-if">IF-001</span>
+            <span class="tag tag-if">IF-002</span>
+            <span class="tag tag-form">FM-009-01</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 2: Requirements Flow-Down -->
+      <div class="pipeline-stage">
+        <div class="stage-indicator">
+          <div class="stage-number">2</div>
+          <div class="stage-line"></div>
+        </div>
+        <div class="stage-content">
+          <h4>MRB Index &amp; Structure Initialization</h4>
+          <div class="stage-ref">PR-009 &sect;6.6 &bull; aurelian-mrb-builder</div>
+          <p>SDRL generates the order-specific MRB Index (variable per order). Folder structure created. Document slots populated. FAIR triggers evaluated (defence). ITP tracker initialized (Oil &amp; Gas). The MRB Index becomes the live tracking document.</p>
+          <div class="stage-tags">
+            <span class="tag tag-proc">PR-009</span>
+            <span class="tag tag-skill">mrb-builder</span>
+            <span class="tag tag-form">FM-009-04</span>
+            <span class="tag tag-if">IF-006</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 3: Document Collection -->
+      <div class="pipeline-stage">
+        <div class="stage-indicator">
+          <div class="stage-number">3</div>
+          <div class="stage-line"></div>
+        </div>
+        <div class="stage-content">
+          <h4>Real-Time Document Collection</h4>
+          <div class="stage-ref">PR-009 &sect;6.7 &bull; aurelian-mrb-builder</div>
+          <p>Documents flow in from three routes: <strong>CNC/Metrology/Inspection</strong> (direct to MRB via MQTT/OPC-UA), <strong>Supplier docs</strong> (via ERP, one cert may serve multiple orders), <strong>Internal QA</strong> (process sheets, FAIR, NCRs). MRB Index updated as documents arrive.</p>
+          <div class="stage-tags">
+            <span class="tag tag-skill">mrb-builder</span>
+            <span class="tag tag-if">IF-004</span>
+            <span class="tag tag-if">IF-006</span>
+            <span class="tag tag-if">IF-007</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 4: Validation -->
+      <div class="pipeline-stage">
+        <div class="stage-indicator">
+          <div class="stage-number">4</div>
+          <div class="stage-line"></div>
+        </div>
+        <div class="stage-content">
+          <h4>5-Layer Document Validation</h4>
+          <div class="stage-ref">PR-010 &bull; aurelian-doc-validator</div>
+          <p>Every document passes 5 checks: <strong>L1</strong> Existence &rarr; <strong>L2</strong> Format &rarr; <strong>L3</strong> Completeness &rarr; <strong>L4</strong> Compliance &rarr; <strong>L5</strong> Traceability. Failures generate Correction Requests. Cross-document traceability chain verified. MRB Index status updated per document.</p>
+          <div class="stage-tags">
+            <span class="tag tag-proc">PR-010</span>
+            <span class="tag tag-skill">doc-validator</span>
+            <span class="tag tag-form">FM-010-01</span>
+            <span class="tag tag-form">FM-010-03</span>
+            <span class="tag tag-if">IF-013</span>
+            <span class="tag tag-if">IF-014</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 5: CoC -->
+      <div class="pipeline-stage">
+        <div class="stage-indicator">
+          <div class="stage-number">5</div>
+          <div class="stage-line"></div>
+        </div>
+        <div class="stage-content">
+          <h4>Certificate of Conformance</h4>
+          <div class="stage-ref">PR-011 &bull; aurelian-coc-generator</div>
+          <p>Prerequisite gate: all MRB documents must be VALIDATED before CoC generation. Industry-specific templates (Defence AS9100/AQAP, Oil &amp; Gas NORSOK/API). Auto-populated from validated data. Deviations declared. Signed by authorized signatory.</p>
+          <div class="stage-tags">
+            <span class="tag tag-proc">PR-011</span>
+            <span class="tag tag-skill">coc-generator</span>
+            <span class="tag tag-form">FM-010-04</span>
+            <span class="tag tag-form">FM-011-01</span>
+            <span class="tag tag-if">IF-010</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 6: MRB Assembly -->
+      <div class="pipeline-stage">
+        <div class="stage-indicator">
+          <div class="stage-number">6</div>
+          <div class="stage-line"></div>
+        </div>
+        <div class="stage-content">
+          <h4>MRB Assembly &amp; Release</h4>
+          <div class="stage-ref">PR-012 &bull; aurelian-mrb-builder</div>
+          <p>MRB Index finalized (page numbers added). All validated documents compiled into single bookmarked PDF/A-3. Cover page, master index, section dividers. 10-point quality check. Release authorization. Electronic and/or physical delivery to customer.</p>
+          <div class="stage-tags">
+            <span class="tag tag-proc">PR-012</span>
+            <span class="tag tag-skill">mrb-builder</span>
+            <span class="tag tag-form">FM-012-02</span>
+            <span class="tag tag-if">IF-009</span>
+            <span class="tag tag-if">IF-011</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 7: Archive -->
+      <div class="pipeline-stage">
+        <div class="stage-indicator">
+          <div class="stage-number">7</div>
+          <div class="stage-line" style="background: transparent;"></div>
+        </div>
+        <div class="stage-content">
+          <h4>Delivery &amp; Archive</h4>
+          <div class="stage-ref">PR-013 &bull; All skills</div>
+          <p>MRB shipped with product. Electronic delivery via customer portal. Active archive (2 years) &rarr; Deep archive. PDF/A with SHA-256 checksums. 15+ year retention (defence: 25&ndash;30 years). Annual integrity checks. Legal hold capability. Disaster recovery from encrypted off-site backups.</p>
+          <div class="stage-tags">
+            <span class="tag tag-proc">PR-013</span>
+            <span class="tag tag-form">FM-013-01</span>
+            <span class="tag tag-if">IF-016</span>
+            <span class="tag tag-if">IF-020</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========== DATA FLOW PRINCIPLES ========== -->
+<div class="section">
+  <div class="section-label">Data Flow</div>
+  <h2>Routing Principles</h2>
+  <h3>Machine data goes direct. Supplier documents route through ERP. Single source of truth for every document.</h3>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+    <div>
+      <h4 style="font-size: 14px; color: var(--red); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">Direct to MRB (bypasses ERP)</h4>
+      <div class="flow-row">
+        <div class="flow-from">CNC Machine Data</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-to">MRB Section 4</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-from">CMM Inspection</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-to">MRB Section 6</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-from">Metrology Systems</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-to">MRB Section 4</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-from">In-Process Inspection</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-to">MRB Section 6</div>
+      </div>
+    </div>
+    <div>
+      <h4 style="font-size: 14px; color: var(--red); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">Via ERP (shared documents)</h4>
+      <div class="flow-row">
+        <div class="flow-from">Material Certificates</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-to">ERP &rarr; MRB Section 3</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-from">Special Process Certs</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-to">ERP &rarr; MRB Section 5</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-from">Sub-supplier Declarations</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-to">ERP &rarr; MRB Section 3</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-from">Purchase Orders</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-to">ERP &rarr; MRB Section 2</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== ERP INTERFACES ========== -->
+<div class="section-dark">
+  <div class="inner">
+    <div class="section-label" style="color: var(--red);">ERP Integration</div>
+    <h2 style="color: var(--white);">20 Defined Interfaces (AM-IF-001)</h2>
+    <h3 style="color: var(--steel-blue);">Every data exchange between the ERP and MRB Builder is specified. Core interfaces simulated from Phase 0 (Q2 2026). All live by production start (Q3 2027).</h3>
+
+    <table class="if-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Interface</th>
+          <th>Direction</th>
+          <th>Trigger</th>
+          <th>Live Phase</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>IF-001</td><td>New Purchase Order</td><td><span class="dir-badge dir-in">ERP &rarr; MRB</span></td><td>PO confirmed</td><td><span style="color:var(--gray-med); font-size:10px;">Sim</span> &rarr; 1</td></tr>
+        <tr><td>IF-002</td><td>SDRL Attachment</td><td><span class="dir-badge dir-in">ERP &rarr; MRB</span></td><td>SDRL attached to PO</td><td><span style="color:var(--gray-med); font-size:10px;">Sim</span> &rarr; 1</td></tr>
+        <tr><td>IF-003</td><td>Goods Receiving</td><td><span class="dir-badge dir-in">ERP &rarr; MRB</span></td><td>Material booked in</td><td><span style="color:var(--gray-med); font-size:10px;">Sim</span> &rarr; 1</td></tr>
+        <tr><td>IF-004</td><td>Material Certificate</td><td><span class="dir-badge dir-in">ERP &rarr; MRB</span></td><td>Cert attached to receipt</td><td><span style="color:var(--gray-med); font-size:10px;">Sim</span> &rarr; 1</td></tr>
+        <tr><td>IF-005</td><td>Gate Decision</td><td><span class="dir-badge dir-out">MRB &rarr; ERP</span></td><td>Gate review completed</td><td><span style="color:var(--gray-med); font-size:10px;">Sim</span> &rarr; 1</td></tr>
+        <tr><td>IF-006</td><td>Production Order Link</td><td><span class="dir-badge dir-in">ERP &rarr; MRB</span></td><td>Prod order + material issued</td><td><span style="color:var(--gray-med); font-size:10px;">Sim</span> &rarr; 1</td></tr>
+        <tr><td>IF-007</td><td>NCR Sync</td><td><span class="dir-badge dir-bi">Bidirectional</span></td><td>NCR created/updated</td><td>1</td></tr>
+        <tr><td>IF-008</td><td>Order State Update</td><td><span class="dir-badge dir-out">MRB &rarr; ERP</span></td><td>Lifecycle state change</td><td><span style="color:var(--gray-med); font-size:10px;">Sim</span> &rarr; 1</td></tr>
+        <tr><td>IF-009</td><td>MRB Complete</td><td><span class="dir-badge dir-out">MRB &rarr; ERP</span></td><td>MRB assembled and released</td><td><span style="color:var(--gray-med); font-size:10px;">Dry</span> &rarr; 1</td></tr>
+        <tr><td>IF-010</td><td>CoC Registered</td><td><span class="dir-badge dir-out">MRB &rarr; ERP</span></td><td>CoC signed</td><td><span style="color:var(--gray-med); font-size:10px;">Dry</span> &rarr; 1</td></tr>
+        <tr><td>IF-011</td><td>Shipment Release</td><td><span class="dir-badge dir-bi">Bidirectional</span></td><td>Dispatch confirmed</td><td>1</td></tr>
+        <tr><td>IF-012</td><td>Customer Req Profile</td><td><span class="dir-badge dir-in">ERP &rarr; MRB</span></td><td>Customer requirements set</td><td><span style="color:var(--gray-med); font-size:10px;">Samples</span> &rarr; 1</td></tr>
+        <tr><td>IF-013</td><td>Calibration Query</td><td><span class="dir-badge dir-out">MRB &rarr; ERP</span></td><td>Validation checks instrument</td><td>2</td></tr>
+        <tr><td>IF-014</td><td>Supplier Approval</td><td><span class="dir-badge dir-out">MRB &rarr; ERP</span></td><td>Gate checks supplier list</td><td>2</td></tr>
+        <tr><td>IF-015</td><td>Employee Qualification</td><td><span class="dir-badge dir-out">MRB &rarr; ERP</span></td><td>Validation checks inspector</td><td>2</td></tr>
+        <tr><td>IF-016</td><td>Customer MRB Delivery</td><td><span class="dir-badge dir-out">MRB &rarr; Customer</span></td><td>Customer downloads MRB</td><td>2</td></tr>
+        <tr><td>IF-017</td><td>Customer SDRL Submit</td><td><span class="dir-badge dir-in">Customer &rarr; MRB</span></td><td>Customer sends SDRL</td><td>2</td></tr>
+        <tr><td>IF-018</td><td>Customer Req API</td><td><span class="dir-badge dir-in">Customer &rarr; MRB</span></td><td>Customer provides requirements</td><td>2</td></tr>
+        <tr><td>IF-019</td><td>Supplier Cert Submit</td><td><span class="dir-badge dir-in">Supplier &rarr; ERP</span></td><td>Supplier submits cert</td><td>2</td></tr>
+        <tr><td>IF-020</td><td>Archive Metadata Sync</td><td><span class="dir-badge dir-out">MRB &rarr; ERP</span></td><td>Order archived</td><td>2</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ========== PHASE TIMELINE ========== -->
+<div class="section">
+  <div class="section-label">Implementation</div>
+  <h2>5-Phase Roadmap</h2>
+  <h3>From simulation before first production to autonomous zero-touch MRB at scale. System tested and validated before the first chip is cut.</h3>
+
+  <div class="timeline" style="grid-template-columns: repeat(5, 1fr);">
+    <div class="phase">
+      <div class="phase-dot" style="background: var(--dark-charcoal); border: 3px solid var(--red); width: 18px; height: 18px; margin-top: 17px;"></div>
+      <div class="phase-label">Phase 0</div>
+      <div class="phase-date">Q2&ndash;Q4 2026</div>
+      <div class="phase-items">
+        <strong style="color: var(--red);">Simulation &amp; Build</strong><br>
+        Core MRB engine development<br>
+        Simulated SDRLs + material certs<br>
+        Mock MRB lifecycle runs<br>
+        ERP module development (in-house)<br>
+        QMS procedure dry-runs<br>
+        <span style="color: var(--black); font-weight: 600;">0 CNC (all simulated)</span>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-dot" style="background: var(--dark-charcoal); border: 3px solid var(--red); width: 18px; height: 18px; margin-top: 17px;"></div>
+      <div class="phase-label">Phase 0.5</div>
+      <div class="phase-date">Q1&ndash;Q2 2027</div>
+      <div class="phase-items">
+        <strong style="color: var(--red);">Integration &amp; Testing</strong><br>
+        ERP module integration testing<br>
+        Real CNC data (machines arrive Q2)<br>
+        End-to-end dry runs<br>
+        UAT with QA engineers<br>
+        Material Gate live testing<br>
+        <span style="color: var(--black); font-weight: 600;">System ready by Q3 2027</span>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-dot"></div>
+      <div class="phase-label">Phase 1</div>
+      <div class="phase-date">Q3 2027</div>
+      <div class="phase-items">
+        <strong style="color: var(--red);">Production MVP</strong><br>
+        First real MRBs<br>
+        Tested system goes live<br>
+        Semi-auto SDRL parsing<br>
+        Assisted validation (L1&ndash;L3)<br>
+        5&ndash;15 MRBs/month<br>
+        <span style="color: var(--black); font-weight: 600;">5 CNC machines</span>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-dot future"></div>
+      <div class="phase-label">Phase 2</div>
+      <div class="phase-date">Q1&ndash;Q3 2028</div>
+      <div class="phase-items">
+        <strong style="color: var(--red);">Intelligent</strong><br>
+        Full ERP module + CNC auto-export<br>
+        AI-assisted SDRL + validation<br>
+        Automated L1&ndash;L4 checks<br>
+        Electronic signatures<br>
+        Real-time dashboards<br>
+        Customer portal (pilot)<br>
+        <span style="color: var(--black); font-weight: 600;">15&ndash;30 MRBs/month</span>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-dot future"></div>
+      <div class="phase-label">Phase 3</div>
+      <div class="phase-date">2029+</div>
+      <div class="phase-items">
+        <strong style="color: var(--red);">Autonomous</strong><br>
+        Zero-touch for repeat orders<br>
+        Digital twin integration<br>
+        Customer system APIs<br>
+        Full customer/supplier portals<br>
+        Multi-site support<br>
+        Event bus architecture<br>
+        <span style="color: var(--black); font-weight: 600;">60&ndash;100+ MRBs/month</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== QMS MAP ========== -->
+<div class="section-dark">
+  <div class="inner">
+    <div class="section-label" style="color: var(--red);">QMS Integration</div>
+    <h2 style="color: var(--white);">Procedure Ecosystem</h2>
+    <h3 style="color: var(--steel-blue);">6 new procedures (PR-008&ndash;013) extend the existing QM-001 framework to cover the full MRB lifecycle.</h3>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+      <div>
+        <h4 style="color: var(--steel-blue); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">Existing QMS (QM-001 Rev 1.0)</h4>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <div style="background: var(--navy-card); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--steel-blue);">PR-001 Document Control</div>
+          <div style="background: var(--navy-card); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--steel-blue);">PR-002 Internal Audit</div>
+          <div style="background: var(--navy-card); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--steel-blue);">PR-003 Management Review</div>
+          <div style="background: var(--navy-card); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--steel-blue);">PR-004 Nonconformance &amp; CAPA</div>
+          <div style="background: var(--navy-card); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--steel-blue);">PR-005 Production Planning</div>
+          <div style="background: var(--navy-card); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--steel-blue);">PR-006 CNC Process Control</div>
+          <div style="background: var(--navy-card); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--steel-blue);">PR-007 Customer Communication</div>
+        </div>
+      </div>
+      <div>
+        <h4 style="color: var(--red); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">New: Digital MRB Builder (QM-001 Rev 2.0)</h4>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <div style="background: var(--red); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--white); font-weight: 600;">PR-008 Incoming Material Review &amp; Release</div>
+          <div style="background: var(--red); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--white); font-weight: 600;">PR-009 SDRL Processing &amp; MRB Management</div>
+          <div style="background: var(--red); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--white); font-weight: 600;">PR-010 Document Validation &amp; Verification</div>
+          <div style="background: var(--red); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--white); font-weight: 600;">PR-011 Certificate of Conformance</div>
+          <div style="background: var(--red); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--white); font-weight: 600;">PR-012 MRB Assembly &amp; Release</div>
+          <div style="background: var(--red); padding: 8px 16px; border-radius: 4px; font-size: 12px; color: var(--white); font-weight: 600;">PR-013 Document Archival &amp; Retention</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div class="page-footer">
+  <p class="confidential">Confidential</p>
+  <p>Aurelian Manufacturing AS &mdash; Org.nr 835 679 632 &mdash; Valer, Ostfold, Norway</p>
+  <p style="margin-top: 4px;">Digital MRB Builder Architecture &mdash; February 2026 &mdash; Partner Review</p>
+</div>
+
+</body>
+</html>

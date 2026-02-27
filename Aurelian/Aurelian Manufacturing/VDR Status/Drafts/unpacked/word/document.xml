@@ -1,0 +1,4429 @@
+<?xml version="1.0" encoding="UTF-8"?><w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" mc:Ignorable="w14 w15 wp14">
+  <w:body>
+    <w:p>
+      <w:pPr>
+        <w:spacing w:before="2400"/>
+        <w:jc w:val="center"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:b/>
+          <w:bCs/>
+          <w:color w:val="FF3E00"/>
+          <w:sz w:val="88"/>
+          <w:szCs w:val="88"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Aurelian Manufacturing</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:spacing w:after="0"/>
+        <w:jc w:val="center"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:color w:val="333333"/>
+          <w:sz w:val="68"/>
+          <w:szCs w:val="68"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Markedsanalyse — Master Report</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:spacing w:before="200" w:after="400"/>
+        <w:jc w:val="center"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:color w:val="666666"/>
+          <w:sz w:val="48"/>
+          <w:szCs w:val="48"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Februar 2026</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:spacing w:before="400"/>
+        <w:jc w:val="center"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:b/>
+          <w:bCs/>
+          <w:color w:val="999999"/>
+          <w:sz w:val="48"/>
+          <w:szCs w:val="48"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Confidential</w:t>
+      </w:r>
+    </w:p>
+    <w:r>
+      <w:br w:type="page"/>
+    </w:r>
+    <w:p>
+      <w:pPr>
+        <w:sectPr>
+          <w:type w:val="continuous"/>
+          <w:pgSz w:w="11906" w:h="16838" w:orient="portrait"/>
+          <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0"/>
+          <w:pgNumType/>
+          <w:docGrid w:linePitch="360"/>
+        </w:sectPr>
+      </w:pPr>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading1"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">1. Sammendrag</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Aurelian Manufacturing adresserer et voksende behov for autonom CNC-produksjon i Norge og Norden. Tre strukturelle megatrender konvergerer: forsvarsoppbygging (NATO-bane mot 5% av BNP innen 2035), energitransisjon og industriell modernisering, og et strukturelt kapasitetsgap i europeisk HMLV-presisjonsproduksjon. TAM for nordisk presisjonsproduksjon estimeres til 25-40 mrd NOK/år, med SAM på 5-10 mrd NOK og SOM på 300-400 MNOK — oppnåelig med 20-25 CNC-maskiner ved 60-65% utnyttelse. Selskapet posisjonerer seg som Europas svar på Hadrian (USA, ~3,6 mrd USD verdivurdering), men med en mer kapitaldisiplinert tilnærming og tilpasset europeiske forsvars- og energimarkeder.</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading1"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">2. Makrotrender</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading2"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">2.1 Forsvarsoppbygging i Europa</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">NATO-landene akselererer forsvarsutgifter fra 2% mot 3-5% av BNP. Norges langtidsplan for forsvaret (2025-2036): 1 624 mrd NOK totalt. Dette er tverrpolitisk, multi-dekade, og akselererende. Presisjonsproduksjonskomponenter utgjør anslagsvis 10-15% av forsvarsanskaffelser, tilsvarende 13,5-20 mrd NOK/år i CNC-adresserbart marked.</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading2"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">2.2 Energitransisjon og Industriell Modernisering</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Komplekse systemer, compliance-endringer og reshoring av forsyningskjeder forskyver verdi mot pålitelig, sporbar presisjonsproduksjon. Offshore vind, hydrogen/CCS, og modernisering av eksisterende olje/gass-infrastruktur krever alle avanserte CNC-komponenter.</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading2"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">2.3 Strukturelt CNC-kapasitetsgap</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Europeisk HMLV-presisjonsproduksjonskapasitet er utilstrekkelig. Aldrende arbeidsstyrke, manglende investeringer og voksende etterspørsel skaper et tilbuds-etterspørselsgap som utvides hvert år.</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading1"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">3. Målmarkeder</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading2"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">3.1 Forsvarsindustri (Primært)</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Nøkkelaktører: Kongsberg Defence &amp; Aerospace, NAMMO, Thales Norway. Segmenter: Våpensystemer, missilkomponenter, marine systemer, vedlikehold/MRO. Markedsstørrelse: ~5-7 mrd NOK/år (CNC-adresserbar). Vekstrate: 8-12% årlig.</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading2"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">3.2 Energi og Offshore (Sekundært)</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Nøkkelaktører: Equinor, Aker Solutions, Subsea 7, TechnipFMC. Segmenter: Subsea-utstyr, ventiler, pumpekomponenter, offshore vindturbiner. Markedsstørrelse: ~10-20 mrd NOK/år (CNC-adresserbar). Vekstrate: 5-8% årlig.</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading2"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">3.3 Generell Industri (Tertiært)</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Segmenter: Medisinsk utstyr, romfart, maritim, infrastruktur. Markedsstørrelse: ~10-15 mrd NOK/år. Vekstrate: 3-5% årlig.</w:t>
+      </w:r>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblW w:type="dxa" w:w="9026"/>
+        <w:tblBorders>
+          <w:top w:val="single" w:color="auto" w:sz="4"/>
+          <w:left w:val="single" w:color="auto" w:sz="4"/>
+          <w:bottom w:val="single" w:color="auto" w:sz="4"/>
+          <w:right w:val="single" w:color="auto" w:sz="4"/>
+          <w:insideH w:val="single" w:color="auto" w:sz="4"/>
+          <w:insideV w:val="single" w:color="auto" w:sz="4"/>
+        </w:tblBorders>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+      </w:tblGrid>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Segment</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Markedsstørrelse (NOK/år)</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Vekst</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Nøkkelaktører</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Aurelian-relevans</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Forsvar</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">5-7 mrd</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">8-12%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Kongsberg, NAMMO, Thales</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Primært målmarked</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Energi &amp; Offshore</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">10-20 mrd</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">5-8%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Equinor, Aker, Subsea 7</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Sekundært målmarked</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Generell Industri</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">10-15 mrd</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">3-5%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Diverse</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Tertiært målmarked</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p/>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading1"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">4. TAM / SAM / SOM Analyse</w:t>
+      </w:r>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblW w:type="dxa" w:w="9026"/>
+        <w:tblBorders>
+          <w:top w:val="single" w:color="auto" w:sz="4"/>
+          <w:left w:val="single" w:color="auto" w:sz="4"/>
+          <w:bottom w:val="single" w:color="auto" w:sz="4"/>
+          <w:right w:val="single" w:color="auto" w:sz="4"/>
+          <w:insideH w:val="single" w:color="auto" w:sz="4"/>
+          <w:insideV w:val="single" w:color="auto" w:sz="4"/>
+        </w:tblBorders>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+      </w:tblGrid>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Nivå</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Definisjon</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Estimat (NOK/år)</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Metode</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">TAM</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Nordisk presisjon CNC totalt</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">25-40 mrd</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Bunnoppbygging: forsvar + energi + industri</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">SAM</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">HMLV, høy presisjon, sporbarhet</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">5-10 mrd</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Filtrert for Aurelians kapabiliteter</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">SOM</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Aurelians kapasitet ved 20-25 CNC</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">300-400 MNOK</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Revenue per CNC × maskinpark</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p/>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Revenue-formel: Revenue per CNC = 8 760 timer × utnyttelse% × 3 000 NOK/time</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Ved 20 CNC og 60% utnyttelse: ~315 MNOK</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">CAPEX per CNC (inkl. automatisering): 10 MNOK</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading1"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">5. Konkurranseanalyse</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading2"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">5.1 Norsk CNC-benchmark</w:t>
+      </w:r>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblW w:type="dxa" w:w="9026"/>
+        <w:tblBorders>
+          <w:top w:val="single" w:color="auto" w:sz="4"/>
+          <w:left w:val="single" w:color="auto" w:sz="4"/>
+          <w:bottom w:val="single" w:color="auto" w:sz="4"/>
+          <w:right w:val="single" w:color="auto" w:sz="4"/>
+          <w:insideH w:val="single" w:color="auto" w:sz="4"/>
+          <w:insideV w:val="single" w:color="auto" w:sz="4"/>
+        </w:tblBorders>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+      </w:tblGrid>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Selskap</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">CNC</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Utnyttelse</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Ansatte/CNC</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Begrensning</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Rogaland Maskinering</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">7</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">10%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">~2,5</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Kraftig underutnyttelse</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Lilaas</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">15</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">19%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">~2,5</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Lav effektivitet</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Tamek</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">8</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">20%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">~2,5</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Liten skala</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Uvdal Maskinfabrikk</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">11</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">37%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">~2,5</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Tradisjonell drift</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Aarbakke</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">55</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">38%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">~2,5</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Størst, brownfield-begrenset</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">TP-Products</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">14</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">40-45%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">~2,5</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Nær tak for brownfield</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Årdal Maskinering</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">18</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">47%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">2,5</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Beste tradisjonelle</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Aurelian (mål)</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">20</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">60-65%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">0,8</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Greenfield autonom</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p/>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading2"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">5.2 Konkurransefortrinn</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Aurelians moat er strukturell, ikke inkrementell:</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">1. 3× arbeidseffektivitet (0,8 vs 2,5 ansatte/CNC) — umulig å ettermontere</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">2. Greenfield-fordel: Første aktør i nordisk autonom HMLV</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">3. Digital tråd: Full sporbarhet fra råmateriale til ferdig del</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">4. Replikerbar plattform: Samme blueprint kan deployeres på flere europeiske lokasjoner</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">5. Kundelås gjennom 50/50-modellen: Profittdeling over 45% utnyttelse skaper gjensidig insentiv</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading2"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">5.3 Hadrian-sammenligning</w:t>
+      </w:r>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblW w:type="dxa" w:w="9026"/>
+        <w:tblBorders>
+          <w:top w:val="single" w:color="auto" w:sz="4"/>
+          <w:left w:val="single" w:color="auto" w:sz="4"/>
+          <w:bottom w:val="single" w:color="auto" w:sz="4"/>
+          <w:right w:val="single" w:color="auto" w:sz="4"/>
+          <w:insideH w:val="single" w:color="auto" w:sz="4"/>
+          <w:insideV w:val="single" w:color="auto" w:sz="4"/>
+        </w:tblBorders>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+      </w:tblGrid>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Parameter</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Aurelian</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Hadrian (USA)</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Tradisjonelt CNC</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Fokusmarked</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Europa (forsvar + energi)</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">USA (forsvar)</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Lokalt/regionalt</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Utnyttelsesmål</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">60-65%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">~50-60%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">35-45%</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Ansatte/CNC</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">0,8</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">~1,0-1,5</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">2,5</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">CAPEX/CNC</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">10 MNOK</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">~$1-2M</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Varierer</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Automasjonsnivå</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Lights-out mål</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Høy automasjon</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Manuell/semi-auto</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Forretningsmodell</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">50/50 profittdeling</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Tradisjonell</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Tradisjonell</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p/>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading1"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">6. Verdikjede og Kundeposisjon</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Aurelians 50/50 profit-sharing-modell over 45% utnyttelse skaper en unik verdiproposisjon. Kunder betaler kun for faktisk produksjonstid, ingen minimumskjøp, strategiske kunder får prioritert kapasitet. Modellen skaper partnerskap fremfor transaksjonsforhold.</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading1"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">7. Regulatorisk Landskap</w:t>
+      </w:r>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblW w:type="dxa" w:w="9026"/>
+        <w:tblBorders>
+          <w:top w:val="single" w:color="auto" w:sz="4"/>
+          <w:left w:val="single" w:color="auto" w:sz="4"/>
+          <w:bottom w:val="single" w:color="auto" w:sz="4"/>
+          <w:right w:val="single" w:color="auto" w:sz="4"/>
+          <w:insideH w:val="single" w:color="auto" w:sz="4"/>
+          <w:insideV w:val="single" w:color="auto" w:sz="4"/>
+        </w:tblBorders>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+        <w:gridCol w:w="100"/>
+      </w:tblGrid>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Sertifisering</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Beskrivelse</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Planlagt</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:shd w:color="FF3E00" w:val="clear"/>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:b/>
+                <w:bCs/>
+                <w:color w:val="FFFFFF"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Status</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">ISO 9001</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Kvalitetsstyring</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Q3 2027</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Planlagt</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">AS9100</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Luftfart og forsvar</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Q1 2028</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Planlagt</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">AQAP-2110</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">NATO-kvalifikasjon</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Q2 2028</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Planlagt</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Eksportkontroll</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">ITAR/EAR-vurdering</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Q4 2027</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcBorders>
+              <w:top w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:left w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:bottom w:val="single" w:color="CCCCCC" w:space="1"/>
+              <w:right w:val="single" w:color="CCCCCC" w:space="1"/>
+            </w:tcBorders>
+            <w:tcMar>
+              <w:top w:type="dxa" w:w="60"/>
+              <w:left w:type="dxa" w:w="100"/>
+              <w:bottom w:type="dxa" w:w="60"/>
+              <w:right w:type="dxa" w:w="100"/>
+            </w:tcMar>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                <w:sz w:val="21"/>
+                <w:szCs w:val="21"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:t xml:space="preserve">Under vurdering</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p/>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading1"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">8. Markedstiming — Hvorfor Nå</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">1. Forsvars-CAPEX akselererer raskere enn kapasitetstilbudet</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">2. Strukturelt CNC-kapasitetsgap i Europa med aldrende arbeidsstyrke</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">3. Autonom produksjon nå økonomisk levedyktig (MAZAK iSMART, Siemens digital tvilling)</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">4. Greenfield-fordel før legacy-aktører tilpasser seg</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading1"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">9. Go-to-Market Strategi</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Fase 1 (Pre-Seed): Bygge relasjoner med 3-5 nøkkelkunder via grunnleggernes nettverk (Tore Ausland: 30+ år med GE, FMC, Aker)</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Fase 2 (Seed): Sikre LOI-er, levere første produksjonsordrer, starte ISO-sertifisering</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Fase 3 (Serie A): Ekspansjon til 15+ CNC, AQAP-kvalifikasjon, nordisk kundebase</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading1"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">10. Risikofaktorer</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">- Forsinkelser i forsvarskontraktering og lange kvalifiseringsprosesser</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">- Sertifiseringsprosesser tar lengre tid enn planlagt</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">- Konkurranse fra etablerte aktører som vertikalt integrerer</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">- Konjunkturnedgang i energisektoren</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">- Tilgang på kvalifisert arbeidskraft for autonom drift</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Heading1"/>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">11. Konklusjon</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:pPr>
+        <w:pStyle w:val="Normal"/>
+        <w:spacing w:after="140"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+          <w:sz w:val="21"/>
+          <w:szCs w:val="21"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">Aurelian Manufacturing er posisjonert i et strukturelt voksende marked drevet av forsvarsoppbygging, energitransisjon og kapasitetsgap. Selskapets autonome CNC-modell adresserer et reelt og voksende behov i norsk og nordisk presisjonsproduksjon, med 3× arbeidseffektivitet som strukturell moat. Med forsvarsindustrien som primær inngangsport og energisektoren som naturlig ekspansjonsmarked, har selskapet en klar vei til 315+ MNOK årlig omsetning med 20 CNC-maskiner.</w:t>
+      </w:r>
+    </w:p>
+    <w:sectPr>
+      <w:headerReference w:type="default" r:id="rId6"/>
+      <w:footerReference w:type="default" r:id="rId7"/>
+      <w:type w:val="continuous"/>
+      <w:pgSz w:w="11906" w:h="16838" w:orient="portrait"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0"/>
+      <w:pgNumType/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>

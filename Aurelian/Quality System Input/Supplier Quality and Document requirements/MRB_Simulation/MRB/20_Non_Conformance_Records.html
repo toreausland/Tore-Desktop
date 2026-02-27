@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non-Conformance / Concession Records — AM-NCR-2026-0042</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+        .page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+        .page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #F50537; }
+        .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #D3D3D3; padding-bottom: 12px; margin-bottom: 16px; }
+        .logo { font-size: 16pt; font-weight: bold; color: #2B2B2B; }
+        .logo span { display: block; font-size: 9pt; font-weight: normal; color: #6B6B6B; }
+        .doc-info { text-align: right; font-size: 9pt; color: #6B6B6B; }
+        .doc-info strong { color: #2B2B2B; font-size: 10pt; }
+        h1 { font-size: 18pt; color: #2B2B2B; font-weight: bold; margin: 16px 0 6px 0; }
+        h2 { font-size: 13pt; color: #F50537; font-weight: bold; margin: 14px 0 6px 0; }
+        h3 { font-size: 11pt; color: #2B2B2B; font-weight: bold; margin: 10px 0 4px 0; }
+        p { margin-bottom: 6pt; font-size: 10pt; }
+        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+        .meta-box { background: #F5F5F5; padding: 10px; font-size: 9pt; }
+        .meta-box .lbl { font-weight: bold; color: #6B6B6B; text-transform: uppercase; font-size: 8pt; }
+        table { width: 100%; border-collapse: collapse; margin: 8px 0 14px 0; font-size: 9pt; }
+        thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 5pt 6pt; text-align: left; font-size: 8.5pt; }
+        tbody td { padding: 4pt 6pt; border-bottom: 0.5pt solid #D3D3D3; }
+        tbody tr:nth-child(even) { background: #F5F5F5; }
+        .center { text-align: center; }
+        .right { text-align: right; }
+        .sig-block { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 18px; }
+        .sig-block-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; margin-top: 18px; }
+        .sig-line { border-bottom: 1px solid #2B2B2B; height: 30px; margin-bottom: 3px; }
+        .sig-label { font-size: 8pt; color: #6B6B6B; }
+        .sig-name { font-size: 9pt; font-weight: bold; }
+        .footer { margin-top: 24px; border-top: 1px solid #D3D3D3; padding-top: 8px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+        .stamp { border: 2px solid #F50537; padding: 8px 16px; display: inline-block; font-size: 10pt; font-weight: bold; color: #F50537; margin: 10px 0; }
+        .stamp-closed { border: 2px solid #2B8C2B; padding: 6px 14px; display: inline-block; color: #2B8C2B; font-weight: bold; font-size: 10pt; }
+        .callout { background: #F5F5F5; border-left: 3px solid #F50537; padding: 10px 14px; margin: 10px 0; font-size: 10pt; }
+
+        .ncr-card { border: 1px solid #D3D3D3; margin-bottom: 24px; }
+        .ncr-header { background: #2B2B2B; color: #fff; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+        .ncr-header h2 { color: #fff; margin: 0; font-size: 12pt; }
+        .ncr-header .ncr-status { font-size: 9pt; }
+        .ncr-body { padding: 14px; }
+        .field-row { display: grid; grid-template-columns: 140px 1fr; gap: 8px; margin-bottom: 6px; font-size: 9.5pt; }
+        .field-row .field-label { font-weight: bold; color: #6B6B6B; font-size: 8.5pt; text-transform: uppercase; }
+        .field-row .field-value { color: #2B2B2B; }
+        .section-divider { border: none; border-top: 1px solid #D3D3D3; margin: 12px 0; }
+        .disposition-badge { display: inline-block; padding: 3px 10px; font-size: 9pt; font-weight: bold; border-radius: 2px; }
+        .disposition-asis { background: #FFF3CD; color: #856404; border: 1px solid #FFE69C; }
+        .disposition-rework { background: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
+
+        @media print {
+            body { background: #fff; }
+            .page { box-shadow: none; margin: 0; padding: 2cm; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+    <div class="header">
+        <div class="logo">
+            Aurelian Manufacturing
+            <span>Industriveien 12, 1531 Moss, Norway</span>
+        </div>
+        <div class="doc-info">
+            <strong>Non-Conformance / Concession Records</strong><br>
+            MRB Section 20<br>
+            Doc No: AM-NCR-2026-0042<br>
+            Rev: 0
+        </div>
+    </div>
+
+    <h1>Non-Conformance / Concession Records</h1>
+    <p style="font-size: 9pt; color: #6B6B6B; margin-bottom: 14px;">
+        Register and disposition of non-conformances identified during manufacturing, inspection, and testing.
+    </p>
+
+    <div class="meta-grid">
+        <div class="meta-box">
+            <div class="lbl">Purchase Order</div>
+            NSS-PO-2026-0042
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Client</div>
+            Nordic Subsea Solutions AS
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Project</div>
+            Barents Sea Development Phase 2 (NSS-PRJ-BS2024)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Product</div>
+            Subsea Connector Assembly, Size 300 (Upfacing), Super Duplex UNS S32750
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Tag Number</div>
+            NSS-BSP2-SCA-001
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Serial Number</div>
+            AM-BSP2-300-001
+        </div>
+    </div>
+
+    <!-- NCR SUMMARY TABLE -->
+    <h2>NCR Summary Register</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>NCR No.</th>
+                <th>Date Raised</th>
+                <th>Category</th>
+                <th>Description (Short)</th>
+                <th>Disposition</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>AM-NCR-2026-0042-001</td>
+                <td>28 Mar 2026</td>
+                <td>Material</td>
+                <td>PMI reading below spec at 1 of 6 locations on main body forging</td>
+                <td>Use As-Is</td>
+                <td><span class="stamp-closed" style="font-size: 8pt; padding: 2px 8px;">CLOSED</span></td>
+            </tr>
+            <tr>
+                <td>AM-NCR-2026-0042-002</td>
+                <td>15 May 2026</td>
+                <td>Welding</td>
+                <td>Tungsten inclusion in W-004 lifting lug fillet weld</td>
+                <td>Rework</td>
+                <td><span class="stamp-closed" style="font-size: 8pt; padding: 2px 8px;">CLOSED</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- NCR-001 -->
+    <div class="ncr-card">
+        <div class="ncr-header">
+            <h2>NCR-001: AM-NCR-2026-0042-001</h2>
+            <div class="ncr-status"><span class="stamp-closed" style="border-color: #fff; color: #fff; font-size: 9pt; padding: 2px 10px;">CLOSED</span></div>
+        </div>
+        <div class="ncr-body">
+            <div class="field-row">
+                <div class="field-label">NCR Number</div>
+                <div class="field-value">AM-NCR-2026-0042-001</div>
+            </div>
+            <div class="field-row">
+                <div class="field-label">Date Raised</div>
+                <div class="field-value">28 March 2026</div>
+            </div>
+            <div class="field-row">
+                <div class="field-label">Raised By</div>
+                <div class="field-value">Knut Pedersen (QC Inspector)</div>
+            </div>
+            <div class="field-row">
+                <div class="field-label">Category</div>
+                <div class="field-value">Material</div>
+            </div>
+            <div class="field-row">
+                <div class="field-label">Affected Item</div>
+                <div class="field-value">Main Body Forging — Heat H24-5587</div>
+            </div>
+
+            <hr class="section-divider">
+            <h3>Description of Non-Conformance</h3>
+            <p>During incoming PMI inspection of main body forging (Heat H24-5587), one test point (location 5 of 6) showed Cr content of 23.8%, slightly below the 24.0% minimum per ASTM A182 F53. Remaining 5 points all within specification (24.9–25.3%).</p>
+
+            <hr class="section-divider">
+            <h3>Root Cause Analysis</h3>
+            <p>Segregation at surface of forging. Mill certificate shows 25.1% Cr on ladle analysis. Localized surface depletion suspected.</p>
+
+            <hr class="section-divider">
+            <h3>Corrective Action</h3>
+            <p>Additional PMI measurements taken on 8 supplementary points around location 5. All readings 24.2–25.0% Cr. Original reading attributed to surface oxide. Surface ground 0.5mm and re-tested: 24.6% Cr. Material accepted for use.</p>
+
+            <hr class="section-divider">
+            <h3>Disposition</h3>
+            <div style="margin: 6px 0;">
+                <span class="disposition-badge disposition-asis">USE AS-IS</span>
+            </div>
+            <div class="callout">
+                <strong>Justification:</strong> All supplementary PMI readings confirm Cr content within ASTM A182 F53 requirements. Original anomaly attributed to surface oxide contamination, confirmed by re-test after 0.5mm surface grinding (24.6% Cr). Ladle analysis on mill certificate (25.1% Cr) further supports material compliance. Material is fit for intended service.
+            </div>
+
+            <hr class="section-divider">
+            <h3>Client Approval</h3>
+            <div class="field-row">
+                <div class="field-label">NSS Approved By</div>
+                <div class="field-value">Marte Lindgren, Quality Manager, Nordic Subsea Solutions AS</div>
+            </div>
+            <div class="field-row">
+                <div class="field-label">Approval Date</div>
+                <div class="field-value">02 April 2026</div>
+            </div>
+
+            <hr class="section-divider">
+            <div class="sig-block-4">
+                <div>
+                    <div class="sig-name">Knut Pedersen</div>
+                    <div class="sig-label">Originator / QC Inspector</div>
+                    <div class="sig-line"></div>
+                    <div class="sig-label">Signature — 28 Mar 2026</div>
+                </div>
+                <div>
+                    <div class="sig-name">Anna Nordstr&ouml;m</div>
+                    <div class="sig-label">QC Manager</div>
+                    <div class="sig-line"></div>
+                    <div class="sig-label">Signature — 29 Mar 2026</div>
+                </div>
+                <div>
+                    <div class="sig-name">Thomas Eriksen</div>
+                    <div class="sig-label">Disposition Authority / PM</div>
+                    <div class="sig-line"></div>
+                    <div class="sig-label">Signature — 29 Mar 2026</div>
+                </div>
+                <div>
+                    <div class="sig-name">Marte Lindgren</div>
+                    <div class="sig-label">NSS Representative</div>
+                    <div class="sig-line"></div>
+                    <div class="sig-label">Signature — 02 Apr 2026</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NCR-002 -->
+    <div class="ncr-card">
+        <div class="ncr-header">
+            <h2>NCR-002: AM-NCR-2026-0042-002</h2>
+            <div class="ncr-status"><span class="stamp-closed" style="border-color: #fff; color: #fff; font-size: 9pt; padding: 2px 10px;">CLOSED</span></div>
+        </div>
+        <div class="ncr-body">
+            <div class="field-row">
+                <div class="field-label">NCR Number</div>
+                <div class="field-value">AM-NCR-2026-0042-002</div>
+            </div>
+            <div class="field-row">
+                <div class="field-label">Date Raised</div>
+                <div class="field-value">15 May 2026</div>
+            </div>
+            <div class="field-row">
+                <div class="field-label">Raised By</div>
+                <div class="field-value">Lars Henriksen (Welder WE-112)</div>
+            </div>
+            <div class="field-row">
+                <div class="field-label">Category</div>
+                <div class="field-value">Welding</div>
+            </div>
+            <div class="field-row">
+                <div class="field-label">Affected Item</div>
+                <div class="field-value">Weld W-004 — Lifting Lug Fillet Weld</div>
+            </div>
+
+            <hr class="section-divider">
+            <h3>Description of Non-Conformance</h3>
+            <p>During welding of W-004 (lifting lug fillet weld), tungsten inclusion detected by welder. Welding stopped immediately.</p>
+
+            <hr class="section-divider">
+            <h3>Root Cause Analysis</h3>
+            <p>Momentary contact between tungsten electrode and weld pool due to restricted access in welding position.</p>
+
+            <hr class="section-divider">
+            <h3>Corrective Action</h3>
+            <p>Affected area (approx. 25mm length) ground out completely. Area re-examined by PT — no indications. Re-welded per WPS AM-WPS-SD-002. Post-weld VT and PT performed — ACCEPTED.</p>
+
+            <hr class="section-divider">
+            <h3>Disposition</h3>
+            <div style="margin: 6px 0;">
+                <span class="disposition-badge disposition-rework">REWORK COMPLETED</span>
+            </div>
+            <div class="callout">
+                <strong>Rework Summary:</strong> Defective weld area ground out, re-inspected by PT (clear), re-welded per approved WPS AM-WPS-SD-002, and post-weld VT and PT performed with acceptable results. Weld integrity confirmed.
+            </div>
+
+            <hr class="section-divider">
+            <h3>Client Notification</h3>
+            <div class="field-row">
+                <div class="field-label">NSS Notified</div>
+                <div class="field-value">15 May 2026</div>
+            </div>
+            <div class="field-row">
+                <div class="field-label">NSS Witness Required</div>
+                <div class="field-value">No — witness not required for rework</div>
+            </div>
+
+            <hr class="section-divider">
+            <div class="sig-block-4">
+                <div>
+                    <div class="sig-name">Lars Henriksen</div>
+                    <div class="sig-label">Originator / Welder WE-112</div>
+                    <div class="sig-line"></div>
+                    <div class="sig-label">Signature — 15 May 2026</div>
+                </div>
+                <div>
+                    <div class="sig-name">Anna Nordstr&ouml;m</div>
+                    <div class="sig-label">QC Manager</div>
+                    <div class="sig-line"></div>
+                    <div class="sig-label">Signature — 15 May 2026</div>
+                </div>
+                <div>
+                    <div class="sig-name">Thomas Eriksen</div>
+                    <div class="sig-label">Disposition Authority / PM</div>
+                    <div class="sig-line"></div>
+                    <div class="sig-label">Signature — 15 May 2026</div>
+                </div>
+                <div>
+                    <div class="sig-name">Marte Lindgren</div>
+                    <div class="sig-label">NSS Representative</div>
+                    <div class="sig-line"></div>
+                    <div class="sig-label">Signature — 16 May 2026</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>CONFIDENTIAL</span>
+        <span>Aurelian Manufacturing AS — MRB Section 20</span>
+        <span>27 February 2026</span>
+    </div>
+</div>
+
+</body>
+</html>

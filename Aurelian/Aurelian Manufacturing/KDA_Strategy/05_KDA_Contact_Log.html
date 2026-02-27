@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — KDA Kontaktlogg</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --dark-charcoal: #1A1A1A; --navy-card: #253B52; --steel-blue: #8EAEC5;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  /* Cover */
+  .cover { background: var(--pure-black); padding: 4rem 3.5rem 3rem; position: relative; overflow: hidden; min-height: 360px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 1.8rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 1.8rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 2.5rem; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  /* Content */
+  section { padding: 2.5rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.2rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.6rem; margin-bottom: 0.5rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.8rem; }
+  p.secondary { color: var(--gray-medium); font-size: 0.84rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: 0.84rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.6rem 0.8rem; font-size: 0.8rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  /* Status badges */
+  .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; }
+  .badge-sent { background: var(--red); color: var(--white); }
+  .badge-pending { background: var(--gray-divider); color: var(--black); }
+  .badge-accepted { background: #1B7A3D; color: var(--white); }
+  .badge-meeting { background: var(--black); color: var(--white); }
+  .badge-noresponse { background: var(--gray-medium); color: var(--white); }
+
+  /* Callout */
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.1rem 1.3rem; margin: 1.2rem 0; }
+  .callout p { font-size: 0.84rem; margin-bottom: 0; line-height: 1.5; }
+
+  /* Activity entry */
+  .activity-entry { border-left: 3px solid var(--gray-divider); padding: 1rem 1.4rem; margin: 1rem 0; position: relative; }
+  .activity-entry.active { border-left-color: var(--red); }
+  .activity-entry .activity-date { font-size: 0.74rem; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+  .activity-entry .activity-contact { font-size: 0.88rem; font-weight: 700; color: var(--black); margin-bottom: 0.2rem; }
+  .activity-entry .activity-role { font-size: 0.78rem; color: var(--gray-medium); margin-bottom: 0.4rem; }
+  .activity-entry .activity-channel { font-size: 0.74rem; color: var(--gray-medium); font-weight: 600; margin-bottom: 0.3rem; }
+  .activity-entry .activity-content { font-size: 0.84rem; color: var(--black); line-height: 1.5; margin-bottom: 0.4rem; }
+  .activity-entry .activity-message { background: var(--gray-panel); padding: 0.8rem 1rem; margin: 0.5rem 0; font-size: 0.82rem; line-height: 1.5; color: var(--black); font-style: italic; border-radius: 2px; }
+  .activity-entry .activity-status { margin-top: 0.4rem; }
+  .activity-entry .activity-next { font-size: 0.78rem; color: var(--gray-medium); margin-top: 0.3rem; }
+
+  /* Summary strip */
+  .summary-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.3rem 0; border: 1px solid var(--gray-divider); }
+  .summary-item { padding: 1.1rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .summary-item:last-child { border-right: none; }
+  .summary-item.highlight { background: var(--red); }
+  .summary-value { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.2rem; }
+  .summary-item.highlight .summary-value { color: var(--white); }
+  .summary-label { font-size: 0.66rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .summary-item.highlight .summary-label { color: rgba(255,255,255,0.85); }
+
+  /* Dark panel */
+  .dark-panel { background: var(--dark-charcoal); padding: 2.5rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  /* Footer */
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">★ ★ ★ ★ ★</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">KDA Kontaktlogg</div>
+    <div class="cover-subtitle">Aktivitetshistorikk — Kongsberg Defence & Aerospace</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Sist oppdatert: 27. februar 2026</span>
+    </div>
+  </div>
+
+  <!-- STATUS SUMMARY -->
+  <section>
+    <div class="section-label">Statusoversikt</div>
+    <h2>KDA-aktiviteter — sammendrag</h2>
+
+    <div class="summary-strip">
+      <div class="summary-item highlight">
+        <div class="summary-value">5</div>
+        <div class="summary-label">Kontakter<br>initiert</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value">0</div>
+        <div class="summary-label">Møter<br>booket</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value">0</div>
+        <div class="summary-label">NDA<br>signert</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value">—</div>
+        <div class="summary-label">Leverandør-<br>registrering</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>GJENNOMBRUDD:</strong> Hugo Hermansen (KAMS) kom tilbake 26. feb — veldig interessert. KDA Rygge holder stakeholder-møte neste uke (uke 10). Hugo kommer tilbake til oss etter møtet. <strong>Neste steg:</strong> Vent på tilbakemelding fra Hugo etter stakeholder-møtet. Forbered KAMS-tilpasset kapabilitetspresentasjon. Fortsett å vente på LinkedIn-aksept fra Petter, Jon-André og Ragnar.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT DIRECTORY -->
+  <section class="dark-panel">
+    <div class="section-label">Kontaktoversikt</div>
+    <h2>Alle KDA-kontakter — status</h2>
+
+    <table>
+      <thead>
+        <tr><th>Navn</th><th>Tittel</th><th>Divisjon</th><th>Kanal</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Petter Berg Spone</strong></td>
+          <td>VP Supply Chain (acting)</td>
+          <td>KDA konsern</td>
+          <td>LinkedIn</td>
+          <td><span class="badge badge-sent">INVITASJON SENDT</span></td>
+        </tr>
+        <tr>
+          <td><strong>Kyrre Lohne</strong></td>
+          <td>VP Government Relations & BD</td>
+          <td>KDA konsern</td>
+          <td>E-post + telefon</td>
+          <td><span class="badge badge-noresponse">KALD — LITE INTERESSE</span></td>
+        </tr>
+        <tr>
+          <td><strong>Hugo Hermansen</strong></td>
+          <td>Director Special Projects</td>
+          <td>KAMS</td>
+          <td>E-post</td>
+          <td><span class="badge badge-accepted">VARM — INTERESSERT</span></td>
+        </tr>
+        <tr>
+          <td><strong>Jon-André Olaussen</strong></td>
+          <td>SVP Strategic Sourcing & Supply Chain</td>
+          <td>Defence Systems</td>
+          <td>LinkedIn</td>
+          <td><span class="badge badge-sent">INVITASJON SENDT</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ragnar Løkka</strong></td>
+          <td>VP KDA Operations</td>
+          <td>Aerostructures</td>
+          <td>LinkedIn</td>
+          <td><span class="badge badge-sent">INVITASJON SENDT</span></td>
+        </tr>
+        <tr>
+          <td><strong>Arnt Haugen</strong></td>
+          <td>Site Manager, F135 Motordepot</td>
+          <td>KAMS Rygge</td>
+          <td>E-post (kopi)</td>
+          <td><span class="badge badge-accepted">PÅ KOPI — INVOLVERT</span></td>
+        </tr>
+        <tr>
+          <td><strong>Erlend Barheim</strong></td>
+          <td>Director Quality Assurance</td>
+          <td>Aerostructures & MRO</td>
+          <td>—</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Anne Mols</strong></td>
+          <td>Supply Chain Manager</td>
+          <td>KDA Oslo</td>
+          <td>—</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Audun Frøysland</strong></td>
+          <td>Team Manager, Supply Chain QA</td>
+          <td>Missiles & Space</td>
+          <td>—</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ida Katrin Godejord</strong></td>
+          <td>Procurement Manager</td>
+          <td>KDA Kongsberg</td>
+          <td>—</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ACTIVITY LOG -->
+  <section>
+    <div class="section-label">Aktivitetslogg</div>
+    <h2>Kronologisk hendelseslogg</h2>
+
+    <!-- Entry 6: Hugo Hermansen — GJENNOMBRUDD -->
+    <div class="activity-entry active">
+      <div class="activity-date">26. februar 2026</div>
+      <div class="activity-contact">Hugo Hermansen — GJENNOMBRUDD</div>
+      <div class="activity-role">Director Special Projects, Kongsberg Aviation Maintenance Services (KAMS)</div>
+      <div class="activity-channel">KANAL: E-post (innkommende svar) — Arnt Haugen (Site Manager, F135 Motordepot) på kopi</div>
+      <div class="activity-content"><strong>Hugo kom tilbake og var veldig interessert.</strong> Arnt Haugen, Site Manager for F135-motordepot ved Rygge, var på kopi — noe som betyr at operasjonell ledelse allerede er involvert. KDA/KAMS Rygge skal ha et møte med alle stakeholders neste uke (uke 10). Hugo kommer tilbake til oss etter møtet. Dette er første konkrete positive respons fra KDA-systemet — og det kommer fra KAMS-divisjonen, som er nærmest Våler geografisk.</div>
+      <div class="activity-status"><span class="badge badge-accepted">VARM LEAD — VENTER PÅ STAKEHOLDER-MØTE</span></div>
+      <div class="activity-next"><strong>Neste:</strong> Vent på tilbakemelding fra Hugo etter stakeholder-møtet (uke 10). Forbered KAMS-tilpasset kapabilitetspresentasjon/brief. Ha Capability Brief klar før neste kontakt. Vurder om vi skal tilby fabrikkbesøk/presentasjon i etterkant av møtet.</div>
+    </div>
+
+    <!-- Entry 5: Ragnar Løkka -->
+    <div class="activity-entry">
+      <div class="activity-date">26. februar 2026</div>
+      <div class="activity-contact">Ragnar Løkka</div>
+      <div class="activity-role">VP KDA Operations (Aerostructures), Kongsberg Defence & Aerospace</div>
+      <div class="activity-channel">KANAL: LinkedIn — kontaktforespørsel uten notat</div>
+      <div class="activity-content">Sendt LinkedIn-invitasjon uten notat (teknisk begrensning). Ragnar dekker sourcing og operasjoner for Aerostructures-divisjonen — divisjonen med tyngst CNC-maskinering internt.</div>
+      <div class="activity-status"><span class="badge badge-sent">INVITASJON SENDT — VENTER AKSEPT</span></div>
+      <div class="activity-next"><strong>Neste:</strong> Når akseptert → send Aerostructures-tilpasset melding: CNC overflow-kapasitet, Mazak 5-akse, komplementerer Makino-parken. Foreslå teknisk møte.</div>
+    </div>
+
+    <!-- Entry 4: Jon-André Olaussen -->
+    <div class="activity-entry active">
+      <div class="activity-date">26. februar 2026</div>
+      <div class="activity-contact">Jon-André Olaussen</div>
+      <div class="activity-role">Senior VP Strategic Sourcing & Supply Chain, Division Defence Systems, Kongsberg Defence & Aerospace</div>
+      <div class="activity-channel">KANAL: LinkedIn — kontaktforespørsel med notat</div>
+      <div class="activity-content">Sendt LinkedIn-invitasjon med kort introduksjonsnotat. Defence Systems-spesifikt vinkel — styrke leverandørkjede innen divisjonen med størst ordrevekst (NASAMS, Protector).</div>
+      <div class="activity-message">
+        «Hei Jon-André, vi bygger en ny autonom CNC-fabrikk i Østfold rettet mot forsvarsindustrien. Ønsker å utforske hvordan vi kan styrke KDAs leverandørkjede innen Defence Systems. Kan vi ta en prat?»
+      </div>
+      <div class="activity-status"><span class="badge badge-sent">INVITASJON SENDT — VENTER AKSEPT</span></div>
+      <div class="activity-next"><strong>Neste:</strong> Når akseptert → send full kapabilitetspitch med Defence Systems-vinkel (NASAMS, Protector). Foreslå 20 min samtale.</div>
+    </div>
+
+    <!-- Entry 3: Petter Berg Spone -->
+    <div class="activity-entry active">
+      <div class="activity-date">26. februar 2026</div>
+      <div class="activity-contact">Petter Berg Spone</div>
+      <div class="activity-role">VP Supply Chain (acting), Kongsberg Defence & Aerospace</div>
+      <div class="activity-channel">KANAL: LinkedIn — kontaktforespørsel med notat</div>
+      <div class="activity-content">Sendt LinkedIn-invitasjon med kort introduksjonsnotat. Fokus på kapasitet rettet mot forsvarsindustrien og ønske om dialog om leverandørkjeden.</div>
+      <div class="activity-message">
+        «Hei Petter, vi bygger en ny autonom CNC-fabrikk i Østfold for rettet mot forsvarsindustrien. Ønsker å utforske hvordan vi kan utgjøre en styrke i KDAs leverandør kjede. Kan vi ta en prat? Hilsen Tore»
+      </div>
+      <div class="activity-status"><span class="badge badge-sent">INVITASJON SENDT — VENTER AKSEPT</span></div>
+      <div class="activity-next"><strong>Neste:</strong> Når akseptert → send full kapabilitetspitch (forberedt). Foreslå 20 min Teams-samtale.</div>
+    </div>
+
+    <!-- Entry 2: Hugo Hermansen — opprinnelig e-post -->
+    <div class="activity-entry">
+      <div class="activity-date">Februar 2026 (eksakt dato ukjent)</div>
+      <div class="activity-contact">Hugo Hermansen</div>
+      <div class="activity-role">Director Special Projects, Kongsberg Aviation Maintenance Services (KAMS)</div>
+      <div class="activity-channel">KANAL: E-post — memorandum vedlagt</div>
+      <div class="activity-content">Sendt kapabilitetsmemorandum (Smart Factory CNC Kapabilitetsmemorandum V3) per e-post. Generell introduksjon av Aurelian Manufacturing.</div>
+      <div class="activity-message">
+        Vedlegg: Memorandum_Smart_Factory_CNC_Kapabilitet_V3.html
+      </div>
+      <div class="activity-status"><span class="badge badge-accepted">SVAR MOTTATT — SE ENTRY 26. FEB</span></div>
+    </div>
+
+    <!-- Entry 1b: Kyrre Lohne — oppfølging -->
+    <div class="activity-entry">
+      <div class="activity-date">26. februar 2026</div>
+      <div class="activity-contact">Kyrre Lohne</div>
+      <div class="activity-role">VP Government Relations & Business Development, Kongsberg Defence & Aerospace</div>
+      <div class="activity-channel">KANAL: Telefon/samtale</div>
+      <div class="activity-content">Snakket med Kyrre. Han var ikke spesielt ivrig — lite interesse. Gav ingen konkret oppfølging eller introduksjon videre i organisasjonen.</div>
+      <div class="activity-status"><span class="badge badge-noresponse">KALD — LITE INTERESSE</span></div>
+      <div class="activity-next"><strong>Vurdering:</strong> Kyrre er Government Relations, ikke innkjøp. Mangel på entusiasme er forventet — dette er ikke hans ansvarsområde. Ikke bruk mer tid her. De tre LinkedIn-henvendelsene til Supply Chain (Petter, Jon-André, Ragnar) er riktig kanal. Park Kyrre.</div>
+    </div>
+
+    <!-- Entry 1a: Kyrre Lohne — første kontakt -->
+    <div class="activity-entry">
+      <div class="activity-date">Februar 2026 (eksakt dato ukjent)</div>
+      <div class="activity-contact">Kyrre Lohne</div>
+      <div class="activity-role">VP Government Relations & Business Development, Kongsberg Defence & Aerospace</div>
+      <div class="activity-channel">KANAL: E-post — memorandum vedlagt</div>
+      <div class="activity-content">Sendt kapabilitetsmemorandum (Smart Factory CNC Kapabilitetsmemorandum V3) per e-post. Generell introduksjon av Aurelian Manufacturing. Kontaktet fordi kontaktinformasjon var tilgjengelig.</div>
+      <div class="activity-message">
+        Vedlegg: Memorandum_Smart_Factory_CNC_Kapabilitet_V3.html
+      </div>
+      <div class="activity-status"><span class="badge badge-noresponse">SENDT — IKKE MOTTATT SVAR</span></div>
+    </div>
+  </section>
+
+  <!-- PIPELINE NEXT ACTIONS -->
+  <section>
+    <div class="section-label">Neste steg</div>
+    <h2>Prioriterte handlinger — mars 2026</h2>
+
+    <table>
+      <thead><tr><th>#</th><th>Handling</th><th>Kontakt</th><th>Frist</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Fyll ut KDAs leverandørregistreringsskjema</td>
+          <td>—</td>
+          <td>Denne uken</td>
+          <td><span class="badge badge-pending">IKKE STARTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Vent på aksept fra Petter → send oppfølgingsmelding med full pitch</td>
+          <td>Petter Berg Spone</td>
+          <td>Innen 1 uke</td>
+          <td><span class="badge badge-sent">VENTER</span></td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Kyrre Lohne — parkert. Lite interesse, feil rolle. Ikke prioriter.</td>
+          <td>Kyrre Lohne</td>
+          <td>—</td>
+          <td><span class="badge badge-noresponse">PARKERT</span></td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td><strong>Hugo Hermansen — VARM LEAD.</strong> Venter på tilbakemelding etter stakeholder-møte (uke 10, Rygge). Forbered KAMS Capability Brief.</td>
+          <td>Hugo Hermansen</td>
+          <td>Uke 10–11</td>
+          <td><span class="badge badge-accepted">VENTER PÅ MØTE</span></td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Vent på aksept Jon-André → send Defence Systems-pitch</td>
+          <td>Jon-André Olaussen</td>
+          <td>Innen 1 uke</td>
+          <td><span class="badge badge-sent">VENTER</span></td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td>Vent på aksept Ragnar → send Aerostructures-pitch (Mazak/Makino)</td>
+          <td>Ragnar Løkka</td>
+          <td>Innen 1 uke</td>
+          <td><span class="badge badge-sent">VENTER</span></td>
+        </tr>
+        <tr>
+          <td><strong>7</strong></td>
+          <td>Lag kort KDA Capability Brief (1–2 sider) for oppfølgingsmeldinger</td>
+          <td>—</td>
+          <td>Mars 2026</td>
+          <td><span class="badge badge-pending">IKKE STARTET</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SENT MATERIALS LOG -->
+  <section>
+    <div class="section-label">Materiell</div>
+    <h2>Sendte dokumenter og materiell</h2>
+
+    <table>
+      <thead><tr><th>Dato</th><th>Dokument</th><th>Sendt til</th><th>Kanal</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Feb 2026</td>
+          <td>Memorandum_Smart_Factory_CNC_Kapabilitet_V3.html</td>
+          <td>Kyrre Lohne, Hugo Hermansen</td>
+          <td>E-post (vedlegg)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary" style="margin-top: 1rem;">Materiell som bør produseres: KDA Capability Brief (1–2 sider, segmenttilpasset), NDA-mal, referansedeler per divisjon.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | KDA Kontaktlogg | Sist oppdatert: 27. februar 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

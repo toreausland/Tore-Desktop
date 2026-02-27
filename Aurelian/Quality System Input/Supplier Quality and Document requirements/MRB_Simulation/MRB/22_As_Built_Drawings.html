@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>As-Built Drawings / Mark-Ups — AM-ABD-2026-0042-001</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+        .page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+        .page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #F50537; }
+        .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #D3D3D3; padding-bottom: 12px; margin-bottom: 16px; }
+        .logo { font-size: 16pt; font-weight: bold; color: #2B2B2B; }
+        .logo span { display: block; font-size: 9pt; font-weight: normal; color: #6B6B6B; }
+        .doc-info { text-align: right; font-size: 9pt; color: #6B6B6B; }
+        .doc-info strong { color: #2B2B2B; font-size: 10pt; }
+        h1 { font-size: 18pt; color: #2B2B2B; font-weight: bold; margin: 16px 0 6px 0; }
+        h2 { font-size: 13pt; color: #F50537; font-weight: bold; margin: 14px 0 6px 0; }
+        h3 { font-size: 11pt; color: #2B2B2B; font-weight: bold; margin: 10px 0 4px 0; }
+        p { margin-bottom: 6pt; font-size: 10pt; }
+        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+        .meta-box { background: #F5F5F5; padding: 10px; font-size: 9pt; }
+        .meta-box .lbl { font-weight: bold; color: #6B6B6B; text-transform: uppercase; font-size: 8pt; }
+        table { width: 100%; border-collapse: collapse; margin: 8px 0 14px 0; font-size: 9pt; }
+        thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 5pt 6pt; text-align: left; font-size: 8.5pt; }
+        tbody td { padding: 4pt 6pt; border-bottom: 0.5pt solid #D3D3D3; }
+        tbody tr:nth-child(even) { background: #F5F5F5; }
+        .center { text-align: center; }
+        .right { text-align: right; }
+        .sig-block { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 18px; }
+        .sig-line { border-bottom: 1px solid #2B2B2B; height: 30px; margin-bottom: 3px; }
+        .sig-label { font-size: 8pt; color: #6B6B6B; }
+        .sig-name { font-size: 9pt; font-weight: bold; }
+        .sig-date { font-size: 8pt; color: #6B6B6B; margin-top: 2px; }
+        .footer { margin-top: 24px; border-top: 1px solid #D3D3D3; padding-top: 8px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+        .stamp { border: 2px solid #F50537; padding: 8px 16px; display: inline-block; font-size: 10pt; font-weight: bold; color: #F50537; margin: 10px 0; }
+        .callout { background: #F5F5F5; border-left: 3px solid #F50537; padding: 10px 14px; margin: 10px 0; font-size: 10pt; }
+
+        .markup-tag { display: inline-block; padding: 1px 6px; font-size: 8pt; font-weight: bold; border-radius: 2px; }
+        .markup-yes { background: #FFF3CD; color: #856404; border: 1px solid #FFE69C; }
+        .markup-no { background: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
+
+        .markup-detail { background: #F5F5F5; padding: 10px 14px; margin-bottom: 10px; border-left: 3px solid #F50537; }
+        .markup-detail .dwg-ref { font-weight: bold; color: #F50537; font-size: 9.5pt; }
+        .markup-detail p { font-size: 9.5pt; margin-bottom: 2pt; }
+
+        @media print {
+            body { background: #fff; }
+            .page { box-shadow: none; margin: 0; padding: 2cm; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="header">
+        <div class="logo">
+            Aurelian Manufacturing
+            <span>Industriveien 12, 1531 Moss, Norway</span>
+        </div>
+        <div class="doc-info">
+            <strong>As-Built Drawings / Mark-Ups</strong><br>
+            MRB Section 22<br>
+            Doc No: AM-ABD-2026-0042-001<br>
+            Rev: 0 &nbsp;|&nbsp; Date: 20 June 2026
+        </div>
+    </div>
+
+    <h1>As-Built Drawing Transmittal &amp; Cover Sheet</h1>
+    <p style="font-size: 9pt; color: #6B6B6B; margin-bottom: 14px;">
+        Register of as-built drawings issued with the Manufacturing Record Book. All mark-ups shown in red ink on attached print copies.
+    </p>
+
+    <div class="meta-grid">
+        <div class="meta-box">
+            <div class="lbl">Purchase Order</div>
+            NSS-PO-2026-0042
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Client</div>
+            Nordic Subsea Solutions AS
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Project</div>
+            Barents Sea Development Phase 2 (NSS-PRJ-BS2024)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Product</div>
+            Subsea Connector Assembly, Size 300 (Upfacing), Super Duplex UNS S32750
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Tag Number</div>
+            NSS-BSP2-SCA-001
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Serial Number</div>
+            AM-BSP2-300-001
+        </div>
+    </div>
+
+    <!-- DRAWING REGISTER -->
+    <h2>Drawing Register</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Dwg No.</th>
+                <th>Rev</th>
+                <th>Title</th>
+                <th>As-Built Status</th>
+                <th>Mark-Ups</th>
+                <th class="center">Sheets</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>AM-DWG-SCA-300-001</td>
+                <td class="center">B</td>
+                <td>GA — Connector Assembly Size 300</td>
+                <td>As-Built = Manufacturing</td>
+                <td><span class="markup-tag markup-yes">Yes — dim updates</span></td>
+                <td class="center">2</td>
+            </tr>
+            <tr>
+                <td>AM-DWG-SCA-300-002</td>
+                <td class="center">A</td>
+                <td>Detail — Main Body Machining</td>
+                <td>As-Built = Manufacturing</td>
+                <td><span class="markup-tag markup-no">No changes</span></td>
+                <td class="center">3</td>
+            </tr>
+            <tr>
+                <td>AM-DWG-SCA-300-003</td>
+                <td class="center">A</td>
+                <td>Detail — Hub Assembly</td>
+                <td>As-Built = Manufacturing</td>
+                <td><span class="markup-tag markup-yes">Yes — weld detail update</span></td>
+                <td class="center">2</td>
+            </tr>
+            <tr>
+                <td>AM-DWG-SCA-300-004</td>
+                <td class="center">B</td>
+                <td>Detail — Seal Groove</td>
+                <td>As-Built = Manufacturing</td>
+                <td><span class="markup-tag markup-no">No changes</span></td>
+                <td class="center">1</td>
+            </tr>
+            <tr>
+                <td>AM-DWG-SCA-300-005</td>
+                <td class="center">A</td>
+                <td>Weld Map</td>
+                <td>As-Built = Manufacturing</td>
+                <td><span class="markup-tag markup-yes">Yes — W-004 rework noted</span></td>
+                <td class="center">1</td>
+            </tr>
+            <tr>
+                <td>AM-DWG-SCA-300-006</td>
+                <td class="center">A</td>
+                <td>Marking &amp; Nameplate</td>
+                <td>As-Built = Manufacturing</td>
+                <td><span class="markup-tag markup-no">No changes</span></td>
+                <td class="center">1</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="font-size: 9pt; color: #6B6B6B;"><strong>Total sheets transmitted:</strong> 10 sheets across 6 drawings.</p>
+
+    <!-- MARK-UP SUMMARY -->
+    <h2>Mark-Up Summary</h2>
+    <p style="font-size: 9pt; color: #6B6B6B; margin-bottom: 10px;">
+        The following drawings contain as-built mark-ups reflecting deviations from original design dimensions or updates resulting from manufacturing activities.
+    </p>
+
+    <div class="markup-detail">
+        <div class="dwg-ref">AM-DWG-SCA-300-001 Rev B — GA — Connector Assembly Size 300</div>
+        <p>Dimension A (overall length) confirmed as 580.12mm (nominal 580.0 &plusmn;0.5mm). Marked up on sheet 1.</p>
+    </div>
+
+    <div class="markup-detail">
+        <div class="dwg-ref">AM-DWG-SCA-300-003 Rev A — Detail — Hub Assembly</div>
+        <p>Weld detail for W-004 updated to show rework area per NCR AM-NCR-2026-0042-002.</p>
+    </div>
+
+    <div class="markup-detail">
+        <div class="dwg-ref">AM-DWG-SCA-300-005 Rev A — Weld Map</div>
+        <p>W-004 repair weld area annotated on weld map.</p>
+    </div>
+
+    <!-- STATEMENT -->
+    <div class="callout" style="margin-top: 18px;">
+        <strong>As-Built Statement:</strong> As-built drawings represent the final manufactured condition. All mark-ups are shown in red ink on the attached print copies. Drawings without mark-ups are confirmed as manufactured to the issued revision without deviation.
+    </div>
+
+    <!-- SIGNATURES -->
+    <h2>Verified &amp; Approved</h2>
+    <div class="sig-block">
+        <div>
+            <div class="sig-name">Bjarne Solheim</div>
+            <div class="sig-label">Engineering Manager — Aurelian Manufacturing AS</div>
+            <div class="sig-line"></div>
+            <div class="sig-date">Date: 20 June 2026</div>
+        </div>
+        <div>
+            <div class="sig-name">Knut Pedersen</div>
+            <div class="sig-label">QC Inspector — Aurelian Manufacturing AS</div>
+            <div class="sig-line"></div>
+            <div class="sig-date">Date: 20 June 2026</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>CONFIDENTIAL</span>
+        <span>Aurelian Manufacturing AS — MRB Section 22</span>
+        <span>20 June 2026</span>
+    </div>
+</div>
+
+</body>
+</html>

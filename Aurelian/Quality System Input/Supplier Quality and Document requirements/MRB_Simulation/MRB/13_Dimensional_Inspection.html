@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AM-DIR-2026-0042-001 | Dimensional Inspection Record</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 2.5cm;
+        }
+
+        body {
+            font-family: Calibri, sans-serif;
+            color: #2B2B2B;
+            background: #FFFFFF;
+            font-size: 11pt;
+            line-height: 1.15;
+            padding: 0;
+        }
+
+        .page-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 0 2.5cm 2.5cm 2.5cm;
+        }
+
+        /* ── Top red accent bar ── */
+        .top-bar {
+            width: 100%;
+            height: 3pt;
+            background: #F50537;
+            margin-bottom: 0;
+        }
+
+        /* ── Document header ── */
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20pt 2.5cm 12pt 2.5cm;
+            border-bottom: 0.5pt solid #D3D3D3;
+        }
+
+        .doc-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10pt;
+        }
+
+        .logo-stars {
+            font-size: 14pt;
+            color: #F50537;
+            letter-spacing: 2px;
+        }
+
+        .company-name {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2B2B2B;
+        }
+
+        .doc-header-right {
+            text-align: right;
+            font-size: 9pt;
+            color: #6B6B6B;
+        }
+
+        /* ── Title block ── */
+        .title-block {
+            padding: 24pt 0 12pt 0;
+            text-align: center;
+        }
+
+        .title-block h1 {
+            font-size: 22pt;
+            font-weight: bold;
+            color: #2B2B2B;
+            margin-bottom: 4pt;
+        }
+
+        .title-block .doc-subtitle {
+            font-size: 13pt;
+            font-weight: bold;
+            font-style: italic;
+            color: #F50537;
+            margin-bottom: 6pt;
+        }
+
+        .title-block .doc-number {
+            font-size: 11pt;
+            color: #6B6B6B;
+        }
+
+        /* ── Red accent divider ── */
+        .accent-divider {
+            width: 80mm;
+            height: 2pt;
+            background: #F50537;
+            margin: 8pt auto 20pt auto;
+        }
+
+        /* ── Info panels ── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12pt;
+            margin-bottom: 20pt;
+        }
+
+        .info-panel {
+            background: #F5F5F5;
+            padding: 12pt;
+            border-left: 3pt solid #F50537;
+        }
+
+        .info-panel h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #F50537;
+            text-transform: uppercase;
+            margin-bottom: 6pt;
+            letter-spacing: 0.5px;
+        }
+
+        .info-panel table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-panel td {
+            font-size: 9.5pt;
+            padding: 2pt 0;
+            vertical-align: top;
+        }
+
+        .info-panel td:first-child {
+            color: #6B6B6B;
+            width: 40%;
+            padding-right: 8pt;
+        }
+
+        .info-panel td:last-child {
+            color: #2B2B2B;
+            font-weight: bold;
+        }
+
+        /* ── Section headings ── */
+        h2 {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #F50537;
+            margin: 24pt 0 8pt 0;
+        }
+
+        h3.section-heading {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #2B2B2B;
+            margin: 18pt 0 6pt 0;
+        }
+
+        p {
+            margin-bottom: 6pt;
+            line-height: 1.3;
+        }
+
+        /* ── Equipment info panel (single wide) ── */
+        .equip-panel {
+            background: #F5F5F5;
+            padding: 12pt 16pt;
+            border-left: 3pt solid #F50537;
+            margin-bottom: 16pt;
+        }
+
+        .equip-panel h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #F50537;
+            text-transform: uppercase;
+            margin-bottom: 8pt;
+            letter-spacing: 0.5px;
+        }
+
+        .equip-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6pt 20pt;
+            font-size: 9.5pt;
+        }
+
+        .equip-grid .lbl {
+            color: #6B6B6B;
+            font-size: 8.5pt;
+        }
+
+        .equip-grid .val {
+            font-weight: bold;
+            color: #2B2B2B;
+        }
+
+        /* ── Measurement conditions ── */
+        .conditions-bar {
+            display: flex;
+            gap: 30pt;
+            background: #F5F5F5;
+            padding: 8pt 16pt;
+            margin-bottom: 16pt;
+            font-size: 9.5pt;
+        }
+
+        .conditions-bar .lbl {
+            color: #6B6B6B;
+            font-size: 8.5pt;
+        }
+
+        .conditions-bar .val {
+            font-weight: bold;
+        }
+
+        /* ── Dimensional inspection table ── */
+        .dim-table-wrapper {
+            overflow-x: auto;
+            margin: 12pt 0 20pt 0;
+        }
+
+        .dim-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+        }
+
+        .dim-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 8.5pt;
+            padding: 8pt 6pt;
+            text-align: left;
+            border-bottom: none;
+            white-space: nowrap;
+        }
+
+        .dim-table thead th.center-col {
+            text-align: center;
+        }
+
+        .dim-table thead th.right-col {
+            text-align: right;
+        }
+
+        .dim-table tbody td {
+            padding: 6pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+            vertical-align: top;
+            font-size: 9pt;
+        }
+
+        .dim-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        .dim-table tbody tr:nth-child(odd) {
+            background: #FFFFFF;
+        }
+
+        .dim-table tbody td:first-child {
+            text-align: center;
+            font-weight: bold;
+            color: #2B2B2B;
+            width: 40pt;
+        }
+
+        .dim-table tbody td.num {
+            text-align: right;
+            font-family: Calibri, sans-serif;
+        }
+
+        .dim-table tbody td.center {
+            text-align: center;
+        }
+
+        /* ── Result badges ── */
+        .result-pass {
+            display: inline-block;
+            background: #2B8C2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 8pt;
+            padding: 2pt 8pt;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Verdict box ── */
+        .verdict-box {
+            margin: 20pt 0;
+            padding: 16pt 20pt;
+            border: 2pt solid #2B8C2B;
+            text-align: center;
+        }
+
+        .verdict-box .verdict-label {
+            font-size: 10pt;
+            color: #6B6B6B;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4pt;
+        }
+
+        .verdict-box .verdict-result {
+            font-size: 20pt;
+            font-weight: bold;
+            color: #2B8C2B;
+            letter-spacing: 2px;
+        }
+
+        .verdict-box .verdict-note {
+            font-size: 9pt;
+            color: #6B6B6B;
+            margin-top: 4pt;
+        }
+
+        /* ── Callout box ── */
+        .callout {
+            background: #F5F5F5;
+            border-left: 3pt solid #F50537;
+            padding: 10pt 14pt;
+            margin: 10pt 0;
+            font-size: 10pt;
+        }
+
+        /* ── Approval signatures ── */
+        .approval-section {
+            margin-top: 30pt;
+            page-break-inside: avoid;
+        }
+
+        .approval-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .approval-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 9.5pt;
+            padding: 8pt;
+            text-align: left;
+        }
+
+        .approval-table tbody td {
+            padding: 10pt 8pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+            font-size: 9.5pt;
+            vertical-align: bottom;
+        }
+
+        .approval-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        .signature-line {
+            display: block;
+            width: 120pt;
+            border-bottom: 1pt solid #2B2B2B;
+            margin-top: 18pt;
+        }
+
+        /* ── Revision history ── */
+        .rev-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+            margin: 8pt 0 20pt 0;
+        }
+
+        .rev-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            padding: 6pt 8pt;
+            text-align: left;
+        }
+
+        .rev-table tbody td {
+            padding: 6pt 8pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+        }
+
+        .rev-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        /* ── Footer ── */
+        .doc-footer {
+            margin-top: 30pt;
+            padding-top: 8pt;
+            border-top: 0.5pt solid #6B6B6B;
+            display: flex;
+            justify-content: space-between;
+            font-size: 8pt;
+            color: #6B6B6B;
+        }
+
+        .doc-footer .confidential {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── Print styles ── */
+        @media print {
+            body {
+                padding: 0;
+            }
+            .page-container {
+                padding: 0;
+                max-width: none;
+            }
+            .doc-header {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .dim-table {
+                font-size: 8pt;
+            }
+            .dim-table thead th {
+                font-size: 7.5pt;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top red accent bar -->
+<div class="top-bar"></div>
+
+<!-- Document header -->
+<div class="doc-header">
+    <div class="doc-header-left">
+        <span class="logo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="company-name">Aurelian Manufacturing</span>
+    </div>
+    <div class="doc-header-right">
+        Aurelian Manufacturing AS<br>
+        Industriveien 12, 1531 Moss, Norway
+    </div>
+</div>
+
+<div class="page-container">
+
+    <!-- Title block -->
+    <div class="title-block">
+        <h1>Dimensional Inspection Record</h1>
+        <div class="doc-subtitle">MRB Section 13 &mdash; Manufacturing Record Book</div>
+        <div class="accent-divider"></div>
+        <div class="doc-number">
+            Document No: <strong>AM-DIR-2026-0042-001</strong> &nbsp;|&nbsp;
+            Rev: <strong>0</strong> &nbsp;|&nbsp;
+            Date: <strong>25 May 2026</strong>
+        </div>
+    </div>
+
+    <!-- Project & product information panels -->
+    <div class="info-grid">
+        <div class="info-panel">
+            <h3>Project Information</h3>
+            <table>
+                <tr><td>Client:</td><td>Nordic Subsea Solutions AS</td></tr>
+                <tr><td>Client Address:</td><td>Forusbeen 35, 4033 Stavanger, Norway</td></tr>
+                <tr><td>Purchase Order:</td><td>NSS-PO-2026-0042</td></tr>
+                <tr><td>Project:</td><td>Barents Sea Development Phase 2</td></tr>
+                <tr><td>Project No:</td><td>NSS-PRJ-BS2024</td></tr>
+            </table>
+        </div>
+        <div class="info-panel">
+            <h3>Product Information</h3>
+            <table>
+                <tr><td>Product:</td><td>Subsea Connector Assembly</td></tr>
+                <tr><td>Size / Type:</td><td>300 (Upfacing)</td></tr>
+                <tr><td>Material:</td><td>Super Duplex UNS S32750</td></tr>
+                <tr><td>Tag Number:</td><td>NSS-BSP2-SCA-001</td></tr>
+                <tr><td>Serial Number:</td><td>AM-BSP2-300-001</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Reference drawing -->
+    <h2>1. Reference Drawing</h2>
+    <div class="callout">
+        <strong>Drawing No:</strong> AM-DWG-SCA-300-001 &nbsp;&nbsp;|&nbsp;&nbsp;
+        <strong>Revision:</strong> B &nbsp;&nbsp;|&nbsp;&nbsp;
+        <strong>Title:</strong> Subsea Connector Assembly, Size 300 (Upfacing) &mdash; General Arrangement &amp; Detail Drawing
+    </div>
+
+    <!-- Measurement equipment -->
+    <h2>2. Measurement Equipment</h2>
+    <div class="equip-panel">
+        <h3>CMM Equipment Details</h3>
+        <div class="equip-grid">
+            <div>
+                <div class="lbl">Equipment</div>
+                <div class="val">Mitutoyo CMM (Crysta-Apex C9106)</div>
+            </div>
+            <div>
+                <div class="lbl">Calibration Certificate</div>
+                <div class="val">CAL-2026-CMM-003</div>
+            </div>
+            <div>
+                <div class="lbl">Calibration Valid To</div>
+                <div class="val">December 2026</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Measurement conditions -->
+    <h2>3. Environmental Conditions</h2>
+    <div class="conditions-bar">
+        <div>
+            <span class="lbl">Temperature:</span>
+            <span class="val">20 &plusmn; 1&deg;C</span>
+        </div>
+        <div>
+            <span class="lbl">Humidity:</span>
+            <span class="val">45%</span>
+        </div>
+        <div>
+            <span class="lbl">Date of Inspection:</span>
+            <span class="val">25 May 2026</span>
+        </div>
+    </div>
+
+    <!-- Dimensional inspection results -->
+    <h2>4. Dimensional Inspection Results</h2>
+
+    <div class="dim-table-wrapper">
+        <table class="dim-table">
+            <thead>
+                <tr>
+                    <th class="center-col">Dim No</th>
+                    <th>Feature Description</th>
+                    <th class="right-col">Nominal (mm)</th>
+                    <th class="center-col">Tolerance</th>
+                    <th class="right-col">Actual (mm)</th>
+                    <th class="right-col">Deviation</th>
+                    <th class="center-col">Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Overall length</td>
+                    <td class="num">580.00</td>
+                    <td class="center">&plusmn;0.50</td>
+                    <td class="num">580.12</td>
+                    <td class="num">+0.12</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Overall diameter (OD)</td>
+                    <td class="num">340.00</td>
+                    <td class="center">&plusmn;0.30</td>
+                    <td class="num">339.85</td>
+                    <td class="num">&minus;0.15</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Bore diameter</td>
+                    <td class="num">304.80</td>
+                    <td class="center">&plusmn;0.20</td>
+                    <td class="num">304.72</td>
+                    <td class="num">&minus;0.08</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Hub face flatness</td>
+                    <td class="num">&mdash;</td>
+                    <td class="center">0.05 max</td>
+                    <td class="num">0.02</td>
+                    <td class="num">&mdash;</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Hub bolt circle diameter</td>
+                    <td class="num">298.50</td>
+                    <td class="center">&plusmn;0.15</td>
+                    <td class="num">298.55</td>
+                    <td class="num">+0.05</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Bolt hole diameter (&times;12)</td>
+                    <td class="num">27.00</td>
+                    <td class="center">+0.10 / &minus;0.00</td>
+                    <td class="num">27.04</td>
+                    <td class="num">+0.04</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Bolt hole position (true position)</td>
+                    <td class="num">&mdash;</td>
+                    <td class="center">&empty;0.15 max</td>
+                    <td class="num">&empty;0.08</td>
+                    <td class="num">&mdash;</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Seal groove diameter</td>
+                    <td class="num">265.00</td>
+                    <td class="center">&plusmn;0.05</td>
+                    <td class="num">265.02</td>
+                    <td class="num">+0.02</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Seal groove depth</td>
+                    <td class="num">4.50</td>
+                    <td class="center">&plusmn;0.05</td>
+                    <td class="num">4.48</td>
+                    <td class="num">&minus;0.02</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Seal groove surface finish</td>
+                    <td class="num">&mdash;</td>
+                    <td class="center">Ra 0.8 &mu;m max</td>
+                    <td class="num">Ra 0.4 &mu;m</td>
+                    <td class="num">&mdash;</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Test port thread (1/2&quot; NPT gauge check)</td>
+                    <td class="num">&mdash;</td>
+                    <td class="center">GO / NOGO</td>
+                    <td class="num">GO accepted<br>NOGO rejected</td>
+                    <td class="num">&mdash;</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Connector profile radius</td>
+                    <td class="num">R15.00</td>
+                    <td class="center">&plusmn;0.50</td>
+                    <td class="num">R15.20</td>
+                    <td class="num">+0.20</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Perpendicularity (hub face to bore axis)</td>
+                    <td class="num">&mdash;</td>
+                    <td class="center">0.05 max</td>
+                    <td class="num">0.03</td>
+                    <td class="num">&mdash;</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>Concentricity (seal groove to bore axis)</td>
+                    <td class="num">&mdash;</td>
+                    <td class="center">0.03 max</td>
+                    <td class="num">0.01</td>
+                    <td class="num">&mdash;</td>
+                    <td class="center"><span class="result-pass">Pass</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Verdict -->
+    <div class="verdict-box">
+        <div class="verdict-label">Overall Dimensional Inspection Verdict</div>
+        <div class="verdict-result">ACCEPTED</div>
+        <div class="verdict-note">All 14 measured dimensions are within specified tolerances per drawing AM-DWG-SCA-300-001 Rev B.</div>
+    </div>
+
+    <!-- Notes -->
+    <h2>5. Notes</h2>
+    <div class="callout">
+        All measurements performed using Mitutoyo Crysta-Apex C9106 Coordinate Measuring Machine with valid calibration certificate CAL-2026-CMM-003. Measurement uncertainty has been accounted for in the acceptance evaluation. Temperature-compensated measurements taken at 20&deg;C &plusmn; 1&deg;C ambient conditions per ISO 1.
+    </div>
+
+    <!-- Revision history -->
+    <h2>6. Revision History</h2>
+    <table class="rev-table">
+        <thead>
+            <tr>
+                <th style="width: 60pt;">Rev</th>
+                <th style="width: 100pt;">Date</th>
+                <th>Description of Change</th>
+                <th style="width: 100pt;">Prepared By</th>
+                <th style="width: 100pt;">Approved By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>0</td>
+                <td>25 May 2026</td>
+                <td>Initial issue &mdash; final dimensional inspection completed</td>
+                <td>T. Bakken</td>
+                <td>K. Svendsen</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Approval signatures -->
+    <h2>7. Approval Signatures</h2>
+    <div class="approval-section">
+        <table class="approval-table">
+            <thead>
+                <tr>
+                    <th style="width: 26%;">Role</th>
+                    <th style="width: 22%;">Name</th>
+                    <th style="width: 26%;">Signature</th>
+                    <th style="width: 26%;">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>CMM Operator</strong></td>
+                    <td>Thomas Bakken</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>25 May 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>QC Inspector</strong></td>
+                    <td>Ingrid Haugen</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>25 May 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>QA Manager</strong></td>
+                    <td>Karin Svendsen</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>25 May 2026</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="doc-footer">
+        <span class="confidential">Confidential</span>
+        <span>AM-DIR-2026-0042-001 Rev 0</span>
+        <span>Page 1 of 1</span>
+    </div>
+
+</div>
+
+</body>
+</html>

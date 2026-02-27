@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NDE Reports — AM-NDE-2026-0042-001</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+.page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+.page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #F50537; }
+.header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #D3D3D3; padding-bottom: 12px; margin-bottom: 16px; }
+.logo { font-size: 16pt; font-weight: bold; color: #2B2B2B; }
+.logo span { display: block; font-size: 9pt; font-weight: normal; color: #6B6B6B; }
+.doc-info { text-align: right; font-size: 9pt; color: #6B6B6B; }
+.doc-info strong { color: #2B2B2B; font-size: 10pt; }
+h1 { font-size: 18pt; color: #2B2B2B; font-weight: bold; margin: 16px 0 6px 0; }
+h2 { font-size: 13pt; color: #F50537; font-weight: bold; margin: 14px 0 6px 0; }
+h3 { font-size: 11pt; color: #2B2B2B; font-weight: bold; margin: 10px 0 4px 0; }
+p { margin-bottom: 6pt; font-size: 10pt; }
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.meta-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
+.meta-box { background: #F5F5F5; padding: 10px; font-size: 9pt; }
+.meta-box .lbl { font-weight: bold; color: #6B6B6B; text-transform: uppercase; font-size: 8pt; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 14px 0; font-size: 9pt; }
+thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 5pt 6pt; text-align: left; font-size: 8.5pt; }
+tbody td { padding: 4pt 6pt; border-bottom: 0.5pt solid #D3D3D3; }
+tbody tr:nth-child(even) { background: #F5F5F5; }
+.center { text-align: center; }
+.sig-block { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; margin-top: 24px; }
+.sig-line { border-bottom: 1px solid #2B2B2B; height: 30px; margin-bottom: 3px; }
+.sig-label { font-size: 8pt; color: #6B6B6B; }
+.sig-name { font-size: 9pt; font-weight: bold; }
+.footer { margin-top: 24px; border-top: 1px solid #D3D3D3; padding-top: 8px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+.stamp { border: 2px solid #F50537; padding: 8px 16px; display: inline-block; font-size: 10pt; font-weight: bold; color: #F50537; margin: 10px 0; }
+.accepted { border: 2px solid #2B8C2B; padding: 6px 14px; display: inline-block; color: #2B8C2B; font-weight: bold; font-size: 10pt; }
+.section-divider { border: none; border-top: 2px solid #F50537; margin: 28px 0 20px 0; }
+.report-label { display: inline-block; background: #F50537; color: #fff; font-size: 9pt; font-weight: bold; padding: 3px 10px; margin-bottom: 8px; }
+@media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; padding: 2cm; page-break-after: always; }
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: Cover & RT Report -->
+<div class="page">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            Aurelian Manufacturing
+            <span>Industriveien 12, 1531 Moss, Norway</span>
+        </div>
+        <div class="doc-info">
+            <strong>NDE EXAMINATION REPORTS</strong><br>
+            Doc No: AM-NDE-2026-0042-001<br>
+            Rev: 0<br>
+            Date: 22 May 2026<br>
+            Page 1 of 2
+        </div>
+    </div>
+
+    <!-- Title -->
+    <h1>Non-Destructive Examination Reports</h1>
+    <p style="font-size: 9pt; color: #6B6B6B;">MRB Section 10 — Radiographic Testing (RT) &amp; Liquid Penetrant Testing (PT)</p>
+
+    <!-- Project Metadata -->
+    <h2>Project &amp; Product Information</h2>
+    <div class="meta-grid">
+        <div class="meta-box">
+            <div class="lbl">Client</div>
+            Nordic Subsea Solutions AS<br>
+            Forusbeen 35, 4033 Stavanger, Norway
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Purchase Order</div>
+            NSS-PO-2026-0042<br>
+            Project: Barents Sea Development Phase 2 (NSS-PRJ-BS2024)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Product</div>
+            Subsea Connector Assembly, Size 300 (Upfacing)<br>
+            Material: Super Duplex UNS S32750
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Identification</div>
+            Tag: NSS-BSP2-SCA-001<br>
+            Serial: AM-BSP2-300-001
+        </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- SECTION A: RADIOGRAPHIC TESTING -->
+    <!-- ============================================================= -->
+    <hr class="section-divider">
+    <div class="report-label">SECTION A</div>
+    <h1>Radiographic Testing (RT) Report</h1>
+
+    <div class="meta-grid">
+        <div class="meta-box">
+            <div class="lbl">RT Report No</div>
+            AM-RT-2026-0042-001
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Date of Examination</div>
+            21 May 2026
+        </div>
+    </div>
+
+    <h2>Examination Parameters</h2>
+    <div class="meta-grid three-col">
+        <div class="meta-box">
+            <div class="lbl">Technique</div>
+            Single Wall Single Image (SWSI)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Radiation Source</div>
+            X-ray, 200 kV
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Film Type</div>
+            Class D4 (AGFA D4)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">IQI</div>
+            Wire type per EN ISO 19232-1
+        </div>
+        <div class="meta-box">
+            <div class="lbl">SFD</div>
+            700 mm (minimum)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Processing</div>
+            Automatic — AGFA NDT-U processor
+        </div>
+    </div>
+
+    <h2>Acceptance Standard</h2>
+    <p>EN ISO 10675-1 — Acceptance Level 1 (most stringent)</p>
+    <p style="font-size: 9pt; color: #6B6B6B;">Applicable to butt welds and weld overlay. Fillet welds (W-003, W-004, W-005) not subject to RT — examined by PT only.</p>
+
+    <h2>RT Examination Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Weld No</th>
+                <th>Joint Type</th>
+                <th>Film No</th>
+                <th class="center">Density (D)</th>
+                <th class="center">IQI Sensitivity</th>
+                <th>Indications Found</th>
+                <th class="center">Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>W-001</td>
+                <td>Body to hub butt weld</td>
+                <td>RT-001-A to RT-001-F</td>
+                <td class="center">2.3 &ndash; 3.1</td>
+                <td class="center">W16 (1.6%)</td>
+                <td>No rejectable indications</td>
+                <td class="center"><span class="accepted">ACCEPTED</span></td>
+            </tr>
+            <tr>
+                <td>W-002</td>
+                <td>Body to seal ring groove butt weld</td>
+                <td>RT-002-A to RT-002-D</td>
+                <td class="center">2.2 &ndash; 2.9</td>
+                <td class="center">W16 (1.6%)</td>
+                <td>No rejectable indications</td>
+                <td class="center"><span class="accepted">ACCEPTED</span></td>
+            </tr>
+            <tr>
+                <td>W-006</td>
+                <td>Internal bore weld overlay (CRA)</td>
+                <td>RT-006-A to RT-006-H</td>
+                <td class="center">2.1 &ndash; 3.0</td>
+                <td class="center">W14 (2.0%)</td>
+                <td>No rejectable indications</td>
+                <td class="center"><span class="accepted">ACCEPTED</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="font-size: 9pt; color: #6B6B6B;">Film density range requirement: 2.0 &ndash; 4.0 (EN ISO 17636-1). All films within specification. Total 18 film exposures evaluated.</p>
+
+    <h2>RT Operator</h2>
+    <div class="meta-grid">
+        <div class="meta-box">
+            <div class="lbl">Name</div>
+            Sigrid Olsen
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Qualification</div>
+            RT Level II — EN ISO 9712:2022<br>
+            Cert No: AM-NDT-RT-031
+        </div>
+    </div>
+
+    <div class="stamp">RT — ALL WELDS ACCEPTED</div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span>CONFIDENTIAL</span>
+        <span>Aurelian Manufacturing AS — Quality Department</span>
+        <span>AM-NDE-2026-0042-001 Rev 0 — Page 1 of 2</span>
+    </div>
+
+</div>
+
+<!-- PAGE 2: PT Report -->
+<div class="page">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            Aurelian Manufacturing
+            <span>Industriveien 12, 1531 Moss, Norway</span>
+        </div>
+        <div class="doc-info">
+            <strong>NDE EXAMINATION REPORTS</strong><br>
+            Doc No: AM-NDE-2026-0042-001<br>
+            Rev: 0<br>
+            Date: 22 May 2026<br>
+            Page 2 of 2
+        </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- SECTION B: LIQUID PENETRANT TESTING -->
+    <!-- ============================================================= -->
+    <div class="report-label">SECTION B</div>
+    <h1>Liquid Penetrant Testing (PT) Report</h1>
+
+    <div class="meta-grid">
+        <div class="meta-box">
+            <div class="lbl">PT Report No</div>
+            AM-PT-2026-0042-001
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Date of Examination</div>
+            22 May 2026
+        </div>
+    </div>
+
+    <h2>Examination Parameters</h2>
+    <div class="meta-grid three-col">
+        <div class="meta-box">
+            <div class="lbl">Technique</div>
+            Color contrast (visible), solvent removable
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Penetrant</div>
+            Ardrox 9PR5 (Type II, Method C)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Developer</div>
+            Ardrox 9D1B (non-aqueous, solvent-based)
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Dwell Time</div>
+            30 minutes
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Development Time</div>
+            30 minutes
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Surface Temperature</div>
+            22&deg;C (within 10&ndash;50&deg;C range)
+        </div>
+    </div>
+
+    <h2>Acceptance Standard</h2>
+    <p>EN ISO 23277 — Acceptance Level 1 (most stringent)</p>
+    <p style="font-size: 9pt; color: #6B6B6B;">Examination covers all welds (W-001 through W-006) and adjacent heat-affected zones (HAZ). Surface cleaned to Sa 2&frac12; prior to examination.</p>
+
+    <h2>PT Examination Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Weld / Area</th>
+                <th>Joint Description</th>
+                <th class="center">Surface Temp (&deg;C)</th>
+                <th class="center">Dwell Time (min)</th>
+                <th>Indications Found</th>
+                <th class="center">Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>W-001 + HAZ</td>
+                <td>Body to hub butt weld</td>
+                <td class="center">22</td>
+                <td class="center">30</td>
+                <td>No relevant indications</td>
+                <td class="center"><span class="accepted">ACCEPTED</span></td>
+            </tr>
+            <tr>
+                <td>W-002 + HAZ</td>
+                <td>Body to seal ring groove butt weld</td>
+                <td class="center">22</td>
+                <td class="center">30</td>
+                <td>No relevant indications</td>
+                <td class="center"><span class="accepted">ACCEPTED</span></td>
+            </tr>
+            <tr>
+                <td>W-003 + HAZ</td>
+                <td>Guide pin bracket fillet weld (&times;4)</td>
+                <td class="center">22</td>
+                <td class="center">30</td>
+                <td>No relevant indications</td>
+                <td class="center"><span class="accepted">ACCEPTED</span></td>
+            </tr>
+            <tr>
+                <td>W-004 + HAZ</td>
+                <td>Lifting lug fillet weld (&times;2)</td>
+                <td class="center">22</td>
+                <td class="center">30</td>
+                <td>No relevant indications</td>
+                <td class="center"><span class="accepted">ACCEPTED</span></td>
+            </tr>
+            <tr>
+                <td>W-005 + HAZ</td>
+                <td>Anode attachment fillet weld</td>
+                <td class="center">21</td>
+                <td class="center">30</td>
+                <td>No relevant indications</td>
+                <td class="center"><span class="accepted">ACCEPTED</span></td>
+            </tr>
+            <tr>
+                <td>W-006 + HAZ</td>
+                <td>Internal bore weld overlay (CRA)</td>
+                <td class="center">22</td>
+                <td class="center">30</td>
+                <td>No relevant indications</td>
+                <td class="center"><span class="accepted">ACCEPTED</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="font-size: 9pt; color: #6B6B6B;">Lighting conditions: &gt;500 lux white light at examination surface. All surfaces clean, dry, and free from contaminants prior to penetrant application.</p>
+
+    <h2>PT Verdict</h2>
+    <p style="font-weight: bold;">All six (6) welds and adjacent heat-affected zones have been examined by liquid penetrant testing. No relevant or rejectable indications were detected. All areas meet EN ISO 23277, Acceptance Level 1.</p>
+    <div class="stamp">PT — ALL WELDS ACCEPTED</div>
+
+    <h2>NDE Operator</h2>
+    <div class="meta-grid">
+        <div class="meta-box">
+            <div class="lbl">Name</div>
+            Knut Pedersen
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Qualification</div>
+            PT Level II — EN ISO 9712:2022<br>
+            Cert No: AM-NDT-PT-024
+        </div>
+    </div>
+
+    <!-- Combined Signature Block -->
+    <h2>Authorisation — NDE Reports (RT &amp; PT)</h2>
+    <div class="sig-block">
+        <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Sigrid Olsen (RT) /<br>Knut Pedersen (PT)</div>
+            <div class="sig-label">NDE Operators (Level II)<br>Date: 22 May 2026</div>
+        </div>
+        <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Lars Halvorsen</div>
+            <div class="sig-label">QC Supervisor<br>Aurelian Manufacturing AS<br>Date: 22 May 2026</div>
+        </div>
+        <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Erik Tangen</div>
+            <div class="sig-label">NSS Witness / Client Representative<br>Nordic Subsea Solutions AS<br>Date: 22 May 2026</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span>CONFIDENTIAL</span>
+        <span>Aurelian Manufacturing AS — Quality Department</span>
+        <span>AM-NDE-2026-0042-001 Rev 0 — Page 2 of 2</span>
+    </div>
+
+</div>
+
+</body>
+</html>

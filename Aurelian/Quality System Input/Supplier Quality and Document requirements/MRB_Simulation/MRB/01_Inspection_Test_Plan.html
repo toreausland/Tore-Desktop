@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AM-ITP-2026-0042-001 | Inspection & Test Plan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 2.5cm;
+        }
+
+        body {
+            font-family: Calibri, sans-serif;
+            color: #2B2B2B;
+            background: #FFFFFF;
+            font-size: 11pt;
+            line-height: 1.15;
+            padding: 0;
+        }
+
+        .page-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 0 2.5cm 2.5cm 2.5cm;
+        }
+
+        /* ── Top red accent bar ── */
+        .top-bar {
+            width: 100%;
+            height: 3pt;
+            background: #F50537;
+            margin-bottom: 0;
+        }
+
+        /* ── Document header ── */
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20pt 2.5cm 12pt 2.5cm;
+            border-bottom: 0.5pt solid #D3D3D3;
+        }
+
+        .doc-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10pt;
+        }
+
+        .logo-stars {
+            font-size: 14pt;
+            color: #F50537;
+            letter-spacing: 2px;
+        }
+
+        .company-name {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2B2B2B;
+        }
+
+        .doc-header-right {
+            text-align: right;
+            font-size: 9pt;
+            color: #6B6B6B;
+        }
+
+        /* ── Title block ── */
+        .title-block {
+            padding: 24pt 0 12pt 0;
+            text-align: center;
+        }
+
+        .title-block h1 {
+            font-size: 22pt;
+            font-weight: bold;
+            color: #2B2B2B;
+            margin-bottom: 4pt;
+        }
+
+        .title-block .doc-subtitle {
+            font-size: 13pt;
+            font-weight: bold;
+            font-style: italic;
+            color: #F50537;
+            margin-bottom: 6pt;
+        }
+
+        .title-block .doc-number {
+            font-size: 11pt;
+            color: #6B6B6B;
+        }
+
+        /* ── Red accent divider ── */
+        .accent-divider {
+            width: 80mm;
+            height: 2pt;
+            background: #F50537;
+            margin: 8pt auto 20pt auto;
+        }
+
+        /* ── Info panels ── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12pt;
+            margin-bottom: 20pt;
+        }
+
+        .info-panel {
+            background: #F5F5F5;
+            padding: 12pt;
+            border-left: 3pt solid #F50537;
+        }
+
+        .info-panel h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #F50537;
+            text-transform: uppercase;
+            margin-bottom: 6pt;
+            letter-spacing: 0.5px;
+        }
+
+        .info-panel table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-panel td {
+            font-size: 9.5pt;
+            padding: 2pt 0;
+            vertical-align: top;
+        }
+
+        .info-panel td:first-child {
+            color: #6B6B6B;
+            width: 40%;
+            padding-right: 8pt;
+        }
+
+        .info-panel td:last-child {
+            color: #2B2B2B;
+            font-weight: bold;
+        }
+
+        /* ── Section headings ── */
+        h2 {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #F50537;
+            margin: 24pt 0 8pt 0;
+        }
+
+        h3.section-heading {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #2B2B2B;
+            margin: 18pt 0 6pt 0;
+        }
+
+        p {
+            margin-bottom: 6pt;
+            line-height: 1.3;
+        }
+
+        /* ── Legend ── */
+        .legend-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6pt 24pt;
+            margin: 8pt 0 16pt 0;
+            padding: 10pt 12pt;
+            background: #F5F5F5;
+            border: 0.5pt solid #D3D3D3;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6pt;
+            font-size: 9.5pt;
+        }
+
+        .legend-code {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22pt;
+            height: 22pt;
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 9pt;
+            border-radius: 3px;
+        }
+
+        .legend-code.hold {
+            background: #F50537;
+        }
+
+        .legend-code.witness {
+            background: #2B2B2B;
+        }
+
+        .legend-code.review {
+            background: #6B6B6B;
+        }
+
+        .legend-code.surveillance {
+            background: #888888;
+        }
+
+        .legend-code.info {
+            background: #D3D3D3;
+            color: #2B2B2B;
+        }
+
+        /* ── ITP Table ── */
+        .itp-table-wrapper {
+            overflow-x: auto;
+            margin: 12pt 0 20pt 0;
+        }
+
+        .itp-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+        }
+
+        .itp-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 8.5pt;
+            padding: 8pt 6pt;
+            text-align: left;
+            border-bottom: none;
+            white-space: nowrap;
+        }
+
+        .itp-table thead th:first-child {
+            text-align: center;
+            width: 40pt;
+        }
+
+        .itp-table thead th.type-col,
+        .itp-table thead th.party-col {
+            text-align: center;
+            width: 46pt;
+        }
+
+        .itp-table tbody td {
+            padding: 6pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+            vertical-align: top;
+            font-size: 9pt;
+        }
+
+        .itp-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        .itp-table tbody tr:nth-child(odd) {
+            background: #FFFFFF;
+        }
+
+        .itp-table tbody td:first-child {
+            text-align: center;
+            font-weight: bold;
+            color: #2B2B2B;
+        }
+
+        .itp-table tbody td.type-cell,
+        .itp-table tbody td.party-cell {
+            text-align: center;
+        }
+
+        .itp-table tbody td.ref-cell {
+            font-size: 8.5pt;
+            color: #6B6B6B;
+        }
+
+        .itp-table tbody td.records-cell {
+            font-size: 8.5pt;
+        }
+
+        /* Inspection type badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22pt;
+            height: 18pt;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 8.5pt;
+            color: #FFFFFF;
+        }
+
+        .badge-H { background: #F50537; }
+        .badge-W { background: #2B2B2B; }
+        .badge-R { background: #6B6B6B; }
+        .badge-S { background: #888888; }
+        .badge-I { background: #D3D3D3; color: #2B2B2B; }
+
+        .badge-dash {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22pt;
+            height: 18pt;
+            font-size: 10pt;
+            color: #D3D3D3;
+        }
+
+        /* ── Hold point highlight row ── */
+        .itp-table tbody tr.hold-row td {
+            border-left: 0;
+        }
+
+        .itp-table tbody tr.hold-row td:first-child {
+            border-left: 3pt solid #F50537;
+        }
+
+        /* ── Notes section ── */
+        .notes-list {
+            margin: 8pt 0 16pt 0;
+            padding-left: 20pt;
+        }
+
+        .notes-list li {
+            font-size: 9.5pt;
+            margin-bottom: 4pt;
+            color: #2B2B2B;
+        }
+
+        .notes-list li strong {
+            color: #F50537;
+        }
+
+        /* ── Approval signatures ── */
+        .approval-section {
+            margin-top: 30pt;
+            page-break-inside: avoid;
+        }
+
+        .approval-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .approval-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 9.5pt;
+            padding: 8pt;
+            text-align: left;
+        }
+
+        .approval-table tbody td {
+            padding: 10pt 8pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+            font-size: 9.5pt;
+            vertical-align: bottom;
+        }
+
+        .approval-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        .signature-line {
+            display: block;
+            width: 120pt;
+            border-bottom: 1pt solid #2B2B2B;
+            margin-top: 18pt;
+        }
+
+        /* ── Revision history ── */
+        .rev-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+            margin: 8pt 0 20pt 0;
+        }
+
+        .rev-table thead th {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            font-weight: bold;
+            padding: 6pt 8pt;
+            text-align: left;
+        }
+
+        .rev-table tbody td {
+            padding: 6pt 8pt;
+            border-bottom: 0.5pt solid #D3D3D3;
+        }
+
+        .rev-table tbody tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+
+        /* ── Footer ── */
+        .doc-footer {
+            margin-top: 30pt;
+            padding-top: 8pt;
+            border-top: 0.5pt solid #6B6B6B;
+            display: flex;
+            justify-content: space-between;
+            font-size: 8pt;
+            color: #6B6B6B;
+        }
+
+        .doc-footer .confidential {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── Print styles ── */
+        @media print {
+            body {
+                padding: 0;
+            }
+            .page-container {
+                padding: 0;
+                max-width: none;
+            }
+            .doc-header {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .itp-table {
+                font-size: 8pt;
+            }
+            .itp-table thead th {
+                font-size: 7.5pt;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top red accent bar -->
+<div class="top-bar"></div>
+
+<!-- Document header -->
+<div class="doc-header">
+    <div class="doc-header-left">
+        <span class="logo-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="company-name">Aurelian Manufacturing</span>
+    </div>
+    <div class="doc-header-right">
+        Aurelian Manufacturing AS<br>
+        Industriveien 12, 1531 Moss, Norway
+    </div>
+</div>
+
+<div class="page-container">
+
+    <!-- Title block -->
+    <div class="title-block">
+        <h1>Inspection &amp; Test Plan</h1>
+        <div class="doc-subtitle">MRB Section 1 &mdash; Manufacturing Record Book</div>
+        <div class="accent-divider"></div>
+        <div class="doc-number">
+            Document No: <strong>AM-ITP-2026-0042-001</strong> &nbsp;|&nbsp;
+            Rev: <strong>1</strong> &nbsp;|&nbsp;
+            Date: <strong>12 February 2026</strong> &nbsp;|&nbsp;
+            Status: <strong style="color: #F50537;">APPROVED</strong>
+        </div>
+    </div>
+
+    <!-- Project & product information panels -->
+    <div class="info-grid">
+        <div class="info-panel">
+            <h3>Project Information</h3>
+            <table>
+                <tr><td>Client:</td><td>Nordic Subsea Solutions AS</td></tr>
+                <tr><td>Client Address:</td><td>Forusbeen 35, 4033 Stavanger, Norway</td></tr>
+                <tr><td>Purchase Order:</td><td>NSS-PO-2026-0042</td></tr>
+                <tr><td>Project:</td><td>Barents Sea Development Phase 2</td></tr>
+                <tr><td>Project No:</td><td>NSS-PRJ-BS2024</td></tr>
+            </table>
+        </div>
+        <div class="info-panel">
+            <h3>Product Information</h3>
+            <table>
+                <tr><td>Product:</td><td>Subsea Connector Assembly</td></tr>
+                <tr><td>Size / Type:</td><td>300 (Upfacing)</td></tr>
+                <tr><td>Material:</td><td>Super Duplex UNS S32750</td></tr>
+                <tr><td>Tag Number:</td><td>NSS-BSP2-SCA-001</td></tr>
+                <tr><td>Serial Number:</td><td>AM-BSP2-300-001</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Scope & purpose -->
+    <h2>1. Purpose &amp; Scope</h2>
+    <p>
+        This Inspection and Test Plan (ITP) defines the inspection, examination, and testing activities required
+        during the manufacture and assembly of the Subsea Connector Assembly, Size 300 (Upfacing), fabricated from
+        Super Duplex Stainless Steel UNS S32750, for the Barents Sea Development Phase 2 project.
+    </p>
+    <p>
+        The ITP covers all manufacturing stages from material receipt through final release, specifying hold points,
+        witness points, and documentation requirements in accordance with the purchase order and applicable codes and standards.
+    </p>
+
+    <!-- Applicable documents -->
+    <h2>2. Applicable Documents &amp; Standards</h2>
+    <h3 class="section-heading">2.1 Client Specifications</h3>
+    <ul class="notes-list">
+        <li>NSS-PRJ-BS2024 Project Quality Plan</li>
+        <li>NSS-PO-2026-0042 Purchase Order &amp; Technical Specification</li>
+        <li>NSS-SPC-SCA-300 Subsea Connector Assembly Drawing Package</li>
+    </ul>
+
+    <h3 class="section-heading">2.2 International Standards</h3>
+    <ul class="notes-list">
+        <li>EN 10204:2004 &mdash; Metallic products, types of inspection documents</li>
+        <li>NORSOK M-630 &mdash; Material data sheets for piping</li>
+        <li>NORSOK M-650 &mdash; Qualification of manufacturers of special materials</li>
+        <li>ASME B16.5 / API 6A &mdash; Flanges and fittings (as applicable)</li>
+        <li>ASME BPVC Section V &mdash; Nondestructive Examination</li>
+        <li>ASME BPVC Section IX &mdash; Welding and Brazing Qualifications</li>
+        <li>ISO 17636-2 &mdash; Radiographic testing (digital)</li>
+        <li>ISO 3452-1 &mdash; Liquid penetrant testing</li>
+        <li>ISO 10474 / EN 10204 &mdash; Inspection documents</li>
+        <li>ISO 9712 &mdash; Qualification of NDE personnel</li>
+        <li>NORSOK M-501 &mdash; Surface preparation and protective coating</li>
+        <li>DNV-ST-F101 &mdash; Submarine pipeline systems (as applicable)</li>
+    </ul>
+
+    <!-- Legend -->
+    <h2>3. Inspection Type Legend</h2>
+    <div class="legend-grid">
+        <div class="legend-item">
+            <span class="legend-code hold">H</span>
+            <span><strong>Hold Point</strong> &mdash; Work shall not proceed without approval from NSS representative</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-code witness">W</span>
+            <span><strong>Witness Point</strong> &mdash; NSS to be notified 48 hrs in advance; work may proceed if NSS waives attendance</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-code review">R</span>
+            <span><strong>Review Point</strong> &mdash; Documentation to be submitted for NSS review prior to proceeding</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-code surveillance">S</span>
+            <span><strong>Surveillance</strong> &mdash; NSS may attend at their discretion; no notification required</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-code info">I</span>
+            <span><strong>Information</strong> &mdash; Records available for NSS review upon request</span>
+        </div>
+    </div>
+
+    <!-- ITP Table -->
+    <h2>4. Inspection &amp; Test Plan</h2>
+
+    <div class="itp-table-wrapper">
+        <table class="itp-table">
+            <thead>
+                <tr>
+                    <th>Item No.</th>
+                    <th>Description of Activity</th>
+                    <th>Reference Document / Standard</th>
+                    <th class="type-col">Type</th>
+                    <th class="party-col">Supplier QC</th>
+                    <th class="party-col">NSS</th>
+                    <th class="party-col">3rd Party</th>
+                    <th>Records / Certificates</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 10: Material Receipt -->
+                <tr class="hold-row">
+                    <td>10</td>
+                    <td><strong>Material Receipt &amp; Incoming Inspection</strong><br>
+                        Visual inspection of incoming material. PMI verification (XRF) of all Super Duplex UNS S32750 components. Verify heat/lot traceability.</td>
+                    <td class="ref-cell">EN 10204:2004<br>NORSOK M-630<br>ASTM A751</td>
+                    <td class="type-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">Material Receiving Report<br>PMI Report<br>Incoming Inspection Report</td>
+                </tr>
+
+                <!-- 20: Material Certificate Review -->
+                <tr>
+                    <td>20</td>
+                    <td><strong>Material Certificate Review</strong><br>
+                        Review of EN 10204 Type 3.2 material certificates. Verify chemical composition, mechanical properties, and heat treatment condition against specification requirements.</td>
+                    <td class="ref-cell">EN 10204:2004 Type 3.2<br>NORSOK M-630<br>ASTM A182 / A240</td>
+                    <td class="type-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">EN 10204 3.2 Certificates<br>Certificate Review Checklist</td>
+                </tr>
+
+                <!-- 30: Machining Setup -->
+                <tr>
+                    <td>30</td>
+                    <td><strong>Machining Setup &amp; First Article Inspection</strong><br>
+                        CNC program verification. First article dimensional inspection against drawing. Tool setup validation.</td>
+                    <td class="ref-cell">NSS-SPC-SCA-300<br>ISO 2768-1</td>
+                    <td class="type-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">First Article Inspection Report<br>CNC Program Verification Record</td>
+                </tr>
+
+                <!-- 40: Machining Operations -->
+                <tr>
+                    <td>40</td>
+                    <td><strong>Machining Operations</strong><br>
+                        Multi-axis CNC machining of connector body, hub, and seal surfaces. Maintain surface finish requirements per drawing.</td>
+                    <td class="ref-cell">NSS-SPC-SCA-300<br>ISO 1302</td>
+                    <td class="type-cell"><span class="badge badge-S">S</span></td>
+                    <td class="party-cell"><span class="badge badge-S">S</span></td>
+                    <td class="party-cell"><span class="badge badge-I">I</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">Machining Traveler / Route Card<br>In-Process Records</td>
+                </tr>
+
+                <!-- 50: In-Process Dimensional -->
+                <tr>
+                    <td>50</td>
+                    <td><strong>In-Process Dimensional Check</strong><br>
+                        Intermediate dimensional verification of critical features during machining. Seal groove geometry, bore tolerances, flange face dimensions.</td>
+                    <td class="ref-cell">NSS-SPC-SCA-300<br>ISO 2768-1/2</td>
+                    <td class="type-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-I">I</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">Dimensional Inspection Report<br>(In-Process)</td>
+                </tr>
+
+                <!-- 60: Welding -->
+                <tr class="hold-row">
+                    <td>60</td>
+                    <td><strong>Welding Operations</strong><br>
+                        Welding per qualified WPS. Verify welder qualifications (WPQR per ASME IX). Preheat &amp; interpass temperature monitoring. Ferrite content measurement.</td>
+                    <td class="ref-cell">ASME BPVC IX<br>NORSOK M-601<br>ISO 3834-2<br>Client WPS</td>
+                    <td class="type-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">WPS &amp; WPQR<br>Welder Qualification Certs<br>Weld Log / Heat Input Records<br>Ferrite Measurement Report</td>
+                </tr>
+
+                <!-- 70: PWHT -->
+                <tr>
+                    <td>70</td>
+                    <td><strong>Post-Weld Heat Treatment (PWHT)</strong><br>
+                        PWHT if required per WPS or project specification. Thermocouple placement, heating/cooling rate monitoring, soak time verification.</td>
+                    <td class="ref-cell">ASME BPVC IX<br>Client Specification</td>
+                    <td class="type-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">PWHT Chart / Record<br>Thermocouple Placement Drawing</td>
+                </tr>
+
+                <!-- 80: NDE VT -->
+                <tr>
+                    <td>80</td>
+                    <td><strong>NDE &mdash; Visual Inspection (VT)</strong><br>
+                        Visual inspection of all welds and machined surfaces by certified Level II inspector. Acceptance per ASME BPVC V.</td>
+                    <td class="ref-cell">ASME BPVC V Art. 9<br>ISO 17637<br>ISO 5817 Level B</td>
+                    <td class="type-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-I">I</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">Visual Inspection Report<br>NDE Operator Qualification</td>
+                </tr>
+
+                <!-- 90: NDE RT -->
+                <tr>
+                    <td>90</td>
+                    <td><strong>NDE &mdash; Radiographic Testing (RT)</strong><br>
+                        100% RT of all butt welds. Digital radiography per ISO 17636-2. Level II certified operator. Acceptance per ISO 10675-1 Level 1.</td>
+                    <td class="ref-cell">ISO 17636-2<br>ISO 10675-1<br>ASME BPVC V Art. 2</td>
+                    <td class="type-cell"><span class="badge badge-W">W</span></td>
+                    <td class="party-cell"><span class="badge badge-W">W</span></td>
+                    <td class="party-cell"><span class="badge badge-W">W</span></td>
+                    <td class="party-cell"><span class="badge badge-W">W</span></td>
+                    <td class="records-cell">RT Report &amp; Radiographs<br>NDE Operator Qualification<br>Equipment Calibration Cert</td>
+                </tr>
+
+                <!-- 100: NDE PT -->
+                <tr>
+                    <td>100</td>
+                    <td><strong>NDE &mdash; Liquid Penetrant Testing (PT)</strong><br>
+                        100% PT of all weld surfaces and critical machined areas. Acceptance per ISO 23277 Level 1.</td>
+                    <td class="ref-cell">ISO 3452-1<br>ISO 23277<br>ASME BPVC V Art. 6</td>
+                    <td class="type-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-I">I</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">PT Report<br>NDE Operator Qualification</td>
+                </tr>
+
+                <!-- 110: PMI Welds -->
+                <tr>
+                    <td>110</td>
+                    <td><strong>PMI on Welds</strong><br>
+                        Positive Material Identification (XRF) of all weld deposits. Verify alloy composition meets UNS S32750 weld filler requirements.</td>
+                    <td class="ref-cell">NORSOK M-630<br>ASTM A751</td>
+                    <td class="type-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">PMI Report (Welds)<br>XRF Calibration Cert</td>
+                </tr>
+
+                <!-- 120: Dimensional Final -->
+                <tr class="hold-row">
+                    <td>120</td>
+                    <td><strong>Final Dimensional Inspection</strong><br>
+                        Complete dimensional inspection using CMM. All critical dimensions per drawing. Seal groove profiles, bore IDs, flange face finish (Ra), bolt hole pattern.</td>
+                    <td class="ref-cell">NSS-SPC-SCA-300<br>ISO 2768-1/2<br>ISO 1302</td>
+                    <td class="type-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">Final Dimensional Report<br>CMM Report<br>Surface Roughness Report</td>
+                </tr>
+
+                <!-- 130: Surface Treatment -->
+                <tr>
+                    <td>130</td>
+                    <td><strong>Surface Treatment / Coating</strong><br>
+                        Surface preparation per NORSOK M-501. Blast cleaning to Sa 2.5 (ISO 8501-1). Application of protective coating system per project specification.</td>
+                    <td class="ref-cell">NORSOK M-501<br>ISO 8501-1<br>ISO 8503-1</td>
+                    <td class="type-cell"><span class="badge badge-W">W</span></td>
+                    <td class="party-cell"><span class="badge badge-W">W</span></td>
+                    <td class="party-cell"><span class="badge badge-W">W</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">Surface Preparation Report<br>Coating Application Record<br>Environmental Conditions Log</td>
+                </tr>
+
+                <!-- 140: Coating Inspection -->
+                <tr>
+                    <td>140</td>
+                    <td><strong>Coating Inspection &mdash; DFT Measurement</strong><br>
+                        Dry film thickness measurement per NORSOK M-501. Adhesion testing (pull-off) per ISO 4624. Holiday detection.</td>
+                    <td class="ref-cell">NORSOK M-501<br>ISO 2808<br>ISO 4624</td>
+                    <td class="type-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-I">I</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">DFT Measurement Report<br>Adhesion Test Report<br>Holiday Detection Report</td>
+                </tr>
+
+                <!-- 150: Hydrostatic Test -->
+                <tr class="hold-row">
+                    <td>150</td>
+                    <td><strong>Hydrostatic Pressure Test</strong><br>
+                        Hydrostatic test at 1.5x design pressure. Hold for minimum 30 minutes. Monitor pressure decay. Medium: treated fresh water.</td>
+                    <td class="ref-cell">API 6A / API 17D<br>Client Specification<br>Test Procedure AM-TP-HYD-001</td>
+                    <td class="type-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-W">W</span></td>
+                    <td class="records-cell">Hydrostatic Test Report<br>Pressure Recorder Chart<br>Gauge Calibration Cert</td>
+                </tr>
+
+                <!-- 160: Final Visual -->
+                <tr class="hold-row">
+                    <td>160</td>
+                    <td><strong>Final Visual Inspection</strong><br>
+                        Complete visual inspection of finished assembly. Verify surface condition, marking legibility, cleanliness, and absence of damage.</td>
+                    <td class="ref-cell">Client Specification<br>ISO 17637</td>
+                    <td class="type-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">Final Visual Inspection Report</td>
+                </tr>
+
+                <!-- 170: Marking -->
+                <tr>
+                    <td>170</td>
+                    <td><strong>Marking &amp; Identification</strong><br>
+                        Permanent marking per drawing requirements. Tag number, serial number, material grade, heat number, test pressure, date. Low-stress stamping method.</td>
+                    <td class="ref-cell">NSS-SPC-SCA-300<br>API 6A</td>
+                    <td class="type-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-I">I</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">Marking Verification Record<br>Photograph of Markings</td>
+                </tr>
+
+                <!-- 180: Weighing -->
+                <tr>
+                    <td>180</td>
+                    <td><strong>Weighing</strong><br>
+                        Weigh finished assembly on calibrated scale. Record actual weight and compare to design weight. Verify within tolerance.</td>
+                    <td class="ref-cell">Client Specification</td>
+                    <td class="type-cell"><span class="badge badge-W">W</span></td>
+                    <td class="party-cell"><span class="badge badge-W">W</span></td>
+                    <td class="party-cell"><span class="badge badge-W">W</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">Weight Certificate<br>Scale Calibration Cert</td>
+                </tr>
+
+                <!-- 190: Preservation -->
+                <tr>
+                    <td>190</td>
+                    <td><strong>Preservation &amp; Packing</strong><br>
+                        Apply preservation per project specification. VCI protection for machined surfaces. Seal all openings. Pack in wooden crate with desiccant. Mark crate per shipping spec.</td>
+                    <td class="ref-cell">NORSOK Z-CR-002<br>Client Packing Spec</td>
+                    <td class="type-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-I">I</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">Preservation Record<br>Packing List<br>Packing Photographs</td>
+                </tr>
+
+                <!-- 200: MRB Compilation -->
+                <tr>
+                    <td>200</td>
+                    <td><strong>MRB Compilation &amp; Review</strong><br>
+                        Compile complete Manufacturing Record Book. Verify all records present and properly signed. Cross-reference ITP item completion. QA review and verification.</td>
+                    <td class="ref-cell">AM-QP-MRB-001<br>PO Requirements</td>
+                    <td class="type-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">MRB Index<br>MRB Completeness Checklist</td>
+                </tr>
+
+                <!-- 210: Final Release -->
+                <tr class="hold-row">
+                    <td>210</td>
+                    <td><strong>Final Release &mdash; Certificate of Conformance</strong><br>
+                        Issue Certificate of Conformance (CoC) confirming product meets all PO requirements. Final release for shipment. MRB handover to client.</td>
+                    <td class="ref-cell">EN 10204:2004 Type 3.2<br>PO Requirements</td>
+                    <td class="type-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge badge-H">H</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
+                    <td class="records-cell">Certificate of Conformance<br>Release Note<br>Complete MRB Package</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Notes -->
+    <h2>5. Notes</h2>
+    <ul class="notes-list">
+        <li><strong>Hold Points (H):</strong> Work shall not proceed beyond the hold point until the designated representative has verified and signed off the relevant documentation. NSS shall be notified minimum 72 hours in advance of scheduled hold points.</li>
+        <li><strong>Witness Points (W):</strong> NSS shall be notified minimum 48 hours in advance. If NSS representative does not attend and does not provide written waiver, the activity may proceed after the notification period has elapsed.</li>
+        <li><strong>Third-Party Inspection:</strong> Third-party inspector (DNV GL or as agreed) shall attend witness points for hydrostatic testing and radiographic testing as specified above.</li>
+        <li><strong>NDE Personnel:</strong> All NDE personnel shall be qualified and certified to ISO 9712 Level II minimum. RT operators shall hold Level II certification for the applicable method.</li>
+        <li><strong>Calibration:</strong> All measuring and test equipment shall have valid calibration certificates traceable to national standards (ISO 10012). Calibration certificates shall be included in the MRB.</li>
+        <li><strong>NCR Process:</strong> Any non-conformance identified during manufacturing or inspection shall be documented on a Non-Conformance Report (NCR) and processed per AM-QP-NCR-001. All NCRs shall be included in the MRB.</li>
+        <li><strong>Deviations:</strong> Any deviation from this ITP requires written approval from both Aurelian QA and NSS QA representative prior to implementation.</li>
+    </ul>
+
+    <!-- Revision history -->
+    <h2>6. Revision History</h2>
+    <table class="rev-table">
+        <thead>
+            <tr>
+                <th style="width: 60pt;">Rev</th>
+                <th style="width: 100pt;">Date</th>
+                <th>Description of Change</th>
+                <th style="width: 100pt;">Prepared By</th>
+                <th style="width: 100pt;">Approved By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>0</td>
+                <td>28 January 2026</td>
+                <td>Issued for NSS review</td>
+                <td>E. Nordahl</td>
+                <td>K. Svendsen</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>12 February 2026</td>
+                <td>Incorporated NSS comments. Added hold point at Item 160 (Final Visual). Updated RT acceptance criteria to ISO 10675-1 Level 1. Approved for manufacturing.</td>
+                <td>E. Nordahl</td>
+                <td>K. Svendsen</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Approval signatures -->
+    <h2>7. Approval Signatures</h2>
+    <div class="approval-section">
+        <table class="approval-table">
+            <thead>
+                <tr>
+                    <th style="width: 26%;">Role</th>
+                    <th style="width: 22%;">Name</th>
+                    <th style="width: 26%;">Signature</th>
+                    <th style="width: 26%;">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Aurelian QA Manager</strong></td>
+                    <td>Karin Svendsen</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>12 February 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>Aurelian Project Manager</strong></td>
+                    <td>Erik Nordahl</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>12 February 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>NSS QA Representative</strong></td>
+                    <td>Lars Henriksen</td>
+                    <td><span class="signature-line"></span></td>
+                    <td>12 February 2026</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="doc-footer">
+        <span class="confidential">Confidential</span>
+        <span>AM-ITP-2026-0042-001 Rev 1</span>
+        <span>Page 1 of 1</span>
+    </div>
+
+</div>
+
+</body>
+</html>

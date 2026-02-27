@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MRB Section 7 — WPS / WPQR</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+  .page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+  .page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #F50537; }
+  .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #D3D3D3; padding-bottom: 12px; margin-bottom: 16px; }
+  .logo { font-size: 16pt; font-weight: bold; color: #2B2B2B; }
+  .logo span { display: block; font-size: 9pt; font-weight: normal; color: #6B6B6B; }
+  .doc-info { text-align: right; font-size: 9pt; color: #6B6B6B; }
+  .doc-info strong { color: #2B2B2B; font-size: 10pt; }
+  h1 { font-size: 18pt; color: #2B2B2B; font-weight: bold; margin: 16px 0 6px 0; }
+  h2 { font-size: 13pt; color: #F50537; font-weight: bold; margin: 14px 0 6px 0; }
+  h3 { font-size: 11pt; color: #2B2B2B; font-weight: bold; margin: 10px 0 4px 0; }
+  p { margin-bottom: 6pt; font-size: 10pt; }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .meta-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
+  .meta-box { background: #F5F5F5; padding: 10px; font-size: 9pt; }
+  .meta-box .lbl { font-weight: bold; color: #6B6B6B; text-transform: uppercase; font-size: 8pt; }
+  .meta-box .val { color: #2B2B2B; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 14px 0; font-size: 9pt; }
+  thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 5pt 6pt; text-align: left; font-size: 8.5pt; }
+  tbody td { padding: 4pt 6pt; border-bottom: 0.5pt solid #D3D3D3; }
+  tbody tr:nth-child(even) { background: #F5F5F5; }
+  .center { text-align: center; }
+  .right { text-align: right; }
+  .sig-block { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; margin-top: 24px; }
+  .sig-line { border-bottom: 1px solid #2B2B2B; height: 30px; margin-bottom: 3px; }
+  .sig-label { font-size: 8pt; color: #6B6B6B; }
+  .sig-name { font-size: 9pt; font-weight: bold; }
+  .footer { margin-top: 24px; border-top: 1px solid #D3D3D3; padding-top: 8px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+  .stamp { border: 2px solid #F50537; padding: 8px 16px; display: inline-block; font-size: 10pt; font-weight: bold; color: #F50537; margin: 10px 0; }
+  .note-box { background: #F5F5F5; border-left: 3px solid #F50537; padding: 10px 12px; margin: 12px 0; font-size: 9pt; }
+  .param-table td.right { text-align: right; }
+  .wps-id-banner { background: #2B2B2B; color: #fff; padding: 12px 16px; margin: 12px 0; display: flex; justify-content: space-between; align-items: center; }
+  .wps-id-banner .wps-title { font-size: 14pt; font-weight: bold; }
+  .wps-id-banner .wps-rev { font-size: 10pt; color: #D3D3D3; }
+  .detail-grid { display: grid; grid-template-columns: 160px 1fr; gap: 0; margin: 6px 0; font-size: 9pt; }
+  .detail-grid .dt { font-weight: bold; color: #6B6B6B; padding: 3px 0; border-bottom: 0.5pt solid #D3D3D3; }
+  .detail-grid .dd { padding: 3px 0; border-bottom: 0.5pt solid #D3D3D3; }
+  .joint-diagram { background: #F5F5F5; border: 1px solid #D3D3D3; padding: 16px; text-align: center; margin: 10px 0; }
+  .joint-diagram pre { font-family: Consolas, monospace; font-size: 9pt; color: #2B2B2B; line-height: 1.3; }
+  .joint-diagram .caption { font-size: 8pt; color: #6B6B6B; margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      Aurelian Manufacturing
+      <span>Production as a Service</span>
+    </div>
+    <div class="doc-info">
+      <strong>AM-WPS-2026-0042-001</strong><br>
+      Rev 0 &nbsp;|&nbsp; 15 May 2026<br>
+      MRB Section 7
+    </div>
+  </div>
+
+  <!-- Title -->
+  <h1>Welding Procedure Specification (WPS)</h1>
+  <p style="font-size: 10pt; color: #6B6B6B; margin-bottom: 14px;">
+    Qualified welding procedure for Super Duplex butt welds on the subsea connector assembly.
+  </p>
+
+  <!-- WPS Identification Banner -->
+  <div class="wps-id-banner">
+    <div class="wps-title">AM-WPS-SD-001</div>
+    <div class="wps-rev">Revision 3 &nbsp;|&nbsp; Effective: 01 March 2026</div>
+  </div>
+
+  <!-- WPS Identification -->
+  <h2>WPS Identification &amp; Qualification Reference</h2>
+  <div class="meta-grid">
+    <div class="meta-box">
+      <div class="lbl">WPS Number</div>
+      <div class="val">AM-WPS-SD-001 Rev 3</div>
+    </div>
+    <div class="meta-box">
+      <div class="lbl">Supporting WPQR</div>
+      <div class="val">AM-WPQR-SD-001</div>
+    </div>
+    <div class="meta-box">
+      <div class="lbl">Qualification Standard</div>
+      <div class="val">ASME IX / EN ISO 15614-1</div>
+    </div>
+    <div class="meta-box">
+      <div class="lbl">Application</div>
+      <div class="val">Production butt welds on subsea connector assemblies</div>
+    </div>
+  </div>
+
+  <!-- Project Context -->
+  <h2>Project Application</h2>
+  <div class="meta-grid">
+    <div class="meta-box">
+      <div class="lbl">Client / PO</div>
+      <div class="val">Nordic Subsea Solutions AS<br>NSS-PO-2026-0042</div>
+    </div>
+    <div class="meta-box">
+      <div class="lbl">Product / Tag</div>
+      <div class="val">Subsea Connector Assembly, Size 300 (Upfacing)<br>Tag: NSS-BSP2-SCA-001 &nbsp;|&nbsp; Serial: AM-BSP2-300-001</div>
+    </div>
+  </div>
+
+  <!-- Base Metal -->
+  <h2>Base Metal</h2>
+  <div class="detail-grid">
+    <div class="dt">Material Specification</div>
+    <div class="dd">UNS S32750 (Super Duplex Stainless Steel)</div>
+    <div class="dt">P-Number (ASME IX)</div>
+    <div class="dd">P-No. 10H, Group 1</div>
+    <div class="dt">Material Group (EN)</div>
+    <div class="dd">Group 10.2</div>
+    <div class="dt">Joint Configuration</div>
+    <div class="dd">UNS S32750 to UNS S32750</div>
+    <div class="dt">Thickness Range Qualified</div>
+    <div class="dd">8 mm &ndash; 40 mm</div>
+    <div class="dt">Diameter Range Qualified</div>
+    <div class="dd">&ge; 50 mm (pipe/tube configuration)</div>
+  </div>
+
+  <!-- Filler Metal -->
+  <h2>Filler Metal</h2>
+  <div class="detail-grid">
+    <div class="dt">Classification</div>
+    <div class="dd">ER2209 per AWS A5.9</div>
+    <div class="dt">F-Number (ASME IX)</div>
+    <div class="dd">F-No. 6</div>
+    <div class="dt">A-Number (ASME IX)</div>
+    <div class="dd">A-No. 8</div>
+    <div class="dt">Wire Diameter</div>
+    <div class="dd">&Oslash; 2.4 mm</div>
+    <div class="dt">Form</div>
+    <div class="dd">Solid wire (spooled)</div>
+    <div class="dt">Manufacturer / Trade Name</div>
+    <div class="dd">Sandvik 22.8.3.L / Avesta 2209</div>
+  </div>
+
+  <!-- Shielding Gas -->
+  <h2>Shielding &amp; Purge Gas</h2>
+  <div class="detail-grid">
+    <div class="dt">Front Shielding Gas</div>
+    <div class="dd">Argon + 2% N<sub>2</sub> &nbsp;(flow rate: 10&ndash;15 L/min)</div>
+    <div class="dt">Back Purge Gas</div>
+    <div class="dd">100% Argon &nbsp;(flow rate: 15&ndash;20 L/min)</div>
+    <div class="dt">Trailing Shield</div>
+    <div class="dd">Not required (GTAW torch gas cup provides adequate coverage)</div>
+    <div class="dt">Purge O<sub>2</sub> Limit</div>
+    <div class="dd">&le; 0.5% (500 ppm) before welding commences</div>
+  </div>
+
+  <!-- Welding Process -->
+  <h2>Welding Process</h2>
+  <div class="detail-grid">
+    <div class="dt">Process</div>
+    <div class="dd">GTAW (TIG) &mdash; Process Number 141 (EN ISO 4063)</div>
+    <div class="dt">Mode</div>
+    <div class="dd">Manual</div>
+    <div class="dt">Current Type / Polarity</div>
+    <div class="dd">DCEN (Direct Current Electrode Negative)</div>
+    <div class="dt">Electrode</div>
+    <div class="dd">2% Ceriated Tungsten (WC20), &Oslash; 2.4 mm</div>
+  </div>
+
+  <!-- Joint Design -->
+  <h2>Joint Design</h2>
+  <div class="joint-diagram">
+    <pre>
+         60&deg;
+        /    \
+       /      \
+      /________\
+      |  2 mm  |  &larr; Root gap
+      |__1.5mm_|  &larr; Root face
+      |        |
+      |  BASE  |
+      | METAL  |
+    </pre>
+    <div class="caption">Single V-groove butt joint (not to scale)</div>
+  </div>
+  <div class="detail-grid">
+    <div class="dt">Joint Type</div>
+    <div class="dd">Single V-groove butt joint</div>
+    <div class="dt">Included Angle</div>
+    <div class="dd">60&deg;</div>
+    <div class="dt">Root Gap</div>
+    <div class="dd">2 mm (&plusmn; 0.5 mm)</div>
+    <div class="dt">Root Face (Land)</div>
+    <div class="dd">1.5 mm (&plusmn; 0.5 mm)</div>
+    <div class="dt">Backing</div>
+    <div class="dd">None (open root with back purge)</div>
+    <div class="dt">Preparation Method</div>
+    <div class="dd">Machined groove; final cleaning with acetone</div>
+  </div>
+
+  <!-- Position -->
+  <h2>Welding Position</h2>
+  <div class="detail-grid">
+    <div class="dt">Qualified Position</div>
+    <div class="dd">All positions (6G qualified &mdash; pipe inclined 45&deg;)</div>
+    <div class="dt">Progression</div>
+    <div class="dd">Vertical uphill for fill and cap passes</div>
+  </div>
+
+  <!-- Thermal Parameters -->
+  <h2>Thermal Parameters</h2>
+  <div class="detail-grid">
+    <div class="dt">Preheat Temperature</div>
+    <div class="dd">15&deg;C minimum (no preheat above ambient required for Super Duplex)</div>
+    <div class="dt">Interpass Temperature</div>
+    <div class="dd">150&deg;C maximum</div>
+    <div class="dt">PWHT</div>
+    <div class="dd">None required</div>
+    <div class="dt">Measurement Method</div>
+    <div class="dd">Contact thermocouple / digital pyrometer, calibrated per ISO 17637</div>
+  </div>
+
+  <!-- Welding Parameters Table -->
+  <h2>Welding Parameters &mdash; Pass Sequence</h2>
+  <table class="param-table">
+    <thead>
+      <tr>
+        <th>Pass</th>
+        <th>Layer</th>
+        <th>Filler &Oslash; (mm)</th>
+        <th>Current (A)</th>
+        <th>Voltage (V)</th>
+        <th>Travel Speed (mm/min)</th>
+        <th>Heat Input (kJ/mm)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Root</td>
+        <td class="center">2.4</td>
+        <td class="center">80 &ndash; 100</td>
+        <td class="center">9 &ndash; 11</td>
+        <td class="center">60 &ndash; 80</td>
+        <td class="center">0.5 &ndash; 1.0</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Hot Pass</td>
+        <td class="center">2.4</td>
+        <td class="center">100 &ndash; 130</td>
+        <td class="center">10 &ndash; 12</td>
+        <td class="center">70 &ndash; 100</td>
+        <td class="center">0.7 &ndash; 1.2</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Fill 1</td>
+        <td class="center">2.4</td>
+        <td class="center">110 &ndash; 140</td>
+        <td class="center">10 &ndash; 13</td>
+        <td class="center">80 &ndash; 110</td>
+        <td class="center">0.8 &ndash; 1.5</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Fill 2</td>
+        <td class="center">2.4</td>
+        <td class="center">110 &ndash; 140</td>
+        <td class="center">10 &ndash; 13</td>
+        <td class="center">80 &ndash; 110</td>
+        <td class="center">0.8 &ndash; 1.5</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Fill 3</td>
+        <td class="center">2.4</td>
+        <td class="center">110 &ndash; 140</td>
+        <td class="center">10 &ndash; 13</td>
+        <td class="center">80 &ndash; 110</td>
+        <td class="center">0.8 &ndash; 1.5</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Cap</td>
+        <td class="center">2.4</td>
+        <td class="center">100 &ndash; 130</td>
+        <td class="center">10 &ndash; 12</td>
+        <td class="center">70 &ndash; 100</td>
+        <td class="center">0.7 &ndash; 1.2</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note-box">
+    <strong>Heat Input Calculation:</strong><br>
+    Heat Input (kJ/mm) = (Amps &times; Volts &times; 60) / (Travel Speed &times; 1000)<br>
+    Maximum heat input shall not exceed 1.5 kJ/mm per NORSOK M-601 requirements for Super Duplex stainless steels.
+  </div>
+
+  <!-- Acceptance Criteria -->
+  <h2>Acceptance Criteria &amp; Applicable Codes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Examination</th>
+        <th>Standard / Code</th>
+        <th>Acceptance Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Visual Testing (VT)</td>
+        <td>EN ISO 17637 / ASME IX</td>
+        <td>Level B per EN ISO 5817</td>
+      </tr>
+      <tr>
+        <td>Radiographic Testing (RT)</td>
+        <td>ASME V, Article 2</td>
+        <td>Level 1 per EN ISO 10675-1</td>
+      </tr>
+      <tr>
+        <td>Penetrant Testing (PT)</td>
+        <td>EN ISO 3452-1 / ASME V, Article 6</td>
+        <td>Level 1 per EN ISO 23277</td>
+      </tr>
+      <tr>
+        <td>Ferrite Content</td>
+        <td>ASTM E562 / NORSOK M-601</td>
+        <td>35% &ndash; 55% (austenite/ferrite ratio)</td>
+      </tr>
+      <tr>
+        <td>PMI (Positive Material Identification)</td>
+        <td>NORSOK M-650</td>
+        <td>Confirmed match to specified UNS</td>
+      </tr>
+      <tr>
+        <td>Hardness Testing</td>
+        <td>NORSOK M-601 / EN ISO 15156-3</td>
+        <td>&le; 350 HV10 (weld metal and HAZ)</td>
+      </tr>
+      <tr>
+        <td>Impact Testing (WPQR)</td>
+        <td>NORSOK M-601 / EN ISO 15614-1</td>
+        <td>&ge; 45 J at &minus;46&deg;C (weld metal and HAZ)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Additional Requirements -->
+  <h2>Additional Requirements</h2>
+  <div class="note-box">
+    <strong>NORSOK M-601 Supplementary Requirements:</strong><br>
+    1. Back purge shall be maintained until a minimum of three (3) complete layers have been deposited.<br>
+    2. Weld metal ferrite content shall be verified by metallographic examination on production test coupons.<br>
+    3. No post-weld heat treatment (PWHT) is permitted for Super Duplex stainless steels.<br>
+    4. All tack welds shall be made using qualified WPS and shall be fully re-fused into the root pass.<br>
+    5. Interpass cleaning by stainless steel wire brush or grinding only. No carbon steel tooling permitted.
+  </div>
+
+  <!-- WPQR Reference -->
+  <h2>WPQR Qualification Test Results (Summary)</h2>
+  <p style="font-size: 9pt; color: #6B6B6B; margin-bottom: 6px;">
+    Refer to AM-WPQR-SD-001 for complete qualification test records. Summary of key results:
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Test</th>
+        <th>Requirement</th>
+        <th>Result</th>
+        <th>Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tensile Test</td>
+        <td>&ge; 750 MPa (UTS)</td>
+        <td>812 MPa</td>
+        <td>Acceptable</td>
+      </tr>
+      <tr>
+        <td>Bend Test (Root &amp; Face)</td>
+        <td>No open defects &gt; 3 mm</td>
+        <td>No defects observed</td>
+        <td>Acceptable</td>
+      </tr>
+      <tr>
+        <td>Charpy Impact (&minus;46&deg;C, WM)</td>
+        <td>&ge; 45 J average</td>
+        <td>78 / 82 / 75 J (avg. 78 J)</td>
+        <td>Acceptable</td>
+      </tr>
+      <tr>
+        <td>Charpy Impact (&minus;46&deg;C, HAZ)</td>
+        <td>&ge; 45 J average</td>
+        <td>92 / 88 / 95 J (avg. 92 J)</td>
+        <td>Acceptable</td>
+      </tr>
+      <tr>
+        <td>Hardness (HV10)</td>
+        <td>&le; 350 HV10</td>
+        <td>Max 298 HV10 (HAZ)</td>
+        <td>Acceptable</td>
+      </tr>
+      <tr>
+        <td>Ferrite Content</td>
+        <td>35% &ndash; 55%</td>
+        <td>44% (weld metal)</td>
+        <td>Acceptable</td>
+      </tr>
+      <tr>
+        <td>Macro Examination</td>
+        <td>No cracks, lack of fusion, or porosity</td>
+        <td>Satisfactory — no defects</td>
+        <td>Acceptable</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Signatures -->
+  <h2>Approvals</h2>
+  <div class="sig-block">
+    <div>
+      <div class="sig-line"></div>
+      <div class="sig-name">Erik Solheim</div>
+      <div class="sig-label">Welding Engineer / IWE<br>Date: 01 March 2026</div>
+    </div>
+    <div>
+      <div class="sig-line"></div>
+      <div class="sig-name">Thomas Berg</div>
+      <div class="sig-label">Responsible Welding Coordinator / IWT<br>Date: 01 March 2026</div>
+    </div>
+    <div>
+      <div class="sig-line"></div>
+      <div class="sig-name">Knut Andersen</div>
+      <div class="sig-label">QA Manager<br>Date: 01 March 2026</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>CONFIDENTIAL</span>
+    <span>Page 1 of 1</span>
+    <span>AM-WPS-2026-0042-001 Rev 0</span>
+  </div>
+</div>
+
+</body>
+</html>

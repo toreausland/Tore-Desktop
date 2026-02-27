@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NDE Operator Certificates — AM-NDC-2026-0042-001</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+.page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+.page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #F50537; }
+.header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #D3D3D3; padding-bottom: 12px; margin-bottom: 16px; }
+.logo { font-size: 16pt; font-weight: bold; color: #2B2B2B; }
+.logo span { display: block; font-size: 9pt; font-weight: normal; color: #6B6B6B; }
+.doc-info { text-align: right; font-size: 9pt; color: #6B6B6B; }
+.doc-info strong { color: #2B2B2B; font-size: 10pt; }
+h1 { font-size: 18pt; color: #2B2B2B; font-weight: bold; margin: 16px 0 6px 0; }
+h2 { font-size: 13pt; color: #F50537; font-weight: bold; margin: 14px 0 6px 0; }
+h3 { font-size: 11pt; color: #2B2B2B; font-weight: bold; margin: 10px 0 4px 0; }
+p { margin-bottom: 6pt; font-size: 10pt; }
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.meta-box { background: #F5F5F5; padding: 10px; font-size: 9pt; }
+.meta-box .lbl { font-weight: bold; color: #6B6B6B; text-transform: uppercase; font-size: 8pt; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 14px 0; font-size: 9pt; }
+thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 5pt 6pt; text-align: left; font-size: 8.5pt; }
+tbody td { padding: 4pt 6pt; border-bottom: 0.5pt solid #D3D3D3; }
+tbody tr:nth-child(even) { background: #F5F5F5; }
+.center { text-align: center; }
+.sig-block { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; margin-top: 24px; }
+.sig-line { border-bottom: 1px solid #2B2B2B; height: 30px; margin-bottom: 3px; }
+.sig-label { font-size: 8pt; color: #6B6B6B; }
+.sig-name { font-size: 9pt; font-weight: bold; }
+.footer { margin-top: 24px; border-top: 1px solid #D3D3D3; padding-top: 8px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+.stamp { border: 2px solid #F50537; padding: 8px 16px; display: inline-block; font-size: 10pt; font-weight: bold; color: #F50537; margin: 10px 0; }
+.accepted { border: 2px solid #2B8C2B; padding: 6px 14px; display: inline-block; color: #2B8C2B; font-weight: bold; font-size: 10pt; }
+
+/* Certificate Card Styling */
+.cert-card {
+    border: 1.5px solid #D3D3D3;
+    margin: 16px 0 24px 0;
+    position: relative;
+    overflow: hidden;
+}
+.cert-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #F50537;
+}
+.cert-header {
+    background: #2B2B2B;
+    color: #fff;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cert-header .cert-name {
+    font-size: 14pt;
+    font-weight: bold;
+}
+.cert-header .cert-badge {
+    background: #F50537;
+    color: #fff;
+    font-size: 9pt;
+    font-weight: bold;
+    padding: 4px 12px;
+}
+.cert-body {
+    padding: 16px;
+}
+.cert-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.cert-field {
+    font-size: 9pt;
+}
+.cert-field .lbl {
+    font-weight: bold;
+    color: #6B6B6B;
+    text-transform: uppercase;
+    font-size: 7.5pt;
+    margin-bottom: 2px;
+}
+.cert-field .val {
+    color: #2B2B2B;
+    font-weight: bold;
+}
+.cert-methods {
+    margin-top: 10px;
+}
+.method-tag {
+    display: inline-block;
+    background: #F5F5F5;
+    border: 1px solid #D3D3D3;
+    padding: 4px 10px;
+    font-size: 9pt;
+    font-weight: bold;
+    margin-right: 6px;
+    margin-bottom: 4px;
+}
+.method-tag .level {
+    color: #F50537;
+}
+.cert-validity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #F5F5F5;
+    padding: 10px 16px;
+    border-top: 1px solid #D3D3D3;
+    font-size: 9pt;
+}
+.validity-status {
+    font-weight: bold;
+    color: #2B8C2B;
+    border: 1.5px solid #2B8C2B;
+    padding: 3px 10px;
+    font-size: 8.5pt;
+}
+
+@media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; padding: 2cm; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            Aurelian Manufacturing
+            <span>Industriveien 12, 1531 Moss, Norway</span>
+        </div>
+        <div class="doc-info">
+            <strong>NDE OPERATOR CERTIFICATES</strong><br>
+            Doc No: AM-NDC-2026-0042-001<br>
+            Rev: 0<br>
+            Date: 22 May 2026<br>
+            Page 1 of 1
+        </div>
+    </div>
+
+    <!-- Title -->
+    <h1>NDE Operator Qualification Certificates</h1>
+    <p style="font-size: 9pt; color: #6B6B6B;">MRB Section 11 — Summary of NDE Operator Qualifications for Project NSS-PO-2026-0042</p>
+
+    <!-- Project Reference -->
+    <h2>Project Reference</h2>
+    <div class="meta-grid">
+        <div class="meta-box">
+            <div class="lbl">Purchase Order</div>
+            NSS-PO-2026-0042 — Barents Sea Development Phase 2
+        </div>
+        <div class="meta-box">
+            <div class="lbl">Product</div>
+            Subsea Connector Assembly, Size 300 (Upfacing)<br>
+            Tag: NSS-BSP2-SCA-001 / Serial: AM-BSP2-300-001
+        </div>
+    </div>
+    <p style="font-size: 9pt; color: #6B6B6B; margin-bottom: 4px;">The following NDE operators were assigned to this project. Certificate copies are maintained in the Aurelian Manufacturing quality records archive and are available for third-party audit upon request.</p>
+
+    <!-- ============================================================= -->
+    <!-- CERTIFICATE 1: Knut Pedersen -->
+    <!-- ============================================================= -->
+    <h2>Certificate 1 of 2</h2>
+
+    <div class="cert-card">
+        <div class="cert-header">
+            <div class="cert-name">Knut Pedersen</div>
+            <div class="cert-badge">NDE LEVEL II</div>
+        </div>
+        <div class="cert-body">
+            <div class="cert-grid">
+                <div class="cert-field">
+                    <div class="lbl">Employee ID</div>
+                    <div class="val">AM-EMP-112</div>
+                </div>
+                <div class="cert-field">
+                    <div class="lbl">Qualification Standard</div>
+                    <div class="val">EN ISO 9712:2022</div>
+                </div>
+                <div class="cert-field">
+                    <div class="lbl">Certifying Body</div>
+                    <div class="val">NORDTEST / DNV GL</div>
+                </div>
+            </div>
+
+            <div class="cert-methods">
+                <div class="lbl" style="font-weight: bold; color: #6B6B6B; text-transform: uppercase; font-size: 7.5pt; margin-bottom: 6px;">Certified Methods</div>
+                <span class="method-tag">VT <span class="level">Level II</span></span>
+                <span class="method-tag">PT <span class="level">Level II</span></span>
+            </div>
+
+            <div class="cert-grid" style="margin-top: 12px;">
+                <div class="cert-field">
+                    <div class="lbl">Certificate No (VT)</div>
+                    <div class="val">AM-NDT-VT-024</div>
+                </div>
+                <div class="cert-field">
+                    <div class="lbl">Certificate No (PT)</div>
+                    <div class="val">AM-NDT-PT-024</div>
+                </div>
+                <div class="cert-field">
+                    <div class="lbl">Sector</div>
+                    <div class="val">Pre-service (w)</div>
+                </div>
+            </div>
+
+            <div class="cert-grid">
+                <div class="cert-field">
+                    <div class="lbl">Product Sectors</div>
+                    <div class="val">Castings, Forgings, Welds</div>
+                </div>
+                <div class="cert-field">
+                    <div class="lbl">NDE Tasks on This Project</div>
+                    <div class="val">VT of all welds (W-001 to W-006)<br>PT of all welds (W-001 to W-006)</div>
+                </div>
+                <div class="cert-field">
+                    <div class="lbl">Report References</div>
+                    <div class="val">AM-VIR-2026-0042-001<br>AM-PT-2026-0042-001</div>
+                </div>
+            </div>
+        </div>
+        <div class="cert-validity">
+            <div>
+                <strong>Valid From:</strong> 12 March 2024 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Valid To:</strong> 11 March 2029
+            </div>
+            <div class="validity-status">VALID</div>
+        </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- CERTIFICATE 2: Sigrid Olsen -->
+    <!-- ============================================================= -->
+    <h2>Certificate 2 of 2</h2>
+
+    <div class="cert-card">
+        <div class="cert-header">
+            <div class="cert-name">Sigrid Olsen</div>
+            <div class="cert-badge">NDE LEVEL II</div>
+        </div>
+        <div class="cert-body">
+            <div class="cert-grid">
+                <div class="cert-field">
+                    <div class="lbl">Employee ID</div>
+                    <div class="val">AM-EMP-131</div>
+                </div>
+                <div class="cert-field">
+                    <div class="lbl">Qualification Standard</div>
+                    <div class="val">EN ISO 9712:2022</div>
+                </div>
+                <div class="cert-field">
+                    <div class="lbl">Certifying Body</div>
+                    <div class="val">NORDTEST / DNV GL</div>
+                </div>
+            </div>
+
+            <div class="cert-methods">
+                <div class="lbl" style="font-weight: bold; color: #6B6B6B; text-transform: uppercase; font-size: 7.5pt; margin-bottom: 6px;">Certified Methods</div>
+                <span class="method-tag">RT <span class="level">Level II</span></span>
+                <span class="method-tag">UT <span class="level">Level II</span></span>
+            </div>
+
+            <div class="cert-grid" style="margin-top: 12px;">
+                <div class="cert-field">
+                    <div class="lbl">Certificate No (RT)</div>
+                    <div class="val">AM-NDT-RT-031</div>
+                </div>
+                <div class="cert-field">
+                    <div class="lbl">Certificate No (UT)</div>
+                    <div class="val">AM-NDT-UT-031</div>
+                </div>
+                <div class="cert-field">
+                    <div class="lbl">Sector</div>
+                    <div class="val">Pre-service (w)</div>
+                </div>
+            </div>
+
+            <div class="cert-grid">
+                <div class="cert-field">
+                    <div class="lbl">Product Sectors</div>
+                    <div class="val">Welds</div>
+                </div>
+                <div class="cert-field">
+                    <div class="lbl">NDE Tasks on This Project</div>
+                    <div class="val">RT of butt welds &amp; overlay<br>(W-001, W-002, W-006)</div>
+                </div>
+                <div class="cert-field">
+                    <div class="lbl">Report References</div>
+                    <div class="val">AM-RT-2026-0042-001</div>
+                </div>
+            </div>
+        </div>
+        <div class="cert-validity">
+            <div>
+                <strong>Valid From:</strong> 08 August 2023 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Valid To:</strong> 07 August 2028
+            </div>
+            <div class="validity-status">VALID</div>
+        </div>
+    </div>
+
+    <!-- Summary Table -->
+    <h2>Operator Assignment Summary</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Operator</th>
+                <th>Method</th>
+                <th>Level</th>
+                <th>Cert No</th>
+                <th>Welds Examined</th>
+                <th class="center">Cert Valid</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Knut Pedersen</td>
+                <td>VT</td>
+                <td>Level II</td>
+                <td>AM-NDT-VT-024</td>
+                <td>W-001 to W-006</td>
+                <td class="center">12/03/2024 &ndash; 11/03/2029</td>
+            </tr>
+            <tr>
+                <td>Knut Pedersen</td>
+                <td>PT</td>
+                <td>Level II</td>
+                <td>AM-NDT-PT-024</td>
+                <td>W-001 to W-006 + HAZ</td>
+                <td class="center">12/03/2024 &ndash; 11/03/2029</td>
+            </tr>
+            <tr>
+                <td>Sigrid Olsen</td>
+                <td>RT</td>
+                <td>Level II</td>
+                <td>AM-NDT-RT-031</td>
+                <td>W-001, W-002, W-006</td>
+                <td class="center">08/08/2023 &ndash; 07/08/2028</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="font-size: 9pt; color: #6B6B6B;">All certificates confirmed valid at time of NDE execution. Original certificate copies filed under Aurelian Manufacturing quality archive ref: QA-NDT-CERT-2026. Certificates available for client or third-party verification on request.</p>
+
+    <!-- Verification Signature -->
+    <h2>Verification</h2>
+    <div class="sig-block" style="grid-template-columns: 1fr 1fr;">
+        <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Lars Halvorsen</div>
+            <div class="sig-label">QC Supervisor — Certificate Verification<br>Aurelian Manufacturing AS<br>Date: 22 May 2026</div>
+        </div>
+        <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Erik Tangen</div>
+            <div class="sig-label">NSS Witness / Client Representative<br>Nordic Subsea Solutions AS<br>Date: 22 May 2026</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span>CONFIDENTIAL</span>
+        <span>Aurelian Manufacturing AS — Quality Department</span>
+        <span>AM-NDC-2026-0042-001 Rev 0</span>
+    </div>
+
+</div>
+
+</body>
+</html>
