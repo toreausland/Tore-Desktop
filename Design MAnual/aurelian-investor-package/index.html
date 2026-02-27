@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — PreSeed Investor Package</title>
+<meta name="description" content="PreSeed Investor Information Package for Aurelian Manufacturing AS. Confidential.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9733;</text></svg>">
+<style>
+/* ============================================================
+   AURELIAN MANUFACTURING — PRESEED INVESTOR PACKAGE
+   Design Manual v2.0 compliant
+   All numbers: 02 Economic Tables & Projections (VDR 02.04)
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red: #F50537;
+  --dark-red: #D0042E;
+  --black: #2B2B2B;
+  --pure-black: #000000;
+  --white: #FFFFFF;
+  --gray: #6B6B6B;
+  --panel: #F5F5F5;
+  --divider: #D3D3D3;
+  --axis: #888888;
+  --charcoal: #1A1A1A;
+  --navy: #1C2D3F;
+  --navy-card: #253B52;
+  --slate: #3D5A7A;
+  --steel: #8EAEC5;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: Calibri, 'Segoe UI', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ---------- LOGIN OVERLAY ---------- */
+#login-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--pure-black);
+}
+#login-overlay.hidden { display: none; }
+.login-bg {
+  position: absolute; inset: 0;
+  background: url('mazak-hero.jpg') center center / cover no-repeat;
+  opacity: 0.35;
+}
+.login-card {
+  position: relative; z-index: 1;
+  background: var(--white); border-radius: 8px;
+  width: 400px; max-width: 90vw;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5); overflow: hidden;
+}
+.login-accent { height: 4px; background: var(--red); }
+.login-body { padding: 40px 36px 32px; text-align: center; }
+.login-logo { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 6px; }
+.login-logo .stars { color: var(--red); font-size: 14px; letter-spacing: 3px; }
+.login-logo-text { font-size: 18px; font-weight: 700; color: var(--black); }
+.login-subtitle { font-size: 12px; color: var(--gray); margin-bottom: 28px; letter-spacing: 0.5px; }
+.login-field {
+  width: 100%; padding: 12px 16px;
+  border: 1px solid var(--divider); border-radius: 4px;
+  font-family: inherit; font-size: 14px; color: var(--black);
+  margin-bottom: 16px; transition: border-color 0.2s;
+}
+.login-field:focus { outline: none; border-color: var(--red); }
+.login-btn {
+  width: 100%; padding: 13px;
+  background: var(--red); color: var(--white);
+  border: none; border-radius: 4px;
+  font-family: inherit; font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: background 0.2s; letter-spacing: 0.3px;
+}
+.login-btn:hover { background: var(--dark-red); }
+.login-error { color: var(--red); font-size: 12px; margin-top: 12px; min-height: 16px; }
+.login-footer { padding: 14px; text-align: center; background: var(--panel); border-top: 1px solid var(--divider); font-size: 11px; color: var(--gray); }
+.login-brand { position: absolute; top: 32px; right: 40px; z-index: 2; opacity: 0.85; }
+
+/* ---------- APP ---------- */
+#app { display: none; }
+#app.visible { display: block; }
+
+/* ---------- HERO ---------- */
+.hero {
+  background: var(--pure-black);
+  padding: 60px 40px 48px;
+  text-align: center;
+  position: relative;
+}
+.hero-logo { height: 64px; margin-bottom: 16px; opacity: 0.95; }
+.hero-company { font-size: 28px; font-weight: 700; color: var(--white); letter-spacing: 0.5px; display: block; }
+.hero-bar { width: 120px; height: 3px; background: var(--red); margin: 14px auto; }
+.hero-tagline { font-size: 15px; font-style: italic; color: var(--red); margin-bottom: 20px; }
+.hero-title { font-size: 20px; font-weight: 700; color: var(--white); letter-spacing: 0.3px; }
+.hero-date { font-size: 12px; color: var(--gray); margin-top: 18px; }
+.hero-conf { position: absolute; bottom: 14px; right: 40px; font-size: 11px; color: var(--gray); letter-spacing: 1px; }
+
+/* ---------- LANG TOGGLE ---------- */
+.lang-toggle { position: absolute; top: 20px; right: 40px; display: flex; gap: 0; }
+.lang-btn {
+  padding: 6px 14px; font-family: inherit; font-size: 13px; font-weight: 700;
+  border: 1px solid var(--gray); cursor: pointer; transition: all 0.2s;
+  background: transparent; color: var(--gray);
+}
+.lang-btn:first-child { border-radius: 4px 0 0 4px; border-right: none; }
+.lang-btn:last-child { border-radius: 0 4px 4px 0; }
+.lang-btn.active { background: var(--red); color: var(--white); border-color: var(--red); }
+
+/* ---------- STICKY NAV ---------- */
+.sticky-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--white); border-bottom: 1px solid var(--divider);
+  overflow-x: auto; white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.sticky-nav::-webkit-scrollbar { display: none; }
+.nav-inner { display: flex; max-width: 960px; margin: 0 auto; padding: 0 24px; }
+.nav-link {
+  display: inline-block; padding: 12px 16px;
+  font-size: 13px; font-weight: 700; color: var(--gray);
+  text-decoration: none; border-bottom: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s; flex-shrink: 0;
+}
+.nav-link:hover { color: var(--black); }
+.nav-link.active { color: var(--red); border-bottom-color: var(--red); }
+
+/* ---------- SECTIONS ---------- */
+.section { padding: 56px 24px; scroll-margin-top: 52px; }
+.section:nth-child(even) { background: var(--panel); }
+.section-inner { max-width: 960px; margin: 0 auto; }
+.section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.section-num {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--red); color: var(--white);
+  font-size: 16px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.section-title { font-size: 22px; font-weight: 700; color: var(--black); }
+.section p { margin-bottom: 14px; line-height: 1.6; }
+.section p:last-child { margin-bottom: 0; }
+
+/* ---------- TABLES ---------- */
+.tbl-wrap { overflow-x: auto; margin: 20px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+thead th {
+  background: var(--black); color: var(--white);
+  padding: 10px 14px; text-align: left; font-weight: 700; font-size: 13px;
+}
+thead th.r { text-align: right; }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--divider); }
+tbody tr:nth-child(even) { background: var(--panel); }
+tbody td.r { text-align: right; }
+tbody td.b { font-weight: 700; }
+tfoot td { padding: 10px 14px; font-weight: 700; border-top: 2px solid var(--black); }
+
+/* ---------- KPI CARDS ---------- */
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 24px 0; }
+.kpi-card {
+  background: var(--red); border-radius: 6px; padding: 20px 16px;
+  text-align: center;
+}
+.kpi-val { font-size: 28px; font-weight: 700; color: var(--white); }
+.kpi-label { font-size: 12px; color: var(--white); opacity: 0.85; margin-top: 4px; }
+
+/* ---------- CALLOUT ---------- */
+.callout {
+  background: var(--panel); border-left: 3px solid var(--red);
+  padding: 16px 20px; margin: 20px 0; border-radius: 0 4px 4px 0;
+}
+.callout p { margin-bottom: 6px; }
+.callout code { font-family: 'Consolas', monospace; font-size: 13px; color: var(--red); background: var(--white); padding: 2px 6px; border-radius: 3px; }
+
+/* ---------- TEAM CARDS ---------- */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 20px; }
+.team-card { background: var(--panel); border-radius: 6px; padding: 24px; }
+.team-name { font-size: 16px; font-weight: 700; color: var(--black); }
+.team-role { font-size: 13px; color: var(--red); font-weight: 700; margin: 4px 0 10px; }
+.team-bio { font-size: 13px; color: var(--gray); line-height: 1.5; }
+
+/* ---------- CONTRIB ITEMS ---------- */
+.contrib-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+.contrib-item { background: var(--white); border: 1px solid var(--divider); border-radius: 6px; padding: 16px; }
+.contrib-item h4 { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+.contrib-item .val { font-size: 13px; color: var(--gray); }
+
+/* ---------- TIMELINE ---------- */
+.timeline { margin: 24px 0; }
+.tl-item { display: flex; gap: 16px; margin-bottom: 18px; position: relative; padding-left: 4px; }
+.tl-dot { width: 12px; height: 12px; background: var(--red); border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.tl-item:not(:last-child) .tl-dot::after {
+  content: ''; position: absolute; left: 9px; top: 20px;
+  width: 2px; height: calc(100% - 4px); background: var(--divider);
+}
+.tl-date { font-size: 13px; font-weight: 700; color: var(--red); min-width: 100px; }
+.tl-text { font-size: 14px; color: var(--black); }
+
+/* ---------- NAVY CARD (Calculator) ---------- */
+.navy-card {
+  background: var(--navy); border-radius: 8px; padding: 36px;
+  text-align: center; margin: 20px 0;
+}
+.navy-card h3 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+.navy-card p { font-size: 14px; color: var(--steel); margin-bottom: 20px; }
+.navy-card .note { font-size: 11px; color: var(--steel); opacity: 0.7; margin-top: 14px; }
+
+/* ---------- PDF SECTION ---------- */
+.pdf-frame { width: 100%; height: 70vh; border: 1px solid var(--divider); border-radius: 4px; }
+.pdf-dl { display: inline-block; margin-top: 14px; }
+
+/* ---------- BUTTONS ---------- */
+.btn {
+  display: inline-block; padding: 12px 28px;
+  background: var(--red); color: var(--white);
+  border: none; border-radius: 4px;
+  font-family: inherit; font-size: 15px; font-weight: 700;
+  text-decoration: none; cursor: pointer; transition: background 0.2s;
+}
+.btn:hover { background: var(--dark-red); }
+.btn-outline {
+  display: inline-block; padding: 10px 22px;
+  background: transparent; color: var(--red);
+  border: 2px solid var(--red); border-radius: 4px;
+  font-family: inherit; font-size: 14px; font-weight: 700;
+  text-decoration: none; cursor: pointer; transition: all 0.2s;
+}
+.btn-outline:hover { background: var(--red); color: var(--white); }
+.btn-sm {
+  padding: 8px 18px; font-size: 13px;
+}
+
+/* ---------- DOC REQUEST GRID ---------- */
+.doc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+.doc-card {
+  border: 1px solid var(--divider); border-radius: 6px; padding: 20px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.doc-card h4 { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+.doc-card .vdr { font-size: 12px; color: var(--gray); margin-bottom: 8px; }
+.doc-card .doc-desc { font-size: 13px; color: var(--gray); margin-bottom: 14px; flex: 1; }
+
+/* ---------- FORM ---------- */
+.form-panel { background: var(--panel); border-radius: 8px; padding: 32px; border-top: 4px solid var(--red); margin-top: 20px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { display: flex; flex-direction: column; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { font-size: 13px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+.form-label .req { color: var(--red); }
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 10px 14px;
+  border: 1px solid var(--divider); border-radius: 4px;
+  font-family: inherit; font-size: 14px; color: var(--black);
+  transition: border-color 0.2s; background: var(--white);
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--red); }
+.form-textarea { resize: vertical; min-height: 80px; }
+.form-submit { margin-top: 8px; }
+.form-ok { display: none; text-align: center; padding: 40px 20px; }
+.form-ok h3 { font-size: 20px; font-weight: 700; color: var(--black); margin-bottom: 8px; }
+.form-ok p { font-size: 14px; color: var(--gray); }
+.hidden { display: none !important; }
+
+/* ---------- CONTACT CARDS ---------- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+.contact-card { background: var(--panel); border-radius: 6px; padding: 24px; text-align: center; }
+.contact-card .name { font-size: 18px; font-weight: 700; color: var(--black); }
+.contact-card .role { font-size: 13px; color: var(--red); font-weight: 700; margin: 4px 0 12px; }
+.contact-card a { color: var(--red); font-size: 14px; text-decoration: none; font-weight: 700; }
+.contact-card a:hover { text-decoration: underline; }
+
+/* ---------- REFERENCES TABLE ---------- */
+.ref-table { margin-top: 20px; }
+
+/* ---------- FOOTER ---------- */
+.site-footer {
+  background: var(--charcoal); padding: 28px 24px;
+  text-align: center; font-size: 11px; color: var(--gray);
+}
+.site-footer p { margin-bottom: 6px; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .hero { padding: 44px 24px 36px; }
+  .hero-company { font-size: 22px; }
+  .hero-title { font-size: 17px; }
+  .lang-toggle { top: 14px; right: 16px; }
+  .nav-link { padding: 10px 12px; font-size: 12px; }
+  .section { padding: 40px 16px; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .contrib-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .pdf-frame { height: 50vh; }
+}
+@media (max-width: 600px) {
+  .hero { padding: 36px 16px 28px; }
+  .hero-logo { height: 48px; }
+  .hero-company { font-size: 18px; }
+  .hero-bar { width: 80px; }
+  .hero-title { font-size: 15px; }
+  .lang-toggle { top: 10px; right: 12px; }
+  .lang-btn { padding: 5px 10px; font-size: 12px; }
+  .section { padding: 32px 14px; }
+  .section-title { font-size: 18px; }
+  .kpi-val { font-size: 22px; }
+  .team-grid { grid-template-columns: 1fr; }
+  .doc-grid { grid-template-columns: 1fr; }
+  .pdf-section-mobile { display: block; }
+  .pdf-frame { display: none; }
+  .nav-link { padding: 10px 10px; font-size: 11px; }
+}
+
+/* ---------- PRINT ---------- */
+@media print {
+  #login-overlay, .sticky-nav, .lang-toggle, .btn, .btn-outline, .form-panel, .navy-card, .pdf-frame { display: none !important; }
+  .section { padding: 24px 0; page-break-inside: avoid; }
+  .section:nth-child(even) { background: var(--white); }
+  body { font-size: 10pt; }
+  .hero { padding: 20px; }
+  .site-footer { background: var(--white); color: var(--black); border-top: 1px solid var(--divider); }
+  h2 { page-break-after: avoid; }
+  table { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN OVERLAY -->
+<div id="login-overlay">
+  <div class="login-bg"></div>
+  <svg class="login-brand" xmlns="http://www.w3.org/2000/svg" viewBox="200 330 220 130" style="height:80px;">
+    <defs><style>.al{fill:#fff;}</style></defs>
+    <g><path class="al" d="M227.59,449.59v-12.07l-4.76,10.25h-2.63l-4.76-10.25v12.07h-3.66v-17.9h4.53l5.22,10.95,5.19-10.95h4.5v17.9h-3.63Z"/><path class="al" d="M243.34,447.98c-.92,1.15-2.4,1.79-4.32,1.79-2.94,0-4.73-1.79-4.73-4.3s1.87-4.12,5.24-4.14h3.78v-.26c0-1.46-.97-2.3-2.86-2.3-1.23,0-2.66.41-4.09,1.2l-1.23-2.71c2.05-1.02,3.81-1.58,6.21-1.58,3.68,0,5.81,1.84,5.83,4.94l.03,8.98h-3.86v-1.61ZM243.32,444.89v-1.23h-3.09c-1.51,0-2.25.46-2.25,1.56s.82,1.74,2.15,1.74c1.66,0,2.97-.89,3.2-2.07Z"/><path class="al" d="M264.59,440.95v8.64h-3.94v-7.49c0-1.74-1.02-2.81-2.71-2.81-1.97.03-3.15,1.51-3.15,3.53v6.78h-3.94v-13.76h3.94v2.4c.97-1.71,2.61-2.53,4.76-2.56,3.07,0,5.04,2.05,5.04,5.27Z"/><path class="al" d="M281.32,449.59h-3.91v-2.43c-.95,1.74-2.53,2.58-4.6,2.58-3.04,0-4.96-2.02-4.96-5.27v-8.64h3.94v7.52c0,1.74,1,2.79,2.58,2.79,1.89-.03,3.04-1.51,3.04-3.5v-6.8h3.91v13.76Z"/><path class="al" d="M289.73,435.3v1.15h3.25v2.74h-3.25v10.41h-3.91v-10.41h-1.84v-2.74h1.84v-1.3c0-3.07,2.3-4.71,5.06-4.71,1.28,0,2.63.33,3.61.97l-1.41,2.86c-.51-.38-1.15-.59-1.71-.59-.92,0-1.64.51-1.64,1.61Z"/><path class="al" d="M303.67,447.98c-.92,1.15-2.4,1.79-4.32,1.79-2.94,0-4.73-1.79-4.73-4.3s1.87-4.12,5.24-4.14h3.79v-.26c0-1.46-.97-2.3-2.86-2.3-1.23,0-2.66.41-4.09,1.2l-1.23-2.71c2.05-1.02,3.81-1.58,6.21-1.58,3.68,0,5.8,1.84,5.83,4.94l.03,8.98h-3.86v-1.61ZM303.64,444.89v-1.23h-3.09c-1.51,0-2.25.46-2.25,1.56s.82,1.74,2.15,1.74c1.66,0,2.97-.89,3.2-2.07Z"/><path class="al" d="M323.02,438.59l-2.66,1.92c-.74-.92-1.79-1.48-3.15-1.46-1.92,0-3.27,1.48-3.27,3.68s1.36,3.73,3.27,3.73c1.41,0,2.51-.54,3.2-1.61l2.71,1.84c-1.15,1.92-3.3,3.04-6.11,3.04-4.17,0-7.01-2.81-7.01-6.98s2.84-7.06,7.06-7.06c2.63,0,4.73,1.05,5.96,2.89Z"/><path class="al" d="M334.35,448.82c-1.02.59-2.3.95-3.58.95-2.46,0-4.32-1.41-4.32-4.25v-6.37h-1.92v-2.71h1.92v-3.78h3.91v3.78h3.73v2.74h-3.73v5.68c0,1.15.49,1.61,1.33,1.59.51,0,1.12-.18,1.84-.51l.82,2.89Z"/><path class="al" d="M350.05,449.59h-3.91v-2.43c-.95,1.74-2.53,2.58-4.6,2.58-3.04,0-4.96-2.02-4.96-5.27v-8.64h3.94v7.52c0,1.74,1,2.79,2.58,2.79,1.89-.03,3.04-1.51,3.04-3.5v-6.8h3.91v13.76Z"/><path class="al" d="M358.06,438.31c.95-1.69,2.51-2.61,4.55-2.63v3.71c-2.81-.26-4.55,1.25-4.55,3.58v6.62h-3.94v-13.76h3.94v2.48Z"/><path class="al" d="M369.1,431.92c0,1.28-.87,2.2-2.12,2.2s-2.12-.92-2.12-2.2.87-2.2,2.12-2.2,2.12.92,2.12,2.2ZM365.01,449.59v-13.76h3.94v13.76h-3.94Z"/><path class="al" d="M386.72,440.95v8.64h-3.94v-7.49c0-1.74-1.02-2.81-2.71-2.81-1.97.03-3.15,1.51-3.15,3.53v6.78h-3.94v-13.76h3.94v2.4c.97-1.71,2.61-2.53,4.76-2.56,3.07,0,5.04,2.05,5.04,5.27Z"/><path class="al" d="M403.27,448.31c0,3.91-2.94,6.39-7.34,6.39-2.33,0-4.4-.74-5.98-1.82l1.46-2.76c1.25.89,2.71,1.38,4.27,1.38,2.25,0,3.68-1.2,3.68-3.07v-1.56c-.92,1.28-2.33,2-4.14,2-3.55,0-6.01-2.66-6.01-6.65s2.4-6.52,5.91-6.52c1.87-.03,3.3.72,4.25,2v-1.87h3.91v12.48ZM399.35,442.33c0-2.12-1.3-3.58-3.22-3.58s-3.22,1.48-3.25,3.58c.03,2.1,1.3,3.55,3.25,3.55s3.22-1.46,3.22-3.55Z"/></g>
+    <g><path class="al" d="M258.08,413.1l-1.41,3.48h-4.17l7.77-17.9h4.17l7.65,17.9h-4.32l-1.41-3.48h-8.29ZM262.25,402.89l-2.84,6.96h5.65l-2.81-6.96Z"/><path class="al" d="M286.6,416.58h-3.91v-2.43c-.95,1.74-2.53,2.58-4.6,2.58-3.04,0-4.96-2.02-4.96-5.27v-8.64h3.94v7.52c0,1.74,1,2.79,2.58,2.79,1.89-.03,3.04-1.51,3.04-3.5v-6.8h3.91v13.76Z"/><path class="al" d="M294.6,405.3c.95-1.69,2.51-2.61,4.55-2.63v3.71c-2.81-.26-4.55,1.25-4.55,3.58v6.62h-3.94v-13.76h3.94v2.48Z"/><path class="al" d="M314.21,410.9h-9.87c.46,1.74,1.79,2.76,3.55,2.76,1.3,0,2.53-.51,3.48-1.46l2.07,2.1c-1.38,1.53-3.4,2.43-5.88,2.43-4.4,0-7.19-2.81-7.19-6.98s2.89-7.06,7.08-7.06c4.83,0,7.08,3.2,6.75,8.21ZM310.53,408.57c-.05-1.82-1.23-2.99-3.04-2.99s-2.92,1.18-3.22,2.99h6.27Z"/><path class="al" d="M317.2,416.58v-18.98h3.94v18.98h-3.94Z"/><path class="al" d="M329.43,398.9c0,1.28-.87,2.2-2.12,2.2s-2.12-.92-2.12-2.2.87-2.2,2.12-2.2,2.12.92,2.12,2.2ZM325.34,416.58v-13.76h3.94v13.76h-3.94Z"/><path class="al" d="M341.29,414.97c-.92,1.15-2.4,1.79-4.32,1.79-2.94,0-4.73-1.79-4.73-4.3s1.87-4.12,5.24-4.14h3.78v-.26c0-1.46-.97-2.3-2.86-2.3-1.23,0-2.66.41-4.09,1.2l-1.23-2.71c2.05-1.02,3.81-1.58,6.21-1.58,3.68,0,5.81,1.84,5.83,4.94l.03,8.98h-3.86v-1.61ZM341.27,411.87v-1.23h-3.09c-1.51,0-2.25.46-2.25,1.56s.82,1.74,2.15,1.74c1.66,0,2.97-.89,3.2-2.07Z"/><path class="al" d="M362.54,407.93v8.64h-3.94v-7.49c0-1.74-1.02-2.81-2.71-2.81-1.97.03-3.15,1.51-3.15,3.53v6.78h-3.94v-13.76h3.94v2.4c.97-1.71,2.61-2.53,4.76-2.56,3.07,0,5.04,2.05,5.04,5.27Z"/></g>
+    <polygon class="al" points="208.73 411.87 217.17 409.58 217.61 400.85 222.39 408.17 230.83 405.88 225.35 412.69 230.13 420.01 221.96 416.9 216.48 423.71 216.91 414.98 208.73 411.87"/>
+    <polygon class="al" points="338.2 389.03 338.2 380.29 329.89 377.59 338.2 374.88 338.2 366.14 343.34 373.21 351.66 370.51 346.52 377.59 351.66 384.66 343.34 381.96 338.2 389.03"/>
+    <polygon class="al" points="323.25 346.81 322.01 355.47 329.86 359.32 321.24 360.81 320 369.47 315.92 361.74 307.3 363.23 313.39 356.96 309.31 349.23 317.16 353.08 323.25 346.81"/>
+    <polygon class="al" points="286.85 338.29 289.55 346.61 298.29 346.61 291.22 351.75 293.92 360.07 286.85 354.93 279.77 360.07 282.47 351.75 275.4 346.61 284.14 346.61 286.85 338.29"/>
+    <polygon class="al" points="249.71 348.08 255.9 354.25 263.69 350.27 259.73 358.07 265.92 364.24 257.28 362.89 253.33 370.68 251.94 362.05 243.31 360.7 251.09 356.71 249.71 348.08"/>
+    <polygon class="al" points="221.29 374.36 229.71 376.73 234.57 369.46 234.91 378.2 243.33 380.57 235.12 383.6 235.47 392.34 230.05 385.47 221.85 388.5 226.71 381.23 221.29 374.36"/>
+  </svg>
+  <div class="login-card">
+    <div class="login-accent"></div>
+    <div class="login-body">
+      <div class="login-logo"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+      <div class="login-logo-text">Aurelian Manufacturing</div>
+      <div class="login-subtitle">PRESEED INVESTOR PACKAGE</div>
+      <form id="login-form" onsubmit="return handleLogin(event)">
+        <input type="password" class="login-field" id="login-password"
+               placeholder="Enter investor password" autocomplete="off" autofocus>
+        <button type="submit" class="login-btn">Sign In</button>
+      </form>
+      <div class="login-error" id="login-error"></div>
+    </div>
+    <div class="login-footer">CONFIDENTIAL &mdash; Authorized Investors Only</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+<!-- HERO -->
+<header class="hero">
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang="no" onclick="setLang('no')">NO</button>
+  </div>
+  <svg class="hero-logo" xmlns="http://www.w3.org/2000/svg" viewBox="200 330 220 130" style="height:120px;margin-bottom:20px;opacity:0.95;">
+    <defs><style>.al{fill:#fff;}</style></defs>
+    <g><path class="al" d="M227.59,449.59v-12.07l-4.76,10.25h-2.63l-4.76-10.25v12.07h-3.66v-17.9h4.53l5.22,10.95,5.19-10.95h4.5v17.9h-3.63Z"/><path class="al" d="M243.34,447.98c-.92,1.15-2.4,1.79-4.32,1.79-2.94,0-4.73-1.79-4.73-4.3s1.87-4.12,5.24-4.14h3.78v-.26c0-1.46-.97-2.3-2.86-2.3-1.23,0-2.66.41-4.09,1.2l-1.23-2.71c2.05-1.02,3.81-1.58,6.21-1.58,3.68,0,5.81,1.84,5.83,4.94l.03,8.98h-3.86v-1.61ZM243.32,444.89v-1.23h-3.09c-1.51,0-2.25.46-2.25,1.56s.82,1.74,2.15,1.74c1.66,0,2.97-.89,3.2-2.07Z"/><path class="al" d="M264.59,440.95v8.64h-3.94v-7.49c0-1.74-1.02-2.81-2.71-2.81-1.97.03-3.15,1.51-3.15,3.53v6.78h-3.94v-13.76h3.94v2.4c.97-1.71,2.61-2.53,4.76-2.56,3.07,0,5.04,2.05,5.04,5.27Z"/><path class="al" d="M281.32,449.59h-3.91v-2.43c-.95,1.74-2.53,2.58-4.6,2.58-3.04,0-4.96-2.02-4.96-5.27v-8.64h3.94v7.52c0,1.74,1,2.79,2.58,2.79,1.89-.03,3.04-1.51,3.04-3.5v-6.8h3.91v13.76Z"/><path class="al" d="M289.73,435.3v1.15h3.25v2.74h-3.25v10.41h-3.91v-10.41h-1.84v-2.74h1.84v-1.3c0-3.07,2.3-4.71,5.06-4.71,1.28,0,2.63.33,3.61.97l-1.41,2.86c-.51-.38-1.15-.59-1.71-.59-.92,0-1.64.51-1.64,1.61Z"/><path class="al" d="M303.67,447.98c-.92,1.15-2.4,1.79-4.32,1.79-2.94,0-4.73-1.79-4.73-4.3s1.87-4.12,5.24-4.14h3.79v-.26c0-1.46-.97-2.3-2.86-2.3-1.23,0-2.66.41-4.09,1.2l-1.23-2.71c2.05-1.02,3.81-1.58,6.21-1.58,3.68,0,5.8,1.84,5.83,4.94l.03,8.98h-3.86v-1.61ZM303.64,444.89v-1.23h-3.09c-1.51,0-2.25.46-2.25,1.56s.82,1.74,2.15,1.74c1.66,0,2.97-.89,3.2-2.07Z"/><path class="al" d="M323.02,438.59l-2.66,1.92c-.74-.92-1.79-1.48-3.15-1.46-1.92,0-3.27,1.48-3.27,3.68s1.36,3.73,3.27,3.73c1.41,0,2.51-.54,3.2-1.61l2.71,1.84c-1.15,1.92-3.3,3.04-6.11,3.04-4.17,0-7.01-2.81-7.01-6.98s2.84-7.06,7.06-7.06c2.63,0,4.73,1.05,5.96,2.89Z"/><path class="al" d="M334.35,448.82c-1.02.59-2.3.95-3.58.95-2.46,0-4.32-1.41-4.32-4.25v-6.37h-1.92v-2.71h1.92v-3.78h3.91v3.78h3.73v2.74h-3.73v5.68c0,1.15.49,1.61,1.33,1.59.51,0,1.12-.18,1.84-.51l.82,2.89Z"/><path class="al" d="M350.05,449.59h-3.91v-2.43c-.95,1.74-2.53,2.58-4.6,2.58-3.04,0-4.96-2.02-4.96-5.27v-8.64h3.94v7.52c0,1.74,1,2.79,2.58,2.79,1.89-.03,3.04-1.51,3.04-3.5v-6.8h3.91v13.76Z"/><path class="al" d="M358.06,438.31c.95-1.69,2.51-2.61,4.55-2.63v3.71c-2.81-.26-4.55,1.25-4.55,3.58v6.62h-3.94v-13.76h3.94v2.48Z"/><path class="al" d="M369.1,431.92c0,1.28-.87,2.2-2.12,2.2s-2.12-.92-2.12-2.2.87-2.2,2.12-2.2,2.12.92,2.12,2.2ZM365.01,449.59v-13.76h3.94v13.76h-3.94Z"/><path class="al" d="M386.72,440.95v8.64h-3.94v-7.49c0-1.74-1.02-2.81-2.71-2.81-1.97.03-3.15,1.51-3.15,3.53v6.78h-3.94v-13.76h3.94v2.4c.97-1.71,2.61-2.53,4.76-2.56,3.07,0,5.04,2.05,5.04,5.27Z"/><path class="al" d="M403.27,448.31c0,3.91-2.94,6.39-7.34,6.39-2.33,0-4.4-.74-5.98-1.82l1.46-2.76c1.25.89,2.71,1.38,4.27,1.38,2.25,0,3.68-1.2,3.68-3.07v-1.56c-.92,1.28-2.33,2-4.14,2-3.55,0-6.01-2.66-6.01-6.65s2.4-6.52,5.91-6.52c1.87-.03,3.3.72,4.25,2v-1.87h3.91v12.48ZM399.35,442.33c0-2.12-1.3-3.58-3.22-3.58s-3.22,1.48-3.25,3.58c.03,2.1,1.3,3.55,3.25,3.55s3.22-1.46,3.22-3.55Z"/></g>
+    <g><path class="al" d="M258.08,413.1l-1.41,3.48h-4.17l7.77-17.9h4.17l7.65,17.9h-4.32l-1.41-3.48h-8.29ZM262.25,402.89l-2.84,6.96h5.65l-2.81-6.96Z"/><path class="al" d="M286.6,416.58h-3.91v-2.43c-.95,1.74-2.53,2.58-4.6,2.58-3.04,0-4.96-2.02-4.96-5.27v-8.64h3.94v7.52c0,1.74,1,2.79,2.58,2.79,1.89-.03,3.04-1.51,3.04-3.5v-6.8h3.91v13.76Z"/><path class="al" d="M294.6,405.3c.95-1.69,2.51-2.61,4.55-2.63v3.71c-2.81-.26-4.55,1.25-4.55,3.58v6.62h-3.94v-13.76h3.94v2.48Z"/><path class="al" d="M314.21,410.9h-9.87c.46,1.74,1.79,2.76,3.55,2.76,1.3,0,2.53-.51,3.48-1.46l2.07,2.1c-1.38,1.53-3.4,2.43-5.88,2.43-4.4,0-7.19-2.81-7.19-6.98s2.89-7.06,7.08-7.06c4.83,0,7.08,3.2,6.75,8.21ZM310.53,408.57c-.05-1.82-1.23-2.99-3.04-2.99s-2.92,1.18-3.22,2.99h6.27Z"/><path class="al" d="M317.2,416.58v-18.98h3.94v18.98h-3.94Z"/><path class="al" d="M329.43,398.9c0,1.28-.87,2.2-2.12,2.2s-2.12-.92-2.12-2.2.87-2.2,2.12-2.2,2.12.92,2.12,2.2ZM325.34,416.58v-13.76h3.94v13.76h-3.94Z"/><path class="al" d="M341.29,414.97c-.92,1.15-2.4,1.79-4.32,1.79-2.94,0-4.73-1.79-4.73-4.3s1.87-4.12,5.24-4.14h3.78v-.26c0-1.46-.97-2.3-2.86-2.3-1.23,0-2.66.41-4.09,1.2l-1.23-2.71c2.05-1.02,3.81-1.58,6.21-1.58,3.68,0,5.81,1.84,5.83,4.94l.03,8.98h-3.86v-1.61ZM341.27,411.87v-1.23h-3.09c-1.51,0-2.25.46-2.25,1.56s.82,1.74,2.15,1.74c1.66,0,2.97-.89,3.2-2.07Z"/><path class="al" d="M362.54,407.93v8.64h-3.94v-7.49c0-1.74-1.02-2.81-2.71-2.81-1.97.03-3.15,1.51-3.15,3.53v6.78h-3.94v-13.76h3.94v2.4c.97-1.71,2.61-2.53,4.76-2.56,3.07,0,5.04,2.05,5.04,5.27Z"/></g>
+    <polygon class="al" points="208.73 411.87 217.17 409.58 217.61 400.85 222.39 408.17 230.83 405.88 225.35 412.69 230.13 420.01 221.96 416.9 216.48 423.71 216.91 414.98 208.73 411.87"/>
+    <polygon class="al" points="338.2 389.03 338.2 380.29 329.89 377.59 338.2 374.88 338.2 366.14 343.34 373.21 351.66 370.51 346.52 377.59 351.66 384.66 343.34 381.96 338.2 389.03"/>
+    <polygon class="al" points="323.25 346.81 322.01 355.47 329.86 359.32 321.24 360.81 320 369.47 315.92 361.74 307.3 363.23 313.39 356.96 309.31 349.23 317.16 353.08 323.25 346.81"/>
+    <polygon class="al" points="286.85 338.29 289.55 346.61 298.29 346.61 291.22 351.75 293.92 360.07 286.85 354.93 279.77 360.07 282.47 351.75 275.4 346.61 284.14 346.61 286.85 338.29"/>
+    <polygon class="al" points="249.71 348.08 255.9 354.25 263.69 350.27 259.73 358.07 265.92 364.24 257.28 362.89 253.33 370.68 251.94 362.05 243.31 360.7 251.09 356.71 249.71 348.08"/>
+    <polygon class="al" points="221.29 374.36 229.71 376.73 234.57 369.46 234.91 378.2 243.33 380.57 235.12 383.6 235.47 392.34 230.05 385.47 221.85 388.5 226.71 381.23 221.29 374.36"/>
+  </svg>
+  <div class="hero-bar"></div>
+  <div class="hero-tagline" data-i18n="hero_tagline">Production as a Service</div>
+  <div class="hero-title" data-i18n="hero_title">PreSeed Investor Information Package</div>
+  <div class="hero-date">February 2026</div>
+  <div class="hero-conf">CONFIDENTIAL</div>
+</header>
+
+<!-- NAV -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <a class="nav-link" href="#pitch-deck" data-i18n="nav_deck">Pitch Deck</a>
+    <a class="nav-link" href="#calculator" data-i18n="nav_calc">Calculator</a>
+    <a class="nav-link" href="#about" data-i18n="nav_about">About</a>
+    <a class="nav-link" href="#team" data-i18n="nav_team">Team</a>
+    <a class="nav-link" href="#contribution" data-i18n="nav_contrib">Contribution</a>
+    <a class="nav-link" href="#market" data-i18n="nav_market">Market</a>
+    <a class="nav-link" href="#model" data-i18n="nav_model">Business Model</a>
+    <a class="nav-link" href="#financials" data-i18n="nav_fin">Financials</a>
+    <a class="nav-link" href="#fundraising" data-i18n="nav_fund">Fundraising</a>
+    <a class="nav-link" href="#milestones" data-i18n="nav_miles">Milestones</a>
+    <a class="nav-link" href="#risk" data-i18n="nav_risk">Risk</a>
+    <a class="nav-link" href="#interest" data-i18n="nav_interest">Invest</a>
+    <a class="nav-link" href="#contact" data-i18n="nav_contact">Contact</a>
+  </div>
+</nav>
+
+<!-- S1: PITCH DECK -->
+<section class="section" id="pitch-deck">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">1</div>
+      <h2 class="section-title" data-i18n="s1_title">Investor Pitch Deck</h2>
+    </div>
+    <p data-i18n="s1_intro">Review our complete Seed round investor presentation below. You may also download it for offline viewing.</p>
+    <iframe class="pdf-frame" src="07_Investor_Pitch_Deck_PreSeed_V4.pdf" title="Investor Pitch Deck"></iframe>
+    <div style="margin-top:14px; text-align:center;">
+      <a class="btn-outline btn-sm" href="07_Investor_Pitch_Deck_PreSeed_V4.pdf" download data-i18n="s1_download">Download Pitch Deck (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<!-- S2: CALCULATOR -->
+<section class="section" id="calculator">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">2</div>
+      <h2 class="section-title" data-i18n="s2_title">Interactive Financial Calculator</h2>
+    </div>
+    <div class="navy-card">
+      <h3 data-i18n="s2_card_title">Explore the Financial Model</h3>
+      <p data-i18n="s2_card_desc">Adjust CNC count, utilization, and maturity to see how projected revenue, costs, and profitability change in real time. All calculations are based on 02 Economic Tables &amp; Projections (VDR 02.04).</p>
+      <a class="btn" href="calculator.html" target="_blank" rel="noopener" data-i18n="s2_card_btn">Open Financial Calculator</a>
+      <div class="note" data-i18n="s2_card_note">Opens directly in a new tab.</div>
+    </div>
+  </div>
+</section>
+
+<!-- S3: ABOUT -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">3</div>
+      <h2 class="section-title" data-i18n="s3_title">About Aurelian Manufacturing</h2>
+    </div>
+    <p data-i18n="s3_p1">Aurelian Manufacturing AS (org.nr 835 679 632) is building Norway's first purpose-built autonomous CNC manufacturing facility. The company operates a "Production as a Service" model, delivering high-mix, low-volume precision machining for defense, energy, maritime, and critical infrastructure sectors.</p>
+    <p data-i18n="s3_p2">The facility is located in V&aring;ler, &Oslash;stfold &mdash; a purpose-built 2,635 m&sup2; production hall by Norbygg on a 30,000 m&sup2; site, designed from the ground up for autonomous operation.</p>
+    <div class="callout">
+      <p data-i18n="s3_callout"><strong>The structural problem:</strong> Norway faces a documented shortage of 39,000 skilled workers (NAV 2025), creating a persistent bottleneck in precision manufacturing capacity. Aurelian's greenfield approach enables design choices &mdash; 24/7 autonomous scheduling, sub-linear staffing, integrated digital thread &mdash; that are structurally difficult for existing operations to retrofit.</p>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-val">2,635 m&sup2;</div>
+        <div class="kpi-label" data-i18n="s3_kpi1">Purpose-built facility</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">24/7</div>
+        <div class="kpi-label" data-i18n="s3_kpi2">Autonomous scheduling</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">5 CNC</div>
+        <div class="kpi-label" data-i18n="s3_kpi3">Seed phase machines</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">Aug 2027</div>
+        <div class="kpi-label" data-i18n="s3_kpi4">Production start target</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S4: TEAM -->
+<section class="section" id="team">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">4</div>
+      <h2 class="section-title" data-i18n="s4_title">Founding Team</h2>
+    </div>
+    <p data-i18n="s4_intro">The founding team combines deep industrial experience with commercial execution capability.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-name">Andr&eacute; Tandberg</div>
+        <div class="team-role">CEO &amp; Co-Founder</div>
+        <div class="team-bio" data-i18n="s4_andre">Holen Industrier AS (53.125%). Experienced industrial leader with hands-on background in CNC manufacturing, production management, and operational scaling. Responsible for technology strategy, facility design, and operational execution.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-name">Tore Ausland</div>
+        <div class="team-role">VP Business Development &amp; Co-Founder</div>
+        <div class="team-bio" data-i18n="s4_tore">Quality Group Invest AS (31.875%). Extensive experience in business development, customer acquisition, and strategic partnerships across defense and energy sectors. Leads commercial strategy, investor relations, and go-to-market execution.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-name">Henrik S. Str&oslash;m</div>
+        <div class="team-role">Co-Founder</div>
+        <div class="team-bio" data-i18n="s4_henrik">STAH Invest AS (10.00%). Contributes strategic advisory expertise and network within Norwegian industrial and investment communities.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-name">Fredrik Vangsal</div>
+        <div class="team-role">Co-Founder &amp; Technical Advisor</div>
+        <div class="team-bio" data-i18n="s4_fredrik">Roadcode AS (5.00%). Technical advisor with deep expertise in software architecture, digital systems, and automation integration. Supports technology strategy and digital thread implementation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S5: FOUNDERS CONTRIBUTION -->
+<section class="section" id="contribution">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">5</div>
+      <h2 class="section-title" data-i18n="s5_title">Founders' Contribution Prior to PreSeed</h2>
+    </div>
+    <p data-i18n="s5_intro">Between October 2025 and February 2026 &mdash; before any external capital was raised &mdash; the founders delivered substantial value creation at their own cost and risk. No salaries, no founder loans, and no consulting fees were taken during this period.</p>
+    <div class="contrib-grid">
+      <div class="contrib-item">
+        <h4 data-i18n="s5_c1_title">Complete DD Package</h4>
+        <div class="val" data-i18n="s5_c1_val">50+ documents &mdash; 700K&ndash;1.4M NOK equivalent</div>
+      </div>
+      <div class="contrib-item">
+        <h4 data-i18n="s5_c2_title">Financial Model &amp; Economic Foundation</h4>
+        <div class="val" data-i18n="s5_c2_val">Full projections model &mdash; 200&ndash;400K NOK equivalent</div>
+      </div>
+      <div class="contrib-item">
+        <h4 data-i18n="s5_c3_title">Market Analysis &amp; GTM Strategy</h4>
+        <div class="val" data-i18n="s5_c3_val">Defense, energy, infrastructure &mdash; 200&ndash;400K NOK equivalent</div>
+      </div>
+      <div class="contrib-item">
+        <h4 data-i18n="s5_c4_title">Supplier &amp; Technical Due Diligence</h4>
+        <div class="val" data-i18n="s5_c4_val">MAZAK/Ravema evaluation &mdash; 200&ndash;400K NOK equivalent</div>
+      </div>
+      <div class="contrib-item">
+        <h4 data-i18n="s5_c5_title">Customer Pipeline</h4>
+        <div class="val" data-i18n="s5_c5_val">Physical Robotics LOI signed &mdash; Strategic value</div>
+      </div>
+      <div class="contrib-item">
+        <h4 data-i18n="s5_c6_title">Investor Materials &amp; Pitch</h4>
+        <div class="val" data-i18n="s5_c6_val">Full investor package &mdash; 250&ndash;500K NOK equivalent</div>
+      </div>
+    </div>
+    <div class="callout">
+      <p data-i18n="s5_total"><strong>Total founder value creation:</strong> 1.8&ndash;3.6 MNOK in consulting-equivalent work, plus approximately 1.4 MNOK in founder time investment. This represents significant skin in the game before any external capital was deployed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- S6: MARKET -->
+<section class="section" id="market">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">6</div>
+      <h2 class="section-title" data-i18n="s6_title">Market Opportunity</h2>
+    </div>
+    <p data-i18n="s6_p1">Three structural forces converge to create a compelling market window for autonomous precision manufacturing in Norway.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-name" data-i18n="s6_m1_title">Labor Shortage</div>
+        <div class="team-bio" data-i18n="s6_m1_desc">Norway's documented shortage of 39,000 skilled workers (NAV 2025) creates a structural bottleneck. CNC operators are among the hardest-to-fill positions, making autonomous manufacturing a necessity rather than a luxury.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-name" data-i18n="s6_m2_title">Defense Budget Growth</div>
+        <div class="team-bio" data-i18n="s6_m2_desc">Norwegian and Nordic defense budgets are at historic highs, with a projected combined spend of 1,624 billion NOK. This drives sustained demand for domestic precision manufacturing with defense certifications (AQAP 2110).</div>
+      </div>
+      <div class="team-card">
+        <div class="team-name" data-i18n="s6_m3_title">Energy Transition</div>
+        <div class="team-bio" data-i18n="s6_m3_desc">Equinor, Aker, and Vattenfall are investing heavily in offshore wind and energy infrastructure, creating demand for NORSOK-compatible precision components from certified Norwegian suppliers.</div>
+      </div>
+    </div>
+    <p style="font-size:12px; color:var(--gray); margin-top:14px;" data-i18n="s6_ref">Sources: NAV Bedriftsunders&oslash;kelsen 2025, CNC Benchmark &amp; Competitive Landscape (VDR 03.02), Market Trends &amp; Projections (VDR 03.06).</p>
+  </div>
+</section>
+
+<!-- S7: BUSINESS MODEL -->
+<section class="section" id="model">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">7</div>
+      <h2 class="section-title" data-i18n="s7_title">Business Model &amp; Revenue Logic</h2>
+    </div>
+    <p data-i18n="s7_p1">Aurelian operates a "Production as a Service" model: customers pay per machine-hour for precision CNC machining, with no upfront capital commitment. Revenue is a direct function of three variables.</p>
+    <div class="callout">
+      <p><strong data-i18n="s7_formula_label">Revenue formula:</strong> <code>CNC count &times; 8,760 hours/year &times; utilization% &times; NOK 3,000/hour</code></p>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-val">3,000 NOK</div>
+        <div class="kpi-label" data-i18n="s7_kpi1">Hourly rate (conservative floor)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">8,760 h</div>
+        <div class="kpi-label" data-i18n="s7_kpi2">Available hours per CNC/year</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">0.8 FTE</div>
+        <div class="kpi-label" data-i18n="s7_kpi3">Staff per CNC (design target at scale)</div>
+      </div>
+    </div>
+    <p data-i18n="s7_p2">The hourly rate of NOK 3,000 represents a conservative midpoint within the observed industry range of NOK 2,500&ndash;3,500 (CNC Benchmark, VDR 03.02). The design target of 0.8 FTE per CNC at scale is enabled by greenfield automation design, 24/7 autonomous scheduling, and integrated tool management.</p>
+    <p data-i18n="s7_p3"><strong>Customer Program (50/50 profit-sharing):</strong> Qualified customers committing more than 100,000 hours annually receive standard pricing at NOK 3,000/hour. Above 45% utilization, marginal profit is split 50/50 between Aurelian and the customer. This aligns incentives and builds long-term partnerships.</p>
+    <p style="font-size:12px; color:var(--gray);" data-i18n="s7_note">Note: The staffing ratio of 0.8 FTE/CNC is a design target for a pre-revenue company, not an observed metric. Industry observed average is approximately 2.5 staff per CNC (VDR 03.02).</p>
+  </div>
+</section>
+
+<!-- S8: FINANCIALS -->
+<section class="section" id="financials">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">8</div>
+      <h2 class="section-title" data-i18n="s8_title">Financial Overview</h2>
+    </div>
+    <p data-i18n="s8_intro">The following projections are based on the assumptions in 02 Economic Tables &amp; Projections (VDR 02.04). All values represent design targets for a pre-revenue company &mdash; not guarantees of future performance.</p>
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-val">~315 MNOK</div>
+        <div class="kpi-label" data-i18n="s8_kpi1">Revenue at 20 CNC, 60% util.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">~24%</div>
+        <div class="kpi-label" data-i18n="s8_kpi2">Break-even utilization (5 CNC)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">~1,254 MNOK</div>
+        <div class="kpi-label" data-i18n="s8_kpi3">Accumulated profit 2027&ndash;2035</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">2.3B NOK</div>
+        <div class="kpi-label" data-i18n="s8_kpi4">Exit valuation (10x EBITDA)</div>
+      </div>
+    </div>
+    <h3 style="font-size:16px; font-weight:700; color:var(--red); margin:28px 0 12px;" data-i18n="s8_traj_title">Projected Revenue Trajectory</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="th_year">Year</th>
+            <th class="r">CNC</th>
+            <th class="r" data-i18n="th_util">Util.</th>
+            <th class="r" data-i18n="th_rev">Revenue</th>
+            <th class="r" data-i18n="th_cost">Cost</th>
+            <th class="r" data-i18n="th_profit">Profit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>2027 H2</td><td class="r">5</td><td class="r">20%</td><td class="r">10.9</td><td class="r">13.4</td><td class="r">&minus;2.5</td></tr>
+          <tr><td>2028</td><td class="r">5</td><td class="r">37.5%</td><td class="r">49.3</td><td class="r">34.1</td><td class="r">15.2</td></tr>
+          <tr><td>2029</td><td class="r">12</td><td class="r">42.5%</td><td class="r">134</td><td class="r">61.1</td><td class="r">72.9</td></tr>
+          <tr><td>2030</td><td class="r">17</td><td class="r">47.5%</td><td class="r">212</td><td class="r">80.2</td><td class="r">131.8</td></tr>
+          <tr><td>2031</td><td class="r">20</td><td class="r">52.5%</td><td class="r">276</td><td class="r">92.8</td><td class="r">166.8*</td></tr>
+          <tr><td>2032</td><td class="r">20</td><td class="r">57.5%</td><td class="r">302</td><td class="r">92.4</td><td class="r">182.3*</td></tr>
+          <tr><td>2033+</td><td class="r">22&ndash;25</td><td class="r">60&ndash;65%</td><td class="r">347&ndash;427</td><td class="r">98&ndash;107</td><td class="r">207&ndash;248*</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px; color:var(--gray);" data-i18n="s8_note">*After Customer Program deductions (50/50 profit-sharing above 45% util.). All amounts in MNOK. All values are projections based on 02 Economic Tables &amp; Projections (VDR 02.04).</p>
+
+    <h3 style="font-size:16px; font-weight:700; color:var(--red); margin:28px 0 12px;" data-i18n="s8_cost_title">Cost Structure (20 CNC Steady State)</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th data-i18n="th_item">Item</th><th class="r" data-i18n="th_amount">Amount (MNOK)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td data-i18n="s8_c1">Payroll operative (16 FTE &times; 1.1 MNOK)</td><td class="r">17.6</td></tr>
+          <tr><td data-i18n="s8_c2">Payroll admin (4 FTE &times; 1.4 MNOK)</td><td class="r">5.6</td></tr>
+          <tr><td data-i18n="s8_c3">Depreciation CNC</td><td class="r">25.0</td></tr>
+          <tr><td data-i18n="s8_c4">Depreciation shop base</td><td class="r">1.1</td></tr>
+          <tr><td data-i18n="s8_c5">Finance cost</td><td class="r">10.1</td></tr>
+          <tr><td data-i18n="s8_c6">Facility lease (Norbygg)</td><td class="r">5.2</td></tr>
+          <tr><td data-i18n="s8_c7">Other fixed</td><td class="r">3.0</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td class="b" data-i18n="s8_ctotal">Total fixed</td><td class="r">67.6</td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <p style="font-size:12px; color:var(--gray);" data-i18n="s8_var">Variable costs (tools, energy, maintenance): 13% of revenue during startup (2027&ndash;2028), declining to 8% at steady state (2032+).</p>
+  </div>
+</section>
+
+<!-- S9: FUNDRAISING -->
+<section class="section" id="fundraising">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">9</div>
+      <h2 class="section-title" data-i18n="s9_title">Fundraising Structure &amp; Cap Table</h2>
+    </div>
+    <h3 style="font-size:16px; font-weight:700; color:var(--red); margin:0 0 12px;" data-i18n="s9_rounds_title">Fundraising Rounds</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="th_round">Round</th>
+            <th class="r" data-i18n="th_equity">Equity</th>
+            <th class="r" data-i18n="th_premoney">Pre-money</th>
+            <th class="r" data-i18n="th_postmoney">Post-money</th>
+            <th class="r" data-i18n="th_machines">Machines</th>
+            <th class="r" data-i18n="th_debt">Bank Debt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>PreSeed</td><td class="r">5 MNOK</td><td class="r">25 MNOK</td><td class="r">30 MNOK</td><td class="r">0</td><td class="r">&mdash;</td></tr>
+          <tr><td>Seed</td><td class="r">51.3 MNOK</td><td class="r">130 MNOK</td><td class="r">181.3 MNOK</td><td class="r">5 CNC + shop base</td><td class="r">29.3 MNOK</td></tr>
+          <tr><td>Serie A</td><td class="r">45 MNOK</td><td class="r">250 MNOK</td><td class="r">295 MNOK</td><td class="r">15 CNC (3&times;5)</td><td class="r">105 MNOK</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td class="b" data-i18n="s9_total_eq">Total equity raised</td><td class="r">101.3 MNOK</td><td colspan="4"></td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <h3 style="font-size:16px; font-weight:700; color:var(--red); margin:28px 0 12px;" data-i18n="s9_cap_title">Cap Table (Post-Serie A)</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th data-i18n="th_shareholder">Shareholder</th><th class="r" data-i18n="th_ownership">Ownership</th></tr>
+        </thead>
+        <tbody>
+          <tr><td data-i18n="s9_existing">Existing shareholders</td><td class="r">50.60%</td></tr>
+          <tr><td>PreSeed investors</td><td class="r">10.12%</td></tr>
+          <tr><td>Seed investors</td><td class="r">23.98%</td></tr>
+          <tr><td>Serie A investors</td><td class="r">15.25%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:16px; font-weight:700; color:var(--red); margin:28px 0 12px;" data-i18n="s9_uof_title">Use of Funds &mdash; Seed (80.6 MNOK total)</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th data-i18n="th_category">Category</th><th class="r" data-i18n="th_amount">Amount (MNOK)</th><th class="r">%</th></tr>
+        </thead>
+        <tbody>
+          <tr><td data-i18n="s9_u1">CNC machines (5) + automation</td><td class="r">50.0</td><td class="r">62%</td></tr>
+          <tr><td data-i18n="s9_u2">Shop base setup</td><td class="r">8.6</td><td class="r">11%</td></tr>
+          <tr><td data-i18n="s9_u3">Operational buffer (6 months)</td><td class="r">10.0</td><td class="r">12%</td></tr>
+          <tr><td data-i18n="s9_u4">Facility &amp; setup</td><td class="r">~5.0</td><td class="r">6%</td></tr>
+          <tr><td data-i18n="s9_u5">Recruitment &amp; startup</td><td class="r">~4.0</td><td class="r">5%</td></tr>
+          <tr><td data-i18n="s9_u6">Diverse / margin</td><td class="r">~3.0</td><td class="r">4%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px; color:var(--gray); margin-top:8px;" data-i18n="s9_split">Split: Equity 51.3 MNOK + Bank debt 29.3 MNOK = 80.6 MNOK total.</p>
+  </div>
+</section>
+
+<!-- S10: MILESTONES -->
+<section class="section" id="milestones">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">10</div>
+      <h2 class="section-title" data-i18n="s10_title">Key Milestones</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-date">Q1&ndash;Q2 2026</div><div class="tl-text" data-i18n="s10_m1">Seed round close</div></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-date">Q2 2026</div><div class="tl-text" data-i18n="s10_m2">Facility and CNC machine order confirmation</div></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-date">Q3 2026</div><div class="tl-text" data-i18n="s10_m3">Norbygg facility build start</div></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-date">Q3&ndash;Q4 2026</div><div class="tl-text" data-i18n="s10_m4">Key hires (Ops Lead, CNC operators)</div></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-date">Q1 2027</div><div class="tl-text" data-i18n="s10_m5">Facility complete</div></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-date">Q2 2027</div><div class="tl-text" data-i18n="s10_m6">Machines delivered and installed</div></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-date" style="color:var(--red);font-size:14px;">August 2027</div><div class="tl-text" style="font-weight:700;" data-i18n="s10_m7">Production start</div></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-date">Q4 2027</div><div class="tl-text" data-i18n="s10_m8">ISO 9001 certified</div></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-date">Q4 2027 / Q1 2028</div><div class="tl-text" data-i18n="s10_m9">Break-even reached</div></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div><div class="tl-date">Q3&ndash;Q4 2028</div><div class="tl-text" data-i18n="s10_m10">AS9100 / AQAP 2110 certified</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- S11: RISK -->
+<section class="section" id="risk">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">11</div>
+      <h2 class="section-title" data-i18n="s11_title">Risk &amp; Sensitivity</h2>
+    </div>
+    <p data-i18n="s11_intro">The financial model has been stress-tested across multiple scenarios. Key sensitivities are summarized below. Full analysis: Sensitivity Analysis (VDR 02.05).</p>
+    <h3 style="font-size:16px; font-weight:700; color:var(--red); margin:20px 0 12px;" data-i18n="s11_util_title">Utilization Sensitivity (5 CNC &mdash; Seed Phase)</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th data-i18n="th_util">Utilization</th><th class="r">EBIT (MNOK)</th><th data-i18n="th_status">Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>15%</td><td class="r">&minus;10.6</td><td data-i18n="s11_r1">Uses operational buffer</td></tr>
+          <tr><td>~24%</td><td class="r">~0</td><td data-i18n="s11_r2">Break-even point</td></tr>
+          <tr><td>37.5% (2028 budget)</td><td class="r">+15.2</td><td data-i18n="s11_r3">Budget target</td></tr>
+          <tr><td>45% (stretch)</td><td class="r">+23.7</td><td data-i18n="s11_r4">Customer Program threshold</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 style="font-size:16px; font-weight:700; color:var(--red); margin:20px 0 12px;" data-i18n="s11_down_title">Downside Protections</h3>
+    <div class="contrib-grid">
+      <div class="contrib-item">
+        <h4 data-i18n="s11_d1_title">6-Month Delay</h4>
+        <div class="val" data-i18n="s11_d1_val">Operational buffer (10 MNOK) designed to absorb a 6-month delay without additional funding.</div>
+      </div>
+      <div class="contrib-item">
+        <h4 data-i18n="s11_d2_title">12-Month Customer Delay</h4>
+        <div class="val" data-i18n="s11_d2_val">Even at 35% utilization (below budget), the model projects positive EBIT of approximately 65 MNOK at scale.</div>
+      </div>
+      <div class="contrib-item">
+        <h4 data-i18n="s11_d3_title">CNC Resale Safety Valve</h4>
+        <div class="val" data-i18n="s11_d3_val">Multi-axis CNC machines retain 65&ndash;70% residual value in the first 0&ndash;2 years, providing a tangible floor for investor capital.</div>
+      </div>
+      <div class="contrib-item">
+        <h4 data-i18n="s11_d4_title">Price Sensitivity</h4>
+        <div class="val" data-i18n="s11_d4_val">At NOK 2,500/hour (low end of industry range), the model still projects positive EBIT across all utilization levels above 20%.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S12: INVESTOR INTEREST FORM -->
+<section class="section" id="interest">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">12</div>
+      <h2 class="section-title" data-i18n="s12_title">Express Your Interest</h2>
+    </div>
+    <p data-i18n="s12_intro">If you are interested in participating in the Seed round, please share your details below. This is a non-binding expression of interest &mdash; we will follow up personally to discuss terms and timeline.</p>
+    <div class="form-panel" id="interest-form-panel">
+      <form id="interest-form" onsubmit="return handleInterestSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-i18n="f_name">Full Name <span class="req">*</span></label>
+            <input class="form-input" type="text" name="full-name" id="int-name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="f_org">Organization / Company <span class="req">*</span></label>
+            <input class="form-input" type="text" name="organization" id="int-org" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-i18n="f_email">Email <span class="req">*</span></label>
+            <input class="form-input" type="email" name="email" id="int-email" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="f_phone">Phone</label>
+            <input class="form-input" type="tel" name="phone" id="int-phone">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-i18n="f_range">PreSeed Investment Range <span class="req">*</span></label>
+            <select class="form-select" name="investment-range" id="int-range" required>
+              <option value="" data-i18n="f_range_ph">Select range...</option>
+              <option value="0.1-0.5M NOK">0.1 &ndash; 0.5M NOK</option>
+              <option value="0.5-1M NOK">0.5 &ndash; 1M NOK</option>
+              <option value="1-2.5M NOK">1 &ndash; 2.5M NOK</option>
+              <option value="2.5-5M NOK">2.5 &ndash; 5M NOK</option>
+              <option value="5M+ NOK">5M+ NOK</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="f_amount">Specific Amount (NOK, optional)</label>
+            <input class="form-input" type="number" name="specific-amount" id="int-amount" placeholder="e.g. 2500000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-i18n="f_timeline">Investment Timeline</label>
+            <select class="form-select" name="timeline" id="int-timeline">
+              <option value="" data-i18n="f_tl_ph">Select...</option>
+              <option value="Ready now" data-i18n="f_tl1">Ready now</option>
+              <option value="Within 3 months" data-i18n="f_tl2">Within 3 months</option>
+              <option value="Within 6 months" data-i18n="f_tl3">Within 6 months</option>
+              <option value="Exploring" data-i18n="f_tl4">Exploring</option>
+            </select>
+          </div>
+          <div class="form-group"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label class="form-label" data-i18n="f_comments">Comments / Questions</label>
+            <textarea class="form-textarea" name="comments" id="int-comments" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn" data-i18n="f_submit">Send Expression of Interest</button>
+        </div>
+        <p style="text-align:center; margin-top:12px; font-size:12px; color:var(--gray);" data-i18n="f_mailto_note">This will open your email client with a pre-filled message to our team.</p>
+      </form>
+    </div>
+    <div class="form-ok" id="interest-ok" style="display:none;">
+      <h3 data-i18n="f_ok_title">Thank you for your interest!</h3>
+      <p data-i18n="f_ok_desc">Your email client should have opened with the details. Please send the email to complete your expression of interest. We will follow up within 2 business days.</p>
+    </div>
+  </div>
+</section>
+
+<!-- S13: REQUEST DOCUMENTS (hidden — may cause unnecessary requests) -->
+<section class="section" id="documents" style="display:none !important;">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">13</div>
+      <h2 class="section-title" data-i18n="s13_title">Request Supplementary Documents</h2>
+    </div>
+    <p data-i18n="s13_intro">The following documents are available upon request. Click to send a pre-filled email to our team and please justify why you want this supplementary information. We will use this feedback in our continuous improvement processes.</p>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <h4 data-i18n="s13_d1">Full Financial Model (Excel)</h4>
+        <div class="vdr">VDR 02.04</div>
+        <div class="doc-desc" data-i18n="s13_d1d">Complete economic projections, revenue model, and cost structure with interactive scenarios.</div>
+        <button class="btn-outline btn-sm" onclick="requestDoc('Full Financial Model','02.04')" data-i18n="s13_req">Request</button>
+      </div>
+      <div class="doc-card">
+        <h4 data-i18n="s13_d2">Sensitivity Analysis</h4>
+        <div class="vdr">VDR 02.05</div>
+        <div class="doc-desc" data-i18n="s13_d2d">Utilization, pricing, and scaling sensitivity matrices with downside scenarios.</div>
+        <button class="btn-outline btn-sm" onclick="requestDoc('Sensitivity Analysis','02.05')" data-i18n="s13_req">Request</button>
+      </div>
+      <div class="doc-card">
+        <h4 data-i18n="s13_d3">Market Trends &amp; Projections</h4>
+        <div class="vdr">VDR 03.06</div>
+        <div class="doc-desc" data-i18n="s13_d3d">Defense, energy, and infrastructure market analysis with demand projections.</div>
+        <button class="btn-outline btn-sm" onclick="requestDoc('Market Trends & Projections','03.06')" data-i18n="s13_req">Request</button>
+      </div>
+      <div class="doc-card">
+        <h4 data-i18n="s13_d4">CNC Benchmark &amp; Competitive Landscape</h4>
+        <div class="vdr">VDR 03.02</div>
+        <div class="doc-desc" data-i18n="s13_d4d">Industry benchmarks for utilization, staffing, and pricing across Norwegian CNC operations.</div>
+        <button class="btn-outline btn-sm" onclick="requestDoc('CNC Benchmark','03.02')" data-i18n="s13_req">Request</button>
+      </div>
+      <div class="doc-card">
+        <h4 data-i18n="s13_d5">Go-to-Market Strategy</h4>
+        <div class="vdr">VDR 03.04</div>
+        <div class="doc-desc" data-i18n="s13_d5d">Customer targeting, sales cycle, and pipeline development approach by sector.</div>
+        <button class="btn-outline btn-sm" onclick="requestDoc('Go-to-Market Strategy','03.04')" data-i18n="s13_req">Request</button>
+      </div>
+      <div class="doc-card">
+        <h4 data-i18n="s13_d6">Quality Certification Roadmap</h4>
+        <div class="vdr">VDR 04.05</div>
+        <div class="doc-desc" data-i18n="s13_d6d">ISO 9001, AS9100, and AQAP 2110 certification timeline and requirements.</div>
+        <button class="btn-outline btn-sm" onclick="requestDoc('Quality Certification Roadmap','04.05')" data-i18n="s13_req">Request</button>
+      </div>
+      <div class="doc-card">
+        <h4 data-i18n="s13_d7">Risk Register</h4>
+        <div class="vdr">VDR 04.07</div>
+        <div class="doc-desc" data-i18n="s13_d7d">Comprehensive risk identification, mitigation strategies, and contingency plans.</div>
+        <button class="btn-outline btn-sm" onclick="requestDoc('Risk Register','04.07')" data-i18n="s13_req">Request</button>
+      </div>
+      <div class="doc-card" style="border-color:var(--red); border-width:2px;">
+        <h4 data-i18n="s13_d8">Full DD Package</h4>
+        <div class="vdr" data-i18n="s13_d8v">All VDR sections &mdash; NDA required</div>
+        <div class="doc-desc" data-i18n="s13_d8d">Complete data room access including corporate governance, legal, IP, and all financial documentation. Request Full Access requires a justification &mdash; normally reserved for Seed and Serie A investors.</div>
+        <button class="btn btn-sm" onclick="requestDoc('Full DD Package (NDA required)','All')" data-i18n="s13_reqfull">Request Full Access</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S13: CONTACT -->
+<section class="section" id="contact">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">13</div>
+      <h2 class="section-title" data-i18n="s14_title">Contact &amp; Next Steps</h2>
+    </div>
+    <p data-i18n="s14_intro">We welcome the opportunity to discuss this investment in person. Please reach out to either founder directly.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="name">Andr&eacute; Tandberg</div>
+        <div class="role">CEO &amp; Co-Founder</div>
+        <a href="mailto:andre@aurelian.no">andre@aurelian.no</a>
+      </div>
+      <div class="contact-card">
+        <div class="name">Tore Ausland</div>
+        <div class="role">VP Business Development &amp; Co-Founder</div>
+        <a href="mailto:tore@aurelian.no">tore@aurelian.no</a>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:24px;">
+      <a class="btn" href="mailto:andre@aurelian.no;tore@aurelian.no?subject=Aurelian%20Manufacturing%20%E2%80%94%20Meeting%20Request&body=Dear%20Aurelian%20team%2C%0A%0AI%20would%20like%20to%20schedule%20a%20meeting%20to%20discuss%20the%20PreSeed%20investment%20opportunity.%0A%0AName%3A%20%0AOrganization%3A%20%0APreferred%20date%2Ftime%3A%20" data-i18n="s14_meeting">Schedule a Meeting</a>
+    </div>
+    <p style="text-align:center; margin-top:20px; font-size:12px; color:var(--gray);">Aurelian Manufacturing AS &mdash; Org.nr 835 679 632 &mdash; V&aring;ler, &Oslash;stfold, Norway</p>
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<section class="section" id="references">
+  <div class="section-inner">
+    <h2 style="font-size:16px; font-weight:700; color:var(--red); margin-bottom:14px;" data-i18n="ref_title">References</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>VDR ref</th><th data-i18n="th_document">Document</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>02.04</td><td>02 Economic Tables &amp; Projections (master document)</td></tr>
+          <tr><td>02.05</td><td>Sensitivity Analysis</td></tr>
+          <tr><td>02.06</td><td>Use of Funds</td></tr>
+          <tr><td>03.02</td><td>CNC Benchmark &amp; Competitive Landscape</td></tr>
+          <tr><td>03.04</td><td>Go-to-Market Strategy</td></tr>
+          <tr><td>03.05</td><td>Pricing &amp; Revenue Model</td></tr>
+          <tr><td>03.06</td><td>Market Trends &amp; Projections</td></tr>
+          <tr><td>04.05</td><td>Quality Certification Roadmap</td></tr>
+          <tr><td>04.06</td><td>Production Timeline</td></tr>
+          <tr><td>04.07</td><td>Risk Register</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div><!-- /app -->
+
+<!-- FOOTER -->
+<footer class="site-footer" id="site-footer">
+  <p><strong>CONFIDENTIAL</strong> &mdash; This document contains proprietary information intended solely for authorized investors.</p>
+  <p data-i18n="footer_source">All financial data sourced from 02 Economic Tables &amp; Projections (VDR 02.04). All values are projections based on design targets &mdash; not guarantees of future performance.</p>
+  <p>&copy; 2026 Aurelian Manufacturing AS. All rights reserved.</p>
+</footer>
+
+<script>
+/* ============================================================
+   AURELIAN PRESEED INVESTOR PACKAGE — JavaScript
+   ============================================================ */
+
+// --- AUTH (Password Login) ---
+const HASH = '865faf68bec367b9e0b3f897d24874b5a02133fd0186a1a25d7ca408db70d02f';
+async function sha256(m) {
+  var b = new TextEncoder().encode(m);
+  var h = await crypto.subtle.digest('SHA-256', b);
+  return Array.from(new Uint8Array(h)).map(function(x){ return x.toString(16).padStart(2,'0'); }).join('');
+}
+async function handleLogin(e) {
+  e.preventDefault();
+  var pw = document.getElementById('login-password').value;
+  if (await sha256(pw) === HASH) {
+    sessionStorage.setItem('aurelian_inv_auth','1');
+    document.getElementById('login-overlay').classList.add('hidden');
+    document.getElementById('app').classList.add('visible');
+    document.getElementById('site-footer').style.display = '';
+    initApp();
+  } else {
+    document.getElementById('login-error').textContent = 'Invalid password';
+    document.getElementById('login-password').value = '';
+    document.getElementById('login-password').focus();
+  }
+  return false;
+}
+if(sessionStorage.getItem('aurelian_inv_auth')==='1'){
+  document.getElementById('login-overlay').classList.add('hidden');
+  document.getElementById('app').classList.add('visible');
+  document.addEventListener('DOMContentLoaded',initApp);
+}
+
+// --- i18n ---
+const T = {
+en: {
+  hero_company:'Aurelian Manufacturing',
+  hero_tagline:'Production as a Service',
+  hero_title:'PreSeed Investor Information Package',
+  nav_deck:'Pitch Deck', nav_calc:'Calculator', nav_about:'About', nav_team:'Team',
+  nav_contrib:'Contribution', nav_market:'Market', nav_model:'Business Model',
+  nav_fin:'Financials', nav_fund:'Fundraising', nav_miles:'Milestones',
+  nav_risk:'Risk', nav_interest:'Invest', nav_docs:'Documents', nav_contact:'Contact',
+  s1_title:'Investor Pitch Deck',
+  s1_intro:'Review our complete Seed round investor presentation below. You may also download it for offline viewing.',
+  s1_download:'Download Pitch Deck (PDF)',
+  s2_title:'Interactive Financial Calculator',
+  s2_card_title:'Explore the Financial Model',
+  s2_card_desc:'Adjust CNC count, utilization, and maturity to see how projected revenue, costs, and profitability change in real time. All calculations are based on 02 Economic Tables & Projections (VDR 02.04).',
+  s2_card_btn:'Open Financial Calculator',
+  s2_card_note:'Opens directly in a new tab.',
+  s3_title:'About Aurelian Manufacturing',
+  s3_p1:'Aurelian Manufacturing AS (org.nr 835 679 632) is building Norway\u2019s first purpose-built autonomous CNC manufacturing facility. The company operates a \u201cProduction as a Service\u201d model, delivering high-mix, low-volume precision machining for defense, energy, maritime, and critical infrastructure sectors.',
+  s3_p2:'The facility is located in V\u00e5ler, \u00d8stfold \u2014 a purpose-built 2,635 m\u00b2 production hall by Norbygg on a 30,000 m\u00b2 site, designed from the ground up for autonomous operation.',
+  s3_callout:'<strong>The structural problem:</strong> Norway faces a documented shortage of 39,000 skilled workers (NAV 2025), creating a persistent bottleneck in precision manufacturing capacity. Aurelian\u2019s greenfield approach enables design choices \u2014 24/7 autonomous scheduling, sub-linear staffing, integrated digital thread \u2014 that are structurally difficult for existing operations to retrofit.',
+  s3_kpi1:'Purpose-built facility', s3_kpi2:'Autonomous scheduling', s3_kpi3:'Seed phase machines', s3_kpi4:'Production start target',
+  s4_title:'Founding Team',
+  s4_intro:'The founding team combines deep industrial experience with commercial execution capability.',
+  s4_andre:'Holen Industrier AS (53.125%). Experienced industrial leader with hands-on background in CNC manufacturing, production management, and operational scaling. Responsible for technology strategy, facility design, and operational execution.',
+  s4_tore:'Quality Group Invest AS (31.875%). Extensive experience in business development, customer acquisition, and strategic partnerships across defense and energy sectors. Leads commercial strategy, investor relations, and go-to-market execution.',
+  s4_henrik:'STAH Invest AS (10.00%). Contributes strategic advisory expertise and network within Norwegian industrial and investment communities.',
+  s4_fredrik:'Roadcode AS (5.00%). Technical advisor with deep expertise in software architecture, digital systems, and automation integration. Supports technology strategy and digital thread implementation.',
+  s5_title:'Founders\u2019 Contribution Prior to PreSeed',
+  s5_intro:'Between October 2025 and February 2026 \u2014 before any external capital was raised \u2014 the founders delivered substantial value creation at their own cost and risk. No salaries, no founder loans, and no consulting fees were taken during this period.',
+  s5_c1_title:'Complete DD Package', s5_c1_val:'50+ documents \u2014 700K\u20131.4M NOK equivalent',
+  s5_c2_title:'Financial Model & Economic Foundation', s5_c2_val:'Full projections model \u2014 200\u2013400K NOK equivalent',
+  s5_c3_title:'Market Analysis & GTM Strategy', s5_c3_val:'Defense, energy, infrastructure \u2014 200\u2013400K NOK equivalent',
+  s5_c4_title:'Supplier & Technical Due Diligence', s5_c4_val:'MAZAK/Ravema evaluation \u2014 200\u2013400K NOK equivalent',
+  s5_c5_title:'Customer Pipeline', s5_c5_val:'Physical Robotics LOI signed \u2014 Strategic value',
+  s5_c6_title:'Investor Materials & Pitch', s5_c6_val:'Full investor package \u2014 250\u2013500K NOK equivalent',
+  s5_total:'<strong>Total founder value creation:</strong> 1.8\u20133.6 MNOK in consulting-equivalent work, plus approximately 1.4 MNOK in founder time investment. This represents significant skin in the game before any external capital was deployed.',
+  s6_title:'Market Opportunity',
+  s6_p1:'Three structural forces converge to create a compelling market window for autonomous precision manufacturing in Norway.',
+  s6_m1_title:'Labor Shortage', s6_m1_desc:'Norway\u2019s documented shortage of 39,000 skilled workers (NAV 2025) creates a structural bottleneck. CNC operators are among the hardest-to-fill positions, making autonomous manufacturing a necessity rather than a luxury.',
+  s6_m2_title:'Defense Budget Growth', s6_m2_desc:'Norwegian and Nordic defense budgets are at historic highs, with a projected combined spend of 1,624 billion NOK. This drives sustained demand for domestic precision manufacturing with defense certifications (AQAP 2110).',
+  s6_m3_title:'Energy Transition', s6_m3_desc:'Equinor, Aker, and Vattenfall are investing heavily in offshore wind and energy infrastructure, creating demand for NORSOK-compatible precision components from certified Norwegian suppliers.',
+  s6_ref:'Sources: NAV Bedriftsunders\u00f8kelsen 2025, CNC Benchmark & Competitive Landscape (VDR 03.02), Market Trends & Projections (VDR 03.06).',
+  s7_title:'Business Model & Revenue Logic',
+  s7_p1:'Aurelian operates a \u201cProduction as a Service\u201d model: customers pay per machine-hour for precision CNC machining, with no upfront capital commitment. Revenue is a direct function of three variables.',
+  s7_formula_label:'Revenue formula:',
+  s7_kpi1:'Hourly rate (conservative floor)', s7_kpi2:'Available hours per CNC/year', s7_kpi3:'Staff per CNC (design target at scale)',
+  s7_p2:'The hourly rate of NOK 3,000 represents a conservative midpoint within the observed industry range of NOK 2,500\u20133,500 (CNC Benchmark, VDR 03.02). The design target of 0.8 FTE per CNC at scale is enabled by greenfield automation design, 24/7 autonomous scheduling, and integrated tool management.',
+  s7_p3:'<strong>Customer Program (50/50 profit-sharing):</strong> Qualified customers committing more than 100,000 hours annually receive standard pricing at NOK 3,000/hour. Above 45% utilization, marginal profit is split 50/50 between Aurelian and the customer. This aligns incentives and builds long-term partnerships.',
+  s7_note:'Note: The staffing ratio of 0.8 FTE/CNC is a design target for a pre-revenue company, not an observed metric. Industry observed average is approximately 2.5 staff per CNC (VDR 03.02).',
+  s8_title:'Financial Overview',
+  s8_intro:'The following projections are based on the assumptions in 02 Economic Tables & Projections (VDR 02.04). All values represent design targets for a pre-revenue company \u2014 not guarantees of future performance.',
+  s8_kpi1:'Revenue at 20 CNC, 60% util.', s8_kpi2:'Break-even utilization (5 CNC)', s8_kpi3:'Accumulated profit 2027\u20132035', s8_kpi4:'Exit valuation (10x EBITDA)',
+  s8_traj_title:'Projected Revenue Trajectory',
+  s8_note:'*After Customer Program deductions (50/50 profit-sharing above 45% util.). All amounts in MNOK. All values are projections based on 02 Economic Tables & Projections (VDR 02.04).',
+  s8_cost_title:'Cost Structure (20 CNC Steady State)',
+  s8_c1:'Payroll operative (16 FTE \u00d7 1.1 MNOK)', s8_c2:'Payroll admin (4 FTE \u00d7 1.4 MNOK)',
+  s8_c3:'Depreciation CNC', s8_c4:'Depreciation shop base', s8_c5:'Finance cost',
+  s8_c6:'Facility lease (Norbygg)', s8_c7:'Other fixed', s8_ctotal:'Total fixed',
+  s8_var:'Variable costs (tools, energy, maintenance): 13% of revenue during startup (2027\u20132028), declining to 8% at steady state (2032+).',
+  th_year:'Year', th_util:'Util.', th_rev:'Revenue', th_cost:'Cost', th_profit:'Profit',
+  th_item:'Item', th_amount:'Amount (MNOK)',
+  s9_title:'Fundraising Structure & Cap Table',
+  s9_rounds_title:'Fundraising Rounds',
+  th_round:'Round', th_equity:'Equity', th_premoney:'Pre-money', th_postmoney:'Post-money', th_machines:'Machines', th_debt:'Bank Debt',
+  s9_total_eq:'Total equity raised',
+  s9_cap_title:'Cap Table (Post-Serie A)',
+  th_shareholder:'Shareholder', th_ownership:'Ownership',
+  s9_existing:'Existing shareholders',
+  s9_uof_title:'Use of Funds \u2014 Seed (80.6 MNOK total)',
+  th_category:'Category',
+  s9_u1:'CNC machines (5) + automation', s9_u2:'Shop base setup', s9_u3:'Operational buffer (6 months)',
+  s9_u4:'Facility & setup', s9_u5:'Recruitment & startup', s9_u6:'Diverse / margin',
+  s9_split:'Split: Equity 51.3 MNOK + Bank debt 29.3 MNOK = 80.6 MNOK total.',
+  s10_title:'Key Milestones',
+  s10_m1:'Seed round close', s10_m2:'Facility and CNC machine order confirmation', s10_m3:'Norbygg facility build start',
+  s10_m4:'Key hires (Ops Lead, CNC operators)', s10_m5:'Facility complete',
+  s10_m6:'Machines delivered and installed', s10_m7:'Production start',
+  s10_m8:'ISO 9001 certified', s10_m9:'Break-even reached', s10_m10:'AS9100 / AQAP 2110 certified',
+  s11_title:'Risk & Sensitivity',
+  s11_intro:'The financial model has been stress-tested across multiple scenarios. Key sensitivities are summarized below. Full analysis: Sensitivity Analysis (VDR 02.05).',
+  s11_util_title:'Utilization Sensitivity (5 CNC \u2014 Seed Phase)',
+  th_status:'Status',
+  s11_r1:'Uses operational buffer', s11_r2:'Break-even point', s11_r3:'Budget target', s11_r4:'Customer Program threshold',
+  s11_down_title:'Downside Protections',
+  s11_d1_title:'6-Month Delay', s11_d1_val:'Operational buffer (10 MNOK) designed to absorb a 6-month delay without additional funding.',
+  s11_d2_title:'12-Month Customer Delay', s11_d2_val:'Even at 35% utilization (below budget), the model projects positive EBIT of approximately 65 MNOK at scale.',
+  s11_d3_title:'CNC Resale Safety Valve', s11_d3_val:'Multi-axis CNC machines retain 65\u201370% residual value in the first 0\u20132 years, providing a tangible floor for investor capital.',
+  s11_d4_title:'Price Sensitivity', s11_d4_val:'At NOK 2,500/hour (low end of industry range), the model still projects positive EBIT across all utilization levels above 20%.',
+  s12_title:'Express Your Interest',
+  s12_intro:'If you are interested in participating in the Seed round, please share your details below. This is a non-binding expression of interest \u2014 we will follow up personally to discuss terms and timeline.',
+  f_name:'Full Name <span class="req">*</span>', f_org:'Organization / Company <span class="req">*</span>',
+  f_email:'Email <span class="req">*</span>', f_phone:'Phone',
+  f_range:'PreSeed Investment Range <span class="req">*</span>', f_range_ph:'Select range...',
+  f_amount:'Specific Amount (NOK, optional)', f_timeline:'Investment Timeline',
+  f_tl_ph:'Select...', f_tl1:'Ready now', f_tl2:'Within 3 months', f_tl3:'Within 6 months', f_tl4:'Exploring',
+  f_comments:'Comments / Questions', f_submit:'Send Expression of Interest',
+  f_mailto_note:'This will open your email client with a pre-filled message to our team.',
+  f_ok_title:'Thank you for your interest!', f_ok_desc:'Your email client should have opened with the details. Please send the email to complete your expression of interest. We will follow up within 2 business days.',
+  s13_title:'Request Supplementary Documents',
+  s13_intro:'The following documents are available upon request. Click to send a pre-filled email to our team and please justify why you want this supplementary information. We will use this feedback in our continuous improvement processes.',
+  s13_d1:'Full Financial Model (Excel)', s13_d1d:'Complete economic projections, revenue model, and cost structure with interactive scenarios.',
+  s13_d2:'Sensitivity Analysis', s13_d2d:'Utilization, pricing, and scaling sensitivity matrices with downside scenarios.',
+  s13_d3:'Market Trends & Projections', s13_d3d:'Defense, energy, and infrastructure market analysis with demand projections.',
+  s13_d4:'CNC Benchmark & Competitive Landscape', s13_d4d:'Industry benchmarks for utilization, staffing, and pricing across Norwegian CNC operations.',
+  s13_d5:'Go-to-Market Strategy', s13_d5d:'Customer targeting, sales cycle, and pipeline development approach by sector.',
+  s13_d6:'Quality Certification Roadmap', s13_d6d:'ISO 9001, AS9100, and AQAP 2110 certification timeline and requirements.',
+  s13_d7:'Risk Register', s13_d7d:'Comprehensive risk identification, mitigation strategies, and contingency plans.',
+  s13_d8:'Full DD Package', s13_d8v:'All VDR sections \u2014 NDA required',
+  s13_d8d:'Complete data room access including corporate governance, legal, IP, and all financial documentation. Request Full Access requires a justification \u2014 normally reserved for Seed and Serie A investors.',
+  s13_req:'Request', s13_reqfull:'Request Full Access',
+  s14_title:'Contact & Next Steps',
+  s14_intro:'We welcome the opportunity to discuss this investment in person. Please reach out to either founder directly.',
+  s14_meeting:'Schedule a Meeting',
+  ref_title:'References', th_document:'Document',
+  footer_source:'All financial data sourced from 02 Economic Tables & Projections (VDR 02.04). All values are projections based on design targets \u2014 not guarantees of future performance.'
+},
+no: {
+  hero_company:'Aurelian Manufacturing',
+  hero_tagline:'Produksjon som tjeneste',
+  hero_title:'PreSeed investorinformasjonspakke',
+  nav_deck:'Pitch Deck', nav_calc:'Kalkulator', nav_about:'Om oss', nav_team:'Team',
+  nav_contrib:'Bidrag', nav_market:'Marked', nav_model:'Forretningsmodell',
+  nav_fin:'Finans', nav_fund:'Finansiering', nav_miles:'Milep\u00e6ler',
+  nav_risk:'Risiko', nav_interest:'Invester', nav_docs:'Dokumenter', nav_contact:'Kontakt',
+  s1_title:'Investor Pitch Deck',
+  s1_intro:'Se v\u00e5r komplette investorpresentasjon for Seed-runden nedenfor. Du kan ogs\u00e5 laste den ned for offline visning.',
+  s1_download:'Last ned Pitch Deck (PDF)',
+  s2_title:'Interaktiv finanskalkulator',
+  s2_card_title:'Utforsk finansmodellen',
+  s2_card_desc:'Juster antall CNC-maskiner, utnyttelsesgrad og modenhet for \u00e5 se hvordan projisert inntekt, kostnader og l\u00f8nnsomhet endres i sanntid. Alle beregninger er basert p\u00e5 02 Economic Tables & Projections (VDR 02.04).',
+  s2_card_btn:'\u00c5pne finanskalkulator',
+  s2_card_note:'\u00c5pner direkte i en ny fane.',
+  s3_title:'Om Aurelian Manufacturing',
+  s3_p1:'Aurelian Manufacturing AS (org.nr 835 679 632) bygger Norges f\u00f8rste spesialbygde autonome CNC-produksjonsanlegg. Selskapet opererer en \u00abProduksjon som tjeneste\u00bb-modell, og leverer h\u00f8y-miks, lavvolum presisjonsmaskinering for forsvar, energi, maritim og kritisk infrastruktur.',
+  s3_p2:'Anlegget ligger i V\u00e5ler, \u00d8stfold \u2014 en spesialbygd 2 635 m\u00b2 produksjonshall av Norbygg p\u00e5 et 30 000 m\u00b2 tomt, designet fra grunnen for autonom drift.',
+  s3_callout:'<strong>Det strukturelle problemet:</strong> Norge har en dokumentert mangel p\u00e5 39 000 fagarbeidere (NAV 2025), noe som skaper en vedvarende flaskehals i presisjonsmanufakturkapasitet. Aurelians greenfield-tiln\u00e6rming muliggj\u00f8r designvalg \u2014 24/7 autonom planlegging, sub-line\u00e6r bemanning, integrert digital tr\u00e5d \u2014 som er strukturelt vanskelige for eksisterende virksomheter \u00e5 etterinstallere.',
+  s3_kpi1:'Spesialbygd anlegg', s3_kpi2:'Autonom planlegging', s3_kpi3:'Seed-fase maskiner', s3_kpi4:'Produksjonsstart m\u00e5l',
+  s4_title:'Grunnleggerteamet',
+  s4_intro:'Grunnleggerteamet kombinerer dyp industriell erfaring med kommersiell gjennomf\u00f8ringsevne.',
+  s4_andre:'Holen Industrier AS (53,125%). Erfaren industriell leder med praktisk bakgrunn innen CNC-produksjon, produksjonsledelse og operasjonell skalering. Ansvarlig for teknologistrategi, anleggsdesign og operasjonell gjennomf\u00f8ring.',
+  s4_tore:'Quality Group Invest AS (31,875%). Omfattende erfaring innen forretningsutvikling, kundeanskaffelse og strategiske partnerskap p\u00e5 tvers av forsvars- og energisektorer. Leder kommersiell strategi, investorrelasjoner og markedsf\u00f8ring.',
+  s4_henrik:'STAH Invest AS (10,00%). Bidrar med strategisk r\u00e5dgivningskompetanse og nettverk i norske industri- og investeringsmilj\u00f8er.',
+  s4_fredrik:'Roadcode AS (5,00%). Teknisk r\u00e5dgiver med dyp kompetanse innen programvarearkitektur, digitale systemer og automasjonsintegrasjon. St\u00f8tter teknologistrategi og digital tr\u00e5d-implementering.',
+  s5_title:'Grunnlegernes bidrag f\u00f8r PreSeed',
+  s5_intro:'Mellom oktober 2025 og februar 2026 \u2014 f\u00f8r ekstern kapital ble hentet \u2014 leverte grunnleggerne betydelig verdiskaping p\u00e5 egen kostnad og risiko. Ingen l\u00f8nn, ingen grunnleggel\u00e5n og ingen konsulenthonorar ble tatt ut i denne perioden.',
+  s5_c1_title:'Komplett DD-pakke', s5_c1_val:'50+ dokumenter \u2014 700K\u20131,4M NOK ekvivalent',
+  s5_c2_title:'Finansmodell og \u00f8konomisk grunnlag', s5_c2_val:'Fullstendig projeksjonsmodell \u2014 200\u2013400K NOK ekvivalent',
+  s5_c3_title:'Markedsanalyse og GTM-strategi', s5_c3_val:'Forsvar, energi, infrastruktur \u2014 200\u2013400K NOK ekvivalent',
+  s5_c4_title:'Leverand\u00f8r- og teknisk due diligence', s5_c4_val:'MAZAK/Ravema-evaluering \u2014 200\u2013400K NOK ekvivalent',
+  s5_c5_title:'Kundeportefl\u00f8lje', s5_c5_val:'Physical Robotics LOI signert \u2014 Strategisk verdi',
+  s5_c6_title:'Investormateriell og pitch', s5_c6_val:'Komplett investorpakke \u2014 250\u2013500K NOK ekvivalent',
+  s5_total:'<strong>Total verdiskaping fra grunnleggerne:</strong> 1,8\u20133,6 MNOK i konsulent-ekvivalent arbeid, pluss ca. 1,4 MNOK i grunnleggertid. Dette representerer betydelig \u00abskin in the game\u00bb f\u00f8r ekstern kapital ble brukt.',
+  s6_title:'Markedsmuligheten',
+  s6_p1:'Tre strukturelle krefter konvergerer for \u00e5 skape et overbevisende markedsvindu for autonom presisjonsmanufaktur i Norge.',
+  s6_m1_title:'Arbeidskraftmangel', s6_m1_desc:'Norges dokumenterte mangel p\u00e5 39 000 fagarbeidere (NAV 2025) skaper en strukturell flaskehals. CNC-operat\u00f8rer er blant de vanskeligste stillingene \u00e5 fylle, noe som gj\u00f8r autonom produksjon til en n\u00f8dvendighet snarere enn en luksus.',
+  s6_m2_title:'Forsvarsbudsjett-vekst', s6_m2_desc:'Norske og nordiske forsvarsbudsjetter er p\u00e5 historisk h\u00f8ye niv\u00e5er, med en projisert samlet utgift p\u00e5 1 624 milliarder NOK. Dette driver vedvarende ettersp\u00f8rsel etter innenlands presisjonsmanufaktur med forsvarssertifiseringer (AQAP 2110).',
+  s6_m3_title:'Energiomstilling', s6_m3_desc:'Equinor, Aker og Vattenfall investerer kraftig i havvind og energiinfrastruktur, noe som skaper ettersp\u00f8rsel etter NORSOK-kompatible presisjonskomponenter fra sertifiserte norske leverand\u00f8rer.',
+  s6_ref:'Kilder: NAV Bedriftsunders\u00f8kelsen 2025, CNC Benchmark & Competitive Landscape (VDR 03.02), Market Trends & Projections (VDR 03.06).',
+  s7_title:'Forretningsmodell og inntektslogikk',
+  s7_p1:'Aurelian opererer en \u00abProduksjon som tjeneste\u00bb-modell: kunder betaler per maskintime for presisjons-CNC-maskinering, uten kapitalforpliktelse. Inntekt er en direkte funksjon av tre variabler.',
+  s7_formula_label:'Inntektsformel:',
+  s7_kpi1:'Timepris (konservativt gulv)', s7_kpi2:'Tilgjengelige timer per CNC/\u00e5r', s7_kpi3:'Ansatte per CNC (designm\u00e5l ved skala)',
+  s7_p2:'Timeprisen p\u00e5 NOK 3 000 representerer et konservativt midtpunkt i det observerte bransjeintervallet NOK 2 500\u20133 500 (CNC Benchmark, VDR 03.02). Designm\u00e5let p\u00e5 0,8 FTE per CNC ved skala muliggj\u00f8res av greenfield automatiseringsdesign, 24/7 autonom planlegging og integrert verkt\u00f8ystyring.',
+  s7_p3:'<strong>Kundeprogram (50/50 overskuddsdeling):</strong> Kvalifiserte kunder som forplikter mer enn 100 000 timer \u00e5rlig f\u00e5r standardprising p\u00e5 NOK 3 000/time. Over 45% utnyttelse deles marginalt overskudd 50/50 mellom Aurelian og kunden. Dette samkj\u00f8rer insentiver og bygger langsiktige partnerskap.',
+  s7_note:'Merk: Bemanningsforholdet p\u00e5 0,8 FTE/CNC er et designm\u00e5l for et selskap f\u00f8r inntekt, ikke en observert metrikk. Observert bransjesnitt er ca. 2,5 ansatte per CNC (VDR 03.02).',
+  s8_title:'Finansiell oversikt',
+  s8_intro:'F\u00f8lgende projeksjoner er basert p\u00e5 forutsetningene i 02 Economic Tables & Projections (VDR 02.04). Alle verdier representerer designm\u00e5l for et selskap f\u00f8r inntekt \u2014 ikke garantier for fremtidig ytelse.',
+  s8_kpi1:'Inntekt ved 20 CNC, 60% utn.', s8_kpi2:'Break-even utnyttelse (5 CNC)', s8_kpi3:'Akkumulert resultat 2027\u20132035', s8_kpi4:'Exit-verdi (10x EBITDA)',
+  s8_traj_title:'Projisert inntektsbane',
+  s8_note:'*Etter Kundeprogram-fratrekk (50/50 overskuddsdeling over 45% utn.). Alle bel\u00f8p i MNOK. Alle verdier er projeksjoner basert p\u00e5 02 Economic Tables & Projections (VDR 02.04).',
+  s8_cost_title:'Kostnadsstruktur (20 CNC stabil drift)',
+  s8_c1:'L\u00f8nn operativt (16 FTE \u00d7 1,1 MNOK)', s8_c2:'L\u00f8nn admin (4 FTE \u00d7 1,4 MNOK)',
+  s8_c3:'Avskrivning CNC', s8_c4:'Avskrivning butikkbase', s8_c5:'Finanskostnad',
+  s8_c6:'Fasilitetslease (Norbygg)', s8_c7:'Andre faste', s8_ctotal:'Sum faste',
+  s8_var:'Variable kostnader (verkt\u00f8y, energi, vedlikehold): 13% av inntekt under oppstart (2027\u20132028), synkende til 8% ved stabil drift (2032+).',
+  th_year:'\u00c5r', th_util:'Utn.', th_rev:'Inntekt', th_cost:'Kostnad', th_profit:'Resultat',
+  th_item:'Post', th_amount:'Bel\u00f8p (MNOK)',
+  s9_title:'Finansieringsstruktur og eierskap',
+  s9_rounds_title:'Finansieringsrunder',
+  th_round:'Runde', th_equity:'Egenkapital', th_premoney:'Pre-money', th_postmoney:'Post-money', th_machines:'Maskiner', th_debt:'Bankgjeld',
+  s9_total_eq:'Total egenkapital reist',
+  s9_cap_title:'Eiertabell (etter Serie A)',
+  th_shareholder:'Aksjeeier', th_ownership:'Eierandel',
+  s9_existing:'Eksisterende aksjon\u00e6rer',
+  s9_uof_title:'Anvendelse av midler \u2014 Seed (80,6 MNOK totalt)',
+  th_category:'Kategori',
+  s9_u1:'CNC-maskiner (5) + automatisering', s9_u2:'Butikkbase-oppsett', s9_u3:'Operasjonell buffer (6 m\u00e5neder)',
+  s9_u4:'Anlegg og oppsett', s9_u5:'Rekruttering og oppstart', s9_u6:'Diverse / margin',
+  s9_split:'Fordeling: Egenkapital 51,3 MNOK + Bankgjeld 29,3 MNOK = 80,6 MNOK totalt.',
+  s10_title:'Viktige milep\u00e6ler',
+  s10_m1:'Seed-runde lukket', s10_m2:'Anleggs- og CNC-maskinordrebekreftelse', s10_m3:'Norbygg byggestart',
+  s10_m4:'N\u00f8kkelansettelser (driftsleder, CNC-operat\u00f8rer)', s10_m5:'Anlegg ferdigstilt',
+  s10_m6:'Maskiner levert og installert', s10_m7:'Produksjonsstart',
+  s10_m8:'ISO 9001 sertifisert', s10_m9:'Break-even oppn\u00e5dd', s10_m10:'AS9100 / AQAP 2110 sertifisert',
+  s11_title:'Risiko og sensitivitet',
+  s11_intro:'Finansmodellen er stresstestet p\u00e5 tvers av flere scenarier. N\u00f8kkelsensitiviteter er oppsummert nedenfor. Full analyse: Sensitivity Analysis (VDR 02.05).',
+  s11_util_title:'Utnyttelsessensitivitet (5 CNC \u2014 Seed-fase)',
+  th_status:'Status',
+  s11_r1:'Bruker operasjonell buffer', s11_r2:'Break-even punkt', s11_r3:'Budsjettm\u00e5l', s11_r4:'Kundeprogram-terskel',
+  s11_down_title:'Nedsidebeskyttelse',
+  s11_d1_title:'6 m\u00e5neders forsinkelse', s11_d1_val:'Operasjonell buffer (10 MNOK) designet for \u00e5 absorbere 6 m\u00e5neders forsinkelse uten tilleggfinansiering.',
+  s11_d2_title:'12 m\u00e5neders kundeforsinkelse', s11_d2_val:'Selv ved 35% utnyttelse (under budsjett) projiserer modellen positiv EBIT p\u00e5 ca. 65 MNOK ved skala.',
+  s11_d3_title:'CNC videresalgsventil', s11_d3_val:'Flrakse CNC-maskiner beholder 65\u201370% restverdi i de f\u00f8rste 0\u20132 \u00e5rene, noe som gir et h\u00e5ndfast gulv for investorkapital.',
+  s11_d4_title:'Prissensitivitet', s11_d4_val:'Ved NOK 2 500/time (nedre del av bransjeintervallet) projiserer modellen fortsatt positiv EBIT ved alle utnyttelsesniv\u00e5er over 20%.',
+  s12_title:'Uttrykk din interesse',
+  s12_intro:'Hvis du er interessert i \u00e5 delta i Seed-runden, vennligst del dine detaljer nedenfor. Dette er en uforpliktende interesseerkl\u00e6ring \u2014 vi f\u00f8lger opp personlig for \u00e5 diskutere vilk\u00e5r og tidsplan.',
+  f_name:'Fullt navn <span class="req">*</span>', f_org:'Organisasjon / Selskap <span class="req">*</span>',
+  f_email:'E-post <span class="req">*</span>', f_phone:'Telefon',
+  f_range:'PreSeed investeringsintervall <span class="req">*</span>', f_range_ph:'Velg intervall...',
+  f_amount:'Spesifikt bel\u00f8p (NOK, valgfritt)', f_timeline:'Investeringstidslinje',
+  f_tl_ph:'Velg...', f_tl1:'Klar n\u00e5', f_tl2:'Innen 3 m\u00e5neder', f_tl3:'Innen 6 m\u00e5neder', f_tl4:'Utforsker',
+  f_comments:'Kommentarer / Sp\u00f8rsm\u00e5l', f_submit:'Send interesseerkl\u00e6ring',
+  f_mailto_note:'Dette \u00e5pner e-postklienten din med en forh\u00e5ndsutfylt melding til v\u00e5rt team.',
+  f_ok_title:'Takk for din interesse!', f_ok_desc:'E-postklienten din skal ha \u00e5pnet seg med detaljene. Vennligst send e-posten for \u00e5 fullf\u00f8re interesseerkl\u00e6ringen. Vi f\u00f8lger opp innen 2 virkedager.',
+  s13_title:'Be om supplerende dokumenter',
+  s13_intro:'F\u00f8lgende dokumenter er tilgjengelige p\u00e5 foresp\u00f8rsel. Klikk for \u00e5 sende en forh\u00e5ndsutfylt e-post til v\u00e5rt team og vennligst begrunn hvorfor du \u00f8nsker denne tilleggsinformasjonen. Vi vil bruke denne tilbakemeldingen i v\u00e5re kontinuerlige forbedringsprosesser.',
+  s13_d1:'Komplett finansmodell (Excel)', s13_d1d:'Komplette \u00f8konomiske projeksjoner, inntektsmodell og kostnadsstruktur med interaktive scenarier.',
+  s13_d2:'Sensitivitetsanalyse', s13_d2d:'Utnyttelses-, pris- og skaleringsmatriser med nedsidescenarier.',
+  s13_d3:'Markedstrender og prognoser', s13_d3d:'Forsvars-, energi- og infrastrukturmarkedsanalyse med ettersp\u00f8rselsprojeksjoner.',
+  s13_d4:'CNC Benchmark og konkurranselandskap', s13_d4d:'Bransjereferansem\u00e5l for utnyttelse, bemanning og prising p\u00e5 tvers av norske CNC-virksomheter.',
+  s13_d5:'Kommersialiseringsstrategi', s13_d5d:'Kundem\u00e5lretting, salgssyklus og pipeline-utvikling per sektor.',
+  s13_d6:'Kvalitetssertifiserings-veikart', s13_d6d:'ISO 9001, AS9100 og AQAP 2110 sertifiseringstidslinje og krav.',
+  s13_d7:'Risikoregister', s13_d7d:'Omfattende risikoidentifikasjon, tiltak og beredskapsplaner.',
+  s13_d8:'Komplett DD-pakke', s13_d8v:'Alle VDR-seksjoner \u2014 NDA p\u00e5krevd',
+  s13_d8d:'Fullstendig dataromtilgang inkludert selskapsstyring, juridisk, IP og all finansiell dokumentasjon. Full tilgang krever begrunnelse \u2014 normalt forbeholdt Seed- og Serie A-investorer.',
+  s13_req:'Foresp\u00f8r', s13_reqfull:'Be om full tilgang',
+  s14_title:'Kontakt og neste steg',
+  s14_intro:'Vi \u00f8nsker muligheten til \u00e5 diskutere denne investeringen personlig. Ta gjerne direkte kontakt med en av grunnleggerne.',
+  s14_meeting:'Avtal et m\u00f8te',
+  ref_title:'Referanser', th_document:'Dokument',
+  footer_source:'Alle finansielle data hentet fra 02 Economic Tables & Projections (VDR 02.04). Alle verdier er projeksjoner basert p\u00e5 designm\u00e5l \u2014 ikke garantier for fremtidig ytelse.'
+}
+};
+
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (T[lang] && T[lang][key]) { el.innerHTML = T[lang][key]; }
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  sessionStorage.setItem('aurelian_lang', lang);
+}
+
+// --- NAV ---
+function initNav() {
+  var sections = document.querySelectorAll('.section[id]');
+  var links = document.querySelectorAll('.nav-link');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        links.forEach(function(l) { l.classList.remove('active'); });
+        var active = document.querySelector('.nav-link[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+  sections.forEach(function(s) { observer.observe(s); });
+}
+
+// --- FORM (Express Your Interest → mailto) ---
+function initForm() {
+  // Form is ready — investor fills in details manually
+}
+
+function handleInterestSubmit(e) {
+  e.preventDefault();
+  var name = document.getElementById('int-name').value.trim();
+  var org = document.getElementById('int-org').value.trim();
+  var email = document.getElementById('int-email').value.trim();
+  var phone = document.getElementById('int-phone').value.trim();
+  var range = document.getElementById('int-range').value;
+  var amount = document.getElementById('int-amount').value.trim();
+  var timeline = document.getElementById('int-timeline').value;
+  var comments = document.getElementById('int-comments').value.trim();
+
+  if (!name || !org || !email || !range) {
+    alert(currentLang === 'no' ? 'Vennligst fyll ut alle obligatoriske felt.' : 'Please fill in all required fields.');
+    return false;
+  }
+
+  var subject = 'Aurelian PreSeed — Expression of Interest — ' + name + ' (' + org + ')';
+  var body = 'EXPRESSION OF INTEREST — AURELIAN MANUFACTURING PRESEED\n';
+  body += '════════════════════════════════════════════════\n\n';
+  body += 'Name:                  ' + name + '\n';
+  body += 'Organization:          ' + org + '\n';
+  body += 'Email:                 ' + email + '\n';
+  if (phone) body += 'Phone:                 ' + phone + '\n';
+  body += '\n';
+  body += 'Investment range:      ' + range + '\n';
+  if (amount) body += 'Specific amount:       NOK ' + Number(amount).toLocaleString('nb-NO') + '\n';
+  if (timeline) body += 'Timeline:              ' + timeline + '\n';
+  body += '\n';
+  if (comments) {
+    body += 'Comments / Questions:\n' + comments + '\n\n';
+  }
+  body += '════════════════════════════════════════════════\n';
+  body += 'Sent from Aurelian PreSeed Investor Package\n';
+  body += 'This is a non-binding expression of interest.\n';
+
+  var mailto = 'mailto:andre@aurelian.no;tore@aurelian.no';
+  mailto += '?subject=' + encodeURIComponent(subject);
+  mailto += '&body=' + encodeURIComponent(body);
+
+  window.location.href = mailto;
+
+  // Show confirmation
+  document.getElementById('interest-form-panel').style.display = 'none';
+  document.getElementById('interest-ok').style.display = 'block';
+  return false;
+}
+
+// --- MOBILE PDF ---
+function checkMobilePdf() {
+  var frame = document.querySelector('.pdf-frame');
+  if (frame && window.innerWidth < 600) {
+    frame.style.display = 'none';
+  }
+}
+
+// --- INIT ---
+function initApp() {
+  var saved = sessionStorage.getItem('aurelian_lang');
+  if (saved && T[saved]) setLang(saved);
+  initNav();
+  initForm();
+  checkMobilePdf();
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (sessionStorage.getItem('aurelian_inv_auth') === '1') initApp();
+});
+</script>
+</body>
+</html>

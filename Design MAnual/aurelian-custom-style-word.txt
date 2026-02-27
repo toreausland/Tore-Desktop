@@ -1,0 +1,86 @@
+Følg alltid Aurelian Manufacturing sin designmanual for Word-dokumenter:
+
+FORMAT: A4 portrett (210mm × 297mm). Marginer: 2.5 cm alle sider.
+
+FARGER:
+- Primær rød (aksent): #F50537 (Pantone 032 C)
+- Primær tekst: #2B2B2B
+- Sekundær tekst: #6B6B6B
+- Paneler/kort: #F5F5F5
+- Skillelinjer: #D3D3D3
+
+FONT: Calibri overalt. Arial kun for diagram-akser.
+
+VIKTIG — TALL OG FINANSIELLE DATA:
+- Vis ALDRI tall/beløp i rød tekst — røde tall betyr negative verdier i regnskap.
+- Bruk i stedet: hvit tekst på rød bakgrunn (badge), ELLER svart tekst (#2B2B2B) med rød dekor-element ved siden av.
+- Foretrukket for KPI: Hvit tall på #F50537 bakgrunn-badge (avrundede hjørner, padding 8-12pt).
+- Alternativ for KPI: Svart tall (#2B2B2B) på #F5F5F5 bakgrunn med rød venstrekant eller underline.
+- Tall i tabeller: Alltid #2B2B2B (svart), aldri rød.
+
+HEADING-HIERARKI:
+- Tittel: 28pt Bold #2B2B2B (0pt før, 12pt etter)
+- Heading 1: 22pt Bold #2B2B2B (24pt før, 6pt etter)
+- Heading 2: 16pt Bold #F50537 (18pt før, 6pt etter)
+- Heading 3: 13pt Bold #2B2B2B (12pt før, 4pt etter)
+- Heading 4: 11pt Bold #6B6B6B (12pt før, 4pt etter)
+- Brødtekst: 11pt Regular #2B2B2B, linjeavstand 1.15, 6pt etter avsnitt
+- Captions: 9pt Regular #6B6B6B
+
+HEADER OG FOOTER:
+- Header: Logo venstrejustert (~15mm), "Aurelian Manufacturing" høyrejustert i 9pt #6B6B6B. Valgfri tynn #F50537 underline (0.5pt).
+- Footer: "CONFIDENTIAL" venstre | sidetall sentrert | dato høyre, alt i 9pt #6B6B6B
+- Første side: 3pt #F50537 horisontal linje øverst som brand-element. Kan utelate header.
+
+TABELLER:
+- Header-rad: #2B2B2B bakgrunn, 11pt Bold #FFFFFF
+- Brødrad: alternerende #FFFFFF / #F5F5F5
+- Kun horisontale linjer (0.5pt #D3D3D3) — aldri vertikale
+- Tall høyrejustert, tekst venstrejustert. Tall alltid i #2B2B2B.
+- Totalrad: 11pt Bold #2B2B2B, 1.5pt toppborder
+- Aksent-tabell: #F50537 header i stedet for #2B2B2B (for sammenligninger)
+
+KOMPONENTER:
+
+Callout-boks:
+- Bakgrunn: #F5F5F5, venstre kantlinje 3pt #F50537
+- Padding: 12pt, tekst 11pt Regular #2B2B2B
+- Bruk for viktige funn, notater eller nøkkelstatistikk
+
+KPI/Metrikk-kort (foretrukket — hvit på rød badge):
+- Bakgrunn: #F50537, avrundede hjørner (4-6px), padding 8-12pt
+- Stort tall: 28-36pt Bold #FFFFFF
+- Label under badge: 12-14pt Regular #6B6B6B
+- 2-4 kort side om side
+
+KPI/Metrikk-kort (alternativ — svart på lys):
+- Bakgrunn: #F5F5F5, padding 12pt
+- Stort tall: 28-36pt Bold #2B2B2B
+- Rød dekor: tynn #F50537 linje under eller ved siden av tallet
+- Label: 12-14pt Regular #6B6B6B
+
+Nummererte steg:
+- Rød sirkel (#F50537) med hvitt tall inni
+- Tittel: 13pt Bold #2B2B2B
+- Beskrivelse: 11pt Regular #6B6B6B
+- 12pt mellomrom mellom steg
+
+Punktlister:
+- Røde kulepunkter (#F50537) eller standard svarte
+- 11pt Regular #2B2B2B
+
+DIAGRAMMER:
+- Flat 2D — aldri 3D, gradienter eller skygger
+- Primærfarge: #F50537 (akseptabelt som seriefarge, ikke lest som "negativt"). Sekundær: #2B2B2B. Tertiær: #6B6B6B. Kvartær: #D3D3D3
+- Akse-labels: Arial 10pt #6B6B6B
+- Datalabels: Arial 11pt Bold #2B2B2B
+- Kun horisontale rutenett (1pt #D3D3D3)
+- Gjennomsiktig bakgrunn
+
+SKRIVESTIL:
+- Profesjonell, presis, skandinavisk minimalisme
+- Data først, deretter forklaring
+- Aktiv stemme. Ingen floskler.
+- Datoer: DD Month YYYY. Valuta: NOK med tusenskilletegn.
+
+LOGO: Fem stjerner i bue over "Aurelian Manufacturing". Rødtonet versjon på lyse bakgrunner (header). Hvit versjon på mørke bakgrunner. Last opp logofilen som Project Knowledge sammen med denne instruksen for best resultat.

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Design Manual — Oppsett-guide for Claude</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    background: #F5F5F5;
+    color: #2B2B2B;
+    line-height: 1.6;
+    padding: 40px 20px 80px;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    background: #000;
+    color: #FFF;
+    padding: 48px 40px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .header .bar { width: 120px; height: 3px; background: #F50537; margin: 16px auto; }
+  .header p { font-size: 16px; color: #6B6B6B; }
+
+  /* Section */
+  .section {
+    background: #FFF;
+    border-radius: 8px;
+    padding: 32px 36px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2B2B2B;
+    margin-bottom: 4px;
+  }
+  .section .subtitle {
+    font-size: 13px;
+    font-style: italic;
+    color: #F50537;
+    margin-bottom: 20px;
+  }
+  .section h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #F50537;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+  .section p, .section li {
+    font-size: 14px;
+    color: #2B2B2B;
+    margin-bottom: 8px;
+  }
+  .section ul, .section ol {
+    padding-left: 24px;
+    margin-bottom: 16px;
+  }
+  .section li { margin-bottom: 6px; }
+
+  /* Step numbers */
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .step-num {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 50%;
+    background: #F50537;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFF;
+    margin-top: 2px;
+  }
+  .step-content { flex: 1; }
+  .step-content .step-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2B2B2B;
+    margin-bottom: 4px;
+  }
+  .step-content .step-desc {
+    font-size: 13px;
+    color: #6B6B6B;
+    line-height: 1.5;
+  }
+
+  /* Code block */
+  .code-block {
+    background: #2B2B2B;
+    color: #FFF;
+    padding: 20px 24px;
+    border-radius: 6px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0 16px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* Callout */
+  .callout {
+    background: #F5F5F5;
+    border-left: 4px solid #F50537;
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout p { margin-bottom: 4px; font-size: 13px; }
+  .callout strong { color: #F50537; }
+
+  /* File card */
+  .file-card {
+    border: 1px solid #D3D3D3;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .file-card .file-info { flex: 1; }
+  .file-card .file-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2B2B2B;
+  }
+  .file-card .file-desc {
+    font-size: 12px;
+    color: #6B6B6B;
+  }
+  .file-card .file-location {
+    font-size: 11px;
+    color: #F50537;
+    font-weight: 700;
+    text-align: right;
+    max-width: 280px;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-block;
+    background: #F50537;
+    color: #FFF;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .badge-alt {
+    background: #2B2B2B;
+  }
+
+  /* Divider */
+  hr {
+    border: none;
+    height: 1px;
+    background: #D3D3D3;
+    margin: 24px 0;
+  }
+
+  /* Option cards */
+  .option-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .option-card {
+    border: 2px solid #D3D3D3;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .option-card.recommended {
+    border-color: #F50537;
+  }
+  .option-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .option-card p { font-size: 12px; color: #6B6B6B; }
+
+  /* Screenshot placeholder */
+  .screenshot {
+    background: #F5F5F5;
+    border: 2px dashed #D3D3D3;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+    margin: 16px 0;
+    color: #6B6B6B;
+    font-size: 13px;
+  }
+
+  /* Copy button style hint */
+  .copy-hint {
+    font-size: 11px;
+    color: #6B6B6B;
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  @media print {
+    body { background: #FFF; padding: 20px; }
+    .section { box-shadow: none; border: 1px solid #D3D3D3; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+  <h1>Aurelian Manufacturing</h1>
+  <div class="bar"></div>
+  <p>Design Manual — Oppsett-guide for Claude.ai</p>
+</div>
+
+<!-- INTRO -->
+<div class="section">
+  <h2>Hva er dette?</h2>
+  <div class="subtitle">Alt du trenger for konsistente dokumenter</div>
+  <p>Vi har laget en <strong>designmanual</strong> (en "skill"-fil) som forteller Claude n&oslash;yaktig hvordan alle Aurelian-dokumenter skal se ut. N&aring;r du laster denne inn i Claude, f&aring;r du 100% konsistent styling p&aring; alle Word-dokumenter, presentasjoner, tabeller og diagrammer.</p>
+
+  <div class="callout">
+    <p><strong>Du trenger kun &eacute;n fil:</strong> <code>aurelian-design-manual.md</code></p>
+    <p>Denne filen ligger allerede p&aring; skrivebordet ditt i mappen <strong>Design MAnual</strong>.</p>
+  </div>
+</div>
+
+<!-- FILES OVERVIEW -->
+<div class="section">
+  <h2>Dine filer</h2>
+  <div class="subtitle">Disse ligger i mappen Design MAnual p&aring; skrivebordet</div>
+
+  <div class="file-card">
+    <div class="file-info">
+      <div class="file-name">aurelian-design-manual.md &nbsp;<span class="badge">VIKTIGST</span></div>
+      <div class="file-desc">Designmanualen — dette er "skill"-filen du laster opp til Claude</div>
+    </div>
+    <div class="file-location">Skal lastes opp &rarr;</div>
+  </div>
+
+  <div class="file-card">
+    <div class="file-info">
+      <div class="file-name">aurelian-ppt-mockup.html &nbsp;<span class="badge badge-alt">MOCKUP</span></div>
+      <div class="file-desc">Visuelt eksempel p&aring; PowerPoint-design (6 slides) — &aring;pne i nettleser</div>
+    </div>
+    <div class="file-location">Referanse</div>
+  </div>
+
+  <div class="file-card">
+    <div class="file-info">
+      <div class="file-name">aurelian-word-mockup-v2.html &nbsp;<span class="badge badge-alt">MOCKUP</span></div>
+      <div class="file-desc">Visuelt eksempel p&aring; Word-dokument design (2 sider) — &aring;pne i nettleser</div>
+    </div>
+    <div class="file-location">Referanse</div>
+  </div>
+</div>
+
+<!-- OPTION A: CLAUDE.AI PROJECTS (RECOMMENDED) -->
+<div class="section">
+  <h2>Metode 1: Claude.ai Projects</h2>
+  <div class="subtitle">Anbefalt — fungerer for b&aring;de chat og samarbeid</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <div class="step-title">G&aring; til claude.ai</div>
+      <div class="step-desc">&Aring;pne <strong>claude.ai</strong> i nettleseren og logg inn.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <div class="step-title">Opprett et Project</div>
+      <div class="step-desc">I venstre sidebar, klikk p&aring; <strong>"Projects"</strong> &rarr; <strong>"Create project"</strong>. Gi det et navn, f.eks. <strong>"Aurelian Manufacturing"</strong>.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <div class="step-title">Last opp designmanualen som Project Knowledge</div>
+      <div class="step-desc">
+        I prosjektet, klikk <strong>"Add content"</strong> &rarr; <strong>"Upload files"</strong>.<br>
+        Finn filen <code>aurelian-design-manual.md</code> i mappen:<br>
+        <code>Skrivebord &rarr; Design MAnual &rarr; aurelian-design-manual.md</code><br>
+        Last den opp.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <div class="step-title">Legg til Custom Instructions</div>
+      <div class="step-desc">Klikk <strong>"Set custom instructions"</strong> i prosjektet og lim inn teksten under:</div>
+    </div>
+  </div>
+
+  <div class="code-block">Du er designansvarlig for Aurelian Manufacturing AS.
+
+VIKTIG: F&oslash;lg ALLTID designmanualen (aurelian-design-manual.md) som er lastet opp som prosjektfil. Alle dokumenter, presentasjoner, tabeller, diagrammer og annet visuelt innhold skal f&oslash;lge denne manualen uten unntak.
+
+Spesielt:
+- Bruk KUN fargene definert i manualen (#F50537 r&oslash;d, #2B2B2B svart, #6B6B6B gr&aring;)
+- Bruk KUN Calibri som font (Arial kun i diagrammer)
+- Presentasjoner: Hovedsakelig hvit bakgrunn med svart tekst. Svart bakgrunn kun p&aring; f&oslash;rste og siste slide. R&oslash;d tekst for skj&oslash;nnsmessige detaljer.
+- Word-dokumenter: F&oslash;lg heading-hierarkiet, tabellstilene og komponentm&oslash;nstrene i manualen.
+- Skrivestil: Profesjonell, presis, skandinavisk minimalisme. Data f&oslash;rst.</div>
+  <p class="copy-hint">Marker all tekst i den svarte boksen over, kopier (Ctrl+C) og lim inn (Ctrl+V) i Custom Instructions.</p>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <div class="step-title">Ferdig!</div>
+      <div class="step-desc">N&aring; vil <strong>alle nye samtaler</strong> innenfor dette prosjektet automatisk f&oslash;lge designmanualen. Bare start en ny chat i prosjektet og be Claude lage et dokument.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Test det:</strong> Start en ny chat i prosjektet og skriv: <em>"Lag en kort Word-rapport om produksjonskapasitet med en tabell og et KPI-panel"</em> — og se at alt f&oslash;lger designmanualen automatisk.</p>
+  </div>
+</div>
+
+<!-- OPTION B: PLAIN CHAT -->
+<div class="section">
+  <h2>Metode 2: Vanlig Claude-chat (uten Projects)</h2>
+  <div class="subtitle">Enklere, men m&aring; gj&oslash;res hver gang</div>
+
+  <p>Hvis du ikke bruker Projects-funksjonen, kan du lime designmanualen direkte inn i chatten:</p>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <div class="step-title">&Aring;pne en ny chat p&aring; claude.ai</div>
+      <div class="step-desc">G&aring; til <strong>claude.ai</strong> og start en ny samtale.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <div class="step-title">Last opp filen som vedlegg</div>
+      <div class="step-desc">
+        Klikk p&aring; <strong>binders-ikonet</strong> (&#x1F4CE;) i chat-feltet &rarr; <strong>"Upload file"</strong>.<br>
+        Velg <code>aurelian-design-manual.md</code> fra:<br>
+        <code>Skrivebord &rarr; Design MAnual</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <div class="step-title">Skriv instruksen sammen med filen</div>
+      <div class="step-desc">I samme melding som du laster opp filen, skriv:</div>
+    </div>
+  </div>
+
+  <div class="code-block">Her er designmanualen v&aring;r for Aurelian Manufacturing. F&oslash;lg denne 100% i alt du lager for oss i denne samtalen. Bruk den som referanse for farger, fonter, layout, tabeller og alt visuelt.
+
+[Din oppgave her, f.eks.: "Lag en presentasjon om produksjonskapasitet"]</div>
+
+  <div class="callout">
+    <p><strong>Ulempe:</strong> Du m&aring; laste opp filen p&aring; nytt for <em>hver ny samtale</em>. Metode 1 (Projects) er bedre fordi den husker filen permanent.</p>
+  </div>
+</div>
+
+<!-- OPTION C: CLAUDE CODE -->
+<div class="section">
+  <h2>Metode 3: Claude Code (CLI)</h2>
+  <div class="subtitle">For deg som bruker Claude Code i terminalen (det du bruker n&aring;)</div>
+
+  <p>Dette er allerede satt opp! Designmanualen ligger i prosjektmappen og Claude Code har tilgang til den automatisk. Du trenger ikke gj&oslash;re noe ekstra her.</p>
+
+  <div class="callout">
+    <p><strong>Allerede klart:</strong> N&aring;r du jobber i Claude Code i denne mappen, kan du referere til designmanualen direkte.</p>
+  </div>
+</div>
+
+<!-- SUMMARY TABLE -->
+<div class="section">
+  <h2>Sammenligning</h2>
+  <div class="subtitle">Hvilken metode passer for deg?</div>
+
+  <table style="width:100%; border-collapse:collapse; margin-top:12px;">
+    <thead>
+      <tr style="background:#2B2B2B; color:#FFF;">
+        <th style="padding:10px 14px; text-align:left; font-size:13px;">Metode</th>
+        <th style="padding:10px 14px; text-align:left; font-size:13px;">Hvor</th>
+        <th style="padding:10px 14px; text-align:left; font-size:13px;">Fordel</th>
+        <th style="padding:10px 14px; text-align:left; font-size:13px;">Ulempe</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#FFF;">
+        <td style="padding:10px 14px; font-size:13px; font-weight:700; border-bottom:1px solid #D3D3D3;">1. Projects <span class="badge" style="font-size:9px;">ANBEFALT</span></td>
+        <td style="padding:10px 14px; font-size:13px; border-bottom:1px solid #D3D3D3;">claude.ai</td>
+        <td style="padding:10px 14px; font-size:13px; border-bottom:1px solid #D3D3D3;">Husker alt, alltid tilgjengelig</td>
+        <td style="padding:10px 14px; font-size:13px; border-bottom:1px solid #D3D3D3;">Krever Pro/Team-plan</td>
+      </tr>
+      <tr style="background:#F5F5F5;">
+        <td style="padding:10px 14px; font-size:13px; font-weight:700; border-bottom:1px solid #D3D3D3;">2. Fil-vedlegg</td>
+        <td style="padding:10px 14px; font-size:13px; border-bottom:1px solid #D3D3D3;">claude.ai</td>
+        <td style="padding:10px 14px; font-size:13px; border-bottom:1px solid #D3D3D3;">Fungerer p&aring; alle planer</td>
+        <td style="padding:10px 14px; font-size:13px; border-bottom:1px solid #D3D3D3;">M&aring; laste opp hver gang</td>
+      </tr>
+      <tr style="background:#FFF;">
+        <td style="padding:10px 14px; font-size:13px; font-weight:700;">3. Claude Code</td>
+        <td style="padding:10px 14px; font-size:13px;">Terminal</td>
+        <td style="padding:10px 14px; font-size:13px;">Allerede satt opp</td>
+        <td style="padding:10px 14px; font-size:13px;">Kun i denne mappen</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- CUSTOM INSTRUCTIONS TEXT -->
+<div class="section">
+  <h2>Custom Instructions — full tekst</h2>
+  <div class="subtitle">Kopier denne teksten til Claude Projects &rarr; Custom Instructions</div>
+
+  <div class="code-block">Du er designansvarlig for Aurelian Manufacturing AS.
+
+VIKTIG: F&oslash;lg ALLTID designmanualen (aurelian-design-manual.md) som er lastet opp som prosjektfil. Alle dokumenter, presentasjoner, tabeller, diagrammer og annet visuelt innhold skal f&oslash;lge denne manualen uten unntak.
+
+Spesielt:
+- Bruk KUN fargene definert i manualen (#F50537 r&oslash;d, #2B2B2B svart, #6B6B6B gr&aring;)
+- Bruk KUN Calibri som font (Arial kun i diagrammer)
+- Presentasjoner: Hovedsakelig hvit bakgrunn med svart tekst. Svart bakgrunn kun p&aring; f&oslash;rste og siste slide. R&oslash;d tekst for skj&oslash;nnsmessige detaljer.
+- Word-dokumenter: F&oslash;lg heading-hierarkiet, tabellstilene og komponentm&oslash;nstrene i manualen.
+- Skrivestil: Profesjonell, presis, skandinavisk minimalisme. Data f&oslash;rst.
+
+N&aring;r du lager dokumenter:
+1. Sjekk ALLTID designmanualen f&oslash;r du begynner
+2. Bruk riktige farger, fonter og st&oslash;rrelser
+3. F&oslash;lg tabellreglene (m&oslash;rk header, horisontale linjer, alternerende rader)
+4. Diagram: Flat 2D, #F50537 som prim&aelig;rfarge, ingen 3D
+5. Logo: Fem stjerner i bue over "Aurelian Manufacturing"</div>
+  <p class="copy-hint">Marker teksten, kopier med Ctrl+C, og lim inn i Claude Projects &rarr; Custom Instructions.</p>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center; margin-top:48px; padding-top:24px; border-top:2px solid #F50537;">
+  <p style="font-size:12px; color:#6B6B6B;">AURELIAN MANUFACTURING AS &ensp;|&ensp; Design Manual v2.0 &ensp;|&ensp; February 2026</p>
+  <p style="font-size:11px; color:#D3D3D3; margin-top:4px;">CONFIDENTIAL</p>
+</div>
+
+</div>
+</body>
+</html>

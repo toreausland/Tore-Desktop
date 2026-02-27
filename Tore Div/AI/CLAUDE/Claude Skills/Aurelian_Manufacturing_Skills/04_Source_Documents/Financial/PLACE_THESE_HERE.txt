@@ -1,0 +1,8 @@
+Place these financial source documents in this folder:
+
+✅ Aurelian_Finansieringsplan_KOMPLETT.pdf  ← MASTER for all numbers
+✅ Aurelian_Manufacturing_Grunnlag_for_verdisetting_Revidert.pdf
+✅ Analyse_av_Europeisk_VCPraksis.pdf
+□  Vedlegg_B_Økonomiske_tabeller.pdf (if separate from Markedsanalyse)
+□  Detailed financial model (Excel with formulas) — TO BE CREATED
+□  Monthly cash flow projections 2027-2028 — TO BE CREATED

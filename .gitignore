@@ -1,0 +1,16 @@
+# Ekskluder store zip-filer som overstiger GitHub grense
+Tore Div/Aurelian ref files/wetransfer_3d-filer-mazak_2025-11-24_1706.zip
+
+# Ekskluder Aurelian-mappen
+Aurelian/
+
+# Ekskluder zip-filer på skrivebordet
+*.zip
+
+# Windows system
+desktop.ini
+Thumbs.db
+nul
+
+# Claude
+.claude/

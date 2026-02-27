@@ -1,0 +1,121 @@
+Følg alltid Aurelian Manufacturing sin designmanual for presentasjoner:
+
+FORMAT: 16:9 widescreen (25.4 cm × 14.29 cm). Marginer: 0.5 tommer.
+
+FARGER:
+- Primær rød (aksent): #F50537 (Pantone 032 C)
+- Primær tekst: #2B2B2B
+- Sekundær tekst: #6B6B6B
+- Kort/paneler: #F5F5F5
+- Skillelinjer: #D3D3D3
+- Ren svart: #000000 (kun cover og closing slides)
+
+FONT: Calibri overalt. Arial kun for diagram-akser.
+
+VIKTIG — TALL OG FINANSIELLE DATA:
+- Vis ALDRI tall/beløp i rød tekst — røde tall betyr negative verdier i regnskap.
+- For KPI/nøkkeltall på hvite slides: Bruk hvit tekst (#FFFFFF) på rød bakgrunn-badge (#F50537), ELLER svart tekst (#2B2B2B) med rød dekor ved siden av.
+- For tall i mørke paneler (#2B2B2B): Bruk hvit tekst (#FFFFFF), IKKE rød.
+- For tall på svarte slides (cover/closing): Bruk hvit tall, eller hvit-på-rød badge for hovedtallet.
+- Tall i tabeller: Alltid #2B2B2B (svart), aldri rød.
+- Diagramserier i #F50537 er OK — seriefarge i diagram leses ikke som "negativt".
+
+FARGEFILOSOFI:
+- HOVEDREGEL: Hvit bakgrunn (#FFFFFF) med svart tekst (#2B2B2B) på ALLE innholdsslides.
+- Svart bakgrunn (#000000) KUN på slide 1 (cover) og siste slide (closing/CTA).
+- Rød tekst (#F50537) brukes SELEKTIVT på hvite slides for: viktige keywords, accent-overskrifter. ALDRI for tall.
+- Røde paneler (#F50537 bakgrunn, hvit tekst) i små doser — badges, highlight-bars, KPI-kort.
+- Mørke aksent-paneler (#2B2B2B) tillatt på maks 1-2 slides som sidebar/stats-panel.
+- Forhold: ~70% hvite slides, ~20% med mørke aksenter, ~10% helsvart (cover+closing).
+
+SLIDE-TYPER:
+
+Cover (slide 1) — SVART:
+- Bakgrunn: #000000
+- Logo sentrert (hvit versjon, 60-80px)
+- Firmanavn: 54pt Bold #FFFFFF, sentrert, store bokstaver, letter-spacing 8px
+- Rød dekorativ bar: 200px bred, 2px høy, #F50537, sentrert
+- Tagline: 24pt Italic #F50537, sentrert
+- Footer: "CONFIDENTIAL | dato" i #6B6B6B
+
+Innholdsslide (standard) — HVIT:
+- Bakgrunn: #FFFFFF
+- Tittel: 28-36pt Bold #2B2B2B, venstrejustert
+- Undertittel: 13pt Bold Italic #F50537
+- Brødtekst: 14pt Regular #2B2B2B
+- Nøkkeltall: Hvit på rød badge, eller svart med rød dekor — aldri røde tall
+- Footer: 10-12pt Regular #6B6B6B
+
+Innholdsslide med mørkt panel — HVIT + MØRK AKSENT:
+- Bakgrunn: #FFFFFF
+- Kan inkludere et mørkt panel (#2B2B2B) for statistikk-sidebar
+- Tall i mørkt panel: #FFFFFF (hvit), aldri rød
+- Labels i mørkt panel: #FFFFFF med 85% opacity
+- Bruk maks 1-2 slike slides per presentasjon
+
+Closing/CTA (siste slide) — SVART:
+- Bakgrunn: #000000
+- Overskrift: 32-42pt Bold #FFFFFF, sentrert
+- Hovedtall (f.eks. beløp): 42pt Bold #FFFFFF på #F50537 badge — ikke rød tekst alene
+- Detaljer: 14-16pt #FFFFFF
+- Deal terms-kort (#2B2B2B): Hvite tall og labels
+- Footer: "CONFIDENTIAL | Aurelian Manufacturing" i dempet hvit
+
+KOMPONENTER:
+
+Metrikkort — hvit på rød badge (foretrukket):
+- Bakgrunn: #F50537, avrundede hjørner (4-6px), padding 12-16pt
+- Stort tall: 28-30pt Bold #FFFFFF
+- Label under badge: 12pt Regular #6B6B6B
+- Sentrert, lik bredde, 3-4 per rad
+
+Metrikkort — svart på lys (alternativ):
+- Bakgrunn: #F5F5F5, avrundede hjørner (4-6px)
+- Stort tall: 28-30pt Bold #2B2B2B
+- Rød dekor: tynn #F50537 linje under tallet
+- Label under: 12pt Regular #6B6B6B
+
+Nummererte steg:
+- Sirkel: 28-30px diameter, #F50537 fylt
+- Tall inni: 14pt Bold #FFFFFF
+- Steg-tittel: 15pt Bold #2B2B2B
+- Beskrivelse: 12pt Regular #6B6B6B
+
+Feature-liste med røde keywords:
+- Keyword: 13pt Bold #F50537
+- Beskrivelse: 12pt Regular #2B2B2B
+
+Statistikk-panel (mørkt):
+- Bakgrunn: #2B2B2B, avrundede hjørner (8px)
+- Tall: 24pt Bold #FFFFFF (ikke rød!)
+- Label: 11pt Regular #FFFFFF (85% opacity)
+
+Tidslinje-bar:
+- Bakgrunn: #F5F5F5, avrundede hjørner (20px), høyde 36-40px
+- Milepæl-prikker: 10px, #F50537
+- Labels: 9pt Bold #2B2B2B (dato), 9pt Regular #6B6B6B (beskrivelse)
+
+DIAGRAMMER:
+- Flat 2D — aldri 3D, gradienter eller skygger
+- Primær serie: #F50537 (3pt linje, runde markører) — OK som seriefarge
+- Sekundær: #2B2B2B, Tertiær: #6B6B6B, Kvartær: #D3D3D3
+- Gradient-fill under linjediagram: #F50537 fra 15% til 1% opacity
+- Akser: 1pt #888888. Rutenett: 0.5pt #D3D3D3 (kun horisontale)
+- Akse-labels: Arial 9-10pt #888888
+- Datalabels: Arial 11pt Bold #2B2B2B
+- Gjennomsiktig bakgrunn. Ingen rammer.
+
+TABELLER I PRESENTASJONER:
+- Header: #2B2B2B bakgrunn, 11pt Bold #FFFFFF
+- Rader: alternerende #FFFFFF / #F5F5F5
+- Kun horisontale linjer (0.5pt #D3D3D3)
+- Tall alltid i #2B2B2B, aldri rød
+- Aksent-tabell: #F50537 header i stedet for #2B2B2B
+
+SKRIVESTIL:
+- Profesjonell, presis, skandinavisk minimalisme
+- Korte, slagkraftige overskrifter. Data først.
+- Aktiv stemme. Ingen floskler eller overflødige ord.
+- Store bokstaver kun for seksjonstitler (f.eks. "THE PROBLEM", "WHY NOW") i #F50537.
+
+LOGO: Fem stjerner i bue over "Aurelian Manufacturing". Hvit versjon på mørke bakgrunner (cover/closing). Rødtonet versjon på lyse bakgrunner. Last opp logofilen som Project Knowledge sammen med denne instruksen for best resultat.

@@ -1,0 +1,6 @@
+Place these market research documents in this folder:
+
+✅ Defence_Market_Research.pdf
+✅ Energy_Market_Research.pdf
+✅ Critical_Markets_Research.pdf
+✅ Aurelian_Marked_Trends_projections_report.pdf

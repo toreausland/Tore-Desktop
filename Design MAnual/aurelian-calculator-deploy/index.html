@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Profit Calculator</title>
+<meta name="description" content="Interactive profit calculator for Aurelian Manufacturing investors. Explore how CNC count, utilization, and maturity affect projected profitability.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9733;</text></svg>">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+/* ============================================================
+   AURELIAN MANUFACTURING — PROFIT CALCULATOR
+   Design Manual v2.0 compliant
+   All numbers: 02 Economic Tables & Projections (VDR 02.04)
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --red:       #F50537;
+    --dark-red:  #D0042E;
+    --black:     #2B2B2B;
+    --pure-black:#000000;
+    --white:     #FFFFFF;
+    --gray:      #6B6B6B;
+    --panel:     #F5F5F5;
+    --divider:   #D3D3D3;
+    --axis:      #888888;
+    --charcoal:  #1A1A1A;
+    --navy:      #1C2D3F;
+    --navy-card: #253B52;
+    --slate:     #3D5A7A;
+    --steel:     #8EAEC5;
+}
+
+html { font-size: 16px; }
+body {
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    background: var(--pure-black);
+    color: var(--black);
+    line-height: 1.4;
+    overflow-x: hidden;
+}
+
+/* Login overlay removed — calculator is open access via investor package */
+
+/* ---------- MAIN APP ---------- */
+#app { display: block; }
+
+/* ---------- HERO BAR ---------- */
+.hero {
+    position: relative; height: 110px;
+    background:
+        url('mazak-hero.jpg') center/cover no-repeat,
+        linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f3460 100%);
+    display: flex; align-items: center; padding: 0 40px;
+}
+.hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--black); opacity: 0.75;
+}
+.hero-content { position: relative; z-index: 1; display: flex; align-items: baseline; gap: 16px; }
+.hero-company {
+    font-size: 20px; font-weight: 700; color: var(--white);
+    letter-spacing: 0.3px;
+}
+.hero-title {
+    font-size: 28px; font-weight: 700; color: var(--red);
+}
+.hero-confidential {
+    position: absolute; right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px; color: var(--gray);
+    letter-spacing: 1px; z-index: 1;
+}
+
+/* ---------- MAIN LAYOUT ---------- */
+.main {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    min-height: calc(100vh - 110px - 48px);
+    background: var(--white);
+}
+
+/* ---------- LEFT PANEL ---------- */
+.panel-left {
+    background: var(--panel);
+    padding: 28px 24px;
+    border-right: 1px solid var(--divider);
+    display: flex; flex-direction: column; gap: 0;
+}
+
+.slider-group { margin-bottom: 22px; }
+.slider-label {
+    font-size: 12px; font-weight: 700; color: var(--gray);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-bottom: 8px;
+}
+.slider-value-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 6px;
+}
+.slider-value { font-size: 28px; font-weight: 700; color: var(--black); }
+.slider-unit { font-size: 13px; color: var(--gray); font-weight: 400; }
+
+input[type="range"] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 6px; border-radius: 3px;
+    background: var(--divider); outline: none; cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--red); border: 3px solid var(--white);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3); cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--red); border: 3px solid var(--white);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3); cursor: pointer;
+}
+
+.slider-range-labels {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--gray); margin-top: 4px;
+}
+
+.slider-context {
+    font-size: 11px; color: var(--gray);
+    margin-top: 6px; font-style: italic;
+}
+
+.panel-divider {
+    height: 1px; background: var(--divider);
+    margin: 4px 0 18px;
+}
+
+.cost-toggle {
+    display: flex; align-items: center; gap: 8px;
+    cursor: pointer; padding: 10px 0;
+    font-size: 13px; font-weight: 700; color: var(--black);
+    border: none; background: none; font-family: inherit;
+    width: 100%; text-align: left;
+}
+.cost-toggle .arrow {
+    transition: transform 0.2s;
+    font-size: 10px; color: var(--gray);
+}
+.cost-toggle.open .arrow { transform: rotate(90deg); }
+
+.cost-table { display: none; margin-top: 8px; }
+.cost-table.open { display: block; }
+
+.cost-table table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.cost-table th {
+    background: var(--black); color: var(--white);
+    padding: 6px 8px; text-align: left; font-weight: 700;
+}
+.cost-table th:last-child { text-align: right; }
+.cost-table td { padding: 5px 8px; border-bottom: 1px solid var(--divider); }
+.cost-table td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.cost-table tr:nth-child(even) td { background: var(--white); }
+.cost-table tr:nth-child(odd) td { background: var(--panel); }
+.cost-table .total-row td {
+    font-weight: 700; border-top: 2px solid var(--black);
+    background: var(--white) !important;
+}
+
+/* ---------- RIGHT PANEL ---------- */
+.panel-right {
+    padding: 28px 36px;
+    display: flex; flex-direction: column; gap: 24px;
+}
+
+/* Big profit number */
+.profit-hero {
+    background: var(--red);
+    border-radius: 8px;
+    padding: 28px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.profit-hero::after {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+}
+.profit-hero-label {
+    font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.75);
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 4px;
+}
+.profit-hero-number {
+    font-size: 64px; font-weight: 700; color: var(--white);
+    line-height: 1.1; font-variant-numeric: tabular-nums;
+}
+.profit-hero-unit {
+    font-size: 22px; font-weight: 400; color: rgba(255,255,255,0.85);
+    margin-left: 4px;
+}
+.profit-hero-sub {
+    font-size: 12px; color: rgba(255,255,255,0.6);
+    margin-top: 6px;
+}
+.profit-negative { background: var(--black); }
+
+/* KPI cards */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+.kpi-card {
+    background: var(--panel); border-radius: 6px;
+    padding: 16px 14px; text-align: center;
+    position: relative;
+}
+.kpi-card::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 32px; height: 3px;
+    background: var(--red);
+    border-radius: 0 0 2px 2px;
+}
+.kpi-number {
+    font-size: 26px; font-weight: 700; color: var(--black);
+    font-variant-numeric: tabular-nums; margin-top: 4px;
+}
+.kpi-label {
+    font-size: 11px; color: var(--gray);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+
+/* Customer program */
+.customer-program {
+    background: var(--navy); border-radius: 6px;
+    padding: 18px 22px; display: none;
+}
+.customer-program.visible { display: block; }
+.cp-title {
+    font-size: 12px; font-weight: 700; color: var(--steel);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+.cp-row {
+    display: flex; justify-content: space-between;
+    padding: 5px 0; font-size: 13px;
+    border-bottom: 1px solid var(--slate);
+}
+.cp-row:last-child { border-bottom: none; }
+.cp-label { color: var(--steel); }
+.cp-value { color: var(--white); font-weight: 700; font-variant-numeric: tabular-nums; }
+.cp-value.highlight { color: var(--red); }
+
+/* Chart */
+.chart-section {
+    background: var(--panel); border-radius: 6px; padding: 20px;
+}
+.chart-title { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 12px; }
+.chart-subtitle { font-size: 11px; color: var(--gray); margin-top: -8px; margin-bottom: 12px; }
+.chart-container { position: relative; height: 220px; }
+
+/* ---------- FOOTER ---------- */
+.footer {
+    background: var(--charcoal);
+    padding: 14px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: var(--gray);
+}
+.footer-ref { font-style: italic; }
+.footer-ref em { color: var(--steel); font-style: normal; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+    .main { grid-template-columns: 1fr; }
+    .panel-left { border-right: none; border-bottom: 1px solid var(--divider); }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .hero { padding: 0 20px; height: 80px; }
+    .hero-title { font-size: 22px; }
+    .profit-hero-number { font-size: 48px; }
+}
+@media (max-width: 600px) {
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .panel-right { padding: 20px 16px; }
+    .panel-left { padding: 20px 16px; }
+    .profit-hero { padding: 20px; }
+    .profit-hero-number { font-size: 40px; }
+    .footer { flex-direction: column; gap: 4px; text-align: center; padding: 12px 16px; }
+}
+
+input[type="range"] {
+    background: linear-gradient(to right, var(--red) 0%, var(--red) 50%, var(--divider) 50%, var(--divider) 100%);
+}
+.profit-hero-number, .kpi-number, .cp-value { transition: opacity 0.1s; }
+</style>
+</head>
+<body>
+
+<!-- APP (open access — authentication handled by investor package) -->
+<div id="app">
+
+    <div class="hero">
+        <div class="hero-content">
+            <span class="hero-company">Aurelian Manufacturing</span>
+            <span class="hero-title">Profit Calculator</span>
+        </div>
+        <div class="hero-confidential">CONFIDENTIAL</div>
+    </div>
+
+    <div class="main">
+
+        <!-- SLIDERS -->
+        <div class="panel-left">
+            <div class="slider-group">
+                <div class="slider-label">Number of CNC Machines</div>
+                <div class="slider-value-row">
+                    <div>
+                        <span class="slider-value" id="cnc-display">20</span>
+                        <span class="slider-unit">machines</span>
+                    </div>
+                </div>
+                <input type="range" id="slider-cnc" min="5" max="25" value="20" step="1">
+                <div class="slider-range-labels"><span>5 (Seed)</span><span>25</span></div>
+            </div>
+
+            <div class="slider-group">
+                <div class="slider-label">Asset Utilization</div>
+                <div class="slider-value-row">
+                    <div>
+                        <span class="slider-value" id="util-display">60</span>
+                        <span class="slider-unit">% of 8,760 hours</span>
+                    </div>
+                </div>
+                <input type="range" id="slider-util" min="10" max="70" value="60" step="1">
+                <div class="slider-range-labels"><span>10%</span><span>70%</span></div>
+                <div class="slider-context" id="util-context">Base case design target</div>
+            </div>
+
+            <div class="slider-group">
+                <div class="slider-label">Variable Cost</div>
+                <div class="slider-value-row">
+                    <div>
+                        <span class="slider-value" id="var-display">8.00</span>
+                        <span class="slider-unit">% of revenue</span>
+                    </div>
+                </div>
+                <input type="range" id="slider-var" min="8" max="13" value="8" step="0.25">
+                <div class="slider-range-labels"><span>8% (Mature)</span><span>13% (Startup)</span></div>
+                <div class="slider-context" id="var-context">Mature operations (2032+)</div>
+            </div>
+
+            <div class="panel-divider"></div>
+
+            <button class="cost-toggle" id="cost-toggle" onclick="toggleCosts()">
+                <span class="arrow">&#9654;</span> Cost Breakdown
+            </button>
+            <div class="cost-table" id="cost-table">
+                <table>
+                    <thead><tr><th>Component</th><th>MNOK</th></tr></thead>
+                    <tbody id="cost-tbody"></tbody>
+                </table>
+            </div>
+
+            <button class="cost-toggle" id="assumptions-toggle" onclick="toggleAssumptions()" style="margin-top:8px">
+                <span class="arrow">&#9654;</span> Model Assumptions
+            </button>
+            <div class="cost-table" id="assumptions-panel">
+                <table>
+                    <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+                    <tbody>
+                        <tr><td>Hours per CNC/year</td><td>8,760</td></tr>
+                        <tr><td>Hourly rate</td><td>3,000 NOK</td></tr>
+                        <tr><td>CAPEX per CNC</td><td>10 MNOK</td></tr>
+                        <tr><td>Depreciation life</td><td>8 years</td></tr>
+                        <tr><td>Facility lease</td><td>5.2 MNOK/yr</td></tr>
+                        <tr><td>Shop base setup</td><td>8.6 MNOK</td></tr>
+                        <tr><td>Debt rate</td><td>7.5%</td></tr>
+                        <tr><td>Ops salary (incl. social)</td><td>1.1 MNOK/yr</td></tr>
+                        <tr><td>Admin salary (incl. social)</td><td>1.4 MNOK/yr</td></tr>
+                        <tr><td>Admin FTEs</td><td>4 (constant)</td></tr>
+                        <tr><td>Staff ratio target</td><td>0.8 FTE/CNC</td></tr>
+                        <tr><td>Customer Program</td><td>50/50 above 45%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="panel-right">
+
+            <div class="profit-hero" id="profit-hero">
+                <div class="profit-hero-label">Projected Annual Profit</div>
+                <div>
+                    <span class="profit-hero-number" id="profit-number">222.3</span>
+                    <span class="profit-hero-unit">MNOK</span>
+                </div>
+                <div class="profit-hero-sub" id="profit-sub">After Customer Program deductions</div>
+            </div>
+
+            <div class="kpi-row">
+                <div class="kpi-card">
+                    <div class="kpi-number" id="kpi-revenue">315.4</div>
+                    <div class="kpi-label">Revenue (MNOK)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-number" id="kpi-cost">92.7</div>
+                    <div class="kpi-label">Total Cost (MNOK)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-number" id="kpi-margin">70.5%</div>
+                    <div class="kpi-label">EBIT Margin</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-number" id="kpi-breakeven">14%</div>
+                    <div class="kpi-label">Break-Even Util.</div>
+                </div>
+            </div>
+
+            <div class="customer-program" id="customer-program">
+                <div class="cp-title">Customer Program (50/50 Sharing above 45% Utilization)</div>
+                <div class="cp-row">
+                    <span class="cp-label">Revenue at 45% threshold</span>
+                    <span class="cp-value" id="cp-threshold">&mdash;</span>
+                </div>
+                <div class="cp-row">
+                    <span class="cp-label">Revenue above threshold</span>
+                    <span class="cp-value" id="cp-above">&mdash;</span>
+                </div>
+                <div class="cp-row">
+                    <span class="cp-label">Customer share (50%)</span>
+                    <span class="cp-value highlight" id="cp-share">&mdash;</span>
+                </div>
+                <div class="cp-row">
+                    <span class="cp-label">Gross profit before sharing</span>
+                    <span class="cp-value" id="cp-gross">&mdash;</span>
+                </div>
+                <div class="cp-row">
+                    <span class="cp-label">Aurelian retained profit</span>
+                    <span class="cp-value" id="cp-retained" style="color:var(--white);font-size:15px">&mdash;</span>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <div class="chart-title">Profit Sensitivity &mdash; Utilization Range</div>
+                <div class="chart-subtitle">Projected profit at current CNC count and variable cost, across 10&ndash;70% utilization</div>
+                <div class="chart-container">
+                    <canvas id="sensitivity-chart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer-ref">
+            Source: <em>02 Economic Tables &amp; Projections</em> (VDR 02.04) &mdash; Aurelian Manufacturing AS
+        </div>
+        <div>All values are projections based on design targets &mdash; not guarantees of future performance</div>
+    </div>
+
+</div>
+
+<script>
+// ---- No login required — calculator is open access ----
+// Authentication is handled by the Investor Package (aurelian-preseed site)
+
+// ---- ENGINE (02 Economic Tables & Projections, VDR 02.04) ----
+const H=8760,R=3000,DL=8,DPC=10000000/DL,SD=8600000/DL,FAC=5200000,OPC=150000,INT=0.075,OS=1100000,AS=1400000,AF=4,CPT=0.45,CPS=0.50,SBD=4300000;
+const ST=[{c:5,f:6},{c:10,f:10},{c:15,f:13},{c:20,f:16},{c:25,f:20}];
+
+function gF(n){if(n<=5)return 6;if(n>=25)return 20;for(let i=0;i<ST.length-1;i++){const a=ST[i],b=ST[i+1];if(n>=a.c&&n<=b.c)return a.f+(n-a.c)/(b.c-a.c)*(b.f-a.f)}return 20}
+function gD(n){return Math.min(n,5)*5000000+Math.max(0,n-5)*7000000+SBD}
+
+function calc(cnc,uP,vP){
+    const u=uP/100,v=vP/100;
+    const rev=cnc*H*u*R;
+    const oF=gF(cnc),pO=oF*OS,pA=AF*AS,tP=pO+pA;
+    const dC=cnc*DPC,dS=SD,tD=gD(cnc),fC=tD*INT,fac=FAC,oO=cnc*OPC;
+    const tFx=tP+dC+dS+fC+fac+oO;
+    const vC=rev*v,tCo=tFx+vC,gP=rev-tCo;
+    let cS=0,rT=0,rA=0,pAb=0;
+    if(u>CPT){rT=cnc*H*CPT*R;rA=rev-rT;pAb=rA*(1-v);cS=pAb*CPS}
+    const aP=gP-cS;
+    const eM=rev>0?(aP/rev)*100:0;
+    const bE=tFx/(cnc*H*R*(1-v))*100;
+    return{rev,tCo,gP,cS,aP,eM,bE:Math.max(0,bE),pO,pA,tP,dC,dS,fC,fac,oO,tFx,vC,rT,rA,pAb,oF,tD}
+}
+
+// ---- FORMAT ----
+function fM(v){const m=v/1e6;return Math.abs(m)>=100?m.toFixed(0):m.toFixed(1)}
+function fP(v){return Math.abs(v)>=10?v.toFixed(0)+'%':v.toFixed(1)+'%'}
+
+// ---- UI ----
+let chart=null;
+function updateUI(){
+    const cnc=+document.getElementById('slider-cnc').value;
+    const util=+document.getElementById('slider-util').value;
+    const vc=+document.getElementById('slider-var').value;
+
+    document.getElementById('cnc-display').textContent=cnc;
+    document.getElementById('util-display').textContent=util;
+    document.getElementById('var-display').textContent=vc.toFixed(2);
+    uFill('slider-cnc');uFill('slider-util');uFill('slider-var');
+
+    // Context
+    const uc=document.getElementById('util-context');
+    if(util<=25)uc.textContent='Near break-even level';
+    else if(util<=40)uc.textContent='Below industry average';
+    else if(util<=50)uc.textContent='Industry best practice (~47%)';
+    else if(util<=60)uc.textContent='Base case design target';
+    else uc.textContent='Above base case \u2014 bull scenario';
+
+    const vx=document.getElementById('var-context');
+    if(vc>=12)vx.textContent='Startup phase (2027\u20132028)';
+    else if(vc>=10.5)vx.textContent='Early optimization (2029\u20132030)';
+    else if(vc>=9)vx.textContent='Maturing operations (2031)';
+    else vx.textContent='Mature operations (2032+)';
+
+    const r=calc(cnc,util,vc);
+    const pM=r.aP/1e6;
+    const ph=document.getElementById('profit-hero');
+    if(pM<0){ph.classList.add('profit-negative');document.getElementById('profit-number').textContent='('+Math.abs(pM).toFixed(1)+')'}
+    else{ph.classList.remove('profit-negative');document.getElementById('profit-number').textContent=fM(r.aP)}
+
+    document.getElementById('profit-sub').textContent=r.cS>0?'After Customer Program deductions':'No Customer Program applied (utilization \u2264 45%)';
+
+    document.getElementById('kpi-revenue').textContent=fM(r.rev);
+    document.getElementById('kpi-cost').textContent=fM(r.tCo);
+    document.getElementById('kpi-margin').textContent=fP(r.eM);
+    document.getElementById('kpi-breakeven').textContent=fP(r.bE);
+
+    const cp=document.getElementById('customer-program');
+    if(r.cS>0){cp.classList.add('visible');
+        document.getElementById('cp-threshold').textContent=fM(r.rT)+' MNOK';
+        document.getElementById('cp-above').textContent=fM(r.rA)+' MNOK';
+        document.getElementById('cp-share').textContent=fM(r.cS)+' MNOK';
+        document.getElementById('cp-gross').textContent=fM(r.gP)+' MNOK';
+        document.getElementById('cp-retained').textContent=fM(r.aP)+' MNOK';
+    }else{cp.classList.remove('visible')}
+
+    document.getElementById('cost-tbody').innerHTML=`
+        <tr><td>Operational payroll (${r.oF.toFixed(1)} FTE)</td><td>${fM(r.pO)}</td></tr>
+        <tr><td>Administration (4 FTE)</td><td>${fM(r.pA)}</td></tr>
+        <tr><td>CNC depreciation (${cnc} \u00d7 1.25M)</td><td>${fM(r.dC)}</td></tr>
+        <tr><td>Shop base depreciation</td><td>${fM(r.dS)}</td></tr>
+        <tr><td>Finance cost (${fM(r.tD)}M \u00d7 7.5%)</td><td>${fM(r.fC)}</td></tr>
+        <tr><td>Facility lease</td><td>${fM(r.fac)}</td></tr>
+        <tr><td>Other operating costs</td><td>${fM(r.oO)}</td></tr>
+        <tr><td>Variable costs (${vc}%)</td><td>${fM(r.vC)}</td></tr>
+        <tr class="total-row"><td>Total cost</td><td>${fM(r.tCo)}</td></tr>`;
+
+    uChart(cnc,vc);
+}
+
+function uFill(id){const s=document.getElementById(id);const p=((s.value-s.min)/(s.max-s.min))*100;s.style.background=`linear-gradient(to right,var(--red) 0%,var(--red) ${p}%,var(--divider) ${p}%,var(--divider) 100%)`}
+
+function uChart(cnc,vc){
+    const L=[],P=[],R2=[];
+    for(let u=10;u<=70;u+=2){L.push(u+'%');const r=calc(cnc,u,vc);P.push(+(r.aP/1e6).toFixed(1));R2.push(+(r.rev/1e6).toFixed(1))}
+    if(chart){chart.data.labels=L;chart.data.datasets[0].data=P;chart.data.datasets[1].data=R2;chart.update('none');return}
+    chart=new Chart(document.getElementById('sensitivity-chart').getContext('2d'),{
+        type:'line',
+        data:{labels:L,datasets:[
+            {label:'Aurelian Profit',data:P,borderColor:'#F50537',backgroundColor:'rgba(245,5,55,0.08)',borderWidth:3,pointRadius:0,pointHitRadius:10,fill:true,tension:0.3},
+            {label:'Revenue',data:R2,borderColor:'#2B2B2B',borderWidth:2,pointRadius:0,pointHitRadius:10,borderDash:[6,3],fill:false,tension:0.3}
+        ]},
+        options:{responsive:true,maintainAspectRatio:false,
+            interaction:{mode:'index',intersect:false},
+            plugins:{legend:{position:'bottom',labels:{font:{family:'Arial,sans-serif',size:11},color:'#6B6B6B',usePointStyle:true,padding:16}},
+                tooltip:{backgroundColor:'#2B2B2B',titleFont:{family:'Calibri,sans-serif',size:13},bodyFont:{family:'Calibri,sans-serif',size:12},
+                    callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.y.toFixed(1)+' MNOK'}}}},
+            scales:{x:{grid:{display:false},ticks:{font:{family:'Arial,sans-serif',size:10},color:'#888',maxTicksLimit:8}},
+                y:{grid:{color:'#D3D3D3',lineWidth:0.5},ticks:{font:{family:'Arial,sans-serif',size:10},color:'#888',callback:function(v){return v+' MNOK'}}}}}
+    });
+}
+
+function toggleCosts(){const b=document.getElementById('cost-toggle'),p=document.getElementById('cost-table');b.classList.toggle('open');p.classList.toggle('open')}
+function toggleAssumptions(){const b=document.getElementById('assumptions-toggle'),p=document.getElementById('assumptions-panel');b.classList.toggle('open');p.classList.toggle('open')}
+
+function initApp(){['slider-cnc','slider-util','slider-var'].forEach(id=>document.getElementById(id).addEventListener('input',updateUI));updateUI()}
+document.addEventListener('DOMContentLoaded',initApp);
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+Place these Vedlegg (appendix) documents in this folder:
+
+□  Vedlegg A — Investeringsmemorandum (NOTE: Superseded by Finansieringsplan for Pre-Seed numbers)
+□  Vedlegg B — Økonomiske tabeller
+✅ Vedlegg C — Sammenligning med lignende industrielle investeringscaser
+□  Vedlegg D — Kvalitativ validering av autonom CNC-utnyttelse
+✅ Vedlegg E — CNC Resale Value Analysis
+✅ Vedlegg F — Team, Styre og Governance
+✅ Vedlegg G — Verksted og Eiendomsstrategi

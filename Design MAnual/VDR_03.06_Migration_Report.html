@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VDR 03.06 Migration Report — Aurelian Manufacturing</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Calibri, 'Segoe UI', sans-serif; background: #fff; color: #2B2B2B; line-height: 1.5; }
+
+  /* Header bar */
+  .top-bar { height: 4px; background: #F50537; }
+  .header { padding: 40px 60px 30px; border-bottom: 1px solid #D3D3D3; }
+  .header-inner { max-width: 960px; margin: 0 auto; }
+  .header .company { font-size: 10px; color: #6B6B6B; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+  .header h1 { font-size: 28px; font-weight: 700; color: #2B2B2B; margin-bottom: 6px; }
+  .header .subtitle { font-size: 16px; font-weight: 700; font-style: italic; color: #F50537; margin-bottom: 12px; }
+  .header .meta { font-size: 11px; color: #6B6B6B; }
+  .header .meta span { margin-right: 24px; }
+
+  /* Main content */
+  .content { max-width: 960px; margin: 0 auto; padding: 40px 60px 80px; }
+
+  /* Section headings */
+  h2 { font-size: 22px; font-weight: 700; color: #2B2B2B; margin: 36px 0 12px; padding-top: 24px; border-top: 1px solid #D3D3D3; }
+  h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  h3 { font-size: 16px; font-weight: 700; color: #F50537; margin: 24px 0 8px; }
+  h4 { font-size: 13px; font-weight: 700; color: #2B2B2B; margin: 16px 0 6px; }
+
+  p { font-size: 11pt; margin-bottom: 10px; }
+  ul, ol { font-size: 11pt; margin: 0 0 12px 24px; }
+  li { margin-bottom: 4px; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 11pt; }
+  thead th { background: #2B2B2B; color: #fff; font-weight: 700; text-align: left; padding: 8px 12px; }
+  thead th.num { text-align: right; }
+  tbody td { padding: 8px 12px; border-bottom: 1px solid #D3D3D3; }
+  tbody tr:nth-child(even) td { background: #F5F5F5; }
+  tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tfoot td { font-weight: 700; padding: 8px 12px; border-top: 2px solid #2B2B2B; }
+
+  /* Callout box */
+  .callout { background: #F5F5F5; border-left: 3px solid #F50537; padding: 16px 20px; margin: 20px 0; font-size: 11pt; }
+  .callout strong { color: #2B2B2B; }
+  .callout.warning { border-left-color: #F50537; background: #FFF5F5; }
+  .callout.ok { border-left-color: #2B8C2B; background: #F5FFF5; }
+
+  /* Badge */
+  .badge { display: inline-block; background: #F50537; color: #fff; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: middle; }
+  .badge.retired { background: #6B6B6B; }
+  .badge.active { background: #2B8C2B; }
+  .badge.warning { background: #D48800; }
+
+  /* Status indicators */
+  .status-row { display: flex; gap: 24px; margin: 16px 0 24px; flex-wrap: wrap; }
+  .status-card { flex: 1; min-width: 200px; background: #F5F5F5; padding: 20px; text-align: center; }
+  .status-card .number { font-size: 32px; font-weight: 700; color: #2B2B2B; }
+  .status-card .label { font-size: 11px; color: #6B6B6B; margin-top: 4px; }
+
+  /* Arrow indicator */
+  .arrow { color: #F50537; font-weight: 700; }
+
+  /* Footer */
+  .footer { max-width: 960px; margin: 0 auto; padding: 20px 60px; border-top: 1px solid #D3D3D3; font-size: 9pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+
+  /* Diff highlight */
+  .old { text-decoration: line-through; color: #6B6B6B; }
+  .new { color: #2B2B2B; font-weight: 700; }
+  .correction { background: #FFF5F5; padding: 2px 4px; border-radius: 2px; }
+
+  /* Print styles */
+  @media print {
+    body { font-size: 10pt; }
+    .content { padding: 20px 0; }
+    .header { padding: 20px 0; }
+    h2 { page-break-after: avoid; }
+    table { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="company">Aurelian Manufacturing AS</div>
+    <h1>VDR Document Migration Report</h1>
+    <div class="subtitle">03_Market_Trends_Projections replaces DRAFT_03_Market_Analysis_Master_Report</div>
+    <div class="meta">
+      <span>Date: 15 February 2026</span>
+      <span>Classification: INTERNAL</span>
+      <span>Master ref: <em>02 Economic Tables &amp; Projections REV6</em> (VDR 02.04)</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- 1. EXECUTIVE SUMMARY -->
+<h2>1. Executive Summary</h2>
+
+<p>The VDR document <span class="badge retired">RETIRED</span> <code>DRAFT_03_Market_Analysis_Master_Report</code> (formerly in <code>3.1_Market_Analysis/</code>) has been replaced by <span class="badge active">ACTIVE</span> <code>03_Market_Trends_Projections</code> (VDR 03.06).</p>
+
+<p>This report documents all findings from the migration: structural changes, content scope, financial discrepancies against the REV6 master document, and all updates made to project infrastructure (Cowork instructions, skills, memory).</p>
+
+<div class="status-row">
+  <div class="status-card">
+    <div class="number">4</div>
+    <div class="label">Financial discrepancies found</div>
+  </div>
+  <div class="status-card">
+    <div class="number">3</div>
+    <div class="label">Files updated</div>
+  </div>
+  <div class="status-card">
+    <div class="number">11</div>
+    <div class="label">Chapters in new document</div>
+  </div>
+  <div class="status-card">
+    <div class="number">1</div>
+    <div class="label">Document retired</div>
+  </div>
+</div>
+
+<!-- 2. DOCUMENT COMPARISON -->
+<h2>2. Document Comparison</h2>
+
+<h3>2.1 Old Document (RETIRED)</h3>
+<table>
+  <thead><tr><th>Property</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>File name</td><td><code>DRAFT_03_Market_Analysis_Master_Report.docx</code></td></tr>
+    <tr><td>Location</td><td><code>Aurelian_VDR/03_Commercial_Market/3.1_Market_Analysis/</code></td></tr>
+    <tr><td>VDR reference</td><td>Unlisted (was in 3.1, no dedicated VDR ref)</td></tr>
+    <tr><td>Status</td><td><span class="badge retired">RETIRED</span> &mdash; exists only in backup (<code>Backup 14.02.2026 1534/</code>)</td></tr>
+    <tr><td>Language</td><td>Norwegian</td></tr>
+    <tr><td>Format</td><td>.docx + .pdf</td></tr>
+  </tbody>
+</table>
+
+<h3>2.2 New Document (ACTIVE)</h3>
+<table>
+  <thead><tr><th>Property</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>File name</td><td><code>03_Market_Trends_Projections_Report.pdf</code></td></tr>
+    <tr><td>Primary location</td><td><code>Aurelian_VDR/03_Commercial_Market/3.6_Market_Trends_Projections/</code></td></tr>
+    <tr><td>Secondary copy</td><td><code>3.1_Market_Analysis/03_Market_Trends_Projections.pdf</code> + <code>.docx</code></td></tr>
+    <tr><td>VDR reference</td><td><strong>VDR 03.06</strong> (newly assigned)</td></tr>
+    <tr><td>Status</td><td><span class="badge active">ACTIVE</span></td></tr>
+    <tr><td>Language</td><td>Norwegian (English Word version to be generated)</td></tr>
+    <tr><td>Format</td><td>.pdf + .docx</td></tr>
+  </tbody>
+</table>
+
+<h3>2.3 Content Scope Comparison</h3>
+<table>
+  <thead><tr><th>Chapter / Topic</th><th>Old (DRAFT)</th><th>New (VDR 03.06)</th></tr></thead>
+  <tbody>
+    <tr><td>Executive summary</td><td>Brief</td><td>Comprehensive, investor-focused</td></tr>
+    <tr><td>Market &amp; benchmark methodology</td><td>Basic</td><td>Detailed (Ch. 1&ndash;3): normalized hourly rate, CNC share adjustment, utilization calculation</td></tr>
+    <tr><td>CNC utilization benchmark (7 companies)</td><td>Present</td><td>Expanded (Ch. 4): full table with structural explanations</td></tr>
+    <tr><td>Business model &amp; autonomous operations</td><td>Partial</td><td>Full chapter (Ch. 5): eDOC, eMRB, OEE, CSNE&sup2;T systems</td></tr>
+    <tr><td>Economic analysis &amp; ramp-up</td><td>Basic projections</td><td>Full chapter (Ch. 6): cost structure, ramp-up table, sensitivity</td></tr>
+    <tr><td>Investment &amp; financing plan</td><td>Not included</td><td><strong>New</strong> (Ch. 7): CAPEX phasing, financing structure, residual value</td></tr>
+    <tr><td>Return metrics (ROCE, IRR)</td><td>Not included</td><td><strong>New</strong> (Ch. 8): bank risk perspective, capital productivity</td></tr>
+    <tr><td>Customer segmentation &amp; order profile</td><td>Not included</td><td><strong>New</strong> (Ch. 9): segments, order mix, ramp-up commercial strategy</td></tr>
+    <tr><td>Implementation &amp; risk</td><td>Not included</td><td><strong>New</strong> (Ch. 10): 8 risk dimensions with mitigations</td></tr>
+    <tr><td>Appendix references</td><td>None</td><td>Vedlegg A&ndash;G (mapped to VDR sections)</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>Key takeaway:</strong> The new document is substantially more comprehensive. It adds 5 entirely new chapters (7&ndash;10 + expanded methodology) and transforms the market analysis from a benchmark comparison into a full investor-grade market and economic feasibility report.
+</div>
+
+<!-- 3. FINANCIAL DISCREPANCIES -->
+<h2>3. Financial Discrepancies vs. REV6 Master</h2>
+
+<div class="callout warning">
+  <strong>Warning:</strong> The new VDR 03.06 document contains financial figures that predate REV6. These must be corrected in any derivative documents (Word, presentations, etc.). The REV6 master document always takes precedence.
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Parameter</th>
+      <th>VDR 03.06 states</th>
+      <th></th>
+      <th>REV6 master value</th>
+      <th>Impact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>CNC machines at launch (2028)</td>
+      <td class="correction">4 CNC</td>
+      <td class="arrow">&rarr;</td>
+      <td class="new">5 CNC (Seed)</td>
+      <td>Affects all ramp-up tables, revenue projections, staffing</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Ramp-up sequence</td>
+      <td class="correction">4 + 4 + 6 + 6 = 20</td>
+      <td class="arrow">&rarr;</td>
+      <td class="new">5 (Seed) + 15 in 3&times;5 tranches (Serie A)</td>
+      <td>Affects CAPEX phasing, financing plan, Ch. 7 entirely</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Total cost at 20 CNC steady state</td>
+      <td class="correction">~102.5 MNOK</td>
+      <td class="arrow">&rarr;</td>
+      <td class="new">~92.75 MNOK</td>
+      <td>Affects margins, break-even, profitability claims</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Admin payroll (4 FTE)</td>
+      <td class="correction">~4.2 MNOK (4 &times; 1.05 MNOK)</td>
+      <td class="arrow">&rarr;</td>
+      <td class="new">5.6 MNOK (4 &times; 1.4 MNOK)</td>
+      <td>Affects total fixed cost, cost structure table in Ch. 6.3</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>3.1 Detailed Impact Analysis</h3>
+
+<h4>Discrepancy #1 &amp; #2: Machine count and ramp-up</h4>
+<p>VDR 03.06 uses an older 4-stage ramp-up model (4+4+6+6 machines from 2028&ndash;2031). REV6 established a cleaner 2-round model: 5 CNC funded by Seed, followed by 15 CNC in 3&times;5 tranches funded by Serie A. This affects:</p>
+<ul>
+  <li>Chapter 6.2 (ramp-up table)</li>
+  <li>Chapter 6.4 (result profile per year)</li>
+  <li>Chapter 7.1 (CAPEX phasing table)</li>
+  <li>Chapter 5.2 (staffing model table)</li>
+</ul>
+
+<h4>Discrepancy #3: Total cost</h4>
+<p>The ~10 MNOK cost difference stems from different depreciation assumptions, admin costs, and facility lease terms between the pre-REV6 model and the final REV6 version. REV6 value of ~92.75 MNOK includes:</p>
+<table>
+  <thead><tr><th>Cost item</th><th class="num">VDR 03.06</th><th class="num">REV6</th><th class="num">Difference</th></tr></thead>
+  <tbody>
+    <tr><td>Operative payroll</td><td class="num">~17.6</td><td class="num">17.6</td><td class="num">0</td></tr>
+    <tr><td>Admin payroll</td><td class="num">~4.2</td><td class="num">5.6</td><td class="num">+1.4</td></tr>
+    <tr><td>CNC depreciation</td><td class="num">~16.0</td><td class="num">25.0</td><td class="num">+9.0</td></tr>
+    <tr><td>Shop base depreciation</td><td class="num">&mdash;</td><td class="num">1.1</td><td class="num">+1.1</td></tr>
+    <tr><td>Finance cost</td><td class="num">~12.0</td><td class="num">10.1</td><td class="num">&minus;1.9</td></tr>
+    <tr><td>Facility lease</td><td class="num">incl. in other</td><td class="num">5.2</td><td class="num">&mdash;</td></tr>
+    <tr><td>Other fixed</td><td class="num">~8.2</td><td class="num">3.0</td><td class="num">&minus;5.2</td></tr>
+    <tr><td>Variable costs</td><td class="num">~44.5</td><td class="num">~25.2 (8%)</td><td class="num">&minus;19.3</td></tr>
+  </tbody>
+  <tfoot>
+    <tr><td>Total</td><td class="num">~102.5</td><td class="num">~92.75</td><td class="num">&minus;9.75</td></tr>
+  </tfoot>
+</table>
+<p style="font-size:9pt; color:#6B6B6B;">Note: Variable cost at 8% depends on actual revenue level. Values shown assume ~315 MNOK revenue. Category splits differ between documents due to restructured accounting classifications in REV6.</p>
+
+<h4>Discrepancy #4: Admin payroll</h4>
+<p>VDR 03.06 uses ~1.05 MNOK per admin FTE. REV6 uses 1.4 MNOK per admin FTE, reflecting full employer cost including social contributions, pension, and overhead. The REV6 figure is the correct, fully loaded rate.</p>
+
+<!-- 4. APPENDIX REFERENCE MAPPING -->
+<h2>4. Appendix Reference Mapping</h2>
+
+<p>VDR 03.06 uses the legacy "Vedlegg A&ndash;G" naming convention. For any derivative documents, these must be translated to VDR section numbers:</p>
+
+<table>
+  <thead><tr><th>Legacy reference</th><th>Content</th><th class="arrow"></th><th>VDR mapping</th></tr></thead>
+  <tbody>
+    <tr><td>Vedlegg A</td><td>Investment Memorandum</td><td class="arrow">&rarr;</td><td>VDR 09 Appendix A (NEED)</td></tr>
+    <tr><td>Vedlegg B</td><td>Economic Tables</td><td class="arrow">&rarr;</td><td><em>02 Economic Tables &amp; Projections REV6</em> (VDR 02.04)</td></tr>
+    <tr><td>Vedlegg C</td><td>Comparable Industrial Investments</td><td class="arrow">&rarr;</td><td>VDR 09 Appendix C</td></tr>
+    <tr><td>Vedlegg D</td><td>Autonomous CNC Validation</td><td class="arrow">&rarr;</td><td>VDR 09 Appendix D (NEED)</td></tr>
+    <tr><td>Vedlegg E</td><td>CNC Resale Value Analysis</td><td class="arrow">&rarr;</td><td>VDR 02.05 Sensitivity Analysis</td></tr>
+    <tr><td>Vedlegg F</td><td>Team, Board &amp; Governance</td><td class="arrow">&rarr;</td><td>VDR 06 Team</td></tr>
+    <tr><td>Vedlegg G</td><td>Workshop &amp; Property Strategy</td><td class="arrow">&rarr;</td><td>VDR 04.04 Facility &amp; Real Estate</td></tr>
+  </tbody>
+</table>
+
+<!-- 5. SECTION 2.2 COMPLIANCE -->
+<h2>5. Section 2.2 Compliance Assessment</h2>
+
+<p>The &sect;2.2 rule requires that Aurelian's numbers (design targets for a pre-revenue company) must never be presented side-by-side with observed industry data without clear labeling.</p>
+
+<h3>5.1 Findings in VDR 03.06</h3>
+
+<table>
+  <thead><tr><th>Location</th><th>Issue</th><th>Severity</th><th>Required action</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Chapter 4.1 &mdash; Benchmark table</td>
+      <td>Aurelian's "target ~65%" is listed alongside observed company data (10&ndash;47%) in the same table without labeling</td>
+      <td><span class="badge warning">MEDIUM</span></td>
+      <td>Add footnote: "Aurelian: design target (pre-revenue). All other values: observed industry data."</td>
+    </tr>
+    <tr>
+      <td>Chapter 5.2 &mdash; Staffing table</td>
+      <td>Projected staffing numbers are presented as factual; no indication these are projections</td>
+      <td><span class="badge warning">MEDIUM</span></td>
+      <td>Add header note: "Planned staffing &mdash; design targets subject to operational validation"</td>
+    </tr>
+    <tr>
+      <td>Chapter 6.4 &mdash; Result profile</td>
+      <td>Revenue and profit figures are projected but presented without qualification</td>
+      <td><span class="badge warning">MEDIUM</span></td>
+      <td>Add disclaimer: "Indicative projections based on design assumptions. Ref: <em>02 Economic Tables &amp; Projections REV6</em> (VDR 02.04)"</td>
+    </tr>
+    <tr>
+      <td>Chapter 11 &mdash; Conclusion</td>
+      <td>States "65% represents a clear break with market standard" &mdash; appropriate framing</td>
+      <td><span class="badge active">OK</span></td>
+      <td>None &mdash; language correctly positions this as ambitious but substantiated</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 6. FILES UPDATED -->
+<h2>6. Infrastructure Updates Completed</h2>
+
+<table>
+  <thead><tr><th>File</th><th>Changes made</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><code>Cowork_Instruks_Word_Generering.md</code></td>
+      <td>
+        <ul>
+          <li>Expanded from 8 to 9 documents</li>
+          <li>Added VDR 03.06 as document #11 in upload list</li>
+          <li>Added full special instructions section for NO&rarr;EN translation</li>
+          <li>Documented all 4 REV6 discrepancies with correction rules</li>
+          <li>Added Vedlegg&rarr;VDR mapping table</li>
+          <li>Updated priority order (VDR 03.06 = #6)</li>
+          <li>Updated summary request to include correction log for VDR 03.06</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>aurelian-market-dd/SKILL.md</code></td>
+      <td>
+        <ul>
+          <li>Added new section "VDR 03.06 &mdash; Market Trends &amp; Projections"</li>
+          <li>Documented chapter structure (Ch. 4&ndash;10)</li>
+          <li>Listed all 4 known REV6 discrepancies</li>
+          <li>Marked DRAFT_03_Market_Analysis_Master_Report as RETIRED</li>
+          <li>Updated Q10 to reference new document</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>MEMORY.md</code></td>
+      <td>
+        <ul>
+          <li>Added VDR 03.06 to document index table</li>
+          <li>Added 3 new entries to Known Wrong Values (DRAFT name, 4 CNC, 102.5 MNOK)</li>
+          <li>Added VDR 03.06 status note with correction requirement</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 7. RECOMMENDATIONS -->
+<h2>7. Recommendations &amp; Next Steps</h2>
+
+<ol>
+  <li><strong>Generate English Word version</strong> &mdash; VDR 03.06 exists only in Norwegian. The Cowork instruction set now includes full translation and correction rules. Prioritized as #6 in the generation queue.</li>
+  <li><strong>Correct financial figures</strong> &mdash; When generating the English Word version, all 4 discrepancies must be resolved using REV6 values. The ramp-up model (Ch. 6&ndash;7) will require restructuring from 4-stage to 2-round (Seed + Serie A).</li>
+  <li><strong>Apply &sect;2.2 labeling</strong> &mdash; Three locations in the document require explicit "design target vs. observed data" labeling before investor distribution.</li>
+  <li><strong>Clean up file duplication</strong> &mdash; The document currently exists in both <code>3.6_Market_Trends_Projections/</code> and <code>3.1_Market_Analysis/</code>. Consider designating one as canonical and removing the duplicate.</li>
+  <li><strong>Delete DRAFT from active VDR</strong> &mdash; <code>DRAFT_03_Market_Analysis_Master_Report</code> has been removed from the active VDR folder (exists only in backup). Confirm this is intentional.</li>
+  <li><strong>Update VDR README.md</strong> &mdash; The README already lists VDR 03.06 under section 3.6 with status "HAVE". No further update needed.</li>
+</ol>
+
+<div class="callout ok">
+  <strong>Migration status: COMPLETE.</strong> All project infrastructure (Cowork instructions, market-dd skill, memory) has been updated to reflect the document change. The retired DRAFT document is flagged across all systems to prevent accidental use.
+</div>
+
+</div>
+
+<div class="footer">
+  <span>CONFIDENTIAL &mdash; Aurelian Manufacturing AS</span>
+  <span>15 February 2026</span>
+</div>
+
+</body>
+</html>

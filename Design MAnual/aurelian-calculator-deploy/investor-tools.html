@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Investor Tools</title>
+<meta name="description" content="Interactive profit calculator and investor position calculator for Aurelian Manufacturing investors.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9733;</text></svg>">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+/* ============================================================
+   AURELIAN MANUFACTURING — INVESTOR TOOLS
+   Design Manual v2.0 compliant
+   All numbers: 02 Economic Tables & Projections (VDR 02.04)
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --red:       #F50537;
+    --dark-red:  #D0042E;
+    --black:     #2B2B2B;
+    --pure-black:#000000;
+    --white:     #FFFFFF;
+    --gray:      #6B6B6B;
+    --panel:     #F5F5F5;
+    --divider:   #D3D3D3;
+    --axis:      #888888;
+    --charcoal:  #1A1A1A;
+    --navy:      #1C2D3F;
+    --navy-card: #253B52;
+    --slate:     #3D5A7A;
+    --steel:     #8EAEC5;
+}
+
+html { font-size: 16px; }
+body {
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    background: var(--pure-black);
+    color: var(--black);
+    line-height: 1.4;
+    overflow-x: hidden;
+}
+
+/* ---------- MAIN APP ---------- */
+#app { display: block; }
+
+/* ---------- HERO BAR ---------- */
+.hero {
+    position: relative; height: 110px;
+    background:
+        url('mazak-hero.jpg') center/cover no-repeat,
+        linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f3460 100%);
+    display: flex; align-items: center; padding: 0 40px;
+}
+.hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--black); opacity: 0.75;
+}
+.hero-content { position: relative; z-index: 1; display: flex; align-items: baseline; gap: 16px; }
+.hero-company {
+    font-size: 20px; font-weight: 700; color: var(--white);
+    letter-spacing: 0.3px;
+}
+.hero-title {
+    font-size: 28px; font-weight: 700; color: var(--red);
+}
+.hero-confidential {
+    position: absolute; right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px; color: var(--gray);
+    letter-spacing: 1px; z-index: 1;
+}
+
+/* ---------- TAB BAR ---------- */
+.tab-bar {
+    display: flex;
+    background: var(--charcoal);
+    border-bottom: 1px solid var(--slate);
+    padding: 0 40px;
+}
+.tab-btn {
+    padding: 12px 28px;
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: color 0.2s, border-color 0.2s;
+}
+.tab-btn:hover { color: var(--white); }
+.tab-btn.active {
+    color: var(--white);
+    border-bottom-color: var(--red);
+}
+
+/* ---------- CONTENT SECTIONS ---------- */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ---------- MAIN LAYOUT ---------- */
+.main {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    min-height: calc(100vh - 110px - 48px - 48px);
+    background: var(--white);
+}
+
+/* ---------- LEFT PANEL ---------- */
+.panel-left {
+    background: var(--panel);
+    padding: 28px 24px;
+    border-right: 1px solid var(--divider);
+    display: flex; flex-direction: column; gap: 0;
+}
+
+.slider-group { margin-bottom: 22px; }
+.slider-label {
+    font-size: 12px; font-weight: 700; color: var(--gray);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-bottom: 8px;
+}
+.slider-value-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 6px;
+}
+.slider-value { font-size: 28px; font-weight: 700; color: var(--black); }
+.slider-unit { font-size: 13px; color: var(--gray); font-weight: 400; }
+
+input[type="range"] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 6px; border-radius: 3px;
+    background: var(--divider); outline: none; cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--red); border: 3px solid var(--white);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3); cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--red); border: 3px solid var(--white);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3); cursor: pointer;
+}
+
+.slider-range-labels {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--gray); margin-top: 4px;
+}
+
+.slider-context {
+    font-size: 11px; color: var(--gray);
+    margin-top: 6px; font-style: italic;
+}
+
+.panel-divider {
+    height: 1px; background: var(--divider);
+    margin: 4px 0 18px;
+}
+
+.cost-toggle {
+    display: flex; align-items: center; gap: 8px;
+    cursor: pointer; padding: 10px 0;
+    font-size: 13px; font-weight: 700; color: var(--black);
+    border: none; background: none; font-family: inherit;
+    width: 100%; text-align: left;
+}
+.cost-toggle .arrow {
+    transition: transform 0.2s;
+    font-size: 10px; color: var(--gray);
+}
+.cost-toggle.open .arrow { transform: rotate(90deg); }
+
+.cost-table { display: none; margin-top: 8px; }
+.cost-table.open { display: block; }
+
+.cost-table table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.cost-table th {
+    background: var(--black); color: var(--white);
+    padding: 6px 8px; text-align: left; font-weight: 700;
+}
+.cost-table th:last-child { text-align: right; }
+.cost-table td { padding: 5px 8px; border-bottom: 1px solid var(--divider); }
+.cost-table td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.cost-table tr:nth-child(even) td { background: var(--white); }
+.cost-table tr:nth-child(odd) td { background: var(--panel); }
+.cost-table .total-row td {
+    font-weight: 700; border-top: 2px solid var(--black);
+    background: var(--white) !important;
+}
+
+/* ---------- RIGHT PANEL ---------- */
+.panel-right {
+    padding: 28px 36px;
+    display: flex; flex-direction: column; gap: 24px;
+}
+
+/* Big hero number */
+.profit-hero {
+    background: var(--red);
+    border-radius: 8px;
+    padding: 28px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.profit-hero::after {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+}
+.profit-hero-label {
+    font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.75);
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 4px;
+}
+.profit-hero-number {
+    font-size: 64px; font-weight: 700; color: var(--white);
+    line-height: 1.1; font-variant-numeric: tabular-nums;
+}
+.profit-hero-unit {
+    font-size: 22px; font-weight: 400; color: rgba(255,255,255,0.85);
+    margin-left: 4px;
+}
+.profit-hero-sub {
+    font-size: 12px; color: rgba(255,255,255,0.6);
+    margin-top: 6px;
+}
+.profit-negative { background: var(--black); }
+
+/* KPI cards */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+.kpi-card {
+    background: var(--panel); border-radius: 6px;
+    padding: 16px 14px; text-align: center;
+    position: relative;
+}
+.kpi-card::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 32px; height: 3px;
+    background: var(--red);
+    border-radius: 0 0 2px 2px;
+}
+.kpi-number {
+    font-size: 26px; font-weight: 700; color: var(--black);
+    font-variant-numeric: tabular-nums; margin-top: 4px;
+}
+.kpi-label {
+    font-size: 11px; color: var(--gray);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+
+/* Customer program */
+.customer-program {
+    background: var(--navy); border-radius: 6px;
+    padding: 18px 22px; display: none;
+}
+.customer-program.visible { display: block; }
+.cp-title {
+    font-size: 12px; font-weight: 700; color: var(--steel);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+.cp-row {
+    display: flex; justify-content: space-between;
+    padding: 5px 0; font-size: 13px;
+    border-bottom: 1px solid var(--slate);
+}
+.cp-row:last-child { border-bottom: none; }
+.cp-label { color: var(--steel); }
+.cp-value { color: var(--white); font-weight: 700; font-variant-numeric: tabular-nums; }
+.cp-value.highlight { color: var(--red); }
+
+/* Chart */
+.chart-section {
+    background: var(--panel); border-radius: 6px; padding: 20px;
+}
+.chart-title { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 12px; }
+.chart-subtitle { font-size: 11px; color: var(--gray); margin-top: -8px; margin-bottom: 12px; }
+.chart-container { position: relative; height: 220px; }
+
+/* ============================================================
+   INVESTOR CALCULATOR — ADDITIONAL STYLES
+   ============================================================ */
+
+.round-card {
+    background: var(--white);
+    border: 1px solid var(--divider);
+    border-radius: 6px;
+    padding: 18px 16px;
+    margin-bottom: 16px;
+}
+.round-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+}
+.round-name { font-size: 15px; font-weight: 700; color: var(--black); }
+.round-badge {
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px;
+    padding: 3px 8px; border-radius: 3px;
+}
+.round-badge.preseed { background: var(--navy); color: var(--steel); }
+.round-badge.seed { background: var(--red); color: var(--white); }
+.round-badge.seriea { background: var(--black); color: var(--white); }
+
+.round-details {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4px 12px; font-size: 11px; color: var(--gray);
+    margin-bottom: 14px;
+}
+.round-details span { font-variant-numeric: tabular-nums; }
+.round-detail-value { font-weight: 700; color: var(--black); }
+
+.round-input-group { position: relative; }
+.round-input-label {
+    font-size: 11px; font-weight: 700; color: var(--gray);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+.round-input-wrap {
+    display: flex; align-items: center;
+    border: 2px solid var(--divider);
+    border-radius: 5px; overflow: hidden;
+    transition: border-color 0.2s;
+}
+.round-input-wrap:focus-within { border-color: var(--red); }
+.round-input {
+    flex: 1; border: none; outline: none;
+    padding: 10px 12px;
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--black); background: transparent;
+    font-variant-numeric: tabular-nums; width: 100%;
+}
+.round-input::placeholder { color: var(--divider); font-weight: 400; }
+.round-input::-webkit-outer-spin-button,
+.round-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.round-input[type=number] { -moz-appearance: textfield; }
+.round-input-suffix {
+    padding: 10px 14px; font-size: 13px; font-weight: 700;
+    color: var(--gray); background: var(--panel);
+    border-left: 1px solid var(--divider); white-space: nowrap;
+}
+
+.round-share-result {
+    margin-top: 8px; font-size: 12px; color: var(--gray);
+    font-style: italic; min-height: 18px;
+}
+.round-share-result strong { color: var(--black); font-style: normal; }
+
+/* Investor breakdown table */
+.inv-breakdown {
+    background: var(--navy); border-radius: 6px; padding: 18px 22px;
+}
+.inv-breakdown-title {
+    font-size: 12px; font-weight: 700; color: var(--steel);
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
+}
+.inv-breakdown table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.inv-breakdown th {
+    color: var(--steel); font-weight: 700; padding: 6px 8px; text-align: left;
+    border-bottom: 1px solid var(--slate);
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.inv-breakdown th:not(:first-child) { text-align: right; }
+.inv-breakdown td {
+    padding: 7px 8px; color: var(--white);
+    border-bottom: 1px solid rgba(61,90,122,0.3);
+    font-variant-numeric: tabular-nums;
+}
+.inv-breakdown td:not(:first-child) { text-align: right; }
+.inv-breakdown .total-row td {
+    font-weight: 700; border-top: 1px solid var(--steel);
+    border-bottom: none; padding-top: 10px;
+}
+.inv-breakdown .total-row td:first-child { color: var(--steel); }
+
+/* Dilution visualization */
+.dilution-viz {
+    background: var(--panel); border-radius: 6px; padding: 20px;
+}
+.dilution-viz-title { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+.dilution-viz-sub { font-size: 11px; color: var(--gray); margin-bottom: 16px; }
+.dilution-bar-container { margin-bottom: 12px; }
+.dilution-bar-label {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--gray); margin-bottom: 4px;
+}
+.dilution-bar-label strong { color: var(--black); }
+.dilution-bar {
+    height: 28px; background: var(--divider); border-radius: 4px;
+    overflow: hidden; position: relative;
+}
+.dilution-bar-fill {
+    height: 100%; border-radius: 4px; transition: width 0.3s ease;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 8px; font-size: 11px; font-weight: 700; color: var(--white);
+    min-width: 0;
+}
+.dilution-bar-fill.preseed { background: var(--navy); }
+.dilution-bar-fill.seed { background: var(--red); }
+.dilution-bar-fill.seriea { background: var(--black); }
+
+/* ---------- FOOTER ---------- */
+.footer {
+    background: var(--charcoal);
+    padding: 14px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: var(--gray);
+}
+.footer-ref { font-style: italic; }
+.footer-ref em { color: var(--steel); font-style: normal; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+    .main { grid-template-columns: 1fr; }
+    .panel-left { border-right: none; border-bottom: 1px solid var(--divider); }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .hero { padding: 0 20px; height: 80px; }
+    .hero-title { font-size: 22px; }
+    .profit-hero-number { font-size: 48px; }
+    .tab-bar { padding: 0 20px; }
+    .tab-btn { padding: 10px 16px; font-size: 13px; }
+}
+@media (max-width: 600px) {
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .panel-right { padding: 20px 16px; }
+    .panel-left { padding: 20px 16px; }
+    .profit-hero { padding: 20px; }
+    .profit-hero-number { font-size: 40px; }
+    .footer { flex-direction: column; gap: 4px; text-align: center; padding: 12px 16px; }
+    .tab-bar { padding: 0 12px; }
+    .tab-btn { padding: 10px 12px; font-size: 12px; }
+    .round-details { grid-template-columns: 1fr; }
+}
+
+input[type="range"] {
+    background: linear-gradient(to right, var(--red) 0%, var(--red) 50%, var(--divider) 50%, var(--divider) 100%);
+}
+.profit-hero-number, .kpi-number, .cp-value { transition: opacity 0.1s; }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+    <div class="hero">
+        <div class="hero-content">
+            <span class="hero-company">Aurelian Manufacturing</span>
+            <span class="hero-title" id="hero-title">Profit Calculator</span>
+        </div>
+        <div class="hero-confidential">CONFIDENTIAL</div>
+    </div>
+
+    <!-- TAB BAR -->
+    <div class="tab-bar">
+        <button class="tab-btn active" data-tab="profit" onclick="switchTab('profit')">Profit Calculator</button>
+        <button class="tab-btn" data-tab="investor" onclick="switchTab('investor')">Investor Calculator</button>
+    </div>
+
+    <!-- ==================== PROFIT CALCULATOR ==================== -->
+    <div class="tab-content active" id="tab-profit">
+        <div class="main">
+            <div class="panel-left">
+                <div class="slider-group">
+                    <div class="slider-label">Number of CNC Machines</div>
+                    <div class="slider-value-row">
+                        <div>
+                            <span class="slider-value" id="cnc-display">20</span>
+                            <span class="slider-unit">machines</span>
+                        </div>
+                    </div>
+                    <input type="range" id="slider-cnc" min="5" max="25" value="20" step="1">
+                    <div class="slider-range-labels"><span>5 (Seed)</span><span>25</span></div>
+                </div>
+
+                <div class="slider-group">
+                    <div class="slider-label">Asset Utilization</div>
+                    <div class="slider-value-row">
+                        <div>
+                            <span class="slider-value" id="util-display">60</span>
+                            <span class="slider-unit">% of 8,760 hours</span>
+                        </div>
+                    </div>
+                    <input type="range" id="slider-util" min="10" max="70" value="60" step="1">
+                    <div class="slider-range-labels"><span>10%</span><span>70%</span></div>
+                    <div class="slider-context" id="util-context">Base case design target</div>
+                </div>
+
+                <div class="slider-group">
+                    <div class="slider-label">Variable Cost</div>
+                    <div class="slider-value-row">
+                        <div>
+                            <span class="slider-value" id="var-display">8.00</span>
+                            <span class="slider-unit">% of revenue</span>
+                        </div>
+                    </div>
+                    <input type="range" id="slider-var" min="8" max="13" value="8" step="0.25">
+                    <div class="slider-range-labels"><span>8% (Mature)</span><span>13% (Startup)</span></div>
+                    <div class="slider-context" id="var-context">Mature operations (2032+)</div>
+                </div>
+
+                <div class="panel-divider"></div>
+
+                <button class="cost-toggle" id="cost-toggle" onclick="toggleCosts()">
+                    <span class="arrow">&#9654;</span> Cost Breakdown
+                </button>
+                <div class="cost-table" id="cost-table">
+                    <table>
+                        <thead><tr><th>Component</th><th>MNOK</th></tr></thead>
+                        <tbody id="cost-tbody"></tbody>
+                    </table>
+                </div>
+
+                <button class="cost-toggle" id="assumptions-toggle" onclick="toggleAssumptions()" style="margin-top:8px">
+                    <span class="arrow">&#9654;</span> Model Assumptions
+                </button>
+                <div class="cost-table" id="assumptions-panel">
+                    <table>
+                        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+                        <tbody>
+                            <tr><td>Hours per CNC/year</td><td>8,760</td></tr>
+                            <tr><td>Hourly rate</td><td>3,000 NOK</td></tr>
+                            <tr><td>CAPEX per CNC</td><td>10 MNOK</td></tr>
+                            <tr><td>Depreciation life</td><td>8 years</td></tr>
+                            <tr><td>Facility lease</td><td>5.2 MNOK/yr</td></tr>
+                            <tr><td>Shop base setup</td><td>8.6 MNOK</td></tr>
+                            <tr><td>Debt rate</td><td>7.5%</td></tr>
+                            <tr><td>Ops salary (incl. social)</td><td>1.1 MNOK/yr</td></tr>
+                            <tr><td>Admin salary (incl. social)</td><td>1.4 MNOK/yr</td></tr>
+                            <tr><td>Admin FTEs</td><td>4 (constant)</td></tr>
+                            <tr><td>Staff ratio target</td><td>0.8 FTE/CNC</td></tr>
+                            <tr><td>Customer Program</td><td>50/50 above 45%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel-right">
+                <div class="profit-hero" id="profit-hero">
+                    <div class="profit-hero-label">Projected Annual Profit</div>
+                    <div>
+                        <span class="profit-hero-number" id="profit-number">222.3</span>
+                        <span class="profit-hero-unit">MNOK</span>
+                    </div>
+                    <div class="profit-hero-sub" id="profit-sub">After Customer Program deductions</div>
+                </div>
+
+                <div class="kpi-row">
+                    <div class="kpi-card">
+                        <div class="kpi-number" id="kpi-revenue">315.4</div>
+                        <div class="kpi-label">Revenue (MNOK)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-number" id="kpi-cost">92.7</div>
+                        <div class="kpi-label">Total Cost (MNOK)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-number" id="kpi-margin">70.5%</div>
+                        <div class="kpi-label">EBIT Margin</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-number" id="kpi-breakeven">14%</div>
+                        <div class="kpi-label">Break-Even Util.</div>
+                    </div>
+                </div>
+
+                <div class="customer-program" id="customer-program">
+                    <div class="cp-title">Customer Program (50/50 Sharing above 45% Utilization)</div>
+                    <div class="cp-row">
+                        <span class="cp-label">Revenue at 45% threshold</span>
+                        <span class="cp-value" id="cp-threshold">&mdash;</span>
+                    </div>
+                    <div class="cp-row">
+                        <span class="cp-label">Revenue above threshold</span>
+                        <span class="cp-value" id="cp-above">&mdash;</span>
+                    </div>
+                    <div class="cp-row">
+                        <span class="cp-label">Customer share (50%)</span>
+                        <span class="cp-value highlight" id="cp-share">&mdash;</span>
+                    </div>
+                    <div class="cp-row">
+                        <span class="cp-label">Gross profit before sharing</span>
+                        <span class="cp-value" id="cp-gross">&mdash;</span>
+                    </div>
+                    <div class="cp-row">
+                        <span class="cp-label">Aurelian retained profit</span>
+                        <span class="cp-value" id="cp-retained" style="color:var(--white);font-size:15px">&mdash;</span>
+                    </div>
+                </div>
+
+                <div class="chart-section">
+                    <div class="chart-title">Profit Sensitivity &mdash; Utilization Range</div>
+                    <div class="chart-subtitle">Projected profit at current CNC count and variable cost, across 10&ndash;70% utilization</div>
+                    <div class="chart-container">
+                        <canvas id="sensitivity-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== INVESTOR CALCULATOR ==================== -->
+    <div class="tab-content" id="tab-investor">
+        <div class="main">
+            <div class="panel-left">
+
+                <!-- PreSeed -->
+                <div class="round-card">
+                    <div class="round-card-header">
+                        <span class="round-name">PreSeed Round</span>
+                        <span class="round-badge preseed">Closed</span>
+                    </div>
+                    <div class="round-details">
+                        <span>Pre-money</span><span class="round-detail-value">25 MNOK</span>
+                        <span>Round size</span><span class="round-detail-value">5 MNOK</span>
+                        <span>Post-money</span><span class="round-detail-value">30 MNOK</span>
+                    </div>
+                    <div class="round-input-group">
+                        <div class="round-input-label">Your investment</div>
+                        <div class="round-input-wrap">
+                            <input type="number" class="round-input" id="inv-preseed" min="0" max="5" step="0.1" value="0" placeholder="0">
+                            <span class="round-input-suffix">MNOK</span>
+                        </div>
+                        <div class="round-share-result" id="inv-preseed-share"></div>
+                    </div>
+                </div>
+
+                <!-- Seed -->
+                <div class="round-card">
+                    <div class="round-card-header">
+                        <span class="round-name">Seed Round</span>
+                        <span class="round-badge seed">Current</span>
+                    </div>
+                    <div class="round-details">
+                        <span>Pre-money</span><span class="round-detail-value">130 MNOK</span>
+                        <span>Round size</span><span class="round-detail-value">51.3 MNOK</span>
+                        <span>Post-money</span><span class="round-detail-value">181.3 MNOK</span>
+                    </div>
+                    <div class="round-input-group">
+                        <div class="round-input-label">Your investment</div>
+                        <div class="round-input-wrap">
+                            <input type="number" class="round-input" id="inv-seed" min="0" max="51.3" step="0.1" value="0" placeholder="0">
+                            <span class="round-input-suffix">MNOK</span>
+                        </div>
+                        <div class="round-share-result" id="inv-seed-share"></div>
+                    </div>
+                </div>
+
+                <!-- Serie A -->
+                <div class="round-card">
+                    <div class="round-card-header">
+                        <span class="round-name">Serie A Round</span>
+                        <span class="round-badge seriea">Future</span>
+                    </div>
+                    <div class="round-details">
+                        <span>Pre-money</span><span class="round-detail-value">250 MNOK</span>
+                        <span>Round size</span><span class="round-detail-value">45 MNOK</span>
+                        <span>Post-money</span><span class="round-detail-value">295 MNOK</span>
+                    </div>
+                    <div class="round-input-group">
+                        <div class="round-input-label">Your investment</div>
+                        <div class="round-input-wrap">
+                            <input type="number" class="round-input" id="inv-seriea" min="0" max="45" step="0.1" value="0" placeholder="0">
+                            <span class="round-input-suffix">MNOK</span>
+                        </div>
+                        <div class="round-share-result" id="inv-seriea-share"></div>
+                    </div>
+                </div>
+
+                <div class="panel-divider"></div>
+
+                <!-- Exit multiple slider -->
+                <div class="slider-group">
+                    <div class="slider-label">Exit Multiple (EBITDA)</div>
+                    <div class="slider-value-row">
+                        <div>
+                            <span class="slider-value" id="exit-mult-display">10</span>
+                            <span class="slider-unit">x EBITDA</span>
+                        </div>
+                    </div>
+                    <input type="range" id="slider-exit-mult" min="5" max="20" value="10" step="0.5">
+                    <div class="slider-range-labels"><span>5x (conservative)</span><span>20x (premium)</span></div>
+                    <div class="slider-context" id="exit-mult-context">Base case assumption</div>
+                </div>
+
+                <!-- Profit scenario context -->
+                <div style="background:var(--navy); border-radius:6px; padding:12px 14px; margin-bottom:16px">
+                    <div style="font-size:10px; font-weight:700; color:var(--steel); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px">Linked Profit Scenario</div>
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--steel); padding:3px 0; border-bottom:1px solid var(--slate)">
+                        <span>Projected annual profit</span>
+                        <span style="color:var(--white); font-weight:700" id="inv-linked-profit">&mdash;</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--steel); padding:3px 0; border-bottom:1px solid var(--slate)">
+                        <span>Implied exit valuation</span>
+                        <span style="color:var(--red); font-weight:700" id="inv-linked-exit">&mdash;</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--steel); padding:3px 0">
+                        <span>Scenario</span>
+                        <span style="color:var(--steel); font-weight:700" id="inv-linked-scenario">&mdash;</span>
+                    </div>
+                    <div style="font-size:10px; color:var(--slate); margin-top:6px; font-style:italic">Adjust CNC count, utilization &amp; variable cost on the Profit Calculator tab</div>
+                </div>
+
+                <button class="cost-toggle" id="inv-assumptions-toggle" onclick="toggleInvAssumptions()">
+                    <span class="arrow">&#9654;</span> Round Assumptions
+                </button>
+                <div class="cost-table" id="inv-assumptions-panel">
+                    <table>
+                        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+                        <tbody>
+                            <tr><td>PreSeed pre-money</td><td>25 MNOK</td></tr>
+                            <tr><td>PreSeed round size</td><td>5 MNOK</td></tr>
+                            <tr><td>Seed pre-money</td><td>130 MNOK</td></tr>
+                            <tr><td>Seed round size</td><td>51.3 MNOK</td></tr>
+                            <tr><td>Serie A pre-money</td><td>250 MNOK</td></tr>
+                            <tr><td>Serie A round size</td><td>45 MNOK</td></tr>
+                            <tr><td>Exit valuation</td><td id="inv-assumptions-exit">Linked to Profit Calculator</td></tr>
+                            <tr><td>Exit multiple</td><td id="inv-assumptions-mult">10x EBITDA</td></tr>
+                            <tr><td>Total equity raised</td><td>101.3 MNOK</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="panel-right">
+
+                <div class="profit-hero" id="inv-hero">
+                    <div class="profit-hero-label">Your Post-Serie A Ownership</div>
+                    <div>
+                        <span class="profit-hero-number" id="inv-ownership-pct">0.00</span>
+                        <span class="profit-hero-unit">%</span>
+                    </div>
+                    <div class="profit-hero-sub" id="inv-hero-sub">Enter an investment amount to see your position</div>
+                </div>
+
+                <div class="kpi-row">
+                    <div class="kpi-card">
+                        <div class="kpi-number" id="inv-kpi-total">0.0</div>
+                        <div class="kpi-label">Total Invested (MNOK)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-number" id="inv-kpi-exit">0.0</div>
+                        <div class="kpi-label">Exit Value (MNOK)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-number" id="inv-kpi-moic">&mdash;</div>
+                        <div class="kpi-label">MOIC (Multiple)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-number" id="inv-kpi-postmoney">0.0</div>
+                        <div class="kpi-label">Position Value Today (MNOK)</div>
+                    </div>
+                </div>
+
+                <div class="inv-breakdown" id="inv-breakdown">
+                    <div class="inv-breakdown-title">Investment Breakdown by Round</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Round</th>
+                                <th>Invested</th>
+                                <th>Initial %</th>
+                                <th>Post-Serie A %</th>
+                                <th>Exit Value</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inv-breakdown-tbody">
+                            <tr><td>PreSeed</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+                            <tr><td>Seed</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+                            <tr><td>Serie A</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+                            <tr class="total-row"><td>Total</td><td>&mdash;</td><td></td><td>&mdash;</td><td>&mdash;</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="dilution-viz">
+                    <div class="dilution-viz-title">Ownership Visualization</div>
+                    <div class="dilution-viz-sub">Your combined position across all rounds (post-Serie A)</div>
+
+                    <div class="dilution-bar-container">
+                        <div class="dilution-bar-label">
+                            <span>PreSeed position</span>
+                            <strong id="viz-preseed-pct">0.00%</strong>
+                        </div>
+                        <div class="dilution-bar">
+                            <div class="dilution-bar-fill preseed" id="viz-preseed-bar" style="width:0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="dilution-bar-container">
+                        <div class="dilution-bar-label">
+                            <span>Seed position</span>
+                            <strong id="viz-seed-pct">0.00%</strong>
+                        </div>
+                        <div class="dilution-bar">
+                            <div class="dilution-bar-fill seed" id="viz-seed-bar" style="width:0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="dilution-bar-container">
+                        <div class="dilution-bar-label">
+                            <span>Serie A position</span>
+                            <strong id="viz-seriea-pct">0.00%</strong>
+                        </div>
+                        <div class="dilution-bar">
+                            <div class="dilution-bar-fill seriea" id="viz-seriea-bar" style="width:0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="dilution-bar-container" style="margin-top:8px; padding-top:8px; border-top:1px solid var(--divider)">
+                        <div class="dilution-bar-label">
+                            <span style="font-weight:700; color:var(--black)">Total combined position</span>
+                            <strong id="viz-total-pct" style="color:var(--red)">0.00%</strong>
+                        </div>
+                        <div class="dilution-bar">
+                            <div class="dilution-bar-fill" id="viz-total-bar" style="width:0%; background:var(--red)"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer-ref">
+            Source: <em>02 Economic Tables &amp; Projections</em> (VDR 02.04) &mdash; Aurelian Manufacturing AS
+        </div>
+        <div>All values are projections based on design targets &mdash; not guarantees of future performance</div>
+    </div>
+
+</div>
+
+<script>
+// ============================================================
+// TAB SWITCHING
+// ============================================================
+function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+    document.querySelector('[data-tab="'+tab+'"]').classList.add('active');
+    document.getElementById('tab-'+tab).classList.add('active');
+    document.getElementById('hero-title').textContent = tab === 'profit' ? 'Profit Calculator' : 'Investor Calculator';
+}
+
+// ============================================================
+// PROFIT CALCULATOR ENGINE (02 Economic Tables & Projections, VDR 02.04)
+// ============================================================
+var H=8760,R=3000,DL=8,DPC=10000000/DL,SD=8600000/DL,FAC=5200000,OPC=150000,INT=0.075,OS=1100000,AS2=1400000,AF=4,CPT=0.45,CPS=0.50,SBD=4300000;
+var ST=[{c:5,f:6},{c:10,f:10},{c:15,f:13},{c:20,f:16},{c:25,f:20}];
+
+function gF(n){if(n<=5)return 6;if(n>=25)return 20;for(var i=0;i<ST.length-1;i++){var a=ST[i],b=ST[i+1];if(n>=a.c&&n<=b.c)return a.f+(n-a.c)/(b.c-a.c)*(b.f-a.f)}return 20}
+function gD(n){return Math.min(n,5)*5000000+Math.max(0,n-5)*7000000+SBD}
+
+function calc(cnc,uP,vP){
+    var u=uP/100,v=vP/100;
+    var rev=cnc*H*u*R;
+    var oF=gF(cnc),pO=oF*OS,pA=AF*AS2,tP=pO+pA;
+    var dC=cnc*DPC,dS=SD,tD=gD(cnc),fC=tD*INT,fac=FAC,oO=cnc*OPC;
+    var tFx=tP+dC+dS+fC+fac+oO;
+    var vC=rev*v,tCo=tFx+vC,gP=rev-tCo;
+    var cS=0,rT=0,rA=0,pAb=0;
+    if(u>CPT){rT=cnc*H*CPT*R;rA=rev-rT;pAb=rA*(1-v);cS=pAb*CPS}
+    var aP=gP-cS;
+    var eM=rev>0?(aP/rev)*100:0;
+    var bE=tFx/(cnc*H*R*(1-v))*100;
+    return{rev:rev,tCo:tCo,gP:gP,cS:cS,aP:aP,eM:eM,bE:Math.max(0,bE),pO:pO,pA:pA,tP:tP,dC:dC,dS:dS,fC:fC,fac:fac,oO:oO,tFx:tFx,vC:vC,rT:rT,rA:rA,pAb:pAb,oF:oF,tD:tD}
+}
+
+function fM(v){var m=v/1e6;return Math.abs(m)>=100?m.toFixed(0):m.toFixed(1)}
+function fP(v){return Math.abs(v)>=10?v.toFixed(0)+'%':v.toFixed(1)+'%'}
+
+var chart=null;
+function updateUI(){
+    var cnc=+document.getElementById('slider-cnc').value;
+    var util=+document.getElementById('slider-util').value;
+    var vc=+document.getElementById('slider-var').value;
+
+    document.getElementById('cnc-display').textContent=cnc;
+    document.getElementById('util-display').textContent=util;
+    document.getElementById('var-display').textContent=vc.toFixed(2);
+    uFill('slider-cnc');uFill('slider-util');uFill('slider-var');
+
+    var uc=document.getElementById('util-context');
+    if(util<=25)uc.textContent='Near break-even level';
+    else if(util<=40)uc.textContent='Below industry average';
+    else if(util<=50)uc.textContent='Industry best practice (~47%)';
+    else if(util<=60)uc.textContent='Base case design target';
+    else uc.textContent='Above base case \u2014 bull scenario';
+
+    var vx=document.getElementById('var-context');
+    if(vc>=12)vx.textContent='Startup phase (2027\u20132028)';
+    else if(vc>=10.5)vx.textContent='Early optimization (2029\u20132030)';
+    else if(vc>=9)vx.textContent='Maturing operations (2031)';
+    else vx.textContent='Mature operations (2032+)';
+
+    var r=calc(cnc,util,vc);
+    var pM=r.aP/1e6;
+    var ph=document.getElementById('profit-hero');
+    if(pM<0){ph.classList.add('profit-negative');document.getElementById('profit-number').textContent='('+Math.abs(pM).toFixed(1)+')'}
+    else{ph.classList.remove('profit-negative');document.getElementById('profit-number').textContent=fM(r.aP)}
+
+    document.getElementById('profit-sub').textContent=r.cS>0?'After Customer Program deductions':'No Customer Program applied (utilization \u2264 45%)';
+
+    document.getElementById('kpi-revenue').textContent=fM(r.rev);
+    document.getElementById('kpi-cost').textContent=fM(r.tCo);
+    document.getElementById('kpi-margin').textContent=fP(r.eM);
+    document.getElementById('kpi-breakeven').textContent=fP(r.bE);
+
+    var cp=document.getElementById('customer-program');
+    if(r.cS>0){cp.classList.add('visible');
+        document.getElementById('cp-threshold').textContent=fM(r.rT)+' MNOK';
+        document.getElementById('cp-above').textContent=fM(r.rA)+' MNOK';
+        document.getElementById('cp-share').textContent=fM(r.cS)+' MNOK';
+        document.getElementById('cp-gross').textContent=fM(r.gP)+' MNOK';
+        document.getElementById('cp-retained').textContent=fM(r.aP)+' MNOK';
+    }else{cp.classList.remove('visible')}
+
+    document.getElementById('cost-tbody').innerHTML=
+        '<tr><td>Operational payroll ('+r.oF.toFixed(1)+' FTE)</td><td>'+fM(r.pO)+'</td></tr>'+
+        '<tr><td>Administration (4 FTE)</td><td>'+fM(r.pA)+'</td></tr>'+
+        '<tr><td>CNC depreciation ('+cnc+' \u00d7 1.25M)</td><td>'+fM(r.dC)+'</td></tr>'+
+        '<tr><td>Shop base depreciation</td><td>'+fM(r.dS)+'</td></tr>'+
+        '<tr><td>Finance cost ('+fM(r.tD)+'M \u00d7 7.5%)</td><td>'+fM(r.fC)+'</td></tr>'+
+        '<tr><td>Facility lease</td><td>'+fM(r.fac)+'</td></tr>'+
+        '<tr><td>Other operating costs</td><td>'+fM(r.oO)+'</td></tr>'+
+        '<tr><td>Variable costs ('+vc+'%)</td><td>'+fM(r.vC)+'</td></tr>'+
+        '<tr class="total-row"><td>Total cost</td><td>'+fM(r.tCo)+'</td></tr>';
+
+    uChart(cnc,vc);
+
+    // Feed profit to investor calculator
+    currentProfitMNOK = r.aP / 1e6;
+    currentCNC = cnc;
+    currentUtil = util;
+    currentVarCost = vc;
+    updateInvestor();
+}
+
+function uFill(id){var s=document.getElementById(id);var p=((s.value-s.min)/(s.max-s.min))*100;s.style.background='linear-gradient(to right,var(--red) 0%,var(--red) '+p+'%,var(--divider) '+p+'%,var(--divider) 100%)'}
+
+function uChart(cnc,vc){
+    var L=[],P=[],R2=[];
+    for(var u=10;u<=70;u+=2){L.push(u+'%');var r=calc(cnc,u,vc);P.push(+(r.aP/1e6).toFixed(1));R2.push(+(r.rev/1e6).toFixed(1))}
+    if(chart){chart.data.labels=L;chart.data.datasets[0].data=P;chart.data.datasets[1].data=R2;chart.update('none');return}
+    chart=new Chart(document.getElementById('sensitivity-chart').getContext('2d'),{
+        type:'line',
+        data:{labels:L,datasets:[
+            {label:'Aurelian Profit',data:P,borderColor:'#F50537',backgroundColor:'rgba(245,5,55,0.08)',borderWidth:3,pointRadius:0,pointHitRadius:10,fill:true,tension:0.3},
+            {label:'Revenue',data:R2,borderColor:'#2B2B2B',borderWidth:2,pointRadius:0,pointHitRadius:10,borderDash:[6,3],fill:false,tension:0.3}
+        ]},
+        options:{responsive:true,maintainAspectRatio:false,
+            interaction:{mode:'index',intersect:false},
+            plugins:{legend:{position:'bottom',labels:{font:{family:'Arial,sans-serif',size:11},color:'#6B6B6B',usePointStyle:true,padding:16}},
+                tooltip:{backgroundColor:'#2B2B2B',titleFont:{family:'Calibri,sans-serif',size:13},bodyFont:{family:'Calibri,sans-serif',size:12},
+                    callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.y.toFixed(1)+' MNOK'}}}},
+            scales:{x:{grid:{display:false},ticks:{font:{family:'Arial,sans-serif',size:10},color:'#888',maxTicksLimit:8}},
+                y:{grid:{color:'#D3D3D3',lineWidth:0.5},ticks:{font:{family:'Arial,sans-serif',size:10},color:'#888',callback:function(v){return v+' MNOK'}}}}}
+    });
+}
+
+function toggleCosts(){var b=document.getElementById('cost-toggle'),p=document.getElementById('cost-table');b.classList.toggle('open');p.classList.toggle('open')}
+function toggleAssumptions(){var b=document.getElementById('assumptions-toggle'),p=document.getElementById('assumptions-panel');b.classList.toggle('open');p.classList.toggle('open')}
+
+// ============================================================
+// INVESTOR CALCULATOR ENGINE (02 Economic Tables & Projections, VDR 02.04)
+// Linked to Profit Calculator — exit valuation = projected profit x EBITDA multiple
+// ============================================================
+
+var ROUNDS = {
+    preseed: { equity: 5, preMoney: 25, postMoney: 30 },
+    seed:    { equity: 51.3, preMoney: 130, postMoney: 181.3 },
+    seriea:  { equity: 45, preMoney: 250, postMoney: 295 }
+};
+
+// Shared state: profit calculator feeds this value (in MNOK)
+var currentProfitMNOK = 0;
+var currentCNC = 20;
+var currentUtil = 60;
+var currentVarCost = 8;
+
+var DIL_PRESEED = (ROUNDS.seed.preMoney / ROUNDS.seed.postMoney) * (ROUNDS.seriea.preMoney / ROUNDS.seriea.postMoney);
+var DIL_SEED = ROUNDS.seriea.preMoney / ROUNDS.seriea.postMoney;
+var DIL_SERIEA = 1;
+
+function getExitMultiple() {
+    return parseFloat(document.getElementById('slider-exit-mult').value) || 10;
+}
+
+function getExitValuation() {
+    // Exit = projected annual profit x EBITDA multiple
+    var mult = getExitMultiple();
+    return Math.max(0, currentProfitMNOK * mult);
+}
+
+function updateExitMultSlider() {
+    var mult = getExitMultiple();
+    document.getElementById('exit-mult-display').textContent = mult % 1 === 0 ? mult.toFixed(0) : mult.toFixed(1);
+    // Fill the slider track
+    var s = document.getElementById('slider-exit-mult');
+    var p = ((s.value - s.min) / (s.max - s.min)) * 100;
+    s.style.background = 'linear-gradient(to right,var(--red) 0%,var(--red) ' + p + '%,var(--divider) ' + p + '%,var(--divider) 100%)';
+    // Context label
+    var ctx = document.getElementById('exit-mult-context');
+    if (mult <= 7) ctx.textContent = 'Conservative / industrial';
+    else if (mult <= 10) ctx.textContent = 'Base case assumption';
+    else if (mult <= 14) ctx.textContent = 'Growth premium';
+    else ctx.textContent = 'High-growth / tech premium';
+}
+
+function updateInvestor() {
+    var exitVal = getExitValuation();
+    var mult = getExitMultiple();
+
+    // Update linked scenario display
+    if (currentProfitMNOK > 0) {
+        document.getElementById('inv-linked-profit').textContent = (Math.abs(currentProfitMNOK) >= 100 ? currentProfitMNOK.toFixed(0) : currentProfitMNOK.toFixed(1)) + ' MNOK';
+        document.getElementById('inv-linked-exit').textContent = (exitVal >= 100 ? exitVal.toFixed(0) : exitVal.toFixed(1)) + ' MNOK (' + (mult % 1 === 0 ? mult.toFixed(0) : mult.toFixed(1)) + 'x)';
+    } else {
+        document.getElementById('inv-linked-profit').textContent = currentProfitMNOK < 0 ? '(' + Math.abs(currentProfitMNOK).toFixed(1) + ') MNOK' : '0 MNOK';
+        document.getElementById('inv-linked-exit').textContent = '0 MNOK';
+    }
+    document.getElementById('inv-linked-scenario').textContent = currentCNC + ' CNC \u00b7 ' + currentUtil + '% util. \u00b7 ' + currentVarCost + '% var.';
+
+    // Update assumptions panel
+    document.getElementById('inv-assumptions-exit').textContent = exitVal > 0 ? (exitVal >= 100 ? exitVal.toFixed(0) : exitVal.toFixed(1)) + ' MNOK' : '0 MNOK';
+    document.getElementById('inv-assumptions-mult').textContent = (mult % 1 === 0 ? mult.toFixed(0) : mult.toFixed(1)) + 'x EBITDA';
+
+    updateExitMultSlider();
+
+    var ps = parseFloat(document.getElementById('inv-preseed').value) || 0;
+    var sd = parseFloat(document.getElementById('inv-seed').value) || 0;
+    var sa = parseFloat(document.getElementById('inv-seriea').value) || 0;
+
+    ps = Math.max(0, Math.min(ps, ROUNDS.preseed.equity));
+    sd = Math.max(0, Math.min(sd, ROUNDS.seed.equity));
+    sa = Math.max(0, Math.min(sa, ROUNDS.seriea.equity));
+
+    var psInitial = ps > 0 ? (ps / ROUNDS.preseed.postMoney) * 100 : 0;
+    var sdInitial = sd > 0 ? (sd / ROUNDS.seed.postMoney) * 100 : 0;
+    var saInitial = sa > 0 ? (sa / ROUNDS.seriea.postMoney) * 100 : 0;
+
+    var psFinal = (ps / ROUNDS.preseed.postMoney) * DIL_PRESEED * 100;
+    var sdFinal = (sd / ROUNDS.seed.postMoney) * DIL_SEED * 100;
+    var saFinal = (sa / ROUNDS.seriea.postMoney) * DIL_SERIEA * 100;
+
+    var totalPct = psFinal + sdFinal + saFinal;
+    var totalInvested = ps + sd + sa;
+    var exitValue = (totalPct / 100) * exitVal;
+    var moic = totalInvested > 0 ? exitValue / totalInvested : 0;
+    var positionToday = (totalPct / 100) * ROUNDS.seriea.postMoney;
+
+    document.getElementById('inv-preseed-share').innerHTML = ps > 0
+        ? '= <strong>' + psInitial.toFixed(2) + '%</strong> of PreSeed round \u2192 <strong>' + psFinal.toFixed(2) + '%</strong> post-Serie A'
+        : '';
+    document.getElementById('inv-seed-share').innerHTML = sd > 0
+        ? '= <strong>' + sdInitial.toFixed(2) + '%</strong> of Seed round \u2192 <strong>' + sdFinal.toFixed(2) + '%</strong> post-Serie A'
+        : '';
+    document.getElementById('inv-seriea-share').innerHTML = sa > 0
+        ? '= <strong>' + saInitial.toFixed(2) + '%</strong> of Serie A round (no further dilution)'
+        : '';
+
+    var heroEl = document.getElementById('inv-hero');
+    document.getElementById('inv-ownership-pct').textContent = totalPct.toFixed(2);
+    if (totalInvested <= 0) {
+        document.getElementById('inv-hero-sub').textContent = 'Enter an investment amount to see your position';
+        heroEl.classList.add('profit-negative');
+    } else if (exitVal <= 0) {
+        document.getElementById('inv-hero-sub').textContent = 'Profit scenario shows no positive exit \u2014 adjust sliders on Profit Calculator tab';
+        heroEl.classList.remove('profit-negative');
+    } else {
+        document.getElementById('inv-hero-sub').textContent = 'Fully diluted ownership after all three rounds';
+        heroEl.classList.remove('profit-negative');
+    }
+
+    document.getElementById('inv-kpi-total').textContent = totalInvested > 0 ? totalInvested.toFixed(1) : '0.0';
+    document.getElementById('inv-kpi-exit').textContent = exitValue > 0 ? (exitValue >= 100 ? exitValue.toFixed(0) : exitValue.toFixed(1)) : '0.0';
+    document.getElementById('inv-kpi-moic').textContent = totalInvested > 0 && exitValue > 0 ? moic.toFixed(1) + 'x' : '\u2014';
+    document.getElementById('inv-kpi-postmoney').textContent = positionToday > 0 ? (positionToday >= 100 ? positionToday.toFixed(0) : positionToday.toFixed(1)) : '0.0';
+
+    function fv(v) { return v > 0 ? (v >= 100 ? v.toFixed(0) : v.toFixed(1)) + ' MNOK' : '\u2014'; }
+    function fp(v) { return v > 0 ? v.toFixed(2) + '%' : '\u2014'; }
+    var psExit = (psFinal / 100) * exitVal;
+    var sdExit = (sdFinal / 100) * exitVal;
+    var saExit = (saFinal / 100) * exitVal;
+
+    document.getElementById('inv-breakdown-tbody').innerHTML =
+        '<tr><td>PreSeed</td><td>' + fv(ps) + '</td><td>' + fp(psInitial) + '</td><td>' + fp(psFinal) + '</td><td>' + fv(psExit) + '</td></tr>' +
+        '<tr><td>Seed</td><td>' + fv(sd) + '</td><td>' + fp(sdInitial) + '</td><td>' + fp(sdFinal) + '</td><td>' + fv(sdExit) + '</td></tr>' +
+        '<tr><td>Serie A</td><td>' + fv(sa) + '</td><td>' + fp(saInitial) + '</td><td>' + fp(saFinal) + '</td><td>' + fv(saExit) + '</td></tr>' +
+        '<tr class="total-row"><td>Total</td><td>' + fv(totalInvested) + '</td><td></td><td>' + fp(totalPct) + '</td><td>' + fv(exitValue) + '</td></tr>';
+
+    var maxBar = 30;
+    function barW(pct) { return Math.min((pct / maxBar) * 100, 100); }
+
+    document.getElementById('viz-preseed-pct').textContent = psFinal.toFixed(2) + '%';
+    document.getElementById('viz-preseed-bar').style.width = barW(psFinal) + '%';
+    document.getElementById('viz-seed-pct').textContent = sdFinal.toFixed(2) + '%';
+    document.getElementById('viz-seed-bar').style.width = barW(sdFinal) + '%';
+    document.getElementById('viz-seriea-pct').textContent = saFinal.toFixed(2) + '%';
+    document.getElementById('viz-seriea-bar').style.width = barW(saFinal) + '%';
+    document.getElementById('viz-total-pct').textContent = totalPct.toFixed(2) + '%';
+    document.getElementById('viz-total-bar').style.width = barW(totalPct) + '%';
+}
+
+function toggleInvAssumptions() {
+    var b = document.getElementById('inv-assumptions-toggle');
+    var p = document.getElementById('inv-assumptions-panel');
+    b.classList.toggle('open');
+    p.classList.toggle('open');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+function initApp() {
+    ['slider-cnc','slider-util','slider-var'].forEach(function(id) {
+        document.getElementById(id).addEventListener('input', updateUI);
+    });
+    updateUI();
+
+    ['inv-preseed','inv-seed','inv-seriea','slider-exit-mult'].forEach(function(id) {
+        document.getElementById(id).addEventListener('input', updateInvestor);
+    });
+    // updateInvestor() is called by updateUI() above via the profit feed
+}
+document.addEventListener('DOMContentLoaded', initApp);
+</script>
+</body>
+</html>

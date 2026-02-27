@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — 4x Scale Profit Calculator</title>
+<meta name="description" content="Multi-site fleet profit calculator for Aurelian Manufacturing. Model 4 production sites with independent CNC count, utilization, and variable cost.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9733;</text></svg>">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+/* ============================================================
+   AURELIAN MANUFACTURING — 4x SCALE PROFIT CALCULATOR
+   Design Manual v2.0 compliant
+   All numbers: 02 Economic Tables & Projections (VDR 02.04)
+   Multi-site model: 4 independent production sites
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+    --red:#F50537;--dark-red:#D0042E;--black:#2B2B2B;--pure-black:#000000;
+    --white:#FFFFFF;--gray:#6B6B6B;--panel:#F5F5F5;--divider:#D3D3D3;
+    --axis:#888888;--charcoal:#1A1A1A;--navy:#1C2D3F;--navy-card:#253B52;
+    --slate:#3D5A7A;--steel:#8EAEC5;
+    --site0:#F50537;--site1:#2B7A78;--site2:#3D5A80;--site3:#8B5E3C;
+}
+html{font-size:16px}
+body{font-family:Calibri,'Segoe UI',sans-serif;background:var(--panel);color:var(--black);line-height:1.4;overflow-x:hidden}
+
+/* HERO */
+.hero{position:relative;height:100px;background:url('mazak-hero.jpg') center/cover no-repeat,linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 50%,#0f3460 100%);display:flex;align-items:center;padding:0 32px}
+.hero::before{content:'';position:absolute;inset:0;background:var(--black);opacity:0.78}
+.hero-content{position:relative;z-index:1;display:flex;align-items:baseline;gap:14px}
+.hero-company{font-size:18px;font-weight:700;color:var(--white)}
+.hero-title{font-size:26px;font-weight:700;color:var(--red)}
+.hero-badge{position:relative;z-index:1;margin-left:auto;background:var(--red);color:var(--white);font-size:11px;font-weight:700;padding:4px 12px;border-radius:3px;letter-spacing:1px}
+.hero-conf{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:10px;color:var(--gray);letter-spacing:1px;z-index:1}
+
+/* COMBINED RESULTS BAR */
+.combined-bar{background:var(--white);padding:20px 32px;border-bottom:1px solid var(--divider);display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.combined-profit{background:var(--red);border-radius:8px;padding:16px 28px;text-align:center;min-width:220px;position:relative;overflow:hidden}
+.combined-profit.negative{background:var(--black)}
+.combined-profit-label{font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:2px}
+.combined-profit-number{font-size:48px;font-weight:700;color:var(--white);line-height:1.1;font-variant-numeric:tabular-nums}
+.combined-profit-unit{font-size:18px;font-weight:400;color:rgba(255,255,255,0.8);margin-left:3px}
+.combined-profit-sub{font-size:10px;color:rgba(255,255,255,0.5);margin-top:3px}
+.combined-kpis{display:flex;gap:16px;flex:1;flex-wrap:wrap}
+.ckpi{background:var(--panel);border-radius:6px;padding:12px 16px;text-align:center;min-width:120px;flex:1;position:relative}
+.ckpi::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:28px;height:3px;background:var(--red);border-radius:0 0 2px 2px}
+.ckpi-num{font-size:22px;font-weight:700;color:var(--black);font-variant-numeric:tabular-nums;margin-top:2px}
+.ckpi-label{font-size:10px;color:var(--gray);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+.combined-sites-count{font-size:11px;color:var(--gray);text-align:center}
+.combined-sites-count strong{color:var(--black)}
+
+/* SITES GRID */
+.sites-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:20px 32px}
+
+/* SITE CARD */
+.site-card{background:var(--white);border-radius:8px;border:2px solid var(--divider);overflow:hidden;transition:border-color .2s,opacity .2s}
+.site-card.active{border-color:var(--site-color,var(--red))}
+.site-card.inactive{opacity:.45}
+.site-card.inactive .site-body{pointer-events:none}
+
+.site-header{padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--divider);background:var(--panel)}
+.site-check{width:20px;height:20px;accent-color:var(--red);cursor:pointer;flex-shrink:0}
+.site-name{font-size:14px;font-weight:700;color:var(--black);flex:1}
+.site-tag{font-size:10px;color:var(--gray);font-style:italic}
+
+.site-body{padding:14px 16px}
+
+/* Mini sliders */
+.ms-group{margin-bottom:14px}
+.ms-label{font-size:10px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px;display:flex;justify-content:space-between}
+.ms-val{color:var(--black);font-size:13px;font-weight:700;text-transform:none;letter-spacing:0}
+.ms-range{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:3px;background:var(--divider);outline:none;cursor:pointer}
+.ms-range::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--site-color,var(--red));border:2px solid var(--white);box-shadow:0 1px 3px rgba(0,0,0,.25);cursor:pointer}
+.ms-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--site-color,var(--red));border:2px solid var(--white);box-shadow:0 1px 3px rgba(0,0,0,.25);cursor:pointer}
+.ms-ticks{display:flex;justify-content:space-between;font-size:9px;color:var(--axis);margin-top:2px}
+
+/* Per-site results */
+.site-results{margin-top:12px;padding-top:12px;border-top:1px solid var(--divider)}
+.sr-row{display:flex;justify-content:space-between;padding:3px 0;font-size:11px}
+.sr-label{color:var(--gray)}
+.sr-val{font-weight:700;color:var(--black);font-variant-numeric:tabular-nums}
+.sr-profit{font-size:15px;font-weight:700;padding:6px 0 2px;display:flex;justify-content:space-between;border-top:1.5px solid var(--black);margin-top:4px}
+.sr-profit .sr-val{font-size:15px}
+
+/* BOTTOM SECTION */
+.bottom-section{padding:20px 32px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.chart-section{background:var(--white);border-radius:8px;padding:20px}
+.chart-title{font-size:14px;font-weight:700;color:var(--black);margin-bottom:4px}
+.chart-subtitle{font-size:10px;color:var(--gray);margin-bottom:12px}
+.chart-container{position:relative;height:240px}
+
+.info-section{background:var(--white);border-radius:8px;padding:20px}
+.info-title{font-size:14px;font-weight:700;color:var(--black);margin-bottom:10px}
+
+.info-table{width:100%;border-collapse:collapse;font-size:11px}
+.info-table th{background:var(--black);color:var(--white);padding:5px 8px;text-align:left;font-weight:700}
+.info-table th:last-child{text-align:right}
+.info-table td{padding:4px 8px;border-bottom:1px solid var(--divider)}
+.info-table td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.info-table tr:nth-child(even) td{background:var(--panel)}
+
+/* Fleet summary table */
+.fleet-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:12px}
+.fleet-table th{background:var(--black);color:var(--white);padding:5px 8px;text-align:right;font-weight:700}
+.fleet-table th:first-child{text-align:left}
+.fleet-table td{padding:5px 8px;border-bottom:1px solid var(--divider);text-align:right;font-variant-numeric:tabular-nums}
+.fleet-table td:first-child{text-align:left;font-weight:700}
+.fleet-table tr:nth-child(even) td{background:var(--panel)}
+.fleet-table .total-row td{font-weight:700;border-top:2px solid var(--black);background:var(--white)!important}
+.fleet-table .inactive-row td{color:var(--divider)}
+
+/* FOOTER */
+.footer{background:var(--charcoal);padding:12px 32px;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--gray);margin-top:8px}
+.footer em{color:var(--steel);font-style:normal}
+
+/* RESPONSIVE */
+@media(max-width:1200px){.sites-grid{grid-template-columns:repeat(2,1fr)}.bottom-section{grid-template-columns:1fr}}
+@media(max-width:700px){.sites-grid{grid-template-columns:1fr}.combined-bar{flex-direction:column;align-items:stretch}.combined-kpis{flex-direction:row}.hero{height:70px;padding:0 16px}.hero-title{font-size:20px}.sites-grid,.bottom-section{padding:12px 16px}.footer{flex-direction:column;gap:4px;text-align:center}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-content">
+        <span class="hero-company">Aurelian Manufacturing</span>
+        <span class="hero-title">4x Scale Calculator</span>
+    </div>
+    <div class="hero-badge">MULTI-SITE</div>
+    <div class="hero-conf">CONFIDENTIAL</div>
+</div>
+
+<!-- COMBINED RESULTS -->
+<div class="combined-bar">
+    <div class="combined-profit" id="comb-profit">
+        <div class="combined-profit-label">Combined Fleet Profit</div>
+        <div><span class="combined-profit-number" id="comb-profit-num">222</span><span class="combined-profit-unit">MNOK</span></div>
+        <div class="combined-profit-sub" id="comb-profit-sub">1 active site</div>
+    </div>
+    <div class="combined-kpis">
+        <div class="ckpi"><div class="ckpi-num" id="comb-rev">315</div><div class="ckpi-label">Revenue (MNOK)</div></div>
+        <div class="ckpi"><div class="ckpi-num" id="comb-cost">93</div><div class="ckpi-label">Total Cost (MNOK)</div></div>
+        <div class="ckpi"><div class="ckpi-num" id="comb-cnc">20</div><div class="ckpi-label">Total CNC</div></div>
+        <div class="ckpi"><div class="ckpi-num" id="comb-staff">20</div><div class="ckpi-label">Total Staff</div></div>
+        <div class="ckpi"><div class="ckpi-num" id="comb-margin">71%</div><div class="ckpi-label">Fleet EBIT Margin</div></div>
+    </div>
+</div>
+
+<!-- 4 SITE CARDS -->
+<div class="sites-grid" id="sites-grid"></div>
+
+<!-- BOTTOM: CHART + INFO -->
+<div class="bottom-section">
+    <div class="chart-section">
+        <div class="chart-title">Fleet Profit by Site</div>
+        <div class="chart-subtitle">Contribution of each active site to combined profit</div>
+        <div class="chart-container"><canvas id="fleet-chart"></canvas></div>
+    </div>
+    <div class="info-section">
+        <div class="info-title">Fleet Summary</div>
+        <table class="fleet-table" id="fleet-table">
+            <thead><tr><th>Site</th><th>CNC</th><th>Util.</th><th>Revenue</th><th>Cost</th><th>Profit</th></tr></thead>
+            <tbody id="fleet-tbody"></tbody>
+        </table>
+        <div style="margin-top:16px">
+            <div class="info-title">Model Assumptions (per site)</div>
+            <table class="info-table">
+                <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+                <tbody>
+                    <tr><td>Hours per CNC/year</td><td>8,760</td></tr>
+                    <tr><td>Hourly rate</td><td>3,000 NOK</td></tr>
+                    <tr><td>CAPEX per CNC</td><td>10 MNOK</td></tr>
+                    <tr><td>Depreciation life</td><td>8 years</td></tr>
+                    <tr><td>Facility lease (per site)</td><td>5.2 MNOK/yr</td></tr>
+                    <tr><td>Shop base setup (per site)</td><td>8.6 MNOK</td></tr>
+                    <tr><td>Admin FTEs (per site)</td><td>4</td></tr>
+                    <tr><td>Customer Program</td><td>50/50 above 45%</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div>Source: <em>02 Economic Tables &amp; Projections</em> (VDR 02.04) &mdash; Aurelian Manufacturing AS</div>
+    <div>All values are projections based on design targets &mdash; not guarantees of future performance</div>
+</div>
+
+<script>
+// ============================================================
+// ENGINE — 02 Economic Tables & Projections (VDR 02.04)
+// Multi-site: each site is an independent production facility
+// Site Zero: Seed (5 CNC @ 50% EQ) + Serie A terms for 6+
+// Sites 2-4: All CNC at Serie A terms (7M debt, 30% EQ)
+// Each site: own shop base (8.6M), facility (5.2M), 4 admin FTE
+// ============================================================
+
+const H=8760,R=3000,DL=8,DPC=10000000/DL,SD=8600000/DL,FAC=5200000,OPC=150000,INT=0.075,OS=1100000,AS_=1400000,AF=4,CPT=0.45,CPS=0.50,SBD=4300000;
+const ST=[{c:5,f:6},{c:10,f:10},{c:15,f:13},{c:20,f:16},{c:25,f:20}];
+
+function gF(n){if(n<=5)return 6;if(n>=25)return 20;for(let i=0;i<ST.length-1;i++){const a=ST[i],b=ST[i+1];if(n>=a.c&&n<=b.c)return a.f+(n-a.c)/(b.c-a.c)*(b.f-a.f)}return 20}
+
+// Site Zero debt: first 5 at Seed terms (5M each), rest at Serie A (7M each) + shop base
+function gD0(n){return Math.min(n,5)*5000000+Math.max(0,n-5)*7000000+SBD}
+// Sites 2-4 debt: all CNC at Serie A terms (7M each) + shop base
+function gDX(n){return n*7000000+SBD}
+
+function calcSite(cnc,uP,vP,isSiteZero){
+    const u=uP/100,v=vP/100;
+    const rev=cnc*H*u*R;
+    const oF=gF(cnc),pO=oF*OS,pA=AF*AS_,tP=pO+pA;
+    const dC=cnc*DPC,dS=SD;
+    const tD=isSiteZero?gD0(cnc):gDX(cnc);
+    const fC=tD*INT,fac=FAC,oO=cnc*OPC;
+    const tFx=tP+dC+dS+fC+fac+oO;
+    const vC=rev*v,tCo=tFx+vC,gP=rev-tCo;
+    let cS=0,rT=0,rA=0;
+    if(u>CPT){rT=cnc*H*CPT*R;rA=rev-rT;cS=rA*(1-v)*CPS}
+    const aP=gP-cS;
+    const eM=rev>0?(aP/rev)*100:0;
+    const bE=tFx/(cnc*H*R*(1-v))*100;
+    const totalStaff=oF+AF;
+    return{rev,tCo,gP,cS,aP,eM,bE:Math.max(0,bE),oF,totalStaff,tD,tFx,vC,cnc,uP,vP}
+}
+
+function fM(v){const m=v/1e6;return Math.abs(m)>=100?m.toFixed(0):m.toFixed(1)}
+function fP(v){return Math.abs(v)>=10?v.toFixed(0)+'%':v.toFixed(1)+'%'}
+
+// ---- SITE DEFINITIONS ----
+const SITES=[
+    {id:0,name:'Site Zero',tag:'V\u00e5ler, \u00d8stfold',color:'#F50537',cnc:20,util:60,vc:8,on:true},
+    {id:1,name:'Site Two',tag:'Location TBD',color:'#2B7A78',cnc:15,util:50,vc:9.25,on:false},
+    {id:2,name:'Site Three',tag:'Location TBD',color:'#3D5A80',cnc:10,util:40,vc:10.5,on:false},
+    {id:3,name:'Site Four',tag:'Location TBD',color:'#8B5E3C',cnc:5,util:30,vc:13,on:false}
+];
+
+// ---- BUILD SITE CARDS ----
+function buildCards(){
+    const grid=document.getElementById('sites-grid');
+    SITES.forEach(s=>{
+        const card=document.createElement('div');
+        card.className='site-card'+(s.on?' active':' inactive');
+        card.id='card-'+s.id;
+        card.style.setProperty('--site-color',s.color);
+        card.innerHTML=`
+            <div class="site-header">
+                <input type="checkbox" class="site-check" id="chk-${s.id}" ${s.on?'checked':''} onchange="toggleSite(${s.id})">
+                <div class="site-name" style="color:${s.color}">${s.name}</div>
+                <div class="site-tag">${s.tag}</div>
+            </div>
+            <div class="site-body">
+                <div class="ms-group">
+                    <div class="ms-label"><span>CNC Machines</span><span class="ms-val" id="v-cnc-${s.id}">${s.cnc}</span></div>
+                    <input type="range" class="ms-range" id="s-cnc-${s.id}" min="5" max="25" value="${s.cnc}" step="1" style="--site-color:${s.color}" oninput="updateAll()">
+                    <div class="ms-ticks"><span>5</span><span>15</span><span>25</span></div>
+                </div>
+                <div class="ms-group">
+                    <div class="ms-label"><span>Utilization</span><span class="ms-val" id="v-util-${s.id}">${s.util}%</span></div>
+                    <input type="range" class="ms-range" id="s-util-${s.id}" min="10" max="70" value="${s.util}" step="1" style="--site-color:${s.color}" oninput="updateAll()">
+                    <div class="ms-ticks"><span>10%</span><span>45%</span><span>70%</span></div>
+                </div>
+                <div class="ms-group">
+                    <div class="ms-label"><span>Variable Cost</span><span class="ms-val" id="v-vc-${s.id}">${s.vc.toFixed(1)}%</span></div>
+                    <input type="range" class="ms-range" id="s-vc-${s.id}" min="8" max="13" value="${s.vc}" step="0.25" style="--site-color:${s.color}" oninput="updateAll()">
+                    <div class="ms-ticks"><span>8%</span><span>10.5%</span><span>13%</span></div>
+                </div>
+                <div class="site-results" id="results-${s.id}"></div>
+            </div>`;
+        grid.appendChild(card);
+    });
+}
+
+function toggleSite(id){
+    SITES[id].on=document.getElementById('chk-'+id).checked;
+    const card=document.getElementById('card-'+id);
+    card.classList.toggle('active',SITES[id].on);
+    card.classList.toggle('inactive',!SITES[id].on);
+    updateAll();
+}
+
+// ---- UPDATE ALL ----
+let fleetChart=null;
+function updateAll(){
+    let totRev=0,totCost=0,totProfit=0,totCNC=0,totStaff=0,activeSites=0;
+    const siteResults=[];
+
+    SITES.forEach(s=>{
+        const cnc=+document.getElementById('s-cnc-'+s.id).value;
+        const util=+document.getElementById('s-util-'+s.id).value;
+        const vc=+document.getElementById('s-vc-'+s.id).value;
+
+        // Update displayed values
+        document.getElementById('v-cnc-'+s.id).textContent=cnc;
+        document.getElementById('v-util-'+s.id).textContent=util+'%';
+        document.getElementById('v-vc-'+s.id).textContent=vc.toFixed(1)+'%';
+
+        // Update slider fills
+        ['s-cnc-'+s.id,'s-util-'+s.id,'s-vc-'+s.id].forEach(sid=>{
+            const sl=document.getElementById(sid);
+            const pct=((sl.value-sl.min)/(sl.max-sl.min))*100;
+            sl.style.background=`linear-gradient(to right,${s.color} 0%,${s.color} ${pct}%,#D3D3D3 ${pct}%,#D3D3D3 100%)`;
+        });
+
+        const r=calcSite(cnc,util,vc,s.id===0);
+        siteResults.push({...r,site:s});
+
+        // Per-site results
+        const rd=document.getElementById('results-'+s.id);
+        if(s.on){
+            totRev+=r.rev;totCost+=r.tCo;totProfit+=r.aP;totCNC+=cnc;totStaff+=r.totalStaff;activeSites++;
+            rd.innerHTML=`
+                <div class="sr-row"><span class="sr-label">Revenue</span><span class="sr-val">${fM(r.rev)} MNOK</span></div>
+                <div class="sr-row"><span class="sr-label">Total cost</span><span class="sr-val">${fM(r.tCo)} MNOK</span></div>
+                <div class="sr-row"><span class="sr-label">EBIT margin</span><span class="sr-val">${fP(r.eM)}</span></div>
+                <div class="sr-row"><span class="sr-label">Break-even</span><span class="sr-val">${fP(r.bE)} util.</span></div>
+                <div class="sr-row"><span class="sr-label">Staff</span><span class="sr-val">${r.totalStaff.toFixed(0)} FTE</span></div>
+                ${r.cS>0?'<div class="sr-row"><span class="sr-label">Customer Program</span><span class="sr-val" style="color:var(--red)">\u2212'+fM(r.cS)+'</span></div>':''}
+                <div class="sr-profit"><span>Site Profit</span><span class="sr-val">${r.aP<0?'('+fM(Math.abs(r.aP))+')':fM(r.aP)} MNOK</span></div>`;
+        }else{
+            rd.innerHTML='<div style="text-align:center;color:var(--divider);font-size:12px;padding:8px">Site disabled</div>';
+        }
+    });
+
+    // Combined KPIs
+    const cp=document.getElementById('comb-profit');
+    const pM=totProfit/1e6;
+    if(pM<0){cp.classList.add('negative');document.getElementById('comb-profit-num').textContent='('+Math.abs(pM).toFixed(0)+')'}
+    else{cp.classList.remove('negative');document.getElementById('comb-profit-num').textContent=fM(totProfit)}
+    document.getElementById('comb-profit-sub').textContent=activeSites+' active site'+(activeSites!==1?'s':'');
+
+    document.getElementById('comb-rev').textContent=fM(totRev);
+    document.getElementById('comb-cost').textContent=fM(totCost);
+    document.getElementById('comb-cnc').textContent=totCNC;
+    document.getElementById('comb-staff').textContent=Math.round(totStaff);
+    document.getElementById('comb-margin').textContent=totRev>0?fP((totProfit/totRev)*100):'0%';
+
+    // Fleet summary table
+    const tbody=document.getElementById('fleet-tbody');
+    let rows='';
+    siteResults.forEach(r=>{
+        const cls=r.site.on?'':'inactive-row';
+        rows+=`<tr class="${cls}">
+            <td style="color:${r.site.color}">${r.site.name}</td>
+            <td>${r.cnc}</td><td>${r.uP}%</td>
+            <td>${r.site.on?fM(r.rev):'\u2014'}</td>
+            <td>${r.site.on?fM(r.tCo):'\u2014'}</td>
+            <td>${r.site.on?(r.aP<0?'('+fM(Math.abs(r.aP))+')':fM(r.aP)):'\u2014'}</td>
+        </tr>`;
+    });
+    rows+=`<tr class="total-row"><td>Combined Fleet</td><td>${totCNC}</td><td>\u2014</td><td>${fM(totRev)}</td><td>${fM(totCost)}</td><td>${pM<0?'('+Math.abs(pM).toFixed(0)+')':fM(totProfit)}</td></tr>`;
+    tbody.innerHTML=rows;
+
+    // Chart
+    updateChart(siteResults);
+}
+
+function updateChart(results){
+    const labels=['Revenue','Fixed Costs','Variable Costs','Cust. Program','Profit'];
+    const datasets=results.filter(r=>r.site.on).map(r=>({
+        label:r.site.name,
+        data:[+(r.rev/1e6).toFixed(1),+(r.tFx/1e6).toFixed(1),+(r.vC/1e6).toFixed(1),+(r.cS/1e6).toFixed(1),+(r.aP/1e6).toFixed(1)],
+        backgroundColor:r.site.color+'CC',
+        borderColor:r.site.color,
+        borderWidth:1
+    }));
+
+    if(fleetChart){
+        fleetChart.data.datasets=datasets;
+        fleetChart.update('none');
+        return;
+    }
+    fleetChart=new Chart(document.getElementById('fleet-chart').getContext('2d'),{
+        type:'bar',
+        data:{labels,datasets},
+        options:{
+            responsive:true,maintainAspectRatio:false,
+            plugins:{
+                legend:{position:'bottom',labels:{font:{family:'Arial,sans-serif',size:10},color:'#6B6B6B',usePointStyle:true,padding:12}},
+                tooltip:{backgroundColor:'#2B2B2B',bodyFont:{family:'Calibri,sans-serif',size:11},callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(1)+' MNOK'}}
+            },
+            scales:{
+                x:{grid:{display:false},ticks:{font:{family:'Arial,sans-serif',size:10},color:'#888'}},
+                y:{grid:{color:'#D3D3D3',lineWidth:.5},ticks:{font:{family:'Arial,sans-serif',size:10},color:'#888',callback:v=>v+' MNOK'}}
+            }
+        }
+    });
+}
+
+// INIT
+document.addEventListener('DOMContentLoaded',()=>{buildCards();updateAll()});
+</script>
+</body>
+</html>

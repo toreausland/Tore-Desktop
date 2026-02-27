@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Profit Calculator</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+/* ============================================================
+   AURELIAN MANUFACTURING — PROFIT CALCULATOR
+   Design Manual v2.0 compliant
+   All numbers from: 02 Economic Tables & Projections (VDR 02.04)
+   ============================================================ */
+
+/* ---------- RESET & BASE ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --red:       #F50537;
+    --dark-red:  #D0042E;
+    --black:     #2B2B2B;
+    --pure-black:#000000;
+    --white:     #FFFFFF;
+    --gray:      #6B6B6B;
+    --panel:     #F5F5F5;
+    --divider:   #D3D3D3;
+    --axis:      #888888;
+    --charcoal:  #1A1A1A;
+    --navy:      #1C2D3F;
+    --navy-card: #253B52;
+    --slate:     #3D5A7A;
+    --steel:     #8EAEC5;
+}
+
+html { font-size: 16px; }
+body {
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    background: var(--pure-black);
+    color: var(--black);
+    line-height: 1.4;
+    overflow-x: hidden;
+}
+
+/* ---------- LOGIN OVERLAY ---------- */
+#login-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--pure-black);
+}
+#login-overlay.hidden { display: none; }
+
+.login-bg {
+    position: absolute; inset: 0;
+    background: url('mazak-hero.jpg') center/cover no-repeat;
+    opacity: 0.25;
+}
+
+.login-card {
+    position: relative; z-index: 1;
+    background: var(--white);
+    border-radius: 8px;
+    width: 400px; max-width: 90vw;
+    padding: 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.login-accent { height: 4px; background: var(--red); }
+
+.login-body { padding: 40px 36px 32px; text-align: center; }
+
+.login-logo {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; margin-bottom: 6px;
+}
+.login-logo .stars { color: var(--red); font-size: 14px; letter-spacing: 3px; }
+.login-logo-text { font-size: 18px; font-weight: 700; color: var(--black); }
+
+.login-subtitle {
+    font-size: 12px; color: var(--gray);
+    margin-bottom: 28px; letter-spacing: 0.5px;
+}
+
+.login-field {
+    width: 100%; padding: 12px 16px;
+    border: 1px solid var(--divider);
+    border-radius: 4px; font-family: inherit;
+    font-size: 14px; color: var(--black);
+    margin-bottom: 16px; transition: border-color 0.2s;
+}
+.login-field:focus { outline: none; border-color: var(--red); }
+
+.login-btn {
+    width: 100%; padding: 13px;
+    background: var(--red); color: var(--white);
+    border: none; border-radius: 4px;
+    font-family: inherit; font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: background 0.2s;
+    letter-spacing: 0.3px;
+}
+.login-btn:hover { background: var(--dark-red); }
+
+.login-error {
+    color: var(--red); font-size: 12px;
+    margin-top: 12px; min-height: 16px;
+}
+
+.login-footer {
+    padding: 14px; text-align: center;
+    background: var(--panel); border-top: 1px solid var(--divider);
+    font-size: 11px; color: var(--gray);
+}
+
+/* ---------- MAIN APP (hidden until login) ---------- */
+#app { display: none; }
+#app.visible { display: block; }
+
+/* ---------- HERO BAR ---------- */
+.hero {
+    position: relative; height: 110px;
+    background: url('mazak-hero.jpg') center/cover no-repeat;
+    display: flex; align-items: center; padding: 0 40px;
+}
+.hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--black); opacity: 0.75;
+}
+.hero-content { position: relative; z-index: 1; display: flex; align-items: baseline; gap: 16px; }
+.hero-company {
+    font-size: 20px; font-weight: 700; color: var(--white);
+    letter-spacing: 0.3px;
+}
+.hero-title {
+    font-size: 28px; font-weight: 700; color: var(--red);
+}
+.hero-confidential {
+    position: absolute; right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px; color: var(--gray);
+    letter-spacing: 1px; z-index: 1;
+}
+
+/* ---------- MAIN LAYOUT ---------- */
+.main {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    min-height: calc(100vh - 110px - 48px);
+    background: var(--white);
+}
+
+/* ---------- LEFT PANEL (SLIDERS) ---------- */
+.panel-left {
+    background: var(--panel);
+    padding: 28px 24px;
+    border-right: 1px solid var(--divider);
+    display: flex; flex-direction: column; gap: 0;
+}
+
+.slider-group { margin-bottom: 22px; }
+.slider-label {
+    font-size: 12px; font-weight: 700; color: var(--gray);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-bottom: 8px;
+}
+.slider-value-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 6px;
+}
+.slider-value {
+    font-size: 28px; font-weight: 700; color: var(--black);
+}
+.slider-unit { font-size: 13px; color: var(--gray); font-weight: 400; }
+.slider-input-wrap { position: relative; }
+
+input[type="range"] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 6px; border-radius: 3px;
+    background: var(--divider); outline: none;
+    cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--red); border: 3px solid var(--white);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--red); border: 3px solid var(--white);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+.slider-range-labels {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--gray); margin-top: 4px;
+}
+
+.slider-context {
+    font-size: 11px; color: var(--gray);
+    margin-top: 6px; font-style: italic;
+}
+
+.panel-divider {
+    height: 1px; background: var(--divider);
+    margin: 4px 0 18px;
+}
+
+/* Cost breakdown toggle */
+.cost-toggle {
+    display: flex; align-items: center; gap: 8px;
+    cursor: pointer; padding: 10px 0;
+    font-size: 13px; font-weight: 700; color: var(--black);
+    border: none; background: none; font-family: inherit;
+    width: 100%; text-align: left;
+}
+.cost-toggle .arrow {
+    transition: transform 0.2s;
+    font-size: 10px; color: var(--gray);
+}
+.cost-toggle.open .arrow { transform: rotate(90deg); }
+
+.cost-table { display: none; margin-top: 8px; }
+.cost-table.open { display: block; }
+
+.cost-table table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.cost-table th {
+    background: var(--black); color: var(--white);
+    padding: 6px 8px; text-align: left; font-weight: 700;
+}
+.cost-table th:last-child { text-align: right; }
+.cost-table td { padding: 5px 8px; border-bottom: 1px solid var(--divider); }
+.cost-table td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.cost-table tr:nth-child(even) td { background: var(--white); }
+.cost-table tr:nth-child(odd) td { background: var(--panel); }
+.cost-table .total-row td {
+    font-weight: 700; border-top: 2px solid var(--black);
+    background: var(--white) !important;
+}
+
+/* ---------- RIGHT PANEL (RESULTS) ---------- */
+.panel-right {
+    padding: 28px 36px;
+    display: flex; flex-direction: column; gap: 24px;
+}
+
+/* Big profit number */
+.profit-hero {
+    background: var(--red);
+    border-radius: 8px;
+    padding: 28px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.profit-hero::after {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+}
+.profit-hero-label {
+    font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.75);
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 4px;
+}
+.profit-hero-number {
+    font-size: 64px; font-weight: 700; color: var(--white);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.profit-hero-unit {
+    font-size: 22px; font-weight: 400; color: rgba(255,255,255,0.85);
+    margin-left: 4px;
+}
+.profit-hero-sub {
+    font-size: 12px; color: rgba(255,255,255,0.6);
+    margin-top: 6px;
+}
+.profit-negative .profit-hero-number { }
+.profit-negative { background: var(--black); }
+
+/* KPI cards row */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+.kpi-card {
+    background: var(--panel);
+    border-radius: 6px;
+    padding: 16px 14px;
+    text-align: center;
+    position: relative;
+}
+.kpi-card::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 32px; height: 3px;
+    background: var(--red);
+    border-radius: 0 0 2px 2px;
+}
+.kpi-number {
+    font-size: 26px; font-weight: 700; color: var(--black);
+    font-variant-numeric: tabular-nums;
+    margin-top: 4px;
+}
+.kpi-label {
+    font-size: 11px; color: var(--gray);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+
+/* Customer program panel */
+.customer-program {
+    background: var(--navy);
+    border-radius: 6px;
+    padding: 18px 22px;
+    display: none;
+}
+.customer-program.visible { display: block; }
+.cp-title {
+    font-size: 12px; font-weight: 700; color: var(--steel);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+.cp-row {
+    display: flex; justify-content: space-between;
+    padding: 5px 0;
+    font-size: 13px;
+    border-bottom: 1px solid var(--slate);
+}
+.cp-row:last-child { border-bottom: none; }
+.cp-label { color: var(--steel); }
+.cp-value { color: var(--white); font-weight: 700; font-variant-numeric: tabular-nums; }
+.cp-value.highlight { color: var(--red); }
+
+/* Chart section */
+.chart-section {
+    background: var(--panel);
+    border-radius: 6px;
+    padding: 20px;
+}
+.chart-title {
+    font-size: 14px; font-weight: 700; color: var(--black);
+    margin-bottom: 12px;
+}
+.chart-subtitle {
+    font-size: 11px; color: var(--gray); margin-top: -8px; margin-bottom: 12px;
+}
+.chart-container {
+    position: relative;
+    height: 220px;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+    background: var(--charcoal);
+    padding: 14px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: var(--gray);
+}
+.footer-ref {
+    font-style: italic;
+}
+.footer-ref em { color: var(--steel); font-style: normal; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+    .main {
+        grid-template-columns: 1fr;
+    }
+    .panel-left {
+        border-right: none;
+        border-bottom: 1px solid var(--divider);
+    }
+    .kpi-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .hero { padding: 0 20px; height: 80px; }
+    .hero-title { font-size: 22px; }
+    .profit-hero-number { font-size: 48px; }
+}
+
+@media (max-width: 600px) {
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .panel-right { padding: 20px 16px; }
+    .panel-left { padding: 20px 16px; }
+    .profit-hero { padding: 20px; }
+    .profit-hero-number { font-size: 40px; }
+    .footer { flex-direction: column; gap: 4px; text-align: center; padding: 12px 16px; }
+}
+
+/* ---------- RANGE FILL (JS-updated) ---------- */
+input[type="range"] {
+    background: linear-gradient(to right, var(--red) 0%, var(--red) 50%, var(--divider) 50%, var(--divider) 100%);
+}
+
+/* Smooth transitions */
+.profit-hero-number, .kpi-number, .cp-value {
+    transition: opacity 0.1s;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOGIN OVERLAY
+     ============================================================ -->
+<div id="login-overlay">
+    <div class="login-bg"></div>
+    <div class="login-card">
+        <div class="login-accent"></div>
+        <div class="login-body">
+            <div class="login-logo">
+                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            </div>
+            <div class="login-logo-text">Aurelian Manufacturing</div>
+            <div class="login-subtitle">INVESTOR PROFIT CALCULATOR</div>
+            <form id="login-form" onsubmit="return handleLogin(event)">
+                <input type="password" class="login-field" id="login-password"
+                       placeholder="Enter investor password" autocomplete="off" autofocus>
+                <button type="submit" class="login-btn">Sign In</button>
+            </form>
+            <div class="login-error" id="login-error"></div>
+        </div>
+        <div class="login-footer">CONFIDENTIAL &mdash; Authorized Investors Only</div>
+    </div>
+</div>
+
+<!-- ============================================================
+     MAIN APPLICATION
+     ============================================================ -->
+<div id="app">
+
+    <!-- HERO BAR -->
+    <div class="hero">
+        <div class="hero-content">
+            <span class="hero-company">Aurelian Manufacturing</span>
+            <span class="hero-title">Profit Calculator</span>
+        </div>
+        <div class="hero-confidential">CONFIDENTIAL</div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="main">
+
+        <!-- LEFT PANEL: SLIDERS -->
+        <div class="panel-left">
+
+            <!-- Slider 1: CNC Machines -->
+            <div class="slider-group">
+                <div class="slider-label">Number of CNC Machines</div>
+                <div class="slider-value-row">
+                    <div>
+                        <span class="slider-value" id="cnc-display">20</span>
+                        <span class="slider-unit">machines</span>
+                    </div>
+                </div>
+                <input type="range" id="slider-cnc" min="5" max="25" value="20" step="1">
+                <div class="slider-range-labels">
+                    <span>5 (Seed)</span>
+                    <span>25</span>
+                </div>
+            </div>
+
+            <!-- Slider 2: Utilization -->
+            <div class="slider-group">
+                <div class="slider-label">Asset Utilization</div>
+                <div class="slider-value-row">
+                    <div>
+                        <span class="slider-value" id="util-display">60</span>
+                        <span class="slider-unit">% of 8,760 hours</span>
+                    </div>
+                </div>
+                <input type="range" id="slider-util" min="10" max="70" value="60" step="1">
+                <div class="slider-range-labels">
+                    <span>10%</span>
+                    <span>70%</span>
+                </div>
+                <div class="slider-context" id="util-context">Base case design target</div>
+            </div>
+
+            <!-- Slider 3: Variable Cost -->
+            <div class="slider-group">
+                <div class="slider-label">Variable Cost</div>
+                <div class="slider-value-row">
+                    <div>
+                        <span class="slider-value" id="var-display">8.00</span>
+                        <span class="slider-unit">% of revenue</span>
+                    </div>
+                </div>
+                <input type="range" id="slider-var" min="8" max="13" value="8" step="0.25">
+                <div class="slider-range-labels">
+                    <span>8% (Mature)</span>
+                    <span>13% (Startup)</span>
+                </div>
+                <div class="slider-context" id="var-context">Mature operations (2032+)</div>
+            </div>
+
+            <div class="panel-divider"></div>
+
+            <!-- Cost Breakdown Toggle -->
+            <button class="cost-toggle" id="cost-toggle" onclick="toggleCosts()">
+                <span class="arrow">&#9654;</span>
+                Cost Breakdown
+            </button>
+            <div class="cost-table" id="cost-table">
+                <table>
+                    <thead>
+                        <tr><th>Component</th><th>MNOK</th></tr>
+                    </thead>
+                    <tbody id="cost-tbody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Assumptions -->
+            <button class="cost-toggle" id="assumptions-toggle" onclick="toggleAssumptions()" style="margin-top: 8px;">
+                <span class="arrow">&#9654;</span>
+                Model Assumptions
+            </button>
+            <div class="cost-table" id="assumptions-panel">
+                <table>
+                    <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+                    <tbody>
+                        <tr><td>Hours per CNC/year</td><td>8,760</td></tr>
+                        <tr><td>Hourly rate</td><td>3,000 NOK</td></tr>
+                        <tr><td>CAPEX per CNC</td><td>10 MNOK</td></tr>
+                        <tr><td>Depreciation life</td><td>8 years</td></tr>
+                        <tr><td>Facility lease</td><td>5.2 MNOK/yr</td></tr>
+                        <tr><td>Shop base setup</td><td>8.6 MNOK</td></tr>
+                        <tr><td>Debt rate</td><td>7.5%</td></tr>
+                        <tr><td>Ops salary (incl. social)</td><td>1.1 MNOK/yr</td></tr>
+                        <tr><td>Admin salary (incl. social)</td><td>1.4 MNOK/yr</td></tr>
+                        <tr><td>Admin FTEs</td><td>4 (constant)</td></tr>
+                        <tr><td>Staff ratio target</td><td>0.8 FTE/CNC</td></tr>
+                        <tr><td>Customer Program</td><td>50/50 above 45%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- RIGHT PANEL: RESULTS -->
+        <div class="panel-right">
+
+            <!-- BIG PROFIT NUMBER -->
+            <div class="profit-hero" id="profit-hero">
+                <div class="profit-hero-label">Projected Annual Profit</div>
+                <div>
+                    <span class="profit-hero-number" id="profit-number">222.3</span>
+                    <span class="profit-hero-unit">MNOK</span>
+                </div>
+                <div class="profit-hero-sub" id="profit-sub">After Customer Program deductions</div>
+            </div>
+
+            <!-- KPI CARDS -->
+            <div class="kpi-row">
+                <div class="kpi-card">
+                    <div class="kpi-number" id="kpi-revenue">315.4</div>
+                    <div class="kpi-label">Revenue (MNOK)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-number" id="kpi-cost">92.7</div>
+                    <div class="kpi-label">Total Cost (MNOK)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-number" id="kpi-margin">70.5%</div>
+                    <div class="kpi-label">EBIT Margin</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-number" id="kpi-breakeven">14%</div>
+                    <div class="kpi-label">Break-Even Util.</div>
+                </div>
+            </div>
+
+            <!-- CUSTOMER PROGRAM PANEL -->
+            <div class="customer-program" id="customer-program">
+                <div class="cp-title">Customer Program (50/50 Sharing above 45% Utilization)</div>
+                <div class="cp-row">
+                    <span class="cp-label">Revenue at 45% threshold</span>
+                    <span class="cp-value" id="cp-threshold">—</span>
+                </div>
+                <div class="cp-row">
+                    <span class="cp-label">Revenue above threshold</span>
+                    <span class="cp-value" id="cp-above">—</span>
+                </div>
+                <div class="cp-row">
+                    <span class="cp-label">Customer share (50%)</span>
+                    <span class="cp-value highlight" id="cp-share">—</span>
+                </div>
+                <div class="cp-row">
+                    <span class="cp-label">Gross profit before sharing</span>
+                    <span class="cp-value" id="cp-gross">—</span>
+                </div>
+                <div class="cp-row">
+                    <span class="cp-label">Aurelian retained profit</span>
+                    <span class="cp-value" id="cp-retained" style="color: var(--white); font-size: 15px;">—</span>
+                </div>
+            </div>
+
+            <!-- CHART -->
+            <div class="chart-section">
+                <div class="chart-title">Profit Sensitivity — Utilization Range</div>
+                <div class="chart-subtitle">Projected profit at current CNC count and variable cost, across 10–70% utilization</div>
+                <div class="chart-container">
+                    <canvas id="sensitivity-chart"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer-ref">
+            Source: <em>02 Economic Tables &amp; Projections</em> (VDR 02.04) &mdash; Aurelian Manufacturing AS
+        </div>
+        <div>All values are projections based on design targets &mdash; not guarantees of future performance</div>
+    </div>
+
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT ENGINE
+     ============================================================ -->
+<script>
+// ---- PASSWORD AUTH ----
+const HASH = '865faf68bec367b9e0b3f897d24874b5a02133fd0186a1a25d7ca408db70d02f';
+
+async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function handleLogin(e) {
+    e.preventDefault();
+    const pw = document.getElementById('login-password').value;
+    const hash = await sha256(pw);
+    if (hash === HASH) {
+        document.getElementById('login-overlay').classList.add('hidden');
+        document.getElementById('app').classList.add('visible');
+        sessionStorage.setItem('aurelian_auth', '1');
+        initApp();
+    } else {
+        document.getElementById('login-error').textContent = 'Invalid password';
+        document.getElementById('login-password').value = '';
+        document.getElementById('login-password').focus();
+    }
+    return false;
+}
+
+// Auto-login if session exists
+if (sessionStorage.getItem('aurelian_auth') === '1') {
+    document.getElementById('login-overlay').classList.add('hidden');
+    document.getElementById('app').classList.add('visible');
+    window.addEventListener('DOMContentLoaded', initApp);
+}
+
+// ---- CALCULATION ENGINE ----
+// All numbers from: 02 Economic Tables & Projections REV7 (VDR 02.04)
+
+const HOURS = 8760;
+const RATE = 3000;
+const CNC_COST = 10000000;
+const DEPR_LIFE = 8;
+const DEPR_PER_CNC = CNC_COST / DEPR_LIFE; // 1,250,000
+const SHOP_BASE = 8600000;
+const SHOP_DEPR = SHOP_BASE / DEPR_LIFE; // 1,075,000
+const FACILITY = 5200000;
+const OPEX_PER_CNC = 150000;
+const INTEREST = 0.075;
+const OPS_SALARY = 1100000;
+const ADMIN_SALARY = 1400000;
+const ADMIN_FTE = 4;
+const CP_THRESHOLD = 0.45; // 45% utilization
+const CP_SPLIT = 0.50;
+const SHOP_DEBT = 4300000;
+
+// Sub-linear staffing lookup (master doc §1.3b)
+const STAFF_TABLE = [
+    { cnc: 5,  fte: 6  },
+    { cnc: 10, fte: 10 },
+    { cnc: 15, fte: 13 },
+    { cnc: 20, fte: 16 },
+    { cnc: 25, fte: 20 }
+];
+
+function getOpsFTE(cnc) {
+    if (cnc <= 5) return 6;
+    if (cnc >= 25) return 20;
+    for (let i = 0; i < STAFF_TABLE.length - 1; i++) {
+        const a = STAFF_TABLE[i], b = STAFF_TABLE[i + 1];
+        if (cnc >= a.cnc && cnc <= b.cnc) {
+            const ratio = (cnc - a.cnc) / (b.cnc - a.cnc);
+            return a.fte + ratio * (b.fte - a.fte);
+        }
+    }
+    return 20;
+}
+
+function getTotalDebt(cnc) {
+    const seedCNC = Math.min(cnc, 5);
+    const serieCNC = Math.max(0, cnc - 5);
+    return seedCNC * 5000000 + serieCNC * 7000000 + SHOP_DEBT;
+}
+
+function calculate(cnc, utilPct, varPct) {
+    const util = utilPct / 100;
+    const varRate = varPct / 100;
+
+    // Revenue
+    const revenue = cnc * HOURS * util * RATE;
+
+    // Fixed costs
+    const opsFTE = getOpsFTE(cnc);
+    const personnelOps = opsFTE * OPS_SALARY;
+    const personnelAdmin = ADMIN_FTE * ADMIN_SALARY;
+    const totalPersonnel = personnelOps + personnelAdmin;
+
+    const deprCNC = cnc * DEPR_PER_CNC;
+    const deprShop = SHOP_DEPR;
+    const totalDebt = getTotalDebt(cnc);
+    const financeCost = totalDebt * INTEREST;
+    const facility = FACILITY;
+    const otherOpex = cnc * OPEX_PER_CNC;
+
+    const totalFixed = totalPersonnel + deprCNC + deprShop + financeCost + facility + otherOpex;
+
+    // Variable costs
+    const variableCosts = revenue * varRate;
+
+    // Total costs
+    const totalCosts = totalFixed + variableCosts;
+
+    // Gross profit
+    const grossProfit = revenue - totalCosts;
+
+    // Customer Program
+    let customerShare = 0;
+    let revenueAtThreshold = 0;
+    let revenueAbove = 0;
+    let profitAbove = 0;
+    if (util > CP_THRESHOLD) {
+        revenueAtThreshold = cnc * HOURS * CP_THRESHOLD * RATE;
+        revenueAbove = revenue - revenueAtThreshold;
+        profitAbove = revenueAbove * (1 - varRate);
+        customerShare = profitAbove * CP_SPLIT;
+    }
+
+    const aurelianProfit = grossProfit - customerShare;
+
+    // EBIT margin
+    const ebitMargin = revenue > 0 ? (aurelianProfit / revenue) * 100 : 0;
+
+    // Break-even utilization (solve: revenue * (1 - varRate) = totalFixed)
+    // revenue = cnc * 8760 * util * 3000
+    // cnc * 8760 * util * 3000 * (1 - varRate) = totalFixed
+    // util = totalFixed / (cnc * 8760 * 3000 * (1 - varRate))
+    const breakEvenUtil = totalFixed / (cnc * HOURS * RATE * (1 - varRate));
+    const breakEvenPct = Math.max(0, breakEvenUtil * 100);
+
+    return {
+        revenue, totalCosts, grossProfit, customerShare, aurelianProfit,
+        ebitMargin, breakEvenPct,
+        // Breakdown
+        personnelOps, personnelAdmin, totalPersonnel,
+        deprCNC, deprShop, financeCost, facility, otherOpex,
+        totalFixed, variableCosts,
+        revenueAtThreshold, revenueAbove, profitAbove,
+        opsFTE, totalDebt
+    };
+}
+
+// ---- FORMAT HELPERS ----
+function fmtMNOK(val) {
+    const m = val / 1000000;
+    if (Math.abs(m) >= 100) return m.toFixed(0);
+    if (Math.abs(m) >= 10) return m.toFixed(1);
+    return m.toFixed(1);
+}
+
+function fmtPct(val) {
+    if (Math.abs(val) >= 10) return val.toFixed(0) + '%';
+    return val.toFixed(1) + '%';
+}
+
+// ---- UI UPDATE ----
+let sensitivityChart = null;
+
+function updateUI() {
+    const cnc = parseInt(document.getElementById('slider-cnc').value);
+    const util = parseInt(document.getElementById('slider-util').value);
+    const varCost = parseFloat(document.getElementById('slider-var').value);
+
+    // Update slider displays
+    document.getElementById('cnc-display').textContent = cnc;
+    document.getElementById('util-display').textContent = util;
+    document.getElementById('var-display').textContent = varCost.toFixed(2);
+
+    // Update slider fills
+    updateSliderFill('slider-cnc');
+    updateSliderFill('slider-util');
+    updateSliderFill('slider-var');
+
+    // Context labels
+    if (util <= 25) document.getElementById('util-context').textContent = 'Near break-even level';
+    else if (util <= 40) document.getElementById('util-context').textContent = 'Below industry average';
+    else if (util <= 50) document.getElementById('util-context').textContent = 'Industry best practice (~47%)';
+    else if (util <= 60) document.getElementById('util-context').textContent = 'Base case design target';
+    else document.getElementById('util-context').textContent = 'Above base case — bull scenario';
+
+    if (varCost >= 12) document.getElementById('var-context').textContent = 'Startup phase (2027–2028)';
+    else if (varCost >= 10.5) document.getElementById('var-context').textContent = 'Early optimization (2029–2030)';
+    else if (varCost >= 9) document.getElementById('var-context').textContent = 'Maturing operations (2031)';
+    else document.getElementById('var-context').textContent = 'Mature operations (2032+)';
+
+    // Calculate
+    const r = calculate(cnc, util, varCost);
+
+    // Big profit number
+    const profitMNOK = r.aurelianProfit / 1000000;
+    const profitHero = document.getElementById('profit-hero');
+    if (profitMNOK < 0) {
+        profitHero.classList.add('profit-negative');
+        document.getElementById('profit-number').textContent = '(' + Math.abs(profitMNOK).toFixed(1) + ')';
+    } else {
+        profitHero.classList.remove('profit-negative');
+        document.getElementById('profit-number').textContent = fmtMNOK(r.aurelianProfit);
+    }
+
+    if (r.customerShare > 0) {
+        document.getElementById('profit-sub').textContent = 'After Customer Program deductions';
+    } else {
+        document.getElementById('profit-sub').textContent = 'No Customer Program applied (utilization ≤ 45%)';
+    }
+
+    // KPI cards
+    document.getElementById('kpi-revenue').textContent = fmtMNOK(r.revenue);
+    document.getElementById('kpi-cost').textContent = fmtMNOK(r.totalCosts);
+    document.getElementById('kpi-margin').textContent = fmtPct(r.ebitMargin);
+    document.getElementById('kpi-breakeven').textContent = fmtPct(r.breakEvenPct);
+
+    // Customer Program panel
+    const cpPanel = document.getElementById('customer-program');
+    if (r.customerShare > 0) {
+        cpPanel.classList.add('visible');
+        document.getElementById('cp-threshold').textContent = fmtMNOK(r.revenueAtThreshold) + ' MNOK';
+        document.getElementById('cp-above').textContent = fmtMNOK(r.revenueAbove) + ' MNOK';
+        document.getElementById('cp-share').textContent = fmtMNOK(r.customerShare) + ' MNOK';
+        document.getElementById('cp-gross').textContent = fmtMNOK(r.grossProfit) + ' MNOK';
+        document.getElementById('cp-retained').textContent = fmtMNOK(r.aurelianProfit) + ' MNOK';
+    } else {
+        cpPanel.classList.remove('visible');
+    }
+
+    // Cost breakdown table
+    const tbody = document.getElementById('cost-tbody');
+    tbody.innerHTML = `
+        <tr><td>Operational payroll (${r.opsFTE.toFixed(1)} FTE)</td><td>${fmtMNOK(r.personnelOps)}</td></tr>
+        <tr><td>Administration (4 FTE)</td><td>${fmtMNOK(r.personnelAdmin)}</td></tr>
+        <tr><td>CNC depreciation (${cnc} × 1.25M)</td><td>${fmtMNOK(r.deprCNC)}</td></tr>
+        <tr><td>Shop base depreciation</td><td>${fmtMNOK(r.deprShop)}</td></tr>
+        <tr><td>Finance cost (${fmtMNOK(r.totalDebt)}M × 7.5%)</td><td>${fmtMNOK(r.financeCost)}</td></tr>
+        <tr><td>Facility lease</td><td>${fmtMNOK(r.facility)}</td></tr>
+        <tr><td>Other operating costs</td><td>${fmtMNOK(r.otherOpex)}</td></tr>
+        <tr><td>Variable costs (${varCost}%)</td><td>${fmtMNOK(r.variableCosts)}</td></tr>
+        <tr class="total-row"><td>Total cost</td><td>${fmtMNOK(r.totalCosts)}</td></tr>
+    `;
+
+    // Sensitivity chart
+    updateChart(cnc, varCost);
+}
+
+function updateSliderFill(id) {
+    const slider = document.getElementById(id);
+    const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+    slider.style.background = `linear-gradient(to right, var(--red) 0%, var(--red) ${pct}%, var(--divider) ${pct}%, var(--divider) 100%)`;
+}
+
+function updateChart(cnc, varCost) {
+    const labels = [];
+    const profits = [];
+    const revenues = [];
+
+    for (let u = 10; u <= 70; u += 2) {
+        labels.push(u + '%');
+        const r = calculate(cnc, u, varCost);
+        profits.push(+(r.aurelianProfit / 1000000).toFixed(1));
+        revenues.push(+(r.revenue / 1000000).toFixed(1));
+    }
+
+    if (sensitivityChart) {
+        sensitivityChart.data.labels = labels;
+        sensitivityChart.data.datasets[0].data = profits;
+        sensitivityChart.data.datasets[1].data = revenues;
+        sensitivityChart.update('none');
+        return;
+    }
+
+    const ctx = document.getElementById('sensitivity-chart').getContext('2d');
+    sensitivityChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Aurelian Profit',
+                    data: profits,
+                    borderColor: '#F50537',
+                    backgroundColor: 'rgba(245, 5, 55, 0.08)',
+                    borderWidth: 3,
+                    pointRadius: 0,
+                    pointHitRadius: 10,
+                    fill: true,
+                    tension: 0.3
+                },
+                {
+                    label: 'Revenue',
+                    data: revenues,
+                    borderColor: '#2B2B2B',
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    pointHitRadius: 10,
+                    borderDash: [6, 3],
+                    fill: false,
+                    tension: 0.3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: { family: 'Arial, sans-serif', size: 11 },
+                        color: '#6B6B6B',
+                        usePointStyle: true,
+                        padding: 16
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#2B2B2B',
+                    titleFont: { family: 'Calibri, sans-serif', size: 13 },
+                    bodyFont: { family: 'Calibri, sans-serif', size: 12 },
+                    callbacks: {
+                        label: function(ctx) {
+                            return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + ' MNOK';
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: {
+                        font: { family: 'Arial, sans-serif', size: 10 },
+                        color: '#888888',
+                        maxTicksLimit: 8
+                    }
+                },
+                y: {
+                    grid: {
+                        color: '#D3D3D3',
+                        lineWidth: 0.5
+                    },
+                    ticks: {
+                        font: { family: 'Arial, sans-serif', size: 10 },
+                        color: '#888888',
+                        callback: function(value) { return value + ' MNOK'; }
+                    }
+                }
+            }
+        }
+    });
+}
+
+// ---- TOGGLE PANELS ----
+function toggleCosts() {
+    const btn = document.getElementById('cost-toggle');
+    const panel = document.getElementById('cost-table');
+    btn.classList.toggle('open');
+    panel.classList.toggle('open');
+}
+
+function toggleAssumptions() {
+    const btn = document.getElementById('assumptions-toggle');
+    const panel = document.getElementById('assumptions-panel');
+    btn.classList.toggle('open');
+    panel.classList.toggle('open');
+}
+
+// ---- INIT ----
+function initApp() {
+    const sliders = ['slider-cnc', 'slider-util', 'slider-var'];
+    sliders.forEach(id => {
+        const el = document.getElementById(id);
+        el.addEventListener('input', updateUI);
+    });
+    updateUI();
+}
+
+// If not using session restore, init on DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+    if (sessionStorage.getItem('aurelian_auth') === '1') {
+        initApp();
+    }
+});
+</script>
+
+</body>
+</html>

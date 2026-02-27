@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Operational Readiness Report</title>
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    background: #e0e0e0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    color: #2B2B2B;
+    line-height: 1.5;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== A4 PAGE ===== */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: #ffffff;
+    padding: 25mm;
+    padding-top: calc(25mm + 3pt);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Red top bar */
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3pt;
+    background: #F50537;
+  }
+
+  /* ===== HEADER ===== */
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 0.5pt solid #F50537;
+    margin-bottom: 20px;
+  }
+
+  .page-header .logo {
+    width: 15mm;
+    height: auto;
+    /* CSS filter to colorize white PNG to #F50537 */
+    filter: brightness(0) saturate(100%) invert(12%) sepia(95%) saturate(6000%) hue-rotate(345deg) brightness(95%) contrast(102%);
+  }
+
+  .page-header .header-text {
+    font-size: 9pt;
+    color: #6B6B6B;
+    letter-spacing: 0.02em;
+  }
+
+  /* ===== FOOTER ===== */
+  .page-footer {
+    position: absolute;
+    bottom: 12mm;
+    left: 25mm;
+    right: 25mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8pt;
+    color: #6B6B6B;
+    border-top: 0.5pt solid #D3D3D3;
+    padding-top: 6px;
+  }
+
+  .page-footer .footer-left,
+  .page-footer .footer-center,
+  .page-footer .footer-right {
+    flex: 1;
+  }
+  .page-footer .footer-center { text-align: center; }
+  .page-footer .footer-right  { text-align: right; }
+
+  /* ===== TYPOGRAPHY ===== */
+  .title {
+    font-size: 28pt;
+    font-weight: 700;
+    color: #2B2B2B;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 14pt;
+    font-weight: 700;
+    font-style: italic;
+    color: #F50537;
+    margin-bottom: 16px;
+  }
+
+  .divider-bar {
+    width: 60mm;
+    height: 2pt;
+    background: #F50537;
+    border: none;
+    margin-bottom: 18px;
+  }
+
+  .meta-block {
+    font-size: 9.5pt;
+    color: #6B6B6B;
+    margin-bottom: 24px;
+    line-height: 1.7;
+  }
+  .meta-block strong {
+    color: #2B2B2B;
+    font-weight: 600;
+  }
+
+  h2 {
+    font-size: 22pt;
+    font-weight: 700;
+    color: #2B2B2B;
+    margin-top: 22px;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 16pt;
+    font-weight: 700;
+    color: #F50537;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  h4 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: #2B2B2B;
+    margin-top: 14px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 10.5pt;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: #2B2B2B;
+  }
+
+  /* ===== CALLOUT BOX ===== */
+  .callout {
+    background: #F5F5F5;
+    border-left: 3pt solid #F50537;
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .callout p {
+    margin-bottom: 0;
+    font-size: 10pt;
+  }
+  .callout strong {
+    color: #F50537;
+  }
+
+  /* ===== KPI CARDS ===== */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 14px 0 18px 0;
+  }
+
+  .kpi-card {
+    background: #F50537;
+    border-radius: 4px;
+    padding: 14px 10px 12px 10px;
+    text-align: center;
+  }
+
+  .kpi-card .kpi-value {
+    font-size: 28pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .kpi-card .kpi-label {
+    font-size: 8pt;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  /* ===== TABLE — STANDARD ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 10px 0 16px 0;
+  }
+
+  .data-table thead th {
+    background: #2B2B2B;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 0.5pt solid #D3D3D3;
+  }
+
+  .data-table tbody td {
+    padding: 7px 10px;
+    border-bottom: 0.5pt solid #D3D3D3;
+  }
+
+  .data-table tbody tr:nth-child(even) {
+    background: #F5F5F5;
+  }
+  .data-table tbody tr:nth-child(odd) {
+    background: #ffffff;
+  }
+
+  .data-table .total-row td {
+    font-weight: 700;
+    border-top: 1.5pt solid #2B2B2B;
+    border-bottom: none;
+    padding-top: 9px;
+  }
+
+  /* Status badges */
+  .status {
+    display: inline-block;
+    font-size: 8.5pt;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.02em;
+  }
+  .status-live       { background: #e6f7ee; color: #1a7a42; }
+  .status-testing    { background: #fff3e0; color: #b36b00; }
+  .status-pending    { background: #f0f0f0; color: #6B6B6B; }
+
+  /* ===== TABLE — ACCENT (Comparison) ===== */
+  .accent-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 10px 0 14px 0;
+  }
+
+  .accent-table thead th {
+    background: #F50537;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 0.5pt solid #D3D3D3;
+  }
+
+  .accent-table tbody td {
+    padding: 7px 10px;
+    border-bottom: 0.5pt solid #D3D3D3;
+  }
+
+  .accent-table tbody tr:nth-child(even) {
+    background: #F5F5F5;
+  }
+  .accent-table tbody tr:nth-child(odd) {
+    background: #ffffff;
+  }
+
+  .accent-table .improvement {
+    color: #F50537;
+    font-weight: 700;
+  }
+
+  /* ===== PROCESS STEPS ===== */
+  .process-steps {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 18px 0;
+  }
+
+  .process-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+
+  .step-number {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    background: #F50537;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 12pt;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  .step-content strong {
+    color: #2B2B2B;
+  }
+  .step-content span {
+    color: #6B6B6B;
+    font-size: 9.5pt;
+  }
+
+  /* ===== CHART CONTAINER ===== */
+  .chart-container {
+    margin: 12px 0 18px 0;
+    background: #ffffff;
+    border: 0.5pt solid #D3D3D3;
+    border-radius: 4px;
+    padding: 16px 12px 8px 12px;
+  }
+
+  .chart-container svg text {
+    font-family: Arial, sans-serif;
+  }
+
+  /* ===== BULLET LIST ===== */
+  .red-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 14px 0;
+  }
+
+  .red-bullets li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 10.5pt;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .red-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 7px;
+    height: 7px;
+    background: #F50537;
+    border-radius: 50%;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    html { background: #fff; }
+    body { padding: 0; gap: 0; }
+    .page { box-shadow: none; page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE 1 — Cover & Introduction                                -->
+<!-- ============================================================ -->
+<div class="page" id="page-1">
+
+  <!-- Header -->
+  <header class="page-header">
+    <img class="logo" src="data:image/png;base64,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" alt="Aurelian Logo">
+    <span class="header-text">Aurelian Manufacturing</span>
+  </header>
+
+  <!-- Cover Title Block -->
+  <div style="margin-top: 10px;">
+    <div class="title">Operational Readiness Report</div>
+    <div class="subtitle">Phase 1 &mdash; Facility Setup &amp; Equipment Commissioning</div>
+    <hr class="divider-bar">
+  </div>
+
+  <!-- Meta -->
+  <div class="meta-block">
+    <strong>Prepared by</strong>&ensp;Andr&eacute; Tandberg, CEO<br>
+    <strong>Date</strong>&ensp;13 February 2026<br>
+    <strong>Version</strong>&ensp;1.0&ensp;&nbsp;|&ensp;&nbsp;CONFIDENTIAL
+  </div>
+
+  <!-- 1. Executive Summary -->
+  <h2>1. Executive Summary</h2>
+  <p>
+    Aurelian Manufacturing has completed the first phase of facility build-out at our Moss production site.
+    All five CNC machining cells have been installed and integrated with the centralised MES platform,
+    achieving first-part accuracy that exceeds industry benchmarks. The commissioning programme is
+    on track, with 87&thinsp;% of planned milestones delivered within the original timeline.
+  </p>
+
+  <div class="callout">
+    <p><strong>Key Takeaway:</strong> First-part dimensional accuracy reached <strong>94.7&thinsp;%</strong>,
+    surpassing the 90&thinsp;% threshold required for defence-grade component qualification and
+    positioning Aurelian ahead of schedule for AS9100D certification.</p>
+  </div>
+
+  <p>
+    With core infrastructure now operational, the programme transitions to sustained production ramp-up.
+    Remaining commissioning activities focus on automated tool-path optimisation and real-time
+    quality-loop integration, both of which are scheduled for completion by end of Q2&nbsp;2026.
+  </p>
+
+  <!-- Key Performance Indicators -->
+  <h3>Key Performance Indicators</h3>
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-value">94.7%</div>
+      <div class="kpi-label">First-Part Accuracy</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">5</div>
+      <div class="kpi-label">CNC Cells Online</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">87%</div>
+      <div class="kpi-label">Commissioning Complete</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">Q3 '26</div>
+      <div class="kpi-label">Full Capacity Target</div>
+    </div>
+  </div>
+
+  <!-- 2. Commissioning Status -->
+  <h2>2. Commissioning Status</h2>
+  <h4>2.1 Equipment Overview</h4>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Equipment</th>
+        <th>Vendor</th>
+        <th>Status</th>
+        <th style="text-align:right;">Utilisation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5-Axis CNC Mill &mdash; Cell&nbsp;A</td>
+        <td>DMG MORI</td>
+        <td><span class="status status-live">Live</span></td>
+        <td style="text-align:right;">78&thinsp;%</td>
+      </tr>
+      <tr>
+        <td>5-Axis CNC Mill &mdash; Cell&nbsp;B</td>
+        <td>DMG MORI</td>
+        <td><span class="status status-live">Live</span></td>
+        <td style="text-align:right;">72&thinsp;%</td>
+      </tr>
+      <tr>
+        <td>CNC Lathe &mdash; Cell&nbsp;C</td>
+        <td>Mazak</td>
+        <td><span class="status status-live">Live</span></td>
+        <td style="text-align:right;">81&thinsp;%</td>
+      </tr>
+      <tr>
+        <td>Wire EDM &mdash; Cell&nbsp;D</td>
+        <td>Mitsubishi</td>
+        <td><span class="status status-testing">Testing</span></td>
+        <td style="text-align:right;">45&thinsp;%</td>
+      </tr>
+      <tr>
+        <td>CMM Inspection Station</td>
+        <td>Zeiss</td>
+        <td><span class="status status-live">Live</span></td>
+        <td style="text-align:right;">66&thinsp;%</td>
+      </tr>
+      <tr>
+        <td>Robotic Load/Unload</td>
+        <td>FANUC</td>
+        <td><span class="status status-pending">Pending</span></td>
+        <td style="text-align:right;">&mdash;</td>
+      </tr>
+      <tr class="total-row">
+        <td>Overall Facility</td>
+        <td></td>
+        <td><strong>87&thinsp;% Complete</strong></td>
+        <td style="text-align:right;"><strong>68&thinsp;%</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Footer Page 1 -->
+  <footer class="page-footer">
+    <span class="footer-left">CONFIDENTIAL</span>
+    <span class="footer-center">1</span>
+    <span class="footer-right">13 February 2026</span>
+  </footer>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- PAGE 2 — Process, Chart & Comparison                         -->
+<!-- ============================================================ -->
+<div class="page" id="page-2">
+
+  <!-- Header -->
+  <header class="page-header">
+    <img class="logo" src="data:image/png;base64,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" alt="Aurelian Logo">
+    <span class="header-text">Aurelian Manufacturing</span>
+  </header>
+
+  <!-- 2.2 Commissioning Process -->
+  <h4>2.2 Commissioning Process</h4>
+  <p>Each equipment cell follows a structured four-stage qualification protocol before entering production service:</p>
+
+  <ol class="process-steps">
+    <li>
+      <span class="step-number">1</span>
+      <div class="step-content">
+        <strong>Factory Acceptance Test (FAT)</strong><br>
+        <span>Vendor-site verification of mechanical tolerances, spindle run-out and control-system firmware against purchase specifications.</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-number">2</span>
+      <div class="step-content">
+        <strong>Site Acceptance Test (SAT)</strong><br>
+        <span>On-site installation validation including power-quality checks, coolant integration and MES handshake confirmation.</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-number">3</span>
+      <div class="step-content">
+        <strong>First Article Inspection (FAI)</strong><br>
+        <span>Production of representative defence-grade components with full CMM dimensional reporting against GD&amp;T datums.</span>
+      </div>
+    </li>
+    <li>
+      <span class="step-number">4</span>
+      <div class="step-content">
+        <strong>Production Release</strong><br>
+        <span>Final sign-off by Quality Engineering; cell enters the MES scheduling pool and is available for customer orders.</span>
+      </div>
+    </li>
+  </ol>
+
+  <!-- 3. Revenue Projection -->
+  <h2>3. Revenue Projection</h2>
+  <p>Projected monthly revenue ramp based on current commissioning trajectory and signed letters of intent:</p>
+
+  <div class="chart-container">
+    <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg" width="100%" height="auto">
+      <!-- Grid lines -->
+      <line x1="60" y1="20" x2="60" y2="210" stroke="#D3D3D3" stroke-width="0.5"/>
+      <line x1="60" y1="210" x2="570" y2="210" stroke="#888888" stroke-width="1"/>
+      <line x1="60" y1="20" x2="570" y2="20" stroke="#D3D3D3" stroke-width="0.5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="67.5" x2="570" y2="67.5" stroke="#D3D3D3" stroke-width="0.5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="115" x2="570" y2="115" stroke="#D3D3D3" stroke-width="0.5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="162.5" x2="570" y2="162.5" stroke="#D3D3D3" stroke-width="0.5" stroke-dasharray="4,3"/>
+      <!-- Y-axis -->
+      <line x1="60" y1="20" x2="60" y2="210" stroke="#888888" stroke-width="1"/>
+      <!-- Y-axis labels -->
+      <text x="52" y="214" text-anchor="end" font-size="9" fill="#888888">0</text>
+      <text x="52" y="166.5" text-anchor="end" font-size="9" fill="#888888">5M</text>
+      <text x="52" y="119" text-anchor="end" font-size="9" fill="#888888">10M</text>
+      <text x="52" y="71.5" text-anchor="end" font-size="9" fill="#888888">15M</text>
+      <text x="52" y="24" text-anchor="end" font-size="9" fill="#888888">20M</text>
+      <!-- Y-axis title -->
+      <text x="14" y="120" text-anchor="middle" font-size="9" fill="#888888" transform="rotate(-90, 14, 120)">Revenue (NOK)</text>
+      <!-- X-axis labels -->
+      <text x="102.5" y="228" text-anchor="middle" font-size="9" fill="#888888">Q1 '26</text>
+      <text x="187.5" y="228" text-anchor="middle" font-size="9" fill="#888888">Q2 '26</text>
+      <text x="272.5" y="228" text-anchor="middle" font-size="9" fill="#888888">Q3 '26</text>
+      <text x="357.5" y="228" text-anchor="middle" font-size="9" fill="#888888">Q4 '26</text>
+      <text x="442.5" y="228" text-anchor="middle" font-size="9" fill="#888888">Q1 '27</text>
+      <text x="527.5" y="228" text-anchor="middle" font-size="9" fill="#888888">Q2 '27</text>
+      <!-- Data line: 1.2M, 3.5M, 7.8M, 12.5M, 16.0M, 19.5M -->
+      <!-- Y scale: 0=210, 20M=20 => per M = 9.5px -->
+      <!-- 1.2M => 210 - 11.4 = 198.6 -->
+      <!-- 3.5M => 210 - 33.25 = 176.75 -->
+      <!-- 7.8M => 210 - 74.1 = 135.9 -->
+      <!-- 12.5M => 210 - 118.75 = 91.25 -->
+      <!-- 16.0M => 210 - 152 = 58 -->
+      <!-- 19.5M => 210 - 185.25 = 24.75 -->
+      <polyline
+        fill="none"
+        stroke="#F50537"
+        stroke-width="2.5"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+        points="102.5,198.6 187.5,176.75 272.5,135.9 357.5,91.25 442.5,58 527.5,24.75"
+      />
+      <!-- Area fill -->
+      <polygon
+        fill="#F50537"
+        fill-opacity="0.07"
+        points="102.5,210 102.5,198.6 187.5,176.75 272.5,135.9 357.5,91.25 442.5,58 527.5,24.75 527.5,210"
+      />
+      <!-- Data points -->
+      <circle cx="102.5" cy="198.6" r="4.5" fill="#F50537"/>
+      <circle cx="187.5" cy="176.75" r="4.5" fill="#F50537"/>
+      <circle cx="272.5" cy="135.9" r="4.5" fill="#F50537"/>
+      <circle cx="357.5" cy="91.25" r="4.5" fill="#F50537"/>
+      <circle cx="442.5" cy="58" r="4.5" fill="#F50537"/>
+      <circle cx="527.5" cy="24.75" r="4.5" fill="#F50537"/>
+      <!-- Data labels -->
+      <text x="102.5" y="192" text-anchor="middle" font-size="8" fill="#2B2B2B" font-weight="600">1.2M</text>
+      <text x="187.5" y="170" text-anchor="middle" font-size="8" fill="#2B2B2B" font-weight="600">3.5M</text>
+      <text x="272.5" y="129" text-anchor="middle" font-size="8" fill="#2B2B2B" font-weight="600">7.8M</text>
+      <text x="357.5" y="84" text-anchor="middle" font-size="8" fill="#2B2B2B" font-weight="600">12.5M</text>
+      <text x="442.5" y="51" text-anchor="middle" font-size="8" fill="#2B2B2B" font-weight="600">16.0M</text>
+      <text x="527.5" y="18" text-anchor="middle" font-size="8" fill="#2B2B2B" font-weight="600">19.5M</text>
+      <!-- Chart title -->
+      <text x="315" y="252" text-anchor="middle" font-size="9" fill="#6B6B6B">Quarterly Revenue Projection (NOK)</text>
+    </svg>
+  </div>
+
+  <!-- 3.2 Capability Comparison -->
+  <h4>3.2 Capability Comparison</h4>
+
+  <table class="accent-table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Traditional Workshop</th>
+        <th>Aurelian Platform</th>
+        <th>Improvement</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Setup Time per Part</td>
+        <td>4.5 hours</td>
+        <td>1.2 hours</td>
+        <td class="improvement">73&thinsp;% faster</td>
+      </tr>
+      <tr>
+        <td>First-Part Accuracy</td>
+        <td>82&thinsp;%</td>
+        <td>94.7&thinsp;%</td>
+        <td class="improvement">+12.7 pp</td>
+      </tr>
+      <tr>
+        <td>Spindle Utilisation</td>
+        <td>48&thinsp;%</td>
+        <td>78&thinsp;%</td>
+        <td class="improvement">+30 pp</td>
+      </tr>
+      <tr>
+        <td>Lead Time (avg.)</td>
+        <td>14 weeks</td>
+        <td>5 weeks</td>
+        <td class="improvement">64&thinsp;% shorter</td>
+      </tr>
+      <tr>
+        <td>Scrap Rate</td>
+        <td>6.2&thinsp;%</td>
+        <td>1.8&thinsp;%</td>
+        <td class="improvement">71&thinsp;% reduction</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p><strong>Note:</strong> Comparison data is based on anonymised benchmarks from three Norwegian defence-sector
+    subcontractors (2024&ndash;2025) and Aurelian&rsquo;s own commissioning data as of February&nbsp;2026.</p>
+  </div>
+
+  <!-- 4. Next Steps -->
+  <h2>4. Next Steps</h2>
+  <p>The following activities are prioritised for Q2&nbsp;2026 to complete the transition from commissioning to full-rate production:</p>
+
+  <ul class="red-bullets">
+    <li>Complete Wire EDM (Cell&nbsp;D) site acceptance test and integrate into production scheduling by end of March</li>
+    <li>Commission robotic load/unload system (FANUC) for lights-out operation of Cells&nbsp;A and&nbsp;B</li>
+    <li>Finalise AS9100D Stage&nbsp;2 audit preparation and submit documentation package to certification body</li>
+    <li>Onboard two additional CNC programmers to support second-shift operations from April</li>
+    <li>Deliver first customer shipment under LOI-2025-017 (titanium airframe brackets) by mid-May</li>
+    <li>Deploy real-time SPC dashboard integration between CMM and MES for automated quality gating</li>
+  </ul>
+
+  <!-- Footer Page 2 -->
+  <footer class="page-footer">
+    <span class="footer-left">CONFIDENTIAL</span>
+    <span class="footer-center">2</span>
+    <span class="footer-right">13 February 2026</span>
+  </footer>
+</div>
+
+</body>
+</html>
