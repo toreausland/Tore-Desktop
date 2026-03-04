@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRB Simulation — Endringsrapport</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
+  .page { width: 210mm; min-height: 297mm; margin: 20px auto; background: #fff; padding: 2.5cm; box-shadow: 0 2px 8px rgba(0,0,0,0.12); position: relative; }
+  .page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3pt; background: #F50537; }
+
+  .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #F50537; padding-bottom: 12px; margin-bottom: 20px; }
+  .logo { font-size: 16pt; font-weight: bold; color: #2B2B2B; }
+  .logo .stars { color: #F50537; font-size: 12pt; letter-spacing: 2px; }
+  .logo span { display: block; font-size: 9pt; font-weight: normal; color: #6B6B6B; }
+  .doc-info { text-align: right; font-size: 9pt; color: #6B6B6B; }
+  .doc-info strong { color: #2B2B2B; font-size: 11pt; }
+
+  h1 { font-size: 22pt; font-weight: bold; color: #2B2B2B; margin: 0 0 4pt 0; }
+  .subtitle { font-size: 13pt; font-weight: bold; font-style: italic; color: #F50537; margin-bottom: 6pt; }
+  .divider { width: 80mm; height: 2pt; background: #F50537; margin: 8pt 0 20pt 0; }
+
+  h2 { font-size: 16pt; font-weight: bold; color: #F50537; margin: 24pt 0 6pt 0; }
+  h3 { font-size: 13pt; font-weight: bold; color: #2B2B2B; margin: 18pt 0 6pt 0; }
+  p { margin-bottom: 6pt; line-height: 1.3; }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px 0; font-size: 10pt; }
+  table thead th { background: #2B2B2B; color: #fff; font-weight: bold; padding: 6pt 8pt; text-align: left; font-size: 9pt; }
+  table tbody td { padding: 6pt 8pt; border-bottom: 0.5pt solid #D3D3D3; vertical-align: top; }
+  table tbody tr:nth-child(even) { background: #F5F5F5; }
+
+  .highlight-box { background: #F5F5F5; border-left: 3pt solid #F50537; padding: 12pt; margin: 12pt 0; }
+  .highlight-box strong { color: #F50537; }
+
+  .tag-removed { background: #F50537; color: #fff; padding: 1px 8px; font-size: 8pt; font-weight: bold; display: inline-block; letter-spacing: 0.5px; }
+  .tag-modified { background: #2B2B2B; color: #fff; padding: 1px 8px; font-size: 8pt; font-weight: bold; display: inline-block; letter-spacing: 0.5px; }
+  .tag-kept { background: #6B6B6B; color: #fff; padding: 1px 8px; font-size: 8pt; font-weight: bold; display: inline-block; letter-spacing: 0.5px; }
+  .tag-na { background: #D3D3D3; color: #2B2B2B; padding: 1px 8px; font-size: 8pt; font-weight: bold; display: inline-block; letter-spacing: 0.5px; }
+
+  ul { margin-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 4pt; font-size: 10pt; }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+  .summary-card { background: #F5F5F5; padding: 14px; text-align: center; }
+  .summary-card .num { font-size: 22pt; font-weight: bold; color: #2B2B2B; }
+  .summary-card .lbl { font-size: 8pt; color: #6B6B6B; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .footer { margin-top: 30px; border-top: 1px solid #D3D3D3; padding-top: 10px; font-size: 8pt; color: #6B6B6B; display: flex; justify-content: space-between; }
+  .page-break { page-break-before: always; }
+
+  @media print { body { background: #fff; } .page { box-shadow: none; margin: 0; } }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="header">
+    <div>
+      <div class="logo">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        Aurelian Manufacturing
+        <span>Production as a Service &mdash; Autonomous, Data-Driven, and Scalable</span>
+      </div>
+    </div>
+    <div class="doc-info">
+      <strong>Endringsrapport</strong><br>
+      MRB Simulation Package<br>
+      02 March 2026
+    </div>
+  </div>
+
+  <h1>Tilpasning av MRB-simuleringspakken</h1>
+  <div class="subtitle">Intern rapport &mdash; For Fredrik og utviklingsteamet</div>
+  <div class="divider"></div>
+
+  <h2>1. Bakgrunn</h2>
+
+  <p>
+    MRB-simuleringspakken (Manufacturing Record Book) ble opprinnelig bygget som en generisk demonstrasjon
+    av en komplett dokumentpakke for subsea-produksjon &mdash; inkludert sveising, trykktesting og FAT.
+  </p>
+  <p>
+    Aurelian Manufacturing er et <strong>CNC-maskinerings-verksted</strong>, ikke et sveiseverksted.
+    Pakken m&aring;tte derfor tilpasses slik at den gjenspeiler det Aurelian faktisk leverer, og det
+    kundene realistisk kan forvente av oss.
+  </p>
+
+  <div class="highlight-box">
+    <strong>Prinsipp:</strong> Pakken skal vise hva Aurelian faktisk kan levere &mdash; verken mer eller mindre.
+    Sveising og trykktesting h&oslash;rer ikke hjemme i v&aring;rt leveranseomfang. Alt som gjenstår er
+    standard forventninger fra olje- og gass-kunder for maskinerte subsea-komponenter.
+  </div>
+
+  <h2>2. Oversikt over endringer</h2>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="num">4</div>
+      <div class="lbl">Filer slettet</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">14</div>
+      <div class="lbl">Filer oppdatert</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">16</div>
+      <div class="lbl">Gjenst&aring;ende MRB-filer</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">6</div>
+      <div class="lbl">Filer uendret</div>
+    </div>
+  </div>
+
+  <h2>3. Fjernede MRB-seksjoner</h2>
+  <p>F&oslash;lgende MRB-seksjoner er fjernet i sin helhet fordi de utelukkende tilh&oslash;rer sveisefaget eller trykktesting:</p>
+
+  <table>
+    <thead>
+      <tr><th>MRB Sek.</th><th>Dokument</th><th>Fil</th><th>Begrunnelse</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>7</td>
+        <td>WPS / WPQR / PWHT Records</td>
+        <td><span class="tag-removed">SLETTET</span> 07_WPS_WPQR.html</td>
+        <td>Sveiseprosedyrer og kvalifiseringsark &mdash; Aurelian utf&oslash;rer ingen sveising</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Welder Certificates</td>
+        <td><span class="tag-removed">SLETTET</span> 08_Welder_Certificates.html</td>
+        <td>Sveisersertifikater &mdash; ingen sveisere ansatt i dette verkstedet</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td>Pressure Test Procedure / FAT Procedure</td>
+        <td><span class="tag-removed">SLETTET</span> 17_Pressure_Test_Procedure.html</td>
+        <td>Hydrostatisk trykktestprosedyre &mdash; ikke aktuelt for maskinering</td>
+      </tr>
+      <tr>
+        <td>18</td>
+        <td>Pressure Test Certificate / FAT Report</td>
+        <td><span class="tag-removed">SLETTET</span> 18_Pressure_Test_Certificate.html</td>
+        <td>Trykktestsertifikat &mdash; ikke aktuelt for maskinering</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Seksjon 16</strong> (Pressure Test Traceability Certificate) eksisterte ikke som egen fil, men alle referanser er fjernet og markert som N/A i SDRL MRB-indeksen.</p>
+
+  <h2>4. Transformert seksjon</h2>
+
+  <table>
+    <thead>
+      <tr><th>MRB Sek.</th><th>F&oslash;r</th><th>Etter</th><th>Endring</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>6</td>
+        <td>Weld &amp; NDT Log</td>
+        <td><strong>NDT Log</strong></td>
+        <td>
+          <span class="tag-modified">TRANSFORMERT</span><br>
+          Sveiselogg fjernet. NDT-resultater beholdt, men generalisert fra sveises&oslash;mmer (W-001&ndash;W-006)
+          til inspeksjonsomr&aring;der p&aring; maskinerte komponenter (Area-001&ndash;Area-006).
+          Dokument-ID endret fra AM-WDL til AM-NDL.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <span style="color: #F50537; font-weight: bold;">INTERN</span>
+    <span>Side 1 av 4</span>
+    <span>MRB Simulation Endringsrapport &bull; 02 March 2026</span>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo" style="font-size:12pt;">
+      <span class="stars" style="font-size:10pt;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      Aurelian Manufacturing
+      <span>Endringsrapport &mdash; MRB Simulation</span>
+    </div>
+    <div style="font-size:9pt; color:#6B6B6B;">Side 2 av 4</div>
+  </div>
+
+  <h2>5. Oppdaterte dokumenter &mdash; detaljert oversikt</h2>
+
+  <h3>5.1 PO (NSS-PO-2026-0042)</h3>
+  <p><span class="tag-modified">OPPDATERT</span> &mdash; Det styrende dokumentet fra Nordic Subsea Solutions.</p>
+  <ul>
+    <li>Fjernet <strong>ISO 3834-2</strong> (Quality Requirements for Fusion Welding) fra standardtabell</li>
+    <li>MRB-tabell (seksjon 3.3): fjernet seksjon 7, 8, 16, 17, 18; omd&oslash;pt seksjon 6 til &laquo;NDT Log&raquo;; omnummerert 1&ndash;19</li>
+    <li>Fjernet <strong>seksjon 4.3 Welding Requirements</strong> (hele avsnittet)</li>
+    <li>Fjernet <strong>seksjon 4.5 Pressure Testing</strong> (hele avsnittet)</li>
+    <li>NDE-krav generalisert fra sveiser til kritiske overflater</li>
+    <li>Leveringsplan: fjernet trykktestmilepæl, FAT-referanser erstattet med &laquo;final inspection&raquo;</li>
+    <li><strong>PO-dato</strong> satt til 04 March 2026 &mdash; alle WAO-milepæler omberegnet</li>
+  </ul>
+
+  <h3>5.2 ITP (01_Inspection_Test_Plan)</h3>
+  <p><span class="tag-modified">OPPDATERT</span> &mdash; Aurelians inspeksjons- og testplan.</p>
+  <ul>
+    <li>Fjernet ASME BPVC Section IX (sveisekvalifikasjon) fra standarder</li>
+    <li>Fjernet ITP-punkt: 60 (Sveising), 70 (PWHT), 110 (PMI p&aring; sveiser), 150 (Hydrostatisk trykktest)</li>
+    <li>Oppdatert NDE-punkt (VT, RT, PT) til &aring; referere maskinerte komponenter istedenfor sveiser</li>
+    <li>Omnummerert alle punkt sekvensielt 10&ndash;170</li>
+    <li>Tabellbredder justert for bedre lesbarhet av &laquo;Records / Certificates&raquo;-kolonnen</li>
+  </ul>
+
+  <h3>5.3 QMS Certificates (02_QMS_Certificates)</h3>
+  <p><span class="tag-modified">OPPDATERT</span></p>
+  <ul>
+    <li>Fjernet ISO 3834-2:2021 sertifikat (b&aring;de fra oppsummeringstabell og detaljert sertifikatkort)</li>
+    <li>Fjernet sveisekoordinator-notater (RWC Thomas Bergstrom)</li>
+    <li>ISO 45001 omfang: fjernet &laquo;welding&raquo; fra aktivitetsliste</li>
+  </ul>
+
+  <h3>5.4 SDRL (NSS-SDRL-2026-0042)</h3>
+  <p><span class="tag-modified">OPPDATERT</span> &mdash; Kundens dokumentkravliste.</p>
+  <ul>
+    <li>Fjernet 9 sveise- og trykktestrelaterte rader fra dokumentkravtabellen</li>
+    <li>Lagt til &laquo;NDT Log&raquo;-rad som erstatning</li>
+    <li>MRB Standard Index: seksjon 7, 8, 17, 18 markert som <strong>N/A</strong> med merknad</li>
+    <li>QMS-referanse oppdatert fra &laquo;ISO 9001, ISO 3834-2&raquo; til &laquo;ISO 9001&raquo;</li>
+  </ul>
+
+  <h3>5.5 SDL (AM-SDL-2026-0042-001)</h3>
+  <p><span class="tag-modified">OPPDATERT</span> &mdash; Aurelians dokumentliste.</p>
+  <ul>
+    <li>Fjernet 4 dokumentrader (WPS/WPQR, Welder Certs, Pressure Test Proc, Pressure Test Cert)</li>
+    <li>Omd&oslash;pt &laquo;Weld &amp; NDT Log&raquo; til &laquo;NDT Log&raquo;</li>
+    <li>Dokumenttelling oppdatert: 22 &rarr; 18</li>
+    <li>Alle datoer omberegnet (+48 dager) for &aring; matche ny PO-dato</li>
+    <li>Transmittal-numre fjernet (kan ikke tildeles f&oslash;r de faktisk skjer)</li>
+  </ul>
+
+  <h3>5.6 Visual Inspection (09_Visual_Inspection)</h3>
+  <p><span class="tag-modified">OPPDATERT</span></p>
+  <ul>
+    <li>Generalisert fra &laquo;Weld Examination&raquo; til &laquo;Component Examination&raquo;</li>
+    <li>Sveises&oslash;mmer (W-001&ndash;W-006) erstattet med maskinerte inspeksjonsomr&aring;der: hub bore, seal groove, flange face, guide pin recesses, lifting lug, internal bore</li>
+    <li>Akseptkriterier oppdatert fra sveisestandarder til overflate- og maskinerings&shy;standarder</li>
+  </ul>
+
+  <h3>5.7 NDE Reports (10_NDE_Reports)</h3>
+  <p><span class="tag-modified">OPPDATERT</span></p>
+  <ul>
+    <li>RT- og PT-rapporter: alle W-XXX sveisereferanser erstattet med Area-XXX</li>
+    <li>Beskrivelser endret fra sveiseforbindelser til maskinerte komponentomr&aring;der</li>
+    <li>Stempel endret fra &laquo;ALL WELDS ACCEPTED&raquo; til &laquo;ALL AREAS ACCEPTED&raquo;</li>
+  </ul>
+
+  <div class="footer">
+    <span style="color: #F50537; font-weight: bold;">INTERN</span>
+    <span>Side 2 av 4</span>
+    <span>MRB Simulation Endringsrapport &bull; 02 March 2026</span>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo" style="font-size:12pt;">
+      <span class="stars" style="font-size:10pt;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      Aurelian Manufacturing
+      <span>Endringsrapport &mdash; MRB Simulation</span>
+    </div>
+    <div style="font-size:9pt; color:#6B6B6B;">Side 3 av 4</div>
+  </div>
+
+  <h3>5.8 NDE Operator Certificates (11_NDE_Operator_Certificates)</h3>
+  <p><span class="tag-modified">OPPDATERT</span></p>
+  <ul>
+    <li>Produktsektorer endret fra &laquo;Welds&raquo; til &laquo;Machined Components&raquo;</li>
+    <li>Alle W-XXX referanser erstattet med Area-XXX</li>
+  </ul>
+
+  <h3>5.9 NCR Records (20_Non_Conformance_Records)</h3>
+  <p><span class="tag-modified">OPPDATERT</span></p>
+  <ul>
+    <li>NCR endret fra sveise-NCR (tungsten-inneslutning i sveis) til maskinerings-NCR (overflateruhet)</li>
+    <li>Korrigerende tiltak: re-sveising &rarr; re-maskinering</li>
+    <li>Operatør: sveiser &rarr; CNC-operat&oslash;r</li>
+  </ul>
+
+  <h3>5.10 Certificate of Conformance (21_Certificate_of_Conformance)</h3>
+  <p><span class="tag-modified">OPPDATERT</span></p>
+  <ul>
+    <li>Fjernet sveise- og trykktestsamsvarserklæringer</li>
+    <li>Kvalitetssystem: ISO 9001:2015 (fjernet ISO 3834-2)</li>
+  </ul>
+
+  <h3>5.11 As-Built Drawings (22_As_Built_Drawings)</h3>
+  <p><span class="tag-modified">OPPDATERT</span></p>
+  <ul>
+    <li>&laquo;Weld Map&raquo; endret til &laquo;Inspection Map&raquo;</li>
+    <li>Sveisedetaljer erstattet med maskineringsdetaljer</li>
+  </ul>
+
+  <h3>5.12 Mechanical Completion Dossier (24_Mechanical_Completion_Dossier)</h3>
+  <p><span class="tag-modified">OPPDATERT</span></p>
+  <ul>
+    <li>Fjernet WPS/WPQR, sveiser, trykktest-elementer fra sjekklisten</li>
+    <li>&laquo;Weld &amp; NDT log&raquo; endret til &laquo;NDT log&raquo;</li>
+    <li>Sjekkliste omnummerert 1&ndash;14</li>
+  </ul>
+
+  <h2>6. Filer uten endringer</h2>
+  <p>F&oslash;lgende filer hadde ingen sveisereferanser og er uendret:</p>
+
+  <table>
+    <thead><tr><th>MRB Sek.</th><th>Fil</th><th>Innhold</th></tr></thead>
+    <tbody>
+      <tr><td>4</td><td><span class="tag-kept">UENDRET</span> 04_Material_Traceability.html</td><td>Materialsporbarhet &mdash; relevant for all produksjon</td></tr>
+      <tr><td>5</td><td><span class="tag-kept">UENDRET</span> 05_Material_Certificates.html</td><td>EN 10204 3.2 sertifikater &mdash; kun materialkjemi og mekanikk</td></tr>
+      <tr><td>12</td><td><span class="tag-kept">UENDRET</span> 12_Surface_Treatment.html</td><td>Overflatebehandling &mdash; uavhengig av sveising</td></tr>
+      <tr><td>13</td><td><span class="tag-kept">UENDRET</span> 13_Dimensional_Inspection.html</td><td>Dimensjonskontroll &mdash; rent maskineringsdokument</td></tr>
+      <tr><td>14</td><td><span class="tag-kept">UENDRET</span> 14_Weight_Certificate.html</td><td>Veierapport &mdash; uavhengig av sveising</td></tr>
+      <tr><td>&mdash;</td><td><span class="tag-kept">UENDRET</span> UML-diagrammer (rot)</td><td>Prosessdiagrammer &mdash; ingen sveisereferanser</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <span style="color: #F50537; font-weight: bold;">INTERN</span>
+    <span>Side 3 av 4</span>
+    <span>MRB Simulation Endringsrapport &bull; 02 March 2026</span>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo" style="font-size:12pt;">
+      <span class="stars" style="font-size:10pt;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      Aurelian Manufacturing
+      <span>Endringsrapport &mdash; MRB Simulation</span>
+    </div>
+    <div style="font-size:9pt; color:#6B6B6B;">Side 4 av 4</div>
+  </div>
+
+  <h2>7. Oppdatert tidslinje</h2>
+  <p>PO-datoen er satt til <strong>04 March 2026</strong> for &aring; simulere en faktisk nylig mottatt ordre. Alle milepæler beregnet som Weeks After Order (WAO):</p>
+
+  <table>
+    <thead><tr><th>Milepæl</th><th>WAO</th><th>Dato</th></tr></thead>
+    <tbody>
+      <tr><td>PO utstedt</td><td>0</td><td>04 March 2026</td></tr>
+      <tr><td>ITP + SDL innlevering</td><td>4</td><td>01 April 2026</td></tr>
+      <tr><td>Materialordre bekreftet</td><td>6</td><td>15 April 2026</td></tr>
+      <tr><td>Produksjonsstart</td><td>8</td><td>29 April 2026</td></tr>
+      <tr><td>Sluttinspeksjon (W)</td><td>22</td><td>05 August 2026</td></tr>
+      <tr><td>MRB innsending</td><td>23</td><td>12 August 2026</td></tr>
+      <tr><td>Levering FCA Moss</td><td>24</td><td>19 August 2026</td></tr>
+    </tbody>
+  </table>
+
+  <h2>8. Gjenst&aring;ende MRB-innhold</h2>
+  <p>MRB-pakken inneholder n&aring; <strong>16 dokumenter</strong> som dekker det en kunde realistisk kan forvente fra et CNC-maskinerings-verksted:</p>
+
+  <table>
+    <thead><tr><th>MRB Sek.</th><th>Dokument</th><th>Relevans for Aurelian</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Inspection &amp; Test Plan (ITP)</td><td>Definerer alle inspeksjonspunkter for maskinering</td></tr>
+      <tr><td>2</td><td>QMS Certificates (ISO 9001)</td><td>Kvalitetsstyringssystem</td></tr>
+      <tr><td>4</td><td>Material Traceability</td><td>Sporbarhet fra r&aring;materiale til ferdig produkt</td></tr>
+      <tr><td>5</td><td>Material Certificates (EN 10204 3.2)</td><td>Materialsertifikater med kjemisk/mekanisk analyse</td></tr>
+      <tr><td>6</td><td>NDT Log</td><td>Oversikt over NDE-aktiviteter (RT, PT, VT)</td></tr>
+      <tr><td>9</td><td>Visual Inspection Reports</td><td>Visuell inspeksjon av maskinerte overflater</td></tr>
+      <tr><td>10</td><td>NDE Reports (RT + PT)</td><td>Ikke-destruktiv testing av kritiske omr&aring;der</td></tr>
+      <tr><td>11</td><td>NDE Operator Certificates</td><td>Operat&oslash;rsertifikater (ISO 9712 Level II)</td></tr>
+      <tr><td>12</td><td>Surface Treatment Reports</td><td>Overflatebehandling og belegg (NORSOK M-501)</td></tr>
+      <tr><td>13</td><td>Dimensional Inspection Record</td><td>CMM-m&aring;linger og dimensjonskontroll</td></tr>
+      <tr><td>14</td><td>Weight Certificate</td><td>Veierapport mot designvekt</td></tr>
+      <tr><td>20</td><td>NCR Records</td><td>Avviksrapporter med korrigerende tiltak</td></tr>
+      <tr><td>21</td><td>Certificate of Conformance</td><td>Samsvarserklæring mot PO-krav</td></tr>
+      <tr><td>22</td><td>As-Built Drawings</td><td>Ferdig-tegninger med eventuelle avvik</td></tr>
+      <tr><td>23</td><td>Photos</td><td>Fotodokumentasjon av utstyr og merking</td></tr>
+      <tr><td>24</td><td>Mechanical Completion Dossier</td><td>Kompletteringsdossier med sjekkliste</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <strong>SDRL MRB-indeks:</strong> Seksjon 7, 8, 16, 17 og 18 er beholdt i kundens SDRL MRB Standard Index,
+    men markert som <span class="tag-na">N/A</span> med merknad. Dette er korrekt praksis &mdash; MRB-indeksen har 24
+    faste seksjoner, og de som ikke brukes markeres eksplisitt slik at det er tydelig at de er vurdert og bevisst ekskludert.
+  </div>
+
+  <h2>9. Verifisering</h2>
+  <p>
+    Etter alle endringer ble det kj&oslash;rt en komplett s&oslash;k (grep) over samtlige HTML-filer etter
+    nøkkelord: <em>weld, WPS, WPQR, PWHT, welder, ISO 3834, pressure test, hydrostatic, FAT report, FAT procedure</em>.
+  </p>
+  <p>Gjenst&aring;ende treff er utelukkende:</p>
+  <ul>
+    <li><strong>SDRL MRB-indeks:</strong> Seksjon 7, 8, 16, 17, 18 korrekt markert som N/A</li>
+    <li><strong>PO designparameter:</strong> &laquo;Test Pressure (hydrostatic): 517 barg&raquo; &mdash; produktspesifikasjon, ikke en aktivitet</li>
+    <li><strong>Certificate of Conformance:</strong> &laquo;N/A &mdash; No pressure testing&raquo; &mdash; eksplisitt utelukkelse</li>
+  </ul>
+
+  <div class="footer">
+    <span style="color: #F50537; font-weight: bold;">INTERN</span>
+    <span>Side 4 av 4</span>
+    <span>MRB Simulation Endringsrapport &bull; 02 March 2026</span>
+  </div>
+</div>
+
+</body>
+</html>

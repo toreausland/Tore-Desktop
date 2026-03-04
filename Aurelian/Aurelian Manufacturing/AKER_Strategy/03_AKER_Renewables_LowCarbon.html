@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Aker Solutions Renewables &amp; Low Carbon</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; max-width: 620px; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  .steps { list-style: none; padding: 0; margin: 1.2rem 0; counter-reset: step-counter; }
+  .steps li { position: relative; padding-left: 3rem; margin-bottom: 1.3rem; font-size: 0.88rem; line-height: 1.5; counter-increment: step-counter; }
+  .steps li::before { content: counter(step-counter); position: absolute; left: 0; top: -0.1em; width: 2rem; height: 2rem; background: var(--red); color: var(--white); font-size: 0.88rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 120px; color: var(--black); }
+
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel ul.clean-list li { color: rgba(255,255,255,0.85); }
+  .dark-panel ul.clean-list li strong { color: var(--white); }
+  .dark-panel .callout { background: rgba(255,255,255,0.06); border-left-color: var(--red); }
+  .dark-panel .callout p { color: rgba(255,255,255,0.85); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  .priority-stars { color: var(--red); font-weight: 700; white-space: nowrap; }
+
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+
+  .back-link { display: inline-block; font-size: 0.82rem; color: var(--red); font-weight: 600; text-decoration: none; margin-bottom: 1.5rem; }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">Aker Solutions &mdash; Renewables &amp; Low Carbon</div>
+    <div class="cover-subtitle">Segmentstrategi &mdash; Offshore vind, karbonfangst og hydrogen</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Mars 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: SEGMENTPROFIL -->
+  <section>
+    <a href="00_AKER_Strategy_Overview.html" class="back-link">&larr; Tilbake til Aker Solutions-oversikt</a>
+    <div class="section-label">Segmentprofil</div>
+    <h2>Renewables &amp; Low Carbon &mdash; energiomstillingens CNC-behov</h2>
+
+    <p class="lead"><strong>Renewables &amp; Low Carbon</strong> er Aker Solutions' voksende forretningsomr&aring;de innen energiomstilling. Segmentet dekker <strong>offshore vindkraft</strong> (flytende og bunnfaste fundamenter), <strong>karbonfangst og -lagring (CCS)</strong>, og <strong>hydrogenproduksjon</strong>. Aker Solutions posisjonerer seg som en ledende teknologileverand&oslash;r for energiomstillingen &mdash; med betydelig prosjektpipeline og &oslash;kende investeringer.</p>
+
+    <h3>Forretningsomr&aring;der</h3>
+    <ul class="clean-list">
+      <li><strong>Offshore vind</strong> &mdash; flytende fundamenter (betong/st&aring;l-hybrid), bunnfaste jacket-strukturer, kabelkonnektorer og subsea kraftkabler</li>
+      <li><strong>Karbonfangst og -lagring (CCS)</strong> &mdash; prosessmoduler for CO2-fangst, kompresjonsutstyr, r&oslash;rsystemer for CO2-transport og -injeksjon</li>
+      <li><strong>Hydrogen</strong> &mdash; elektrolys&oslash;r-komponenter, h&oslash;ytrykksventiler for H2-h&aring;ndtering, distribusjonssystemer</li>
+      <li><strong>Havenergi</strong> &mdash; b&oslash;lge- og tidevannskraft-komponenter (tidlig fase)</li>
+    </ul>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">1&ndash;4k</div>
+        <div class="kpi-label">Est. CNC-timer<br>per &aring;r</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Voksende</div>
+        <div class="kpi-label">Markeds-<br>segment</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">Strategisk</div>
+        <div class="kpi-label">Langsiktig<br>posisjon</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">2030+</div>
+        <div class="kpi-label">Full<br>skalering</div>
+      </div>
+    </div>
+
+    <p class="secondary">Renewables &amp; Low Carbon er fortsatt i en tidlig vekstfase sammenlignet med subsea-kjernevirksomheten. Men politiske rammebetingelser (EU Green Deal, Norges Langskip-prosjekt) og Aker Solutions' egne investeringer tilsier at dette segmentet vil vokse betydelig gjennom 2027&ndash;2030.</p>
+  </section>
+
+  <!-- SECTION 2: CNC-KOMPONENTBEHOV -->
+  <section>
+    <div class="section-label">Komponentbehov</div>
+    <h2>CNC-komponenttyper &mdash; Renewables &amp; Low Carbon</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Komponenttype</th>
+          <th>Materialer</th>
+          <th>Kompleksitet</th>
+          <th>Volum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fundamentkonnektorer (vind)</strong></td>
+          <td>H&oslash;yfast st&aring;l (S355&ndash;S460), rustfritt</td>
+          <td>Stor dimensjon, 3&ndash;4 akse</td>
+          <td>Medium &mdash; prosjektbasert</td>
+        </tr>
+        <tr>
+          <td><strong>Ventillegemer (H2/CCS)</strong></td>
+          <td>Inconel 625, Super Duplex, 316L</td>
+          <td>4&ndash;5 akse, h&oslash;ytrykksdesign</td>
+          <td>Lav&ndash;medium</td>
+        </tr>
+        <tr>
+          <td><strong>Kompressorkomponenter (CCS)</strong></td>
+          <td>Inconel 718, titanium</td>
+          <td>5-akse, tette toleranser</td>
+          <td>Lav</td>
+        </tr>
+        <tr>
+          <td><strong>Kabelkonnektorer (offshore vind)</strong></td>
+          <td>Kobberlegering, rustfritt</td>
+          <td>Presisjonsfresing</td>
+          <td>Medium &mdash; serier</td>
+        </tr>
+        <tr>
+          <td><strong>Elektrolys&oslash;r-endeplater</strong></td>
+          <td>Nikkellegering, titan</td>
+          <td>Planfresing, presisjonsm&aring;l</td>
+          <td>Lav &mdash; voksende</td>
+        </tr>
+        <tr>
+          <td><strong>Strukturelle braketter og adaptere</strong></td>
+          <td>S355, S460, duplex</td>
+          <td>3&ndash;4 akse, varierende</td>
+          <td>Medium</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 3: RELEVANS -->
+  <section>
+    <div class="section-label">Aurelians posisjon</div>
+    <h2>Hvorfor Renewables &amp; Low Carbon er strategisk viktig</h2>
+
+    <div class="callout">
+      <p><strong>Energiomstillingen skaper nye CNC-intensive komponentbehov.</strong> Hydrogen-ventiler i Inconel, CCS-kompressorkomponenter i titanium, og offshore vind-konnektorer i h&oslash;yfast st&aring;l &mdash; alle krever moderne maskinpark med h&oslash;y presisjon. Aurelian posisjonerer seg tidlig i et marked som forventes &aring; mangedobles innen 2030.</p>
+    </div>
+
+    <h3>N&oslash;kkelargumenter</h3>
+    <ul class="clean-list">
+      <li><strong>Tidlig posisjonering:</strong> Leverand&oslash;rkjeden for renewables-komponenter er under oppbygging. &Aring; komme inn tidlig gir mulighet til &aring; bli foretrukket leverand&oslash;r n&aring;r volumet &oslash;ker.</li>
+      <li><strong>Materialoverlapp med subsea:</strong> Mange renewables-komponenter bruker de samme materialene som subsea (Inconel, Super Duplex, h&oslash;yfast st&aring;l). Aurelians materialekspertise er direkte overf&oslash;rbar.</li>
+      <li><strong>Ny teknologi = nye leverand&oslash;rer:</strong> I motsetning til etablert subsea med langvarige leverand&oslash;rrelasjoner, s&oslash;ker renewables-segmentet aktivt nye leverand&oslash;rer med moderne kapasitet.</li>
+      <li><strong>Norsk verdikjede-ambisjon:</strong> Regjeringens m&aring;l om norsk industriell verdiskaping i offshore vind favoriserer norske leverand&oslash;rer som Aurelian.</li>
+      <li><strong>Langsiktig volum:</strong> NCS-vindprosjekter (Utsira Nord, S&oslash;rlige Nordsj&oslash; II) og CCS (Northern Lights/Langskip) vil generere &oslash;kende komponentbehov fra 2027+.</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 4: KONTAKTER -->
+  <section>
+    <div class="section-label">Kontakter</div>
+    <h2>N&oslash;kkelkontakter &mdash; Renewables &amp; Low Carbon</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Rolle/Tittel</th>
+          <th>Relevans</th>
+          <th>Prioritet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Jo Kjetil Krabbe</strong></td>
+          <td>EVP Power Solutions</td>
+          <td>Leder Power Solutions (renewables). 30+ &aring;r i Aker Solutions, tidligere SVP Manufacturing.</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9734;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Henning Mosv&aelig;r</strong></td>
+          <td>Senior Procurement Manager, Norway</td>
+          <td>Delt kontakt p&aring; tvers av segmenter. Inngang via subsea-dialog.</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Rune Andersen</strong></td>
+          <td>VP Supply Chain Management</td>
+          <td>Overordnet supply chain. Felles kontaktpunkt p&aring; tvers av segmenter.</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary" style="margin-top: 0.8rem;">Kontakter identifisert gjennom research av LinkedIn, selskapets nettsider og offentlige organisasjonskart (mars 2026). Alle kontakter har status <strong>IKKE KONTAKTET</strong>. Renewables-segmentet adresseres prim&aelig;rt gjennom Henning Mosv&aelig;r (felles inngang med subsea).</p>
+  </section>
+
+  <!-- SECTION 5: TILN&AElig;RMINGSSTRATEGI -->
+  <section>
+    <div class="section-label">Tiln&aelig;rmingsstrategi</div>
+    <h2>Fem steg for &aring; entre Renewables &amp; Low Carbon</h2>
+
+    <ol class="steps">
+      <li><strong>Inngang via subsea-relasjonen</strong> &mdash; n&aring;r dialogen med Rune Andersen / Henning Mosv&aelig;r er etablert, be om introduksjon til Jo Kjetil Krabbe (EVP Power Solutions) og renewables-teamet. Felles innkj&oslash;psorganisasjon gj&oslash;r dette naturlig.</li>
+      <li><strong>Kartlegg konkrete prosjekter</strong> &mdash; identifiser aktive renewables-prosjekter (offshore vind-kontrakter, CCS-anlegg) og deres komponentbehov. M&aring;lrett Capability Brief per prosjekt.</li>
+      <li><strong>Demonstrer materialoverlapp</strong> &mdash; vis at Aurelians kapasitet i Inconel og h&oslash;yfast st&aring;l er direkte relevant for renewables. Bruk subsea-referanser som bevisf&oslash;ring.</li>
+      <li><strong>Tilby prototype/testserie</strong> &mdash; nye teknologier (H2-ventiler, CCS-komponenter) trenger prototyper. Aurelians HMLV-profil passer perfekt for korte testserier.</li>
+      <li><strong>Posisjon&eacute;r for volum 2028+</strong> &mdash; inng&aring; rammeavtale for renewables-komponenter som posisjonerer Aurelian n&aring;r fullskala produksjon starter.</li>
+    </ol>
+  </section>
+
+  <!-- SECTION 6: MARKEDSKONTEKST (DARK PANEL) -->
+  <section class="dark-panel">
+    <div class="section-label">Markedskontekst</div>
+    <h2>Energiomstillingen &mdash; Norges industrielle mulighet</h2>
+
+    <p>Aker Solutions er en av de st&oslash;rste industrielle akt&oslash;rene i Norges energiomstilling. Selskapet er involvert i flere av de viktigste prosjektene:</p>
+
+    <ul class="clean-list">
+      <li><strong>Northern Lights / Langskip</strong> &mdash; Norges flaggskipprosjekt for CO2-fangst og -lagring. Aker Solutions leverer prosessmoduler og subsea-infrastruktur for CO2-injeksjon.</li>
+      <li><strong>Offshore vindkonsesjoner</strong> &mdash; Utsira Nord og S&oslash;rlige Nordsj&oslash; II representerer Norges f&oslash;rste fullskala offshore vindparker. Aker Solutions posisjonerer seg som leverand&oslash;r av flytende fundamenter og subsea-infrastruktur.</li>
+      <li><strong>Hydrogenproduksjon</strong> &mdash; Aker Solutions utvikler l&oslash;sninger for bl&aring; hydrogen (naturgass + CCS) og samarbeider med Aker Horizons om gr&oslash;nn hydrogen.</li>
+      <li><strong>Havvind-fundamenter</strong> &mdash; Gjennom samarbeid med Aker Offshore Wind utvikles betong-st&aring;l hybridfundamenter som krever presisjonmaskinerte st&aring;lkonnektorer og festepunkter.</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Strategisk vurdering:</strong> Renewables-segmentet gir lavere CNC-volum p&aring; kort sikt (2026&ndash;2027), men representerer langsiktig strategisk posisjonering. Aurelian b&oslash;r etablere relasjon og kapabilitet n&aring;, slik at selskapet er kvalifisert n&aring;r fullskala prosjekter ruller ut fra 2028&ndash;2030.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: TIDSLINJE -->
+  <section>
+    <div class="section-label">Tidslinje</div>
+    <h2>Kvalifiseringsl&oslash;p &mdash; Renewables &amp; Low Carbon</h2>
+
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>Tidspunkt</th>
+          <th>Aktivitet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Q2 2026</strong></td>
+          <td>Introduksjon til Jo Kjetil Krabbe (EVP Power Solutions) via etablert kontakt med Rune Andersen / Henning Mosv&aelig;r. Kartlegg aktive prosjekter og komponentbehov.</td>
+        </tr>
+        <tr>
+          <td><strong>Q3 2026</strong></td>
+          <td>Teknisk m&oslash;te med renewables-ingeni&oslash;rer. Demonstrer materialoverlapp (Inconel, h&oslash;yfast st&aring;l). Diskuter prototypebehov.</td>
+        </tr>
+        <tr>
+          <td><strong>Q4 2026</strong></td>
+          <td>Levere prisestimat p&aring; identifiserte komponenter (CCS-ventiler, vindkonnektorer). F&oslash;rste tegninger mottatt.</td>
+        </tr>
+        <tr>
+          <td><strong>Q1&ndash;Q2 2027</strong></td>
+          <td>Prototype/testserie for nye komponenter (H2-ventiler eller CCS-deler). Bygg referanse.</td>
+        </tr>
+        <tr>
+          <td><strong>Q3&ndash;Q4 2027</strong></td>
+          <td>Rammeavtale for renewables-komponenter. Posisjon&eacute;r for volum n&aring;r fullskala prosjekter starter.</td>
+        </tr>
+        <tr>
+          <td><strong>2028+</strong></td>
+          <td><strong style="color: var(--red);">Fullskala leveranser.</strong> Skalering i takt med offshore vind- og CCS-prosjektene.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Langsiktig perspektiv:</strong> Renewables-markedet har et lengre tidsperspektiv enn subsea, men potensialet er enormt. Ved &aring; etablere posisjon n&aring; &mdash; gjennom subsea-d&oslash;r&aring;pnere og tidlige prototyper &mdash; sikrer Aurelian en plass i leverand&oslash;rkjeden n&aring;r volumet &oslash;ker.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | Aker Solutions Renewables &amp; Low Carbon V1.0 | Mars 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

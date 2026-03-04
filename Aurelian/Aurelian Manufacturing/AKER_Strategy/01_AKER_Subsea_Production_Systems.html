@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Aker Solutions Subsea Production Systems</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  /* Cover */
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; max-width: 620px; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  /* Content */
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  /* KPI strip */
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  /* Callout */
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  /* Bullet list */
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  /* Numbered steps */
+  .steps { list-style: none; padding: 0; margin: 1.2rem 0; counter-reset: step-counter; }
+  .steps li { position: relative; padding-left: 3rem; margin-bottom: 1.3rem; font-size: 0.88rem; line-height: 1.5; counter-increment: step-counter; }
+  .steps li::before { content: counter(step-counter); position: absolute; left: 0; top: -0.1em; width: 2rem; height: 2rem; background: var(--red); color: var(--white); font-size: 0.88rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  /* Timeline */
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 120px; color: var(--black); }
+
+  /* Dark panel */
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel ul.clean-list li { color: rgba(255,255,255,0.85); }
+  .dark-panel ul.clean-list li strong { color: var(--white); }
+  .dark-panel .callout { background: rgba(255,255,255,0.06); border-left-color: var(--red); }
+  .dark-panel .callout p { color: rgba(255,255,255,0.85); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+  .dark-panel .kpi-strip { border-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-item { background: rgba(255,255,255,0.04); border-right-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-value { color: var(--white); }
+  .dark-panel .kpi-label { color: var(--steel-blue); }
+
+  /* Contact table priority stars */
+  .priority-stars { color: var(--red); font-weight: 700; white-space: nowrap; }
+
+  /* Footer */
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+
+  /* Back link */
+  .back-link { display: inline-block; font-size: 0.82rem; color: var(--red); font-weight: 600; text-decoration: none; margin-bottom: 1.5rem; }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">Aker Solutions &mdash; Subsea Production Systems</div>
+    <div class="cover-subtitle">Segmentstrategi &mdash; Subsea tr&aelig;r, ventillegemer og manifolder i Super Duplex &amp; Inconel</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Mars 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: SEGMENTPROFIL -->
+  <section>
+    <a href="00_AKER_Strategy_Overview.html" class="back-link">&larr; Tilbake til Aker Solutions-oversikt</a>
+    <div class="section-label">Segmentprofil</div>
+    <h2>Subsea Production Systems &mdash; Aker Solutions' CNC-tyngste segment</h2>
+
+    <p class="lead"><strong>Subsea Production Systems</strong> er kjernevirksomheten i Aker Solutions og representerer selskapets st&oslash;rste verdiskaping. Segmentet designer, produserer og leverer komplette subsea produksjonssystemer til verdens st&oslash;rste oljeselskaper &mdash; inkludert <strong>subsea tr&aelig;r</strong> (vertikale og horisontale), <strong>manifolder</strong>, <strong>templater</strong>, <strong>kontrollmoduler</strong> og <strong>konnektorsystemer</strong>.</p>
+
+    <h3>Produksjonsprogram</h3>
+    <ul class="clean-list">
+      <li><strong>Vertikale subsea tr&aelig;r (VXT)</strong> &mdash; standard produksjonsenheter for br&oslash;nnhoder, levert i serier p&aring; 4&ndash;20+ per prosjekt</li>
+      <li><strong>Horisontale subsea tr&aelig;r (HXT)</strong> &mdash; avanserte tr&aelig;r for h&oslash;ytrykks- og h&oslash;ytemperaturapplikasjoner (HP/HT)</li>
+      <li><strong>Manifolder og templatestrukturer</strong> &mdash; store sveiste/maskinerte konstruksjoner som fordeler str&oslash;mningen mellom br&oslash;nner</li>
+      <li><strong>Kontrollmoduler (SCM)</strong> &mdash; elektroniske og hydrauliske styringssystemer for subsea-utstyr</li>
+      <li><strong>Konnektorsystemer</strong> &mdash; h&oslash;ypresisjons koblinger for r&oslash;r og kabler p&aring; havbunnen</li>
+    </ul>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">1 000+</div>
+        <div class="kpi-label">Subsea tr&aelig;r<br>levert globalt</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">5&ndash;15k</div>
+        <div class="kpi-label">Est. CNC-timer<br>per &aring;r</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Tranby</div>
+        <div class="kpi-label">Hovedproduksjon<br>Norge</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">API 6A/17D</div>
+        <div class="kpi-label">Prim&aelig;re<br>standarder</div>
+      </div>
+    </div>
+
+    <p class="secondary">Subsea Production Systems genererer en betydelig andel av Aker Solutions' totale omsetning. Med en ordrebok p&aring; over NOK 80 milliarder og &oslash;kende ettersp&oslash;rsel etter dyphavsl&oslash;sninger i Brasil, Vest-Afrika og Norsk sokkel, er behovet for ekstra maskinerings-kapasitet reelt og voksende.</p>
+  </section>
+
+  <!-- SECTION 2: CNC-KOMPONENTBEHOV -->
+  <section>
+    <div class="section-label">Komponentbehov</div>
+    <h2>CNC-komponenttyper &mdash; Subsea Production Systems</h2>
+
+    <p>Oversikt over de mest relevante komponentfamiliene for Aurelians maskinpark, med materialkrav, kompleksitetsniv&aring; og estimert volum.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Komponenttype</th>
+          <th>Materialer</th>
+          <th>Kompleksitet</th>
+          <th>Volum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Ventillegemer (valve bodies)</strong></td>
+          <td>Super Duplex (UNS S32750), Inconel 625</td>
+          <td>4&ndash;5 akse, tette toleranser</td>
+          <td>H&oslash;y &mdash; seriebasert</td>
+        </tr>
+        <tr>
+          <td><strong>Tr&aelig;rammer (tree frames)</strong></td>
+          <td>Super Duplex, 6Mo austenittisk</td>
+          <td>Stor dimensjon, 3&ndash;5 akse</td>
+          <td>Medium &mdash; prosjektbasert</td>
+        </tr>
+        <tr>
+          <td><strong>Konnektorhub (connector hubs)</strong></td>
+          <td>Inconel 718, Super Duplex</td>
+          <td>5-akse simultan, h&oslash;y presisjon</td>
+          <td>Medium&ndash;h&oslash;y</td>
+        </tr>
+        <tr>
+          <td><strong>Manifold-legemer</strong></td>
+          <td>Super Duplex, F55</td>
+          <td>Stor dimensjon, boring + fresing</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Aktuatorhus</strong></td>
+          <td>Inconel 625, Super Duplex</td>
+          <td>Dreiing/fresing, tette toleranser</td>
+          <td>H&oslash;y &mdash; gjentakende</td>
+        </tr>
+        <tr>
+          <td><strong>Choke-legemer</strong></td>
+          <td>Inconel 718, tungsten karbid innsats</td>
+          <td>H&oslash;ypresisjons boring, overlapping</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Br&oslash;nnhode-adapters</strong></td>
+          <td>Super Duplex, 4130 st&aring;l</td>
+          <td>Stor dreiing, presisjonsflater</td>
+          <td>Medium &mdash; prosjektbasert</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 3: RELEVANS -->
+  <section>
+    <div class="section-label">Aurelians posisjon</div>
+    <h2>Hvorfor Aurelian er relevant for dette segmentet</h2>
+
+    <div class="callout">
+      <p><strong>Subsea Production Systems outsourcer betydelig CNC-maskinering.</strong> Ventillegemer i Super Duplex og Inconel krever spesialiserte maskiner med h&oslash;y spindeleffekt, stabile oppspenningsl&oslash;sninger og komplett prosessdokumentasjon. Aurelians nye maskinpark med Mazak multi-tasking og 5-akse maskiner er designet for nøyaktig denne typen arbeid.</p>
+    </div>
+
+    <h3>N&oslash;kkelargumenter</h3>
+    <ul class="clean-list">
+      <li><strong>Materialekspertise i vanskelige legeringer:</strong> Super Duplex (UNS S32750) og Inconel 625/718 er kjernematerialer for subsea. Aurelians maskinpark er optimalisert for h&oslash;ylegerte materialer med riktig spindeleffekt og kj&oslash;lesystem.</li>
+      <li><strong>Kapasitet n&aring;r eksisterende leverand&oslash;rer er fulle:</strong> Aker Solutions' ordrebok vokser raskere enn leverand&oslash;rbasen kan levere. Nye maskineringskapasiteter med moderne automatisering gir reell avlastning.</li>
+      <li><strong>Komplett sporbarhet for API/NORSOK:</strong> Subsea-kvalifisering krever full materialsertifisering (3.1/3.2-sertifikater), prosesslogg og dimensjonskontroll. Aurelians digitale tr&aring;d leverer dette automatisk.</li>
+      <li><strong>Geografisk n&aelig;rhet:</strong> V&aring;ler til Tranby (hovedproduksjon) er ca. 1.5 timer. Kort nok for hyppig logistikk, kvalitetssamarbeid og urgent leveranser.</li>
+      <li><strong>Skalering fra reservedeler til serieproduksjon:</strong> Start med enklere komponenter via Subsea Services, bygg track record, og skaler opp til subsea tr&aelig;-komponenter over tid.</li>
+      <li><strong>Maskinkonfigurasjon p&aring; bestilling:</strong> Tidsvindu Q3 2026 &mdash; Aker Solutions kan p&aring;virke spindeleffekt, verkt&oslash;ymagasin, kj&oslash;lemiddel og oppspenningsl&oslash;sninger for optimal maskinering av deres komponentprofil.</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 4: N&Oslash;KKELKONTAKTER -->
+  <section>
+    <div class="section-label">Kontakter</div>
+    <h2>N&oslash;kkelkontakter &mdash; Subsea Production Systems</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Rolle/Tittel</th>
+          <th>Relevans</th>
+          <th>Prioritet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Rune Andersen</strong></td>
+          <td>VP Supply Chain Management</td>
+          <td>Overordnet ansvar for innkj&oslash;p og leverand&oslash;rkvalifisering i subsea-segmentet</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Yngvild Billing</strong></td>
+          <td>SVP Business Excellence</td>
+          <td>Kvalitetskrav, API/NORSOK-compliance, leverand&oslash;rrevisjon</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Henning Mosv&aelig;r</strong></td>
+          <td>Senior Procurement Manager, Norway</td>
+          <td>Prosjektinnkj&oslash;p, kapasitetsstyring, outsourcing-beslutninger</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Guro Rausand</strong></td>
+          <td>EVP New Build</td>
+          <td>Strategisk retning, store prosjektbeslutninger for ny produksjon</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9734;</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary" style="margin-top: 0.8rem;">Kontakter identifisert gjennom research av LinkedIn, selskapets nettsider og offentlige organisasjonskart (mars 2026). Alle kontakter har status <strong>IKKE KONTAKTET</strong>.</p>
+  </section>
+
+  <!-- SECTION 5: TILN&AElig;RMINGSSTRATEGI -->
+  <section>
+    <div class="section-label">Tiln&aelig;rmingsstrategi</div>
+    <h2>Fem steg for &aring; entre Subsea Production Systems</h2>
+
+    <ol class="steps">
+      <li><strong>Kontakt Rune Andersen (VP Supply Chain)</strong> &mdash; send LinkedIn-henvendelse med Capability Brief med fokus p&aring; Super Duplex/Inconel-kapasitet og API 6A-relevans.</li>
+      <li><strong>Leverand&oslash;rregistrering i Achilles/EPIM</strong> &mdash; Aker Solutions bruker bransjeportaler for leverand&oslash;rkvalifisering. Registrer Aurelian med komplett dokumentasjonspakke (ISO 9001-plan, materialkapabiliteter, maskinliste).</li>
+      <li><strong>Teknisk m&oslash;te p&aring; Tranby/Fornebu</strong> &mdash; ta med prosesspaner i Super Duplex og Inconel. Demonstrer overflaterikhet, toleransekontroll og materialdokumentasjon. Vis digital sporbarhetsl&oslash;sning.</li>
+      <li><strong>NDA og eksempeltegninger</strong> &mdash; f&aring; tilgang til tegninger for ventillegemer eller konnektorhub. Evaluer maskinbehov, syklustider og verkt&oslash;ykrav. Lever tilbake prisestimat og prosessplan.</li>
+      <li><strong>Tilby cellekonfigurasjon-input:</strong> &laquo;Vi bestiller maskiner Q3 2026 &mdash; fortell oss hva dere trenger for subsea-komponenter.&raquo; Optimaliser spindeleffekt, kj&oslash;lemiddel og oppspenning for Aker Solutions' profil.</li>
+    </ol>
+  </section>
+
+  <!-- SECTION 6: MATERIAL DEEP-DIVE (DARK PANEL) -->
+  <section class="dark-panel">
+    <div class="section-label">Materialkompetanse</div>
+    <h2>Super Duplex &amp; Inconel &mdash; Aurelians kjernekompetanse</h2>
+
+    <p>Subsea-industrien stiller ekstremt h&oslash;ye krav til materialkvalitet. De to viktigste materialfamiliene for Aker Solutions' subsea-komponenter er Super Duplex rustfritt st&aring;l og Inconel nikkelbaserte legeringer.</p>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">S32750</div>
+        <div class="kpi-label">Super Duplex<br>UNS Grade</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">625/718</div>
+        <div class="kpi-label">Inconel<br>Legeringer</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">HRC 35+</div>
+        <div class="kpi-label">Typisk<br>hardhet</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">3.1/3.2</div>
+        <div class="kpi-label">EN 10204<br>Sertifikater</div>
+      </div>
+    </div>
+
+    <h3>Maskineringskrav</h3>
+    <ul class="clean-list">
+      <li><strong>H&oslash;y spindeleffekt (37+ kW)</strong> &mdash; Super Duplex og Inconel krever h&oslash;ye skj&aelig;rekrefter med lav hastighet og h&oslash;yt matingsforhold</li>
+      <li><strong>Stabil oppspenning:</strong> Vibrasjoner i vanskelige materialer gir d&aring;rlig overflate og verkt&oslash;yslitasje. Mazak multi-tasking med integrert dreiing/fresing minimerer omspenningstid</li>
+      <li><strong>H&oslash;ytrykks kj&oslash;lemiddel (70+ bar):</strong> Sponkontroll i Inconel krever gjennomspindel kj&oslash;lemiddel med h&oslash;yt trykk for &aring; bryte spon og kj&oslash;le skj&aelig;rekanten</li>
+      <li><strong>Prosessdokumentasjon:</strong> Hvert kutt, verkt&oslash;yskifte og m&aring;lepunkt logges automatisk i Aurelians digitale tr&aring;d</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Konkurransefortrinn:</strong> De fleste tradisjonelle verksteder i Norge har eldre maskiner med utilstrekkelig spindeleffekt og manuell dokumentasjon. Aurelians nye maskinpark med Mazak INTEGREX og VARIAXIS serien er spesifikt dimensjonert for h&oslash;ylegerte subsea-materialer med full automasjon og digital sporbarhet.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: TIDSLINJE -->
+  <section>
+    <div class="section-label">Tidslinje</div>
+    <h2>Kvalifiseringsl&oslash;p &mdash; Subsea Production Systems</h2>
+
+    <p>M&aring;lrettet tidslinje fra f&oslash;rste kontakt til produksjonsstart, med vekt p&aring; det kritiske tidsvinduet for maskinkonfigurasjon i Q3 2026.</p>
+
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>Tidspunkt</th>
+          <th>Aktivitet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mar 2026</strong></td>
+          <td>LinkedIn-kontakt med Rune Andersen (VP Supply Chain) og Yngvild Billing (SVP Business Excellence). Send Capability Brief med subsea-fokus. P&aring;begynn leverand&oslash;rregistrering i Achilles/EPIM.</td>
+        </tr>
+        <tr>
+          <td><strong>Apr 2026</strong></td>
+          <td>F&oslash;rste tekniske m&oslash;te p&aring; Fornebu eller Tranby. Prosesspaner i Super Duplex og Inconel medbringes.</td>
+        </tr>
+        <tr>
+          <td><strong>Mai&ndash;Jun 2026</strong></td>
+          <td>NDA signert. Eksempeltegninger mottatt for ventillegemer eller konnektorhub. Prosessplan og prisestimat levert tilbake.</td>
+        </tr>
+        <tr>
+          <td><strong>Jun&ndash;Aug 2026</strong></td>
+          <td>Maskinkonfigurasjonsdiskusjoner med Aker Solutions' ingeni&oslash;rer. Input til spindeleffekt, kj&oslash;lemiddel og verkt&oslash;ymagasin.</td>
+        </tr>
+        <tr>
+          <td><strong>Q3 2026</strong></td>
+          <td><strong style="color: var(--red);">CNC-cellekonfigurasjon l&aring;st med input fra Aker Solutions.</strong> Kritisk milep&aelig;l.</td>
+        </tr>
+        <tr>
+          <td><strong>Q4 2026</strong></td>
+          <td>Pre-kvalifiseringss&oslash;knad innsendt. Dokumentasjonsrevisjon og eventuell desk audit gjennomf&oslash;rt.</td>
+        </tr>
+        <tr>
+          <td><strong>Q2 2027</strong></td>
+          <td>F&oslash;rste pr&oslash;veordrer via Subsea Services (reservedeler). Bygger track record og prosessdokumentasjon.</td>
+        </tr>
+        <tr>
+          <td><strong>Q3&ndash;Q4 2027</strong></td>
+          <td>FAI (First Article Inspection) p&aring; subsea-komponenter. Produksjonsstart. Ramp-up mot full kapasitet.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Kritisk tidsvindu:</strong> Kunder som inng&aring;r dialog innen august 2026 kan p&aring;virke CNC-cellenes maskinsammensetning. For subsea-komponenter er det spesielt viktig med riktig spindeleffekt (&gt;37 kW), h&oslash;ytrykks kj&oslash;lemiddel og stabile oppspenningsl&oslash;sninger. Denne muligheten skiller Aurelian fra alle eksisterende leverand&oslash;rer.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | Aker Solutions Subsea Production Systems V1.0 | Mars 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — FMC Subsea Services &amp; Aftermarket</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; max-width: 620px; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  .steps { list-style: none; padding: 0; margin: 1.2rem 0; counter-reset: step-counter; }
+  .steps li { position: relative; padding-left: 3rem; margin-bottom: 1.3rem; font-size: 0.88rem; line-height: 1.5; counter-increment: step-counter; }
+  .steps li::before { content: counter(step-counter); position: absolute; left: 0; top: -0.1em; width: 2rem; height: 2rem; background: var(--red); color: var(--white); font-size: 0.88rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 120px; color: var(--black); }
+
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel ul.clean-list li { color: rgba(255,255,255,0.85); }
+  .dark-panel ul.clean-list li strong { color: var(--white); }
+  .dark-panel .callout { background: rgba(255,255,255,0.06); border-left-color: var(--red); }
+  .dark-panel .callout p { color: rgba(255,255,255,0.85); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+  .dark-panel .kpi-strip { border-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-item { background: rgba(255,255,255,0.04); border-right-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-value { color: var(--white); }
+  .dark-panel .kpi-label { color: var(--steel-blue); }
+
+  .priority-stars { color: var(--red); font-weight: 700; white-space: nowrap; }
+
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+  .back-link { display: inline-block; font-size: 0.82rem; color: var(--red); font-weight: 600; text-decoration: none; margin-bottom: 1.5rem; }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">FMC Subsea Services &amp; Aftermarket</div>
+    <div class="cover-subtitle">Segmentstrategi &mdash; Reservedeler, reparasjoner og rekvalifisering</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Mars 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: SEGMENTPROFIL -->
+  <section>
+    <a href="00_FMC_Strategy_Overview.html" class="back-link">&larr; Tilbake til FMC-oversikt</a>
+    <div class="section-label">Segmentprofil</div>
+    <h2>Subsea Services &amp; Aftermarket &mdash; FMCs raskeste vei til Aurelian</h2>
+
+    <p class="lead"><strong>Subsea Services</strong> dekker alt vedlikehold, reparasjon og rekvalifisering av installert subsea-utstyr gjennom dets levetid (typisk 20&ndash;30 &aring;r). Dette inkluderer erstatningsdeler for ventiler, aktuatorer, bonnetter og konnektorer &mdash; samt spesialverkt&oslash;y for installasjon og intervensjon. Aftermarket-segmentet er strategisk viktig fordi det gir <strong>lavere kvalifiseringsterskel, raskere ordresyklus og repeterbare bestillinger</strong>.</p>
+
+    <h3>Tjenester og produkter</h3>
+    <ul class="clean-list">
+      <li><strong>Reservedeler til installerte trees</strong> &mdash; ventilgater, seter, bonnetter, aktuatorstempler, pakningsr&oslash;r</li>
+      <li><strong>Rekvalifisering av returnert utstyr</strong> &mdash; maskinering av nye tetningsflater, utboring av slitte boringer, re-maskinering til ny spesifikasjon</li>
+      <li><strong>Spesialverkt&oslash;y for intervensjon</strong> &mdash; running tools, pulling tools, test fixtures for nedsenkbart utstyr</li>
+      <li><strong>Installasjonsverkt&oslash;y</strong> &mdash; guide frames, alignment tools, connector running tools &mdash; prosjektspesifikke</li>
+      <li><strong>Upgrade-kits</strong> &mdash; komponentoppgraderinger for eksisterende subsea-systemer til ny spesifikasjon</li>
+    </ul>
+
+    <div class="kpi-strip">
+      <div class="kpi-item highlight">
+        <div class="kpi-value">2&ndash;7k</div>
+        <div class="kpi-label">Est. CNC-timer<br>per &aring;r</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Quick wins</div>
+        <div class="kpi-label">Lavere<br>kvalifiseringsterskel</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">HMLV</div>
+        <div class="kpi-label">Typisk 1&ndash;20<br>enheter per ordre</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Stavanger</div>
+        <div class="kpi-label">FMC Services<br>hovedbase</div>
+      </div>
+    </div>
+
+    <p class="secondary">FMCs Services-divisjon er basert prim&aelig;rt i Stavanger, men trekker p&aring; Kongsberg-fabrikkens kapasitet for maskinering av reservedeler. Med en installert base p&aring; tusenvis av subsea tr&aelig;r globalt, er aftermarket-volumet betydelig og voksende.</p>
+  </section>
+
+  <!-- SECTION 2: CNC-KOMPONENTBEHOV -->
+  <section>
+    <div class="section-label">Komponentbehov</div>
+    <h2>CNC-komponenttyper &mdash; Subsea Services</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Komponenttype</th>
+          <th>Materialer</th>
+          <th>Kompleksitet</th>
+          <th>Volum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Ventilgater og -seter</strong></td>
+          <td>Inconel 718, Stellite, tungstenkarbid</td>
+          <td>Presisjonssliping + 5-akse</td>
+          <td>Medium &mdash; 50&ndash;200/&aring;r</td>
+        </tr>
+        <tr>
+          <td><strong>Bonnet-deler (erstatning)</strong></td>
+          <td>Inconel 625, Super Duplex</td>
+          <td>4&ndash;5 akse, tetningsflater</td>
+          <td>Medium &mdash; 30&ndash;100/&aring;r</td>
+        </tr>
+        <tr>
+          <td><strong>Aktuatorstempler og -sylindre</strong></td>
+          <td>Super Duplex, 316L</td>
+          <td>Dreiing + fresing, presisjon</td>
+          <td>Medium &mdash; 50&ndash;150/&aring;r</td>
+        </tr>
+        <tr>
+          <td><strong>Intervensionsverkt&oslash;y</strong></td>
+          <td>Verkt&oslash;yst&aring;l, aluminium, Super Duplex</td>
+          <td>3&ndash;5 akse, prosjektspesifikk</td>
+          <td>Lav &mdash; 5&ndash;20/&aring;r</td>
+        </tr>
+        <tr>
+          <td><strong>Running/pulling tools</strong></td>
+          <td>AISI 4140/4340, h&oslash;ylegert st&aring;l</td>
+          <td>3&ndash;4 akse</td>
+          <td>Lav-medium &mdash; prosjektbasert</td>
+        </tr>
+        <tr>
+          <td><strong>Test fixtures og adapter</strong></td>
+          <td>Karbonst&aring;l, aluminium</td>
+          <td>3 akse, rask levering</td>
+          <td>L&oslash;pende &mdash; ad hoc bestillinger</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 3: RELEVANS -->
+  <section>
+    <div class="section-label">Aurelians posisjon</div>
+    <h2>Hvorfor aftermarket er den raskeste veien inn hos FMC</h2>
+
+    <div class="callout">
+      <p><strong>Aftermarket-deler har lavere kvalifiseringsterskel enn nye tree-komponenter.</strong> Reservedeler og verkt&oslash;y krever ikke full API 6A-kvalifisering for alle kategorier &mdash; mange kan leveres under FMCs generelle leverand&oslash;rgodkjenning med materialssertifikater og dimensjonskontroll. Dette gir Aurelian muligheten til &aring; f&aring; f&oslash;rste ordrer 6&ndash;12 m&aring;neder f&oslash;r full tree-kvalifisering.</p>
+    </div>
+
+    <h3>N&oslash;kkelargumenter</h3>
+    <ul class="clean-list">
+      <li><strong>Rask kvalifisering:</strong> Mange aftermarket-kategorier krever kun ISO 9001 + materialssertifikater + dimensjonsrapport &mdash; ikke full API-audit. Aurelian kan starte her.</li>
+      <li><strong>HMLV er vare kjernevirksomhet:</strong> 1&ndash;20 enheter per ordre i varierende konfigurasjoner er n&oslash;yaktig profilen Aurelians autonome celler er designet for.</li>
+      <li><strong>Kort leveringstid:</strong> Aftermarket-deler har ofte hasteordrer &mdash; nedetid p&aring; subsea-utstyr koster operat&oslash;ren millioner per dag. Aurelians 24/7 drift gir kortere responstid.</li>
+      <li><strong>Bygger track record:</strong> Suksessfulle aftermarket-leveranser etablerer Aurelian i FMCs leverand&oslash;rsystem og bygger referanser for h&oslash;yverdi-segmenter.</li>
+      <li><strong>Materialoverlapp:</strong> Inconel 718, Super Duplex, Stellite &mdash; identiske materialer som i nye tree-komponenter. Kompetansen overf&oslash;res direkte.</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 4: KONTAKTER -->
+  <section>
+    <div class="section-label">Kontakter</div>
+    <h2>N&oslash;kkelkontakter &mdash; Subsea Services</h2>
+
+    <table>
+      <thead>
+        <tr><th>Navn</th><th>Tittel</th><th>Relevans</th><th>Prioritet</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Rune Thoresen</strong></td>
+          <td>SVP Subsea Services / President Europe Subsea Projects / Country Manager Norway</td>
+          <td>Direkte ansvarlig for Subsea Services. Daglig leder TechnipFMC Norge AS. Prim&aelig;r kontaktperson.</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Thierry Conti</strong></td>
+          <td>President, EMS &amp; Quality (Manufacturing, Supply Chain, Quality)</td>
+          <td>Overordnet ansvar for supply chain og kvalitet &mdash; strategisk beslutningstaker</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9734;</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary">Kontakter identifisert gjennom research av TechnipFMC ledelsessider, Br&oslash;nn&oslash;ysundregistrene, LinkedIn og presseoppslag (mars 2026). Rune Thoresen bekreftet som daglig leder TechnipFMC Norge AS. FMC Services koordineres mellom Stavanger og Kongsberg.</p>
+  </section>
+
+  <!-- SECTION 5: TILNÆRMINGSSTRATEGI -->
+  <section>
+    <div class="section-label">Tiln&aelig;rmingsstrategi</div>
+    <h2>Fem steg for &aring; entre Subsea Services</h2>
+
+    <ol class="steps">
+      <li><strong>Start med test fixtures og verkt&oslash;y</strong> &mdash; lavest kvalifiseringsterskel. Aluminium og verkt&oslash;yst&aring;l, 3&ndash;4 akse, kort leveringstid. Bygger relasjon uten tung sertifiseringsprosess.</li>
+      <li><strong>Tilby &laquo;fast-track&raquo; reservedelskapasitet</strong> &mdash; pitch: &laquo;24/7 autonom drift = kortere responstid p&aring; hasteordrer enn tradisjonelle verksteder.&raquo; Subsea-nedetid koster millioner per dag.</li>
+      <li><strong>Demonstrer Inconel 718 kompetanse</strong> &mdash; ventilgater og -seter er h&oslash;yverdi aftermarket-deler. Vis prosesspaner og overflateruhet-dokumentasjon.</li>
+      <li><strong>Forhandle blanket purchase order</strong> &mdash; &aring;pen rammeavtale for standardreservedeler med call-off. Reduserer FMCs administrative belastning.</li>
+      <li><strong>Bruk aftermarket-referanser til &aring; &aring;pne tree-segmentet</strong> &mdash; etter 3&ndash;6 m&aring;neders suksessfulle leveranser, pitch overgang til nye tree-subkomponenter.</li>
+    </ol>
+  </section>
+
+  <!-- SECTION 6: QUICK WIN STRATEGI (DARK PANEL) -->
+  <section class="dark-panel">
+    <div class="section-label">Quick win-strategi</div>
+    <h2>Aftermarket som d&oslash;r&aring;pner &mdash; fra f&oslash;rste ordre til full kvalifisering</h2>
+
+    <p><strong>Aftermarket-segmentet er Aurelians trojanerhest inn i FMC.</strong> Ved &aring; starte med lavterskel-deler bygges kompetanse, referanser og relasjoner som gj&oslash;r overgangen til h&oslash;yverdi tree-maskinering naturlig og troverdig.</p>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">3&ndash;6 md</div>
+        <div class="kpi-label">Kvalifisering<br>verkt&oslash;y/fixtures</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">6&ndash;12 md</div>
+        <div class="kpi-label">Kvalifisering<br>reservedeler</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">12&ndash;18 md</div>
+        <div class="kpi-label">Kvalifisering<br>tree-komp.</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Trinnvis</div>
+        <div class="kpi-label">Gradvis<br>opptrapping</div>
+      </div>
+    </div>
+
+    <h3>Progresjonsstrategi</h3>
+    <ul class="clean-list">
+      <li><strong>Fase 1 (Q3 2027):</strong> Test fixtures, adapter, enkle verkt&oslash;y &mdash; aluminium og karbonst&aring;l. Bygger leverand&oslash;rprofil i FMC-systemet.</li>
+      <li><strong>Fase 2 (Q4 2027):</strong> Aktuatorstempler, -sylindre og enkle reservedeler i Super Duplex/316L. &Oslash;ker materialkompleksiteten.</li>
+      <li><strong>Fase 3 (Q1 2028):</strong> Bonnet-deler og ventilkomponenter i Inconel. Demonstrerer presisjon p&aring; kritiske tetningsflater.</li>
+      <li><strong>Fase 4 (Q2&ndash;Q3 2028):</strong> Overgang til nye tree-subkomponenter basert p&aring; aftermarket-track record. Full API 6A-kvalifisering.</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Strategisk vurdering:</strong> Denne trinnvise tiln&aelig;rmingen minimerer FMCs risiko og Aurelians kvalifiseringskostnad. Hver fase bygger kompetanse og kredibilitet for neste. Innen 18 m&aring;neder fra f&oslash;rste aftermarket-ordre kan Aurelian v&aelig;re kvalifisert for tree-komponenter.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: TIDSLINJE -->
+  <section>
+    <div class="section-label">Tidslinje</div>
+    <h2>Kvalifiseringsl&oslash;p &mdash; Subsea Services</h2>
+
+    <table class="timeline-table">
+      <thead><tr><th>Tidspunkt</th><th>Aktivitet</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Apr 2026</strong></td><td>LinkedIn-kontakt med Rune Thoresen, SVP Subsea Services og Country Manager Norway (Oslo/Kongsberg).</td></tr>
+        <tr><td><strong>Mai 2026</strong></td><td>F&oslash;rste kontakt med Thoresen &mdash; pitch fast-track reservedelskapasitet. Capability Brief med aftermarket-fokus.</td></tr>
+        <tr><td><strong>Jun 2026</strong></td><td>Registrer i FMCs leverand&oslash;rportal med aftermarket-kategorier.</td></tr>
+        <tr><td><strong>Jul&ndash;Sep 2026</strong></td><td>Teknisk m&oslash;te. Prosesspaner for Inconel 718 og Super Duplex. Diskuter verkt&oslash;y/fixture-muligheter.</td></tr>
+        <tr><td><strong>Q4 2026</strong></td><td>Pre-kvalifisering for aftermarket-kategori (forenklet prosess).</td></tr>
+        <tr><td><strong>Q3 2027</strong></td><td>F&oslash;rste pilotordre &mdash; test fixtures eller enkle verkt&oslash;y. FAI.</td></tr>
+        <tr><td><strong>Q4 2027</strong></td><td>Reservedeler i Super Duplex/Inconel. Ramp-up.</td></tr>
+        <tr><td><strong>2028</strong></td><td>Overgang til nye tree-subkomponenter basert p&aring; track record.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Quick win-potensial:</strong> Aftermarket-deler er den enkleste veien til f&oslash;rste FMC-faktura. Kvalifiseringstiden er 6&ndash;12 m&aring;neder kortere enn for nye tree-komponenter. Aurelian b&oslash;r prioritere denne inngangen parallelt med tree-kvalifisering.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | FMC Subsea Services &amp; Aftermarket V1.0 | Mars 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

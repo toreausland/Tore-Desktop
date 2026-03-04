@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Aker Solutions Subsea Services &amp; Lifecycle</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; max-width: 620px; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  .steps { list-style: none; padding: 0; margin: 1.2rem 0; counter-reset: step-counter; }
+  .steps li { position: relative; padding-left: 3rem; margin-bottom: 1.3rem; font-size: 0.88rem; line-height: 1.5; counter-increment: step-counter; }
+  .steps li::before { content: counter(step-counter); position: absolute; left: 0; top: -0.1em; width: 2rem; height: 2rem; background: var(--red); color: var(--white); font-size: 0.88rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 120px; color: var(--black); }
+
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel ul.clean-list li { color: rgba(255,255,255,0.85); }
+  .dark-panel ul.clean-list li strong { color: var(--white); }
+  .dark-panel .callout { background: rgba(255,255,255,0.06); border-left-color: var(--red); }
+  .dark-panel .callout p { color: rgba(255,255,255,0.85); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+  .dark-panel .kpi-strip { border-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-item { background: rgba(255,255,255,0.04); border-right-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-value { color: var(--white); }
+  .dark-panel .kpi-label { color: var(--steel-blue); }
+
+  .priority-stars { color: var(--red); font-weight: 700; white-space: nowrap; }
+
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+
+  .back-link { display: inline-block; font-size: 0.82rem; color: var(--red); font-weight: 600; text-decoration: none; margin-bottom: 1.5rem; }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">Aker Solutions &mdash; Subsea Services &amp; Lifecycle</div>
+    <div class="cover-subtitle">Segmentstrategi &mdash; Ettermarked, reservedeler og quick wins</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Mars 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: SEGMENTPROFIL -->
+  <section>
+    <a href="00_AKER_Strategy_Overview.html" class="back-link">&larr; Tilbake til Aker Solutions-oversikt</a>
+    <div class="section-label">Segmentprofil</div>
+    <h2>Subsea Services &amp; Lifecycle &mdash; inngangsporten til Aker Solutions</h2>
+
+    <p class="lead"><strong>Subsea Services &amp; Lifecycle</strong> dekker hele ettermarkedet for subsea-utstyr: reservedeler, reparasjon, oppussing (refurbishment) og livsforlengelse av eksisterende subsea-installasjoner. Segmentet vokser jevnt ettersom den installerte basen p&aring; norsk sokkel og globalt &oslash;ker i alder og krever hyppigere vedlikehold.</p>
+
+    <h3>Tjenestekategorier</h3>
+    <ul class="clean-list">
+      <li><strong>Reservedeler (spare parts)</strong> &mdash; erstatningskomponenter for ventiler, aktuatorer, konnektorer og kontrollmoduler</li>
+      <li><strong>Reparasjon og oppussing</strong> &mdash; overhalering av brukte subsea-tr&aelig;r, manifolder og kontrollsystemer</li>
+      <li><strong>Livsforlengelse</strong> &mdash; oppgradering av eldre subsea-utstyr til forlenget levetid (NORSOK U-009)</li>
+      <li><strong>Interventionsverkt&oslash;y</strong> &mdash; spesialverkt&oslash;y for subsea installasjon og vedlikehold</li>
+      <li><strong>Modifikasjoner</strong> &mdash; tilpasning av eksisterende komponenter til nye driftskrav</li>
+    </ul>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">2&ndash;8k</div>
+        <div class="kpi-label">Est. CNC-timer<br>per &aring;r</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">Quick Win</div>
+        <div class="kpi-label">Kortere<br>kvalifisering</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">HMLV</div>
+        <div class="kpi-label">High-Mix<br>Low-Volume</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">&Aring;gotn&aelig;s</div>
+        <div class="kpi-label">Service-hub<br>Bergen-omr&aring;det</div>
+      </div>
+    </div>
+
+    <p class="secondary">Subsea Services opererer fra &Aring;gotn&aelig;s (Bergen-omr&aring;det) og Fornebu, med global service-tilstedev&aelig;relse. Ettermarkedet har h&oslash;yere marginer enn nyproduksjon og gir stabil, gjentakende inntekt.</p>
+  </section>
+
+  <!-- SECTION 2: CNC-KOMPONENTBEHOV -->
+  <section>
+    <div class="section-label">Komponentbehov</div>
+    <h2>CNC-komponenttyper &mdash; Subsea Services &amp; Lifecycle</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Komponenttype</th>
+          <th>Materialer</th>
+          <th>Kompleksitet</th>
+          <th>Volum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Erstatningsventillegemer</strong></td>
+          <td>Super Duplex, Inconel 625</td>
+          <td>4&ndash;5 akse, identisk med original</td>
+          <td>L&oslash;pende bestilling</td>
+        </tr>
+        <tr>
+          <td><strong>Aktuatorkomponenter</strong></td>
+          <td>Inconel 718, 17-4PH</td>
+          <td>Dreiing/fresing, presisjon</td>
+          <td>Medium &mdash; gjentakende</td>
+        </tr>
+        <tr>
+          <td><strong>Slitedeler (wear parts)</strong></td>
+          <td>Tungsten karbid, stellitt, Inconel</td>
+          <td>H&oslash;y hardhet, presisjonssliping</td>
+          <td>H&oslash;y &mdash; hyppig utskiftning</td>
+        </tr>
+        <tr>
+          <td><strong>Konnektordeler</strong></td>
+          <td>Super Duplex, CuNi</td>
+          <td>Presisjonsfresing, tetningsflater</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Kontrollmodul-deler</strong></td>
+          <td>Aluminium, rustfritt 316L</td>
+          <td>3&ndash;4 akse, moderate toleranser</td>
+          <td>Lav&ndash;medium</td>
+        </tr>
+        <tr>
+          <td><strong>Spesialverkt&oslash;y og fixturer</strong></td>
+          <td>Verkt&oslash;yst&aring;l, aluminium</td>
+          <td>3&ndash;5 akse, varierende</td>
+          <td>L&oslash;pende</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 3: RELEVANS -->
+  <section>
+    <div class="section-label">Aurelians posisjon</div>
+    <h2>Hvorfor Subsea Services er quick-win segmentet</h2>
+
+    <div class="callout">
+      <p><strong>Subsea Services har kortere kvalifiseringsterskel enn nyproduksjon.</strong> Reservedeler og verkt&oslash;y krever fortsatt h&oslash;y kvalitet, men kvalifiseringsprosessen er raskere fordi delene ofte er enkeltbestillinger med kjente tegninger. Dette gj&oslash;r segmentet til den ideelle inngangsporten for Aurelian hos Aker Solutions.</p>
+    </div>
+
+    <h3>N&oslash;kkelargumenter</h3>
+    <ul class="clean-list">
+      <li><strong>Raskere kvalifisering:</strong> Reservedeler og fixturer har typisk enklere godkjenningsprosess enn serieproduksjon av nye subsea-tr&aelig;r. F&aelig;rre formelle trinn fra kontakt til f&oslash;rste ordre.</li>
+      <li><strong>HMLV passer perfekt:</strong> Subsea Services bestiller typisk 1&ndash;20 stykk av mange ulike deler. Dette er n&oslash;yaktig Aurelians produksjonsprofil &mdash; High-Mix Low-Volume med rask omstilling.</li>
+      <li><strong>Bygg track record:</strong> Vellykkede leveranser av reservedeler bygger tillit og dokumentasjon som akselererer kvalifisering for hovedproduksjon (Subsea Production Systems).</li>
+      <li><strong>Korte leveringstider gir fordel:</strong> Ettermarkedet har ofte hastedeler. Aurelians n&aelig;rhet og moderne maskiner kan gi kortere ledetid enn tradisjonelle leverand&oslash;rer.</li>
+      <li><strong>Komplett materialsporbarhet:</strong> Selv for reservedeler kreves full EN 10204 3.1/3.2 dokumentasjon. Aurelians digitale tr&aring;d leverer dette automatisk.</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 4: KONTAKTER -->
+  <section>
+    <div class="section-label">Kontakter</div>
+    <h2>N&oslash;kkelkontakter &mdash; Subsea Services &amp; Lifecycle</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Rolle/Tittel</th>
+          <th>Relevans</th>
+          <th>Prioritet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Henning Mosv&aelig;r</strong></td>
+          <td>Senior Procurement Manager, Norway</td>
+          <td>Innkj&oslash;p for b&aring;de services og nyproduksjon. Sentral d&oslash;r&aring;pner.</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Rune Andersen</strong></td>
+          <td>VP Supply Chain Management</td>
+          <td>Overordnet ansvar. Delt kontakt med Subsea Production Systems.</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Paal Eikeseth</strong></td>
+          <td>EVP Life Cycle</td>
+          <td>Leder lifecycle/ettermarked-operasjoner. Strategisk kontakt.</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9734;</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary" style="margin-top: 0.8rem;">Kontakter identifisert gjennom research av LinkedIn, selskapets nettsider og offentlige organisasjonskart (mars 2026). Alle kontakter har status <strong>IKKE KONTAKTET</strong>.</p>
+  </section>
+
+  <!-- SECTION 5: TILN&AElig;RMINGSSTRATEGI -->
+  <section>
+    <div class="section-label">Tiln&aelig;rmingsstrategi</div>
+    <h2>Fem steg for &aring; entre Subsea Services</h2>
+
+    <ol class="steps">
+      <li><strong>Kontakt Henning Mosv&aelig;r (Sr. Procurement Manager)</strong> &mdash; pitch Aurelian som ettermarkedsleverand&oslash;r for CNC-maskinerte reservedeler. Fokus: kort ledetid, HMLV-kapasitet, full materialsporbarhet.</li>
+      <li><strong>Leverand&oslash;rregistrering i Achilles/EPIM</strong> &mdash; registrer med tydelig markering av ettermarkedskapasitet. Dokumenter materialkompetanse i Super Duplex og Inconel.</li>
+      <li><strong>Be om tegninger for standard reservedeler</strong> &mdash; identifiser 3&ndash;5 typiske ettermarkedsdeler der Aurelian kan levere konkurrerende pris og ledetid. Lever prisestimat og prosessplan.</li>
+      <li><strong>F&oslash;rste pr&oslash;veordre</strong> &mdash; m&aring;l om f&oslash;rste ordre p&aring; reservedeler innen Q2 2027. Enklere komponenter f&oslash;rst, deretter kompleksitet over tid.</li>
+      <li><strong>Skaler opp til Subsea Production Systems</strong> &mdash; bruk track record fra ettermarkedsleveranser som referanse for kvalifisering til serieproduksjon av nye subsea-komponenter.</li>
+    </ol>
+  </section>
+
+  <!-- SECTION 6: STRATEGISK VERDI (DARK PANEL) -->
+  <section class="dark-panel">
+    <div class="section-label">Strategisk verdi</div>
+    <h2>Ettermarkedet som br&oslash;hode inn i Aker Solutions</h2>
+
+    <p>Subsea Services er ikke bare en omsetningskanal &mdash; det er den strategiske inngangsporten til hele Aker Solutions-kontoen. Her er logikken:</p>
+
+    <ul class="clean-list">
+      <li><strong>Steg 1: Reservedeler</strong> &mdash; enkle deler med kjente tegninger. Bevis at Aurelian kan levere riktig kvalitet til riktig tid.</li>
+      <li><strong>Steg 2: Slitedeler og aktuatorkomponenter</strong> &mdash; h&oslash;yere kompleksitet, men fortsatt HMLV. Bygger kompetanse i Aker Solutions' materialspesifikasjoner.</li>
+      <li><strong>Steg 3: Interventionsverkt&oslash;y og spesialfixturer</strong> &mdash; viser bredde i kapabilitet. Ofte med tidspress som favoriserer n&aelig;re leverand&oslash;rer.</li>
+      <li><strong>Steg 4: Pre-kvalifisering for Subsea Production</strong> &mdash; med dokumentert track record fra Services-leveranser er veien til serieproduksjon kortere.</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Strategisk vurdering:</strong> Kvalifiseringstiden for reservedeler er typisk 3&ndash;6 m&aring;neder mot 12&ndash;18 m&aring;neder for serieproduksjon. Ved &aring; starte med Services f&aring;r Aurelian tidlige ordrer, inntekter og en proven track record &mdash; alt mens kvalifiseringen for hovedproduksjon p&aring;g&aring;r parallelt.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: TIDSLINJE -->
+  <section>
+    <div class="section-label">Tidslinje</div>
+    <h2>Kvalifiseringsl&oslash;p &mdash; Subsea Services &amp; Lifecycle</h2>
+
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>Tidspunkt</th>
+          <th>Aktivitet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mar 2026</strong></td>
+          <td>LinkedIn-kontakt med Henning Mosv&aelig;r (Sr. Procurement Manager). Send Capability Brief med ettermarkedsfokus.</td>
+        </tr>
+        <tr>
+          <td><strong>Apr 2026</strong></td>
+          <td>Leverand&oslash;rregistrering fullf&oslash;rt. F&oslash;rste dialog om reservedelskapasitet.</td>
+        </tr>
+        <tr>
+          <td><strong>Mai&ndash;Jun 2026</strong></td>
+          <td>Motta tegninger for 3&ndash;5 typiske reservedeler. Lever prisestimat og prosessplan.</td>
+        </tr>
+        <tr>
+          <td><strong>Q3 2026</strong></td>
+          <td>Forhandling om rammeavtale for ettermarkedsdeler. Pre-kvalifisering igangsatt.</td>
+        </tr>
+        <tr>
+          <td><strong>Q4 2026</strong></td>
+          <td>Betinget godkjenning som ettermarkedsleverand&oslash;r. Pilot-ordre planlegging.</td>
+        </tr>
+        <tr>
+          <td><strong>Q2 2027</strong></td>
+          <td><strong style="color: var(--red);">F&oslash;rste leveranse av reservedeler.</strong> FAI og kvalitetskontroll gjennomf&oslash;rt.</td>
+        </tr>
+        <tr>
+          <td><strong>Q3 2027</strong></td>
+          <td>L&oslash;pende leveranser. Utvidelse av komponentporteф&oslash;lje. Start kvalifisering for Subsea Production.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Quick win-logikk:</strong> Ettermarkedet har kortere beslutningssykluser og mindre formell godkjenningsprosess. Ved &aring; posisjonere seg her f&oslash;rst, bygger Aurelian kompetanse, relasjoner og referanser som er verdifulle for hele Aker Solutions-kontoen.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | Aker Solutions Subsea Services V1.0 | Mars 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

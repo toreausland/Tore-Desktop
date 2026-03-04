@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — OneSubsea Digital &amp; Lifecycle Services</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; max-width: 620px; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  .steps { list-style: none; padding: 0; margin: 1.2rem 0; counter-reset: step-counter; }
+  .steps li { position: relative; padding-left: 3rem; margin-bottom: 1.3rem; font-size: 0.88rem; line-height: 1.5; counter-increment: step-counter; }
+  .steps li::before { content: counter(step-counter); position: absolute; left: 0; top: -0.1em; width: 2rem; height: 2rem; background: var(--red); color: var(--white); font-size: 0.88rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 120px; color: var(--black); }
+
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel ul.clean-list li { color: rgba(255,255,255,0.85); }
+  .dark-panel ul.clean-list li strong { color: var(--white); }
+  .dark-panel .callout { background: rgba(255,255,255,0.06); border-left-color: var(--red); }
+  .dark-panel .callout p { color: rgba(255,255,255,0.85); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+  .dark-panel .kpi-strip { border-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-item { background: rgba(255,255,255,0.04); border-right-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-value { color: var(--white); }
+  .dark-panel .kpi-label { color: var(--steel-blue); }
+
+  .priority-stars { color: var(--red); font-weight: 700; white-space: nowrap; }
+
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+
+  .back-link { display: inline-block; font-size: 0.82rem; color: var(--red); font-weight: 600; text-decoration: none; margin-bottom: 1.5rem; }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">OneSubsea Digital &amp; Lifecycle Services</div>
+    <div class="cover-subtitle">Segmentstrategi &mdash; Reservedeler, retrofit og inngangsbillett</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Mars 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: SEGMENTPROFIL -->
+  <section>
+    <a href="00_ONESUBSEA_Strategy_Overview.html" class="back-link">&larr; Tilbake til OneSubsea-oversikt</a>
+    <div class="section-label">Segmentprofil</div>
+    <h2>Digital &amp; Lifecycle Services &mdash; den naturlige inngangsporten</h2>
+
+    <p class="lead"><strong>Digital &amp; Lifecycle Services</strong> leverer reservedeler, tilstandsoverv&aring;kningsutstyr, retrofit-komponenter og oppgraderinger for OneSubseas installerte base av subsea-utstyr. Med tusenvis av juletrer, pumper og kontrollmoduler i drift p&aring; verdenshavene, er behovet for ettermarkedstjenester stort og voksende.</p>
+
+    <h3>Produkter og tjenester</h3>
+    <ul class="clean-list">
+      <li><strong>Reservedeler</strong> &mdash; erstatningsdeler for juletrer, pumper, ventiler og konnektorer i drift. Ofte hasteproduksjon.</li>
+      <li><strong>Tilstandsoverv&aring;kningsutstyr</strong> &mdash; sensorhus, monteringsbraketter og mekaniske deler for condition monitoring-systemer</li>
+      <li><strong>Retrofit-komponenter</strong> &mdash; oppgraderte deler som erstatter originale komponenter med forbedret design eller materialer</li>
+      <li><strong>Overhaling (refurbishment)</strong> &mdash; maskineringsarbeid i forbindelse med overhalingsprosjekter p&aring; eksisterende utstyr</li>
+      <li><strong>Modifikasjonskomponenter</strong> &mdash; sm&aring;serier av tilpassede deler for felt-spesifikke modifikasjoner</li>
+    </ul>
+
+    <div class="kpi-strip">
+      <div class="kpi-item highlight">
+        <div class="kpi-value">1&ndash;4k</div>
+        <div class="kpi-label">Est. CNC-timer<br>per &aring;r</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">1 000+</div>
+        <div class="kpi-label">Subsea-systemer<br>i drift globalt</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Lavere</div>
+        <div class="kpi-label">Kvalifiserings-<br>terskel</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">MEDIUM</div>
+        <div class="kpi-label">CNC-prioritet<br>inngangsbillett</div>
+      </div>
+    </div>
+
+    <p class="secondary">Selv om CNC-volumet per &aring;r er lavere enn de andre segmentene, er Lifecycle Services den mest realistiske inngangsporten til OneSubsea. Lavere kvalifiseringsterskel, kortere leveringstider og hyppigere ordrer gir mulighet til &aring; bygge track record raskt.</p>
+  </section>
+
+  <!-- SECTION 2: CNC-KOMPONENTBEHOV -->
+  <section>
+    <div class="section-label">Komponentbehov</div>
+    <h2>CNC-komponenttyper &mdash; Digital &amp; Lifecycle Services</h2>
+
+    <p>Bred og uforutsigbar komponentmiks. Mange sm&aring; ordrer med kort ledetid. Materialer varierer avhengig av originalt utstyr.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Komponenttype</th>
+          <th>Materialer</th>
+          <th>Kompleksitet</th>
+          <th>Volum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Reserveventiler og seter</strong></td>
+          <td>Inconel 625, Super Duplex</td>
+          <td>Dreiing + presisjonsfresing</td>
+          <td>L&oslash;pende, sm&aring;serier</td>
+        </tr>
+        <tr>
+          <td><strong>Tetninger og b&oslash;sninger</strong></td>
+          <td>Inconel 625, Stellite, CRA</td>
+          <td>Presisjonsdreiing</td>
+          <td>Hyppig, enkeltdeler</td>
+        </tr>
+        <tr>
+          <td><strong>Sensorhus og braketter</strong></td>
+          <td>316L SS, Super Duplex</td>
+          <td>3&ndash;4 akse</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Retrofit ventilkropper</strong></td>
+          <td>Super Duplex, Inconel 718</td>
+          <td>5-akse (oppdatert design)</td>
+          <td>Lav, h&oslash;y verdi</td>
+        </tr>
+        <tr>
+          <td><strong>Fixturer og spesialverkt&oslash;y</strong></td>
+          <td>Verkt&oslash;yst&aring;l, aluminium</td>
+          <td>3&ndash;5 akse</td>
+          <td>L&oslash;pende</td>
+        </tr>
+        <tr>
+          <td><strong>Modifikasjonsadaptere</strong></td>
+          <td>Varierende (tilpasses originalt utstyr)</td>
+          <td>3&ndash;5 akse</td>
+          <td>Enkeltordrer</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 3: RELEVANS -->
+  <section>
+    <div class="section-label">Aurelians posisjon</div>
+    <h2>Hvorfor dette segmentet er den beste inngangsbilletten</h2>
+
+    <div class="callout">
+      <p><strong>Lifecycle Services er Aurelians mest realistiske f&oslash;rste kontrakt med OneSubsea.</strong> Reservedeler og retrofit-komponenter har lavere kvalifiseringsterskel enn nybygg-komponenter, kortere beslutningstid og ofte hasteordrer der leveringstid er viktigere enn historisk track record.</p>
+    </div>
+
+    <h3>N&oslash;kkelargumenter</h3>
+    <ul class="clean-list">
+      <li><strong>Lavere inngangsbarri&egrave;re:</strong> Reservedeler har ofte enklere kvalifiseringsprosess enn nybygg. Materialsertifikat, dimensjonskontroll og sporbarhet er tilstrekkelig for mange deler.</li>
+      <li><strong>Hasteproduksjon:</strong> N&aring;r et subsea-system st&aring;r med behov for en reservedel, er leveringstid kritisk. Aurelians automatiserte drift med rask programmering gir konkurransefortrinn p&aring; ledetid.</li>
+      <li><strong>HMLV i sin reneste form:</strong> Ofte enkeltdeler eller 2&ndash;5 stykker av samme del. Ingen andre leverand&oslash;rer har s&aring; god &oslash;konomi p&aring; dette volumet som en autonom fabrikk med minimal omstillingskostnad.</li>
+      <li><strong>Relasjon-bygger:</strong> L&oslash;pende sm&aring;ordrer bygger tillitsforhold og kvalifiseringshistorikk som baner vei for st&oslash;rre kontrakter i andre segmenter.</li>
+      <li><strong>Reverse engineering:</strong> Noen reservedeler krever at Aurelian m&aring;ler opp originale deler og produserer etter m&aring;l. CMM og 3D-skanning integrert i Aurelians prosess er et pluss.</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 4: NØKKELKONTAKTER -->
+  <section>
+    <div class="section-label">Kontakter</div>
+    <h2>N&oslash;kkelkontakter &mdash; Digital &amp; Lifecycle Services</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Rolle/Tittel</th>
+          <th>Relevans</th>
+          <th>Prioritet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Hakan Eser</strong></td>
+          <td>VP Subsea Lifecycle Services</td>
+          <td>Direkte ansvarlig for global service, ettermarked, reservedeler og reparasjon &mdash; beslutter leverand&oslash;rvalg for reservedeler</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>N.N. (Supply Chain Director)</strong>*</td>
+          <td>Supply Chain Director, OneSubsea</td>
+          <td>Overordnet leverand&oslash;rstrategi inkl. ettermarked</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Francisco Nunez</strong></td>
+          <td>VP Sales &amp; Commercial</td>
+          <td>Kommersiell portvakt &mdash; kan &aring;pne d&oslash;rer til ettermarked-innkj&oslash;p</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9734;</span></td>
+        </tr>
+        <tr>
+          <td><strong>John Macleod</strong></td>
+          <td>VP Marketing &amp; Technology</td>
+          <td>Teknologi-kvalifisering for retrofit-komponenter</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9734;</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary" style="margin-top: 0.8rem;">*N.N. (Supply Chain Director): Rollen bekreftet via OneSubsea ledelsesside, men navnet er ikke offentlig tilgjengelig. Identifiseres via LinkedIn-s&oslash;k. Kontakter identifisert gjennom research av OneSubsea ledelsesside, LinkedIn og offentlige kilder (mars 2026).</p>
+  </section>
+
+  <!-- SECTION 5: TILNÆRMINGSSTRATEGI -->
+  <section>
+    <div class="section-label">Tiln&aelig;rmingsstrategi</div>
+    <h2>Fem steg for &aring; entre Digital &amp; Lifecycle Services</h2>
+
+    <ol class="steps">
+      <li><strong>Kontakt Hakan Eser (VP Lifecycle Services) via LinkedIn</strong> &mdash; reservedelsinnkj&oslash;p har ofte kortere beslutningsveier enn nybygg. Pitch: &laquo;Rask CNC-leveranse for subsea reservedeler &mdash; fra tegning til ferdig del p&aring; dager.&raquo;</li>
+      <li><strong>Tilby hastekapasitet</strong> &mdash; posisjon&eacute;r Aurelian som leverand&oslash;r for tidskritiske reservedeler. 24/7 autonom drift betyr at maskiner kj&oslash;rer natt og helg &mdash; ideelt for hastejobber.</li>
+      <li><strong>Start med enkle deler</strong> &mdash; fixturer, braketter og sensorhus f&oslash;r man tar trykkb&aelig;rende reservedeler. Bygg kvalifiseringshistorikk trinn for trinn.</li>
+      <li><strong>Vis digital sporbarhet</strong> &mdash; reservedeler for subsea-utstyr krever komplett materialsporing. Demonstrer at Aurelians system genererer full dokumentasjonspakke automatisk.</li>
+      <li><strong>Bruk som brohode til andre segmenter</strong> &mdash; n&aring;r Lifecycle-kvalifiseringen er p&aring; plass, bruk denne som referanse for &aring; entre Production Systems og Processing &amp; Boosting med st&oslash;rre kontrakter.</li>
+    </ol>
+  </section>
+
+  <!-- SECTION 6: INSTALLERT BASE (DARK PANEL) -->
+  <section class="dark-panel">
+    <div class="section-label">Markedsmulighet</div>
+    <h2>Installert base &mdash; et voksende ettermarked</h2>
+
+    <p>OneSubseas installerte base av subsea-utstyr er enorm og vokser hvert &aring;r. Hvert nytt prosjekt som settes i drift legger til utstyr som vil trenge reservedeler og vedlikehold i 20&ndash;30 &aring;r.</p>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">1 000+</div>
+        <div class="kpi-label">Subsea-systemer<br>i drift globalt</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">20&ndash;30 &aring;r</div>
+        <div class="kpi-label">Typisk levetid<br>per system</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">Voksende</div>
+        <div class="kpi-label">Ettermarked<br>per &aring;r</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Nordsj&oslash;en</div>
+        <div class="kpi-label">St&oslash;rste marked<br>for reservedeler</div>
+      </div>
+    </div>
+
+    <h3>Hvorfor ettermarkedet vokser</h3>
+    <ul class="clean-list">
+      <li><strong>Aldrende infrastruktur:</strong> Mange felt p&aring; norsk sokkel n&aelig;rmer seg original designlevetid &mdash; &oslash;kt behov for reservedeler og oppgraderinger</li>
+      <li><strong>Life extension-prosjekter:</strong> Operat&oslash;rer forlenger levetiden p&aring; eksisterende felt fremfor &aring; bygge nytt &mdash; dette krever retrofit-komponenter</li>
+      <li><strong>Nye felt legger til installert base:</strong> Hvert nytt prosjekt (Troll Fase 3, Breidablikk, osv.) &oslash;ker den totale basen som trenger service</li>
+      <li><strong>Tilstandsbasert vedlikehold:</strong> Overgang fra tidsbasert til tilstandsbasert vedlikehold &oslash;ker behovet for overv&aring;kningsutstyr og sensorkomponenter</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Strategisk vurdering:</strong> Lifecycle Services gir Aurelian en langsiktig, stabil inntektskilde. Selv om enkeltordrene er sm&aring;, er den akkumulerte effekten over tid betydelig. Og viktigere: det bygger relasjonen som &aring;pner d&oslash;ren til nybygg-kontrakter.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: TIDSLINJE -->
+  <section>
+    <div class="section-label">Tidslinje</div>
+    <h2>Kvalifiseringsl&oslash;p &mdash; Digital &amp; Lifecycle Services</h2>
+
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>Tidspunkt</th>
+          <th>Aktivitet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mar&ndash;Apr 2026</strong></td>
+          <td>Kontakt Hakan Eser (VP Lifecycle Services) identifisert. Kartlegg hans organisasjon for Spare Parts Manager og Aftermarket Procurement.</td>
+        </tr>
+        <tr>
+          <td><strong>Mai 2026</strong></td>
+          <td>Registrer i SLB portal med fokus p&aring; spare parts og aftermarket machining.</td>
+        </tr>
+        <tr>
+          <td><strong>Jun 2026</strong></td>
+          <td>F&oslash;rste LinkedIn-kontakt med Hakan Eser. Pitch hastekapasitet og digital sporbarhet for reservedeler.</td>
+        </tr>
+        <tr>
+          <td><strong>Jul&ndash;Sep 2026</strong></td>
+          <td>Teknisk evaluering. Vis referansedeler. Diskuter typiske reservedelsbehov.</td>
+        </tr>
+        <tr>
+          <td><strong>Q4 2026</strong></td>
+          <td>Forenklet kvalifisering for reservedeler (lavere terskel enn nybygg).</td>
+        </tr>
+        <tr>
+          <td><strong>Q1 2027</strong></td>
+          <td><strong style="color: var(--red);">F&oslash;rste pilot-ordre p&aring; reservedeler.</strong> Aurelians tidligste mulige OneSubsea-kontrakt.</td>
+        </tr>
+        <tr>
+          <td><strong>Q2&ndash;Q3 2027</strong></td>
+          <td>Gjentakende ordrer. Bygg track record og kvalifiseringshistorikk.</td>
+        </tr>
+        <tr>
+          <td><strong>Q4 2027</strong></td>
+          <td>Bruk Lifecycle-referanse for &aring; entre Controls &amp; Connectors og Production Systems.</td>
+        </tr>
+        <tr>
+          <td><strong>2028</strong></td>
+          <td>Ramme-avtale for reservedeler. Eskalering til nybygg-komponenter.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Inngangsstrategi:</strong> Lifecycle Services er den raskeste veien til en f&oslash;rste kontrakt med OneSubsea. F&oslash;rste realistiske ordre allerede Q1 2027. Bruk denne som springbrett for &aring; kvalifisere seg for h&oslash;yere-verdi segmenter.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | OneSubsea Digital &amp; Lifecycle Services V1.0 | Mars 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

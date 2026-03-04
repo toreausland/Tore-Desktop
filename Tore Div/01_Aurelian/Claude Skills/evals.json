@@ -1,0 +1,47 @@
+[
+  {
+    "id": "eval-0",
+    "prompt": "Create an investor pitch deck for a SaaS company called CloudSync. We're a B2B file synchronization platform for enterprises, raising our Seed round of $3M at a $10M pre-money valuation. We have 50 paying customers, $500K ARR, and growing 30% month-over-month. The team includes our CEO (former Dropbox PM) and CTO (ex-Google infrastructure). Market size is $15B TAM. Use blue (#0066CC) as our primary brand color.",
+    "files": [],
+    "expectations": [
+      "Deck contains 12-15 slides",
+      "Every slide has a visual element (no text-only slides)",
+      "Financial projections show revenue growth",
+      "Team slide includes founders' backgrounds",
+      "Uses blue color (#0066CC) as primary brand accent",
+      "Includes clear ask on final slide ($3M Seed round)",
+      "Market opportunity slide shows $15B TAM",
+      "Traction slide mentions 50 customers and $500K ARR"
+    ]
+  },
+  {
+    "id": "eval-1",
+    "prompt": "I need a pitch deck for our climate tech startup, GreenGrid. We're building AI-powered energy optimization for commercial buildings. Raising Series A of $8M at $30M pre-money. Currently deployed in 200 buildings, saving average 23% on energy costs. Team of 15, founded by energy sector veterans. Use green (#00A86B) as primary color. TAM is $50B.",
+    "files": [],
+    "expectations": [
+      "Problem slide addresses energy inefficiency in commercial buildings",
+      "Solution slide explains AI-powered optimization approach",
+      "Traction slide shows 200 buildings deployed and 23% savings metric",
+      "Uses green (#00A86B) as brand color",
+      "Series A ask of $8M is clearly stated",
+      "Market opportunity shows $50B TAM",
+      "Team slide highlights energy sector expertise",
+      "Deck follows professional visual design standards"
+    ]
+  },
+  {
+    "id": "eval-2",
+    "prompt": "Build a pitch deck for BioSynth, a biotech company developing novel protein therapeutics. Pre-seed round, raising $2M at $6M pre-money valuation. We have preliminary lab results showing 40% improvement over existing treatments. Founded by PhD researchers from MIT. Market is rare genetic disorders, $8B TAM. Use purple (#7B2CBF) as primary color.",
+    "files": [],
+    "expectations": [
+      "Deck is appropriate for Pre-seed stage (acknowledges early stage)",
+      "Scientific credibility established through MIT background",
+      "Preliminary results (40% improvement) highlighted in traction",
+      "Uses purple (#7B2CBF) as brand accent",
+      "Ask is $2M at $6M pre-money",
+      "Market slide shows rare genetic disorders and $8B TAM",
+      "Product/technology slide explains therapeutic approach",
+      "Professional biotech-appropriate design"
+    ]
+  }
+]

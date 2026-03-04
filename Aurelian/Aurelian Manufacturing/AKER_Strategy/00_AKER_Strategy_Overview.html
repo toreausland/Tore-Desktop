@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Aker Solutions Go-to-Market Strategi</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  /* Cover */
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  /* Content */
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  /* Cards grid */
+  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; margin: 1.5rem 0; }
+  .card { background: var(--gray-panel); padding: 1.5rem; position: relative; text-decoration: none; color: var(--black); transition: box-shadow 0.2s; }
+  .card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--red); }
+  .card-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--red); color: var(--white); font-size: 0.82rem; font-weight: 700; border-radius: 50%; margin-bottom: 0.7rem; }
+  .card h4 { font-size: 0.95rem; font-weight: 700; color: var(--black); margin-bottom: 0.4rem; }
+  .card p { font-size: 0.82rem; line-height: 1.5; color: var(--gray-medium); margin-bottom: 0.5rem; }
+  .card .card-meta { font-size: 0.74rem; color: var(--red); font-weight: 700; }
+
+  /* KPI strip */
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  /* Callout */
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  /* Bullet list */
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  /* Timeline */
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 140px; }
+
+  /* Dark panel */
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  /* Footer */
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+
+  /* File link styling */
+  .file-link { display: block; margin-top: 0.5rem; font-size: 0.78rem; color: var(--red); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">Aker Solutions Go-to-Market Strategi</div>
+    <div class="cover-subtitle">Aker Solutions ASA &mdash; Segmentert tiln&aelig;rming for subsea og energi</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Mars 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section>
+    <div class="section-label">Sammendrag</div>
+    <h2>Hvorfor Aker Solutions er en strategisk prioritet</h2>
+
+    <div class="callout">
+      <p><strong>Aker Solutions har en ordrebok p&aring; over NOK 80 milliarder</strong> og er Norges st&oslash;rste leverand&oslash;r av subsea produksjonssystemer. Selskapet outsourcer betydelig CNC-maskinering av ventillegemer, tr&aelig;rammer og konnektorer i Super Duplex og Inconel &mdash; materialer og toleranser som matcher Aurelians maskinpark perfekt. Med geografisk n&aelig;rhet (Fornebu/Tranby til V&aring;ler ~1.5 timer) og norsk eierskapspreferanse gjennom Aker ASA, representerer dette en topp-mulighet.</p>
+    </div>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">~55</div>
+        <div class="kpi-label">MRD NOK<br>Revenue 2024</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">80+</div>
+        <div class="kpi-label">MRD NOK<br>Ordrebok</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">15 000</div>
+        <div class="kpi-label">Ansatte<br>globalt</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">9&ndash;30k</div>
+        <div class="kpi-label">Est. &aring;rlige<br>CNC-timer</div>
+      </div>
+    </div>
+
+    <p>Denne strategien segmenterer Aker Solutions i fire forretningsomr&aring;der &mdash; hvert med ulik CNC-relevans, kvalifiseringskrav og tidsperspektiv. Tiln&aelig;rmingen er skreddersydd per segment for &aring; maksimere konvertering og bygge langsiktige relasjoner i Norges st&oslash;rste subsea-milj&oslash;.</p>
+  </section>
+
+  <!-- FOUR SEGMENTS OVERVIEW -->
+  <section>
+    <div class="section-label">Forretningssegmenter</div>
+    <h2>Segmentoversikt &mdash; CNC-relevans og prioritet</h2>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-number">1</div>
+        <h4>Subsea Production Systems</h4>
+        <p>Subsea tr&aelig;r (vertikale/horisontale), manifolder, templater, kontrollmoduler. Tung CNC-maskinering av ventillegemer, tr&aelig;rammer og konnektorhub i Super Duplex og Inconel 625/718.</p>
+        <div class="card-meta">Prioritet: H&Oslash;YEST &mdash; st&oslash;rst CNC-volum</div>
+        <span class="file-link">&rarr; 01_AKER_Subsea_Production_Systems.html</span>
+      </div>
+      <div class="card">
+        <div class="card-number">2</div>
+        <h4>Subsea Services &amp; Lifecycle</h4>
+        <p>Ettermarked: reservedeler, reparasjon, oppussing av subsea-utstyr. Erstatningsventiler, aktuatorkomponenter, slitedeler. Kortere kvalifisering, raske gevinster.</p>
+        <div class="card-meta">Prioritet: H&Oslash;Y &mdash; quick wins, kort kvalifisering</div>
+        <span class="file-link">&rarr; 02_AKER_Subsea_Services.html</span>
+      </div>
+      <div class="card">
+        <div class="card-number">3</div>
+        <h4>Renewables &amp; Low Carbon</h4>
+        <p>Offshore vind-fundamenter, karbonfangst-komponenter, hydrogen-ventilsystemer. Voksende segment med ny teknologi og nye materialkrav.</p>
+        <div class="card-meta">Prioritet: MEDIUM &mdash; strategisk langsiktig</div>
+        <span class="file-link">&rarr; 03_AKER_Renewables_LowCarbon.html</span>
+      </div>
+      <div class="card">
+        <div class="card-number">4</div>
+        <h4>Engineering &amp; Fabrication</h4>
+        <p>FEED-studier, detaljprosjektering, modulfabrikasjon. Strukturkomponenter, r&oslash;rst&oslash;tter, utstyrsrammer. Supplerer kjerneproduksjonen.</p>
+        <div class="card-meta">Prioritet: MEDIUM &mdash; supplement&aelig;rt volum</div>
+        <span class="file-link">&rarr; 04_AKER_Engineering_Fabrication.html</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY CONTACTS -->
+  <section class="dark-panel">
+    <div class="section-label">Kontakter</div>
+    <h2>Identifiserte n&oslash;kkelpersoner &mdash; alle segmenter</h2>
+
+    <h3>Supply Chain &amp; Innkj&oslash;p (Tier 1)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Rolle/Tittel</th><th>Segment</th><th>Prioritet</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Rune Andersen</strong></td><td>VP Supply Chain Management</td><td>Subsea Production / Alle segmenter</td><td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9733;</td></tr>
+        <tr><td><strong>Henning Mosv&aelig;r</strong></td><td>Senior Procurement Manager, Norway</td><td>Alle segmenter (prosjektinnkj&oslash;p)</td><td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9733;</td></tr>
+        <tr><td><strong>Stan Bogiel</strong></td><td>Sr. VP Supply Management (US)</td><td>Alle segmenter (global)</td><td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9734;</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Kvalitet &amp; Teknisk (Tier 1)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Rolle/Tittel</th><th>Segment</th><th>Prioritet</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Yngvild Billing</strong></td><td>SVP Business Excellence (kvalitet, operasjonell forbedring)</td><td>Alle segmenter</td><td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9733;</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Strategisk &amp; Divisjonsledelse (Tier 2)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Rolle/Tittel</th><th>Segment</th><th>Relevans</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Guro Rausand</strong></td><td>EVP New Build</td><td>Subsea Production / Engineering &amp; Fabrication</td><td>Strategisk kapasitetsplanlegging, ny produksjon</td></tr>
+        <tr><td><strong>Paal Eikeseth</strong></td><td>EVP Life Cycle</td><td>Subsea Services &amp; Lifecycle</td><td>Ettermarked, livsforlengelse, reservedeler</td></tr>
+        <tr><td><strong>Jo Kjetil Krabbe</strong></td><td>EVP Power Solutions</td><td>Renewables &amp; Low Carbon</td><td>Manufacturing-bakgrunn, renewables-ledelse</td></tr>
+        <tr><td><strong>Kjetel Digre</strong></td><td>CEO</td><td>Alle segmenter</td><td>Strategisk bevissthet (ikke direkte kontaktm&aring;l)</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 1.5rem; font-size: 0.82rem; color: var(--steel-blue);"><strong>Merk:</strong> Kontakter identifisert gjennom research av LinkedIn, selskapets nettsider og offentlige organisasjonskart (mars 2026). Ingen er kontaktet enda &mdash; dette er en ny GTM-strategi. Verifikasjon anbefales via direkte LinkedIn-s&oslash;k.</p>
+  </section>
+
+  <!-- QUALIFICATION ROADMAP -->
+  <section>
+    <div class="section-label">Kvalifisering</div>
+    <h2>Leverand&oslash;rkvalifisering &mdash; tidslinje</h2>
+
+    <table class="timeline-table">
+      <thead><tr><th>Fase</th><th>Tidspunkt</th><th>Aktivitet</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Research</strong></td><td>Feb 2026</td><td>Markedsanalyse, segmentering, kontaktidentifisering. GTM-strategi ferdigstilt.</td><td style="color: var(--red); font-weight: 700;">FULLF&Oslash;RT</td></tr>
+        <tr><td><strong>F&oslash;rste kontakt</strong></td><td>Mar 2026</td><td>LinkedIn-kontakt med Rune Andersen (VP Supply Chain) og Henning Mosv&aelig;r (Sr. Procurement Manager). Capability Brief vedlagt. Leverand&oslash;rregistrering p&aring;begynt.</td><td style="color: var(--red); font-weight: 700;">NESTE STEG</td></tr>
+        <tr><td><strong>Registrering</strong></td><td>Mar&ndash;Apr 2026</td><td>Leverand&oslash;rregistrering i Aker Solutions' portal (Achilles/EPIM). Dokumentasjonspakke sendt.</td><td>Planlagt</td></tr>
+        <tr><td><strong>Tekniske m&oslash;ter</strong></td><td>Apr&ndash;Jun 2026</td><td>Kapabilitetspresentasjoner hos Aker Solutions Fornebu/Tranby. Prosesspaner for Super Duplex/Inconel.</td><td>Planlagt</td></tr>
+        <tr><td><strong>Maskinkonfigurasjon</strong></td><td>Mai&ndash;Aug 2026</td><td>Aker Solutions p&aring;virker CNC-cellekonfigurasjon. Tidsvindu lukker Q3 2026.</td><td>Kritisk vindu</td></tr>
+        <tr><td><strong>NDA &amp; tegninger</strong></td><td>Jun&ndash;Sep 2026</td><td>NDA signert. Eksempeltegninger mottatt for evaluering av maskin- og toleransekrav.</td><td>Planlagt</td></tr>
+        <tr><td><strong>Pre-kvalifisering</strong></td><td>Q4 2026</td><td>Formell leverand&oslash;rs&oslash;knad. Dokumentasjonsrevisjon. Eventuell desk audit.</td><td>M&aring;l</td></tr>
+        <tr><td><strong>Pr&oslash;veordrer (ettermarked)</strong></td><td>Q2&ndash;Q3 2027</td><td>F&oslash;rste ordrer p&aring; reservedeler og enklere komponenter via Subsea Services.</td><td>M&aring;l</td></tr>
+        <tr><td><strong>Full produksjon</strong></td><td>Q4 2027&ndash;2028</td><td>Produksjonsstart p&aring; subsea-komponenter. FAI gjennomf&oslash;rt. Ramp-up mot full kapasitet.</td><td>M&aring;l</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Kritisk tidsvindu:</strong> Kunder som inng&aring;r dialog innen august 2026 kan p&aring;virke CNC-cellenes maskinsammensetning, verkt&oslash;ymagasin og automasjonsgrad. For subsea-komponenter i Super Duplex og Inconel er dette spesielt relevant &mdash; riktig spindeleffekt, kj&oslash;lemiddelsystem og oppspenningsautomatikk gj&oslash;r stor forskjell p&aring; produktivitet og kvalitet.</p>
+    </div>
+  </section>
+
+  <!-- APPROACH PRINCIPLES -->
+  <section>
+    <div class="section-label">Tiln&aelig;rming</div>
+    <h2>Fem n&oslash;kkelbudskap til Aker Solutions</h2>
+
+    <ul class="clean-list">
+      <li><strong>&laquo;Vi l&oslash;ser kapasitetsproblemet i subsea-maskinering&raquo;</strong> &mdash; Aker Solutions trenger CNC-timer i vanskelige materialer. Led med kapasitet: 25 maskiner, 140 000 spindeltimer, optimalisert for Super Duplex og Inconel.</li>
+      <li><strong>&laquo;Norsk eierskap, norsk verdiskaping&raquo;</strong> &mdash; Aker ASA har et uttalt m&aring;l om norsk verdikjede. Aurelian er 100% norsk og lokalisert i &Oslash;stfold &mdash; kort vei til Tranby og Fornebu.</li>
+      <li><strong>&laquo;Full digital sporbarhet for NORSOK- og API-krav&raquo;</strong> &mdash; Subsea-kvalifisering krever komplett materialsertifisering og prosesslogg. Aurelians digitale tr&aring;d er bygget for dette fra dag 1.</li>
+      <li><strong>&laquo;Dere kan p&aring;virke maskinkonfigurasjonen&raquo;</strong> &mdash; Tidsvindu som lukker seg Q3 2026. Spindeleffekt, kj&oslash;lemiddel og oppspenning kan optimaliseres for Aker Solutions' komponentprofil.</li>
+      <li><strong>&laquo;Vi starter med ettermarked og skalerer opp&raquo;</strong> &mdash; Reservedeler via Subsea Services gir rask kvalifisering og bevisf&oslash;ring f&oslash;r vi tar hovedproduksjonsvolum.</li>
+    </ul>
+  </section>
+
+  <!-- QUALIFICATION STANDARDS -->
+  <section>
+    <div class="section-label">Standarder</div>
+    <h2>Kvalifiseringskrav &mdash; subsea og energi</h2>
+
+    <p>Aker Solutions opererer under strenge bransje- og kundebestemte kvalitetsstandarder. Aurelians kvalifiseringsstrategi m&aring; adressere f&oslash;lgende:</p>
+
+    <table>
+      <thead><tr><th>Standard</th><th>Omr&aring;de</th><th>Relevans for Aurelian</th></tr></thead>
+      <tbody>
+        <tr><td><strong>NORSOK M-001</strong></td><td>Materialvalg</td><td>Krav til materialvalg for utstyr i olje- og gassindustrien. Gjelder alle komponenter.</td></tr>
+        <tr><td><strong>NORSOK M-630</strong></td><td>Materialdatablad</td><td>Spesifikke krav til materialegenskaper, testing og dokumentasjon for metalliske materialer.</td></tr>
+        <tr><td><strong>API 6A</strong></td><td>Ventiler og br&oslash;nnhodeutstyr</td><td>Sentralt for alle ventillegemer og br&oslash;nnhodekontroller som Aurelian kan maskinere.</td></tr>
+        <tr><td><strong>API 17D</strong></td><td>Subsea-utstyr</td><td>Design og drift av subsea produksjonsutstyr. P&aring;virker toleranser og overflatebehandling.</td></tr>
+        <tr><td><strong>DNV Type Approval</strong></td><td>Tredjepartsverifisering</td><td>Mange subsea-komponenter krever DNV-godkjenning. Aurelian m&aring; levere iht. DNV-krav.</td></tr>
+        <tr><td><strong>ISO 9001</strong></td><td>Kvalitetsledelse</td><td>Minimumskrav for alle leverand&oslash;rer. Aurelians grunnplanlegging dekker dette.</td></tr>
+        <tr><td><strong>NORSOK U-009</strong></td><td>Livsforlengelsesvurdering</td><td>Relevant for Subsea Services &mdash; reservedeler og oppussing av eksisterende utstyr.</td></tr>
+        <tr><td><strong>ISO 3834</strong></td><td>Sveisekvalitet</td><td>Relevant dersom Aurelian tilbyr sveiseoperasjoner i tillegg til maskinering.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FILE INDEX -->
+  <section>
+    <div class="section-label">Dokumenter</div>
+    <h2>Segmentstrategier &mdash; filindeks</h2>
+
+    <table>
+      <thead><tr><th>Fil</th><th>Segment</th><th>Innhold</th></tr></thead>
+      <tbody>
+        <tr><td><strong>00_AKER_Strategy_Overview.html</strong></td><td>Oversikt</td><td>Dette dokumentet &mdash; samlet strategi, kontakter og kvalifisering</td></tr>
+        <tr><td><strong>01_AKER_Subsea_Production_Systems.html</strong></td><td>Subsea Production Systems</td><td>Subsea tr&aelig;r, ventillegemer, manifolder, Super Duplex/Inconel</td></tr>
+        <tr><td><strong>02_AKER_Subsea_Services.html</strong></td><td>Subsea Services &amp; Lifecycle</td><td>Ettermarked, reservedeler, reparasjon, quick wins</td></tr>
+        <tr><td><strong>03_AKER_Renewables_LowCarbon.html</strong></td><td>Renewables &amp; Low Carbon</td><td>Offshore vind, karbonfangst, hydrogen-ventiler</td></tr>
+        <tr><td><strong>04_AKER_Engineering_Fabrication.html</strong></td><td>Engineering &amp; Fabrication</td><td>Modulfabrikasjon, strukturkomponenter, r&oslash;rst&oslash;tter</td></tr>
+        <tr><td><strong>05_AKER_Contact_Log.html</strong></td><td>Kontaktlogg</td><td>Aktivitetshistorikk for alle kontakter</td></tr>
+        <tr><td><strong>06_AKER_Sales_Report.html</strong></td><td>Salgsrapport</td><td>Ukentlig rapport med KPI, pipeline og handlingsplan</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | Aker Solutions Go-to-Market Strategi V1.0 | Mars 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

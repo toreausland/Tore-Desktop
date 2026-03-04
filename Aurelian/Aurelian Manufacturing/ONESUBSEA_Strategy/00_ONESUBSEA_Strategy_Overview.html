@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — OneSubsea Go-to-Market Strategi</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  /* Cover */
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  /* Content */
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  /* Cards grid */
+  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; margin: 1.5rem 0; }
+  .card { background: var(--gray-panel); padding: 1.5rem; position: relative; text-decoration: none; color: var(--black); transition: box-shadow 0.2s; }
+  .card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--red); }
+  .card-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--red); color: var(--white); font-size: 0.82rem; font-weight: 700; border-radius: 50%; margin-bottom: 0.7rem; }
+  .card h4 { font-size: 0.95rem; font-weight: 700; color: var(--black); margin-bottom: 0.4rem; }
+  .card p { font-size: 0.82rem; line-height: 1.5; color: var(--gray-medium); margin-bottom: 0.5rem; }
+  .card .card-meta { font-size: 0.74rem; color: var(--red); font-weight: 700; }
+
+  /* KPI strip */
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  /* Callout */
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  /* Bullet list */
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  /* Timeline */
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 140px; }
+
+  /* Dark panel */
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  /* Footer */
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+
+  /* File link styling */
+  .file-link { display: block; margin-top: 0.5rem; font-size: 0.78rem; color: var(--red); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">OneSubsea Go-to-Market Strategi</div>
+    <div class="cover-subtitle">OneSubsea (SLB) &mdash; Segmentert tiln&aelig;rming for subsea CNC-komponenter</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Mars 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section>
+    <div class="section-label">Sammendrag</div>
+    <h2>Hvorfor OneSubsea er en strategisk prioritet</h2>
+
+    <div class="callout">
+      <p><strong>OneSubsea er SLBs subsea-divisjon med ~2 500 ansatte i Norge og hovedproduksjon p&aring; Hors&oslash;y (Bergen).</strong> De produserer verdens mest avanserte subsea boosting- og prosesseringssystemer &mdash; komponenter som krever ekstensiv CNC-maskinering i eksotiske legeringer. Aurelian tilbyr den autonome kapasiteten de trenger for &aring; skalere.</p>
+    </div>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">~36</div>
+        <div class="kpi-label">MRD USD<br>SLB global revenue</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">2 500</div>
+        <div class="kpi-label">Ansatte<br>i Norge</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Hors&oslash;y</div>
+        <div class="kpi-label">Hovedfabrikk<br>Bergen</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">10&ndash;32k</div>
+        <div class="kpi-label">Est. &aring;rlige<br>CNC-timer</div>
+      </div>
+    </div>
+
+    <p>Denne strategien deler OneSubsea inn i fire forretningssegmenter &mdash; hvert med egne produktlinjer, materialspesifikasjoner og komponentbehov. Aurelians tiln&aelig;rming tilpasses per segment for &aring; maksimere relevans og identifisere den mest naturlige inngangsporten.</p>
+  </section>
+
+  <!-- FOUR SEGMENTS OVERVIEW -->
+  <section>
+    <div class="section-label">OneSubseas fire segmenter</div>
+    <h2>Segmentoversikt &mdash; CNC-relevans og prioritet</h2>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-number">1</div>
+        <h4>Subsea Production Systems</h4>
+        <p>Juletrer (X-trees), br&oslash;nnhoder, kontrollsystemer, konnektorer. Tung CNC-maskinering i eksotiske legeringer. H&oslash;yest CNC-volum.</p>
+        <div class="card-meta">Prioritet: H&Oslash;YEST &mdash; 4 000&ndash;12 000 CNC-timer/&aring;r</div>
+        <span class="file-link">&rarr; 01_ONESUBSEA_Production_Systems.html</span>
+      </div>
+      <div class="card">
+        <div class="card-number">2</div>
+        <h4>Subsea Processing &amp; Boosting</h4>
+        <p>Flerfasepumper, kompressorer, separatorer. Komplekse roterende komponenter med stramme toleranser. Hors&oslash;y-fabrikkens kjerneprodukter.</p>
+        <div class="card-meta">Prioritet: H&Oslash;Y &mdash; 3 000&ndash;10 000 CNC-timer/&aring;r</div>
+        <span class="file-link">&rarr; 02_ONESUBSEA_Processing_Boosting.html</span>
+      </div>
+      <div class="card">
+        <div class="card-number">3</div>
+        <h4>Subsea Controls &amp; Connectors</h4>
+        <p>Hydrauliske/elektriske kontrollmoduler, konnektorsystemer, jumpere. Presisjonsmaskinering i CRA-materialer.</p>
+        <div class="card-meta">Prioritet: MEDIUM-H&Oslash;Y &mdash; 2 000&ndash;6 000 CNC-timer/&aring;r</div>
+        <span class="file-link">&rarr; 03_ONESUBSEA_Controls_Connectors.html</span>
+      </div>
+      <div class="card">
+        <div class="card-number">4</div>
+        <h4>Digital &amp; Lifecycle Services</h4>
+        <p>Reservedeler, tilstandsoverv&aring;kningsutstyr, retrofit-komponenter. God inngangsbillett med lavere kvalifiseringsterskel.</p>
+        <div class="card-meta">Prioritet: MEDIUM &mdash; 1 000&ndash;4 000 CNC-timer/&aring;r</div>
+        <span class="file-link">&rarr; 04_ONESUBSEA_Digital_Lifecycle.html</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY CONTACTS -->
+  <section class="dark-panel">
+    <div class="section-label">Kontakter</div>
+    <h2>Identifiserte n&oslash;kkelpersoner &mdash; OneSubsea Norge</h2>
+
+    <h3>Supply Chain &amp; Innkj&oslash;p (Tier 1)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Rolle/Tittel</th><th>Lokasjon</th><th>Prioritet</th></tr></thead>
+      <tbody>
+        <tr><td><strong>N.N. (Supply Chain Director)</strong>*</td><td>Supply Chain Director, OneSubsea Norway</td><td>Bergen / Stavanger</td><td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9733;</td></tr>
+        <tr><td><strong>Gary Archer</strong></td><td>VP Subsea Production Systems</td><td>Bergen / Hors&oslash;y</td><td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9733;</td></tr>
+        <tr><td><strong>Andreas Fjellbirkeland</strong></td><td>VP Subsea Processing Systems</td><td>Hors&oslash;y</td><td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9733;</td></tr>
+        <tr><td><strong>Francisco Nunez</strong></td><td>VP Sales &amp; Commercial</td><td>Bergen</td><td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9734;</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Kvalitet &amp; Teknologi (Tier 2)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Rolle/Tittel</th><th>Lokasjon</th><th>Prioritet</th></tr></thead>
+      <tbody>
+        <tr><td><strong>John Macleod</strong></td><td>VP Marketing &amp; Technology</td><td>Bergen</td><td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9734;</td></tr>
+        <tr><td><strong>Hakan Eser</strong></td><td>VP Subsea Lifecycle Services</td><td>Bergen / Stavanger</td><td style="color: var(--red); font-weight: 700;">&#9733;&#9733;&#9734;</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Strategisk &amp; Konsern (Tier 2)</h3>
+    <table>
+      <thead><tr><th>Navn</th><th>Rolle/Tittel</th><th>Lokasjon</th><th>Relevans</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Mads Hjelmeland</strong></td><td>CEO, OneSubsea (fra okt. 2022)</td><td>Bergen</td><td>Strategisk bevissthet &mdash; ikke direkte kontaktm&aring;l</td></tr>
+        <tr><td><strong>Maria Peralta</strong></td><td>VP Umbilical &amp; Cable Systems</td><td>Bergen</td><td>Umbilical-konnektorer, spesialmaterialer</td></tr>
+        <tr><td><strong>Tarek Rizk</strong></td><td>Chief Performance Officer, SLB (morselskap)</td><td>Global</td><td>Oversikt &mdash; global supply chain/manufacturing-strategi i SLB</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 1.5rem; font-size: 0.82rem; color: var(--steel-blue);"><strong>Merk:</strong> Kontakter identifisert gjennom research av OneSubsea ledelsesside, LinkedIn og offentlige kilder (mars 2026). *N.N. (Supply Chain Director): Rollen bekreftet via OneSubsea ledelsesside, men navnet er ikke offentlig tilgjengelig. Identifiseres via LinkedIn-s&oslash;k.</p>
+  </section>
+
+  <!-- QUALIFICATION ROADMAP -->
+  <section>
+    <div class="section-label">Kvalifisering</div>
+    <h2>Leverand&oslash;rkvalifisering &mdash; tidslinje</h2>
+
+    <table class="timeline-table">
+      <thead><tr><th>Fase</th><th>Tidspunkt</th><th>Aktivitet</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Kartlegging</strong></td><td>Mar&ndash;Apr 2026</td><td>Identifiser n&oslash;kkelkontakter via LinkedIn. Kartlegg SLBs leverand&oslash;rkvalifikasjonsprosess (SQM).</td><td style="color: var(--red); font-weight: 700;">NESTE STEG</td></tr>
+        <tr><td><strong>Registrering</strong></td><td>Apr&ndash;Mai 2026</td><td>Registrer i SLBs globale leverand&oslash;rportal. Last opp ISO 9001, kapabilitetsdokumenter.</td><td>Planlagt</td></tr>
+        <tr><td><strong>F&oslash;rste kontakt</strong></td><td>Mai 2026</td><td>LinkedIn-kontakt med Tier 1. Capability Brief (subsea-tilpasset) vedlagt.</td><td>Planlagt</td></tr>
+        <tr><td><strong>Teknisk evaluering</strong></td><td>Jun&ndash;Sep 2026</td><td>NDA, eksempeltegninger, materialsertifikater. Bes&oslash;k Hors&oslash;y.</td><td>Planlagt</td></tr>
+        <tr><td><strong>Maskinkonfigurasjon</strong></td><td>Jun&ndash;Sep 2026</td><td>OneSubsea p&aring;virker CNC-cellekonfigurasjon. Tidsvindu lukker Q3 2026.</td><td>Kritisk vindu</td></tr>
+        <tr><td><strong>Pre-kvalifisering</strong></td><td>Q4 2026</td><td>Formell leverand&oslash;rkvalifisering (SQM-basert). Desktop audit.</td><td>Planlagt</td></tr>
+        <tr><td><strong>Pilot-produksjon</strong></td><td>Q2 2027</td><td>Pilot-ordre for reservedeler eller enklere komponenter (Lifecycle Services).</td><td>M&aring;l</td></tr>
+        <tr><td><strong>FAI</strong></td><td>Q3 2027</td><td>First Article Inspection p&aring; produksjonskomponenter ved oppstart.</td><td>M&aring;l</td></tr>
+        <tr><td><strong>Full kvalifisering</strong></td><td>Q4 2027&ndash;2028</td><td>Produksjonsramp. API 6A/17D-kompatibel. DNV type approval der p&aring;krevd.</td><td>M&aring;l</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Kritisk tidsvindu:</strong> Kunder som inng&aring;r dialog innen august 2026 kan p&aring;virke CNC-cellenes maskinsammensetning, verkt&oslash;ymagasin og automasjonsgrad. For OneSubsea er dette s&aelig;rlig relevant for &aring; konfigurere maskiner for Super Duplex og Inconel &mdash; materialer som krever spesifikk verkt&oslash;y- og kj&oslash;lestrategi.</p>
+    </div>
+  </section>
+
+  <!-- APPROACH PRINCIPLES -->
+  <section>
+    <div class="section-label">Tiln&aelig;rming</div>
+    <h2>Fem n&oslash;kkelbudskap til OneSubsea</h2>
+
+    <ul class="clean-list">
+      <li><strong>&laquo;Vi maskinerer eksotiske legeringer autonomt&raquo;</strong> &mdash; Super Duplex, Inconel 625/718, Titanium. Aurelians maskinpark er konfigurert for materialer subsea-industrien krever daglig.</li>
+      <li><strong>&laquo;Norsk leverand&oslash;r med digital sporbarhet&raquo;</strong> &mdash; Full digital tr&aring;d fra r&aring;materiale til ferdig komponent. Dokumentasjonspakker som tilfredsstiller SLBs Supplier Quality Manual uten manuell etterarbeid.</li>
+      <li><strong>&laquo;Dere kan p&aring;virke maskinkonfigurasjonen&raquo;</strong> &mdash; Tidsvindu Q3 2026. Maskinvalg, verkt&oslash;ymagasin og automasjonsgrad tilpasses OneSubseas komponentprofil.</li>
+      <li><strong>&laquo;Kapasitetsavlastning uten kvalitetsrisiko&raquo;</strong> &mdash; N&aring;r Hors&oslash;y er fullbooket, tar Aurelian overflow-produksjon med identisk sporbarhetsniv&aring;.</li>
+      <li><strong>&laquo;SLB-kvalifisering &aring;pner globale d&oslash;rer&raquo;</strong> &mdash; Godkjenning som SLB-leverand&oslash;r gir tilgang til subsea-prosjekter i Brasil, Guyana, Angola og hele Nordsj&oslash;en.</li>
+    </ul>
+  </section>
+
+  <!-- WHY ONESUBSEA -->
+  <section>
+    <div class="section-label">Strategisk begrunnelse</div>
+    <h2>Hvorfor OneSubsea passer Aurelians profil</h2>
+
+    <ul class="clean-list">
+      <li><strong>Ekstremt CNC-intensivt:</strong> Pumpeskovler, impellere, diffusorer, trykkhus og ventilkropper &mdash; alt CNC-maskinerert i vanskelige materialer.</li>
+      <li><strong>Materialmatch:</strong> Super Duplex, Inconel 625/718, Titanium Grade 5, CRA-legeringer. Identisk med Aurelians kjernekompetanse.</li>
+      <li><strong>HMLV-profil:</strong> Subsea-komponenter produseres typisk i sm&aring; serier med h&oslash;y kompleksitet &mdash; n&oslash;yaktig Aurelians driftsmodell.</li>
+      <li><strong>Logistikk:</strong> Hors&oslash;y til V&aring;ler kan l&oslash;ses via kystfrakt (Bergen&ndash;Moss/Drammen) &mdash; mer praktisk enn veitransport (~7 timer).</li>
+      <li><strong>Global leverand&oslash;rplattform:</strong> SLB har et globalt leverand&oslash;rprogram. Kvalifisering i Norge &aring;pner for prosjekter i hele verden.</li>
+      <li><strong>Voksende marked:</strong> Subsea processing og boosting vokser kraftig (Troll Fase 3, Bacalhau, Guyana-prosjekter). Flere prosjekter betyr flere komponenter.</li>
+    </ul>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">30&ndash;96</div>
+        <div class="kpi-label">MNOK &aring;rlig<br>potensial</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">API 6A/17D</div>
+        <div class="kpi-label">Prim&aelig;r<br>kvalifisering</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Kystfrakt</div>
+        <div class="kpi-label">Bergen&ndash;V&aring;ler<br>logistikk</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">Global</div>
+        <div class="kpi-label">SLB leverand&oslash;r-<br>plattform</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILE INDEX -->
+  <section>
+    <div class="section-label">Dokumenter</div>
+    <h2>Segmentstrategier &mdash; filindeks</h2>
+
+    <table>
+      <thead><tr><th>Fil</th><th>Segment</th><th>Innhold</th></tr></thead>
+      <tbody>
+        <tr><td><strong>00_ONESUBSEA_Strategy_Overview.html</strong></td><td>Oversikt</td><td>Dette dokumentet &mdash; samlet strategi og kontakter</td></tr>
+        <tr><td><strong>01_ONESUBSEA_Production_Systems.html</strong></td><td>Subsea Production Systems</td><td>Juletrer, br&oslash;nnhoder, konnektorer, eksotiske legeringer</td></tr>
+        <tr><td><strong>02_ONESUBSEA_Processing_Boosting.html</strong></td><td>Processing &amp; Boosting</td><td>Flerfasepumper, kompressorer, roterende komponenter</td></tr>
+        <tr><td><strong>03_ONESUBSEA_Controls_Connectors.html</strong></td><td>Controls &amp; Connectors</td><td>Kontrollmoduler, konnektorsystemer, presisjonsdeler</td></tr>
+        <tr><td><strong>04_ONESUBSEA_Digital_Lifecycle.html</strong></td><td>Digital &amp; Lifecycle</td><td>Reservedeler, retrofit, tilstandsoverv&aring;kning</td></tr>
+        <tr><td><strong>05_ONESUBSEA_Contact_Log.html</strong></td><td>Kontaktlogg</td><td>Aktivitetshistorikk og kontaktstatus</td></tr>
+        <tr><td><strong>06_ONESUBSEA_Sales_Report.html</strong></td><td>Salgsrapport</td><td>Pipeline, muligheter, milepæler</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | OneSubsea Go-to-Market Strategi V1.0 | Mars 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

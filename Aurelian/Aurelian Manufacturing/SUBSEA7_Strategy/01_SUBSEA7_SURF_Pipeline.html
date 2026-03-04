@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Subsea 7 SURF &amp; Pipeline</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  /* Cover */
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; max-width: 620px; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  /* Content */
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  /* KPI strip */
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  /* Callout */
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  /* Bullet list */
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  /* Numbered steps */
+  .steps { list-style: none; padding: 0; margin: 1.2rem 0; counter-reset: step-counter; }
+  .steps li { position: relative; padding-left: 3rem; margin-bottom: 1.3rem; font-size: 0.88rem; line-height: 1.5; counter-increment: step-counter; }
+  .steps li::before { content: counter(step-counter); position: absolute; left: 0; top: -0.1em; width: 2rem; height: 2rem; background: var(--red); color: var(--white); font-size: 0.88rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  /* Timeline */
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 120px; color: var(--black); }
+
+  /* Dark panel */
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel ul.clean-list li { color: rgba(255,255,255,0.85); }
+  .dark-panel ul.clean-list li strong { color: var(--white); }
+  .dark-panel .callout { background: rgba(255,255,255,0.06); border-left-color: var(--red); }
+  .dark-panel .callout p { color: rgba(255,255,255,0.85); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+  .dark-panel .kpi-strip { border-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-item { background: rgba(255,255,255,0.04); border-right-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-value { color: var(--white); }
+  .dark-panel .kpi-label { color: var(--steel-blue); }
+
+  /* Priority stars */
+  .priority-stars { color: var(--red); font-weight: 700; white-space: nowrap; }
+
+  /* Footer */
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+
+  /* Back link */
+  .back-link { display: inline-block; font-size: 0.82rem; color: var(--red); font-weight: 600; text-decoration: none; margin-bottom: 1.5rem; }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">Subsea 7 SURF &amp; Pipeline</div>
+    <div class="cover-subtitle">Segmentstrategi &mdash; Subsea-strukturer, konnektorer og r&oslash;rledningssystemer</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Mars 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: SEGMENTPROFIL -->
+  <section>
+    <a href="00_SUBSEA7_Strategy_Overview.html" class="back-link">&larr; Tilbake til Subsea 7-oversikt</a>
+    <div class="section-label">Segmentprofil</div>
+    <h2>SURF &amp; Pipeline &mdash; Subsea 7s kjernevirksomhet</h2>
+
+    <p class="lead"><strong>SURF (Subsea, Umbilicals, Risers, Flowlines)</strong> er Subsea 7s st&oslash;rste og mest CNC-intensive forretningssegment. Segmentet leverer komplette subsea-installasjoner inkludert r&oslash;rledningslegging, strukturmontasje og tilkoblingsarbeider p&aring; havbunnen.</p>
+
+    <h3>Kjerneaktiviteter</h3>
+    <ul class="clean-list">
+      <li><strong>Pipeline End Terminations (PLETs)</strong> &mdash; kritiske endepunkter for r&oslash;rledninger som krever presisjonsmaskinererte konnektorhus og t&oslash;mmeventilkomponenter</li>
+      <li><strong>Pipeline End Manifolds (PLEMs)</strong> &mdash; fordelingsstrukturer p&aring; havbunnen med komplekse maskinerte tilkoblingspunkter</li>
+      <li><strong>In-line strukturer</strong> &mdash; t-stykker, ventilstasjoner og str&oslash;mningskontrollmoduler som krever n&oslash;yaktig maskinering</li>
+      <li><strong>Konnektorsystemer</strong> &mdash; mekaniske og hydrauliske konnektorer som kobler subsea-infrastruktur sammen</li>
+      <li><strong>Strukturelle klemmer og st&oslash;tter</strong> &mdash; r&oslash;rklemmer, beskyttelsesstrukturer og festeelementer for havbunnsinstallasjoner</li>
+    </ul>
+
+    <div class="kpi-strip">
+      <div class="kpi-item highlight">
+        <div class="kpi-value">2&ndash;8k</div>
+        <div class="kpi-label">Est. &aring;rlige<br>CNC-timer</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">PLET/PLEM</div>
+        <div class="kpi-label">H&oslash;yest<br>CNC-relevans</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Duplex</div>
+        <div class="kpi-label">Prim&aelig;r-<br>materiale</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">DNV</div>
+        <div class="kpi-label">Styrende<br>standard</div>
+      </div>
+    </div>
+
+    <p class="secondary">SURF &amp; Pipeline er det segmentet med st&oslash;rst CNC-behov fordi hver installasjon krever unike, prosjekttilpassede maskinerte komponenter. Volum per komponenttype er lavt, men bredden i komponentbehov gj&oslash;r total-timene betydelige.</p>
+  </section>
+
+  <!-- SECTION 2: CNC-KOMPONENTBEHOV -->
+  <section>
+    <div class="section-label">Komponentbehov</div>
+    <h2>CNC-komponenttyper &mdash; SURF &amp; Pipeline</h2>
+
+    <p>Oversikt over de mest relevante komponentfamiliene for Aurelians maskinpark, med materialkrav, kompleksitetsniv&aring; og estimert volum.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Komponenttype</th>
+          <th>Materialer</th>
+          <th>Kompleksitet</th>
+          <th>Volum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Konnektorhus</strong></td>
+          <td>Super-duplex, duplex SS</td>
+          <td>5-akse simultan</td>
+          <td>Lav-medium (prosjektbasert)</td>
+        </tr>
+        <tr>
+          <td><strong>Hub-assemblyer</strong></td>
+          <td>Duplex, inconel cladding</td>
+          <td>4&ndash;5 akse</td>
+          <td>Lav (h&oslash;y verdi per del)</td>
+        </tr>
+        <tr>
+          <td><strong>PLET strukturkomponenter</strong></td>
+          <td>Karbonst&aring;l, duplex</td>
+          <td>3&ndash;5 akse</td>
+          <td>Medium (varierer per prosjekt)</td>
+        </tr>
+        <tr>
+          <td><strong>Ventilhus og aktuatorbraketter</strong></td>
+          <td>Super-duplex, 6Mo</td>
+          <td>4&ndash;5 akse presisjon</td>
+          <td>Lav-medium</td>
+        </tr>
+        <tr>
+          <td><strong>Strukturelle r&oslash;rklemmer</strong></td>
+          <td>Karbonst&aring;l, duplex</td>
+          <td>3&ndash;4 akse</td>
+          <td>Medium-h&oslash;y (repeterende)</td>
+        </tr>
+        <tr>
+          <td><strong>Guidefunneler og landingshus</strong></td>
+          <td>Duplex SS, inconel</td>
+          <td>5-akse</td>
+          <td>Lav (kritisk toleranse)</td>
+        </tr>
+        <tr>
+          <td><strong>Beskyttelsesstrukturer</strong></td>
+          <td>Karbonst&aring;l</td>
+          <td>3-akse</td>
+          <td>Medium-h&oslash;y</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 3: RELEVANS -->
+  <section>
+    <div class="section-label">Aurelians posisjon</div>
+    <h2>Hvorfor Aurelian er relevant for SURF &amp; Pipeline</h2>
+
+    <div class="callout">
+      <p><strong>SURF-segmentet er prosjektdrevet med varierende komponentbehov fra installasjon til installasjon.</strong> Tradisjonelle maskinverksteder som er optimalisert for serieproduksjon sliter med denne profilen. Aurelians autonome CNC-celler er designet for n&oslash;yaktig denne typen fleksibel, prosjektbasert HMLV-produksjon.</p>
+    </div>
+
+    <h3>N&oslash;kkelargumenter</h3>
+    <ul class="clean-list">
+      <li><strong>HMLV-profil matcher perfekt:</strong> Hver SURF-installasjon krever unike komponenter tilpasset prosjektets spesifikasjoner. Aurelians cellekonsept h&aring;ndterer hyppige omstillinger uten produktivitetstap.</li>
+      <li><strong>5-akse kapabilitet for komplekse konnektorer:</strong> Hub-assemblyer og konnektorhus krever 5-akse simultan maskinering med stramme toleranser. Dette er Aurelians kjernekapabilitet.</li>
+      <li><strong>Materialekspertise i korrosjonsbestandige legeringer:</strong> Duplex, super-duplex og inconel er standard subsea-materialer. Aurelians maskinpark kan konfigureres spesifikt for disse materialene.</li>
+      <li><strong>Digital sporbarhet for DNV-krav:</strong> Subsea-komponenter krever full materialsporbarhet og prosesskontroll iht. DNV-regler. Aurelians digitale tr&aring;d leverer dette som standard.</li>
+      <li><strong>Kort leveringstid p&aring; prosjektspesifikke deler:</strong> 24/7 autonom drift betyr at Aurelian kan levere raskere enn tradisjonelle verksteder p&aring; urgente prosjektbehov.</li>
+      <li><strong>Skalerbar kapasitet:</strong> Subsea 7s prosjektportefolje varierer &mdash; Aurelian kan skalere opp og ned uten faste kapasitetsforpliktelser.</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 4: NØKKELKONTAKTER -->
+  <section>
+    <div class="section-label">Kontakter</div>
+    <h2>N&oslash;kkelkontakter &mdash; SURF &amp; Pipeline</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Tittel</th>
+          <th>Relevans</th>
+          <th>Prioritet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Erik Femsteinevik</strong></td>
+          <td>VP Subsea7 Norway</td>
+          <td>Prim&aelig;r norsk gatekeeper. Sitert i flere store kontraktsannonseringer i 2025 (Northern Lights Phase 2, ConocoPhillips PPF, Equinor IMR).</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Joseph Leroy</strong></td>
+          <td>VP Supply Chain Management and Products</td>
+          <td>Global leverand&oslash;rkjedestrategi. Basert i Paris. Signert rammeavtaler for r&oslash;rleveranser p&aring; vegne av Subsea 7.</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Olivier Blaringhem</strong></td>
+          <td>EVP Subsea and Conventional</td>
+          <td>Overordnet ansvar for SURF-virksomheten</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9734;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Patrice Davis</strong></td>
+          <td>Central Procurement Manager</td>
+          <td>Operasjonell innkj&oslash;pskontakt. Basert i Houston.</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9734;</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary">Kontakter identifisert gjennom research av Subsea 7 ledelse, The Org, LinkedIn og presseoppslag (mars 2026). Erik Femsteinevik bekreftet som VP Subsea7 Norway gjennom flere kontraktsannonseringer i 2025.</p>
+  </section>
+
+  <!-- SECTION 5: TILNÆRMINGSSTRATEGI -->
+  <section>
+    <div class="section-label">Tiln&aelig;rmingsstrategi</div>
+    <h2>Fem steg for &aring; entre SURF &amp; Pipeline</h2>
+
+    <ol class="steps">
+      <li><strong>Etabler kontakt med Erik Femsteinevik (VP Norway)</strong> &mdash; via LinkedIn. Prim&aelig;r norsk gatekeeper, sitert i flere kontraktsannonseringer i 2025. N&oslash;kkel til leverand&oslash;rlisten for SURF-prosjekter i Norge.</li>
+      <li><strong>Registrer i Subsea 7s leverand&oslash;rportal</strong> &mdash; med spesifikk markering for subsea-materialer (duplex, super-duplex, inconel), 5-akse kapabilitet og NORSOK/DNV-kompetanse.</li>
+      <li><strong>Teknisk m&oslash;te med subsea-ingeni&oslash;rer i Stavanger</strong> &mdash; ta med prosesspaner i duplex stainless steel og referanser for presisjonsmaskinererte konnektorhus.</li>
+      <li><strong>Tilby pilot-produksjon p&aring; strukturelle klemmer</strong> &mdash; dette er den enkleste komponentfamilien med h&oslash;yest volum. Perfekt for f&oslash;rstegangs-evaluering og FAI.</li>
+      <li><strong>Bruk cellekonfigurasjon-argumentet</strong> &mdash; &laquo;Vi bestiller maskiner Q3 2026 &mdash; fortell oss om dere trenger kapasitet for st&oslash;rre duplex-arbeidsstykker, s&aring; konfigurerer vi CNC-cellene deretter.&raquo;</li>
+    </ol>
+  </section>
+
+  <!-- SECTION 6: SUBSEA-MATERIALER (DARK PANEL) -->
+  <section class="dark-panel">
+    <div class="section-label">Materialfokus</div>
+    <h2>Subsea-materialer &mdash; hva Aurelian m&aring; levere</h2>
+
+    <p>Subsea-komponenter opererer i ekstremt korrosive milj&oslash;er p&aring; havbunnen. Materialvalg er kritisk og styres av DNV-regler og NORSOK-standarder. Aurelian m&aring; demonstrere kompetanse p&aring; f&oslash;lgende materialer:</p>
+
+    <table>
+      <thead><tr><th>Materiale</th><th>Typisk bruk</th><th>Maskineringsutfordring</th><th>Aurelian-relevans</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Duplex rustfritt st&aring;l (UNS S31803)</strong></td>
+          <td>Strukturelle klemmer, r&oslash;rst&oslash;tter, beskyttelsesstrukturer</td>
+          <td>H&oslash;y hardhet, arbeidsherding</td>
+          <td>Kjernemateriale &mdash; konfigurer maskinpark for dette</td>
+        </tr>
+        <tr>
+          <td><strong>Super-duplex (UNS S32750)</strong></td>
+          <td>Konnektorhus, hub-assemblyer, ventilhus</td>
+          <td>Sv&aelig;rt h&oslash;y hardhet, krever spesialverkt&oslash;y</td>
+          <td>H&oslash;y verdi per del &mdash; differensiator</td>
+        </tr>
+        <tr>
+          <td><strong>Inconel 625 / 718</strong></td>
+          <td>Cladding, tetningsflater, kritiske konnektordeler</td>
+          <td>Ekstremt vanskelig, h&oslash;y verkt&oslash;yslitasje</td>
+          <td>Mulighet for spesialisering</td>
+        </tr>
+        <tr>
+          <td><strong>6Mo (UNS S31254)</strong></td>
+          <td>Sjøvannseksponerte komponenter</td>
+          <td>Ligner super-duplex i vanskelighetsgrad</td>
+          <td>Relevant for sekundære strukturer</td>
+        </tr>
+        <tr>
+          <td><strong>Karbonst&aring;l (S355 / API 5L)</strong></td>
+          <td>Prim&aelig;rstrukturer, beskyttelsesrammer</td>
+          <td>Standard &mdash; ingen spesielle utfordringer</td>
+          <td>Grunnlastmateriale, h&oslash;yt volum</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Strategisk anbefaling:</strong> Aurelian b&oslash;r konfigurere minimum &eacute;n CNC-celle spesifikt for duplex/super-duplex maskinering. Dette inkluderer verkt&oslash;y med PVD-belegg, h&oslash;ytrykks kj&oslash;lev&aelig;ske og prosessparametere optimalisert for arbeids&shy;herdende materialer. Denne kapabiliteten er en differensiator i det norske subsea-markedet.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: TIDSLINJE -->
+  <section>
+    <div class="section-label">Tidslinje</div>
+    <h2>Kvalifiseringsl&oslash;p &mdash; SURF &amp; Pipeline</h2>
+
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>Tidspunkt</th>
+          <th>Aktivitet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mar&ndash;Apr 2026</strong></td>
+          <td>LinkedIn-kontakt med Erik Femsteinevik (VP Norway) og Joseph Leroy (VP SCM). Subsea Valley-konferansen som nettverksarena.</td>
+        </tr>
+        <tr>
+          <td><strong>Mai 2026</strong></td>
+          <td>F&oslash;rste kontakt med Femsteinevik og Leroy. Capability Brief med subsea-materialer og 5-akse referanser.</td>
+        </tr>
+        <tr>
+          <td><strong>Jun&ndash;Jul 2026</strong></td>
+          <td>Teknisk m&oslash;te i Stavanger. NDA. Motta eksempeltegninger for strukturelle klemmer eller enklere PLET-komponenter.</td>
+        </tr>
+        <tr>
+          <td><strong>Aug&ndash;Sep 2026</strong></td>
+          <td>CNC-cellekonfigurasjon med input fra Subsea 7 for duplex/super-duplex kapabilitet.</td>
+        </tr>
+        <tr>
+          <td><strong>Q4 2026</strong></td>
+          <td>Pre-kvalifiseringss&oslash;knad. Dokumentpakke med ISO 9001, materialskompetanse, maskinspesifikasjoner.</td>
+        </tr>
+        <tr>
+          <td><strong>Q1 2027</strong></td>
+          <td>Betinget godkjenning. Pilot-ordre p&aring; strukturelle klemmer eller enklere maskinerte deler.</td>
+        </tr>
+        <tr>
+          <td><strong>Q3 2027</strong></td>
+          <td>FAI p&aring; pilot-deler. Utvid til mer komplekse komponenter (ventilhus, konnektordeler).</td>
+        </tr>
+        <tr>
+          <td><strong>2028</strong></td>
+          <td>Full kvalifisering. DNV-sertifisering. Konnektorhus og hub-assemblyer i produksjon.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Inngangsstrategi:</strong> Start med strukturelle klemmer og beskyttelsesstrukturer &mdash; disse har lavest kvalifiseringsterskel og h&oslash;yest volum. Bygg referanser og tillit f&oslash;r overgang til h&oslash;yverdi-komponenter som konnektorhus og hub-assemblyer.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | Subsea 7 SURF &amp; Pipeline V1.0 | Mars 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

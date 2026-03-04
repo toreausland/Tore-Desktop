@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>MRB Section 6 — Weld &amp; NDT Log</title>
+<title>MRB Section 6 — NDT Log</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: Calibri, sans-serif; color: #2B2B2B; font-size: 11pt; line-height: 1.15; background: #f0f0f0; }
@@ -35,10 +35,6 @@
   .stamp { border: 2px solid #F50537; padding: 8px 16px; display: inline-block; font-size: 10pt; font-weight: bold; color: #F50537; margin: 10px 0; }
   .status-accepted { color: #2B2B2B; font-weight: bold; }
   .note-box { background: #F5F5F5; border-left: 3px solid #F50537; padding: 10px 12px; margin: 12px 0; font-size: 9pt; }
-  .weld-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0; }
-  .weld-stat { background: #F5F5F5; padding: 10px; text-align: center; }
-  .weld-stat .num { font-size: 18pt; font-weight: bold; color: #2B2B2B; }
-  .weld-stat .desc { font-size: 8pt; color: #6B6B6B; text-transform: uppercase; }
 </style>
 </head>
 <body>
@@ -51,16 +47,16 @@
       <span>Production as a Service</span>
     </div>
     <div class="doc-info">
-      <strong>AM-WDL-2026-0042-001</strong><br>
+      <strong>AM-NDL-2026-0042-001</strong><br>
       Rev 0 &nbsp;|&nbsp; 15 May 2026<br>
       MRB Section 6
     </div>
   </div>
 
   <!-- Title -->
-  <h1>Weld &amp; NDT Log</h1>
+  <h1>NDT Log</h1>
   <p style="font-size: 10pt; color: #6B6B6B; margin-bottom: 14px;">
-    Complete record of all production welds and associated non-destructive testing for the connector assembly.
+    Complete record of all non-destructive testing performed on the connector assembly.
   </p>
 
   <!-- Project Metadata -->
@@ -92,94 +88,13 @@
     </div>
   </div>
 
-  <!-- Weld Summary -->
-  <h2>Weld Summary</h2>
-  <div class="weld-summary">
-    <div class="weld-stat">
-      <div class="num">6</div>
-      <div class="desc">Total Welds</div>
-    </div>
-    <div class="weld-stat">
-      <div class="num">6</div>
-      <div class="desc">Accepted</div>
-    </div>
-    <div class="weld-stat">
-      <div class="num">0</div>
-      <div class="desc">Rejected / Repaired</div>
-    </div>
-  </div>
-
-  <!-- Weld Log Table -->
-  <h2>Weld Log — Production Welds</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Weld No</th>
-        <th>Joint Description</th>
-        <th>WPS No</th>
-        <th>Welder ID</th>
-        <th>Process</th>
-        <th>Date Welded</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>W-001</td>
-        <td>Body to Hub butt weld</td>
-        <td>AM-WPS-SD-001</td>
-        <td>WE-112</td>
-        <td>GTAW</td>
-        <td>28 Apr 2026</td>
-      </tr>
-      <tr>
-        <td>W-002</td>
-        <td>Seal groove overlay weld (Inconel 625)</td>
-        <td>AM-WPS-IN-001</td>
-        <td>WE-118</td>
-        <td>GTAW</td>
-        <td>29 Apr 2026</td>
-      </tr>
-      <tr>
-        <td>W-003</td>
-        <td>Test port socket weld</td>
-        <td>AM-WPS-SD-002</td>
-        <td>WE-118</td>
-        <td>GTAW</td>
-        <td>30 Apr 2026</td>
-      </tr>
-      <tr>
-        <td>W-004</td>
-        <td>Lifting lug fillet weld</td>
-        <td>AM-WPS-SD-002</td>
-        <td>WE-112</td>
-        <td>GTAW</td>
-        <td>01 May 2026</td>
-      </tr>
-      <tr>
-        <td>W-005</td>
-        <td>Nameplate attachment weld</td>
-        <td>AM-WPS-SD-002</td>
-        <td>WE-112</td>
-        <td>GTAW</td>
-        <td>01 May 2026</td>
-      </tr>
-      <tr>
-        <td>W-006</td>
-        <td>Body circumferential seam weld</td>
-        <td>AM-WPS-SD-001</td>
-        <td>WE-118</td>
-        <td>GTAW</td>
-        <td>02 May 2026</td>
-      </tr>
-    </tbody>
-  </table>
-
   <!-- NDT Results Table -->
   <h2>NDT Results</h2>
   <table>
     <thead>
       <tr>
-        <th>Weld No</th>
+        <th>Item</th>
+        <th>Inspection Area</th>
         <th>VT Result</th>
         <th>VT Date</th>
         <th>RT Result</th>
@@ -193,7 +108,8 @@
     </thead>
     <tbody>
       <tr>
-        <td>W-001</td>
+        <td class="center">1</td>
+        <td>Body to Hub interface</td>
         <td>Accepted</td>
         <td>28 Apr 2026</td>
         <td>Accepted</td>
@@ -205,11 +121,12 @@
         <td class="status-accepted">Accepted</td>
       </tr>
       <tr>
-        <td>W-002</td>
+        <td class="center">2</td>
+        <td>Seal groove area (Inconel 625 overlay)</td>
         <td>Accepted</td>
         <td>29 Apr 2026</td>
         <td>N/A</td>
-        <td>—</td>
+        <td>&mdash;</td>
         <td>Accepted</td>
         <td>AM-PT-0042-002</td>
         <td>Confirmed</td>
@@ -217,11 +134,12 @@
         <td class="status-accepted">Accepted</td>
       </tr>
       <tr>
-        <td>W-003</td>
+        <td class="center">3</td>
+        <td>Test port bore area</td>
         <td>Accepted</td>
         <td>30 Apr 2026</td>
         <td>N/A</td>
-        <td>—</td>
+        <td>&mdash;</td>
         <td>Accepted</td>
         <td>AM-PT-0042-003</td>
         <td>Confirmed</td>
@@ -229,11 +147,12 @@
         <td class="status-accepted">Accepted</td>
       </tr>
       <tr>
-        <td>W-004</td>
+        <td class="center">4</td>
+        <td>Lifting lug attachment area</td>
         <td>Accepted</td>
         <td>01 May 2026</td>
         <td>N/A</td>
-        <td>—</td>
+        <td>&mdash;</td>
         <td>Accepted</td>
         <td>AM-PT-0042-004</td>
         <td>Confirmed</td>
@@ -241,11 +160,12 @@
         <td class="status-accepted">Accepted</td>
       </tr>
       <tr>
-        <td>W-005</td>
+        <td class="center">5</td>
+        <td>Nameplate attachment area</td>
         <td>Accepted</td>
         <td>01 May 2026</td>
         <td>N/A</td>
-        <td>—</td>
+        <td>&mdash;</td>
         <td>Accepted</td>
         <td>AM-PT-0042-005</td>
         <td>Confirmed</td>
@@ -253,7 +173,8 @@
         <td class="status-accepted">Accepted</td>
       </tr>
       <tr>
-        <td>W-006</td>
+        <td class="center">6</td>
+        <td>Body circumferential seam area</td>
         <td>Accepted</td>
         <td>02 May 2026</td>
         <td>Accepted</td>
@@ -270,56 +191,22 @@
   <!-- Notes -->
   <div class="note-box">
     <strong>Notes:</strong><br>
-    1. Radiographic testing (RT) performed on all butt welds (W-001, W-006) per ASME V, Article 2.<br>
-    2. Penetrant testing (PT) performed on all welds per ASME V, Article 6 / EN ISO 3452-1.<br>
-    3. Visual testing (VT) performed on all welds per EN ISO 17637.<br>
+    1. Radiographic testing (RT) performed on body-to-hub interface and circumferential seam areas per ASME V, Article 2.<br>
+    2. Penetrant testing (PT) performed on all inspected areas per ASME V, Article 6 / EN ISO 3452-1.<br>
+    3. Visual testing (VT) performed on all inspected areas per EN ISO 17637.<br>
     4. PMI verified using XRF analyser (Olympus Vanta M series), Cert No: CAL-2026-0034.<br>
     5. Ferrite measured per ASTM E562 / NORSOK M-601 (acceptance range: 35&ndash;55%).<br>
     6. All NDT performed by Level II certified operators (see MRB Section 9 for NDT personnel qualifications).
   </div>
 
-  <!-- WPS Reference -->
-  <h2>WPS Cross-Reference</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>WPS No</th>
-        <th>Description</th>
-        <th>Applicable Welds</th>
-        <th>WPQR Reference</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>AM-WPS-SD-001</td>
-        <td>Super Duplex butt weld, GTAW, all positions</td>
-        <td>W-001, W-006</td>
-        <td>AM-WPQR-SD-001</td>
-      </tr>
-      <tr>
-        <td>AM-WPS-SD-002</td>
-        <td>Super Duplex fillet/socket weld, GTAW</td>
-        <td>W-003, W-004, W-005</td>
-        <td>AM-WPQR-SD-002</td>
-      </tr>
-      <tr>
-        <td>AM-WPS-IN-001</td>
-        <td>Inconel 625 overlay on Super Duplex, GTAW</td>
-        <td>W-002</td>
-        <td>AM-WPQR-IN-001</td>
-      </tr>
-    </tbody>
-  </table>
-
   <!-- Acceptance Statement -->
   <h2>Acceptance Statement</h2>
   <p>
-    All six (6) production welds on Tag NSS-BSP2-SCA-001 / Serial AM-BSP2-300-001 have been completed in
-    accordance with the applicable Welding Procedure Specifications and have passed all required non-destructive
-    testing examinations. Ferrite content is within the acceptance range of 35&ndash;55% per NORSOK M-601.
-    All welds are accepted for service.
+    All non-destructive testing examinations on Tag NSS-BSP2-SCA-001 / Serial AM-BSP2-300-001 have been
+    completed in accordance with applicable inspection procedures. Ferrite content is within the acceptance
+    range of 35&ndash;55% per NORSOK M-601. All examined areas are accepted for service.
   </p>
-  <div class="stamp">ALL WELDS ACCEPTED</div>
+  <div class="stamp">ALL NDT ACCEPTED</div>
 
   <!-- Signatures -->
   <h2>Approvals</h2>
@@ -327,7 +214,7 @@
     <div>
       <div class="sig-line"></div>
       <div class="sig-name">Erik Solheim</div>
-      <div class="sig-label">Welding Engineer / IWE<br>Date: 15 May 2026</div>
+      <div class="sig-label">QA Engineer<br>Date: 15 May 2026</div>
     </div>
     <div>
       <div class="sig-line"></div>
@@ -345,7 +232,7 @@
   <div class="footer">
     <span>CONFIDENTIAL</span>
     <span>Page 1 of 1</span>
-    <span>AM-WDL-2026-0042-001 Rev 0</span>
+    <span>AM-NDL-2026-0042-001 Rev 0</span>
   </div>
 </div>
 

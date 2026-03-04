@@ -1,0 +1,29 @@
+{
+  "skills": {
+    "aurelian-dd-coordinator": {
+      "path": "skills/aurelian-dd-coordinator",
+      "enabled": true,
+      "description": "DD process orchestration for Aurelian Manufacturing"
+    },
+    "aurelian-financial-dd": {
+      "path": "skills/aurelian-financial-dd",
+      "enabled": true,
+      "description": "Financial Due Diligence for Aurelian Manufacturing"
+    },
+    "aurelian-technical-dd": {
+      "path": "skills/aurelian-technical-dd",
+      "enabled": true,
+      "description": "Technical Due Diligence for Aurelian Manufacturing"
+    },
+    "aurelian-market-dd": {
+      "path": "skills/aurelian-market-dd",
+      "enabled": true,
+      "description": "Market Due Diligence for Aurelian Manufacturing"
+    },
+    "aurelian-legal-dd": {
+      "path": "skills/aurelian-legal-dd",
+      "enabled": true,
+      "description": "Legal/Corporate Due Diligence for Aurelian Manufacturing"
+    }
+  }
+}

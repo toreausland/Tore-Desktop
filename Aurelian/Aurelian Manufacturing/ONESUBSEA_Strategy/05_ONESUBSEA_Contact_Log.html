@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — OneSubsea Kontaktlogg</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --dark-charcoal: #1A1A1A; --navy-card: #253B52; --steel-blue: #8EAEC5;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  .cover { background: var(--pure-black); padding: 4rem 3.5rem 3rem; position: relative; overflow: hidden; min-height: 360px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 1.8rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 1.8rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 2.5rem; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  section { padding: 2.5rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.2rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.6rem; margin-bottom: 0.5rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.8rem; }
+  p.secondary { color: var(--gray-medium); font-size: 0.84rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: 0.84rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.6rem 0.8rem; font-size: 0.8rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; }
+  .badge-sent { background: var(--red); color: var(--white); }
+  .badge-pending { background: var(--gray-divider); color: var(--black); }
+  .badge-accepted { background: #1B7A3D; color: var(--white); }
+  .badge-meeting { background: var(--black); color: var(--white); }
+  .badge-noresponse { background: var(--gray-medium); color: var(--white); }
+
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.1rem 1.3rem; margin: 1.2rem 0; }
+  .callout p { font-size: 0.84rem; margin-bottom: 0; line-height: 1.5; }
+
+  .activity-entry { border-left: 3px solid var(--gray-divider); padding: 1rem 1.4rem; margin: 1rem 0; position: relative; }
+  .activity-entry.active { border-left-color: var(--red); }
+  .activity-entry .activity-date { font-size: 0.74rem; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+  .activity-entry .activity-contact { font-size: 0.88rem; font-weight: 700; color: var(--black); margin-bottom: 0.2rem; }
+  .activity-entry .activity-role { font-size: 0.78rem; color: var(--gray-medium); margin-bottom: 0.4rem; }
+  .activity-entry .activity-channel { font-size: 0.74rem; color: var(--gray-medium); font-weight: 600; margin-bottom: 0.3rem; }
+  .activity-entry .activity-content { font-size: 0.84rem; color: var(--black); line-height: 1.5; margin-bottom: 0.4rem; }
+  .activity-entry .activity-message { background: var(--gray-panel); padding: 0.8rem 1rem; margin: 0.5rem 0; font-size: 0.82rem; line-height: 1.5; color: var(--black); font-style: italic; border-radius: 2px; }
+  .activity-entry .activity-status { margin-top: 0.4rem; }
+  .activity-entry .activity-next { font-size: 0.78rem; color: var(--gray-medium); margin-top: 0.3rem; }
+
+  .summary-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.3rem 0; border: 1px solid var(--gray-divider); }
+  .summary-item { padding: 1.1rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .summary-item:last-child { border-right: none; }
+  .summary-item.highlight { background: var(--red); }
+  .summary-value { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.2rem; }
+  .summary-item.highlight .summary-value { color: var(--white); }
+  .summary-label { font-size: 0.66rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .summary-item.highlight .summary-label { color: rgba(255,255,255,0.85); }
+
+  .dark-panel { background: var(--dark-charcoal); padding: 2.5rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">OneSubsea Kontaktlogg</div>
+    <div class="cover-subtitle">Aktivitetshistorikk &mdash; OneSubsea (SLB) Norge</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Sist oppdatert: 1. mars 2026</span>
+    </div>
+  </div>
+
+  <!-- STATUS SUMMARY -->
+  <section>
+    <div class="section-label">Statusoversikt</div>
+    <h2>OneSubsea-aktiviteter &mdash; sammendrag</h2>
+
+    <div class="summary-strip">
+      <div class="summary-item highlight">
+        <div class="summary-value">0</div>
+        <div class="summary-label">Kontakter<br>initiert</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value">0</div>
+        <div class="summary-label">M&oslash;ter<br>booket</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value">0</div>
+        <div class="summary-label">NDA<br>signert</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value">&mdash;</div>
+        <div class="summary-label">Leverand&oslash;r-<br>registrering</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Status: Kartleggingsfase.</strong> OneSubsea-kontoen er i kartleggingsfasen. N&oslash;kkelkontakter er identifisert: Gary Archer (VP SPS), Andreas Fjellbirkeland (VP Processing), Hakan Eser (VP Lifecycle), Francisco Nunez (VP Sales), John Macleod (VP Technology), Maria Peralta (VP Umbilical), Mads Hjelmeland (CEO). Supply Chain Director m&aring; identifiseres via LinkedIn. Ingen kontakter er initiert enda. Neste steg er LinkedIn-tilkobling og registrering i SLBs leverand&oslash;rportal.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT DIRECTORY -->
+  <section class="dark-panel">
+    <div class="section-label">Kontaktoversikt</div>
+    <h2>Alle OneSubsea-kontakter &mdash; status</h2>
+
+    <table>
+      <thead>
+        <tr><th>Navn</th><th>Rolle/Tittel</th><th>Segment</th><th>Kanal</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mads Hjelmeland</strong></td>
+          <td>CEO, OneSubsea (fra okt. 2022)</td>
+          <td>Konsern</td>
+          <td>&mdash;</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Gary Archer</strong></td>
+          <td>VP Subsea Production Systems</td>
+          <td>Production Systems</td>
+          <td>&mdash;</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Andreas Fjellbirkeland</strong></td>
+          <td>VP Subsea Processing Systems</td>
+          <td>Processing &amp; Boosting</td>
+          <td>&mdash;</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Hakan Eser</strong></td>
+          <td>VP Subsea Lifecycle Services</td>
+          <td>Lifecycle Services</td>
+          <td>&mdash;</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>N.N. (Supply Chain Director)</strong>*</td>
+          <td>Supply Chain Director, OneSubsea</td>
+          <td>Konsern (alle segmenter)</td>
+          <td>&mdash;</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Francisco Nunez</strong></td>
+          <td>VP Sales &amp; Commercial</td>
+          <td>Konsern (kommersiell)</td>
+          <td>&mdash;</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>John Macleod</strong></td>
+          <td>VP Marketing &amp; Technology</td>
+          <td>Konsern (teknologi)</td>
+          <td>&mdash;</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Maria Peralta</strong></td>
+          <td>VP Umbilical &amp; Cable Systems</td>
+          <td>Controls &amp; Connectors</td>
+          <td>&mdash;</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>Tarek Rizk</strong></td>
+          <td>Chief Performance Officer, SLB</td>
+          <td>SLB morselskap (kontekst)</td>
+          <td>&mdash;</td>
+          <td><span class="badge badge-pending">IKKE KONTAKTET</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 1.5rem; font-size: 0.82rem; color: var(--steel-blue);"><strong>Merk:</strong> Kontakter identifisert gjennom research av OneSubsea ledelsesside, LinkedIn og offentlige kilder (mars 2026). *N.N. (Supply Chain Director): Rollen bekreftet via OneSubsea ledelsesside, men navnet er ikke offentlig tilgjengelig. Identifiseres via LinkedIn-s&oslash;k.</p>
+  </section>
+
+  <!-- ACTIVITY LOG -->
+  <section>
+    <div class="section-label">Aktivitetslogg</div>
+    <h2>Kronologisk hendelseslogg</h2>
+
+    <div class="activity-entry">
+      <div class="activity-date">1. mars 2026</div>
+      <div class="activity-contact">OneSubsea GTM-strategi ferdigstilt</div>
+      <div class="activity-role">Intern aktivitet &mdash; Aurelian Manufacturing</div>
+      <div class="activity-channel">KANAL: Intern</div>
+      <div class="activity-content">Go-to-Market strategi for OneSubsea (SLB) ferdigstilt med fire segmentstrategier, kontaktlogg og salgsrapport. Klar for kartleggingsfasen.</div>
+      <div class="activity-status"><span class="badge badge-pending">KLAR FOR KARTLEGGING</span></div>
+      <div class="activity-next"><strong>Neste:</strong> N&oslash;kkelkontakter identifisert: Gary Archer (VP SPS), Andreas Fjellbirkeland (VP Processing), Hakan Eser (VP Lifecycle), Francisco Nunez (VP Sales), John Macleod (VP Technology), Maria Peralta (VP Umbilical), Mads Hjelmeland (CEO). Supply Chain Director-navnet m&aring; verifiseres via LinkedIn. Neste steg: LinkedIn-tilkobling og registrering i SLBs leverand&oslash;rportal.</div>
+    </div>
+
+    <p class="secondary" style="margin-top: 1.5rem;">Ingen ytterligere aktiviteter registrert. Loggen oppdateres fortl&oslash;pende etter hvert som kontakter identifiseres og f&oslash;rste henvendelser sendes.</p>
+  </section>
+
+  <!-- NEXT ACTIONS -->
+  <section>
+    <div class="section-label">Neste steg</div>
+    <h2>Prioriterte handlinger &mdash; mars 2026</h2>
+
+    <table>
+      <thead><tr><th>#</th><th>Handling</th><th>Kontakt</th><th>Frist</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td><strong>Koble til identifiserte n&oslash;kkelkontakter p&aring; LinkedIn</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">Gary Archer, Andreas Fjellbirkeland, Hakan Eser, Francisco Nunez, John Macleod, Maria Peralta. Identifiser Supply Chain Director via LinkedIn-s&oslash;k.</span></td>
+          <td>Gary Archer, Andreas Fjellbirkeland m.fl.</td>
+          <td>Mars 2026</td>
+          <td><span class="badge badge-pending">IKKE STARTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td><strong>Registrer i SLBs globale leverand&oslash;rportal</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">Last opp ISO 9001, kapabilitetsdokumenter, materialsertifikater</span></td>
+          <td>&mdash;</td>
+          <td>Apr 2026</td>
+          <td><span class="badge badge-pending">IKKE STARTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td><strong>Studere SLBs Supplier Quality Manual (SQM)</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">Forst&aring; kvalifiseringsprosess, dokumentasjonskrav, audit-prosedyrer</span></td>
+          <td>&mdash;</td>
+          <td>Apr 2026</td>
+          <td><span class="badge badge-pending">IKKE STARTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td><strong>Kartlegg kvalifiseringsstandarder</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">API 6A, API 17D, NORSOK M-001, NORSOK M-630, DNV type approval &mdash; hva kreves per komponenttype?</span></td>
+          <td>&mdash;</td>
+          <td>Apr 2026</td>
+          <td><span class="badge badge-pending">IKKE STARTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td><strong>Lag OneSubsea Capability Brief</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">Subsea-tilpasset versjon av kapabilitetsmemorandum. Fokus p&aring; materialer (Super Duplex, Inconel), sporbarhet og autonom drift.</span></td>
+          <td>&mdash;</td>
+          <td>Apr 2026</td>
+          <td><span class="badge badge-pending">IKKE STARTET</span></td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td><strong>F&oslash;rste LinkedIn-henvendelse med Capability Brief</strong><br><span style="font-size: 0.76rem; color: var(--gray-medium);">Sendes n&aring;r Capability Brief er klar. Prioritert rekkef&oslash;lge: Gary Archer (SPS), Hakan Eser (Lifecycle), Andreas Fjellbirkeland (Processing)</span></td>
+          <td>Gary Archer / Hakan Eser</td>
+          <td>Mai 2026</td>
+          <td><span class="badge badge-pending">VENTER P&Aring; KARTLEGGING</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SENT MATERIALS LOG -->
+  <section>
+    <div class="section-label">Materiell</div>
+    <h2>Sendte dokumenter og materiell</h2>
+
+    <p class="secondary">Ingen dokumenter sendt til OneSubsea enda. Tabellen oppdateres n&aring;r f&oslash;rste henvendelser initieres.</p>
+
+    <table>
+      <thead><tr><th>Dato</th><th>Dokument</th><th>Sendt til</th><th>Kanal</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>&mdash;</td>
+          <td>&mdash;</td>
+          <td>&mdash;</td>
+          <td>&mdash;</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary" style="margin-top: 1rem;">Materiell som m&aring; produseres: OneSubsea Capability Brief (subsea-tilpasset), referansedeler i Inconel 625 og Super Duplex, NDA-mal, CMM-referanserapporter.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | OneSubsea Kontaktlogg | Sist oppdatert: 1. mars 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

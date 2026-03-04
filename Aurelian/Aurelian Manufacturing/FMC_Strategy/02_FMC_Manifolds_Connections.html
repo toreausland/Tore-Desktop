@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — FMC Manifolds &amp; Connection Systems</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; max-width: 620px; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  .steps { list-style: none; padding: 0; margin: 1.2rem 0; counter-reset: step-counter; }
+  .steps li { position: relative; padding-left: 3rem; margin-bottom: 1.3rem; font-size: 0.88rem; line-height: 1.5; counter-increment: step-counter; }
+  .steps li::before { content: counter(step-counter); position: absolute; left: 0; top: -0.1em; width: 2rem; height: 2rem; background: var(--red); color: var(--white); font-size: 0.88rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 120px; color: var(--black); }
+
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel ul.clean-list li { color: rgba(255,255,255,0.85); }
+  .dark-panel ul.clean-list li strong { color: var(--white); }
+  .dark-panel .callout { background: rgba(255,255,255,0.06); border-left-color: var(--red); }
+  .dark-panel .callout p { color: rgba(255,255,255,0.85); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+  .dark-panel .kpi-strip { border-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-item { background: rgba(255,255,255,0.04); border-right-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-value { color: var(--white); }
+  .dark-panel .kpi-label { color: var(--steel-blue); }
+
+  .priority-stars { color: var(--red); font-weight: 700; white-space: nowrap; }
+
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+  .back-link { display: inline-block; font-size: 0.82rem; color: var(--red); font-weight: 600; text-decoration: none; margin-bottom: 1.5rem; }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">FMC Manifolds &amp; Connection Systems</div>
+    <div class="cover-subtitle">Segmentstrategi &mdash; Subsea manifolder, hub-konnektorer og r&oslash;rforbindelser</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Mars 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: SEGMENTPROFIL -->
+  <section>
+    <a href="00_FMC_Strategy_Overview.html" class="back-link">&larr; Tilbake til FMC-oversikt</a>
+    <div class="section-label">Segmentprofil</div>
+    <h2>Manifolds &amp; Connection Systems &mdash; kritisk subsea-infrastruktur</h2>
+
+    <p class="lead"><strong>Subsea manifolder</strong> er sentrale fordelingspunkter p&aring; havbunnen som dirigerer produksjonsstr&oslash;mmer fra flere br&oslash;nner til oppstr&oslash;ms prosesserings- eller eksportlinjer. TechnipFMC er en av verdens ledende produsenter av manifold-systemer, hub-konnektorer og jumper-forbindelser &mdash; alle med intensiv CNC-maskinering i krevende materialer.</p>
+
+    <h3>Produkter</h3>
+    <ul class="clean-list">
+      <li><strong>Subsea manifolder</strong> &mdash; 2-, 4- og 6-slots konfigurasjoner med integrerte ventiler, choke-moduler og instrumenteringsporter</li>
+      <li><strong>Hub-konnektorer</strong> &mdash; FMCs propriet&aelig;re konnektorsystemer for r&oslash;rforbindelser p&aring; havbunnen, presisjonsmaskinererte hub-flater</li>
+      <li><strong>Jumper-systemer</strong> &mdash; fleksible og rigide r&oslash;rforbindelser mellom subsea-enheter, med maskinererte endekonnektorer</li>
+      <li><strong>Pipeline connection systems</strong> &mdash; tie-in verkt&oslash;y, klemmer, konnektorer for r&oslash;rledningsinstallasjon</li>
+      <li><strong>PLEM/PLET</strong> &mdash; Pipeline End Manifolds/Terminations, kompakte fordelingsenheter</li>
+    </ul>
+
+    <div class="kpi-strip">
+      <div class="kpi-item highlight">
+        <div class="kpi-value">3&ndash;10k</div>
+        <div class="kpi-label">Est. CNC-timer<br>per &aring;r</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Tung</div>
+        <div class="kpi-label">Maskinering<br>store emner</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">Super Duplex</div>
+        <div class="kpi-label">Prim&aelig;r-<br>materiale</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">API 17D</div>
+        <div class="kpi-label">Prim&aelig;r<br>standard</div>
+      </div>
+    </div>
+
+    <p class="secondary">Manifold-segmentet har jevn ettersp&oslash;rsel drevet av nye feltutbygginger globalt. Hvert st&oslash;rre subsea-prosjekt krever 2&ndash;8 manifolder, hundrevis av konnektorer og tilh&oslash;rende maskinerte deler. FMCs iEPCI-modell gj&oslash;r at manifolder ofte leveres som del av integrerte pakker.</p>
+  </section>
+
+  <!-- SECTION 2: CNC-KOMPONENTBEHOV -->
+  <section>
+    <div class="section-label">Komponentbehov</div>
+    <h2>CNC-komponenttyper &mdash; Manifolds &amp; Connections</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Komponenttype</th>
+          <th>Materialer</th>
+          <th>Kompleksitet</th>
+          <th>Volum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Manifold-kropp (hub)</strong></td>
+          <td>Super Duplex, 6Mo, Inconel-kledd</td>
+          <td>5-akse, store dimensjoner (1&ndash;3m)</td>
+          <td>Lav-medium &mdash; 20&ndash;60/&aring;r</td>
+        </tr>
+        <tr>
+          <td><strong>Hub-konnektorer</strong></td>
+          <td>Super Duplex UNS S32750/S32760</td>
+          <td>5-akse presisjon, &plusmn;0.01mm hub-flater</td>
+          <td>H&oslash;y &mdash; 100&ndash;500/&aring;r</td>
+        </tr>
+        <tr>
+          <td><strong>Ventilblokker til manifold</strong></td>
+          <td>Super Duplex, Inconel 625</td>
+          <td>5-akse, dype boringer, kryssboringer</td>
+          <td>Medium-h&oslash;y</td>
+        </tr>
+        <tr>
+          <td><strong>Jumper-endekonnektorer</strong></td>
+          <td>Super Duplex, CRA</td>
+          <td>4&ndash;5 akse, tetningsflater</td>
+          <td>H&oslash;y &mdash; multippel per prosjekt</td>
+        </tr>
+        <tr>
+          <td><strong>Choke-moduler</strong></td>
+          <td>Inconel 718, Stellite-belagt</td>
+          <td>5-akse, erosjonsresistente flater</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Tie-in konnektorer</strong></td>
+          <td>Super Duplex, karbonst&aring;l med CRA-liner</td>
+          <td>3&ndash;5 akse</td>
+          <td>Medium-h&oslash;y</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 3: RELEVANS -->
+  <section>
+    <div class="section-label">Aurelians posisjon</div>
+    <h2>Hvorfor Aurelian er relevant for dette segmentet</h2>
+
+    <div class="callout">
+      <p><strong>Hub-konnektorer og jumper-endekonnektorer er ideelle volumdeler for Aurelian.</strong> De krever 5-akse presisjon i Super Duplex, produseres i serier p&aring; 50&ndash;200 enheter, og har stabile leveranseplaner over prosjektets levetid. Dette er n&oslash;yaktig HMLV-profilen Aurelian er designet for.</p>
+    </div>
+
+    <h3>N&oslash;kkelargumenter</h3>
+    <ul class="clean-list">
+      <li><strong>Volumbalanse:</strong> Hub-konnektorer gir repeterbar grunnlast, mens manifold-kropper gir h&oslash;yverdi-oppdrag &mdash; ideell miks for maskinparkutnyttelse.</li>
+      <li><strong>Super Duplex ekspertise:</strong> UNS S32750/S32760 er det dominerende materialet. Aurelians 5-akse Mazak med h&oslash;ytrykkskj&oslash;ling og karbidverkt&oslash;y er optimalisert for dette.</li>
+      <li><strong>Presisjon p&aring; hub-flater:</strong> &plusmn;0.01mm og overflateruhet Ra 0.4 p&aring; tetningsflater &mdash; Aurelians integrerte m&aring;lesystemer sikrer konsistent kvalitet.</li>
+      <li><strong>Prosjektbasert forutsigbarhet:</strong> Subsea-prosjekter har 2&ndash;4 &aring;rs leveranseplaner. Aurelian kan planlegge kapasitet langsiktig.</li>
+      <li><strong>Autonom 24/7 drift:</strong> Hub-konnektorer egner seg for ubemannet produksjon &mdash; standardisert geometri, repeterbare programmer, robotlasting.</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 4: KONTAKTER -->
+  <section>
+    <div class="section-label">Kontakter</div>
+    <h2>N&oslash;kkelkontakter &mdash; Manifolds &amp; Connections</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Tittel</th>
+          <th>Relevans</th>
+          <th>Prioritet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Thierry Conti</strong></td>
+          <td>President, EMS &amp; Quality (Manufacturing, Supply Chain, Quality)</td>
+          <td>Overordnet ansvar for supply chain og innkj&oslash;p &mdash; strategisk leverand&oslash;rgodkjenning</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Rune Thoresen</strong></td>
+          <td>SVP Subsea Services / Country Manager Norway</td>
+          <td>Daglig leder TechnipFMC Norge AS &mdash; norsk gatekeeper for produksjon og operasjoner</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Jonathan Landes</strong></td>
+          <td>President, Subsea</td>
+          <td>Overordnet subsea-leder, relevans for strategiske beslutninger</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9734;</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary">Kontakter identifisert gjennom research av TechnipFMC ledelsessider, Br&oslash;nn&oslash;ysundregistrene, LinkedIn og presseoppslag (mars 2026). Rune Thoresen bekreftet som daglig leder TechnipFMC Norge AS.</p>
+  </section>
+
+  <!-- SECTION 5: TILNÆRMINGSSTRATEGI -->
+  <section>
+    <div class="section-label">Tiln&aelig;rmingsstrategi</div>
+    <h2>Fem steg for &aring; entre Manifold-segmentet</h2>
+
+    <ol class="steps">
+      <li><strong>Led med hub-konnektorer</strong> &mdash; h&oslash;yest volum, standardisert geometri, lavest kvalifiseringsterskel innen manifold-familien. Ideell f&oslash;rsteproduksjon.</li>
+      <li><strong>Demonstrer Super Duplex kompetanse</strong> &mdash; bring prosesspaner i UNS S32750 med dokumentert overflateruhet, dimensjonskontroll og materialintegritet.</li>
+      <li><strong>Tilby komplett dokumentasjonspakke</strong> &mdash; 3.1-sertifikater, dimensjonsrapporter, NDE-rapporter, materialsp&aring;rbarhet. Vis at Aurelians digitale tr&aring;d leverer dette automatisk.</li>
+      <li><strong>Forhandle rammeavtale for konnektorer</strong> &mdash; prosjektbasert rammeavtale med call-off gir FMC fleksibilitet og Aurelian forutsigbar last.</li>
+      <li><strong>Skalere til manifold-kropper</strong> &mdash; n&aring;r track record p&aring; konnektorer er etablert, pitch manifold-hub maskinering som naturlig utvidelse.</li>
+    </ol>
+  </section>
+
+  <!-- SECTION 6: TEKNISK DYBDE (DARK PANEL) -->
+  <section class="dark-panel">
+    <div class="section-label">Teknisk dybde</div>
+    <h2>Hub-konnektorer &mdash; Aurelians volumprodukt for FMC</h2>
+
+    <p><strong>Hub-konnektorer</strong> er den mest volumt&oslash;ffe komponentfamilien i manifold-segmentet. Hver subsea-forbindelse krever matchende konnektor-par med ekstrem presisjon p&aring; tetningsflatene. FMC bruker hundrevis av disse per &aring;r &mdash; et perfekt HMLV-produkt for Aurelian.</p>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">100&ndash;500</div>
+        <div class="kpi-label">Enheter<br>per &aring;r</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">&plusmn;0.01mm</div>
+        <div class="kpi-label">Toleranse<br>hub-flater</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">Ra 0.4</div>
+        <div class="kpi-label">Overflateruhet<br>tetningsflater</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">S32750</div>
+        <div class="kpi-label">Super Duplex<br>standard</div>
+      </div>
+    </div>
+
+    <h3>Hvorfor hub-konnektorer er strategisk riktig inngangsdel</h3>
+    <ul class="clean-list">
+      <li><strong>Standardisert geometri:</strong> Varianter innen en konnektor-familie, men grunngeometrien er lik &mdash; ideelt for autonom produksjon med robotlasting</li>
+      <li><strong>Repeterbare programmer:</strong> N&aring;r f&oslash;rste FAI er godkjent, kan produksjonen kj&oslash;res ubemannet med h&oslash;y prosess-stabilitet</li>
+      <li><strong>Kritisk for FMC:</strong> Konnektorer er p&aring; kritisk sti i alle subsea-prosjekter &mdash; leverand&oslash;rer som leverer p&aring; tid f&aring;r gjentatte ordrer</li>
+      <li><strong>Bygger kompetanse:</strong> Materialer og toleranser er identiske med tree-komponenter &mdash; track record her &aring;pner d&oslash;ren til h&oslash;yverdi tree body-maskinering</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Strategisk vurdering:</strong> Hub-konnektorer er &laquo;inngangsbilletten&raquo; til FMCs subsea-leverand&oslash;rkjede. Volumet er h&oslash;yt nok til &aring; gi Aurelian stabil grunnlast, og kvalitetskravene bygger n&oslash;yaktig den kompetansen som trengs for tree-komponenter.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: TIDSLINJE -->
+  <section>
+    <div class="section-label">Tidslinje</div>
+    <h2>Kvalifiseringsl&oslash;p &mdash; Manifolds &amp; Connections</h2>
+
+    <table class="timeline-table">
+      <thead><tr><th>Tidspunkt</th><th>Aktivitet</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Apr 2026</strong></td><td>LinkedIn-kontakt med Rune Thoresen (Country Manager Norway) om manifold-segmentet. Registrer i leverand&oslash;rportal med konnektorfokus.</td></tr>
+        <tr><td><strong>Mai 2026</strong></td><td>F&oslash;rste kontakt via Thoresen &mdash; pitch hub-konnektor kapabilitet mot Thierry Conti (President EMS &amp; Quality). Capability Brief med Super Duplex-fokus vedlagt.</td></tr>
+        <tr><td><strong>Jun&ndash;Jul 2026</strong></td><td>Teknisk m&oslash;te med konnektoringeni&oslash;rer. Prosesspaner i S32750 medbringes.</td></tr>
+        <tr><td><strong>Aug&ndash;Sep 2026</strong></td><td>NDA og eksempeltegninger for hub-konnektorer. Maskinkonfigurasjon diskutert.</td></tr>
+        <tr><td><strong>Q4 2026</strong></td><td>Pre-kvalifiseringss&oslash;knad for konnektor-kategori.</td></tr>
+        <tr><td><strong>Q1 2027</strong></td><td>Betinget godkjenning. Pilotordre p&aring; 10&ndash;20 konnektorer.</td></tr>
+        <tr><td><strong>Q3 2027</strong></td><td>FAI godkjent. Serieproduksjon starter.</td></tr>
+        <tr><td><strong>2028</strong></td><td>Skalering til manifold-hub maskinering og choke-moduler.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Kritisk tidsvindu:</strong> Hub-konnektorer har kortere kvalifiseringstid enn tree-komponenter. Tidlig inngang her gir Aurelian referanser og FMC-erfaring som akselererer kvalifisering for &oslash;vrige segmenter.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | FMC Manifolds &amp; Connections V1.0 | Mars 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

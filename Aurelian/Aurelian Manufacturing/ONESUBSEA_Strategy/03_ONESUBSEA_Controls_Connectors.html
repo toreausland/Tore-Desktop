@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — OneSubsea Controls &amp; Connectors</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --gray-chart: #888888; --dark-charcoal: #1A1A1A; --navy-card: #253B52;
+    --steel-blue: #8EAEC5; --dark-red: #D0042E;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  .cover { background: var(--pure-black); padding: 4.5rem 3.5rem 3.5rem; position: relative; overflow: hidden; min-height: 460px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1.2rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 2rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 2rem; }
+  .cover-title { font-size: 1.5rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.05rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 3rem; max-width: 620px; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  section { padding: 2.8rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1.3rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  p { font-size: 0.92rem; line-height: 1.6; color: var(--black); margin-bottom: 0.9rem; }
+  p.lead { font-size: 1rem; line-height: 1.6; }
+  p.secondary { color: var(--gray-medium); font-size: 0.86rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.86rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.65rem 0.9rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.5rem 0; border: 1px solid var(--gray-divider); }
+  .kpi-item { padding: 1.3rem 0.8rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-item.highlight { background: var(--red); }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.25rem; }
+  .kpi-item.highlight .kpi-value { color: var(--white); }
+  .kpi-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .kpi-item.highlight .kpi-label { color: rgba(255,255,255,0.85); }
+
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1.2rem 1.4rem; margin: 1.3rem 0; }
+  .callout p { font-size: 0.86rem; margin-bottom: 0; line-height: 1.55; }
+
+  ul.clean-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  ul.clean-list li { position: relative; padding-left: 1.3rem; margin-bottom: 0.6rem; font-size: 0.88rem; line-height: 1.5; }
+  ul.clean-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  .steps { list-style: none; padding: 0; margin: 1.2rem 0; counter-reset: step-counter; }
+  .steps li { position: relative; padding-left: 3rem; margin-bottom: 1.3rem; font-size: 0.88rem; line-height: 1.5; counter-increment: step-counter; }
+  .steps li::before { content: counter(step-counter); position: absolute; left: 0; top: -0.1em; width: 2rem; height: 2rem; background: var(--red); color: var(--white); font-size: 0.88rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  .timeline-table { margin: 1.5rem 0; }
+  .timeline-table td:first-child { font-weight: 700; white-space: nowrap; width: 120px; color: var(--black); }
+
+  .dark-panel { background: var(--dark-charcoal); padding: 2.8rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel h3 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.82); }
+  .dark-panel ul.clean-list li { color: rgba(255,255,255,0.85); }
+  .dark-panel ul.clean-list li strong { color: var(--white); }
+  .dark-panel .callout { background: rgba(255,255,255,0.06); border-left-color: var(--red); }
+  .dark-panel .callout p { color: rgba(255,255,255,0.85); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+  .dark-panel .kpi-strip { border-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-item { background: rgba(255,255,255,0.04); border-right-color: rgba(255,255,255,0.15); }
+  .dark-panel .kpi-value { color: var(--white); }
+  .dark-panel .kpi-label { color: var(--steel-blue); }
+
+  .priority-stars { color: var(--red); font-weight: 700; white-space: nowrap; }
+
+  .doc-footer { padding: 1.5rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--gray-medium); }
+
+  .back-link { display: inline-block; font-size: 0.82rem; color: var(--red); font-weight: 600; text-decoration: none; margin-bottom: 1.5rem; }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">OneSubsea Controls &amp; Connectors</div>
+    <div class="cover-subtitle">Segmentstrategi &mdash; Kontrollmoduler, konnektorer og presisjonsdeler</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>Mars 2026</span>
+      <span>|</span>
+      <span>Versjon 1.0</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: SEGMENTPROFIL -->
+  <section>
+    <a href="00_ONESUBSEA_Strategy_Overview.html" class="back-link">&larr; Tilbake til OneSubsea-oversikt</a>
+    <div class="section-label">Segmentprofil</div>
+    <h2>Subsea Controls &amp; Connectors &mdash; presisjon og p&aring;litelighet</h2>
+
+    <p class="lead"><strong>Subsea Controls &amp; Connectors</strong> leverer de kritiske tilkoblings- og styringssystemene som gj&oslash;r subsea-installasjoner operative. Kontrollmodulene styrer ventiler og sensorer p&aring; havbunnen, mens konnektorsystemene kobler sammen r&oslash;r, umbilicals og jumper-systemer. Alt m&aring; fungere feilfritt p&aring; havdybder ned til 3 000 meter i 20+ &aring;r uten vedlikehold.</p>
+
+    <h3>Produkter</h3>
+    <ul class="clean-list">
+      <li><strong>Subsea Control Modules (SCM)</strong> &mdash; hydrauliske og elektriske kontrollmoduler for styring av br&oslash;nnventiler og sensorer</li>
+      <li><strong>Subsea konnektorer</strong> &mdash; mekaniske og hydrauliske tilkoblingspunkter for r&oslash;rsystemer, rated for h&oslash;yt trykk og korrosjon</li>
+      <li><strong>Jumpere og flyover-r&oslash;r</strong> &mdash; forh&aring;ndsassemblerte r&oslash;rforbindelser mellom utstyr p&aring; havbunnen</li>
+      <li><strong>Distribution units</strong> &mdash; hydrauliske og elektriske fordelingsenheter for subsea-nettverk</li>
+      <li><strong>Umbilical termineringer</strong> &mdash; koblingspunkter mellom umbilical-kabler og subsea-utstyr</li>
+    </ul>
+
+    <div class="kpi-strip">
+      <div class="kpi-item highlight">
+        <div class="kpi-value">2&ndash;6k</div>
+        <div class="kpi-label">Est. CNC-timer<br>per &aring;r</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">3 000m</div>
+        <div class="kpi-label">Maks havdybde<br>operasjon</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">20+ &aring;r</div>
+        <div class="kpi-label">Krav til<br>levetid</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">MED-H&Oslash;Y</div>
+        <div class="kpi-label">CNC-prioritet<br>for Aurelian</div>
+      </div>
+    </div>
+
+    <p class="secondary">Controls &amp; Connectors er et segment med h&oslash;y diversitet &mdash; mange forskjellige komponenttyper i relativt lave volumer per variant. Typisk HMLV-profil som matcher Aurelians fleksible celle-konsept perfekt.</p>
+  </section>
+
+  <!-- SECTION 2: CNC-KOMPONENTBEHOV -->
+  <section>
+    <div class="section-label">Komponentbehov</div>
+    <h2>CNC-komponenttyper &mdash; Controls &amp; Connectors</h2>
+
+    <p>Bred portefølje av presisjonsmaskinererte komponenter. St&oslash;rre variasjon enn de andre segmentene, men typisk mindre dimensjoner og kortere maskineringstider per del.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Komponenttype</th>
+          <th>Materialer</th>
+          <th>Kompleksitet</th>
+          <th>Volum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>SCM-hus og kabinetter</strong></td>
+          <td>Super Duplex, 316L SS</td>
+          <td>5-akse fresing</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Hydrauliske ventilblokker</strong></td>
+          <td>Inconel 625, Super Duplex</td>
+          <td>3&ndash;5 akse, dype boringer</td>
+          <td>Medium-h&oslash;y</td>
+        </tr>
+        <tr>
+          <td><strong>Konnektorhus</strong></td>
+          <td>Inconel 625, Titanium Gr. 5</td>
+          <td>Dreiing + fresing</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Stikkontakter og plugger</strong></td>
+          <td>Inconel 625, Monel K-500</td>
+          <td>Presisjonsdreiing, &plusmn;0.01mm</td>
+          <td>H&oslash;y</td>
+        </tr>
+        <tr>
+          <td><strong>Distribution unit rammer</strong></td>
+          <td>Super Duplex, 6Mo</td>
+          <td>3&ndash;4 akse, store dimensjoner</td>
+          <td>Lav-medium</td>
+        </tr>
+        <tr>
+          <td><strong>Termineringshoder</strong></td>
+          <td>Inconel 625, CRA</td>
+          <td>Multi-tasking</td>
+          <td>Lav-medium</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 3: RELEVANS -->
+  <section>
+    <div class="section-label">Aurelians posisjon</div>
+    <h2>Hvorfor Aurelian er relevant for dette segmentet</h2>
+
+    <div class="callout">
+      <p><strong>Controls &amp; Connectors har den mest typiske HMLV-profilen i hele OneSubsea.</strong> Mange varianter, lave volumer per variant, og strenge kvalitetskrav p&aring; hver enkelt del. Aurelians fleksible cellekonsept med hurtig omstilling og digital arbeidsinstruksjon er designet for nettopp denne typen produksjon.</p>
+    </div>
+
+    <h3>N&oslash;kkelargumenter</h3>
+    <ul class="clean-list">
+      <li><strong>HMLV-ekspertise:</strong> H&oslash;y-mix, lavvolum er Aurelians kjernemodell. Raske omstillinger mellom ulike komponenttyper uten &aring; miste sporbarhet eller kvalitet.</li>
+      <li><strong>Presisjonsprofil:</strong> Konnektorer og ventilblokker krever stramme toleranser (&plusmn;0.01mm) og h&oslash;y overflatekvalitet. Aurelians 5-akse maskiner med h&oslash;y spindelstivhet leverer dette.</li>
+      <li><strong>Materialbredde:</strong> Segmentet bruker et bredt spekter av CRA-materialer &mdash; fra 316L og Super Duplex til Inconel og Monel. Aurelians verkt&oslash;ymagasin dekker hele dette spekteret.</li>
+      <li><strong>Rask prototyping:</strong> Nye konnektordesign krever prototyper og sm&aring;serier. Autonom drift med digital programmering gir kort ledetid fra tegning til ferdig del.</li>
+      <li><strong>Dokumentasjonstung:</strong> Hver komponent m&aring; ledsages av komplett materialsertifikat, dimensjonsrapport og NDT-resultater. Aurelians digitale tr&aring;d genererer dette automatisk.</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 4: NØKKELKONTAKTER -->
+  <section>
+    <div class="section-label">Kontakter</div>
+    <h2>N&oslash;kkelkontakter &mdash; Controls &amp; Connectors</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Rolle/Tittel</th>
+          <th>Relevans</th>
+          <th>Prioritet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Maria Peralta</strong></td>
+          <td>VP Umbilical &amp; Cable Systems</td>
+          <td>Ansvarlig for umbilical-konnektorer og kabelsystemer &mdash; direkte CNC-behov for konnektorkomponenter</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>N.N. (Supply Chain Director)</strong>*</td>
+          <td>Supply Chain Director, OneSubsea</td>
+          <td>Overordnet leverand&oslash;rstrategi for alle segmenter inkl. Controls &amp; Connectors</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9733;</span></td>
+        </tr>
+        <tr>
+          <td><strong>John Macleod</strong></td>
+          <td>VP Marketing &amp; Technology</td>
+          <td>Teknologi-kvalifisering, all-electric subsea partnerskap</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9734;</span></td>
+        </tr>
+        <tr>
+          <td><strong>Francisco Nunez</strong></td>
+          <td>VP Sales &amp; Commercial</td>
+          <td>Kommersiell portvakt &mdash; kan &aring;pne d&oslash;rer til innkj&oslash;p</td>
+          <td><span class="priority-stars">&#9733;&#9733;&#9734;</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="secondary" style="margin-top: 0.8rem;">*N.N. (Supply Chain Director): Rollen bekreftet via OneSubsea ledelsesside, men navnet er ikke offentlig tilgjengelig. Identifiseres via LinkedIn-s&oslash;k. Kontakter identifisert gjennom research av OneSubsea ledelsesside, LinkedIn og offentlige kilder (mars 2026).</p>
+  </section>
+
+  <!-- SECTION 5: TILNÆRMINGSSTRATEGI -->
+  <section>
+    <div class="section-label">Tiln&aelig;rmingsstrategi</div>
+    <h2>Fem steg for &aring; entre Controls &amp; Connectors</h2>
+
+    <ol class="steps">
+      <li><strong>Identifiser standard konnektorkomponenter</strong> &mdash; konnektorhus og stikkontakter produseres i h&oslash;yere volumer enn &oslash;vrige deler. Start her for volum og gjentakende ordrer.</li>
+      <li><strong>Kontakt Maria Peralta (VP Umbilical &amp; Cable Systems) via LinkedIn</strong> &mdash; pitch: &laquo;Fleksibel HMLV CNC-kapasitet for subsea konnektorer og kontrollkomponenter &mdash; rask omstilling, full sporbarhet.&raquo;</li>
+      <li><strong>Tilby prototyping-kapasitet</strong> &mdash; nye konnektordesign krever raske prototyper. Vis at Aurelian kan levere fra tegning til ferdig del p&aring; dager, ikke uker.</li>
+      <li><strong>Teknisk evaluering med John Macleod (VP Technology)</strong> &mdash; diskuter toleransekrav, materialvalg og overflatebehandling. Ta med referansedeler i Inconel og Super Duplex.</li>
+      <li><strong>Bygg brohode via enkle komponenter</strong> &mdash; hydrauliske ventilblokker og rammer er lavere risiko enn konnektorer. Bruk disse for &aring; bygge kvalifiseringshistorikk f&oslash;r man tar presisjonskonnektorer.</li>
+    </ol>
+  </section>
+
+  <!-- SECTION 6: SUBSEA ALL-ELECTRIC (DARK PANEL) -->
+  <section class="dark-panel">
+    <div class="section-label">Fremtidsmulighet</div>
+    <h2>All-Electric Subsea &mdash; neste generasjon kontrollsystemer</h2>
+
+    <p>OneSubsea investerer tungt i <strong>all-electric subsea-teknologi</strong> &mdash; en overgang fra hydrauliske til helelektriske kontrollsystemer. Dette er et paradigmeskifte som endrer komponentbehovet fundamentalt og skaper muligheter for nye leverand&oslash;rer.</p>
+
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-value">All-Electric</div>
+        <div class="kpi-label">Nytt paradigme<br>for kontroll</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">0</div>
+        <div class="kpi-label">Hydraulisk<br>v&aelig;ske subsea</div>
+      </div>
+      <div class="kpi-item highlight">
+        <div class="kpi-value">Nye</div>
+        <div class="kpi-label">Komponenttyper<br>kreves</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">2027+</div>
+        <div class="kpi-label">Forventet<br>utrulling</div>
+      </div>
+    </div>
+
+    <h3>Konsekvens for Aurelian</h3>
+    <ul class="clean-list">
+      <li><strong>Nye komponentdesign:</strong> All-electric aktuatorer, motorhus og kraftelektronikk-kabinetter erstatter hydrauliske komponenter &mdash; nye leverand&oslash;rer f&aring;r lik start</li>
+      <li><strong>H&oslash;yere presisjonskrav:</strong> Elektriske aktuatorer krever tettere toleranser enn hydrauliske &mdash; favoriserer avansert CNC</li>
+      <li><strong>Nye materialer:</strong> Kobber-nikkel-legeringer og spesialmaterialer for elektromagnetisk kompatibilitet &mdash; differensieringsmulighet</li>
+      <li><strong>Ingen etablerte leverand&oslash;rer:</strong> All-electric subsea er s&aring; nytt at ingen leverand&oslash;rer har track record &mdash; Aurelian starter p&aring; lik linje med alle andre</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Strategisk vurdering:</strong> All-electric subsea er et langsiktig veddem&aring;l, men det er n&oslash;yaktig den typen teknologiskift der en ny leverand&oslash;r kan etablere seg. Posisjon&eacute;r Aurelian som prototyping-partner for all-electric komponenter &mdash; dette bygger relasjon og innsikt lenge f&oslash;r serieproduksjon starter.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: TIDSLINJE -->
+  <section>
+    <div class="section-label">Tidslinje</div>
+    <h2>Kvalifiseringsl&oslash;p &mdash; Controls &amp; Connectors</h2>
+
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>Tidspunkt</th>
+          <th>Aktivitet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mar&ndash;Apr 2026</strong></td>
+          <td>Kartlegg kontakter i Controls &amp; Connectors-divisjonen via LinkedIn.</td>
+        </tr>
+        <tr>
+          <td><strong>Mai 2026</strong></td>
+          <td>F&oslash;rste kontakt med Maria Peralta (VP Umbilical &amp; Cable Systems). Registrer i SLB-portal med fokus p&aring; connectors/machined components.</td>
+        </tr>
+        <tr>
+          <td><strong>Jun&ndash;Jul 2026</strong></td>
+          <td>Teknisk m&oslash;te. Vis referansedeler i Inconel 625 og Super Duplex. Diskuter konnektorkrav.</td>
+        </tr>
+        <tr>
+          <td><strong>Aug&ndash;Sep 2026</strong></td>
+          <td>NDA signert. Eksempeltegninger for konnektorhus og ventilblokker mottatt.</td>
+        </tr>
+        <tr>
+          <td><strong>Q4 2026</strong></td>
+          <td>Pre-kvalifisering iht. SLBs SQM. Desktop audit p&aring; kvalitetssystem.</td>
+        </tr>
+        <tr>
+          <td><strong>Q2 2027</strong></td>
+          <td>Pilot-ordre p&aring; hydrauliske ventilblokker og enklere konnektorkomponenter.</td>
+        </tr>
+        <tr>
+          <td><strong>Q3 2027</strong></td>
+          <td>FAI gjennomf&oslash;rt. Eskalering til presisjonskonnektorer og SCM-komponenter.</td>
+        </tr>
+        <tr>
+          <td><strong>2028</strong></td>
+          <td>Fullkvalifisert leverand&oslash;r for Controls &amp; Connectors. All-electric prototyping starter.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Inngangsstrategi:</strong> Controls &amp; Connectors har lavere enkeltdel-verdi enn Production Systems, men h&oslash;yere frekvens og st&oslash;rre variasjon. Dette gj&oslash;r segmentet godt egnet som inngangsbillett &mdash; lavere risiko per ordre, men nok volum til &aring; bygge track record for eskalering til andre segmenter.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | OneSubsea Controls &amp; Connectors V1.0 | Mars 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

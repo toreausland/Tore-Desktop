@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuktskaderapport / Informe de Daños por Humedad — Tiger Palm A1</title>
+    <style>
+        @media print {
+            .page-break { page-break-before: always; }
+            body { font-size: 11pt; }
+        }
+        body {
+            font-family: 'Segoe UI', Calibri, Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 30px;
+            background: #fff;
+        }
+        .header-block {
+            border-bottom: 4px solid #b22222;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header-block h1 {
+            font-size: 22pt;
+            color: #1a1a1a;
+            margin: 0 0 5px 0;
+        }
+        .header-block .subtitle {
+            font-size: 13pt;
+            color: #555;
+            font-style: italic;
+            margin: 0;
+        }
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 10pt;
+        }
+        .meta-table td {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+        }
+        .meta-table td:first-child {
+            font-weight: bold;
+            background: #f5f5f5;
+            width: 200px;
+        }
+        h2 {
+            color: #b22222;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 6px;
+            font-size: 15pt;
+            margin-top: 35px;
+        }
+        h3 {
+            color: #333;
+            font-size: 12pt;
+            margin-top: 20px;
+        }
+        .dual-lang {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 15px 0;
+        }
+        .lang-col {
+            padding: 15px;
+            background: #fafafa;
+            border-left: 4px solid #b22222;
+            border-radius: 0 4px 4px 0;
+        }
+        .lang-col.es {
+            border-left-color: #c49000;
+        }
+        .lang-label {
+            font-size: 9pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .image-container {
+            text-align: center;
+            margin: 25px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background: #fafafa;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        .image-caption {
+            font-size: 9pt;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 15px 0;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10pt;
+        }
+        .legend-color {
+            width: 40px;
+            height: 6px;
+            border-radius: 3px;
+        }
+        .legend-red { background: #e00000; }
+        .legend-yellow { background: #e6c200; }
+        .risk-high {
+            background: #fff0f0;
+            border-left: 4px solid #c00;
+            padding: 12px 15px;
+            margin: 10px 0;
+            font-size: 10pt;
+        }
+        .risk-medium {
+            background: #fff8e0;
+            border-left: 4px solid #c49000;
+            padding: 12px 15px;
+            margin: 10px 0;
+            font-size: 10pt;
+        }
+        table.damage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+        table.damage-table th {
+            background: #b22222;
+            color: white;
+            padding: 8px 10px;
+            text-align: left;
+        }
+        table.damage-table td {
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+        }
+        table.damage-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .ref-section {
+            font-size: 9pt;
+            color: #555;
+            border-top: 2px solid #e0e0e0;
+            margin-top: 30px;
+            padding-top: 15px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 8pt;
+            color: #999;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<div class="header-block">
+    <h1>FUKTSKADERAPPORT / INFORME DE DAÑOS POR HUMEDAD</h1>
+    <p class="subtitle">Tiger Palm A1 — Royal Palms Fase I, Mijas Costa, Malaga, Spania</p>
+</div>
+
+<table class="meta-table">
+    <tr><td>Eiendom / Propiedad</td><td>Tiger Palm A1, Royal Palms Fase I, Mijas Costa, Malaga, Spain</td></tr>
+    <tr><td>Eiere / Propietarios</td><td>Tore Ausland & Laila Espenes</td></tr>
+    <tr><td>Utbygger / Promotor</td><td>Mijas Hills Properties S.L. (One Eden) — Hovedentreprenør / Contratista principal: Sacyr</td></tr>
+    <tr><td>Inspeksjonsdato / Fecha de inspección</td><td>17.–18. desember 2025 / 17–18 de diciembre de 2025</td></tr>
+    <tr><td>Kontaktperson utbygger / Contacto promotor</td><td>Elena Cámara, After-Sales Admin, elenac@oneeden.es, +34 663 173 657</td></tr>
+    <tr><td>Registrerte observasjoner / Observaciones registradas</td><td>64 (opprinnelig 58, utvidet med 3 fuktsaker i feb. 2025 + 3 tillegg) / 64 (inicialmente 58, ampliado con 3 filtraciones en feb. 2025 + 3 adicionales)</td></tr>
+    <tr><td>Rapportdato / Fecha del informe</td><td>1. mars 2026 / 1 de marzo de 2026</td></tr>
+    <tr><td>Rapport utarbeidet av / Informe elaborado por</td><td>Tore Ausland (eier/propietario)</td></tr>
+    <tr><td>Dokumentreferanse / Referencia</td><td>RPF-2026-TPAL-A1-001</td></tr>
+</table>
+
+<!-- ===================== 1. SAMMENDRAG ===================== -->
+<h2>1. Sammendrag / Resumen Ejecutivo</h2>
+
+<div class="dual-lang">
+    <div class="lang-col">
+        <div class="lang-label">Norsk</div>
+        <p>Ved inspeksjon den 17. desember 2025 ble det avdekket omfattende fuktskader i leilighet Tiger Palm A1, Royal Palms Fase I, Mijas Costa. Fuktgjennomtrengningen er ikke begrenset til vår leilighet, men er et utbredt problem som påvirker mange leiligheter i både Fase 1 og Fase 2 av byggeprosjektet.</p>
+        <p>Undertegnede eier identifiserte fuktskader langs flere veggpartier (markert med <strong style="color:#c00;">RØD strek</strong> på plantegningen). Utbygger har ved sin gjennomgang bekreftet ytterligere fuktskader utover det som ble identifisert av eier (markert med <strong style="color:#c49000;">GUL strek</strong> på plantegningen).</p>
+        <p>Utbygger har meddelt intensjon om utbedring ved perimetertetting (inyección perimetral). Denne rapporten dokumenterer skadeomfanget, vurderer den foreslåtte utbedringsmetoden opp mot gjeldende spansk regelverk, og fremlegger eiernes bekymringer og krav.</p>
+    </div>
+    <div class="lang-col es">
+        <div class="lang-label">Español</div>
+        <p>Durante la inspección realizada el 17 de diciembre de 2025, se detectaron daños significativos por humedad en el apartamento Tiger Palm A1, Royal Palms Fase I, Mijas Costa. La infiltración de humedad no se limita a nuestro apartamento, sino que constituye un problema generalizado que afecta a numerosos apartamentos tanto en la Fase 1 como en la Fase 2 del proyecto.</p>
+        <p>El propietario abajo firmante identificó daños por humedad a lo largo de varios tramos de pared (marcados con <strong style="color:#c00;">línea ROJA</strong> en el plano). El promotor, en su propia revisión, ha confirmado daños adicionales por humedad más allá de los identificados por el propietario (marcados con <strong style="color:#c49000;">línea AMARILLA</strong> en el plano).</p>
+        <p>El promotor ha comunicado su intención de subsanar los defectos mediante sellado perimetral (inyección perimetral). Este informe documenta el alcance de los daños, evalúa el método de reparación propuesto conforme a la normativa española vigente, y expone las preocupaciones y exigencias de los propietarios.</p>
+    </div>
+</div>
+
+<!-- ===================== 2. PLANTEGNING ===================== -->
+<h2>2. Plantegning med skademarkering / Plano con marcación de daños</h2>
+
+<div class="image-container">
+    <p style="font-size:11pt; color:#333; font-weight:bold;">[Vedlagt plantegning / Plano adjunto — Tiger Palm A1]</p>
+    <p style="font-size:10pt; color:#555;">Bildet nedenfor viser plantegningen av leilighet Tiger Palm A1 med markeringer av påviste fuktskader.<br>
+    La imagen a continuación muestra el plano del apartamento Tiger Palm A1 con marcas de los daños por humedad detectados.</p>
+
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color legend-red"></div>
+            <span><strong>RØD / ROJO:</strong> Fuktskader påvist av eier / Daños detectados por el propietario</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color legend-yellow"></div>
+            <span><strong>GUL / AMARILLO:</strong> Ytterligere fuktskader påvist av utbygger / Daños adicionales detectados por el promotor</span>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== 3. SKADEBESKRIVELSE ===================== -->
+<h2>3. Detaljert skadebeskrivelse / Descripción detallada de los daños</h2>
+
+<div class="dual-lang">
+    <div class="lang-col">
+        <div class="lang-label">Norsk</div>
+        <p>Basert på inspeksjonen og plantegningsanalysen er følgende soner identifisert med fuktgjennomtrengning:</p>
+    </div>
+    <div class="lang-col es">
+        <div class="lang-label">Español</div>
+        <p>Según la inspección y el análisis del plano, se han identificado las siguientes zonas con infiltración de humedad:</p>
+    </div>
+</div>
+
+<table class="damage-table">
+    <thead>
+        <tr>
+            <th>Sone / Zona</th>
+            <th>Markering / Marca</th>
+            <th>Beskrivelse (NO)</th>
+            <th>Descripción (ES)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>A — Bod (Store Room) / Trastero</strong></td>
+            <td style="color:#c00; font-weight:bold;">RØD / ROJO</td>
+            <td>Fuktskade påvist av eier langs yttervegg i boden mot terreng. Synlig fuktgjennomtrengning ved vegg-gulv-overgang.</td>
+            <td>Daño por humedad detectado por el propietario a lo largo de la pared exterior del trastero en contacto con el terreno. Infiltración visible en la unión pared-suelo.</td>
+        </tr>
+        <tr>
+            <td><strong>A — Bod (Store Room) / Trastero</strong></td>
+            <td style="color:#c49000; font-weight:bold;">GUL / AMARILLO</td>
+            <td>Utbygger har påvist potensielle fuktskader i boden utover det eier identifiserte. Mulig fukt langs tilstøtende veggpartier.</td>
+            <td>El promotor ha detectado posibles daños por humedad en el trastero más allá de lo identificado por el propietario. Posible humedad a lo largo de tramos de pared adyacentes.</td>
+        </tr>
+        <tr>
+            <td><strong>B — Soverom 1 / Dormitorio 1</strong></td>
+            <td style="color:#c49000; font-weight:bold;">GUL / AMARILLO</td>
+            <td>Utbygger har påvist potensielle fuktskader i soverom 1 langs vegg i kontakt med terreng.</td>
+            <td>El promotor ha detectado posibles daños por humedad en el dormitorio 1 a lo largo de la pared en contacto con el terreno.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p style="font-size:10pt; color:#555; margin:10px 0;"><em><strong>Merk / Nota:</strong> Øvrige rom i leiligheten (soverom 2, soverom 3, stue/kjøkken, bad, gang) er ikke utsatt for vanninntrengning grunnet plassering og konstruksjon. Fukt observert mellom blomsterkasser/beplantningsområder på utsiden av leiligheten er utenfor leilighetens perimeter og er ikke inkludert i denne vurderingen. / Las demás habitaciones del apartamento (dormitorio 2, dormitorio 3, salón-cocina, baño, pasillo) no están expuestas a infiltración de agua debido a su ubicación y construcción. La humedad observada entre jardineras/zonas de plantación en el exterior del apartamento queda fuera del perímetro de la vivienda y no se incluye en esta evaluación.</em></p>
+
+<div class="risk-high">
+    <strong>Vurdering / Evaluación:</strong> Fuktskadene er konsentrert i boden og soverom 1 — begge i kontakt med terreng. Det faktum at utbygger påviser <em>flere</em> skader enn eier (inkludert i soverom 1) understreker at fuktproblemet er mer utbredt enn det som var synlig ved eiers inspeksjon. Fuktinntrengningen i disse sonene indikerer svikt i vanntetting mot terreng. / Los daños por humedad se concentran en el trastero y el dormitorio 1 — ambos en contacto con el terreno. El hecho de que el promotor detecte <em>más</em> daños que el propietario (incluido el dormitorio 1) subraya que el problema de humedad es más extenso de lo visible en la inspección del propietario. La infiltración en estas zonas indica un fallo en la impermeabilización contra el terreno.
+</div>
+
+<!-- ===================== 4. OMFANG ===================== -->
+<h2>4. Prosjektomfang / Alcance del proyecto</h2>
+
+<div class="dual-lang">
+    <div class="lang-col">
+        <div class="lang-label">Norsk</div>
+        <p>Fuktproblematikken er <strong>ikke begrenset til leilighet Tiger Palm A1</strong>. Det er rapportert massive fuktgjennomtrengninger i store deler av:</p>
+        <ul>
+            <li><strong>Fase 1</strong> — Royal Palms (inkl. Tiger Palm-blokken)</li>
+            <li><strong>Fase 2</strong> — Royal Palms (under ferdigstillelse)</li>
+        </ul>
+        <p>Problemet berører mange leiligheter og peker på en <strong>systemisk svikt</strong> i vanntetting og/eller drenering under bygging, ikke en isolert hendelse i en enkelt enhet.</p>
+    </div>
+    <div class="lang-col es">
+        <div class="lang-label">Español</div>
+        <p>La problemática de humedad <strong>no se limita al apartamento Tiger Palm A1</strong>. Se han reportado infiltraciones masivas de humedad en gran parte de:</p>
+        <ul>
+            <li><strong>Fase 1</strong> — Royal Palms (incluido el bloque Tiger Palm)</li>
+            <li><strong>Fase 2</strong> — Royal Palms (en proceso de finalización)</li>
+        </ul>
+        <p>El problema afecta a numerosos apartamentos y apunta a un <strong>fallo sistémico</strong> en la impermeabilización y/o drenaje durante la construcción, no un incidente aislado en una sola unidad.</p>
+    </div>
+</div>
+
+<!-- ===================== 5. REGELVERKSVURDERING ===================== -->
+<h2>5. Gjeldende regelverk / Normativa aplicable</h2>
+
+<div class="dual-lang">
+    <div class="lang-col">
+        <div class="lang-label">Norsk</div>
+        <h3>5.1 Código Técnico de la Edificación (CTE)</h3>
+        <p>CTE kapittel <strong>DB HS1 «Protección frente a la humedad»</strong> stiller bindende krav om at nye bygninger skal utformes slik at vann ikke trenger inn. Konkret:</p>
+        <ul>
+            <li>Alle vegger og gulv i kontakt med terreng skal vanntettes</li>
+            <li>Vanntetting av alle grunnmurer er påkrevd med dokumenterte tekniske løsninger</li>
+            <li>Vanntetting skal alltid kombineres med fungerende dreneringssystem</li>
+        </ul>
+
+        <h3>5.2 Ley de Ordenación de la Edificación (LOE)</h3>
+        <p>LOE Lov 38/1999 pålegger utbygger utbedringsplikt:</p>
+        <ul>
+            <li><strong>3 års garanti</strong> for skader som rammer beboelighet («habitabilidad») — fuktskader faller under denne kategorien</li>
+            <li><strong>10 års garanti</strong> for alvorlige fundamentfeil eller konstruksjonsskader (dekadisk ansvar)</li>
+        </ul>
+
+        <h3>5.3 Tekniske standarder</h3>
+        <ul>
+            <li>UNE 104401:2013 — Bitumenmembraner i kontakt med jord</li>
+            <li>UNE-EN 13969:2005/A1:2007 — Bitumenark mot fuktoppsug</li>
+            <li>UNE-EN 14909 — Plast- og gummimembraner</li>
+            <li>EN 1504-2 — Betongbeskyttelse og vanntetting</li>
+        </ul>
+    </div>
+    <div class="lang-col es">
+        <div class="lang-label">Español</div>
+        <h3>5.1 Código Técnico de la Edificación (CTE)</h3>
+        <p>El capítulo <strong>DB HS1 «Protección frente a la humedad»</strong> del CTE establece requisitos vinculantes para que los edificios nuevos se diseñen de modo que el agua no penetre. Concretamente:</p>
+        <ul>
+            <li>Todos los muros y suelos en contacto con el terreno deben impermeabilizarse</li>
+            <li>La impermeabilización de todos los muros de cimentación es obligatoria con soluciones técnicas documentadas</li>
+            <li>La impermeabilización debe combinarse siempre con un sistema de drenaje funcional</li>
+        </ul>
+
+        <h3>5.2 Ley de Ordenación de la Edificación (LOE)</h3>
+        <p>La LOE, Ley 38/1999, impone al promotor la obligación de subsanación:</p>
+        <ul>
+            <li><strong>Garantía de 3 años</strong> para daños que afecten la habitabilidad — los daños por humedad se incluyen en esta categoría</li>
+            <li><strong>Garantía de 10 años</strong> para defectos graves de cimentación o daños estructurales (responsabilidad decenal)</li>
+        </ul>
+
+        <h3>5.3 Normas técnicas</h3>
+        <ul>
+            <li>UNE 104401:2013 — Membranas bituminosas en contacto con el suelo</li>
+            <li>UNE-EN 13969:2005/A1:2007 — Láminas bituminosas contra la humedad ascendente</li>
+            <li>UNE-EN 14909 — Membranas de plástico y caucho</li>
+            <li>EN 1504-2 — Protección y reparación de hormigón</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ===================== 6. UTBEDRINGSMETODE ===================== -->
+<h2>6. Vurdering av utbyggers foreslåtte utbedringsmetode / Evaluación del método de reparación propuesto</h2>
+
+<div class="dual-lang">
+    <div class="lang-col">
+        <div class="lang-label">Norsk</div>
+        <h3>6.1 Utbyggers forslag: Perimetertetting (Inyección Perimetral)</h3>
+        <p>Utbygger har kommunisert intensjon om å utbedre fuktskadene ved hjelp av <strong>perimetertetting</strong> — injeksering av polyuretan- eller akrylharpiks i bunnfuger og rundt grunnmursskjøter for å danne en kjemisk barriere.</p>
+
+        <h3>6.2 Teknisk vurdering</h3>
+        <p>Ifølge spansk faglitteratur og CTE-retningslinjer har perimetertetting alene <strong>vesentlige begrensninger</strong>:</p>
+        <ul>
+            <li>Injeksjon kan danne en kjemisk fuktsperre, men den ytre fuktbelastningen må fremdeles håndteres</li>
+            <li>Vanntetting skal alltid kombineres med fungerende dreneringssystem — manglende drenering øker det hydrostatiske presset</li>
+            <li>Vedvarende lekkasjer kan skyldes feil i dreneringssystemet eller i membranen på yttersiden</li>
+            <li>Hvis utvendig vanntetting mangler eller er ødelagt, er en ren injeksjonsløsning sjelden en permanent løsning</li>
+        </ul>
+
+        <h3>6.3 Anbefalt komplett utbedringsmetode</h3>
+        <p>For en varig og forskriftsmessig løsning bør utbedringen omfatte:</p>
+        <ol>
+            <li><strong>Perimetral injeksjon</strong> — som kortsiktig tiltak for å stoppe akutt vanninntrengning</li>
+            <li><strong>Utvendig vanntettingssystem</strong> — ny membran (bitumen/plast) på ytterside av grunnmur</li>
+            <li><strong>Dreneringssystem</strong> — dreneringsledning, gruslag og geotekstil for å lede vann bort</li>
+            <li><strong>Innvendig membran/impregnering</strong> — sementbaserte membranmørtler eller epoksyrens som ekstra barriere</li>
+            <li><strong>Reparasjon av sprekker og fuger</strong> — tetting av alle horisontale/vertikale fuger og sprekker</li>
+        </ol>
+    </div>
+    <div class="lang-col es">
+        <div class="lang-label">Español</div>
+        <h3>6.1 Propuesta del promotor: Sellado perimetral (Inyección Perimetral)</h3>
+        <p>El promotor ha comunicado su intención de subsanar los daños por humedad mediante <strong>sellado perimetral</strong> — inyección de resinas de poliuretano o acrílicas en las juntas de base y alrededor de las uniones de muros de cimentación para crear una barrera química.</p>
+
+        <h3>6.2 Evaluación técnica</h3>
+        <p>Según la literatura técnica española y las directrices del CTE, el sellado perimetral por sí solo presenta <strong>limitaciones significativas</strong>:</p>
+        <ul>
+            <li>La inyección puede crear una barrera química contra la humedad, pero la carga de humedad exterior debe seguir gestionándose</li>
+            <li>La impermeabilización debe combinarse siempre con un sistema de drenaje funcional — la falta de drenaje aumenta la presión hidrostática</li>
+            <li>Las filtraciones persistentes pueden deberse a fallos en el sistema de drenaje o en la membrana exterior</li>
+            <li>Si la impermeabilización exterior falta o está dañada, una solución de inyección sola rara vez es una solución permanente</li>
+        </ul>
+
+        <h3>6.3 Método de reparación completo recomendado</h3>
+        <p>Para una solución duradera y conforme a la normativa, la reparación debe incluir:</p>
+        <ol>
+            <li><strong>Inyección perimetral</strong> — como medida a corto plazo para detener la infiltración de agua aguda</li>
+            <li><strong>Sistema de impermeabilización exterior</strong> — nueva membrana (bituminosa/plástica) en la cara exterior del muro de cimentación</li>
+            <li><strong>Sistema de drenaje</strong> — tubería de drenaje, capa de grava y geotextil para desviar el agua</li>
+            <li><strong>Membrana interior/impermeabilización</strong> — morteros cementosos impermeabilizantes o resinas epoxi como barrera adicional</li>
+            <li><strong>Reparación de grietas y juntas</strong> — sellado de todas las juntas horizontales/verticales y fisuras</li>
+        </ol>
+    </div>
+</div>
+
+<div class="risk-high">
+    <strong>ADVARSEL / ADVERTENCIA:</strong> Perimetertetting alene anses av faglitteraturen som <strong>utilstrekkelig</strong> dersom grunnvannspresset er høyt og utvendig membran mangler eller er skadet. En helhetlig løsning er nødvendig. / El sellado perimetral por sí solo se considera <strong>insuficiente</strong> según la literatura técnica cuando la presión del agua subterránea es alta y la membrana exterior falta o está dañada. Se requiere una solución integral.
+</div>
+
+<!-- ===================== 7. EIERNES KRAV ===================== -->
+<h2>7. Eiernes krav og standpunkter / Exigencias y posición de los propietarios</h2>
+
+<div class="dual-lang">
+    <div class="lang-col">
+        <div class="lang-label">Norsk</div>
+        <ol>
+            <li><strong>Fullstendig utbedring i henhold til CTE HS1:</strong> Vi krever at utbedringen gjennomføres i tråd med gjeldende forskrifter, ikke bare som en midlertidig løsning.</li>
+            <li><strong>Dokumentert utbedringsplan:</strong> Vi ber om en detaljert teknisk rapport fra utbygger som beskriver eksakt hvilke tiltak som skal gjennomføres, materialspesifikasjoner og tidsplan.</li>
+            <li><strong>Uavhengig inspeksjon:</strong> Vi forbeholder oss retten til å engasjere en uavhengig byggsakkyndig (perito) for å vurdere utbedringsarbeidet.</li>
+            <li><strong>Garanti på utbedringsarbeid:</strong> Vi krever skriftlig garanti på det utførte utbedringsarbeidet.</li>
+            <li><strong>LOE-rettigheter forbeholdt:</strong> Vi reserverer alle rettigheter under LOE Lov 38/1999, inkludert 3-års habitabilitetgaranti og 10-års dekadisk ansvar.</li>
+            <li><strong>Kompensasjon:</strong> Vi forbeholder oss retten til å kreve kompensasjon for forsinket overtakelse og eventuelle følgeskader.</li>
+        </ol>
+    </div>
+    <div class="lang-col es">
+        <div class="lang-label">Español</div>
+        <ol>
+            <li><strong>Reparación completa conforme al CTE HS1:</strong> Exigimos que la reparación se realice de acuerdo con la normativa vigente, no solo como una solución temporal.</li>
+            <li><strong>Plan de reparación documentado:</strong> Solicitamos un informe técnico detallado del promotor que describa exactamente las medidas a ejecutar, especificaciones de materiales y cronograma.</li>
+            <li><strong>Inspección independiente:</strong> Nos reservamos el derecho de contratar un perito independiente para evaluar los trabajos de reparación.</li>
+            <li><strong>Garantía de los trabajos de reparación:</strong> Exigimos una garantía por escrito de los trabajos de reparación realizados.</li>
+            <li><strong>Derechos LOE reservados:</strong> Reservamos todos los derechos bajo la LOE, Ley 38/1999, incluyendo la garantía de habitabilidad de 3 años y la responsabilidad decenal de 10 años.</li>
+            <li><strong>Compensación:</strong> Nos reservamos el derecho a reclamar compensación por el retraso en la entrega y posibles daños consecuenciales.</li>
+        </ol>
+    </div>
+</div>
+
+<!-- ===================== 8. TIDSLINJE ===================== -->
+<h2>8. Hendelsesforløp / Cronología de eventos</h2>
+
+<table class="damage-table">
+    <thead>
+        <tr>
+            <th>Dato / Fecha</th>
+            <th>Hendelse (NO)</th>
+            <th>Evento (ES)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>17.12.2025</strong></td>
+            <td>Inspeksjon av leilighet Tiger Palm A1. Eier identifiserer fuktskader (røde markeringer).</td>
+            <td>Inspección del apartamento Tiger Palm A1. El propietario identifica daños por humedad (marcas rojas).</td>
+        </tr>
+        <tr>
+            <td><strong>17.12.2025</strong></td>
+            <td>Utbygger bekrefter ytterligere fuktskader utover eiers funn (gule markeringer).</td>
+            <td>El promotor confirma daños adicionales por humedad más allá de los hallazgos del propietario (marcas amarillas).</td>
+        </tr>
+        <tr>
+            <td><strong>17.12.2025</strong></td>
+            <td>Utbygger meddeler intensjon om utbedring ved perimetertetting.</td>
+            <td>El promotor comunica su intención de reparación mediante sellado perimetral.</td>
+        </tr>
+        <tr>
+            <td><strong>18.12.2025</strong></td>
+            <td>Formell inspeksjon med 58 observasjoner registrert. Rapport sendt via DocuSign.</td>
+            <td>Inspección formal con 58 observaciones registradas. Informe enviado vía DocuSign.</td>
+        </tr>
+        <tr>
+            <td><strong>Des.25–Feb.26</strong></td>
+            <td>Kraftig uvær/stormer bremser byggearbeidene. 3 nye fuktrelaterte saker oppstår (filtrasjoner åpnet i februar).</td>
+            <td>Fuertes tormentas ralentizan las obras de construcción. Surgen 3 nuevos problemas de humedad (filtraciones abiertas en febrero).</td>
+        </tr>
+        <tr>
+            <td><strong>24.02.2026</strong></td>
+            <td>Eier sender purring til OneEden: nesten 3 mnd uten informasjon av verdi vedr. utbedringsplan.</td>
+            <td>El propietario envía reclamación a OneEden: casi 3 meses sin información de valor respecto al plan de reparación.</td>
+        </tr>
+        <tr>
+            <td><strong>26.02.2026</strong></td>
+            <td>OneEden (Elena Cámara, After-Sales) svarer: 64 observasjoner nå registrert (58+6). 20 saker ferdigstilt. Tiger-blokken er neste i rekkefølge etter Washington, Palmetto, Majesty og Queen. Sacyr (hovedentreprenør) behandler blokkene i byggrekkefølge.</td>
+            <td>OneEden (Elena Cámara, After-Sales) responde: 64 observaciones ahora registradas (58+6). 20 incidencias completadas. El bloque Tiger es el siguiente en secuencia tras Washington, Palmetto, Majesty y Queen. Sacyr (contratista principal) aborda los bloques en orden de ejecución.</td>
+        </tr>
+        <tr>
+            <td><strong>01.03.2026</strong></td>
+            <td>Denne rapport utarbeides for å dokumentere skadeomfang og sikre eiernes rettigheter.</td>
+            <td>Se elabora el presente informe para documentar el alcance de los daños y proteger los derechos de los propietarios.</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- ===================== 8B. KORRESPONDANSE ===================== -->
+<h2>8b. Korrespondanse med utbygger / Correspondencia con el promotor</h2>
+
+<div class="dual-lang">
+    <div class="lang-col">
+        <div class="lang-label">Norsk</div>
+        <h3>Eiers purring — 24. februar 2026</h3>
+        <p>Eier Tore Ausland sendte e-post til OneEden med påpekning om at det nå er nesten 3 måneder siden inspeksjonen, uten at det er mottatt informasjon av verdi vedrørende utbedringsplan eller tidsestimat.</p>
+
+        <h3>OneEdens svar — 26. februar 2026</h3>
+        <p>Elena Cámara (After-Sales, OneEden) svarer med følgende nøkkelopplysninger:</p>
+        <ul>
+            <li>Inspeksjonsrapporten viser nå <strong>64 observasjoner</strong> (opp fra 58 opprinnelige; 3 nye fuktskader oppdaget i februar + 3 tillegg)</li>
+            <li><strong>20 av 64</strong> saker er ferdigstilt (hovedsakelig elektrisk, klimaanlegg, snekkerarbeid, flisarbeid)</li>
+            <li>Gjenstående saker: lakkering, terrassefliser, silikon, rørleggerarbeid, kjøkken — samt <strong>perimetertetting relatert til fuktobservasjoner</strong></li>
+            <li>Kraftig uvær siden desember har forsinket byggearbeidene</li>
+            <li>Hovedentreprenør <strong>Sacyr</strong> behandler blokkene i byggrekkefølge: Washington → Palmetto → Majesty → Queen → <strong>Tiger (vår blokk — neste i rekken)</strong></li>
+        </ul>
+
+        <div class="risk-medium">
+            <strong>Bekymring:</strong> Etter nesten 3 måneder foreligger det fortsatt ikke en konkret tidsplan eller detaljert teknisk beskrivelse av utbedringsmetoden for fuktskadene. Svaret bekrefter at fuktutbedring ikke er ferdigstilt, og Tiger-blokken er ennå ikke prioritert.
+        </div>
+    </div>
+    <div class="lang-col es">
+        <div class="lang-label">Español</div>
+        <h3>Reclamación del propietario — 24 de febrero de 2026</h3>
+        <p>El propietario Tore Ausland envió un correo electrónico a OneEden señalando que habían pasado casi 3 meses desde la inspección sin recibir información de valor respecto al plan de reparación o estimación de plazos.</p>
+
+        <h3>Respuesta de OneEden — 26 de febrero de 2026</h3>
+        <p>Elena Cámara (After-Sales, OneEden) responde con los siguientes datos clave:</p>
+        <ul>
+            <li>El informe de inspección muestra ahora <strong>64 observaciones</strong> (frente a las 58 iniciales; 3 nuevas filtraciones detectadas en febrero + 3 adicionales)</li>
+            <li><strong>20 de 64</strong> incidencias completadas (principalmente trabajos eléctricos, aire acondicionado, carpintería, alicatado)</li>
+            <li>Incidencias pendientes: lacado, baldosas de terraza, silicona, fontanería, cocina — y <strong>sellado perimetral relacionado con las observaciones de humedad</strong></li>
+            <li>Las fuertes tormentas desde diciembre han retrasado las obras de construcción</li>
+            <li>El contratista principal <strong>Sacyr</strong> aborda los bloques en orden de ejecución: Washington → Palmetto → Majesty → Queen → <strong>Tiger (nuestro bloque — el siguiente en la secuencia)</strong></li>
+        </ul>
+
+        <div class="risk-medium">
+            <strong>Preocupación:</strong> Después de casi 3 meses, aún no existe un calendario concreto ni una descripción técnica detallada del método de reparación de los daños por humedad. La respuesta confirma que la reparación de humedades no se ha completado, y el bloque Tiger aún no ha sido priorizado.
+        </div>
+    </div>
+</div>
+
+<!-- ===================== 9. KONKLUSJON ===================== -->
+<h2>9. Konklusjon / Conclusión</h2>
+
+<div class="dual-lang">
+    <div class="lang-col">
+        <div class="lang-label">Norsk</div>
+        <p>Fuktskadene i Tiger Palm A1 og det bredere Royal Palms-prosjektet er alvorlige og tyder på en <strong>systemisk svikt i vanntetting under bygging</strong>. Det foreligger brudd på CTE HS1-kravene om beskyttelse mot fukt.</p>
+        <p>Utbyggers foreslåtte utbedringsmetode — perimetertetting alene — er ifølge faglitteraturen <strong>sannsynligvis utilstrekkelig</strong> som permanent løsning. En helhetlig tilnærming inkludert utvendig membran, drenering og innvendig behandling er nødvendig.</p>
+        <p>Under LOE Lov 38/1999 har utbygger <strong>utbedringsplikt</strong>, og eier har krav på at leiligheten leveres fri for fuktskader og i samsvar med gjeldende byggeforskrifter.</p>
+    </div>
+    <div class="lang-col es">
+        <div class="lang-label">Español</div>
+        <p>Los daños por humedad en Tiger Palm A1 y en el proyecto Royal Palms en general son graves e indican un <strong>fallo sistémico en la impermeabilización durante la construcción</strong>. Existe un incumplimiento de los requisitos del CTE HS1 sobre protección frente a la humedad.</p>
+        <p>El método de reparación propuesto por el promotor — sellado perimetral solamente — es, según la literatura técnica, <strong>probablemente insuficiente</strong> como solución permanente. Se requiere un enfoque integral que incluya membrana exterior, drenaje y tratamiento interior.</p>
+        <p>Conforme a la LOE, Ley 38/1999, el promotor tiene la <strong>obligación de subsanación</strong>, y el propietario tiene derecho a que el apartamento se entregue libre de daños por humedad y en conformidad con la normativa de edificación vigente.</p>
+    </div>
+</div>
+
+<!-- ===================== 10. VEDLEGG ===================== -->
+<h2>10. Vedlegg / Anexos</h2>
+
+<div class="dual-lang">
+    <div class="lang-col">
+        <div class="lang-label">Norsk</div>
+        <ul>
+            <li><strong>Vedlegg A:</strong> Plantegning med fuktskademarkeringer (rød = eier, gul = utbygger)</li>
+            <li><strong>Vedlegg B:</strong> Spanske byggeforskrifter for fuktsikring (forskriftsdokument)</li>
+            <li><strong>Vedlegg C:</strong> Snagging-rapport / Ferdigbefaringsrapport Royal Palms Fase I</li>
+            <li><strong>Vedlegg D:</strong> Kjøpskontrakt og betalingsoversikt</li>
+            <li><strong>Vedlegg E:</strong> Extras & Optionals Tiger Palm A1</li>
+        </ul>
+    </div>
+    <div class="lang-col es">
+        <div class="lang-label">Español</div>
+        <ul>
+            <li><strong>Anexo A:</strong> Plano con marcas de daños por humedad (rojo = propietario, amarillo = promotor)</li>
+            <li><strong>Anexo B:</strong> Normativa española de edificación para impermeabilización (documento normativo)</li>
+            <li><strong>Anexo C:</strong> Informe de remate / Snagging Royal Palms Fase I</li>
+            <li><strong>Anexo D:</strong> Contrato de compraventa y desglose de pagos</li>
+            <li><strong>Anexo E:</strong> Extras y Opcionales Tiger Palm A1</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ===================== KILDER ===================== -->
+<div class="ref-section">
+    <h3>Kilder / Fuentes</h3>
+    <ol style="font-size:9pt;">
+        <li>CTE DB HS1 «Protección frente a la humedad» — Código Técnico de la Edificación</li>
+        <li>LOE — Ley 38/1999, de 5 de noviembre, de Ordenación de la Edificación (BOE-A-1999-21567)</li>
+        <li>UNE 104401:2013 — Impermeabilización en la edificación</li>
+        <li>UNE-EN 13969:2005/A1:2007 — Láminas flexibles para impermeabilización</li>
+        <li>UNE-EN 14909 — Membranas plásticas y de caucho</li>
+        <li>EN 1504-2 — Protección y reparación de estructuras de hormigón</li>
+        <li>Sika — Soluciones de impermeabilización para muros enterrados</li>
+        <li>ESTRUSEC — Filtraciones laterales en muros enterrados</li>
+        <li>Spanske byggeforskrifter for fuktsikring (internt dokument / documento interno)</li>
+    </ol>
+</div>
+
+<!-- ===================== SIGNATUR ===================== -->
+<div style="margin-top:50px; display:grid; grid-template-columns:1fr 1fr; gap:40px;">
+    <div>
+        <p style="border-top:1px solid #333; padding-top:5px; width:250px;">
+            <strong>Tore Ausland</strong><br>
+            <span style="font-size:9pt; color:#666;">Eier / Propietario<br>Dato / Fecha: ____________________</span>
+        </p>
+    </div>
+    <div>
+        <p style="border-top:1px solid #333; padding-top:5px; width:250px;">
+            <strong>Laila Espenes</strong><br>
+            <span style="font-size:9pt; color:#666;">Eier / Propietario<br>Dato / Fecha: ____________________</span>
+        </p>
+    </div>
+</div>
+
+<div class="footer">
+    Dokumentreferanse / Referencia: RPF-2026-TPAL-A1-001 | Konfidensielt / Confidencial
+</div>
+
+</body>
+</html>

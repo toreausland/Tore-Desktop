@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelian Manufacturing — Go-to-Market Statusrapport</title>
+<style>
+  @page { size: A4; margin: 2.5cm; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #F50537; --black: #2B2B2B; --pure-black: #000000; --white: #FFFFFF;
+    --gray-medium: #6B6B6B; --gray-panel: #F5F5F5; --gray-divider: #D3D3D3;
+    --dark-charcoal: #1A1A1A; --navy-card: #253B52; --steel-blue: #8EAEC5;
+  }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: Calibri, 'Segoe UI', system-ui, sans-serif; color: var(--black); background: #E8E8E8; line-height: 1.55; }
+  .document { max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 1px 40px rgba(0,0,0,0.12); }
+  @media screen and (min-width: 900px) { .document { margin: 2rem auto; } }
+
+  /* Cover */
+  .cover { background: var(--pure-black); padding: 4rem 3.5rem 3rem; position: relative; overflow: hidden; min-height: 340px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .cover-stars { font-size: 1.6rem; color: var(--white); letter-spacing: 0.5rem; margin-bottom: 1rem; opacity: 0.85; }
+  .cover-company { font-size: 2.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; margin-bottom: 1.8rem; }
+  .cover-bar { width: 80px; height: 3px; background: var(--red); margin: 0 auto 1.8rem; }
+  .cover-title { font-size: 1.45rem; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; max-width: 620px; }
+  .cover-subtitle { font-size: 1.0rem; font-weight: 400; color: var(--red); font-style: italic; margin-bottom: 2.5rem; }
+  .cover-meta { font-size: 0.78rem; color: var(--gray-medium); letter-spacing: 0.04em; }
+  .cover-meta span { margin: 0 0.8rem; }
+
+  /* Content */
+  section { padding: 2.2rem 3.5rem; position: relative; }
+  section + section { border-top: 1px solid var(--gray-divider); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-size: 1.35rem; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 1rem; }
+  h3 { font-size: 1.0rem; font-weight: 700; color: var(--black); margin-top: 1.4rem; margin-bottom: 0.4rem; }
+  p { font-size: 0.88rem; line-height: 1.6; color: var(--black); margin-bottom: 0.7rem; }
+  p.secondary { color: var(--gray-medium); font-size: 0.82rem; }
+  strong { font-weight: 700; }
+  .red-accent { color: var(--red); font-weight: 700; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.82rem; }
+  thead th { background: var(--black); color: var(--white); font-weight: 700; text-align: left; padding: 0.55rem 0.7rem; font-size: 0.78rem; letter-spacing: 0.02em; }
+  tbody td { padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--gray-divider); vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--gray-panel); }
+
+  /* Status badges */
+  .badge { display: inline-block; padding: 0.18rem 0.55rem; border-radius: 3px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.02em; white-space: nowrap; }
+  .badge-active { background: #1B7A3D; color: var(--white); }
+  .badge-progress { background: var(--red); color: var(--white); }
+  .badge-planning { background: var(--black); color: var(--white); }
+  .badge-research { background: var(--gray-medium); color: var(--white); }
+
+  /* Callout */
+  .callout { background: var(--gray-panel); border-left: 3px solid var(--red); padding: 1rem 1.2rem; margin: 1rem 0; }
+  .callout p { font-size: 0.84rem; margin-bottom: 0; line-height: 1.5; }
+
+  /* Summary strip */
+  .summary-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 1.2rem 0; border: 1px solid var(--gray-divider); }
+  .summary-item { padding: 1rem 0.7rem; text-align: center; border-right: 1px solid var(--gray-divider); background: var(--white); }
+  .summary-item:last-child { border-right: none; }
+  .summary-item.highlight { background: var(--red); }
+  .summary-value { font-size: 1.35rem; font-weight: 700; color: var(--black); line-height: 1.1; margin-bottom: 0.2rem; }
+  .summary-item.highlight .summary-value { color: var(--white); }
+  .summary-label { font-size: 0.64rem; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+  .summary-item.highlight .summary-label { color: rgba(255,255,255,0.85); }
+
+  /* Timeline */
+  .timeline { margin: 1.2rem 0; }
+  .timeline-month { border-left: 3px solid var(--gray-divider); padding: 0.9rem 1.3rem; margin-bottom: 0.6rem; position: relative; }
+  .timeline-month.current { border-left-color: var(--red); }
+  .timeline-month .month-label { font-size: 0.72rem; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
+  .timeline-month .month-content { font-size: 0.84rem; color: var(--black); line-height: 1.55; }
+  .timeline-month ul { margin: 0.3rem 0 0 1.2rem; font-size: 0.84rem; line-height: 1.6; }
+
+  /* Dark panel */
+  .dark-panel { background: var(--dark-charcoal); padding: 2.2rem 3.5rem; border-top: none; }
+  .dark-panel .section-label { color: var(--red); }
+  .dark-panel h2 { color: var(--white); }
+  .dark-panel p { color: rgba(255,255,255,0.85); }
+  .dark-panel table thead th { background: rgba(255,255,255,0.1); }
+  .dark-panel table tbody td { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .dark-panel table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  /* Company cards */
+  .company-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 1rem 0; }
+  .company-card { background: var(--gray-panel); padding: 1rem 1.1rem; }
+  .company-card .card-name { font-size: 0.9rem; font-weight: 700; color: var(--black); margin-bottom: 0.15rem; }
+  .company-card .card-sector { font-size: 0.72rem; font-weight: 600; color: var(--red); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+  .company-card .card-detail { font-size: 0.78rem; color: var(--gray-medium); line-height: 1.45; }
+  .company-card .card-detail strong { color: var(--black); }
+
+  /* Footer */
+  .doc-footer { padding: 1.3rem 3.5rem; border-top: 1px solid var(--gray-divider); display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--gray-medium); }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-stars">★ ★ ★ ★ ★</div>
+    <div class="cover-company">Aurelian Manufacturing</div>
+    <div class="cover-bar"></div>
+    <div class="cover-title">Go-to-Market Statusrapport</div>
+    <div class="cover-subtitle">Kundedialog og LOI-fremdrift — November 2025 til Mars 2026</div>
+    <div class="cover-meta">
+      <span>KONFIDENSIELT</span>
+      <span>|</span>
+      <span>3. mars 2026</span>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section>
+    <div class="section-label">Sammendrag</div>
+    <h2>Status — Go-to-Market og LOI-fremdrift</h2>
+
+    <p>Aurelian Manufacturing har siden november 2025 systematisk bygget opp Go-to-Market-strategier mot <strong>seks betydningsfulle industriselskaper</strong> innen forsvar, aerospace og subsea. Vi er i aktiv dialog med flere av disse og arbeider målrettet mot Letter of Intent (LOI) som grunnlag for formaliserte leverandørrelasjoner.</p>
+
+    <p>Selskapene vi er i dialog med representerer samlet ordrebøker på over <span class="red-accent">NOK 500 milliarder</span> og utgjør ryggraden i norsk forsvarsindustri og subsea-sektor. Disse er ikke tilfeldige målkunder — de er nøye selektert basert på strategisk passform, kapasitetsbehov og langsiktig potensial for Aurelians autonome CNC-produksjon.</p>
+
+    <div class="callout">
+      <p><strong>Hovedbudskap:</strong> Vi er i god fremdrift. Dialogene beveger seg i riktig retning, men fordi vi arbeider med Norges største og mest sikkerhetsgraderte industrikonsern, har kvalifiseringsprosessene et tempo og en grundighet som reflekterer selskapenes størrelse og betydning. LOI-arbeidet er godt i gang, med konkrete varme leads og planlagte møter hos flere av målselskapene.</p>
+    </div>
+
+    <div class="summary-strip">
+      <div class="summary-item highlight">
+        <div class="summary-value">6</div>
+        <div class="summary-label">Målselskaper<br>i pipeline</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value">2</div>
+        <div class="summary-label">Aktive<br>dialoger</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value">4</div>
+        <div class="summary-label">Strategier<br>ferdigstilt</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value">6</div>
+        <div class="summary-label">GTM-planer<br>komplett</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARGET COMPANIES -->
+  <section>
+    <div class="section-label">Målselskaper</div>
+    <h2>Seks strategiske kunder — to sektorer</h2>
+
+    <p>Alle målselskaper er valgt ut basert på tre kriterier: (1) dokumentert CNC-kapasitetsbehov, (2) strategisk relevans for Aurelians posisjonering i forsvar og subsea, og (3) potensial for langsiktige kontrakter som rettferdiggjør investering i maskinpark tilpasset kundens behov.</p>
+
+    <div class="company-grid">
+      <div class="company-card">
+        <div class="card-name">Kongsberg Defence & Aerospace</div>
+        <div class="card-sector">Forsvar & Aerospace</div>
+        <div class="card-detail">Ordrebok: <strong>NOK 125 mrd</strong><br>Dialogstatus: <strong>Aktiv dialog — flere divisjoner</strong><br>Lokasjoner: Kongsberg, Rygge</div>
+      </div>
+      <div class="company-card">
+        <div class="card-name">Nammo</div>
+        <div class="card-sector">Forsvar — Ammunisjon & Missiler</div>
+        <div class="card-detail">Ordrebok: <strong>NOK 39,8 mrd</strong> (+57% YoY)<br>Dialogstatus: <strong>Kontaktfase igangsatt</strong><br>Lokasjon: Raufoss</div>
+      </div>
+      <div class="company-card">
+        <div class="card-name">Aker Solutions</div>
+        <div class="card-sector">Subsea & Energi</div>
+        <div class="card-detail">Ordrebok: <strong>NOK 80+ mrd</strong><br>Dialogstatus: <strong>Kontaktfase igangsatt</strong><br>Lokasjon: Fornebu/Tranby</div>
+      </div>
+      <div class="company-card">
+        <div class="card-name">TechnipFMC</div>
+        <div class="card-sector">Subsea Produksjonssystemer</div>
+        <div class="card-detail">Ordrebok: <strong>NOK 155 mrd</strong><br>Dialogstatus: <strong>Strategifase komplettert</strong><br>Lokasjon: Kongsberg</div>
+      </div>
+      <div class="company-card">
+        <div class="card-name">OneSubsea (SLB)</div>
+        <div class="card-sector">Subsea & Prosessering</div>
+        <div class="card-detail">Ordrebok: <strong>Global — Norges-fokus</strong><br>Dialogstatus: <strong>Strategifase komplettert</strong><br>Lokasjon: Horsøy (Bergen)</div>
+      </div>
+      <div class="company-card">
+        <div class="card-name">Subsea 7</div>
+        <div class="card-sector">EPCI — Subsea Installasjoner</div>
+        <div class="card-detail">Ordrebok: <strong>NOK 108 mrd</strong><br>Dialogstatus: <strong>Strategifase komplettert</strong><br>Lokasjon: Stavanger</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVITY TIMELINE -->
+  <section>
+    <div class="section-label">Aktivitetsoversikt</div>
+    <h2>Tidslinje — November 2025 til Mars 2026</h2>
+
+    <div class="timeline">
+
+      <div class="timeline-month">
+        <div class="month-label">November 2025</div>
+        <div class="month-content">
+          <ul>
+            <li>Igangsatt systematisk markedsanalyse av forsvarsindustrien og subsea-sektoren i Norge med fokus på å identifisere selskaper med dokumentert CNC-kapasitetsbehov</li>
+            <li>Kartlegging av ordrebøker, produksjonslokalisering og leverandørkjedestrategi for potensielle målkunder</li>
+            <li>Analyse av offentlig tilgjengelig informasjon om sektortrender: forsvarsopprustning (NOK 1 600 mrd langtidsplan), subsea-investering og krav til norsk innhold</li>
+            <li>Innledende dialog med kontakter hos Kongsberg Defence & Aerospace for å sondere interesse for ny kapasitetsleverandør</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-month">
+        <div class="month-label">Desember 2025</div>
+        <div class="month-content">
+          <ul>
+            <li>Identifisert seks primære målselskaper fordelt på to sektorer (forsvar/aerospace og subsea/energi) basert på strategisk passform</li>
+            <li>Påbegynt utvikling av segmentert Go-to-Market-rammeverk med individuelle strategier per selskap</li>
+            <li>Analyse av kvalifiseringskrav per selskap: AQAP 2110/2310 (forsvar), NORSOK M-101/M-630 (subsea), AS9100D (aerospace)</li>
+            <li>Utarbeidet første versjon av kapabilitetsmemorandum tilpasset forsvarsindustrien</li>
+            <li>Kartlegging av beslutningsstruktur og innkjøpsorganisasjon hos KDA med fokus på Supply Chain og operasjonelle beslutningstakere</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-month">
+        <div class="month-label">Januar 2026</div>
+        <div class="month-content">
+          <ul>
+            <li>Ferdigstilt detaljerte Go-to-Market-strategier for alle seks målselskaper, hver med fire segmenterte tilnærminger basert på selskapenes divisjonsstruktur</li>
+            <li>Detaljert kontaktkartlegging: identifisert nøkkelposisjoner (VP Supply Chain, SVP Strategic Sourcing, Director Operations, Procurement Manager) hos samtlige målselskaper</li>
+            <li>Utarbeidet kapabilitetsmemorandum V3 — Smart Factory CNC Capability Brief tilpasset forsvarsindustriens krav</li>
+            <li>Utviklet verdiproposisjon per segment: kapasitetsavlastning, norsk eierskap (kritisk for forsvar), digital sporbarhet fra dag én, og mulighet for kunder å påvirke maskinkonfigurasjon</li>
+            <li>Analyse av KDA-divisjonenes produksjonsbehov: Aerostructures (F-35, titanium 5-akse), Defence Systems (NASAMS, Protector), KAMS (MRO), Missiles & Space (NSM/JSM)</li>
+            <li>Kartlegging av Nammos ekspansjonsplaner: 5× oppramping av 155mm-produksjon med NOK 2 mrd statsstøtte — identifisert som prioritert CNC-kapasitetskunde</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-month current">
+        <div class="month-label">Februar 2026</div>
+        <div class="month-content">
+          <ul>
+            <li>Aktiv utadrettet aktivitet igangsatt — direkte kontakt opprettet med sentrale posisjoner i KDAs innkjøps- og operasjonsorganisasjon</li>
+            <li><strong>KDA Kongsberg:</strong> Dialog initiert med SVP Strategic Sourcing & Supply Chain (Defence Systems-divisjonen) og VP Supply Chain (konsern). Kapabilitetsmemorandum V3 oversendt</li>
+            <li><strong>KDA Rygge:</strong> Dialog initiert med Director Special Projects hos KAMS (Kongsberg Aviation Maintenance Services). Positiv respons — intern stakeholder-gjennomgang initiert med deltagelse fra Site Manager F135-motordepot</li>
+            <li>Dialog opprettet med VP Operations (Aerostructures-divisjonen) — divisjonen med størst internt CNC-maskineringsvolum</li>
+            <li>Ferdigstilt Go-to-Market-strategi for Aker Solutions med fokus på subsea produksjonssystemer og aftermarket</li>
+            <li>Ferdigstilt Go-to-Market-strategi for Nammo med fokus på Large Caliber Systems og Aerospace Propulsion</li>
+            <li>Påbegynt kontaktfase mot Aker Solutions — VP Supply Chain Management og Senior Procurement Manager (Norge) identifisert som primærkontakter</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-month current">
+        <div class="month-label">Mars 2026 (pågående)</div>
+        <div class="month-content">
+          <ul>
+            <li><strong>KDA Defence Systems:</strong> SVP Strategic Sourcing aksepterte dialog og ba om utdypende informasjon. Kapabilitetsmemorandum oversendt, møte foreslått på Kongsberg eller i Moss. Venter på møtetidspunkt</li>
+            <li><strong>KDA KAMS (Rygge):</strong> Director Special Projects gjennomfører intern stakeholder-vurdering. Tilbakemelding forventet etter internt arbeidsmøte i uke 10</li>
+            <li>Ferdigstilt Go-to-Market-strategier for TechnipFMC, OneSubsea og Subsea 7 — alle med segmentert tilnærming og identifiserte nøkkelposisjoner</li>
+            <li>Igangsatt kontaktfase mot Nammo: VP Procurement & Supply Chain og Procurement Director (Raufoss) prioritert</li>
+            <li>Planlagt oppstart kontaktfase mot TechnipFMC via SVP Subsea Services / Country Manager Norge — synergi med KDA-dialogen (begge på Kongsberg)</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- KDA DETAIL -->
+  <section class="dark-panel">
+    <div class="section-label">Prioritet 1</div>
+    <h2>Kongsberg Defence & Aerospace — Dialogstatus</h2>
+
+    <p>KDA er vår høyest prioriterte kunde og det selskapet vi er lengst fremme med. Vi har aktiv dialog med flere divisjoner og på tvers av to geografiske lokasjoner.</p>
+
+    <table>
+      <thead>
+        <tr><th>Divisjon</th><th>Lokasjon</th><th>Posisjon i dialog</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Defence Systems</strong></td>
+          <td>Kongsberg</td>
+          <td>SVP Strategic Sourcing & Supply Chain</td>
+          <td><span class="badge badge-active">AKTIV — MØTE PLANLEGGES</span></td>
+        </tr>
+        <tr>
+          <td><strong>KAMS</strong></td>
+          <td>Rygge</td>
+          <td>Director Special Projects + Site Manager</td>
+          <td><span class="badge badge-active">AKTIV — INTERN VURDERING</span></td>
+        </tr>
+        <tr>
+          <td><strong>Aerostructures</strong></td>
+          <td>Kongsberg</td>
+          <td>VP Operations</td>
+          <td><span class="badge badge-progress">KONTAKT INITIERT</span></td>
+        </tr>
+        <tr>
+          <td><strong>KDA Konsern</strong></td>
+          <td>Kongsberg</td>
+          <td>VP Supply Chain (acting)</td>
+          <td><span class="badge badge-progress">KONTAKT INITIERT</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>KDA har en ordrebok på NOK 125 milliarder og søker aktivt 200 nye medarbeidere. Behovet for ekstern CNC-kapasitet er tydelig dokumentert i deres leverandørstrategi. Vår posisjon som norskeid, sikkerhetsgodkjenningsbar leverandør med autonom produksjonskapabilitet er godt mottatt i innledende dialog.</p>
+  </section>
+
+  <!-- LOI PIPELINE -->
+  <section>
+    <div class="section-label">LOI-pipeline</div>
+    <h2>Status mot Letter of Intent</h2>
+
+    <p>LOI-prosessen med selskaper av denne størrelsen og sikkerhetsgraderte kompleksiteten følger en naturlig modningsprosess. Vi er godt posisjonert og i rute med fremdriftsplanen.</p>
+
+    <table>
+      <thead>
+        <tr><th>Selskap</th><th>Sektor</th><th>Fase</th><th>Neste milepæl</th><th>Estimert LOI</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>KDA</strong></td>
+          <td>Forsvar</td>
+          <td><span class="badge badge-active">Aktiv dialog</span></td>
+          <td>Fysiske møter (mar–apr)</td>
+          <td>Q2–Q3 2026</td>
+        </tr>
+        <tr>
+          <td><strong>Nammo</strong></td>
+          <td>Forsvar</td>
+          <td><span class="badge badge-progress">Kontaktfase</span></td>
+          <td>Første møte (mar–apr)</td>
+          <td>Q3 2026</td>
+        </tr>
+        <tr>
+          <td><strong>Aker Solutions</strong></td>
+          <td>Subsea</td>
+          <td><span class="badge badge-progress">Kontaktfase</span></td>
+          <td>Første møte (apr)</td>
+          <td>Q3–Q4 2026</td>
+        </tr>
+        <tr>
+          <td><strong>TechnipFMC</strong></td>
+          <td>Subsea</td>
+          <td><span class="badge badge-planning">Planlagt kontakt</span></td>
+          <td>Kontakt igangsettes (mar)</td>
+          <td>Q3–Q4 2026</td>
+        </tr>
+        <tr>
+          <td><strong>OneSubsea</strong></td>
+          <td>Subsea</td>
+          <td><span class="badge badge-planning">Planlagt kontakt</span></td>
+          <td>Kontakt igangsettes (apr)</td>
+          <td>Q4 2026</td>
+        </tr>
+        <tr>
+          <td><strong>Subsea 7</strong></td>
+          <td>Subsea</td>
+          <td><span class="badge badge-planning">Planlagt kontakt</span></td>
+          <td>Kontakt igangsettes (apr)</td>
+          <td>Q4 2026</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Viktig kontekst:</strong> Kvalifisering som leverandør til forsvarsindustrien krever typisk 12–18 måneders prosess (AQAP 2110, sikkerhetsklarering, First Article Inspection). Subsea-kvalifisering (NORSOK) følger tilsvarende tidslinje. Å ha aktive dialoger med beslutningstagere på SVP-nivå allerede nå — fire måneder etter oppstart — er sterk fremdrift i denne konteksten.</p>
+    </div>
+  </section>
+
+  <!-- KEY DIFFERENTIATORS -->
+  <section>
+    <div class="section-label">Hvorfor dette tar tid — og hvorfor det går bra</div>
+    <h2>Markedets dynamikk</h2>
+
+    <p>Tre forhold forklarer hvorfor LOI-prosessen tar tid, og hvorfor dette er positivt:</p>
+
+    <h3>1. Selskapenes størrelse og kompleksitet</h3>
+    <p>Vi henvender oss til innkjøpsledelse på VP- og SVP-nivå hos konsern med ordrebøker på NOK 40–155 milliarder. Beslutningsprosessene i disse organisasjonene involverer flere ledd og krever intern forankring — noe vi ser tydelig i KDAs pågående stakeholder-gjennomgang.</p>
+
+    <h3>2. Sikkerhetskrav og kvalifisering</h3>
+    <p>Forsvarsindustrien stiller strenge krav til leverandører: AQAP 2110/2310, NATO-kodifisering, norsk eierskap og kontroll, og sikkerhetsklarering av personell. Disse kravene gjør at innledende dialog naturlig tar lengre tid, men gir også høyere inngangsbarrierer som beskytter posisjonen når vi er kvalifisert.</p>
+
+    <h3>3. Maskinpark-konfigurasjon som strategisk fordel</h3>
+    <p>Et sentralt element i våre dialoger er at kunder som engasjerer seg innen Q3 2026 kan påvirke konfigurasjonen av maskinparken — maskinvalg, verktøyoppsett, automasjonsgrad og materialspesifikk optimalisering. Dette gir kundene en direkte interesse i å komme frem til en LOI, men krever at de internt har kartlagt sine behov.</p>
+  </section>
+
+  <!-- SUMMARY & OUTLOOK -->
+  <section>
+    <div class="section-label">Oppsummering</div>
+    <h2>Fremdriftsvurdering</h2>
+
+    <table>
+      <thead>
+        <tr><th>Aktivitet</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Go-to-Market-strategier ferdigstilt for alle 6 målselskaper</td>
+          <td><span class="badge badge-active">KOMPLETT</span></td>
+        </tr>
+        <tr>
+          <td>Aktiv dialog med KDA på tvers av divisjoner (Kongsberg + Rygge)</td>
+          <td><span class="badge badge-active">PÅ PLAN</span></td>
+        </tr>
+        <tr>
+          <td>Kontaktfase igangsatt — Nammo og Aker Solutions</td>
+          <td><span class="badge badge-progress">I GANG</span></td>
+        </tr>
+        <tr>
+          <td>Kontaktfase planlagt — TechnipFMC, OneSubsea, Subsea 7</td>
+          <td><span class="badge badge-planning">PLANLAGT MAR–APR</span></td>
+        </tr>
+        <tr>
+          <td>Første LOI forventet</td>
+          <td><span class="badge badge-progress">Q2–Q3 2026</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Aurelian Manufacturing er i rute med Go-to-Market-planen. Vi har bygget en solid pipeline av dialoger med Norges mest betydningsfulle industrikonsern innen forsvar og subsea. Aktivitetene siden november viser systematisk og profesjonell tilnærming til markedet, og de varme leadene hos KDA bekrefter at posisjoneringen treffer et reelt behov i markedet.</p>
+
+    <p>De neste milepælene er fysiske møter med KDA (mars–april), oppstart dialog med Nammo og Aker Solutions (mars), og gradvis utvidelse til TechnipFMC, OneSubsea og Subsea 7 gjennom Q2 2026.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>KONFIDENSIELT</span>
+    <span>Aurelian Manufacturing AS | Go-to-Market Statusrapport | 3. mars 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

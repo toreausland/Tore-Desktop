@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Utleggsrapport – Tore Ausland – Feb/Mar 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f5f5; color: #222; padding: 40px; }
+        .report { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; }
+        .header { background: #1a2a3a; color: #fff; padding: 32px 40px; }
+        .header h1 { font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+        .header p { font-size: 14px; color: #a0b4c8; }
+        .meta { display: flex; gap: 40px; padding: 20px 40px; border-bottom: 1px solid #e8e8e8; background: #fafbfc; }
+        .meta-item { font-size: 13px; }
+        .meta-item .label { color: #888; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; margin-bottom: 2px; }
+        .meta-item .value { font-weight: 600; color: #1a2a3a; }
+        .content { padding: 30px 40px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+        thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #888; padding: 8px 12px; border-bottom: 2px solid #e0e0e0; }
+        thead th:last-child { text-align: right; }
+        tbody td { padding: 14px 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; vertical-align: top; }
+        tbody td:last-child { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+        tbody tr:hover { background: #f8f9fa; }
+        .desc { font-weight: 500; }
+        .sub { font-size: 12px; color: #888; margin-top: 2px; }
+        .total-row { border-top: 2px solid #1a2a3a; }
+        .total-row td { padding: 16px 12px; font-weight: 700; font-size: 16px; }
+        .footer { padding: 20px 40px; border-top: 1px solid #e8e8e8; font-size: 12px; color: #aaa; display: flex; justify-content: space-between; }
+        .attachments { padding: 0 40px 30px; }
+        .attachments h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 12px; }
+        .attachment-list { list-style: none; }
+        .attachment-list li { padding: 8px 12px; background: #f8f9fa; border-radius: 4px; margin-bottom: 6px; font-size: 13px; font-family: 'Consolas', monospace; }
+        .note { font-size: 12px; color: #999; font-style: italic; margin-top: 8px; }
+        @media print {
+            body { background: #fff; padding: 0; }
+            .report { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="report">
+        <div class="header">
+            <h1>Utleggsrapport</h1>
+            <p>Aurelian Manufacturing AS</p>
+        </div>
+
+        <div class="meta">
+            <div class="meta-item">
+                <div class="label">Ansatt</div>
+                <div class="value">Tore Ausland</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">Periode</div>
+                <div class="value">21. februar – 3. mars 2026</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">Antall kvitteringer</div>
+                <div class="value">4</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">Rapportdato</div>
+                <div class="value">3. mars 2026</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Dato</th>
+                        <th>Beskrivelse</th>
+                        <th>Butikk / Leverandør</th>
+                        <th>Beløp inkl. mva</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>21.02.2026</td>
+                        <td>
+                            <div class="desc">Apple Mac mini M4</div>
+                            <div class="sub">10-core CPU, 10-core GPU, 16 GB RAM, 256 GB SSD</div>
+                        </td>
+                        <td>Scandinavian Photo</td>
+                        <td>8 190,00 kr</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>~27.02.2026</td>
+                        <td>
+                            <div class="desc">Data-rekvisita / kontorutstyr</div>
+                            <div class="sub">Cepter Long Pole A4 (249 kr), Logitech MX Keys S tastatur (939 kr), Cepter Monitor Mount Kit 2 Mon (699 kr), 2 × Eletra grenuttak (118 kr), MyPower-rabatt (−75 kr)</div>
+                        </td>
+                        <td>POWER</td>
+                        <td>1 930,00 kr</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>02.03.2026</td>
+                        <td>
+                            <div class="desc">Parkering – Operagata P-hus, Oslo</div>
+                            <div class="sub">12:31–13:55 (ca. 1,5 timer)</div>
+                        </td>
+                        <td>Onepark AS</td>
+                        <td>168,30 kr</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>03.03.2026</td>
+                        <td>
+                            <div class="desc">HDMI-kabler og adapter</div>
+                            <div class="sub">2 × Electra USB-C til HDMI (379 kr) + 1 × Dacota 4K Premium HDMI 3 m (449 kr)</div>
+                        </td>
+                        <td>POWER Askim</td>
+                        <td>1 207,00 kr</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr class="total-row">
+                        <td colspan="4">TOTALT</td>
+                        <td>11 495,30 kr</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="note">* Kvittering nr. 2 (Data-rekvisita): Dato er avlest fra foto av papirkvittering og bør verifiseres mot original.</p>
+        </div>
+
+        <div class="attachments">
+            <h3>Vedlagte kvitteringer</h3>
+            <ul class="attachment-list">
+                <li>1. 2026-02-21_ScandinavianPhoto_Apple_Mac_Mini_M4.pdf</li>
+                <li>2. 2026-02-27_Power_Data_Rekvisita.jpeg</li>
+                <li>3. 2026-03-02_Onepark_Parkering_Oslo.pdf</li>
+                <li>4. 2026-03-03_Power_HDMI_Kabler.jpeg</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <span>Utleggsrapport generert 3. mars 2026</span>
+            <span>Aurelian Manufacturing AS</span>
+        </div>
+    </div>
+</body>
+</html>

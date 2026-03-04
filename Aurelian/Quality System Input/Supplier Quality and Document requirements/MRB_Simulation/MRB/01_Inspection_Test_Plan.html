@@ -193,12 +193,12 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 22pt;
-            height: 22pt;
+            width: 18pt;
+            height: 18pt;
             background: #2B2B2B;
             color: #FFFFFF;
             font-weight: bold;
-            font-size: 9pt;
+            font-size: 8pt;
             border-radius: 3px;
         }
 
@@ -232,36 +232,40 @@
         .itp-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 9pt;
+            font-size: 8.5pt;
+            table-layout: fixed;
         }
 
         .itp-table thead th {
             background: #2B2B2B;
             color: #FFFFFF;
             font-weight: bold;
-            font-size: 8.5pt;
-            padding: 8pt 6pt;
+            font-size: 7.5pt;
+            padding: 6pt 4pt;
             text-align: left;
             border-bottom: none;
-            white-space: nowrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .itp-table thead th:first-child {
             text-align: center;
-            width: 40pt;
+            width: 26pt;
         }
 
         .itp-table thead th.type-col,
         .itp-table thead th.party-col {
             text-align: center;
-            width: 46pt;
+            width: 26pt;
         }
 
         .itp-table tbody td {
-            padding: 6pt;
+            padding: 4pt;
             border-bottom: 0.5pt solid #D3D3D3;
             vertical-align: top;
-            font-size: 9pt;
+            font-size: 8.5pt;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .itp-table tbody tr:nth-child(even) {
@@ -284,12 +288,12 @@
         }
 
         .itp-table tbody td.ref-cell {
-            font-size: 8.5pt;
+            font-size: 7.5pt;
             color: #6B6B6B;
         }
 
         .itp-table tbody td.records-cell {
-            font-size: 8.5pt;
+            font-size: 8pt;
         }
 
         /* Inspection type badges */
@@ -297,11 +301,11 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 22pt;
-            height: 18pt;
+            width: 18pt;
+            height: 16pt;
             border-radius: 3px;
             font-weight: bold;
-            font-size: 8.5pt;
+            font-size: 7.5pt;
             color: #FFFFFF;
         }
 
@@ -315,9 +319,9 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 22pt;
-            height: 18pt;
-            font-size: 10pt;
+            width: 18pt;
+            height: 16pt;
+            font-size: 9pt;
             color: #D3D3D3;
         }
 
@@ -531,7 +535,6 @@
         <li>NORSOK M-650 &mdash; Qualification of manufacturers of special materials</li>
         <li>ASME B16.5 / API 6A &mdash; Flanges and fittings (as applicable)</li>
         <li>ASME BPVC Section V &mdash; Nondestructive Examination</li>
-        <li>ASME BPVC Section IX &mdash; Welding and Brazing Qualifications</li>
         <li>ISO 17636-2 &mdash; Radiographic testing (digital)</li>
         <li>ISO 3452-1 &mdash; Liquid penetrant testing</li>
         <li>ISO 10474 / EN 10204 &mdash; Inspection documents</li>
@@ -572,14 +575,14 @@
         <table class="itp-table">
             <thead>
                 <tr>
-                    <th>Item No.</th>
-                    <th>Description of Activity</th>
-                    <th>Reference Document / Standard</th>
+                    <th style="width: 26pt;">Item</th>
+                    <th style="width: 34%;">Description of Activity</th>
+                    <th style="width: 14%;">Reference / Standard</th>
                     <th class="type-col">Type</th>
-                    <th class="party-col">Supplier QC</th>
+                    <th class="party-col">Sup. QC</th>
                     <th class="party-col">NSS</th>
-                    <th class="party-col">3rd Party</th>
-                    <th>Records / Certificates</th>
+                    <th class="party-col">3rd Pty</th>
+                    <th style="width: 22%;">Records / Certificates</th>
                 </tr>
             </thead>
             <tbody>
@@ -648,38 +651,13 @@
                     <td class="records-cell">Dimensional Inspection Report<br>(In-Process)</td>
                 </tr>
 
-                <!-- 60: Welding -->
-                <tr class="hold-row">
+
+                <!-- 60: NDE VT -->
+                <tr>
                     <td>60</td>
-                    <td><strong>Welding Operations</strong><br>
-                        Welding per qualified WPS. Verify welder qualifications (WPQR per ASME IX). Preheat &amp; interpass temperature monitoring. Ferrite content measurement.</td>
-                    <td class="ref-cell">ASME BPVC IX<br>NORSOK M-601<br>ISO 3834-2<br>Client WPS</td>
-                    <td class="type-cell"><span class="badge badge-H">H</span></td>
-                    <td class="party-cell"><span class="badge badge-H">H</span></td>
-                    <td class="party-cell"><span class="badge badge-H">H</span></td>
-                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
-                    <td class="records-cell">WPS &amp; WPQR<br>Welder Qualification Certs<br>Weld Log / Heat Input Records<br>Ferrite Measurement Report</td>
-                </tr>
-
-                <!-- 70: PWHT -->
-                <tr>
-                    <td>70</td>
-                    <td><strong>Post-Weld Heat Treatment (PWHT)</strong><br>
-                        PWHT if required per WPS or project specification. Thermocouple placement, heating/cooling rate monitoring, soak time verification.</td>
-                    <td class="ref-cell">ASME BPVC IX<br>Client Specification</td>
-                    <td class="type-cell"><span class="badge badge-R">R</span></td>
-                    <td class="party-cell"><span class="badge badge-R">R</span></td>
-                    <td class="party-cell"><span class="badge badge-R">R</span></td>
-                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
-                    <td class="records-cell">PWHT Chart / Record<br>Thermocouple Placement Drawing</td>
-                </tr>
-
-                <!-- 80: NDE VT -->
-                <tr>
-                    <td>80</td>
                     <td><strong>NDE &mdash; Visual Inspection (VT)</strong><br>
-                        Visual inspection of all welds and machined surfaces by certified Level II inspector. Acceptance per ASME BPVC V.</td>
-                    <td class="ref-cell">ASME BPVC V Art. 9<br>ISO 17637<br>ISO 5817 Level B</td>
+                        Visual inspection of all machined surfaces and critical features by certified Level II inspector.</td>
+                    <td class="ref-cell">ISO 17637<br>ISO 5817 Level B</td>
                     <td class="type-cell"><span class="badge badge-R">R</span></td>
                     <td class="party-cell"><span class="badge badge-R">R</span></td>
                     <td class="party-cell"><span class="badge badge-I">I</span></td>
@@ -687,24 +665,24 @@
                     <td class="records-cell">Visual Inspection Report<br>NDE Operator Qualification</td>
                 </tr>
 
-                <!-- 90: NDE RT -->
+                <!-- 70: NDE RT -->
                 <tr>
-                    <td>90</td>
+                    <td>70</td>
                     <td><strong>NDE &mdash; Radiographic Testing (RT)</strong><br>
-                        100% RT of all butt welds. Digital radiography per ISO 17636-2. Level II certified operator. Acceptance per ISO 10675-1 Level 1.</td>
-                    <td class="ref-cell">ISO 17636-2<br>ISO 10675-1<br>ASME BPVC V Art. 2</td>
-                    <td class="type-cell"><span class="badge badge-W">W</span></td>
-                    <td class="party-cell"><span class="badge badge-W">W</span></td>
-                    <td class="party-cell"><span class="badge badge-W">W</span></td>
-                    <td class="party-cell"><span class="badge badge-W">W</span></td>
+                        RT of critical areas if applicable. Digital radiography per ISO 17636-2. Level II certified operator. Acceptance per ISO 10675-1 Level 1.</td>
+                    <td class="ref-cell">ISO 17636-2<br>ISO 10675-1</td>
+                    <td class="type-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge badge-R">R</span></td>
+                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
                     <td class="records-cell">RT Report &amp; Radiographs<br>NDE Operator Qualification<br>Equipment Calibration Cert</td>
                 </tr>
 
-                <!-- 100: NDE PT -->
+                <!-- 80: NDE PT -->
                 <tr>
-                    <td>100</td>
+                    <td>80</td>
                     <td><strong>NDE &mdash; Liquid Penetrant Testing (PT)</strong><br>
-                        100% PT of all weld surfaces and critical machined areas. Acceptance per ISO 23277 Level 1.</td>
+                        100% PT of all critical machined areas and surfaces. Acceptance per ISO 23277 Level 1.</td>
                     <td class="ref-cell">ISO 3452-1<br>ISO 23277<br>ASME BPVC V Art. 6</td>
                     <td class="type-cell"><span class="badge badge-R">R</span></td>
                     <td class="party-cell"><span class="badge badge-R">R</span></td>
@@ -713,22 +691,10 @@
                     <td class="records-cell">PT Report<br>NDE Operator Qualification</td>
                 </tr>
 
-                <!-- 110: PMI Welds -->
-                <tr>
-                    <td>110</td>
-                    <td><strong>PMI on Welds</strong><br>
-                        Positive Material Identification (XRF) of all weld deposits. Verify alloy composition meets UNS S32750 weld filler requirements.</td>
-                    <td class="ref-cell">NORSOK M-630<br>ASTM A751</td>
-                    <td class="type-cell"><span class="badge badge-R">R</span></td>
-                    <td class="party-cell"><span class="badge badge-R">R</span></td>
-                    <td class="party-cell"><span class="badge badge-R">R</span></td>
-                    <td class="party-cell"><span class="badge-dash">&mdash;</span></td>
-                    <td class="records-cell">PMI Report (Welds)<br>XRF Calibration Cert</td>
-                </tr>
 
-                <!-- 120: Dimensional Final -->
+                <!-- 90: Dimensional Final -->
                 <tr class="hold-row">
-                    <td>120</td>
+                    <td>90</td>
                     <td><strong>Final Dimensional Inspection</strong><br>
                         Complete dimensional inspection using CMM. All critical dimensions per drawing. Seal groove profiles, bore IDs, flange face finish (Ra), bolt hole pattern.</td>
                     <td class="ref-cell">NSS-SPC-SCA-300<br>ISO 2768-1/2<br>ISO 1302</td>
@@ -739,9 +705,9 @@
                     <td class="records-cell">Final Dimensional Report<br>CMM Report<br>Surface Roughness Report</td>
                 </tr>
 
-                <!-- 130: Surface Treatment -->
+                <!-- 100: Surface Treatment -->
                 <tr>
-                    <td>130</td>
+                    <td>100</td>
                     <td><strong>Surface Treatment / Coating</strong><br>
                         Surface preparation per NORSOK M-501. Blast cleaning to Sa 2.5 (ISO 8501-1). Application of protective coating system per project specification.</td>
                     <td class="ref-cell">NORSOK M-501<br>ISO 8501-1<br>ISO 8503-1</td>
@@ -752,9 +718,9 @@
                     <td class="records-cell">Surface Preparation Report<br>Coating Application Record<br>Environmental Conditions Log</td>
                 </tr>
 
-                <!-- 140: Coating Inspection -->
+                <!-- 110: Coating Inspection -->
                 <tr>
-                    <td>140</td>
+                    <td>110</td>
                     <td><strong>Coating Inspection &mdash; DFT Measurement</strong><br>
                         Dry film thickness measurement per NORSOK M-501. Adhesion testing (pull-off) per ISO 4624. Holiday detection.</td>
                     <td class="ref-cell">NORSOK M-501<br>ISO 2808<br>ISO 4624</td>
@@ -765,22 +731,10 @@
                     <td class="records-cell">DFT Measurement Report<br>Adhesion Test Report<br>Holiday Detection Report</td>
                 </tr>
 
-                <!-- 150: Hydrostatic Test -->
-                <tr class="hold-row">
-                    <td>150</td>
-                    <td><strong>Hydrostatic Pressure Test</strong><br>
-                        Hydrostatic test at 1.5x design pressure. Hold for minimum 30 minutes. Monitor pressure decay. Medium: treated fresh water.</td>
-                    <td class="ref-cell">API 6A / API 17D<br>Client Specification<br>Test Procedure AM-TP-HYD-001</td>
-                    <td class="type-cell"><span class="badge badge-H">H</span></td>
-                    <td class="party-cell"><span class="badge badge-H">H</span></td>
-                    <td class="party-cell"><span class="badge badge-H">H</span></td>
-                    <td class="party-cell"><span class="badge badge-W">W</span></td>
-                    <td class="records-cell">Hydrostatic Test Report<br>Pressure Recorder Chart<br>Gauge Calibration Cert</td>
-                </tr>
 
-                <!-- 160: Final Visual -->
+                <!-- 120: Final Visual -->
                 <tr class="hold-row">
-                    <td>160</td>
+                    <td>120</td>
                     <td><strong>Final Visual Inspection</strong><br>
                         Complete visual inspection of finished assembly. Verify surface condition, marking legibility, cleanliness, and absence of damage.</td>
                     <td class="ref-cell">Client Specification<br>ISO 17637</td>
@@ -791,9 +745,9 @@
                     <td class="records-cell">Final Visual Inspection Report</td>
                 </tr>
 
-                <!-- 170: Marking -->
+                <!-- 130: Marking -->
                 <tr>
-                    <td>170</td>
+                    <td>130</td>
                     <td><strong>Marking &amp; Identification</strong><br>
                         Permanent marking per drawing requirements. Tag number, serial number, material grade, heat number, test pressure, date. Low-stress stamping method.</td>
                     <td class="ref-cell">NSS-SPC-SCA-300<br>API 6A</td>
@@ -804,9 +758,9 @@
                     <td class="records-cell">Marking Verification Record<br>Photograph of Markings</td>
                 </tr>
 
-                <!-- 180: Weighing -->
+                <!-- 140: Weighing -->
                 <tr>
-                    <td>180</td>
+                    <td>140</td>
                     <td><strong>Weighing</strong><br>
                         Weigh finished assembly on calibrated scale. Record actual weight and compare to design weight. Verify within tolerance.</td>
                     <td class="ref-cell">Client Specification</td>
@@ -817,9 +771,9 @@
                     <td class="records-cell">Weight Certificate<br>Scale Calibration Cert</td>
                 </tr>
 
-                <!-- 190: Preservation -->
+                <!-- 150: Preservation -->
                 <tr>
-                    <td>190</td>
+                    <td>150</td>
                     <td><strong>Preservation &amp; Packing</strong><br>
                         Apply preservation per project specification. VCI protection for machined surfaces. Seal all openings. Pack in wooden crate with desiccant. Mark crate per shipping spec.</td>
                     <td class="ref-cell">NORSOK Z-CR-002<br>Client Packing Spec</td>
@@ -830,9 +784,9 @@
                     <td class="records-cell">Preservation Record<br>Packing List<br>Packing Photographs</td>
                 </tr>
 
-                <!-- 200: MRB Compilation -->
+                <!-- 160: MRB Compilation -->
                 <tr>
-                    <td>200</td>
+                    <td>160</td>
                     <td><strong>MRB Compilation &amp; Review</strong><br>
                         Compile complete Manufacturing Record Book. Verify all records present and properly signed. Cross-reference ITP item completion. QA review and verification.</td>
                     <td class="ref-cell">AM-QP-MRB-001<br>PO Requirements</td>
@@ -843,9 +797,9 @@
                     <td class="records-cell">MRB Index<br>MRB Completeness Checklist</td>
                 </tr>
 
-                <!-- 210: Final Release -->
+                <!-- 170: Final Release -->
                 <tr class="hold-row">
-                    <td>210</td>
+                    <td>170</td>
                     <td><strong>Final Release &mdash; Certificate of Conformance</strong><br>
                         Issue Certificate of Conformance (CoC) confirming product meets all PO requirements. Final release for shipment. MRB handover to client.</td>
                     <td class="ref-cell">EN 10204:2004 Type 3.2<br>PO Requirements</td>
@@ -864,7 +818,7 @@
     <ul class="notes-list">
         <li><strong>Hold Points (H):</strong> Work shall not proceed beyond the hold point until the designated representative has verified and signed off the relevant documentation. NSS shall be notified minimum 72 hours in advance of scheduled hold points.</li>
         <li><strong>Witness Points (W):</strong> NSS shall be notified minimum 48 hours in advance. If NSS representative does not attend and does not provide written waiver, the activity may proceed after the notification period has elapsed.</li>
-        <li><strong>Third-Party Inspection:</strong> Third-party inspector (DNV GL or as agreed) shall attend witness points for hydrostatic testing and radiographic testing as specified above.</li>
+        <li><strong>Third-Party Inspection:</strong> Third-party inspector (DNV GL or as agreed) shall attend witness points for radiographic testing if applicable as specified above.</li>
         <li><strong>NDE Personnel:</strong> All NDE personnel shall be qualified and certified to ISO 9712 Level II minimum. RT operators shall hold Level II certification for the applicable method.</li>
         <li><strong>Calibration:</strong> All measuring and test equipment shall have valid calibration certificates traceable to national standards (ISO 10012). Calibration certificates shall be included in the MRB.</li>
         <li><strong>NCR Process:</strong> Any non-conformance identified during manufacturing or inspection shall be documented on a Non-Conformance Report (NCR) and processed per AM-QP-NCR-001. All NCRs shall be included in the MRB.</li>
